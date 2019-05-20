@@ -5,8 +5,11 @@
 Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ngôn ngữ cùng họ với Go, đồng thời là các ngôn ngữ lập trình song song được phát triển bởi Bell Labs. Cuối cùng là phiên bản Go với chương trình "Hello, World" được trình bày. Trên thực tế, chương trình "Hello, World" là ví dụ điển hình nhất cho thấy các tính năng của những ngôn ngữ khác nhau. Trong phần này, chúng ta sẽ nhìn lại dòng thời gian phát triển của từng ngôn ngữ và xem cách mà chương trình "Hello, World" phát triển thành ngôn ngữ Go hiện tại và hoàn thành sứ mệnh cách mạng của nó.
 
 <p align="center">
+
 <img src="../images/ch1-4-go-history.png">
-Hình 1-4. Lịch sử tiến hóa của ngôn ngữ Go</p>
+<p align="center">Hình 1-4. Lịch sử tiến hóa của ngôn ngữ Go </p>
+
+</p>
 
 ### 1.2.1 Ngôn ngữ B - Ken Thompson, 1972
 
@@ -88,60 +91,68 @@ print("Hello,", "World", "\n");
 Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tham số, rất khó để thấy các tính năng liên quan đến ngôn ngữ Newsqueak. Bởi vì các tính năng liên quan đến ngôn ngữ Newsqueak và ngôn ngữ Go chủ yếu là đồng thời (concurrency) và pipeline. Do đó, ta sẽ xem xét các tính năng của ngôn ngữ Newsqueak thông qua phiên bản đồng thời của thuật toán "sàng số nguyên tố". Nguyên tắc "sàng số nguyên tố" như sau:
 
 <p align="center">
-<img src="../images/ch1-5-prime-sieve.png">
-Hình 1-5. Sàng số nguyên tố</p>
+<img src="../images/ch1-5-prime-sieve.png"/>
+<br/>
+<span>Hình 1-5. Sàng số nguyên tố</span>
+</p>
+
+
 
 Chương trình "sàng số nguyên tố" cho phiên bản đồng thời của ngôn ngữ Newsqueak như sau:
-
+    
+    
 ```go
-// xuất 1 chuỗi số int từ 2 vào pipeline
-counter := prog(c:chan of int) {
-    i := 2;
-    for(;;) {
-        c <-= i++;
-    }
-};
-
-// Đối với chuỗi thu được từ pipeline listen, lọc ra các số là bội số của số nguyên tố
-// gửi kết quả cho pipeline send
-filter := prog(prime:int, listen, send:chan of int) {
-    i:int;
-    for(;;) {
-        if((i = <-listen)%prime) {
-            send <-= i;
+    // xuất 1 chuỗi số int từ 2 vào pipeline
+    counter := prog(c:chan of int) {
+        i := 2;
+        for(;;) {
+            c <-= i++;
         }
-    }
-};
-
-// chức năng chính
-// Dòng đầu tiên của mỗi pipeline phải là số nguyên tố
-// sau đó xây dựng sàng nguyên tố  dựa trên số nguyên tố mới này
-sieve := prog() of chan of int {
-    c := mk(chan of int);
-    begin counter(c);
-    prime := mk(chan of int);
-    begin prog(){
-        p:int;
-        newc:chan of int;
-        for(;;){
-            prime <-= p =<- c;
-            newc = mk();
-            begin filter(p, c, newc);
-            c = newc;
+    };
+    
+    // Đối với chuỗi thu được từ pipeline listen, lọc ra các số là bội số của số nguyên tố
+    // gửi kết quả cho pipeline send
+    filter := prog(prime:int, listen, send:chan of int) {
+        i:int;
+        for(;;) {
+            if((i = <-listen)%prime) {
+                send <-= i;
+            }
         }
-    }();
-    become prime;
-};
-
-// kết quả là các số nguyên tố còn lại trên sàng
-prime := sieve();
+    };
+    
+    // chức năng chính
+    // Dòng đầu tiên của mỗi pipeline phải là số nguyên tố
+    // sau đó xây dựng sàng nguyên tố  dựa trên số nguyên tố mới này
+    sieve := prog() of chan of int {
+        c := mk(chan of int);
+        begin counter(c);
+        prime := mk(chan of int);
+        begin prog(){
+            p:int;
+            newc:chan of int;
+            for(;;){
+                prime <-= p =<- c;
+                newc = mk();
+                begin filter(p, c, newc);
+                c = newc;
+            }
+        }();
+        become prime;
+    };
+    
+    // kết quả là các số nguyên tố còn lại trên sàng
+    prime := sieve();
 ```
+
+sdf 
 
 - Hàm `counter` dùng để xuất ra chuỗi gốc gồm các số tự nhiên vào các "đường ống" (pipeline). Mỗi hàm `filter` tương ứng với mỗi đường ống lọc số nguyên tố mới. Những đường ống lọc số nguyên tố này lọc các chuỗi đến theo sàng số nguyên tố hiện tại và đưa kết quả ra đường ống đầu ra. `mk(chan of int)` dùng để tạo 1 đường ống, tương tự như `make(chan int)` trong Go.
 - Từ khóa `begin filter(p,c,newc)` bắt đầu một hàm đồng thời, giống với câu lệnh `go filter(p,c,newc)` trong Go.
 - `become` dùng để trả về kết quả của hàm, tương tự như `return`.
 
 Cú pháp xử lý đồng thời (concurrency) và đường ống (pipeline) trong ngôn ngữ Newsqueak khá tương tự với Go, ngay cả cách khai báo kiểu phía sau biến của 2 ngôn ngữ này cũng giống nhau.
+
 
 ### 1.2.4 Alef - Phil Winterbottom, 1993
 
@@ -153,8 +164,11 @@ Các tài nguyên khác nhau bị ngập giữa các thread và process khác nh
 
 <p align="center"> 
 <img src="../images/ch1-6-alef.png">
+<div align="center">
 Hình 1-6. Mô hình đồng thời trong Alef
+</div>
 </p>
+
 
 Chương trình "Hello World" cho phiên bản đồng thời của ngôn ngữ Alef:
 
