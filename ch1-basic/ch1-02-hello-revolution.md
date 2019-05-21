@@ -1,5 +1,3 @@
-# Chapter 1
-
 ## 1.2 Sự tiến hóa của "Hello, World"
 
 Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ngôn ngữ cùng họ với Go, đồng thời là các ngôn ngữ lập trình song song được phát triển bởi Bell Labs. Cuối cùng là phiên bản Go với chương trình "Hello, World" được trình bày. Trên thực tế, chương trình "Hello, World" là ví dụ điển hình nhất cho thấy các tính năng của những ngôn ngữ khác nhau. Trong phần này, chúng ta sẽ nhìn lại dòng thời gian phát triển của từng ngôn ngữ và xem cách mà chương trình "Hello, World" phát triển thành ngôn ngữ Go hiện tại và hoàn thành sứ mệnh cách mạng của nó.
@@ -7,7 +5,7 @@ Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ng�
 <p align="center">
 
 <img src="../images/ch1-4-go-history.png">
-<p align="center">Hình 1-4. Lịch sử tiến hóa của ngôn ngữ Go </p>
+<span align="center">Hình 1-4. Lịch sử tiến hóa của ngôn ngữ Go </span>
 
 </p>
 
@@ -311,7 +309,7 @@ Ngôn ngữ Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu
 
 #### 1.2.7 Hello, World! - V2.0
 
-Sau nửa thế kỷ tái sinh Nirvana, ngôn ngữ Go không chỉ in phiên bản Unicode của "Hello, World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây httpin thông tin "Xin chào, Thế giới!" Của Trung Quốc và thông tin về thời gian hiện tại cho mỗi khách hàng được truy cập qua dịch vụ.
+Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello, World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service.
 
 ```go
 package main
@@ -326,7 +324,7 @@ import (
 func main() {
     fmt.Println("Please visit http://127.0.0.1:12345/")
     http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-        s := fmt.Sprintf("你好, 世界! -- Time: %s", time.Now().String())
+        s := fmt.Sprintf("Xin chào - Thời gian hiện tại: %s", time.Now().String())
         fmt.Fprintf(w, "%v\n", s)
         log.Printf("%v\n", s)
     })
@@ -336,6 +334,6 @@ func main() {
 }
 ```
 
-Chúng tôi đã  xây dựng một dịch vụ http độc lập từ package đi kèm với thư viện chuẩn của Go . Trình xử lý response được đăng ký `http.HandleFunc("/", ...)` cho `/` request đường dẫn gốc. Trong trình xử lý response, chúng tôi vẫn sử dụng `fmt.Fprintf` hàm đầu ra được định dạng để in chuỗi cho máy khách thông qua giao thức http và cũng in chuỗi có liên quan ở phía máy chủ thông qua  log package của thư viện chuẩn. Cuối cùng, `http.ListenAndServe` dịch vụ http được khởi động bằng một lời gọi hàm.
+Chương trình trên  xây dựng một dịch vụ http độc lập từ package `net/http` đi kèm với thư viện chuẩn của Go. Hàm xử lý response: `http.HandleFunc("/", ...)` với `/` request tới root. Hàm này sử dụng `fmt.Fprintf` để in chuỗi được định dạng cho máy khách thông qua giao thức http và đồng thời in chuỗi thông báo ở phía máy chủ thông qua  log package. Cuối cùng, `http.ListenAndServe` khởi động dịch vụ http bằng một lời gọi hàm.
 
-Ở thời điểm này, ngôn ngữ Go cuối cùng đã hoàn thành việc chuyển đổi từ ngôn ngữ C của kỷ nguyên lõi đơn sang ngôn ngữ lập trình đa dụng của môi trường đa lõi của kỷ nguyên Internet trong thế kỷ 21.
+Lúc này, Go cuối cùng đã hoàn thành việc chuyển đổi từ ngôn ngữ C của kỷ nguyên đơn lõi sang một ngôn ngữ lập trình đa dụng của môi trường đa lõi của kỷ nguyên Internet trong thế kỷ 21.
