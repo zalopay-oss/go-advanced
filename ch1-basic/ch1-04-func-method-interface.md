@@ -136,9 +136,15 @@ func main() {
 
 Cả hai phương pháp đều hoạt động. Tuy nhiên, đây không phải là cách thực hành tốt để thực thi câu lệnh `defer` bên trong vòng lặp for. Đây chỉ là ví dụ và không được khuyến khích.
 
-Trong ngôn ngữ Go, nếu một hàm được gọi với một slice làm tham số, đôi khi một ảo ảnh truyền tham chiếu được đưa ra cho tham số: bởi vì phần tử của slice đến có thể được sửa đổi bên trong hàm được gọi. Trong thực tế, bất kỳ tình huống trong đó một tham số cuộc gọi có thể được sửa đổi bởi một tham số chức năng là bởi vì tham số con trỏ được truyền rõ ràng hoặc ngầm định trong tham số chức năng. Đặc tả của giá trị tham số hàm là chính xác hơn. Nó chỉ đề cập đến phần cố định của cấu trúc dữ liệu, chẳng hạn như cấu trúc con trỏ hoặc độ dài chuỗi trong cấu trúc chuỗi hoặc lát tương ứng, nhưng không chứa nội dung trỏ con trỏ gián tiếp. . Thay thế các tham số của loại lát bằng một cái gì đó giống như cấu trúc phản chiếu.SliceHeader là một cách tốt để hiểu ý nghĩa của giá trị lát:
+Trong ngôn ngữ Go, nếu một hàm được gọi với tham số là kiểu slice thì một tham số ảo sẽ được truyền vào bởi vì phần tử của slice có thể được sửa đổi bên trong hàm được gọi.
+
+Trong thực tế, trường hợp mà một tham số ở lời gọi hàm bị sửa đổi bởi thao tác trong  hàm là bởi vì nó là con trỏ được truyền tường minh hoặc ngầm định vào tham số hàm. Đặc tả tham số hàm chỉ đề cập đến phần cố định của cấu trúc dữ liệu, chẳng hạn như cấu trúc con trỏ hoặc độ dài chuỗi (trong cấu trúc chuỗi) hoặc slice tương ứng, nhưng không chứa nội dung trỏ tới bởi con trỏ gián tiếp.
+
+Việc thay thế tham số của kiểu slice với cấu trúc tương tự là `reflect.SliceHeader` là một ví dụ để hiểu ý nghĩa của việc truyền vào giá trị kiểu slice (pass by value):
 
 ```go
+// truyền vào con trỏ ngầm định khiến
+// nội dung của biến x bị thay đổi
 func twice(x []int) {
     for i := range x {
         x[i] *= 2
@@ -157,3 +163,31 @@ func twice(x IntSliceHeader) {
     }
 }
 ```
+
+Vì phần array bên dưới của kiểu slice được truyền bởi con trỏ ngầm định (chính con trỏ vẫn được truyền, nhưng con trỏ trỏ đến cùng một dữ liệu), nên hàm được gọi có thể sửa đổi dữ liệu trong slice thông qua con trỏ.  cấu trúc `IntSliceHeader` chứa không chỉ dữ liệu mà còn có thông tin về độ dài và dung lượng slice, hai thành phần này cũng được truyền theo giá trị. Nếu có hàm nào điều chỉnh `Len` hoặc `Cap` được gọi, nó sẽ không thể hiện sự thay đổi đó trong biến slice của tham số hàm được. Lúc này, ta nên cập nhật slice trước bằng cách trả về slice đã sửa đổi. Đây cũng là lý do tại sao hàm `append` (built-in) phải trả về một slice.
+
+Trong ngôn ngữ Go, các hàm cũng có thể tự gọi chính nó trực tiếp hoặc gián tiếp (gọi đệ quy). Không có giới hạn về độ sâu của lệnh gọi đệ quy trong Go. Stack của lệnh gọi hàm không có lỗi tràn, vì trong thời gian thực thi Go tự động điều chỉnh kích thước của stack hàm khi cần.
+
+Mỗi goroutine sẽ  được phân bổ một stack nhỏ (4 hoặc 8KB, tùy thuộc vào implement) ngay sau khi khởi động. Kích thước stack có thể được điều chỉnh động khi cần. Stack có thể đạt đến mức GB (tùy theo cách implement, trong phiên bản hiện tại là 32 bit) Kiến trúc là 250MB và kiến ​​trúc 64 bit là 1GB).
+
+Trước phiên bản 1.4, Go sử dụng stack động phân đoạn (Segmented dynamic stack). Về cơ bản thì một danh sách liên kết (linked list) được sử dụng để hiện thực các stack động. Địa chỉ bộ nhớ của các node trong mỗi danh sách liên kết là không thay đổi. Tuy nhiên, các stack động này có ảnh hưởng lớn đến hiệu suất của một số lời gọi ở những thời điểm quan trọng. Nguyên nhân là bởi  vì các node  trong danh sách liên kết dù có liền kề cũng sẽ không liền kề trong địa chỉ bộ nhớ, làm tăng khả năng xảy ra lỗi bộ nhớ cache của CPU (cache hit failure).
+
+Để giải quyết vấn đề về tỉ lệ trúng CPU cache (hit rate) nói trên, Go 1.4 sử dụng hiện thực stack động liên tục (Continuous dynamic stack), nghĩa là dùng một cấu trúc tương tự như mảng động để biểu diễn stack. Tuy nhiên, stack động liên tục cũng mang đến một vấn đề mới: khi stack tăng kích thước động, nó cần di chuyển dữ liệu trước đó sang không gian bộ nhớ mới, điều này sẽ khiến địa chỉ của tất cả các biến trong stack trước đó thay đổi.
+
+Mặc dù trong thời điểm thực thi Go tự động cập nhật các con trỏ để lưu trữ (vào stack) các biến tham chiếu tới địa chỉ mới, nhưng quan trọng  là các con trỏ trong Go không còn cố định nữa(vì vậy ta không thể giữ con trỏ trong các biến theo ý muốn, địa chỉ trong Go không thể được lưu vào môi trường không được kiểm soát bởi GC, đó là lý do địa chỉ của đối tượng Go không thể được giữ bằng ngôn ngữ C trong một thời gian dài khi sử dụng CGO).
+
+Vì stack của các hàm trong Go sẽ tự động thay đổi kích thước, lập trình viên hiếm khi cần quan tâm đến cơ chế hoạt động của stack. Trong đặc tả ngôn ngữ, ngay cả khái niệm stack và heap cũng không được đề cập một cách có chủ ý. Chúng ta không thể biết được một tham số hàm hoặc một biến cục bộ sẽ lưu trữ trên stack hay trên heap. Chúng ta chỉ cần biết rằng chúng hoạt động tốt là được. Hãy xem ví dụ sau:
+
+```go
+func f(x int) *int {
+    return &x
+}
+
+func g() int {
+    x = new(int)
+    return *x
+}
+```
+
+- Hàm đầu tiên trả về trực tiếp địa chỉ của biến tham số hàm (biến `x`) - điều này có vẻ là không khả thi bởi vì nếu biến tham số nằm trên stack sẽ trở thành không hợp lệ sau khi hàm trả về và địa chỉ được trả về dĩ nhiên bị lỗi. Nhưng trình biên dịch của  Go thông minh hơn khi đảm bảo rằng các biến được trỏ bởi con trỏ sẽ ở đúng vị trí.
+- Hàm thứ hai, mặc dù lời gọi `new` tạo một đối tượng con trỏ kiểu `*int`, nhưng vẫn không biết nó sẽ được lưu ở đâu. Với những lập trình viên có kinh nghiệm với C/C ++, điều quan trọng phải nhấn mạnh rằng trình biên dịch và thực thi (runtime) sẽ giúp chúng ta không phải lo lắng về stack và heap của hàm trong Go. Ngoài ra cũng đừng cho rằng vị trí của biến trong bộ nhớ là cố định. Con trỏ có thể thay đổi bất cứ lúc nào, đặc biệt là những khi chúng ta không mong đợi nó thay đổi nhất.
