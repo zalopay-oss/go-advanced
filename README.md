@@ -34,37 +34,9 @@ Các bạn có thể đóng góp bằng cách:
 
 Dự án này được phát triển bởi các thành viên sau đây. 
 
-<div style="display:flex; flex-direction: row"> 
-  <a href="https://github.com/anhldbk" style="margin-right: 10px; text-align: center">
-    <img src="https://avatars1.githubusercontent.com/u/3270746?s=460&v=4" width="80px">
-    <div><b>Anh Le (Andy)</b></div>
-  </a>
+| [<img src="https://avatars1.githubusercontent.com/u/3270746?s=460&v=4" width="100px;"/><br /><sub><b>Anh Le (Andy)</b></sub>](https://github.com/anhldbk) | [<img src="https://avatars1.githubusercontent.com/u/38773351?s=460&v=4" width="100px;"/><br /><sub><b>AJPham</b></sub>](https://github.com/phamtai97) | [<img src="https://avatars1.githubusercontent.com/u/26034284?s=460&v=4" width="100px;"/><br /><sub><b>thinhda</b></sub>](https://github.com/thinhdanggroup) | [<img src="https://avatars3.githubusercontent.com/u/10187757?s=460&v=4" width="100px;"/><br /><sub><b>trungdv</b></sub>](https://github.com/dvt1996) | [<img src="https://avatars2.githubusercontent.com/u/23535926?s=460&v=4" width="100px;"/><br /><sub><b>Quoc Anh</b></sub>](https://github.com/quocanh1897) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
-  <a href="https://github.com/phamtai97" style="margin-right: 10px; text-align: center">
-    <img src="https://avatars1.githubusercontent.com/u/38773351?s=460&v=4" width="80px">
-    <div><b>AJPham</b></div>
-  </a>
-
-  <a href="https://github.com/thinhdanggroup" style="margin-right: 10px; text-align: center">
-    <img src="https://avatars1.githubusercontent.com/u/26034284?s=460&v=4" width="80px">
-    <div><b>thinhda</b></div>
-  </a>
-
-   <a href="https://github.com/dvt1996" style="margin-right: 10px; text-align: center">
-    <img src="https://avatars3.githubusercontent.com/u/10187757?s=460&v=4" width="80px">
-    <div><b>trungdv</b></div>
-  </a>
-
-   <a href="https://github.com/quocanh1897" style="margin-right: 10px; text-align: center">
-    <img src="https://avatars2.githubusercontent.com/u/23535926?s=460&v=4" width="80px">
-    <div><b>Quoc Anh</b></div>
-  </a>
-
-  <a href="https://github.com/thoainguyen" style="margin-right: 10px; text-align: center">
-    <img src="https://avatars2.githubusercontent.com/u/32214488?s=400&v=4" width="80px">
-    <div><b>Nguyễn Huỳnh Thoại</b></div>
-  </a>
-</div>
 
 ## Liên hệ
 
