@@ -25,7 +25,7 @@ Time heap là phổ biến nhất và thường được hiện thực bằng mi
 
 ![二叉堆](../images/ch6-binary_tree.png)
 
-*Figure 6-4 Cấu trúc heap nhị phân*
+*Hình 6-4 Cấu trúc heap nhị phân*
 
 Những lợi ích của min heap là gì? Trong thực tế, đối với bộ đếm thời gian, nếu phần tử trên cùng lớn hơn thời gian hiện tại, thì tất cả các phần tử trong heap đều lớn hơn thời gian hiện tại. Hơn nữa, chúng ta không cần quan tâm gì về time heap. Độ phức tạp thời gian của việc kiểm tra này là `O(1)`.
 
@@ -35,17 +35,17 @@ Bộ đếm thời gian tích hợp sẵn của Go được hiện thực với 
 
 ![Quad fork](../images/ch6-four-branch-tree.png)
 
-*Figure 6-5 Quad Cross Stack Structure*
+*Hình 6-5 Quad Cross Stack Structure*
 
-Bản chất của min heap, nút cha nhỏ hơn bốn nút con của nó, không có mối quan hệ kích thước đặc biệt giữa các nút con.
+Bản chất của min heap, node cha nhỏ hơn bốn node con của nó, không có mối quan hệ kích thước đặc biệt giữa các node con.
 
-Không có sự khác biệt giữa thời gian quá hạn của phần tử và điều chỉnh heap trong heap bốn nút và heap nhị phân.
+Không có sự khác biệt giữa thời gian quá hạn của phần tử và điều chỉnh heap trong heap bốn node và heap nhị phân.
 
 ### 6.3.1.2 Time Wheel
 
 ![timewheel](../images/ch6-timewheel.png)
 
-*Figure 6-6 Time Wheel*
+*Hình 6-6 Time Wheel*
 
 Khi sử dụng time wheel để hiện thực bộ đếm thời gian, chúng ta cần xác định "tỷ lệ" của mỗi ô. Bánh xe thời gian có thể được tưởng tượng như một chiếc đồng hồ và trung tâm có kim giây theo chiều kim đồng hồ. Mỗi lần chúng ta chuyển sang một ô, chúng ta cần xem danh sách nhiệm vụ được gắn trên ô đó có nhiệm vụ đã đến hạn hay không.
 
@@ -65,7 +65,7 @@ Chúng ta cần phân bố các công việc theo "thời gian" hoặc "trì ho�
 
 ![task-dist](../images/ch6-task-sched.png)
 
-*Figure 6-7 Distributed Task Distribution*
+*Hình 6-7 Distributed Task Distribution*
 
 Mỗi giờ, mỗi instance sẽ vào cơ sở dữ liệu để truy xuất các tác vụ được định thời trước để xử lý trong giờ tiếp theo. Chỉ cần chọn các tác vụ đó với `task_id % shard_count = shard_id`.
 
@@ -82,25 +82,24 @@ Khi tác vụ của chúng ta thực hiện lỗi do một máy nào đó trong 
 
 Đây là một ý tưởng:
 
-We can refer to Elasticsearch's data distribution design, each task data has multiple copies, here assume two copies, as shown in Figure 6-8*:
 Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của Elaticsearch, mỗi dữ liệu của tác vụ có nhiều bản sao. Giả sử hai bản sao như trong *Hình 6-8*:
 
 
 ![Data Distribution](../images/ch6-data-dist1.png)
 
-*Figure 6-8 Task Data Distribution*
+*Hình 6-8 Task Data Distribution*
 
 Mặc dù có hai chủ sở hữu của một dữ liệu, dữ liệu sẽ có sự phân biệt: bản chính hay bản phụ. Bản chính là ô vuông có tô đậm viền trong hình và bản phụ có viền bình thường.
 
-Một tác vụ sẽ chỉ được thực hiện trên nút có bản chính.
+Một tác vụ sẽ chỉ được thực hiện trên node có bản chính.
 
-Khi có máy bị lỗi, ta cần phân phối các dữ liệu của tác vụ trên máy này. Ví dụ, node 1 bị treo, xem * Hình 6-9 *.
+Khi có máy bị lỗi, ta cần phân phối các dữ liệu của tác vụ trên máy này. Ví dụ, node 1 bị treo, xem *Hình 6-9*.
 
 ![Data Distribution 2](../images/ch6-data-dist2.png)
 
-*Figure 6-9 Data distribution at fault*
+*Hình 6-9 Data distribution at fault*
 
-Dữ liệu của nút 1 sẽ được di chuyển đến nút 2 và nút 3.
+Dữ liệu của node 1 sẽ được di chuyển đến node 2 và node 3.
 
 Tất nhiên, bạn cũng có thể sử dụng một ý tưởng phức tạp hơn một chút, chẳng hạn như phân chia vai trò của các node trong cụm và node điều phối sẽ phân phối lại các tác vụ trong trường hợp có lỗi. Xem xét tính `high availability`, node điều phối cũng cần 1 đến 2 Node dự phòng để ngăn ngừa tai nạn.
 
