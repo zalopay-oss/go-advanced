@@ -112,7 +112,7 @@ func main() {
 
 Bởi vì nó là một bao đóng (hàm trong câu lệnh lặp for), mỗi câu lệnh `defer` trì hoãn việc thực hiện tham chiếu hàm tới cùng một biến lặp i, giá trị của biến này sau khi kết thúc vòng lặp là 3, do đó đầu ra cuối cùng là 3.
 
-Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này:
+Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này: ([source1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[(source2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
 [source code 1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[source code 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
@@ -200,7 +200,7 @@ Phương thức (Method) là một tính năng của lập trình hướng đố
 
 Một chương trình hướng đối tượng sử dụng các phương thức để thể hiện nhưng thao tác trên thuộc tính (properties) của nó, qua đó người dùng có thể sử dụng đối tượng mà không cần phải thao tác trực tiếp với đối tượng mà là thông qua các phương thức. C++ thường được xem là nơi mà lập trình hướng đối tượng bắt đầu phát triển mạnh. C++ hỗ trợ các tính năng hướng đối tượng (như lớp) dựa trên cơ sở ngôn ngữ C. Sau đó đến Java được gọi là ngôn ngữ hướng đối tượng thuần túy  vì các hàm của nó không thể tồn tại độc lập mà phải thuộc về một lớp nhất định.
 
-Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C: 
+Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C:
 
 [source code](../examples/ch1/ch1.4/2-method/example-1/main.go)
 
@@ -403,7 +403,7 @@ type error interface {
 }
 ```
 
-Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó:
+Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó: [(source)](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
 [source code](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
@@ -421,7 +421,7 @@ func main() {
 }
 ```
 
-Tất nhiên ta cũng có thể định nghĩa định dạng in riêng để đạt được hiệu quả tương tự. Với mỗi đối tượng được in ra, nếu interface `fmt.Stringer` được thỏa mãn, kết quả kiểu `String` được trả về bởi phương thức của đối tượng được in mặc định: 
+Tất nhiên ta cũng có thể định nghĩa định dạng in riêng để đạt được hiệu quả tương tự. Với mỗi đối tượng được in ra, nếu interface `fmt.Stringer` được thỏa mãn, kết quả kiểu `String` được trả về bởi phương thức của đối tượng được in mặc định:
 
 [source code](../examples/ch1/ch1.4/3-interface/example-2/main.go)
 
@@ -498,7 +498,7 @@ Tuy nhiên, phương pháp chặn  các đối tượng bên ngoài thực hiệ
 - Thứ nhất, interface này chỉ có thể được sử dụng bên trong gói và các gói bên ngoài thường không thể tạo ra các đối tượng thỏa mãn interface,
 - Thứ hai, cơ chế bảo vệ này cũng không phải tuyệt đối, người dùng nếu cố tình vẫn có thể bỏ qua được.
 
-Như  đã đề cập trong phần Method, ta có thể kế thừa các phương thức của  kiểu ẩn danh bằng cách nhúng các thành phần thuộc  kiểu đó vào struct. Trong thực tế, thành phần ẩn danh này không nhất thiết phải là một kiểu bình thường, mà có thể một kiểu interface cũng được. Chúng ta có thể làm giả  phương thức private `testing.TB` bằng cách nhúng vào các interface ẩn danh, bởi vì các phương thức trong interface thuộc loại lazy binding và không thành vấn đề nếu phương thức `private` thực sự tồn tại ở compile-time.
+Như  đã đề cập trong phần Method, ta có thể kế thừa các phương thức của  kiểu ẩn danh bằng cách nhúng các thành phần thuộc  kiểu đó vào struct. Trong thực tế, thành phần ẩn danh này không nhất thiết phải là một kiểu bình thường, mà có thể một kiểu interface cũng được. Chúng ta có thể làm giả  phương thức private `testing.TB` bằng cách nhúng vào các interface ẩn danh, bởi vì các phương thức trong interface thuộc loại lazy binding và không thành vấn đề nếu phương thức `private` thực sự tồn tại ở compile-time. [(source)](../examples/ch1/ch1.4/3-interface/example-3/main.go)
 
 [source code](../examples/ch1/ch1.4/3-interface/example-3/main.go)
 

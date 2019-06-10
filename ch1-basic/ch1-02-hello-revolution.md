@@ -331,7 +331,7 @@ Ngôn ngữ Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu
 
 #### 1.2.7 Hello, World! - V2.0
 
-Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello, World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service.
+Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello, World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service. [source](../examples/ch1.2/7-hello-world/example-1/main.go)
 
 [source code](../examples/ch1/ch1.2/7-hello-world-v2/example-1/main.go)
 
