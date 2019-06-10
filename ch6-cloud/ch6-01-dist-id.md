@@ -47,8 +47,6 @@ Khi bạn đã nhận được nó từ MySQL, worker_id sẽ được duy trì 
 
 Tất nhiên, sử dụng MySQL đồng nghĩa với việc thêm một phụ thuộc bên ngoài vào dịch vụ tạo id. Càng thêm nhiều phụ thuộc, khả năng phục vụ của dịch vụ càng tệ.
 
-Considering that even if there is a single id generation service instance hanging in the cluster, it is a part of the id that is lost for a while, so we can also be more violent and worker_idwrite it directly in the worker configuration. When going online, the deployment script completes the worker_idfield. replace.
-
 Xem xét đến việc có một dịch vụ tạo id bị lỗi trong cluster, một phần của id bị mất trong một khoảng thời gian, thì chúng ta cần một cách mạnh tay là viết trực tiếp worker_id vào cấu hình của worker. Khi hệ thống đó hoạt động lại, đoạn script triển khai sẽ quy định giá trị worker_id.
 
 ## 6.1.2 Các nguồn mở
@@ -115,8 +113,6 @@ Dĩ nhiên, thư viện này cũng cho phép chúng ta tùy chỉnh vài thông 
 
 ### 6.1.2.2 Sonyflake
 
-Sonyflake is an open source project of Sony. The basic idea is similar to snowflake, but the bit allocation is slightly different. See *Figure 6-3*:
-
 Sonyflower là một dự án nguồn mở của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác. Xem *Hình 6-3*:
 
 ![sonyflake](../images/ch6-snoyflake.png)
@@ -142,8 +138,6 @@ Type Settings struct {
 Tùy chọn `StartTime` tương tự như `Epoch` trước đây của chúng ta. Nếu không được đặt trước, mặc định là bắt đầu vào `2014-09-01 00:00:00 +0000 UTC`.
 
 `MachineID` có thể là hàm do người dùng định nghĩa. Nếu người dùng không định nghĩa nó, 16 bit cuối của IP gốc sẽ mặc định được sử dụng làm `machine id`.
-
-`CheckMachineID` is a function provided by the user to check if `MachineID` conflicts. The design here is quite clever. If there is another centralized storage and support for checking the duplicate storage, then we can customize the logic to check if the `MachineID` conflicts according to our own ideas. If the company has a ready-made Redis cluster, then we can easily check for conflicts with Redis' collection types.
 
 `CheckMachineID` là một chức năng được cung cấp bởi người dùng để kiểm tra xem `MachineID` có trùng hay không. Đây là thiết kế khá thông minh. Nếu có một bộ lưu trữ tập trung và hỗ trợ kiểm tra sự trùng lặp, thì chúng ta có thể tùy chỉnh logic để kiểm tra xem `MachineID` có trùng không. Nếu công ty có cụm Redis được tạo sẵn, thì chúng dễ dàng kiểm tra trùng bằng các loại collection của Redis.
 
