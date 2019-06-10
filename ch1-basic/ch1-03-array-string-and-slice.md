@@ -1,12 +1,11 @@
 
-## 1.3 Array, strings và slices
+# 1.3 Array, strings và slices
 
 `Arrays` và một số cấu trúc dữ liệu liên quan khác được sử dụng thường xuyên trong các ngôn ngữ lập trình. Chỉ khi chúng không đáp ứng được yêu cầu chúng ta mới cân nhắc sử dụng `linked lists` (danh sách liên kết) và `hash tables` (bảng băm) hoặc nhiều cấu trúc dữ liệu tự định nghĩa phức tạp khác.
 
 `Arrays`, `strings` và `slices` trong ngôn ngữ Go là các cấu trúc dữ liệu liên quan mật thiết với nhau. Ba kiểu dữ liệu đó có cùng cấu trúc vùng nhớ lưu trữ bên dưới, và chỉ có những hành vi thể hiện ra bên ngoài khác nhau tùy thuộc vào ràng buộc ngữ nghĩa. Đầu tiên, trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được xử lý toàn bộ, có thể hiểu là khi đó chúng được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó - khác với kiểu truyền tham khảo. Bên dưới dữ liệu của ngôn ngữ Go, `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string không được phép chỉnh sửa. Phép gán string chỉ đơn giản là sao chép hai thành phần đó là con trỏ tới vùng nhớ của `string` và độ dài `string`, mà không phải sao chép toàn bộ string. `Slices` thì phức tạp hơn, cấu trúc của chúng cũng như `string`, tuy nhiên việc giới hạn chỉ-đọc như string được lược bỏ, mỗi slice có thêm hai thông tin là `len` (độ dài) và `capacity` (sức chứa). Phép gán của slice và khi truyền slice như tham số của hàm thì thông tin về header của slice sẽ được xử lý theo giá trị. Bởi vì slice header chứa con trỏ đến dữ liệu bên dưới, phép gán sẽ không gây ra việc sao chép toàn bộ dữ liệu. Trong thực tế, phép gán trong Go và quy luật truyền tham số hàm trong Go rất đơn giản. Ngoại trừ hàm `closure` có tham khảo tới biến toàn cục bên ngoài, thì hầu hết những phép gán và truyền tham số khác được truyền bằng giá trị. Để hiểu được ba cách để xử lý arrays, strings và slices cần phải hiểu chi tiết tầng lưu trữ bên dưới của chúng.
 
-
-### 1.3.1 Array
+## 1.3.1 Array
 
 Một array là một chuỗi độ dài cố định của các phần tử có kiểu dữ liệu nào đó, một array có thể bao gồm không hoặc nhiều phần tử. Độ dài của array là một phần thông tin được chứa trong nó, các array có độ dài khác nhau hoặc kiểu phần tử bên trong khác nhau được xem là các kiểu dữ liệu khác nhau, và không được phép gán cho nhau, vì thế array hiếm khi được sử dụng trong Go. Một kiểu dữ liệu tương ứng với array là slice, một slice cũng là một chuỗi nhưng có thể tăng giảm kích thước một cách động, và các hàm hỗ trợ kiểu slice thì rất linh hoạt, nhưng để hiểu slice hoạt động thế nào, chúng ta phải hiểu array.
 
@@ -19,8 +18,7 @@ var c = [...]int{2: 3, 1: 2} // Mảng này có 3 phần tử theo thứ tự l�
 var d = [...]int{1, 2, 4: 5, 6} // Mảng này chứa dãy các phần tử là 1, 2, 0 , 0, 5, 6
 ```
 
-
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-1/main.go)
 
 Cách đầu tiên là cách cơ bản nhất để định nghĩa một array. Độ dài của array sẽ được ràng buộc trước, và mỗi phần tử trong array sẽ được khởi tạo với giá trị ban đầu là 0.
 
@@ -52,7 +50,7 @@ for i, v := range b {     // duyệt qua các phần tử trong con trỏ array,
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-2/main.go)
 
 Trong khi `b` là một con trỏ tới array `a`, nhưng khi làm việc với `b` cũng giống như `a`. Thì hoàn toàn có thể lặp qua (dùng `for range`) đối với con trỏ array, khi chúng ta gán hoặc truyền vào hàm một con trỏ array thì chỉ có giá trị con trỏ array được sao chép. Tuy nhiên con trỏ array cũng không đủ linh hoạt, bởi vì thông tin về chiều dài của array là một phần của array, do đó nếu hai con trỏ tới hai array có độ dài khác nhau thì hai con trỏ đó cũng thuộc kiểu khác nhau.
 
@@ -73,7 +71,7 @@ for i := 0; i < len(c); i++ {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-3/main.go)
 
 `for range` là cách tốt nhất để duyệt qua các phần tử trong array, bởi vì cách này sẽ đảm các việc truy xuất sẽ không vượt quá giới hạn của array.
 
@@ -87,7 +85,7 @@ for range times {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-4/main.go)
 
 Biến `times` sẽ tương ứng với kiểu array `[5][0]int`, mặc dù chiều thứ nhất của array có độ dài là 5, nhưng độ dài của array `[0]int` là 0, do đó kích thước của toàn bộ `array` là 0. Bỏ qua chi phí cho việc khởi tạo vùng nhớ chúng ta sẽ thực hiện 5 vòng lặp nhanh chóng.
 
@@ -119,7 +117,7 @@ var unknown2 = [...]interface{}{123, "Hello!"}
 var chanList = [2]chan int{}
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-5/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-5/main.go)
 
 
 Chúng ta cũng có thể định nghĩa một array rỗng
@@ -131,7 +129,7 @@ var f = [...]int{} // Tương tự như trên
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-6/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-6/main.go)
 
 Một array có chiều dài 0 thì không chiếm không gian lưu trữ. Một mảng rỗng hiếm khi được sử dụng trực tiếp, có có ích trong trường hợp như sau để đồng bộ luồng thực thi, khi mà việc phát sinh thêm vùng nhớ là không thực sự cần thiết
 
@@ -145,7 +143,7 @@ go func() {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-7/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-7/main.go)
 
 Ở đây, chúng ta không quan tâm về kiểu thực sự được truyền vào pipeline, trong khi thực thi lệnh nhận hoặc gửi chỉ nhằm mục đích đồng bộ thông điệp. Trong ngữ cảnh đó, chúng ta có thể sử dụng mảng rỗng trong pipe để hạn chế phí tổn của phép gán pipe. Dĩ nhiên, nó thích hợp hơn khi thay thế bằng một kiểu struct vô danh.
 
@@ -159,7 +157,7 @@ go func() {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-8/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-8/main.go)
 
 Chúng ta có thể sử dụng hàm `fmt.Printf`, chúng cho phép in ra kiểu cũng như chi tiết của array thông qua các chỉ thị `%T` hoặc `%#v`
 
@@ -169,12 +167,12 @@ fmt.Printf("b: %#v\n", b) // b: [3]int{1, 2, 3}
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/1-arrays/example-9/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-9/main.go)
 
 Trong Go, kiểu array là một kiểu cơ bản như là slice và strings. Nhiều ví dụ về array phía trên có thể được áp dụng trực tiếp cho strings hoặc slices
 
 
-### 1.3.2 String
+## 1.3.2 String
 
 
 Một string là một chuỗi các giá trị `byte` không được thay đổi, và string thường được dùng để biểu diễn giá trị con người có thể đọc được. Không giống như array, những phần tử trong string sẽ không được thay đổi, và chỉ có thể đọc. Chiều dài của mỗi string sẽ được cố định, những thông tin chiều dài đó không là một phần của kiểu string. Do mã nguồn của Go được yêu cầu là kiểu `UTF8`. Nội dung của string trong mã nguồn với kiểu Unicode sẽ được chuyển thành UTF8. Bởi vì mỗi phần tử của string cũng thực chất được lưu trữ thành những byte chỉ-đọc, một string có thể chứa những dữ liệu tùy ý, có thể toàn những byte zero (không). Chúng ta có thể dùng string để biểu diễn kiểu không phải là UTF8 bằng cách mã hóa chúng như là GBK, nhưng cơ bản không nên làm như vậy bởi vì hàm mệnh đề `for range` trong Go không hỗ trợ duyệt string mang kí tự không phải kiểu UTF8.
@@ -190,7 +188,7 @@ type StringHeader struct {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-1/main.go)
 
 Cấu trúc của string chứa hai phần thông tin: đầu tiên là con trỏ array tới địa chỉ chứa string, thứ hai là chiều dài của string. Một string thực sự là một cấu trúc, do đó phép gán string thực chất là việc sao chép cấu trúc `reflect.StringHeader`, và không gây ra việc sao chép bên dưới phần dữ liệu. `[2]string`, cấu trúc bên dưới string được đề cập ở chương trước là `[2]reflect.StringHeader` cũng giống với cấu trúc dưới đây. 
 
@@ -210,7 +208,7 @@ var  data = [...] byte {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-1/main.go)
 
 
 Mặc dù string không phải là slice nhưng nó cũng hỗ trợ thao tác (slicing) cắt. Một vài phần của vùng nhớ cũng được truy cập bên dưới slice tại một số nơi khác nhau.
@@ -223,7 +221,7 @@ s1 := "hello, world"[:5]
 s2 := "hello, world"[7:]
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-1/main.go)
 
 
 Tương tự như array, String cũng có một hàm dựng sẵn là `len` dùng để trả về chiều dài của string, ngoài ra bạn có thể  dùng `reflect.StringHeader` để truy xuất chiều dài của string theo cách như sau
@@ -234,7 +232,7 @@ fmt.Println("len(s1): ", (*reflect.StringHeader)(unsafe.Pointer(&s1)).Len)
 fmt.Println("len(s2): ", (*reflect.StringHeader)(unsafe.Pointer(&s2)).Len)
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-1/main.go)
 
 
 Theo như mô tả của ngôn ngữ Go, mã nguồn của ngôn ngữ được encoded (mã hóa) dưới dạng UTF8. Do đó, hằng string cũng được mã hóa dưới dạng UTF8. Khi đề cập tới Go string, chúng ta thường giả định rằng string là tương ứng với một chuỗi kí tự UTF8 hợp lệ. Bạn có thể dùng hàm dựng sẵn là `print` hoặc `fmt.Print` để in trực tiếp nó, hoặc có thể dùng vòng lặp `for range` qua chuỗi UTF8 một cách trực tiếp.
@@ -249,7 +247,7 @@ fmt.Printf("%#v\n", []byte("Hello, 世界"))
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-2/main.go)
 
 
 Phân tích ra chúng ta có thể nhận thấy rằng các số hexa `0xe4, 0xb8, 0x96` ứng với từ "World" trong tiếng Trung, và `0xe7, 0x95, 0x8c` ứng với "Hello"
@@ -263,7 +261,7 @@ fmt.Println("\xe7\x95\x8c")
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-3/main.go)
 
 
 <p align="center" width="600">
@@ -282,7 +280,7 @@ fmt.Println("\xe4\x00\x00\xe7\x95\x8cabc") // �界abc
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-4/main.go)
 
 
 Tuy nhiên, khi mà `for range` trên những chuỗi UTF8 bị hỏng như trên, các byte thứ hai và thứ ba của kí tự đầu tiên vẫn sẽ được lặp lại một cách độc lập, nhưng giá trị của lần lặp này là 0 sau khi bị gặp lỗi.
@@ -301,7 +299,7 @@ for i, c := range "\xe4\x00\x00\xe7\x95\x8cabc" {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-5/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-5/main.go)
 
 
 Nếu bạn không muốn decode (giải mã) chuỗi UTF8 và muốn duyệt trực tiếp qua nó, bạn có thể bắt string có thể chuyển qua chuỗi `[]byte` sau đó sẽ duyệt (sự chuyển đổi này sẽ không gây ra phí tổn khi chạy chương trình)  
@@ -313,7 +311,7 @@ for i, c := range []byte("世界abc") {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-6/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-6/main.go)
 
 
 Hoặc bạn có thể duyệt một dãy các byte của string như sau
@@ -327,7 +325,7 @@ for i := 0; i < len(s); i++ {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-7/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-7/main.go)
 
 
 Hơn nữa, `for range` sẽ nhờ vào cú pháp UTF8 mà Go có thể hỗ trợ kiểu đặc biệt `[]rune` để chuyển từ kiểu string sang kiểu khác.
@@ -338,7 +336,7 @@ fmt.Printf("%#v\n", string([]rune{'世', '界'})) // 世界
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-8/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-8/main.go)
 
 
 Từ kết quả của đoạn mã nguồn trên, chúng ta có thể thấy `[]rune` thực sự là kiểu `[]int32`, từ đây, `rune` là một tên gọi khác của `int32`, `rune` được dùng để biểu diễn mỗi điểm unicode, hiện tại thì chỉ 21 bits được sử dụng.
@@ -361,7 +359,7 @@ func forOnString(s string, forBody func(i int, r rune)) {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-9/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-9/main.go)
 
 
 `for range` khi lặp qua một string, mỗi lần chúng ta decode một ký tự Unicode và sau đó nhập vào thân vòng lặp for khi bắt gặp một kí tự broken code sẽ không gây dừng vòng lặp.
@@ -380,10 +378,10 @@ func str2bytes(s string) []byte {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-10/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-10/main.go)
 
 
-Một slice mới sẽ được tạo ra trong mô phỏng và sau đó một array của string sẽ được sap chép thành một slice theo từng phần tử, theo thứ tựu để đảm bảo ngữ nghĩa của string là chỉ đọc, Dĩ nhiên, khi chúng ta chuyển một string sang một array các byte `[]byte`, nếu trong quá trình chuyển đổi không thay đổi dữ liệu, thì bộ biên dịch sẽ trả về dữ liệu trực tiếp trỏ tới chuỗi gốc.
+Một slice mới sẽ được tạo ra trong mô phỏng và sau đó một array của string sẽ được sao chép thành một slice theo từng phần tử, theo thứ tựu để đảm bảo ngữ nghĩa của string là chỉ đọc, Dĩ nhiên, khi chúng ta chuyển một string sang một array các byte `[]byte`, nếu trong quá trình chuyển đổi không thay đổi dữ liệu, thì bộ biên dịch sẽ trả về dữ liệu trực tiếp trỏ tới chuỗi gốc.
 
 **`string(bytes)` mô phỏng hiện thực chuyển đổi kiểu**
 
@@ -403,7 +401,7 @@ func bytes2str(s []byte) (p string) {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-11/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-11/main.go)
 
 
 Bởi vì string trong ngôn ngữ Go là chỉ-đọc, hoàn toàn không thể cấu trúc bên dưới một mảng kiểu byte để sinh ra một string. Để mô phỏng cách hiện thực, `unsafe` - một cấu trúc dữ liệu bên dưới của string sẽ được chứa trong một package, và sau đó một dữ liệu slice sẽ được sao chép thành chuỗi string tuần tự, nó giúp đảm bảo rằng ngữ nghĩa của string là chỉ được đọc không bị ảnh hưởng bởi slice. Nếu trong khi chuyển đổi, chuỗi byte không bị thay đổi trong suốt thời gian tồn tại của biến gốc, trình biên dịch sẽ xây dựng một mảng các `[]byte` để tạo thành string một cách trực tiếp dựa vào dữ liệu bên dưới.
@@ -423,10 +421,10 @@ func str2runes(s []byte) []rune {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-12/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-12/main.go)
 
 
-Bởi vì sự khác nhau bên dưới cấu trúc dữ liệu bên dưới, một string được chuyển đổi sang `[]rune` sẽ không thể không cấp phát lại vùng nhớ, và sau đó một chuỗi được decode và sao chép tuần tự tương tứng với chuỗi Unicode. Sự ép kiểu đó sẽ không có một sự tối ưu về string và bytes như được đề cập từ trước
+Bởi vì sự khác nhau bên dưới cấu trúc dữ liệu bên dưới, một string được chuyển đổi sang `[]rune` sẽ không thể không cấp phát lại vùng nhớ, và sau đó một chuỗi được decode và sao chép tuần tự tương ứng với chuỗi Unicode. Sự ép kiểu đó sẽ không có một sự tối ưu về string và bytes như được đề cập từ trước
 
 **`string(runes)` mô phỏng chuyển đổi kiểu**
 
@@ -442,13 +440,13 @@ func runes2string(s []int32) string {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-strings/example-13/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-13/main.go)
 
 
 
 Cũng bởi vì một sự khác nhau bên dưới cấu trúc lưu trữ, `[]rune`, việc chuyển đổi thành một chuỗi chắc chắn sẽ dẫn đến việc xây dựng lại chuỗi. Cách này không không có tối ưu hóa như mô tả ở trên.
 
-### 1.3.3 Slice
+## 1.3.3 Slice
 
 Đơn giản mà nói, slice là một phiên bản đơn giản của mảng động. Bởi vì chiều dài của một mảng động không được cố định, chiều dài của slice thông thường không là một phần của kiểu dữ liệu. Array có nơi mà nó được áp dụng, nhưng kiểu array và những tác vụ trên nó sẽ không đủ linh hoạt, do đó array không được sử dụng nhiều trong ngôn ngữ Go. Slice thường được dùng một cách phổ biến hơn, và hiểu được ý nghĩa cũng như nguyên tắc sử dụng slice sẽ đòi hỏi phải có nhiều kĩ năng của người lập trình viên Go.
 
@@ -463,7 +461,7 @@ type  SliceHeader  struct {
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/2-slices/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/2-slices/example-1/main.go)
 
 
 Có thể nhìn thấy rằng khởi đầu một slice là giống như Go String, nhưng slice có thêm thuộc tính `Cap` chỉ ra kích thước tối đa mà vùng nhớ trỏ tới slice được cấp phát. Hình bên dưới sẽ mô phỏng với `x := []int{2,3,5,7,11}` và `y := x[1:3]` cấu trúc vùng nhớ tương ứng với chương thứ hai.
@@ -492,7 +490,7 @@ var (
 ```
 
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-1/main.go)
 
 
 
@@ -512,7 +510,7 @@ for i := 0; i < len(c); i++ {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-2/main.go)
 
 Trên thực tế, phép duyệt sẽ thông qua con trỏ dữ liệu bên dưới, chiều dài và sức chứa của slice sẽ không bị thay đổi, phép duyệt slice sẽ đọc và thay đổi phần tử như là array. Khi gán một giá trị hoặc truyền vào một tham số cho bản thân slice, nó hoạt động giống như array các con trỏ chỉ sao chép phần thông tin header của slice (`reflect.SliceHeader`). Ở các kiểu đó, điểm khác biệt lớn nhất đối với array và slice chính là thông tin về chiều dài, bên cạnh đó, slice có cùng kiểu dữ liệu sẽ có cùng kiểu slice.
 
@@ -529,7 +527,7 @@ a = append(a, 1, 2, 3)         // nối thêm phần tử 1, 2, 3
 a = append(a, []int{1,2,3}...) // nối thêm các phần tử 1, 2, 3 bằng cách truyền vào một mảng
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-3/main.go)
 
 Tuy nhiên, chú ý rằng trong trường hợp không đủ sức chứa, hàm `append` sẽ gây ra kết quả là vùng nhớ sẽ được phân bố lại, nó dẫn đến chi phí của việc phân bố và sao chép là rất lớn. Mặc dù khi sức chứa không đủ, bạn sẽ cần hàm `append` để cập nhật lại bản thân slice và là giá trị được trả về bởi hàm, bởi vì chiều dài của slice mới đã bị thay đổi.
 
@@ -541,7 +539,7 @@ a = append([]int{0}, a...)        // thêm phần tử 0 vào đầu slice a
 a = append([]int{-3,-2,-1}, a...) // thêm các phần tử -3, -2, -1 vào đầu slice a
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-4/main.go)
 
 Đầu tiên, việc thêm phần tử vào đầu slice sẽ gây ra việc tổ chức lại vùng nhớ, nó cũng sẽ làm những phần tử đang tồn tại trong slice sẽ được sao chép một lần nữa. Do đó, hiệu suất của việc thêm phần tử  vào đầu slice sẽ tệ hơn là thêm phần tử vào cuối slice.
 
@@ -553,7 +551,7 @@ a = append(a[:i], append([]int{x}, a[i:]...)...)     // chèn x ở vị trí th
 a = append(a[:i], append([]int{1,2,3}, a[i:]...)...) // chèn một slice con vào slice ở vị trí thứ i
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-5/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-5/main.go)
 
 Cách `append` thứ hai sẽ gây ra việc tạo một slice tạm thời, slice `a[i:]` sẽ sao chép nội dung vào slice mới được tạo, và thêm slice tạm thời này vào `a[:i]`
 Bạn cũng có thể sử dụng hàm `copy` và `append` kết hợp với nhau để tránh việc khởi tạo những slice tạm thời như vậy, cũng như có thể hoàn thành việc thêm phần tử vào một vị trí bất kỳ trong slice như sau
@@ -564,7 +562,7 @@ copy(a[i+1:], a[i:]) // lùi những phần tử từ i trở về sau của a
 a[i] = x             // gán vị trí thứ i bằng x
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-6/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-6/main.go)
 
 Dòng đầu tiên dùng `append` để mở rộng kích thước của slice và tạo không gian cho phần tử mới được thêm vào. Ở dòng thứ hai sẽ sao chép các phần tử trong slice dời về sau kể từ vị trí thứ i. Dòng cuối cùng sẽ gán giá trị mới vào vị trí thứ i. Mặc dù cách làm trên sẽ dài dòng, tuy nhiên chúng ta có thể lượt bỏ việc phải sao chép một slice tạm thời khi so sánh với cách làm trước.
 
@@ -577,7 +575,7 @@ copy(a[i+len(x):], a[i:]) // sao chép len(x) phần tử lùi về sau
 copy(a[i:], x)            // sao chép array x vào giữa
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-7/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-7/main.go)
 
 **Xóa những phần tử trong slice** 
 
@@ -589,7 +587,7 @@ a = a[:len(a)-1]   // xóa một phần tử ở cuối
 a = a[:len(a)-N]   // xóa N phần tử ở cuối
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-8/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-8/main.go)
 
 Xóa phần tử ở đầu thì thực chất là di chuyển con trỏ dữ liệu về sau
 
@@ -599,7 +597,7 @@ a = a[1:] // xóa phần tử đầu tiên
 a = a[N:] // xóa N phần tử đầu tiên
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-9/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-9/main.go)
 
 Bạn cũng có thể xóa bỏ con trỏ dữ liệu mà không di chuyển phần còn lại về phía sau, nhưng sẽ di chuyển chúng tới nơi bắt đầu sẽ có thể thực hiện bởi hàm `append`, chúng không làm thay đổi cấu trúc không gian vùng nhớ
 
@@ -609,7 +607,7 @@ a = append(a[:0], a[1:]...) // xóa phần tử đầu tiên
 a = append(a[:0], a[N:]...) // xóa N phần tử đầu tiên
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-10/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-10/main.go)
 
 Bạn cũng có thể dùng hàm `copy` để hoàn thành nhiệm vụ xóa
 
@@ -619,7 +617,7 @@ a = a[:copy(a, a[1:])] // xóa phần tử đầu tiên
 a = a[:copy(a, a[N:])] // xóa N phần tử đầu tiên
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-11/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-11/main.go)
 
 Khi xóa phần tử ở giữa, bạn cần dịch chuyển những phần tử ở phía sau lên trước, điều đó có thể được thực hiện như sau
 
@@ -633,7 +631,7 @@ a = a[:i+copy(a[i:], a[i+1:])]  // xóa phần tử ở vị trí i
 a = a[:i+copy(a[i:], a[i+N:])]  // xáo N phần từ từ vị trí i
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-12/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-12/main.go)
 
 Xóa phần tử đầu hoặc phần tử cuối, có thể được xem là những trường hợp đặc biệt của xóa nhũng phần tử ở giữa.
 
@@ -655,7 +653,7 @@ func TrimSpace(s []byte) []byte {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-13/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-13/main.go)
 
 Trong thực thế những giải thuật tương tự để xóa những phần tử trong slice thỏa một điều kiện nào đó, có thể được xử lý theo cách trên, (bởi vì không có chi phí vùng nhớ phụ cho tác vụ xóa).
 
@@ -671,7 +669,7 @@ func Filter(s []byte, fn func(x byte) bool) []byte {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-14/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-14/main.go)
 
 Điểm chính của những tác vụ được coi là hiệu quả trên slice là hạn chế việc phải phân bố lại vùng nhớ, cố gắng để hàm `append` sẽ không đạt tới `cap` sức chứa của slice, là giảm số lần cấp phát vùng nhớ và giảm kích thước vùng nhớ cấp phát tại mọi thời điểm.
 
@@ -688,7 +686,7 @@ func FindPhoneNumber(filename string) []byte {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-15/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-15/main.go)
 
 Mã nguồn này sẽ trả về  một mảng các `byte` trỏ tới toàn bộ file. Bởi vì slice tham khảo tới toàn bộ array gốc, cơ chế tự động thu gom rác không thể giải phóng không gian bên dưới array trong thời gian đó. Một yêu cầu kết quả nhỏ, những phải lưu trữ toàn bộ dữ liệu trong một thời gian dài. Mặc dù nó không phải là `memory leak` trong ngữ cảnh truyền thống, nó có thể làm chậm hiệu suất của toàn hệ thống.
 
@@ -702,7 +700,7 @@ func FindPhoneNumber(filename string) []byte {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-16/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-16/main.go)
 
 Vấn đề tương tự có thể gặp phải khi xóa những phần tử trong slice. Giả sử rằng con trỏ đối tượng được lưu trữ trong cấu trúc của slice, sau khi xóa đi phần tử cuối, thì phần tử được xóa có thể còn được tham khảo bên dưới mảng slice, vùng nhớ có thể được giải phóng tự động trong thời gian đó (nó phụ thuộc vào cách hiện thực cơ chế thu hồi vùng nhớ)
 
@@ -711,9 +709,9 @@ var a []*int{ ... }
 a = a[:len(a)-1]    // phần tử cuối cùng dù được xóa nhưng vẫn được tham chiếu, do đó cơ chế thu gom rác tự động không thu hồi nó
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-17/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-17/main.go)
 
-Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo quá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
+Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo giá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
 
 ```go
 var a []*int{ ... }
@@ -721,7 +719,7 @@ a[len(a)-1] = nil // phần tử cuối cùng sẽ được gán giá trị nil
 a = a[:len(a)-1]  // xóa phần tử cuối cùng ra khỏi slice
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-18/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-18/main.go)
 
 Dĩ nhiên, nếu ở cách làm trước đối với slice có kích thước nhỏ, bạn sẽ không gặp phải vấn đề về  tham chiếu treo. Bởi vì nếu bản thân slice có thể được giải phóng bởi GC (Garbage collector), mỗi phần tử ứng với slice có thể được thu gom tự nhiên.
 
@@ -754,7 +752,7 @@ func SortFloat64FastV2(a []float64) {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.3/3-slices/example-19/main.go)
+[>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-19/main.go)
 
 Cách ép kiểu đầu tiên ban đầu sẽ chuyển địa chỉ bắt đầu của slice thành con trỏ đến mảng lớn hơn, sau đó sẽ `re-slice` array tương ứng với con trỏ array. Ở giữa `unsafe.Pointer` cần phải kết nối tới kiểu dữ liệu khác của pointer để truyền. Nên chú ý rằng, kiểu array none-zero sẽ tối đa 2GB chiều dài, do đó chúng ta có thể tính toán chiều dài tối đa của array cho kiểu array đó (kiểu `[]uint8` có kích thước tối đa 2GB, kiểu `[]uint16` tối đa 1GB, nhưng kiểu `[]struct{}` kích thước tối đa 2GB).
 

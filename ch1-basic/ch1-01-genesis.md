@@ -1,4 +1,4 @@
-## 1.1 Nguồn gốc của ngôn ngữ Go
+# 1.1 Nguồn gốc của ngôn ngữ Go
 
 Ngôn ngữ **Go** ban đầu được thiết kế và phát triển bởi một nhóm kĩ sư Google bao gồm Robert Griesemer, Ken Thompson và Rob Pike vào năm 2007. Mục đích của việc thiết kế ngôn ngữ mới bắt nguồn từ một số phản hồi về tính chất phức tạp của C++11, cuối cùng là nhu cầu thiết kế lại ngôn ngữ C trong môi trường network và muti-core (đa lõi). Vào giữa năm 2008, hầu hết các tính năng được thiết kế trong ngôn ngữ được hoàn thành, họ bắt đầu hiện thực trình biên dịch và bộ thực thi với Russ Cox là nhà phát triển chính. Trước năm 2010, ngôn ngữ Go dần dần được hoàn thiện. Vào tháng 9 cùng năm, ngôn ngữ Go chính thức được công bố dưới dạng open source (mã nguồn mở).
 
@@ -19,7 +19,7 @@ Cuối cùng cột bên phải của sơ đồ gene là ngôn ngữ C. Ngôn ng�
 
 Một vài những tính năng khác của ngôn ngữ Go đến từ một số ngôn ngữ khác, ví dụ là cú pháp `iota` được mượn từ ngôn ngữ **APL**, những đặc điểm như là `lexical scope` và `nested functions` đến từ Scheme. Cũng có những ý tưởng khác được thiết kế và đưa vào. Ví dụ, Go hỗ trợ `slice` để truy cập phần tử nhanh như mảng tĩnh, đồng thời nó có thể được tăng giảm kích thước bằng cơ chế chia sẻ vùng nhớ tương tự linked list, mệnh dề `defer` có trong Go (phát minh của Ken) cũng rất hữu ích.
 
-### 1.1.1 Duy truyền từ Bell Labs
+## 1.1.1 Duy truyền từ Bell Labs
 
 Tính biểu tượng về lập trình đồng thời của Go đến từ một nghiên cứu ít biết được công bố bởi Tony Hoarce tại Bell Labs vào năm 1978 -  Commutative sequential processes (CSP). Về bài báo khoa học nói về CSP, chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `pipes` cho việc giao tiếp và điều khiển đồng bộ. Mô hình Tony Hoare's CSP concurrency chỉ là một ngôn ngữ mô tả cho những khái niệm cơ bản về concurrency (tính đồng thời), nó cũng không hẳn là một ngôn ngữ lập trình.
 
@@ -45,7 +45,7 @@ Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go đượ
 
 Trong suốt quá trình phát triển ngôn ngữ lập trình từ Bell Labs, từ B đến C, NewSqueak, Alef, Limbo, ngôn ngữ Go thừa hưởng một nửa thế kỉ của việc thiết kế từ những thế hệ trước, cuối cùng hoàn thành sứ mệnh tạo ra một thế hệ ngôn ngữ tựa C mới. Trong vòng những năm gần đâu, Go trở thành một ngôn ngữ lập trình vô cùng quan trọng trong `cloud computing` và `cloud storage`.
 
-### 1.1.2 Hello, the World
+## 1.1.2 Hello, the World
 
 Để bắt đầu, chương trình đầu tiên thường in ra dòng chữ "Hello, world", đoạn code bên dưới là chương trình này.
 
@@ -59,7 +59,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.1/1-hello/main.go)
+[>> mã nguồn](../examples/ch1/ch1.1/1-hello/main.go)
 
 Lưu đoạn code trên thành file `hello.go`. Sau đó, chuyển tới thư mục chứa file `hello.go`, nơi mà file được lưu trữ, Bây giờ chúng ta có thể sử dụng Go như là ngôn ngữ scripting bằng cách gõ `go run hello.go` đó là một câu lệnh command line trực tiếp cho ra kết quả là dòng chữ "Hello, World".
 

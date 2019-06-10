@@ -16,7 +16,7 @@ Bộ thực thi Go có một bộ đồng thời cho riêng nó, nó dùng một
 
 Bắt đầu một goroutine trong go không chỉ là gọi một hàm, mà là kèm theo chi phí của việc định thời giữa các Goroutines. Những đặc điểm đó có sự ảnh hưởng lớn đến sự phổ biến và phát triển của lập trình đồng thời.
 
-### 1.5.2 Toán tử Atomic
+## 1.5.2 Toán tử Atomic
 
 Tác vụ atomic là những tác vụ nhỏ nhất và không thể song song được trong lập trình đồng thời. Về mặt chung, nếu nhiều tác vụ được thực thi đồng thời trên cùng một tài nguyên là atomic, sau đó nhiều nhất một thực thể có thể truy cập vào một tài nguyên. Từ góc độ thread, những thread khác không thể cùng truy cập vào tài nguyên. Tác vụ atomic trong mô hình lập trình đồng thời sẽ không khác nhau nhiều với mô hình single thread, và sự tương thích này đối với việc chia sẻ resource sẽ được đảm bảo.
 Thông thường sẽ có một vài lệnh CPU đặc biệt giúp bảo vệ vùng nhớ này. chúng ta có thể dùng `sync.Mutex` để đạt được điều đó.
@@ -52,7 +52,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-1/main.go)
 
 Trong vòng lặp của `worker`, theo thứ tự sẽ đảm bảo `total.value+=i` được đơn nguyên, chúng ta dùng `sync.Mutex` đẻ đảm bảo rằng mệnh đề chỉ được truy cập  bởi một thread trong cùng một thời điểm bằng cơ chế locking và unlocking. Trong chương trình với mô hình mutithread, rất cần thiết để lock và unlock trước và sau khi truy nhập vào vùng critical section. Với không có sự bảo vệ biến `total` , kết quả cuối cùng có thể bị sai khác do sự truy nhập đồng thời của nhiều thread.
 
@@ -84,7 +84,7 @@ func main() {
     wg.Wait()
 }
 ```
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-2/main.go)
 
 
 Hàm `atomic.AddUint64` khi được gọi sẽ đảm bảo rằng biến `total` được đọc và cập nhật và lưu trữ như một tác vụ đơn nguyên, do đó việc truy cập bởi nhiều thread được an toàn.
@@ -117,7 +117,7 @@ func Instance() *singleton {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-3/main.go)
 
 Chúng ta có thể  trích xuất phần code trên trở thành `sync.One` bằng việc hiện thực lại thư viện chuẩn như sau.
 
@@ -142,7 +142,7 @@ func (o *Once) Do(f func()) {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-4/main.go)
 
 Dựa trên `sync.One` chúng ta sẽ hiện thực lại chế độ single piece như sau:
 
@@ -160,7 +160,7 @@ func Instance() *singleton {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-5/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-5/main.go)
 
 `sync/atomic` package này sẽ hỗ trợ những tác vụ atomic cho những kiểu cơ bản và cho việc đọc và ghi một đối tượng phức tạp, `atomic.Value` sẽ hỗ trợ hai hàm `Load` và `Store` hai hàm làm việc load và save dữ liệu, trả về giá trị và tham số là `interface{}` nó có thể được sử dụng trong một vài kiểu đặc biệt.
 
@@ -188,7 +188,7 @@ for i := 0; i < 10; i++ {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-6/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-6/main.go)
 
 Đó là một mô hình producer và comsumer. Bên dưới thread sẽ sinh ra thông tin cấu hình gần nhất; ở phía front-end sẽ có nhiều worker thread để lấy thông tin cấu hình gần nhất.
 
@@ -212,7 +212,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-7/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-7/main.go)
 
 Chúng ta sẽ tạo ra một set up thread cho việc khởi tạo chuỗi ban đầu khởi tạo cờ `done` theo sau tác vụ khởi tạo là true. Trong thread main, nơi mà hàm được lưu giữ, khi mà câu lệnh `for !done{}` kiểm tra biến done có thể chuyển thành true, nó có thể được xem xét như tác vụ khởi tạo string được hoàn thành, sau đó một kí tự trong string sẽ được in ra.
 
@@ -246,7 +246,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/2-atomic-operation/example-8/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/2-atomic-operation/example-8/main.go)
 
 Khi mà `<-done` được thực thi, thì những yêu cầu không thể thay thế `done <- 1` sẽ được hiện thực. Theo như trong cùng một goroutine sẽ thỏa mãn quy luật nhất quán. Chúng ta có thể nói rằng khi `done <- 1` được thực thi, thì mệnh đề `println()` sẽ được thực thi trước rồi,  Do đó chương trình hiện tại sẽ có kết quả được in ra màn hình bình thường.
 
@@ -266,12 +266,12 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/3-sequence-consistency-mem-model/example-9/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/3-sequence-consistency-mem-model/example-9/main.go)
 
 
 Có thể xác định rằng, bên dưới việc thực thi `mutex.UnLock()` sẽ phải là `println("你好, 世界")` hoàn thành trước. (một số thread thỏa mãn thứ tự nhất quán), và trong main, hàm thứ hai sẽ `mu.Lock()` sẽ phải là `mu.UnLock()` xảy ra bên dưới background thread (được đảm bảo bởi `sync.Mutex`) và bên dưới nền sẽ in ra công việc được hoàn thành một cách thành công.
 
-### 1.5.4 Khởi tạo chuỗi
+## 1.5.4 Khởi tạo chuỗi
 
 Trong chương trước, chúng ta đã được giới thiệu ngắn gọn về việc khởi tạo một chuỗi trong chương trình, nó là một số đặc điểm đặt biệt của ngôn ngữ Go theo mô hình vùng nhớ đồng thời.
 
@@ -291,7 +291,7 @@ Nên chú ý rằng `main.main` trong những mã nguồn sẽ được thực t
 Bởi vì tất cả hàm `init` và hàm `main` sẽ được hoàn thành trong cùng một thread, nó cũng sẽ thoả mãn thứ tự về mô hình nhất quán.
 
 
-### 1.5.5 Khởi tạo một Goroutine
+## 1.5.5 Khởi tạo một Goroutine
 
 Mệnh đề đứng trước từ khóa `go` sẽ tạo ra một Goroutine mới trước khi trả về một goroutine hiện tại, ví dụ :
 
@@ -308,11 +308,11 @@ func hello() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/5-create-go-routine/example-10/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/5-create-go-routine/example-10/main.go)
 
 Việc thực thi của `go f()` sẽ tạo ra một Goroutine, và hàm `hello` sẽ thực thi cùng lúc với Goroutine. Theo thứ tự của các statement được viết, nó có thể được xác định bằng một khi việc khởi tạo Goroutine được xảy ra, nó có thể không được sắp xếp. Nó là việc đồng thời. Việc gọi hello sẽ in ra tại một số điểm trong tương lai "hello,world", hoặc có thể là `hello` được in ra sao khi hàm đã thực thi xong
 
-### 1.5.6 Giao tiếp thông qua kênh Channel
+## 1.5.6 Giao tiếp thông qua kênh Channel
 
 Giao tiếp thông qua channel là một phương pháp chính trong việc đồng bộ giữa các goroutine. Mỗi lần thực hiện thao tác gửi trên một `unbufferred Channel` thường đi đôi với tác vụ nhận. Tác vụ gửi và nhận thường xảy ra ở những Goroutine khác nhau (hai tác vụ diễn ra trên cùng một goroutine có thể dễ dàng dẫn đến deadlocks). **Tác vụ gửi trên một unbufferred Channel luôn luôn xảy ra trước khi tác vụ nhận hoàn thành**.
 
@@ -332,7 +332,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/6-channel-base-com/example-11/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/6-channel-base-com/example-11/main.go)
 
 
 Cũng đảm bảo rằng, khi in dòng "hello, world". Vì thread nền sẽ tiếp nhận trước khi bắt đầu `main` thread là `done <- true` trước khi gửi `<-done`, sẽ đảm bảo rằng `msg = "hello, world"` được thực thi, do đó chuỗi `println(msg)` sẽ được gán rồi. Tóm lại, bên thread nền sẽ đầu tiên ghi vào biến `msg`, sau đó sẽ nhận tín hiệu từ `done`, theo sau bởi `main` là một thread để truyền tín hiệu tương ứng với lần thực thi hàm `println(msg)` kết thúc. Tuy nhiên, nếu Channel được buffered (ví dụ, `done = make(chan bool, 1)` ), main thread sẽ nhận tác vụ `done <- true` sẽ blocked cho đến khi thread nền nhận, và chương trình sẽ không đảm bảo in ra dòng chữ "hello, world".
@@ -356,12 +356,12 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.5/6-channel-base-com/example-13/main.go)
+[>> mã nguồn](../examples/ch1/ch1.5/6-channel-base-com/example-13/main.go)
 
 
 Dòng `select{}` cuối cùng là một mệnh đề lựa chọn một empty pipe sẽ làm cho main thread bị block, ngăn chặn chương trình kết thúc sớm. Tương tự `for{}` và `<- make(chan int)` nhiều hàm khác sẽ đạt được kết quả tương tự. Bởi vì thread main sẽ bị blocked. nó có thể là `os.Exit(0)` được hiện thực nếu chương trình cần kết thúc một cách thông thường.
 
-### 1.5.7 Tác vụ đồng bộ không tin cậy
+## 1.5.7 Tác vụ đồng bộ không tin cậy
 
 Như chúng ta phân tích trước, đoạn code sau sẽ không đảm bảo thứ tự in ra kết quả bình thường. Việc chạy thực sự bên dưới sẽ có một xác suất lớn kết quả sẽ không bình thường.
 

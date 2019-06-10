@@ -17,7 +17,7 @@ Trước tiên, ta in ra "Hello world" trong Goroutine mới và đợi cho outp
 
 Khái niệm cốt lõi của lập trình đồng thời là giao tiếp đồng bộ, nhưng có nhiều cách để đồng bộ hóa. Trước tiên chúng ta dùng `sync.Mutex` để giao tiếp đồng bộ với cơ chế mutex quen thuộc . Theo document, chúng ta không thể trực tiếp mở khóa `sync.Mutex` ở trạng thái đã mở khóa , điều này có thể gây ra runtime exceptions. Cách sau đây sẽ không thực thi bình thường được:
 
-[source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-1/main.go)
 
 ```go
 func main() {
@@ -36,7 +36,7 @@ Bởi vì `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, 
 
 Sau đây là đoạn code đã sửa:  
 
-[source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-2/main.go)
 
 ```go
 func main() {
@@ -56,7 +56,7 @@ Cách khắc phục là thực hiện 2 lần `mu.Lock()` trong hàm `main`. Khi
 
 Đồng bộ hóa với mutex là một cách tiếp cận ở mức độ tương đối thấp. Bây giờ ta sẽ sử dụng một pipeline không được  cache để đạt được đồng bộ hóa:  
 
-[source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-3/main.go)
 
 ```go
 func main() {
@@ -73,9 +73,9 @@ func main() {
 
 Theo đặc tả mô hình bộ nhớ Golang, thao tác nhận từ một channel không phải buffer thực hiện trước khi việc truyền tới channel được hoàn thành (kết thúc việc truyền). Do đó, sau khi thread nền hoàn thành thao tác nhận `<-done`, thao tác gửi  của thread `main` là `done <- 1` mới được hoàn thành (do đó thoát khỏi `main` rồi thoát khỏi chương trình) và công việc in được thực thi xong.
 
-Mặc dù đoạn code trên có thể được đồng bộ đúng đắng, nhưng nó quá nhạy cảm với kích thước cache của  pipeline: nếu pipeline có cache, không có gì đảm bảo rằng thread nền sẽ in đúng trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của pipeline để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước cache của pipeline:  
+Mặc dù đoạn code trên có thể được đồng bộ đúng đắn, nhưng nó quá nhạy cảm với kích thước cache của  pipeline: nếu pipeline có cache, không có gì đảm bảo rằng thread nền sẽ in đúng trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của pipeline để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước cache của pipeline:  
 
-[source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-4/main.go)
 
 ```go
 func main() {
@@ -94,7 +94,7 @@ func main() {
 
 Dựa trên pipeline với cache, chúng ta có thể dễ dàng mở rộng thread print đến N. Ví dụ sau là mở 10 thread nền để in riêng biệt:  
 
-[source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-5/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-5/main.go)
 
 ```go
 func main() {
@@ -117,7 +117,7 @@ func main() {
 
 Một cách đơn giản để làm điều này là đợi N thread hoàn thành trước khi tiến hành thao tác đồng bộ hóa tiếp theo, đó là sử dụng `sync.WaitGroup` để chờ một tập các sự kiện: 
 
-[source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-6/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-6/main.go)
 
 ```go
 func main() {
@@ -146,7 +146,7 @@ Ví dụ phổ biến nhất về lập trình đồng thời là mô hình Prod
 
 Golang hiện thực cơ chế này rất đơn giản: 
 
-[source code](../examples/ch1/ch1.6/2-producer-consumer/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/2-producer-consumer/example-1/main.go)
 
 ```go
 // Producer: tạo ra một chuỗi số nguyên dựa trên bội số factor
@@ -178,7 +178,7 @@ Chúng ta đã mở hai producer để tạo ra hai chuỗi bội số của 3 v
 
 Chúng ta có thể để hàm `main` giữ trạng thái block mà không thoát và chỉ  thoát khỏi chương trình khi người dùng gõ `Ctrl-C`: 
 
-[source code](../examples/ch1/ch1.6/2-producer-consumer/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/2-producer-consumer/example-2/main.go)
 
 ```go
 func main() {
@@ -203,7 +203,7 @@ Mô hình publish-and-subscribe thường được viết tắt là mô hình pu
 
 Để làm điều này, chúng tôi đã xây dựng một package  hỗ trợ mô hình pub/sub  tên là `pubsub`:
 
-[source code](../examples/ch1/ch1.6/3-pubsub/example-1/pubsub/pubsub.go)
+[>> mã nguồn](../examples/ch1/ch1.6/3-pubsub/example-1/pubsub/pubsub.go)
 
 ```go
 // Package pubsub implements a simple multi-topic pub-sub library.
@@ -300,7 +300,7 @@ func (p *Publisher) sendTopic(
 
 Trong ví dụ sau đây, 2 subscriber đăng ký hết tất cả các topic với "golang":
 
-[source code](../examples/ch1/ch1.6/3-pubsub/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/3-pubsub/example-1/main.go)
 
 ```go
 import (
@@ -365,7 +365,7 @@ func main() {
 
 Trong trường hợp các cấu trúc hệ thống tập tin local  dựa trên một hệ thống tập tin ảo `vfs.OS("/path")`,  một cơ chế đồng thời `gatefs.New` sẽ kiểm soát hệ thống tập tin ảo dựa trên cấu trúc hệ thống tập tin ảo đang tồn tại. Nguyên tắc kiểm soát tương tranh đã được thảo luận ở phần trước, đó là để đạt được block đồng thời tối đa bằng cách gửi và nhận các rule với pipeline cache:
 
-[source code](../examples/ch1/ch1.6/4-controlling-concurrency/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/4-controlling-concurrency/example-1/main.go)
 
 ```go
 var limit = make(chan int, 3)
@@ -414,7 +414,7 @@ Có nhiều động lực để lập trình đồng thời nhưng tiêu biểu 
 
 Giả sử chúng ta muốn nhanh chóng tìm kiếm các chủ đề liên quan đến "golang", có thể mở nhiều công cụ tìm kiếm như Bing, Google hoặc Yahoo. Khi tìm kiếm trả về kết quả trước, ta có thể đóng các trang tìm kiếm khác. Do ảnh hưởng của môi trường mạng và thuật toán của công cụ tìm kiếm mà một số công cụ tìm kiếm có thể trả về kết quả tìm kiếm nhanh hơn. Chúng ta có thể sử dụng một chiến lược tương tự để viết chương trình này:  
 
-[source code](../examples/ch1/ch1.6/5-winner-is-king/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/5-winner-is-king/example-1/main.go)
 
 ```go
 func main() {
@@ -483,7 +483,7 @@ func PrimeFilter(in <-chan int, prime int) chan int {
 
 Bây giờ ta có thể sử dụng bộ lọc này trong hàm `main`:
 
-[source code](../examples/ch1/ch1.6/6-prime-sieve/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/6-prime-sieve/example-1/main.go)
 
 ```go
 func main() {
@@ -537,7 +537,7 @@ func main() {
 
 Khi có nhiều channel có thể được thực thi, một channel sẽ được chọn ngẫu nhiên. Dựa trên tính năng này, ta có thể  thực hiện một chương trình tạo ra một chuỗi các số ngẫu nhiên:
 
-[source code](../examples/ch1/ch1.6/7-concurrent-exit/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-1/main.go)
 
 ```go
 func main() {
@@ -559,7 +559,7 @@ func main() {
 
 Chúng ta có thể dễ dàng thực hiện kiểm soát thoát Goroutine thông qua   nhánh `select` và  nhánh `default`:
 
-[source code](../examples/ch1/ch1.6/7-concurrent-exit/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-2/main.go)
 
 ```go
 func worker(cannel chan bool) {
@@ -585,7 +585,7 @@ func main() {
 
 Tuy nhiên, các hoạt động gửi và nhận của channel là một đối một. Nếu ta muốn dừng nhiều Goroutines, ta  cần phải tạo ra cùng một số lượng channel. Điều này quá tốn kém. Trên thực tế, chúng ta có thể đạt được hiệu quả của việc broadcast bằng cách đóng một channel bằng `close`. Tất cả các hoạt động nhận được từ channel sẽ nhận được giá trị bằng 0 và cờ lỗi tùy chọn.
 
-[source code](../examples/ch1/ch1.6/7-concurrent-exit/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-3/main.go)
 
 ```go
 func worker(cannel chan bool) {
@@ -614,7 +614,7 @@ func main() {
 
 Chúng ta sử dụng channel `cancel` để phát chỉ thị `close` đến nhiều Goroutine. Tuy nhiên, chương trình này vẫn chưa đủ mạnh: khi mỗi Goroutine nhận được lệnh thoát để thoát, nó thường thực hiện một số công việc dọn dẹp, nhưng việc dọn dẹp của exit không được đảm bảo hoàn thành, vì thread `main` không có cơ chế chờ mỗi công việc Goroutine thoát khỏi công việc của chúng. Ta có thể kết hợp `sync.WaitGroup` để cải thiện điều này:  
 
-[source code](../examples/ch1/ch1.6/7-concurrent-exit/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-4/main.go)
 
 ```go
 func worker(wg *sync.WaitGroup, cannel chan bool) {
@@ -651,7 +651,7 @@ Bây giờ việc tạo, thực thi, đình chỉ và thoát khỏi quá trình 
 
 Ở thời điểm phát hành Go1.7, thư viện tiêu chuẩn đã thêm một package context để đơn giản hóa hoạt động của dữ liệu, thời gian chờ và thoát giữa nhiều Goroutines. Chúng ta có thể sử dụng package context để hiện thực lại cơ chế kiểm soát thoát thread-safe hoặc kiểm soát timeout:
 
-[source code](../examples/ch1/ch1.6/8-context-package/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/8-context-package/example-1/main.go)
 
 ```go
 func worker(ctx context.Context, wg *sync.WaitGroup) error {
@@ -687,7 +687,7 @@ Khi cơ thể đồng thời hết thời gian hoặc `main` chủ động dừn
 
 Golang tự động lấy lại   bộ nhớ, do đó bộ nhớ thường không bị rò rỉ (memory leak). Trong ví dụ trước về sàng số nguyên tố, một Goroutine mới  được đưa vào bên trong hàm `GenerateNatural` và Goroutine nền `PrimeFilter` có nguy cơ bị rò rỉ khi hàm `main` không còn sử dụng channel. Chúng ta có thể tránh vấn đề này với package context. Dưới đây là phần triển khai sàng số nguyên tố được cải thiện:  
 
-[source code](../examples/ch1/ch1.6/7-concurrent-exit/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-2/main.go)
 
 ```go
 // Trả về channel có chuỗi số: 2, 3, 4, ...
