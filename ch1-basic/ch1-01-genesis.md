@@ -8,7 +8,7 @@ Ngôn ngữ Go thường được mô tả là "Ngôn ngữ tựa C" hoặc là 
 <img src="../images/ch1-1-go-family-tree.png" width="600"/>
 </p>
 
-*Hình 1-1 Cây phảhệ của ngôn ngữ Go*
+*Hình 1-1 Cây phả hệ của ngôn ngữ Go*
 
 Đầu tiên, quan sát phía bên trái của sơ đồ, có thể được nhìn thấy rõ ràng rằng tính chất **concurrency** (đồng thời) của ngôn ngữ **Go** được phát triển từ học thuyết **CSP** được công bố bởi Bell Labs' Hoare vào năm 1978. Sau đó, mô hình **CSP** concurrency dần dần được tinh chế và được ứng dụng thực tế trong một số ngôn ngữ lập trình như là **Squeak/NewSqueak** và **Alef**. Những thực tiễn thiết kế mô hình **CSP** đó cuối cùng được hấp thu bởi ngôn ngữ Go. Mô hình concurrency của thế hệ ngôn ngữ Erlang là một hiện thực khác của học thuyết **CSP**.
 
@@ -35,7 +35,7 @@ Ví dụ kinh điển của việc áp dụng mô hình CSP concurrent là ngôn
 
 Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go được dần phát triển từ ngôn ngữ B - được phát minh bởi Ken Thompson và ngôn ngữ C được phát triển bởi Dennis M.Ritchie. Đó là thế hệ ngôn ngữ C đầu tiên, do đó nhiều người gọi Go là ngôn ngữ lập trình C của thế kỉ 21.
 
-*Figure 1-3 shows the evolution of the unique concurrent programming genes from Bell Labs in Go:*
+*Hình 1-3 chỉ ra cuộc cách mạng của các thế hệ ngôn ngữ lập trình từ Bell Labs và đến Go:*
 
 <p align="center">
 <img src="../images/ch1-3-go-history.png" width="600"/>
@@ -61,7 +61,7 @@ func main() {
 
 [>> mã nguồn](../examples/chapter1/ch1.1/1-hello/main.go)
 
-Lưu đoạn code trên thành file `hello.o`. Sau đó, chuyển tới thư mục chứa file `hello.go`, nơi mà file được lưu trữ, Bây giờ chúng ta có thể sử dụng Go như là ngôn ngữ scripting bằng cách gõ `go run hello.go` đó là một câu lệnh command line trực tiếp cho ra kết quả là dòng chữ "Hello, World".
+Lưu đoạn code trên thành file `hello.go`. Sau đó, chuyển tới thư mục chứa file `hello.go`, nơi mà file được lưu trữ, Bây giờ chúng ta có thể sử dụng Go như là ngôn ngữ scripting bằng cách gõ `go run hello.go` đó là một câu lệnh command line trực tiếp cho ra kết quả là dòng chữ "Hello, World".
 
 Bây giờ, giới thiệu ngắn về chương trình trên, tất cả những chương trình Go sẽ được thập hợp thành những đơn vị cơ bản là hàm và biến, Một hàm và biến được tổ chức thành các mã nguồn (source file). Những source đó được tổ chức thành một package phù hợp theo ý định của tác giả. Cuối cùng, những package đó cũng được tổ chức thành một khối thống nhất, chúng cấu thành chương trình Golang. Function được sử dụng chứa những chuỗi statements (mệnh đề) và những biến lưu trữ dữ liệu. Tên của hàm khởi nguồn toàn chương trình được gọi là hàm main. Mặc dù không có nhiều quy định về việc đặt tên hàm trong Go, hàm main phải được đặt trong package main và là điểm khởi đầu của toàn chương trình. Package được sử dụng để đóng gói những hàm, biến, hằng có liên quan và sử dụng cú pháp import để khai báo package, ví dụ chúng ta có thể sử dụng hàm `Println` trong package `fmt`.
 

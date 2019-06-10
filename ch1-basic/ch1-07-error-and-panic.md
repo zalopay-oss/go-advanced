@@ -211,12 +211,12 @@ for i, x := range err.(errors.Error).Caller() {
 Nếu chúng ta cần truyền một error thông qua network. chúng ta có thể encode `errors.ToJson(err)` như là JSON string
 
 ```go
-// 以JSON字符串方式发送错误
+// Gửi lỗi dưới dạng JSON
 func sendError(ch chan<- string, err error) {
     ch <- errors.ToJson(err)
 }
 
-// 接收JSON字符串格式的错误
+//  nhận lỗi dưới dạng JSON
 func recvError(ch <-chan string) error {
     p, err := errors.FromJson(<-ch)
     if err != nil {
@@ -240,10 +240,10 @@ Trong ngôn ngữ Go, error handling cũng có một coding style duy nhất. Sa
 ```go
 f, err := os.Open("filename.ext")
 if err != nil {
-    // 失败的情形, 马上返回错误
+    // Trong trường hợp thất bại, trả về lỗi ngay lặp tức
 }
 
-// 正常的处理流程
+// Tiếp tục xử lý nếu không có lỗi
 ```
 
 Cấu trúc code của hầu hết các hàm trong ngôn ngữ Go cũng tương tự, bắt đầu bới một chuỗi khởi tạo việc kiểm tra để ngăn chặn lỗi xảy ra, theo sau bởi những logic thực sự trong function.
@@ -316,7 +316,7 @@ Trong thực tế, hàm `recover` sẽ có những yêu cầu nghiêm ngặt; ch
 ```go
 func main() {
     defer func() {
-        // 无法捕获异常
+        // Không thể bắt ngoại lệ
         if r := MyRecover(); r != nil {
             fmt.Println(r)
         }
@@ -336,7 +336,7 @@ Một cách tương tự, nếu chúng ta gọi `defer` trong hàm nested, `reco
 func main() {
     defer func() {
         defer func() {
-            // 无法捕获异常
+            // Không thể bắt ngoại lệ
             if r := recover(); r != nil {
                 fmt.Println(r)
             }
@@ -354,7 +354,7 @@ func MyRecover() interface{} {
 }
 
 func main() {
-    // 可以正常捕获异常
+    // có thể bắt ngoại lệ bình thường
     defer MyRecover()
     panic(1)
 }
@@ -377,10 +377,8 @@ Dĩ nhiên, để tránh việc gọi `recover` không nhận ra được ngoạ
 func main() {
     defer func() {
         if r := recover(); r != nil { ... }
-        // 虽然总是返回nil, 但是可以恢复异常状态
     }()
 
-    // 警告: 用`nil`为参数抛出异常
     panic(nil)
 }
 ```
@@ -415,11 +413,11 @@ func main {
         if r := recover(); r != nil {
             switch x := r.(type) {
             case runtime.Error:
-                // 这是运行时错误类型异常
+                // ngoại lệ do quá trình chạy
             case error:
-                // 普通错误类型异常
+                // ngoại lệ do lỗi thông thường
             default:
-                // 其他类型异常
+                // ngoại lệ khác
             }
         }
     }()
