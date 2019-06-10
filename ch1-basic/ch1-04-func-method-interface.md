@@ -114,7 +114,7 @@ Bởi vì nó là một bao đóng (hàm trong câu lệnh lặp for), mỗi câ
 
 Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này: ([source1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[(source2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
-[source code 1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[source code 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
+[>> mã nguồn 1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[>> mã nguồn 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
 ```go
 func main() {
@@ -202,7 +202,7 @@ Một chương trình hướng đối tượng sử dụng các phương thức 
 
 Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C:
 
-[source code](../examples/ch1/ch1.4/2-method/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-1/main.go)
 
 ```go
 // đối tượng File
@@ -260,7 +260,7 @@ Việc di chuyển tham số đầu tiên của hàm lên phía đầu của tê
 
 Phương thức được bắt nguồn từ hàm, chỉ là di chuyển tham số đối tượng đầu tiên của hàm lên phía trước tên hàm. Vì vậy, chúng ta vẫn có thể sử dụng phương thức theo tư duy thủ tục (procedure). Ta có thể biến một phương thức thành một loại hàm thông thường bằng cách gọi các thuộc tính trong biểu thức của nó:
 
-[source code](../examples/ch1/ch1.4/2-method/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-2/main.go)
 
 ```go
 // không phụ thuộc vào đối tượng file cụ thể
@@ -279,7 +279,7 @@ CloseFile(f)
 
 Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính bao đóng (closure property):
 
-[source code](../examples/ch1/ch1.4/2-method/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-3/main.go)
 
 ```go
 // mở đối tượng file
@@ -304,7 +304,7 @@ Close()
 
 Đây chính là vấn đề mà giá trị phương thức cần giải quyết. Chúng ta có thể đơn giản hóa việc  hiện thực với các tính năng:
 
-[source code](../examples/ch1/ch1.4/2-method/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-4/main.go)
 
 ```go
 // mở đối tượng file
@@ -405,7 +405,7 @@ type error interface {
 
 Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó: [(source)](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
-[source code](../examples/ch1/ch1.4/3-interface/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
 ```go
 type UpperWriter struct {
@@ -423,7 +423,7 @@ func main() {
 
 Tất nhiên ta cũng có thể định nghĩa định dạng in riêng để đạt được hiệu quả tương tự. Với mỗi đối tượng được in ra, nếu interface `fmt.Stringer` được thỏa mãn, kết quả kiểu `String` được trả về bởi phương thức của đối tượng được in mặc định:
 
-[source code](../examples/ch1/ch1.4/3-interface/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-2/main.go)
 
 ```go
 type UpperString string
@@ -500,7 +500,7 @@ Tuy nhiên, phương pháp chặn  các đối tượng bên ngoài thực hiệ
 
 Như  đã đề cập trong phần Method, ta có thể kế thừa các phương thức của  kiểu ẩn danh bằng cách nhúng các thành phần thuộc  kiểu đó vào struct. Trong thực tế, thành phần ẩn danh này không nhất thiết phải là một kiểu bình thường, mà có thể một kiểu interface cũng được. Chúng ta có thể làm giả  phương thức private `testing.TB` bằng cách nhúng vào các interface ẩn danh, bởi vì các phương thức trong interface thuộc loại lazy binding và không thành vấn đề nếu phương thức `private` thực sự tồn tại ở compile-time. [(source)](../examples/ch1/ch1.4/3-interface/example-3/main.go)
 
-[source code](../examples/ch1/ch1.4/3-interface/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-3/main.go)
 
 ```go
 package main
