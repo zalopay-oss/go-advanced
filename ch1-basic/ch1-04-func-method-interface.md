@@ -198,7 +198,7 @@ Phương thức (Method) là một tính năng của lập trình hướng đố
 
 Một chương trình hướng đối tượng sử dụng các phương thức để thể hiện nhưng thao tác trên thuộc tính (properties) của nó, qua đó người dùng có thể sử dụng đối tượng mà không cần phải thao tác trực tiếp với đối tượng mà là thông qua các phương thức. C++ thường được xem là nơi mà lập trình hướng đối tượng bắt đầu phát triển mạnh. C++ hỗ trợ các tính năng hướng đối tượng (như lớp) dựa trên cơ sở ngôn ngữ C. Sau đó đến Java được gọi là ngôn ngữ hướng đối tượng thuần túy  vì các hàm của nó không thể tồn tại độc lập mà phải thuộc về một lớp nhất định.
 
-Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C:
+Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C: [source](../examples/ch1.4/2-method/example-1/main.go)
 
 ```go
 // đối tượng File
@@ -254,7 +254,8 @@ func (f *File) Read(offset int64, data []byte) int {
 
 Việc di chuyển tham số đầu tiên của hàm lên phía đầu của tên hàm chỉ là một thay đổi nhỏ trong code, nhưng từ quan điểm triết lý lập trình, ngôn ngữ Go đã đứng trong hàng ngũ của các ngôn ngữ hướng đối tượng. Ta có thể thêm một hoặc nhiều phương thức cho bất kỳ kiểu tùy chỉnh nào (custom type). Phương thức cho mỗi kiểu phải nằm trong cùng một package với định nghĩa kiểu, do đó không thể thêm phương thức vào các kiểu dựng sẵn đó (vì định nghĩa của phương thức và định nghĩa của kiểu không nằm trong package). Đối với một kiểu nhất định, tên của mỗi phương thức phải là duy nhất và các phương thức cũng như hàm đều không hỗ trợ overload.
 
-Phương thức được bắt nguồn từ hàm, chỉ là di chuyển tham số đối tượng đầu tiên của hàm lên phía trước tên hàm. Vì vậy, chúng ta vẫn có thể sử dụng phương thức theo tư duy thủ tục (procedure). Ta có thể biến một phương thức thành một loại hàm thông thường bằng cách gọi các thuộc tính trong biểu thức của nó [(source)](../examples/ch1.4/method2/method2.go):
+Phương thức được bắt nguồn từ hàm, chỉ là di chuyển tham số đối tượng đầu tiên của hàm lên phía trước tên hàm. Vì vậy, chúng ta vẫn có thể sử dụng phương thức theo tư duy thủ tục (procedure). Ta có thể biến một phương thức thành một loại hàm thông thường bằng cách gọi các thuộc tính trong biểu thức của nó [source](../examples/ch1.4/2-method/example-2/main.go)
+:
 
 ```go
 // không phụ thuộc vào đối tượng file cụ thể
@@ -271,7 +272,8 @@ ReadFile(f, 0, data)
 CloseFile(f)
 ```
 
-Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính bao đóng (closure property)[(source)](../examples/ch1.4/method3/method3.go):
+Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính bao đóng (closure property)[source](../examples/ch1.4/2-method/example-3/main.go)
+:
 
 ```go
 // mở đối tượng file
@@ -294,7 +296,8 @@ Read(0, data)
 Close()
 ```
 
-Đây chính là vấn đề mà giá trị phương thức cần giải quyết. Chúng ta có thể đơn giản hóa việc  hiện thực với các tính năng [(source)](../examples/ch1.4/method4/method4.go):
+Đây chính là vấn đề mà giá trị phương thức cần giải quyết. Chúng ta có thể đơn giản hóa việc  hiện thực với các tính năng [source](../examples/ch1.4/2-method/example-4/main.go)
+:
 
 ```go
 // mở đối tượng file
