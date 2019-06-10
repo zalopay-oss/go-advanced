@@ -59,7 +59,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/chapter1/ch1.1/1-hello/main.go)
+[>> mã nguồn](../examples/ch1/ch1.1/1-hello/main.go)
 
 Lưu đoạn code trên thành file `hello.go`. Sau đó, chuyển tới thư mục chứa file `hello.go`, nơi mà file được lưu trữ, Bây giờ chúng ta có thể sử dụng Go như là ngôn ngữ scripting bằng cách gõ `go run hello.go` đó là một câu lệnh command line trực tiếp cho ra kết quả là dòng chữ "Hello, World".
 
