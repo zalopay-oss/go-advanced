@@ -14,7 +14,7 @@ if v, ok := m["key"]; ok {
 
 Nhưng thông thường sẽ có nhiều hơn một nguyên nhân gây ra lỗi, và nhiều lần user muốn biến nhiều về lỗi đó. Nếu bạn chỉ sử dụng một biến boolean, thì bạn sẽ không giải quyết được yêu cầu trên. trong ngôn ngữ C, một số nguyên `errno` được sử dụng mặc định để truyền tải lỗi, do đó bạn có thể định nghĩa nhiều loại error theo nhu cầu. Trong ngôn ngữ Go, có thể gọi `syscall.Errno` là một `errno` ứng với mã lỗi trong ngôn ngữ C. `syscall` interface trong package, nếu có một error trả về, bên dưới cũng phải là `syscall.Errno` kiểu của error.
 
-Ví dụ, khi chúng ta sửa đổi `syscall` để thay đổi chế độ của một file thông qua interface của package đó, nếu chúng ta bắt gặp một error, chúng ta có thể sử lý chúng bởi việc gây ra `err` trong phần `assertion` như là `syscall.Errno` là một kiểu error.
+Ví dụ, khi chúng ta sửa đổi `syscall` để thay đổi chế độ của một file thông qua interface của package đó, nếu chúng ta bắt gặp một error, chúng ta có thể xử lý chúng bởi việc gây ra `err` trong phần `assertion` như là `syscall.Errno` là một kiểu error.
 
 ```go
 err := syscall.Chmod(":invalid path:", 0666)
@@ -27,7 +27,7 @@ Chúng ta có thể xa hơn chứa true error type thông qua một loại truy 
 
 Trong ngôn ngữ Go, errors được xem xét như là một kết quả đã được đoán trước; ngoại lệ là một kết quả không thể đoán trước được, và một ngoại lệ có thể chỉ ra rằng một bug trong chương trình hoặc một vấn đề nào đó không được kiểm soát, nó sẽ cho phép user có thể quan tâm về những vấn đề về business liên quan đến việc xử lý lỗi.
 
-Nếu một interface đơn giản ném tất cả những lỗi thông thường như là một ngoại lệ, chúng sẽ làm thông báo lỗi lộn xộn và không có giá trị. Chỉ như `main` bao gồm moij thứ trực tiếp trong một hàm, nó không mang lại ý nghĩa gì.
+Nếu một interface đơn giản ném tất cả những lỗi thông thường như là một ngoại lệ, chúng sẽ làm thông báo lỗi lộn xộn và không có giá trị. Chỉ như `main` bao gồm mọi thứ trực tiếp trong một hàm, nó không mang lại ý nghĩa gì.
 
 ```go
 func main() {
@@ -37,16 +37,15 @@ func main() {
         }
     }()
 
-    ...
 }
 ```
 
 Bao bọc một mã lỗi không phải là một kết quả cuối cùng. Nếu một ngoại lệ không thể đoán trước được, trực tiếp gây ra một ngoại lệ là một cách tốt nhất để xử lý chúng.
 
 
-### 1.7.1 Chiến lược sử lý lỗi
+### 1.7.1 Chiến lược xử lý lỗi
 
-Hãy minh họa cho ví dụ về sao chếp file: một hàm cần phải mở hai file và sau đó sao chép toàn bộ nội dung của một file nào đó về một file khác.
+Hãy minh họa cho ví dụ về sao chép file: một hàm cần phải mở hai file và sau đó sao chép toàn bộ nội dung của một file nào đó về một file khác.
 
 ```go
 func CopyFile(dstName, srcName string) (written int64, err error) {
@@ -67,7 +66,7 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 }
 ```
 
-Khi đoạn code trên chạy, nhưng bỏ qua một bug. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị fails, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file đầu tiên. Mặc dù chúng ta có thể gọi `src.Close()` để fix bug bằng việc thêm vào lệnh gọi đó trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường được mở sẽ được đóng bình thường.
+Khi đoạn code trên chạy, nhưng bỏ qua một bug. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file đầu tiên. Mặc dù chúng ta có thể gọi `src.Close()` để fix bug bằng việc thêm vào lệnh gọi đó trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường được mở sẽ được đóng bình thường.
 
 
 ```go
@@ -92,9 +91,9 @@ Mệnh đề `defer` sẽ cho phép chúng ta nghĩ về làm cách nào để �
 
 Như chúng ta đã đề cập trước đó, hàm exported trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình.
 
-Nhưng với những framework chúng cung cấp những web service tương tự, chúng thường cần sự truy cập từ bên thứ ba ở middleware. Bởi vi thư viện midleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
+Nhưng với những framework chúng cung cấp những web service tương tự, chúng thường cần sự truy cập từ bên thứ ba ở middleware. Bởi vì thư viện middleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
 
-Chúng ta hãy xe JSON parse là một ví dụ minh họa cho việc dùng ngữ cảnh của việc pục hồi. Cho một hệ thống JSON parser phức tạp, mặc dù một ngôn ngữ parse có thể làm việc một cách phù hợp, có một điều không chắc chắn rằng nó không có lỗ hỏng. Do đó, khi một ngoại lệ xảy ra, chúng ta sẽ không chọn cách crash parser. Thay vì thế chúng ta sẽ làm việc với ngoại lệ panic nhưng là một lỗi parsing thông thường và đính kèm chúng với một thông tin thêm để thông báo cho user biết mà báo cáo lỗi.
+Chúng ta hãy xem JSON parse là một ví dụ minh họa cho việc dùng ngữ cảnh của việc phục hồi. Cho một hệ thống JSON parser phức tạp, mặc dù một ngôn ngữ parse có thể làm việc một cách phù hợp, có một điều không chắc chắn rằng nó không có lỗ hỏng. Do đó, khi một ngoại lệ xảy ra, chúng ta sẽ không chọn cách crash parser. Thay vì thế chúng ta sẽ làm việc với ngoại lệ panic nhưng là một lỗi parsing thông thường và đính kèm chúng với một thông tin thêm để thông báo cho user biết mà báo cáo lỗi.
 
 ```go
 func ParseJSON(input string) (s *Syntax, err error) {
@@ -107,9 +106,9 @@ func ParseJSON(input string) (s *Syntax, err error) {
 }
 ```
 
-Gói `json` trong một thư viện chuẩn, nếu chúng gặp phải một eror khi đệ quy parsing dữ liệu JSON bên trong, chúng sẽ nhanh chóng nhảy về mức cao nhất ở phía ngoài, và sau đó sẽ rả về thông điệp lõi tương ứng.
+Gói `json` trong một thư viện chuẩn, nếu chúng gặp phải một error khi đệ quy parsing dữ liệu JSON bên trong, chúng sẽ nhanh chóng nhảy về mức cao nhất ở phía ngoài, và sau đó sẽ trả về thông điệp lỗi tương ứng.
 
-Ngôn ngữ GO có cách hiện thực thư viện như vậy; mặc dù sử dụng package panic, chúng sẽ có hể được chuyển đổi đến một giá trị lỗi cụ thể khi một  hàm được export.
+Ngôn ngữ Go có cách hiện thực thư viện như vậy; mặc dù sử dụng package panic, chúng sẽ có thể được chuyển đổi đến một giá trị lỗi cụ thể khi một  hàm được export.
 
 ### 1.7.2 Getting the wrong context
 
@@ -123,7 +122,7 @@ if _, err := html.Parse(resp.Body); err != nil {
 
 Khi một upper user bắt gặp một lỗi, nó có thể dễ dàng để hiểu rằng lỗi đó được gây ra trong thời gian chạy từ cấp business. Nhưng rất khó để có cả hai. Khi một upper user nhận được một sai sót mới, chúng ta cũng mất những error type bên dưới (chỉ những thông tin về mô tả sẽ bị mất).
 
-Để cần ghi nhận thông tin về kiểu lỗi trong package transition, chúng ta có thể định nghĩa một hàm `WrapError` nó sẽ gói những lỗi gốc khi bảo vệ toàn kiểu error. Để tạo điều kiện cho việc định vị vấn đến và để ghi nhận lại trạng thái lời gọi hàm, khi xảy ra lỗi, chúng ta thường muốn lưu trưc toàn bộ thông tin về lời gọi hàm hiện tại khi có lỗi xảy ra. Cùng lúc đó, để hỗ trợ network transmission như là RPC, chúng ta sẽ phải cần serialize error thành những dữ liệu tương tự như  định dạng JSON, và sau đó khôi phục lại error decoding từ dữ liệu.
+Để cần ghi nhận thông tin về kiểu lỗi trong package transition, chúng ta có thể định nghĩa một hàm `WrapError` nó sẽ gói những lỗi gốc khi bảo vệ toàn kiểu error. Để tạo điều kiện cho việc định vị vấn đến và để ghi nhận lại trạng thái lời gọi hàm, khi xảy ra lỗi, chúng ta thường muốn lưu trữ toàn bộ thông tin về lời gọi hàm hiện tại khi có lỗi xảy ra. Cùng lúc đó, để hỗ trợ network transmission như là RPC, chúng ta sẽ phải cần serialize error thành những dữ liệu tương tự như  định dạng JSON, và sau đó khôi phục lại error decoding từ dữ liệu.
 
 Để làm việc đó, chúng ta sẽ phải tự định nghĩa cấu trúc lỗi riêng ví dụ như `github.com/chai2010/errors` với những kiểu cơ bản sau:
 
@@ -292,7 +291,7 @@ func panic (interface{})
 func recover() interface{}
 ```
 
-Luồng thông thường trong ngôn ngữ Go là kết quả trả về của việc thực thi lệnh return. Đó không phải là một exception trong luồng, do đó lường thực thi của ngoại lệ `recover` sẽ catch function trong process sẽ luôn luôn trả về  `nil`. Cái khác là ngoại lệ exception. Khi một lời gọi `panic` sẽ ném ra một ngoại lệ , function sẽ kết thúc việc thực thi lệnh con, nhưng vì lời gọi registered `defer` sẽ vấn được thực thi một cách bình thường và sau đó trả về caller. Caller trong hàm hiện tại, bởi vì trạng thái xử lý ngoại lệ chưa được bắt, `panic` sẽ tương tự như hành vi gọi hàm một cách trực tiếp. Khi một ngoại lệ xảy ra, nếu `defer` được thực thi lời gọi `recover`, nó có thể được bắt bằng việc trigger tham số  `panic, và trả về luồng thực thi bình thường.
+Luồng thông thường trong ngôn ngữ Go là kết quả trả về của việc thực thi lệnh return. Đó không phải là một exception trong luồng, do đó lường thực thi của ngoại lệ `recover` sẽ catch function trong process sẽ luôn luôn trả về  `nil`. Cái khác là ngoại lệ exception. Khi một lời gọi `panic` sẽ ném ra một ngoại lệ, function sẽ kết thúc việc thực thi lệnh con, nhưng vì lời gọi registered `defer` sẽ vấn được thực thi một cách bình thường và sau đó trả về caller. Caller trong hàm hiện tại, bởi vì trạng thái xử lý ngoại lệ chưa được bắt, `panic` sẽ tương tự như hành vi gọi hàm một cách trực tiếp. Khi một ngoại lệ xảy ra, nếu `defer` được thực thi lời gọi `recover`, nó có thể được bắt bằng việc trigger tham số  `panic, và trả về luồng thực thi bình thường.
 
 `defer` sẽ thực hiện lệnh gọi `recover` nó thường gây khó khăn cho những người mới bắt đầu.
 
