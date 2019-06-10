@@ -1,4 +1,4 @@
-## 1.4 Functions, Methods và Interfaces
+# 1.4 Functions, Methods và Interfaces
 
 Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function): hàm được đặt tên thường tương ứng với hàm cấp package (package function). Đây là trường hợp đặc biệt của hàm ẩn danh. Khi một hàm ẩn danh tham chiếu một biến trong phạm vi bên ngoài, nó sẽ trở thành hàm đóng. Các package function là cốt lõi của một ngôn ngữ lập trình hàm (functional programming).
 
@@ -23,7 +23,7 @@ Cần lưu ý rằng trong `main.main` tất cả các mã lệnh đều chạy 
 
 Cần lưu ý rằng trước khi hàm `main.main` được thực thi thì tất cả code đều chạy trong cùng một Goroutine, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi động bên trong một Goroutine mới với từ khóa go, Goroutine đó chỉ có thể được thực thi sau khi vào hàm `main.main`.
 
-### 1.4.1 Function
+## 1.4.1 Function
 
 Trong Go, hàm là kiểu đầu tiên của đối tượng  và chúng ta có thể giữ hàm trong một biến. Hàm có thể được đặt tên hoặc ẩn danh (anonymous). Các hàm cấp độ package thường là các hàm được đặt tên. Hàm được đặt tên là một trường hợp đặc biệt của hàm ẩn danh. Tất nhiên, mỗi kiểu trong ngôn ngữ Go cũng có thể có các phương thức riêng, và đó có thể là là một hàm:
 
@@ -194,7 +194,7 @@ func g() int {
 - Hàm đầu tiên trả về trực tiếp địa chỉ của biến tham số hàm (biến `x`) - điều này có vẻ là không khả thi bởi vì nếu biến tham số nằm trên stack sẽ trở thành không hợp lệ sau khi hàm trả về và địa chỉ được trả về dĩ nhiên bị lỗi. Nhưng trình biên dịch của  Go thông minh hơn khi đảm bảo rằng các biến được trỏ bởi con trỏ sẽ ở đúng vị trí.
 - Hàm thứ hai, mặc dù lời gọi `new` tạo một đối tượng con trỏ kiểu `*int`, nhưng vẫn không biết nó sẽ được lưu ở đâu. Một điều nói riêng với những lập trình viên có kinh nghiệm với C/C ++ là trình biên dịch và thực thi (runtime) của Go sẽ giúp chúng ta không phải lo lắng về stack và heap của hàm. Do đó đừng cho rằng địa chỉ của biến trong bộ nhớ là cố định vì con trỏ có thể thay đổi bất cứ lúc nào, đặc biệt là những khi chúng ta không mong đợi nó thay đổi nhất.
 
-### 1.4.2 Method
+## 1.4.2 Method
 
 Phương thức (Method) là một tính năng của lập trình hướng đối tượng (OOP). Trong ngôn ngữ C++, phương thức  tương ứng với một hàm thành viên của một đối tượng lớp, được liên kết với một bảng ảo trên một đối tượng cụ thể. Tuy nhiên, phương thức trong ngôn ngữ Go được liên kết với kiểu, do đó liên kết tĩnh của phương thức có thể được tạo thành trong giai đoạn biên dịch.
 
@@ -368,7 +368,7 @@ Cấu trúc `Cache` nhúng một kiểu ẩn danh `sync.Mutex` để kế thừa
 
 Nếu cần tính chất đa hình ở các hàm ảo, chúng ta cần triển khai nó với Interface.
 
-### 1.4.3 Interface
+## 1.4.3 Interface
 
 Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi tiếng:
 
@@ -524,7 +524,7 @@ func main() {
 }
 ```
 
-Kế thừa  bằng cách nhúng vào interface ẩn danh hoặc nhúng vào đối tượng con trỏ ẩn danh thực sựimplement là một thừa kế ảo thuần túy. Ta chỉ kế thừa đặc tả được chỉ định bởi interface và phần hiện thực chỉ thực sự được đưa vào trong thời gian thực thi. Ví dụ: chúng ta có thể mô phỏng một plugin thực hiện gRPC:
+Kế thừa  bằng cách nhúng vào interface ẩn danh hoặc nhúng vào đối tượng con trỏ ẩn danh thực sự implement là một thừa kế ảo thuần túy. Ta chỉ kế thừa đặc tả được chỉ định bởi interface và phần hiện thực chỉ thực sự được đưa vào trong thời gian thực thi. Ví dụ: chúng ta có thể mô phỏng một plugin thực hiện gRPC:
 
 ```go
 type grpcPlugin struct {

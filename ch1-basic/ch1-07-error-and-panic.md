@@ -43,7 +43,7 @@ func main() {
 Bao bọc một mã lỗi không phải là một kết quả cuối cùng. Nếu một ngoại lệ không thể đoán trước được, trực tiếp gây ra một ngoại lệ là một cách tốt nhất để xử lý chúng.
 
 
-### 1.7.1 Chiến lược xử lý lỗi
+## 1.7.1 Chiến lược xử lý lỗi
 
 Hãy minh họa cho ví dụ về sao chép file: một hàm cần phải mở hai file và sau đó sao chép toàn bộ nội dung của một file nào đó về một file khác.
 
@@ -110,7 +110,7 @@ Gói `json` trong một thư viện chuẩn, nếu chúng gặp phải một err
 
 Ngôn ngữ Go có cách hiện thực thư viện như vậy; mặc dù sử dụng package panic, chúng sẽ có thể được chuyển đổi đến một giá trị lỗi cụ thể khi một  hàm được export.
 
-### 1.7.2 Getting the wrong context
+## 1.7.2 Getting the wrong context
 
 Thỉnh thoảng rất đễ cho những user có cấp độ cao được hiểu, bên dưới sự hiện thực sẽ đóng gói lại error như là một loai error mới và trả kết quả về cho user.
 
@@ -248,7 +248,7 @@ if err != nil {
 
 Cấu trúc code của hầu hết các hàm trong ngôn ngữ Go cũng tương tự, bắt đầu bới một chuỗi khởi tạo việc kiểm tra để ngăn chặn lỗi xảy ra, theo sau bởi những logic thực sự trong function.
 
-### 1.7.3 Incorrect error return
+## 1.7.3 Incorrect error return
 
 Error trong ngôn ngữ Go là một kiểu interface. Thông tin về interface sẽ chứa kiểu dữ liệu nguyên mâu, và kiểu dữ liệu gốc. Giá trị của interface chỉ tương ứng nếu như cả kiểu interface và giá trị gốc cả hai đều empty `nil`. Thực tế, khi kiểu của interface là empty, kiểu gốc sẽ tương ứng với interface sẽ không cần thiết phải empty.
 
@@ -281,7 +281,7 @@ Do đó, khi đối mặt với giá trị error được return về, giá tr�
 Ngôn ngữ Go sẽ có một kiểu dữ liệu mạnh, và cụ thể chuyển đổi sẽ được thực hiện giữa những kiểu khác nhau (và sẽ phải bên dưới cùng kiểu dữ liệu). Tuy nhiên, `interface` là một ngoại lệ của ngôn ngữ Go: non-interface kiểu đến kiểu interface, hoặc chuyển đổi từ interface type là cụ thể. Nó cũng sẽ hỗ trợ ducktype, dĩ nhiên, chúng sẽ thỏa mãn cấp độ 3 về bảo mật.
 
 
-### 1.7.4 Parsing Exception
+## 1.7.4 Parsing Exception
 
 `panic` Support sẽ ném một `panic` liên quan đến việc ném ngoại lệ (không chỉ là error thông thường), `recover` sẽ trả về một giá trị của lời gọi hàm và `panic` cũng như thông tin về kiểu tham số của hàm
 và những nguyên mẫu của hàm sẽ như sau:

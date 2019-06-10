@@ -73,7 +73,7 @@ func main() {
 
 Theo đặc tả mô hình bộ nhớ Golang, thao tác nhận từ một channel không phải buffer thực hiện trước khi việc truyền tới channel được hoàn thành (kết thúc việc truyền). Do đó, sau khi thread nền hoàn thành thao tác nhận `<-done`, thao tác gửi  của thread `main` là `done <- 1` mới được hoàn thành (do đó thoát khỏi `main` rồi thoát khỏi chương trình) và công việc in được thực thi xong.
 
-Mặc dù đoạn code trên có thể được đồng bộ đúng đắng, nhưng nó quá nhạy cảm với kích thước cache của  pipeline: nếu pipeline có cache, không có gì đảm bảo rằng thread nền sẽ in đúng trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của pipeline để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước cache của pipeline:  
+Mặc dù đoạn code trên có thể được đồng bộ đúng đắn, nhưng nó quá nhạy cảm với kích thước cache của  pipeline: nếu pipeline có cache, không có gì đảm bảo rằng thread nền sẽ in đúng trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của pipeline để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước cache của pipeline:  
 
 [source code](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-4/main.go)
 
