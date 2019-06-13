@@ -173,7 +173,7 @@ func main() {
 }
 ```
 
-Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm RegisterHelloService để đăng kí, nó không chỉ tránh việc làm việc với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của giao diện RPC. Cuối cùng, service mới của chnsg ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
+Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm RegisterHelloService để đăng kí, nó không chỉ tránh việc làm việc với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của giao diện RPC. Cuối cùng, service mới của chúng ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
 
 
 ## 4.1.3 Cross-language RPC (đa ngôn ngữ trên RPC)
@@ -283,7 +283,7 @@ type serverResponse struct {
 }
 ```
 
-Do đó không có vấn đề gì về rào cản ngôn ngữ, chỉ theo định dạng của kiểu dữ liệu json trên, chúng ta có thể giao tiếp với nhiều RPC service được viết bởi Go hay những ngôn ngữ khác. Do đó chúng ta hoàn toàn có thể hiện thực việc crossa-language trong RPC.
+Do đó không có vấn đề gì về rào cản ngôn ngữ, chỉ theo định dạng của kiểu dữ liệu json trên, chúng ta có thể giao tiếp với nhiều RPC service được viết bởi Go hay những ngôn ngữ khác. Do đó chúng ta hoàn toàn có thể hiện thực việc cross-language trong RPC.
 
 ## 4.1.4 RPC trên HTTP
 
@@ -328,10 +328,3 @@ Kết quả vẫn là một chuỗi json như sau
 ```
 
 Điều đó làm việc gọi dịch vụ RPC từ những ngôn ngữ khác dễ dàng hơn.
-
-
-
-
-
-
-
