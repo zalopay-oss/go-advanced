@@ -4,7 +4,7 @@ Protobuf là tên gọi rút gọn của Protocols Buffers, một ngôn ngữ m�
 
 ## 4.2.1 Bắt đầu với Protobuf
 
-Cho những ai chưa từng làm quen với protobuf, chúng tôi khuyên hãy hiểu cách sử dụng cơ bản chúng từ trang chủ [protobuf](https://developers.google.com/protocol-buffers/). Ở đây chúng ta thử kết hợp protobuf và RPC, và cuối cùng sẽ đảm bảo rằng giao diện được đặc tả và tính bảo mật của lệnh gọi RPC thông qua protobuf. Đơn vị cơ bản của dữ liệu Protobuf là một message, chúng cũng tương tự như cấu trúc của ngôn ngữ Go. Các thành phần của message hoặc những message từ những kiểu dữ liêu bên dưới khác có thể được lồng vào mesage đó.
+Cho những ai chưa từng làm quen với Protobuf, chúng tôi khuyên hãy hiểu cách sử dụng cơ bản chúng từ trang chủ [protobuf](https://developers.google.com/protocol-buffers/). Ở đây chúng ta thử kết hợp protobuf và RPC, và cuối cùng sẽ đảm bảo rằng giao diện được đặc tả và tính bảo mật của lệnh gọi RPC thông qua protobuf. Đơn vị cơ bản của dữ liệu Protobuf là một message, chúng cũng tương tự như cấu trúc của ngôn ngữ Go. Các thành phần của message hoặc những message từ những kiểu dữ liêu bên dưới khác có thể được lồng vào mesage đó.
 
 Đầu tiên chúng ta tạo file `hello.proto` nó sẽ chứa kiểu string được dùng cho HelloService service:
 
@@ -73,12 +73,12 @@ Chúng ta đầu tiên sẽ nhận ra sự kết hợp giữa Protobuf và RPC. 
 
 Nhìn lại giao diện RPC khá bảo mật của phần 1, chúng ta đã rất nỗ lực để đảm bảo bảo mật cho dịch vụ RPC. Kết quả của mã nguồn RPC trên sẽ an toàn hơn và rất là tuyệt vời để  bảo trì thủ công, chúng ta có thể bảo mật hóa những mã nguồn liên quan mà nó chỉ sẵn có ở môi trường ngôn ngữ Go. Do đó đầu vào và đầu ra của tham số được định nghĩa bởi Protobuf được dùng, có thể giao diện RPC được định nghĩa bởi protobuf. Việc áp dụng protobuf được định nghĩa ở mức độc lập ngôn ngữ dịch vụ RPC và giao diện của chúng ở giá trị thực tế.
 
-Cập nhật hello.proto file bên dưới dễ định nghĩa dịch vụ RPC HelloService service thông qua protobuf.
+Cập nhật `hello.proto` file bên dưới dễ định nghĩa dịch vụ RPC HelloService service thông qua protobuf.
 
 
 ```go
 service HelloService {
-    rpc Hello (String) returns (String);
+    RPC Hello (String) returns (String);
 }
 ```
 
