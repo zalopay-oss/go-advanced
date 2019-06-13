@@ -1,4 +1,4 @@
-# 4.3 RPC thú vị
+# 4.3 RPC trong Golang
 
 Trong những trường hợp khác nhau lại có nhu cầu về RPC khác nhau, vì vậy cộng đồng mã nguồn mở đã tạo ra khá nhiều framework RPC. Trong phần này, chúng tôi sẽ sử dụng framework RPC tích hợp sẵn trong một số  tình huống đặc biệt.
 
@@ -37,7 +37,7 @@ func doClientWork(client *rpc.Client) {
 }
 ```
 
-Sau khi lệnh gọi không đồng bộ được thực hiện, các tác vụ khác sẽ được thực thi, do đó các tham số đầu vào và giá trị trả về của lời gọi không đồng bộ có thể  nhận được thông qua biến `Call` trả về.
+Sau khi lệnh gọi bất đồng bộ được thực hiện, các tác vụ khác sẽ được thực thi, sau đó các tham số đầu vào và giá trị trả về của lời gọi bất đồng bộ có thể  nhận được thông qua biến `Call` trả về.
 
 Phương thức `Client.Go` thực thi một lời gọi bất đồng bộ được hiện thực như sau:
 
@@ -58,7 +58,7 @@ func (client *Client) Go(
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.3/1-principle/example-1/main.go)
+[net/rpc/client.go](https://golang.org/src/net/rpc/client.go)
 
 Phần đầu để khởi tạo một biến lời gọi đại diện cho cuộc lời gọi hiện thời, sau đó `client.send` gửi đi tham số đầy đủ của lời gọi đến RPC framework. Phương thức gọi `client.send` là thread-safe cho nên lệnh gọi có thể gửi từ nhiều Goroutine đồng thời tới cùng một đường link RPC.
 
@@ -79,9 +79,9 @@ Từ phần hiện thực của phương thức `Call.done`, có thể thấy r�
 
 ## 4.3.2 Hiện thực chức năng theo dõi dựa trên RPC
 
-Trong nhiều hệ thống, interface cho việc theo dõi `Watch` được cung cấp. Khi hệ thống gặp những điều kiện nhất định, phương thức `Watch` trả về kết quả của việc giám sát. Chúng ta có thể thử hiện thực hàm `Watch` cơ bản thông qua RPC framework. Như đã đề cập ở trên, vì `client.send` là thread-safe, ta cũng có thể gọi phương thức RPC theo kiểu đồng thời blocking trong nhiều Goroutine khác nhau. Giám sát bằng cách gọi `Watch` trong những Goroutine riêng biệt.
+Trong nhiều hệ thống, interface cho việc theo dõi (`Watch`) được cung cấp. Khi hệ thống gặp những điều kiện nhất định, phương thức `Watch` trả về kết quả của việc giám sát. Chúng ta có thể thử hiện thực hàm `Watch` cơ bản thông qua RPC framework. Như đã đề cập ở trên, vì `client.send` là thread-safe, ta cũng có thể gọi phương thức RPC theo kiểu đồng bộ blocking trong nhiều Goroutine khác nhau. Giám sát bằng cách gọi `Watch` trong những Goroutine riêng biệt.
 
-Với mục đích dùng cho mô tả, chúng tôi dự định xây dựng cơ sở dữ liệu KV bộ nhớ đơn giản thông qua RPC. Đầu tiên xác định service như sau:
+Để minh họa, ta sẽ đi xây dựng cơ sở dữ liệu KV bộ nhớ đơn giản thông qua RPC. Đầu tiên xác định service như sau:
 
 ```go
 type KVStoreService struct {
@@ -98,7 +98,7 @@ func NewKVStoreService() *KVStoreService {
 }
 ```
 
-`m` thuộc kiểu map được sử dụng để lưu trữ dữ liệu KV. `filter` tương ứng với một danh sách các hàm lọc được xác định tại mỗi cuộc gọi. `mu` thuộc kiểu mutex để cung cấp bảo vệ cho các thành phần khác khi được truy cập và sửa đổi từ nhiều Goroutine cùng lúc.
+`m` thuộc kiểu map được sử dụng để lưu trữ dữ liệu KV. `filter` tương ứng với một danh sách các hàm lọc được xác định tại mỗi cuộc gọi. `mu` thuộc kiểu mutex để cung cấp sự bảo vệ cho các thành phần khác khi được truy cập và sửa đổi từ nhiều Goroutine cùng lúc.
 
 Sau đây là phương thức Get và Set:
 
@@ -161,7 +161,7 @@ Tham số đầu vào của phương thức `Watch` là số giây timeout. Khó
 
 Quá trình đăng ký và khởi động service `KVStoreService` sẽ không được lặp lại. Hãy xem cách sử dụng phương thức `Watch` từ client:
 
-[>> mã nguồn](../examples/ch4/ch4.3/2-watch/example-1/main.go)
+[>> mã nguồn](../examples/ch4/ch4.3/2-watch/example-1/client/main.go)
 
 ```go
 func doClientWork(client *rpc.Client) {
@@ -194,7 +194,7 @@ RPC bình thường dựa trên cấu trúc client-server. Server của RPC tư�
 
 Sau đây là mã nguồn để khởi động một reverse RPC service:
 
-[>> mã nguồn](../examples/ch4/ch4.3/3-reverse-rpc/example-1/main.go)
+[>> mã nguồn](../examples/ch4/ch4.3/3-reverse-rpc/example-1/server/main.go)
 
 ```go
 func main() {
@@ -213,7 +213,7 @@ func main() {
 }
 ```
 
-Reverse RPC service sẽ không còn chủ động cung cấp service lắng nghe TCP, mà trước tiên sẽ chủ động liên kết với máy chủ TCP của máy khách. RPC service sau đó được cung cấp dựa trên mỗi liên kết TCP được thiết lập.
+Reverse RPC service sẽ không còn  cung cấp service lắng nghe TCP, thay vào đó nó  sẽ chủ động kết nối với server TCP của client. RPC service sau đó được cung cấp dựa trên mỗi liên kết TCP được thiết lập.
 
 RPC client  cần cung cấp một service TCP có địa chỉ công khai để chấp nhận request từ RPC server:
 
@@ -245,8 +245,6 @@ Khi mỗi đường link được thiết lập, đối tượng RPC client đư
 
 Client thực hiện lời gọi RPC trong hàm `doClientWork`:
 
-[>> mã nguồn](../examples/ch4/ch4.3/3-reverse-rpc/example-2/main.go)
-
 ```go
 func doClientWork(clientChan <-chan *rpc.Client) {
     client := <-clientChan
@@ -262,9 +260,11 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.3/3-reverse-rpc/example-1/client/main.go)
+
 Đầu tiên nhận vào đối tượng RPC client từ pipeline và sử dụng câu lệnh `defer` để xác định đóng kết nối với client trước khi hàm exit. Kế tiếp là thực hiện lời gọi RPC bình thường.
 
-## 4.3.4 Thông tin ngữ cảnh
+## 4.3.4 RPC theo ngữ cảnh
 
 Dựa trên ngữ cảnh chúng ta có thể cung cấp những RPC services thích hợp cho những client khác nhau. Ta có thể hỗ trợ các tính năng theo ngữ cảnh bằng cách cung cấp các RPC service cho từng link kết nối.
 
@@ -302,7 +302,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.3/4-context-info/example-1/main.go)
+[>> mã nguồn](../examples/ch4/ch4.3/4-context-info/example-1/server/main.go)
 
 Trong phương thức `Hello`, bạn có thể xác định lời gọi RPC cho các link khác nhau dựa trên biến `conn`:
 
@@ -314,8 +314,6 @@ func (p *HelloService) Hello(request string, reply *string) error {
 ```
 
 Dựa vào thông tin ngữ cảnh mà  chúng ta có thể dễ dàng thêm vào một cơ chế xác minh trạng thái đăng nhập đơn giản cho RPC service:
-
-[>> mã nguồn](../examples/ch4/ch4.3/4-context-info/example-2/main.go)
 
 ```go
 type HelloService struct {
@@ -340,5 +338,7 @@ func (p *HelloService) Hello(request string, reply *string) error {
     return nil
 }
 ```
+
+[>> mã nguồn](../examples/ch4/ch4.3/4-context-info/example-2-auth/server/main.go)
 
 Theo cách này, khi client kết nối tới RPC service, chức năng login sẽ được thực hiện trước, và các service khác có thể thực thi bình thường sau khi login thành công.

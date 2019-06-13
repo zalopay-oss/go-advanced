@@ -5,19 +5,28 @@ import (
 	"log"
 	"net"
 	"net/rpc"
+	"time"
 )
 
-func doClientWork(clientChan <-chan *rpc.Client) {
-	client := <-clientChan
-	defer client.Close()
+func doClientWork(client *rpc.Client) {
+	go func() {
+		var keyChanged string
+		err := client.Call("KVStoreService.Watch", 30, &keyChanged)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("watch:", keyChanged)
+	}()
 
-	var reply string
-	err := client.Call("HelloService.Hello", "hello", &reply)
+	err := client.Call(
+		"KVStoreService.Set", [2]string{"abc", "abc-value"},
+		new(struct{}),
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(reply)
+	time.Sleep(time.Second * 3)
 }
 
 func main() {
@@ -39,5 +48,5 @@ func main() {
 		}
 	}()
 
-	doClientWork(clientChan)
+	doClientWork(<-clientChan)
 }
