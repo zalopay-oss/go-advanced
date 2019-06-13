@@ -16,7 +16,7 @@ Bộ thực thi Go có một bộ đồng thời cho riêng nó, nó dùng một
 
 Bắt đầu một goroutine trong go không chỉ là gọi một hàm, mà là kèm theo chi phí của việc định thời giữa các Goroutines. Những đặc điểm đó có sự ảnh hưởng lớn đến sự phổ biến và phát triển của lập trình đồng thời.
 
-### 1.5.2 Toán tử Atomic
+## 1.5.2 Toán tử Atomic
 
 Tác vụ atomic là những tác vụ nhỏ nhất và không thể song song được trong lập trình đồng thời. Về mặt chung, nếu nhiều tác vụ được thực thi đồng thời trên cùng một tài nguyên là atomic, sau đó nhiều nhất một thực thể có thể truy cập vào một tài nguyên. Từ góc độ thread, những thread khác không thể cùng truy cập vào tài nguyên. Tác vụ atomic trong mô hình lập trình đồng thời sẽ không khác nhau nhiều với mô hình single thread, và sự tương thích này đối với việc chia sẻ resource sẽ được đảm bảo.
 Thông thường sẽ có một vài lệnh CPU đặc biệt giúp bảo vệ vùng nhớ này. chúng ta có thể dùng `sync.Mutex` để đạt được điều đó.
@@ -271,7 +271,7 @@ func main() {
 
 Có thể xác định rằng, bên dưới việc thực thi `mutex.UnLock()` sẽ phải là `println("你好, 世界")` hoàn thành trước. (một số thread thỏa mãn thứ tự nhất quán), và trong main, hàm thứ hai sẽ `mu.Lock()` sẽ phải là `mu.UnLock()` xảy ra bên dưới background thread (được đảm bảo bởi `sync.Mutex`) và bên dưới nền sẽ in ra công việc được hoàn thành một cách thành công.
 
-### 1.5.4 Khởi tạo chuỗi
+## 1.5.4 Khởi tạo chuỗi
 
 Trong chương trước, chúng ta đã được giới thiệu ngắn gọn về việc khởi tạo một chuỗi trong chương trình, nó là một số đặc điểm đặt biệt của ngôn ngữ Go theo mô hình vùng nhớ đồng thời.
 
@@ -291,7 +291,7 @@ Nên chú ý rằng `main.main` trong những mã nguồn sẽ được thực t
 Bởi vì tất cả hàm `init` và hàm `main` sẽ được hoàn thành trong cùng một thread, nó cũng sẽ thoả mãn thứ tự về mô hình nhất quán.
 
 
-### 1.5.5 Khởi tạo một Goroutine
+## 1.5.5 Khởi tạo một Goroutine
 
 Mệnh đề đứng trước từ khóa `go` sẽ tạo ra một Goroutine mới trước khi trả về một goroutine hiện tại, ví dụ :
 
@@ -312,7 +312,7 @@ func hello() {
 
 Việc thực thi của `go f()` sẽ tạo ra một Goroutine, và hàm `hello` sẽ thực thi cùng lúc với Goroutine. Theo thứ tự của các statement được viết, nó có thể được xác định bằng một khi việc khởi tạo Goroutine được xảy ra, nó có thể không được sắp xếp. Nó là việc đồng thời. Việc gọi hello sẽ in ra tại một số điểm trong tương lai "hello,world", hoặc có thể là `hello` được in ra sao khi hàm đã thực thi xong
 
-### 1.5.6 Giao tiếp thông qua kênh Channel
+## 1.5.6 Giao tiếp thông qua kênh Channel
 
 Giao tiếp thông qua channel là một phương pháp chính trong việc đồng bộ giữa các goroutine. Mỗi lần thực hiện thao tác gửi trên một `unbufferred Channel` thường đi đôi với tác vụ nhận. Tác vụ gửi và nhận thường xảy ra ở những Goroutine khác nhau (hai tác vụ diễn ra trên cùng một goroutine có thể dễ dàng dẫn đến deadlocks). **Tác vụ gửi trên một unbufferred Channel luôn luôn xảy ra trước khi tác vụ nhận hoàn thành**.
 
@@ -361,7 +361,7 @@ func main() {
 
 Dòng `select{}` cuối cùng là một mệnh đề lựa chọn một empty pipe sẽ làm cho main thread bị block, ngăn chặn chương trình kết thúc sớm. Tương tự `for{}` và `<- make(chan int)` nhiều hàm khác sẽ đạt được kết quả tương tự. Bởi vì thread main sẽ bị blocked. nó có thể là `os.Exit(0)` được hiện thực nếu chương trình cần kết thúc một cách thông thường.
 
-### 1.5.7 Tác vụ đồng bộ không tin cậy
+## 1.5.7 Tác vụ đồng bộ không tin cậy
 
 Như chúng ta phân tích trước, đoạn code sau sẽ không đảm bảo thứ tự in ra kết quả bình thường. Việc chạy thực sự bên dưới sẽ có một xác suất lớn kết quả sẽ không bình thường.
 

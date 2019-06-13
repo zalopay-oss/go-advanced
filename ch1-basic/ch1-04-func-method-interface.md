@@ -1,4 +1,4 @@
-## 1.4 Functions, Methods và Interfaces
+# 1.4 Functions, Methods và Interfaces
 
 Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function): hàm được đặt tên thường tương ứng với hàm cấp package (package function). Đây là trường hợp đặc biệt của hàm ẩn danh. Khi một hàm ẩn danh tham chiếu một biến trong phạm vi bên ngoài, nó sẽ trở thành hàm đóng. Các package function là cốt lõi của một ngôn ngữ lập trình hàm (functional programming).
 
@@ -23,7 +23,7 @@ Cần lưu ý rằng trong `main.main` tất cả các mã lệnh đều chạy 
 
 Cần lưu ý rằng trước khi hàm `main.main` được thực thi thì tất cả code đều chạy trong cùng một Goroutine, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi động bên trong một Goroutine mới với từ khóa go, Goroutine đó chỉ có thể được thực thi sau khi vào hàm `main.main`.
 
-### 1.4.1 Function
+## 1.4.1 Function
 
 Trong Go, hàm là kiểu đầu tiên của đối tượng  và chúng ta có thể giữ hàm trong một biến. Hàm có thể được đặt tên hoặc ẩn danh (anonymous). Các hàm cấp độ package thường là các hàm được đặt tên. Hàm được đặt tên là một trường hợp đặc biệt của hàm ẩn danh. Tất nhiên, mỗi kiểu trong ngôn ngữ Go cũng có thể có các phương thức riêng, và đó có thể là là một hàm:
 
@@ -114,7 +114,7 @@ Bởi vì nó là một bao đóng (hàm trong câu lệnh lặp for), mỗi câ
 
 Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này: ([source1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[(source2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
-[source code 1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[source code 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
+[>> mã nguồn 1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[>> mã nguồn 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
 ```go
 func main() {
@@ -194,7 +194,7 @@ func g() int {
 - Hàm đầu tiên trả về trực tiếp địa chỉ của biến tham số hàm (biến `x`) - điều này có vẻ là không khả thi bởi vì nếu biến tham số nằm trên stack sẽ trở thành không hợp lệ sau khi hàm trả về và địa chỉ được trả về dĩ nhiên bị lỗi. Nhưng trình biên dịch của  Go thông minh hơn khi đảm bảo rằng các biến được trỏ bởi con trỏ sẽ ở đúng vị trí.
 - Hàm thứ hai, mặc dù lời gọi `new` tạo một đối tượng con trỏ kiểu `*int`, nhưng vẫn không biết nó sẽ được lưu ở đâu. Một điều nói riêng với những lập trình viên có kinh nghiệm với C/C ++ là trình biên dịch và thực thi (runtime) của Go sẽ giúp chúng ta không phải lo lắng về stack và heap của hàm. Do đó đừng cho rằng địa chỉ của biến trong bộ nhớ là cố định vì con trỏ có thể thay đổi bất cứ lúc nào, đặc biệt là những khi chúng ta không mong đợi nó thay đổi nhất.
 
-### 1.4.2 Method
+## 1.4.2 Method
 
 Phương thức (Method) là một tính năng của lập trình hướng đối tượng (OOP). Trong ngôn ngữ C++, phương thức  tương ứng với một hàm thành viên của một đối tượng lớp, được liên kết với một bảng ảo trên một đối tượng cụ thể. Tuy nhiên, phương thức trong ngôn ngữ Go được liên kết với kiểu, do đó liên kết tĩnh của phương thức có thể được tạo thành trong giai đoạn biên dịch.
 
@@ -202,7 +202,7 @@ Một chương trình hướng đối tượng sử dụng các phương thức 
 
 Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C:
 
-[source code](../examples/ch1/ch1.4/2-method/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-1/main.go)
 
 ```go
 // đối tượng File
@@ -260,7 +260,7 @@ Việc di chuyển tham số đầu tiên của hàm lên phía đầu của tê
 
 Phương thức được bắt nguồn từ hàm, chỉ là di chuyển tham số đối tượng đầu tiên của hàm lên phía trước tên hàm. Vì vậy, chúng ta vẫn có thể sử dụng phương thức theo tư duy thủ tục (procedure). Ta có thể biến một phương thức thành một loại hàm thông thường bằng cách gọi các thuộc tính trong biểu thức của nó:
 
-[source code](../examples/ch1/ch1.4/2-method/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-2/main.go)
 
 ```go
 // không phụ thuộc vào đối tượng file cụ thể
@@ -279,7 +279,7 @@ CloseFile(f)
 
 Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính bao đóng (closure property):
 
-[source code](../examples/ch1/ch1.4/2-method/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-3/main.go)
 
 ```go
 // mở đối tượng file
@@ -304,7 +304,7 @@ Close()
 
 Đây chính là vấn đề mà giá trị phương thức cần giải quyết. Chúng ta có thể đơn giản hóa việc  hiện thực với các tính năng:
 
-[source code](../examples/ch1/ch1.4/2-method/example-4/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/2-method/example-4/main.go)
 
 ```go
 // mở đối tượng file
@@ -368,7 +368,7 @@ Cấu trúc `Cache` nhúng một kiểu ẩn danh `sync.Mutex` để kế thừa
 
 Nếu cần tính chất đa hình ở các hàm ảo, chúng ta cần triển khai nó với Interface.
 
-### 1.4.3 Interface
+## 1.4.3 Interface
 
 Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi tiếng:
 
@@ -405,7 +405,7 @@ type error interface {
 
 Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó: [(source)](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
-[source code](../examples/ch1/ch1.4/3-interface/example-1/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
 ```go
 type UpperWriter struct {
@@ -423,7 +423,7 @@ func main() {
 
 Tất nhiên ta cũng có thể định nghĩa định dạng in riêng để đạt được hiệu quả tương tự. Với mỗi đối tượng được in ra, nếu interface `fmt.Stringer` được thỏa mãn, kết quả kiểu `String` được trả về bởi phương thức của đối tượng được in mặc định:
 
-[source code](../examples/ch1/ch1.4/3-interface/example-2/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-2/main.go)
 
 ```go
 type UpperString string
@@ -500,7 +500,7 @@ Tuy nhiên, phương pháp chặn  các đối tượng bên ngoài thực hiệ
 
 Như  đã đề cập trong phần Method, ta có thể kế thừa các phương thức của  kiểu ẩn danh bằng cách nhúng các thành phần thuộc  kiểu đó vào struct. Trong thực tế, thành phần ẩn danh này không nhất thiết phải là một kiểu bình thường, mà có thể một kiểu interface cũng được. Chúng ta có thể làm giả  phương thức private `testing.TB` bằng cách nhúng vào các interface ẩn danh, bởi vì các phương thức trong interface thuộc loại lazy binding và không thành vấn đề nếu phương thức `private` thực sự tồn tại ở compile-time. [(source)](../examples/ch1/ch1.4/3-interface/example-3/main.go)
 
-[source code](../examples/ch1/ch1.4/3-interface/example-3/main.go)
+[>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-3/main.go)
 
 ```go
 package main
@@ -524,7 +524,7 @@ func main() {
 }
 ```
 
-Kế thừa  bằng cách nhúng vào interface ẩn danh hoặc nhúng vào đối tượng con trỏ ẩn danh thực sựimplement là một thừa kế ảo thuần túy. Ta chỉ kế thừa đặc tả được chỉ định bởi interface và phần hiện thực chỉ thực sự được đưa vào trong thời gian thực thi. Ví dụ: chúng ta có thể mô phỏng một plugin thực hiện gRPC:
+Kế thừa  bằng cách nhúng vào interface ẩn danh hoặc nhúng vào đối tượng con trỏ ẩn danh thực sự implement là một thừa kế ảo thuần túy. Ta chỉ kế thừa đặc tả được chỉ định bởi interface và phần hiện thực chỉ thực sự được đưa vào trong thời gian thực thi. Ví dụ: chúng ta có thể mô phỏng một plugin thực hiện gRPC:
 
 ```go
 type grpcPlugin struct {

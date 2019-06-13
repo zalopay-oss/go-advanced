@@ -1,12 +1,11 @@
 
-## 1.3 Array, strings và slices
+# 1.3 Array, strings và slices
 
 `Arrays` và một số cấu trúc dữ liệu liên quan khác được sử dụng thường xuyên trong các ngôn ngữ lập trình. Chỉ khi chúng không đáp ứng được yêu cầu chúng ta mới cân nhắc sử dụng `linked lists` (danh sách liên kết) và `hash tables` (bảng băm) hoặc nhiều cấu trúc dữ liệu tự định nghĩa phức tạp khác.
 
 `Arrays`, `strings` và `slices` trong ngôn ngữ Go là các cấu trúc dữ liệu liên quan mật thiết với nhau. Ba kiểu dữ liệu đó có cùng cấu trúc vùng nhớ lưu trữ bên dưới, và chỉ có những hành vi thể hiện ra bên ngoài khác nhau tùy thuộc vào ràng buộc ngữ nghĩa. Đầu tiên, trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được xử lý toàn bộ, có thể hiểu là khi đó chúng được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó - khác với kiểu truyền tham khảo. Bên dưới dữ liệu của ngôn ngữ Go, `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string không được phép chỉnh sửa. Phép gán string chỉ đơn giản là sao chép hai thành phần đó là con trỏ tới vùng nhớ của `string` và độ dài `string`, mà không phải sao chép toàn bộ string. `Slices` thì phức tạp hơn, cấu trúc của chúng cũng như `string`, tuy nhiên việc giới hạn chỉ-đọc như string được lược bỏ, mỗi slice có thêm hai thông tin là `len` (độ dài) và `capacity` (sức chứa). Phép gán của slice và khi truyền slice như tham số của hàm thì thông tin về header của slice sẽ được xử lý theo giá trị. Bởi vì slice header chứa con trỏ đến dữ liệu bên dưới, phép gán sẽ không gây ra việc sao chép toàn bộ dữ liệu. Trong thực tế, phép gán trong Go và quy luật truyền tham số hàm trong Go rất đơn giản. Ngoại trừ hàm `closure` có tham khảo tới biến toàn cục bên ngoài, thì hầu hết những phép gán và truyền tham số khác được truyền bằng giá trị. Để hiểu được ba cách để xử lý arrays, strings và slices cần phải hiểu chi tiết tầng lưu trữ bên dưới của chúng.
 
-
-### 1.3.1 Array
+## 1.3.1 Array
 
 Một array là một chuỗi độ dài cố định của các phần tử có kiểu dữ liệu nào đó, một array có thể bao gồm không hoặc nhiều phần tử. Độ dài của array là một phần thông tin được chứa trong nó, các array có độ dài khác nhau hoặc kiểu phần tử bên trong khác nhau được xem là các kiểu dữ liệu khác nhau, và không được phép gán cho nhau, vì thế array hiếm khi được sử dụng trong Go. Một kiểu dữ liệu tương ứng với array là slice, một slice cũng là một chuỗi nhưng có thể tăng giảm kích thước một cách động, và các hàm hỗ trợ kiểu slice thì rất linh hoạt, nhưng để hiểu slice hoạt động thế nào, chúng ta phải hiểu array.
 
@@ -18,7 +17,6 @@ var b = [...]int{1, 2, 3} // Định nghĩa một mảng có ba phần tử 1, 2
 var c = [...]int{2: 3, 1: 2} // Mảng này có 3 phần tử theo thứ tự là 0, 2, 3
 var d = [...]int{1, 2, 4: 5, 6} // Mảng này chứa dãy các phần tử là 1, 2, 0 , 0, 5, 6
 ```
-
 
 [>> mã nguồn](../examples/ch1/ch1.3/1-arrays/example-1/main.go)
 
@@ -174,7 +172,7 @@ fmt.Printf("b: %#v\n", b) // b: [3]int{1, 2, 3}
 Trong Go, kiểu array là một kiểu cơ bản như là slice và strings. Nhiều ví dụ về array phía trên có thể được áp dụng trực tiếp cho strings hoặc slices
 
 
-### 1.3.2 String
+## 1.3.2 String
 
 
 Một string là một chuỗi các giá trị `byte` không được thay đổi, và string thường được dùng để biểu diễn giá trị con người có thể đọc được. Không giống như array, những phần tử trong string sẽ không được thay đổi, và chỉ có thể đọc. Chiều dài của mỗi string sẽ được cố định, những thông tin chiều dài đó không là một phần của kiểu string. Do mã nguồn của Go được yêu cầu là kiểu `UTF8`. Nội dung của string trong mã nguồn với kiểu Unicode sẽ được chuyển thành UTF8. Bởi vì mỗi phần tử của string cũng thực chất được lưu trữ thành những byte chỉ-đọc, một string có thể chứa những dữ liệu tùy ý, có thể toàn những byte zero (không). Chúng ta có thể dùng string để biểu diễn kiểu không phải là UTF8 bằng cách mã hóa chúng như là GBK, nhưng cơ bản không nên làm như vậy bởi vì hàm mệnh đề `for range` trong Go không hỗ trợ duyệt string mang kí tự không phải kiểu UTF8.
@@ -383,7 +381,7 @@ func str2bytes(s string) []byte {
 [>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-10/main.go)
 
 
-Một slice mới sẽ được tạo ra trong mô phỏng và sau đó một array của string sẽ được sap chép thành một slice theo từng phần tử, theo thứ tựu để đảm bảo ngữ nghĩa của string là chỉ đọc, Dĩ nhiên, khi chúng ta chuyển một string sang một array các byte `[]byte`, nếu trong quá trình chuyển đổi không thay đổi dữ liệu, thì bộ biên dịch sẽ trả về dữ liệu trực tiếp trỏ tới chuỗi gốc.
+Một slice mới sẽ được tạo ra trong mô phỏng và sau đó một array của string sẽ được sao chép thành một slice theo từng phần tử, theo thứ tựu để đảm bảo ngữ nghĩa của string là chỉ đọc, Dĩ nhiên, khi chúng ta chuyển một string sang một array các byte `[]byte`, nếu trong quá trình chuyển đổi không thay đổi dữ liệu, thì bộ biên dịch sẽ trả về dữ liệu trực tiếp trỏ tới chuỗi gốc.
 
 **`string(bytes)` mô phỏng hiện thực chuyển đổi kiểu**
 
@@ -426,7 +424,7 @@ func str2runes(s []byte) []rune {
 [>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-12/main.go)
 
 
-Bởi vì sự khác nhau bên dưới cấu trúc dữ liệu bên dưới, một string được chuyển đổi sang `[]rune` sẽ không thể không cấp phát lại vùng nhớ, và sau đó một chuỗi được decode và sao chép tuần tự tương tứng với chuỗi Unicode. Sự ép kiểu đó sẽ không có một sự tối ưu về string và bytes như được đề cập từ trước
+Bởi vì sự khác nhau bên dưới cấu trúc dữ liệu bên dưới, một string được chuyển đổi sang `[]rune` sẽ không thể không cấp phát lại vùng nhớ, và sau đó một chuỗi được decode và sao chép tuần tự tương ứng với chuỗi Unicode. Sự ép kiểu đó sẽ không có một sự tối ưu về string và bytes như được đề cập từ trước
 
 **`string(runes)` mô phỏng chuyển đổi kiểu**
 
@@ -448,7 +446,7 @@ func runes2string(s []int32) string {
 
 Cũng bởi vì một sự khác nhau bên dưới cấu trúc lưu trữ, `[]rune`, việc chuyển đổi thành một chuỗi chắc chắn sẽ dẫn đến việc xây dựng lại chuỗi. Cách này không không có tối ưu hóa như mô tả ở trên.
 
-### 1.3.3 Slice
+## 1.3.3 Slice
 
 Đơn giản mà nói, slice là một phiên bản đơn giản của mảng động. Bởi vì chiều dài của một mảng động không được cố định, chiều dài của slice thông thường không là một phần của kiểu dữ liệu. Array có nơi mà nó được áp dụng, nhưng kiểu array và những tác vụ trên nó sẽ không đủ linh hoạt, do đó array không được sử dụng nhiều trong ngôn ngữ Go. Slice thường được dùng một cách phổ biến hơn, và hiểu được ý nghĩa cũng như nguyên tắc sử dụng slice sẽ đòi hỏi phải có nhiều kĩ năng của người lập trình viên Go.
 
@@ -713,7 +711,7 @@ a = a[:len(a)-1]    // phần tử cuối cùng dù được xóa nhưng vẫn �
 
 [>> mã nguồn](../examples/ch1/ch1.3/3-slices/example-17/main.go)
 
-Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo quá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
+Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo giá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
 
 ```go
 var a []*int{ ... }
