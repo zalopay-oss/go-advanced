@@ -385,4 +385,3 @@ func (p *{{$root.ServiceName}}Client) {{$m.MethodName}}(
 ```
 
 Khi plugin của protobuf được tùy chỉnh hoàn thành, mã nguồn có thể được từ động sinh ra mỗi thời điểm mà RPC service thay đổi trong hello.proto file. Chúng ta có thể điều chỉnh hoặc tăng nội dung của mã nguồn được sinh ra bởi việc cập nhật template được plugin. Sau khi chúng ta đã có thể xây dựng một plugin riêng, chúng ta sẽ hoàn thành toàn bộ công nghệ đó.
-
