@@ -131,7 +131,7 @@ func (p *HelloServiceClient) Hello(request string, reply *string) error {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/api/main.go)
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/api/hello.go)
 
 
 Chúng ta thêm một kiểu mới là `HelloServiceClient` bên phía client trong đặc tả. Kiểu này phải thõa mãn giao diện `HelloServiceInterface`, do đó client cần phải trực tiếp gọi phương thức RPC thông qua hàm tương ứng của giao diện đó. Cùng một thời điểm, một phương thức DialHelloService được cung cấp trực tiếp để gọi service HelloService.
