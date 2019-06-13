@@ -1,10 +1,10 @@
 # 4.1 Bắt đầu với RPC
 
-RPC là viết tắt của remote procedure call (lời gọi hàm từ xa) và nó là một cách thức giao tiếp giữa các node của distributed system (hệ phân bố). Trong lịch sử của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu cũng như là IPC (inter process communication- giao tiếp giữa các tiến trình). Do đó, thư viện chuẩn của Go đã hỗ trợ phiên bản hiện thực RPC đơn giản, và chúng ta sẽ dùng chúng như là một đối tượng để học RPC.
+RPC là viết tắt của remote procedure call (lời gọi hàm từ xa) và nó là một cách thức giao tiếp giữa các node của distributed system (hệ thống phân tán). Trong lịch sử của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu giống như là IPC (inter process communication- giao tiếp giữa các tiến trình). Do đó, thư viện chuẩn của Go đã hỗ trợ phiên bản hiện thực RPC đơn giản, và chúng ta sẽ dùng chúng như là một đối tượng để học RPC.
 
 ## 4.1.1 RPC phiên bản "Hello, World"
 
-Một nhánh hiện thực RPC của ngôn ngữ Go là `net/rpc`, nó sẽ nằm dưới đường dẫn của gói `net`. Do đó chúng ta có thể đoán được rằng gói RPC được hiện thực dựa trên gói `net`. Tại phần cuối của chương "Cuộc cách mạng Hello, World", chúng ta đã hiện thực việc in ra một ví dụ mẫu dựa trên `http`. Bên dưới chúng ta sẽ thử hiện thực tương tự dựa trên `rpc`.
+Một nhánh hiện thực RPC của ngôn ngữ Go là `net/rpc`, nó sẽ nằm dưới đường dẫn của gói `net`. Do đó chúng ta có thể đoán được rằng gói RPC được hiện thực dựa trên gói `net`. Tại phần cuối của chương 1 phần "Cuộc cách mạng Hello, World", chúng ta đã hiện thực việc in ra một ví dụ mẫu dựa trên `http`. Bên dưới chúng ta sẽ thử hiện thực tương tự dựa trên `rpc`.
 
 ```go
 type HelloService struct {}
@@ -37,7 +37,7 @@ func main() {
 }
 ```
 
-Hàm rpc.Register sẽ đăng kí những đối tượng thỏa mãn quy luật RPC như là RPC functions, và tất cả những phương thức bên dưới không gian  "HelloService" service. Sau đó chúng ta sẽ tạo ra một đường dẫn TCP duy nhất và cung cấp service RPC đến bên khác trong qua đường truyền RPC được hỗ trợ bởi hàm `rpc.ServeConn`.
+Hàm `rpc.Register` sẽ đăng kí những đối tượng thỏa mãn quy luật RPC như là RPC functions, và tất cả những phương thức bên dưới không gian "HelloService" service. Sau đó chúng ta sẽ tạo ra một đường dẫn TCP duy nhất và cung cấp service RPC đến các thành phần khác khác trong qua đường truyền RPC được hỗ trợ bởi hàm `rpc.ServeConn`.
 
 Dưới đây là mã nguồn client để yêu cầu service Hello:
 
@@ -58,12 +58,12 @@ func main() {
 }
 ```
 
-Lựa chọn đầu tiên là kết nối tới service RPC thông qua rpc.Dial và sau đó gọi một phương thức RPC cụ thể thông qua Client.Call. Khi gọi Client.Call, tham số đầu tiên là tên RPC Service và tên phương thức qua dấu ".", và sau đó tham số thứ hai và thứ ba sẽ tương ứng với hai tham số định nghĩa ở phương thức RPC.
+Lựa chọn đầu tiên là kết nối tới service RPC thông qua `rpc.Dial` và sau đó gọi một phương thức RPC cụ thể thông qua `client.Call`. Khi gọi `client.Call`, tham số đầu tiên là tên RPC Service và tên phương thức qua dấu ".", và sau đó tham số thứ hai và thứ ba sẽ tương ứng với hai tham số định nghĩa ở phương thức RPC.
 Từ ví dụ trên, có thể thấy rằng chúng ta dùng RPC thật sự rất đơn giản.
 
 ## 4.1.2 RPC Interface an toàn
 
-Trong ứng dụng gọi RPC, sẽ thường có ít nhất ba nhà phát triển: người thứ nhất là nhà phát triển sẽ hiện thực phương thức RPC ở bên phía server, người thứ hai là người gọi RPC bên phía client, và người cuối cùng là người cực kì quan trọng, họ sẽ phát triển giao diện giữa server và client RPC. Trong ví dụ trước, chúng ta đặt tất cả những vai trò trên lại với nhau cho đơn giản, mặc dùng nó dường như là đơn giản để hiện thực, nhưng nó không thuận lợi cho việc bảo trì và phân công công việc về sau.
+Trong ứng dụng gọi RPC, sẽ thường có ít nhất ba nhà phát triển: người thứ nhất là nhà phát triển sẽ hiện thực phương thức RPC ở bên phía server, người thứ hai là người gọi RPC bên phía client, và người cuối cùng là người cực kì quan trọng, họ sẽ phát triển giao diện giữa server và client RPC. Trong ví dụ trước, chúng ta đặt tất cả những vai trò trên lại với nhau cho đơn giản, mặc dùng nó dường như là cách đơn giản để hiện thực, nhưng nó không thuận lợi cho việc bảo trì và phân công công việc về sau.
 
 Nếu bạn muốn refactor lại service HelloService, bước đầu tiên là phân định rạch ròi giữa tên và giao diện của service;
 
@@ -79,7 +79,7 @@ func RegisterHelloService(svc HelloServiceInterface) error {
 }
 ```
 
-Chúng ta chia đặc tả giao diện của service RPC thành ba phần: đầu tiên, tên của service, sau đó là danh sách chi tiết của những phương thức cần hiện thực của service. Để tránh xung đột tên, chúng ta thêm vào tên của gói thành tiền tố của tên service RPC (nó là đường dẫn đến gói của lớp service trừu tượng RPC, không phải là đường dẫn tới gói của ngôn ngữ Go). Chúng ta sẽ đăng kí phương thức RegisterHelloService đến service và bộ biên dịch sẽ hỏi những đối tượng được mang tới để thỏa mãn giao diện HelloServiceInterface.
+Chúng ta chia đặc tả giao diện của service RPC thành ba phần: đầu tiên, tên của service, sau đó là danh sách chi tiết của những phương thức cần hiện thực của service. Để tránh xung đột tên, chúng ta thêm vào tên của gói thành tiền tố của tên service RPC (nó là đường dẫn đến gói của lớp service trừu tượng RPC, không phải là đường dẫn tới gói của ngôn ngữ Go). Chúng ta sẽ đăng kí phương thức `RegisterHelloService` đến service và bộ biên dịch sẽ hỏi những đối tượng được mang tới để thỏa mãn giao diện `HelloServiceInterface`.
 
 Sau khi định nghĩa lớp giao diện của service RPC, client có thể ghi mã nguồn để gọi lệnh RPC theo đặc tả như sau:
 
@@ -98,8 +98,7 @@ func main() {
 }
 ```
 
-Sự thay đổi nhỏ được nhìn thấy ở đối số đầu tiên của hàm client.Call thay thế `HelloService.Hello` với 
-`HelloServiceName+".Hello"`. Tuy nhiên, gọi phương thức RPC thông qua hàm client.Call vẫn rất cồng kềnh, và kiểu của tham số không thể có tính an toàn của trình biên dịch.
+Sự thay đổi nhỏ được nhìn thấy ở đối số đầu tiên của hàm client.Call thay thế `HelloService.Hello` với `HelloServiceName+".Hello"`. Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, và kiểu của tham số không thể có tính an toàn của trình biên dịch.
 
 Để đơn giản lời gọi từ Client tới hàm RPC, chúng ta thêm vào hàm wrapper ở phía client trong giao diện đặc tả như sau:
 
@@ -123,7 +122,7 @@ func (p *HelloServiceClient) Hello(request string, reply *string) error {
 }
 ```
 
-Chúng ta thêm một kiểu mới là HelloServiceClient bên phía client trong đặc tả. Kiểu này phải thõa mãn giao diện HelloServiceInterface, do đó client cần phải trực tiếp gọi phương thức RPC thông qua hàm tương ứng của giao diện đó. Cùng một thời điểm, một phương thức DialHelloService được cung cấp trực tiếp để gọi service HelloService.
+Chúng ta thêm một kiểu mới là `HelloServiceClient` bên phía client trong đặc tả. Kiểu này phải thõa mãn giao diện `HelloServiceInterface`, do đó client cần phải trực tiếp gọi phương thức RPC thông qua hàm tương ứng của giao diện đó. Cùng một thời điểm, một phương thức DialHelloService được cung cấp trực tiếp để gọi service HelloService.
 
 Dựa trên giao diện client mới, chúng ta sẽ đơn giản gọi client như sau
 
@@ -173,7 +172,7 @@ func main() {
 }
 ```
 
-Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm RegisterHelloService để đăng kí, nó không chỉ tránh việc làm việc với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của giao diện RPC. Cuối cùng, service mới của chúng ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
+Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm `RegisterHelloService` để đăng kí, nó không chỉ tránh việc làm việc với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của giao diện RPC. Cuối cùng, service mới của chúng ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
 
 
 ## 4.1.3 Cross-language RPC (đa ngôn ngữ trên RPC)
@@ -235,7 +234,7 @@ Sau khi đảm bảo rằng client có thể gọi RPC service một cách bình
 {"method":"HelloService.Hello","params":["hello"],"id":0}
 ```
 
-Đây không phải là dữ liệu json-encoded, khi một phần của phương thức ứng với tên của rpc service và tên hàm được gọi, phần tử đầu tiên của "params" kaf tham số, và số id được đảm bảo phải duy nhất bởi phía gọi.
+Đây không phải là dữ liệu json-encoded, khi một phần của phương thức ứng với tên của rpc service và tên hàm được gọi, phần tử đầu tiên của "params" là tham số, và số id được đảm bảo phải duy nhất bởi phía gọi.
 
 Đối tượng dữ liệu json sẽ tương ứng với hai cấu trúc sau: bên phía client là clientRequest và bên phía server là serverRequest. Nội dung của cấu trúc clientRequest và serverRequest về cơ bản sẽ giống nhau:
 
@@ -265,7 +264,7 @@ Kết quả trả về cũng là chuỗi dữ liệu json được định dạn
 {"id":1,"result":"hello:hello","error":null}
 ```
 
-Trong khi id tương ứng với tham số input id, kết quả là giá trị của "result" và phần "error" sẽ chỉ ra thông điệp lỗi khi vấn đề xảy ra. Cho chuỗi các lệnh tuần tự, id không được yêu cầu phải có. Tuy nhiên, framework RPC của ngôn ngữ Go sẽ hỗ trợ lệnh gọi bất đồng bộ. Khi thứ tự của kết quả trả về không tương thích với thứ tự của các lần gọi, lệnh gọi tương ứng sẽ được nhận dạng bởi id.
+Trong khi id tương ứng với tham số input id, kết quả là giá trị của "result" và phần "error" sẽ chỉ ra thông điệp lỗi khi có vấn đề xảy ra. Cho chuỗi các lệnh tuần tự, id không được yêu cầu phải có. Tuy nhiên, framework RPC của ngôn ngữ Go sẽ hỗ trợ lệnh gọi bất đồng bộ. Khi thứ tự của kết quả trả về không tương ứng với thứ tự của các lần gọi, lệnh gọi tương ứng sẽ được nhận dạng bởi id.
 
 Kết quả dữ liệu json được trả về sẽ tương ứng với hai thành phần bên trong, đối với phía client là clientResponse, và phía server là serverResponse. Nội dung của hai cấu trúc trên cũng sẽ tương tự nhau
 
@@ -289,7 +288,7 @@ Do đó không có vấn đề gì về rào cản ngôn ngữ, chỉ theo đị
 
 RPC framework sẽ thừa hưởng từ ngôn ngữ Go đã hỗ trợ sẵn dịch vụ RPC trên giao thức HTTP. Tuy nhiên, frameword http service cũng có giao thức được xây dựng sẵn, và nó không cung cấp giao diện để sử dụng cho những protocol khác. Trong ví dụ trước, chúng ta sẽ hiện thực jsonrpc service dựa trên giao thức TCP, và đã hiện thực thành công lời gọi RPC thông qua lệnh `nc`. Bây giờ chúng ta sẽ thử cung cấp dịch vụ rpcjson trên giao thức HTTP.
 
-Dịch vụ RPC mới sẽ thực sự tuân thủ theo chuẩn giao diện REST, do đó chúng sẽ nhận yêu cầu và xử lý chúng theo quá trình bên dưới
+RPC Service  mới sẽ thực sự tuân thủ theo chuẩn giao diện REST, do đó chúng sẽ nhận yêu cầu và xử lý chúng theo quá trình bên dưới
 
 
 ```go
@@ -312,7 +311,7 @@ func main() {
 }
 ```
 
-Dịch vụ RPC sẽ thiết lập đường dẫn `/jsonrpc` và kênh `conn` thuộc kiểu `io.ReadWriteCloser` được xây dựng dựa trên tham số thuộc kiểu `http.ResponseWriter` và `http.Request`. Một json codec cho server sẽ được xây dựng dựa trên `conn`. Cuối cùng phương thức gọi RPC được xử lý một lần cho mỗi request thông qua hàm `rpc.ServeRequest`.
+RPC Service sẽ thiết lập đường dẫn `/jsonrpc` và kênh `conn` thuộc kiểu `io.ReadWriteCloser` được xây dựng dựa trên tham số thuộc kiểu `http.ResponseWriter` và `http.Request`. Một json codec cho server sẽ được xây dựng dựa trên `conn`. Cuối cùng phương thức gọi RPC được xử lý một lần cho mỗi request thông qua hàm `rpc.ServeRequest`.
 
 Quá trình để mô phỏng lệnh gọi RPC để gửi chuỗi json đến kết nối đó như sau:
 
@@ -327,4 +326,4 @@ Kết quả vẫn là một chuỗi json như sau
 {"id":0,"result":"hello:hello","error":null}
 ```
 
-Điều đó làm việc gọi dịch vụ RPC từ những ngôn ngữ khác dễ dàng hơn.
+Điều đó làm việc gọi service RPC từ những ngôn ngữ khác dễ dàng hơn.

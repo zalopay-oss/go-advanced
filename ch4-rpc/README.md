@@ -1,1 +1,3 @@
 # Chapter 4
+
+Chương này ban đầu sẽ giới thiệu về rpc trong golang sau đó bàn về protocol buffer - một công nghệ của Google. Các phần sau sẽ lần lượt trình bày về những best practice với RPC. Một framework mạnh mẽ khác của Google là gRPC của được giới thiệu tới,...

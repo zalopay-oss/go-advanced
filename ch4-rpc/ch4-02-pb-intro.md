@@ -18,11 +18,11 @@ message String {
 }
 ```
 
-Cú pháp của statement trên bắt đầu bằng việc định nghĩa trường "syntax" là "proto3" - Phiên bản ngôn ngữ protobuf thứ ba, và tất cả những thành phần được khởi tạo với giá trị 0 giống như Go (không có hỗ trợ custom), sau đó những thành phần của message sẽ không cần những thuộc tính được yêu cầu. Sau đó package được chỉ thị là "main package" (nó nên đồng nhất với tên package trong Go, đơn giản như code ví dụ), dĩ nhiên, user cũng có thể tùy chỉnh đường dẫn package tương ứng khác cho những ngôn ngữ khác nhau. Cuối cùng, từ khóa "message" sẽ định nghĩa một kiểu dữ liệu string mới là String, nó sẽ ứng với cấu trúc string ở mã nguồn cuối cùng được sinh ra từ chúng trong Go, và những thành phần sẽ được định nghĩa với một số tên gọi.
+Cú pháp của statement trên bắt đầu bằng việc định nghĩa trường "syntax" là "proto3" - phiên bản ngôn ngữ protobuf thứ ba, và tất cả những thành phần được khởi tạo với giá trị 0 giống như Go (không có hỗ trợ custom), sau đó những thành phần của message sẽ không cần những thuộc tính được yêu cầu. Sau đó package được chỉ thị là "main package" (nó nên đồng nhất với tên package trong Go, đơn giản như code ví dụ), dĩ nhiên, user cũng có thể tùy chỉnh đường dẫn package tương ứng khác cho những ngôn ngữ khác nhau. Cuối cùng, từ khóa "message" sẽ định nghĩa một kiểu dữ liệu string mới là String, nó sẽ ứng với cấu trúc string ở mã nguồn cuối cùng được sinh ra từ chúng trong Go, và những thành phần sẽ được định nghĩa với một số tên gọi.
 
-Trong ngôn ngữ mô tả như là XML hay JSON, kiểu dữ liệu tương ứng thông thường sẽ được bao bọc bởi tên các thành viên. Tuy nhiên, Protobuf encoding sẽ kết hợp những dữ liệu bằng một số duy nhất của dữ liệu đó, do đó dung lượng của protobuf sẽ dữ liệu protobuf được encoded sẽ nhỏ, nhưng nó không dễ dàng để con người có thể đọc được. Chúng ta sẽ không quan tâm đến công nghệ encode dữ liệu của protobuf. Két quả của cấu trúc Go có thể được encode bằng JSON hay không, do đó chúng ta có thể tạm thời phớt lờ đi việc Protobuf encode dữ liệu trong tài liệu này.
+Trong ngôn ngữ mô tả như là XML hay JSON, kiểu dữ liệu tương ứng thông thường sẽ được bao bọc bởi tên các thành viên. Tuy nhiên, Protobuf encoding sẽ kết hợp những dữ liệu bằng một số duy nhất của dữ liệu đó, do đó dung lượng của dữ liệu protobuf được encoded sẽ nhỏ, nhưng nó không dễ dàng để con người có thể đọc được. Chúng ta sẽ không quan tâm đến công nghệ encode dữ liệu của protobuf. Kết quả của cấu trúc Go có thể được encode bằng JSON hay không, do đó chúng ta có thể tạm thời phớt lờ đi việc Protobuf encode dữ liệu trong tài liệu này.
 
-Phần lõi của Protobuf được phát triển dựa trên ngôn ngữ C++, và chúng không dùng ngôn ngữ Go trong bộ biên dịch protoc. Để sinh ra mã nguồn Go tương ứng với file hello.go ở trên, chúng ta sẽ phải cần cài đặt một số plugin khác. Đầu tiên là cài đặt bộ biên dịch protoc, chúng có thể được tải về tại https://github.com/google/protobuf/releases. Sau đó là cài đặt một plugin cho Go, chúng ta có thể cài đặt thông qua `go get github.com/golang/protobuf/protoc-gen-go`.
+Phần lõi của Protobuf được phát triển dựa trên ngôn ngữ C++, và chúng không dùng ngôn ngữ Go trong bộ biên dịch `protoc`. Để sinh ra mã nguồn Go tương ứng với file hello.go ở trên, chúng ta sẽ phải cần cài đặt một số plugin khác. Đầu tiên là cài đặt bộ biên dịch `protoc`, chúng có thể được tải về tại https://github.com/google/protobuf/releases. Sau đó là cài đặt một plugin cho Go, chúng ta có thể cài đặt thông qua `go get github.com/golang/protobuf/protoc-gen-go`.
 
 Sau đó chúng ta sẽ sinh ra mã nguồn Go bằng lệnh sau:
 
@@ -56,7 +56,7 @@ func (m *String) GetValue() string {
 
 Cấu trúc được sinh ra của chứa một số hàm với tiền tố `XXX_`, chúng ta có thể ẩn đi những thành phần đó. Cùng một thời điểm, kiểu String cũng có thể được tự động sinh ra một tập hợp các phương thức, trong số đó ProtoMessage chỉ ra rằng đó là một hàm được hiện thực giao diện proto.Message. Thêm vào đó, Protobuf sẽ sinh ra những phương thức Get cho mỗi thành phần, trong nó sẽ kiểm tra dữ liệu null và trả về chuỗi rỗng.
 
-Dựa trên kiểu String mới, chúng ta có thể hiện thực lại HelloService service
+Dựa trên kiểu String mới, chúng ta có thể hiện thực lại service HelloService
 
 ```go
 type HelloService struct{}
@@ -71,7 +71,7 @@ Tham số đầu vào và tham số đầu ra của phương thức Hello đư�
 
 Chúng ta đầu tiên sẽ nhận ra sự kết hợp giữa Protobuf và RPC. Khi chúng ta bắt đầu một RPC service, chúng ta có thể vẫn chọn một kiểu mặc định hoặc định nghĩa lại với Json, và sau đó sẽ hiện thực lại plugin dựa trên mã nguồn protobuf. Mặc dù chúng ta có thể làm rất nhiều công việc, nó dường như chúng ta không thể đạt được gì đáng kể.
 
-Nhìn lại giao diện RPC khá bảo mật của chương 1, chúng ta đã rất nỗ lực để đảm bảo bảo mật cho dịch vụ RPC. Kết quả của mã nguồn RPC trên sẽ an toàn hơn và rất là tuyệt vời để  bảo trì thủ công, chúng ta có thể bảo mật hóa những mã nguồn liên quan mà nó chỉ sẵn có ở môi trường ngôn ngữ Go. Do đó đầu vào và đầu ra của tham số được định nghĩa bởi Protobuf được dùng, có thể giao diện RPC được định nghĩa bởi protobuf. Việc áp dụng protobuf được định nghĩa ở mức độc lập ngôn ngữ dịch vụ RPC và giao diện của chúng ở giá trị thực tế.
+Nhìn lại giao diện RPC khá bảo mật của phần 1, chúng ta đã rất nỗ lực để đảm bảo bảo mật cho dịch vụ RPC. Kết quả của mã nguồn RPC trên sẽ an toàn hơn và rất là tuyệt vời để  bảo trì thủ công, chúng ta có thể bảo mật hóa những mã nguồn liên quan mà nó chỉ sẵn có ở môi trường ngôn ngữ Go. Do đó đầu vào và đầu ra của tham số được định nghĩa bởi Protobuf được dùng, có thể giao diện RPC được định nghĩa bởi protobuf. Việc áp dụng protobuf được định nghĩa ở mức độc lập ngôn ngữ dịch vụ RPC và giao diện của chúng ở giá trị thực tế.
 
 Cập nhật hello.proto file bên dưới dễ định nghĩa dịch vụ RPC HelloService service thông qua protobuf.
 
@@ -82,7 +82,7 @@ service HelloService {
 }
 ```
 
-Nhưng khi sinh lại mã nguồn Go, chúng cũng không thay đổi. Đó là bởi vì có hàng triệu hiện thực RPC trên thế giới, và bộ biên dịch protoc sẽ không thể biết sinh ra mã nguồn của HelloService như thế nào.
+Nhưng khi sinh lại mã nguồn Go, chúng cũng không thay đổi. Đó là bởi vì có hàng triệu hiện thực RPC trên thế giới, và bộ biên dịch `protoc` sẽ không thể biết sinh ra mã nguồn của HelloService như thế nào.
 
 Tuy nhiên `grpc`, một plugin khác đã được tích hợp bên trong `protoc-gen-go` để sinh ra mã nguồn cho gRPC.
 
@@ -94,7 +94,7 @@ Trong mã nguồn được sinh ra, sẽ có một số kiểu mới như là He
 
 Tuy nhiên gRPC plugin sẽ cung cấp cho chúng ta những ý tưởng mới. Bên dưới chúng ta sẽ khám phá ra làm thế nào để sinh ra mã nguồn bảo mật trong RPC.
 
-## 4.2.2 Tùy chỉnh mã nguồn được sinh ra bởi plugin.
+## 4.2.2 Tùy chỉnh mã nguồn được sinh ra bởi plugin
 
 Bộ biên dịch protoc của Protobuf sẽ hiện thực để hỗ trợ những ngôn ngữ khác nhau thông qua cơ chế plugin. cho ví dụ, nếu lệnh protoc có tham số  được định dạng `--xxx_out`, thì sau đó proto sẽ yêu cầu plugin được xây dựng dựa trên ngôn ngữ `xxx`. Sau đó plugin sẽ sinh ra mã nguồn, ví dụ `protoc-gen-go` sẽ sinh ra mã nguồn Go bằng tham số `--go_out=plugins=grpc` sẽ sinh ra mã nguồn cho gRPC, nếu không chúng sẽ chỉ sinh ra mã nguồn liên quan đến message đó.
 
@@ -119,7 +119,7 @@ type Plugin interface {
 }
 ```
 
-Phương thức Name sẽ trả về tên của plugin. Đó là một plugin ở hệ thống cho việc hiện thực Protobuf của ngôn ngữ Go. Sẽ không có gì để làm với tên của protoc plugin. Sau đó hàm Init sẽ khởi tạo plugin với tham số `g`, nó sẽ chứa toàn bộ thông tin về Proto file. Cuối cùng phương thức Generate và GenerateImports sẽ được dùng để sinh ra phần thân của mã nguồn tương ứng với package được import.
+Phương thức `Name` sẽ trả về tên của plugin. Đó là một plugin ở hệ thống cho việc hiện thực Protobuf của ngôn ngữ Go. Sẽ không có gì để làm với tên của protoc plugin. Sau đó hàm `Init` sẽ khởi tạo plugin với tham số `g`, nó sẽ chứa toàn bộ thông tin về Proto file. Cuối cùng phương thức Generate và GenerateImports sẽ được dùng để sinh ra phần thân của mã nguồn tương ứng với package được import.
 
 Do đó chúng ta có thể hiện thực lại hàm `netrpcPlugin` để sinh ra mã nguồn cho thư viện RPC chuẩn của Go.
 
@@ -147,7 +147,7 @@ func (p *netrpcPlugin) Generate(file *generator.FileDescriptor) {
 }
 ```
 
-Đầu tiên phương thức Name sẽ trả về tên của plugin. `netrpcPlugin` có một hàm dựng sẵn `*generator.Generator`, và được khởi tạo với tham số `g` khi hàm Init được khởi tạo, do đó, plugin sẽ kế thừa tất cả những phương thức được public  từ tham số g này. Phương thức ` GenerateImports` sẽ gọi hàm `genImportCode` được định nghĩa để sinh ra mã nguồn import. Và Phương thức `Generate` sẽ gọi phương thức được custom `genServiceCode` để sinh ra mã nguồn cho mỗi service.
+Đầu tiên phương thức Name sẽ trả về tên của plugin. `netrpcPlugin` có một hàm dựng sẵn `*generator.Generator`, và được khởi tạo với tham số `g` khi hàm Init được khởi tạo, do đó, plugin sẽ kế thừa tất cả những phương thức được public  từ tham số g này. Phương thức `GenerateImports` sẽ gọi hàm `genImportCode` được định nghĩa để sinh ra mã nguồn import. Và Phương thức `Generate` sẽ gọi phương thức được custom `genServiceCode` để sinh ra mã nguồn cho mỗi service.
 
 Hiện tại, phương thức `genImportCode` và `genServiceCode` chỉ đơn giản là có một dòng comment đơn giản
 
@@ -161,7 +161,7 @@ func (p *netrpcPlugin) genServiceCode(svc *descriptor.ServiceDescriptorProto) {
 }
 ```
 
-Để sử dụng plugin, chúng ta cần phải đăng kí plugin đó với hàm `generator.RegisterPlugin`, chúng có thể được hoàn tất nhờ vào hàm init.
+Để sử dụng plugin, chúng ta cần phải đăng kí plugin đó với hàm `generator.RegisterPlugin`, chúng có thể được hoàn tất nhờ vào hàm `init()`.
 
 ```go
 func init() {
@@ -236,7 +236,6 @@ Tại thời điểm này, plugin được chúng ta tạo ra cuối cùng đã 
 Trong ví dụ trước chúng ta đã xây dựng một plugin nho nhỏ là `netrpcPlugin` và tạo ra một plugin mới cho `protoc-gen-go-netrpc` bởi việc sao chép lại chương trình chính của protoc-gen-go. Bây giờ tiếp tục phát triển netrpcPlugin plugin với mục tiêu cuối cùng là sinh ra lớp giao diện RPC bảo mật.
 Đầu tiên chúng ta sẽ phải sinh ra mã nguồn của package được import bằng phương thức đã được định nghĩa genImportCode.
 
-
 ```go
 func (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
     p.P(`import "net/rpc"`)
@@ -246,7 +245,6 @@ func (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
 Sau đó sinh ra những mã nguồn liên quan cho mỗi service của phương thức genServiceCode được tạo ra. Chúng ta có thể phân tích thấy rằng thứ quan trọng nhất của mỗi service là tên của service, và sau đó mỗi service sẽ có một tập hợp các phương thức. Việc định nghiã phương thức có thành phần quan trọng nhất là tên của service cũng như là tham số đầu vào và tham số đầu ra.
 
 Chúng ta sẽ định nghĩa kiểu ServiceSpec được mô tả như là thông tin thêm vào của service.
-
 
 ```go
 type ServiceSpec struct {
