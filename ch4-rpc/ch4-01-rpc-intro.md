@@ -15,6 +15,8 @@ func (p *HelloService) Hello(request string, reply *string) error {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.1/hello-server-v1/main.go)
+
 Hàm Hello sẽ phải thỏa mãn những quy luật của RPC trong ngôn ngữ Go; phương thức chỉ có thể có hai tham số để serialize, tham số thứ hai là kiểu con trỏ, và giá trị trả về là kiểu error, và nó phải là một phương thức public.
 
 Sau đó chúng ta có thể đăng kí đối tượng thuộc kiểu HelloService là một RPC Service.
@@ -37,6 +39,9 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.1/hello-server-v1/main.go)
+
+
 Hàm `rpc.Register` sẽ đăng kí những đối tượng thỏa mãn quy luật RPC như là RPC functions, và tất cả những phương thức bên dưới không gian "HelloService" service. Sau đó chúng ta sẽ tạo ra một đường dẫn TCP duy nhất và cung cấp service RPC đến các thành phần khác khác trong qua đường truyền RPC được hỗ trợ bởi hàm `rpc.ServeConn`.
 
 Dưới đây là mã nguồn client để yêu cầu service Hello:
@@ -58,6 +63,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.1/hello-client-v1/main.go)
+
 Lựa chọn đầu tiên là kết nối tới service RPC thông qua `rpc.Dial` và sau đó gọi một phương thức RPC cụ thể thông qua `client.Call`. Khi gọi `client.Call`, tham số đầu tiên là tên RPC Service và tên phương thức qua dấu ".", và sau đó tham số thứ hai và thứ ba sẽ tương ứng với hai tham số định nghĩa ở phương thức RPC.
 Từ ví dụ trên, có thể thấy rằng chúng ta dùng RPC thật sự rất đơn giản.
 
@@ -78,6 +85,8 @@ func RegisterHelloService(svc HelloServiceInterface) error {
     return rpc.RegisterName(HelloServiceName, svc)
 }
 ```
+
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/api/hello.go)
 
 Chúng ta chia đặc tả giao diện của service RPC thành ba phần: đầu tiên, tên của service, sau đó là danh sách chi tiết của những phương thức cần hiện thực của service. Để tránh xung đột tên, chúng ta thêm vào tên của gói thành tiền tố của tên service RPC (nó là đường dẫn đến gói của lớp service trừu tượng RPC, không phải là đường dẫn tới gói của ngôn ngữ Go). Chúng ta sẽ đăng kí phương thức `RegisterHelloService` đến service và bộ biên dịch sẽ hỏi những đối tượng được mang tới để thỏa mãn giao diện `HelloServiceInterface`.
 
@@ -122,6 +131,9 @@ func (p *HelloServiceClient) Hello(request string, reply *string) error {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/api/hello.go)
+
+
 Chúng ta thêm một kiểu mới là `HelloServiceClient` bên phía client trong đặc tả. Kiểu này phải thõa mãn giao diện `HelloServiceInterface`, do đó client cần phải trực tiếp gọi phương thức RPC thông qua hàm tương ứng của giao diện đó. Cùng một thời điểm, một phương thức DialHelloService được cung cấp trực tiếp để gọi service HelloService.
 
 Dựa trên giao diện client mới, chúng ta sẽ đơn giản gọi client như sau
@@ -140,6 +152,9 @@ func main() {
     }
 }
 ```
+
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/client/main.go)
+
 
 Giờ đây, client không còn phải lo lắng về low-level errors như là tên phương thức RPC hoặc kiểu dữ liệu không trùng khớp.
 
@@ -172,6 +187,9 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/server/main.go)
+
+
 Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm `RegisterHelloService` để đăng kí, nó không chỉ tránh việc làm việc với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của giao diện RPC. Cuối cùng, service mới của chúng ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
 
 
@@ -203,6 +221,9 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v3/server/main.go)
+
+
 Sự thay đổi lớn nhất trong mã nguồn là thay thế hàm `rpc.ServeConn` với `rpc.ServeCodec`. Tham số được truyền ở trong là json codec cho server.
 
 Sau đó, client sẽ hiện thực phiên bản json như sau:
@@ -225,6 +246,8 @@ func main() {
     fmt.Println(reply)
 }
 ```
+
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v3/client/main.go)
 
 Đầu tiên chúng ta sẽ gọi hàm `net.Dial` để thiết lập kết nối TCP, sau đó là xây dựng json codec cho client dựa trên liên kết đó.
 
@@ -310,6 +333,9 @@ func main() {
     http.ListenAndServe(":1234", nil)
 }
 ```
+
+[>> mã nguồn](../examples/ch4/ch4.1/hello-service-v3/server-on-http/main.go)
+
 
 RPC Service sẽ thiết lập đường dẫn `/jsonrpc` và kênh `conn` thuộc kiểu `io.ReadWriteCloser` được xây dựng dựa trên tham số thuộc kiểu `http.ResponseWriter` và `http.Request`. Một json codec cho server sẽ được xây dựng dựa trên `conn`. Cuối cùng phương thức gọi RPC được xử lý một lần cho mỗi request thông qua hàm `rpc.ServeRequest`.
 
