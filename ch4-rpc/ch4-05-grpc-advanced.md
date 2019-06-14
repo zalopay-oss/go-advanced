@@ -2,7 +2,7 @@
 
 Các framework RPC cơ bản thì bảo mật và mở rộng thường gặp phải nhiều vấn đề. Phần này sẽ mô tả ngắn gọn cách xác thực an toàn bằng gRPC. Sau đó giới thiệu các tính năng interceptor thông qua gRPC và cách triển khai xác thực Token một cách tốt nhất, theo dõi cuộc gọi và bắt các Panic thông qua interceptor. Cuối cùng là cách gRPC service tương tác với các Web service khác và cùng phát triển như thế nào.
 
-## 4.5.1 Chứng chỉ chứng nhận
+## 4.5.1 Xác thực qua chứng chỉ
 
 gRPC được xây dựng dựa trên giao thức HTTP/2 và hỗ trợ TLS rất tốt. gRPC service trong chương trước chúng tôi không cung cấp hỗ trợ chứng chỉ, vì vậy client `grpc.WithInsecure()` có thể  thông qua tùy chọn mà bỏ qua việc xác thực chứng chỉ   trong server được kết nối. gRPC service không có chứng chỉ được kích hoạt sẽ phải giao tiếp hoàn toàn bằng plain-text với client và có nguy cơ cao bị giám sát bởi một bên thứ ba khác. Để đảm bảo rằng giao tiếp gRPC không bị giả mạo hoặc giả mạo bởi các bên thứ ba, chúng ta có thể kích hoạt mã hóa TLS trên server.
 
@@ -77,7 +77,9 @@ $ openssl x509 -req -sha256 \
     -out client.crt
 ```
 
-Chứng chỉ root cấu hình khi khởi động server:
+Xem [Makefile](../examples/ch4/ch4.5/1-tls-certificate/tls-config/Makefile)
+
+Chứng chỉ root được cấu hình lúc khởi động server:
 
 ```go
 func main() {
@@ -106,13 +108,15 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.5/1-tls-certificate/main.go)
+
 Server cũng sử dụng hàm `credentials.NewTLS` để tạo chứng chỉ, chọn chứng chỉ CA root thông qua ClientCA và cho phép Client được xác thực bằng tùy chọn `ClientAuth`.
 
 Như vậy chúng ta đã xây dựng được một hệ thống gRPC đáng tin cậy để kết nối giữa Client và Server thông qua xác thực chứng chỉ từ cả 2 chiều.
 
 ## 4.5.2 Xác thực token
 
-Xác thực dựa trên chứng chỉ được mô tả ở trên là dành cho từng kết nối gRPC. Ngoài ra gRPC cũng  hỗ trợ xác thực cho mỗi lệnh gọi   gRPC, để việc quản lý quyền được thực hiện trên các kết nối khác nhau dựa trên user token.
+Xác thực dựa trên chứng chỉ được mô tả ở trên là dành cho từng kết nối gRPC. Ngoài ra gRPC cũng  hỗ trợ xác thực cho mỗi lệnh gọi   gRPC, để việc quản lý quyền có thể thực hiện trên các kết nối khác nhau dựa trên user token.
 
 Để hiện thực cơ chế xác thực cho từng phương thức gRPC, ta cần triển khai interface `grpc.PerRPCCredentials`:
 
@@ -214,6 +218,8 @@ func (a *Authentication) Auth(ctx context.Context) error {
 }
 ```
 
+Xem toàn bộ [>> mã nguồn](../examples/ch4/ch4.5/2-token-authentication/main.go)
+
 Công việc xác thực chi tiết chủ yếu được thực hiện trong phương thức `Authentication.Auth`. Đầu tiên, thông tin mô tả (meta infomation) được lấy từ biến ngữ cảnh  `ctx` thông qua `metadata.FromIncomeContext` và sau đó thông tin xác thực tương ứng được lấy ra để xác thực. Nếu xác thực thất bại, nó sẽ trả về lỗi thuộc kiểu `code.Unauthenticated`.
 
 ## 4.5.3 Interceptor
@@ -264,6 +270,8 @@ func filter(
 }
 ```
 
+[>> mã nguồn](../examples/ch4/ch4.5/3-interceptor/main.go)
+
 Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong dự án mã nguồn mở grpc-ecosystem có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
 
 Một ví dụ về cách sử dụng chuỗi interceptor trong package go-grpc-middleware:
@@ -283,7 +291,7 @@ myServer := grpc.NewServer(
 
 Xem chi tiết: [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-middleware)
 
-## 4.5.4 Cùng tồn tại với các Web service
+## 4.5.4 gRPC kết hợp với Web service
 
 gRPC được xây dựng bên trên giao thức HTTP/2 nên chúng ta có thể đặt gRPC service vào các port giống  như một web service bình thường.
 
@@ -359,6 +367,8 @@ func main() {
     )
 }
 ```
+
+[>> mã nguồn](../examples/ch4/ch4.5/4-with-web-services/main.go)
 
 Hàm `if` đầu tiên để đảm bảo nếu HTTP không phải là phiên bản  HTTP/2 thì sẽ không hỗ trợ gRPC. Kế tiếp để xét nếu `Content-Type` ở header của request là  *"application/grpc"* thì thực thi lời gọi gRPC tương ứng (ở đây là `ServeHTTP`).
 
