@@ -1,6 +1,6 @@
 # 4.5 gRPC Nâng cao
 
-Các framework RPC cơ bản thì bảo mật và mở rộng thường gặp phải nhiều vấn đề. Phần này sẽ mô tả ngắn gọn cách xác thực an toàn bằng gRPC. Sau đó giới thiệu các tính năng interceptor thông qua gRPC và cách triển khai xác thực Token một cách tốt nhất, theo dõi cuộc gọi và bắt các Panic thông qua interceptor. Cuối cùng là cách gRPC service tương tác với các Web service khác và cùng phát triển như thế nào.
+Các framework RPC cơ bản thường gặp phải nhiều vấn đề về bảo mật và khả năng mở rộng. Phần này sẽ mô tả ngắn gọn một số cách xác thực an toàn bằng gRPC. Sau đó giới thiệu tính năng interceptor trên gRPC và cách triển khai cơ chế xác thực Token một cách tốt nhất, theo dõi các lời gọi RPC và bắt các Panic thông qua interceptor. Cuối cùng là cách gRPC service kết hợp với Web service khác như thế nào.
 
 ## 4.5.1 Xác thực qua chứng chỉ
 
