@@ -11,5 +11,5 @@ Hello: module
 init(ctxt: ref Draw->Context, args: list of string)
 {
 	sys = load Sys Sys->PATH;
-	sys->print("hello, world\n");
+	sys->print("hello world\n");
 }

@@ -5,7 +5,7 @@ func main() {
 	var done bool
 	
 	func setup() {
-		a = "hello, world"
+		a = "hello world"
 		done = true
 	}
 	

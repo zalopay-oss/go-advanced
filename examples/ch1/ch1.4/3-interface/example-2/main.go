@@ -13,5 +13,5 @@ func (s UpperString) String() string {
 }
 
 func main() {
-    fmt.Fprintln(os.Stdout, UpperString("hello, world"))
+    fmt.Fprintln(os.Stdout, UpperString("hello world"))
 }

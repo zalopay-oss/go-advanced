@@ -3,7 +3,13 @@
 
 `Arrays` và một số cấu trúc dữ liệu liên quan khác được sử dụng thường xuyên trong các ngôn ngữ lập trình. Chỉ khi chúng không đáp ứng được yêu cầu chúng ta mới cân nhắc sử dụng `linked lists` (danh sách liên kết) và `hash tables` (bảng băm) hoặc nhiều cấu trúc dữ liệu tự định nghĩa phức tạp khác.
 
-`Arrays`, `strings` và `slices` trong ngôn ngữ Go là các cấu trúc dữ liệu liên quan mật thiết với nhau. Ba kiểu dữ liệu đó có cùng cấu trúc vùng nhớ lưu trữ bên dưới, và chỉ có những hành vi thể hiện ra bên ngoài khác nhau tùy thuộc vào ràng buộc ngữ nghĩa. Đầu tiên, trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được xử lý toàn bộ, có thể hiểu là khi đó chúng được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó - khác với kiểu truyền tham khảo. Bên dưới dữ liệu của ngôn ngữ Go, `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string không được phép chỉnh sửa. Phép gán string chỉ đơn giản là sao chép hai thành phần đó là con trỏ tới vùng nhớ của `string` và độ dài `string`, mà không phải sao chép toàn bộ string. `Slices` thì phức tạp hơn, cấu trúc của chúng cũng như `string`, tuy nhiên việc giới hạn chỉ-đọc như string được lược bỏ, mỗi slice có thêm hai thông tin là `len` (độ dài) và `capacity` (sức chứa). Phép gán của slice và khi truyền slice như tham số của hàm thì thông tin về header của slice sẽ được xử lý theo giá trị. Bởi vì slice header chứa con trỏ đến dữ liệu bên dưới, phép gán sẽ không gây ra việc sao chép toàn bộ dữ liệu. Trong thực tế, phép gán trong Go và quy luật truyền tham số hàm trong Go rất đơn giản. Ngoại trừ hàm `closure` có tham khảo tới biến toàn cục bên ngoài, thì hầu hết những phép gán và truyền tham số khác được truyền bằng giá trị. Để hiểu được ba cách để xử lý arrays, strings và slices cần phải hiểu chi tiết tầng lưu trữ bên dưới của chúng.
+`Arrays`, `strings` và `slices` trong ngôn ngữ Go là các cấu trúc dữ liệu liên quan mật thiết với nhau. Ba kiểu dữ liệu đó có cùng cấu trúc vùng nhớ lưu trữ bên dưới, và chỉ có những hành vi thể hiện ra bên ngoài khác nhau tùy thuộc vào ràng buộc ngữ nghĩa.
+
+Đầu tiên, trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được xử lý toàn bộ, có thể hiểu là khi đó chúng được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó - khác với kiểu truyền tham khảo. 
+
+Bên dưới dữ liệu của ngôn ngữ Go, `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string không được phép chỉnh sửa. Phép gán string chỉ đơn giản là sao chép hai thành phần đó là con trỏ tới vùng nhớ của `string` và độ dài `string`, mà không phải sao chép toàn bộ string. 
+
+`Slices` thì phức tạp hơn, cấu trúc của chúng cũng như `string`, tuy nhiên việc giới hạn chỉ-đọc như string được lược bỏ, mỗi slice có thêm hai thông tin là `len` (độ dài) và `capacity` (sức chứa). Phép gán của slice và khi truyền slice như tham số của hàm thì thông tin về header của slice sẽ được xử lý theo giá trị. Bởi vì slice header chứa con trỏ đến dữ liệu bên dưới, phép gán sẽ không gây ra việc sao chép toàn bộ dữ liệu. Trong thực tế, phép gán trong Go và quy luật truyền tham số hàm trong Go rất đơn giản. Ngoại trừ hàm `closure` có tham khảo tới biến toàn cục bên ngoài, thì hầu hết những phép gán và truyền tham số khác được truyền bằng giá trị. Để hiểu được ba cách để xử lý arrays, strings và slices cần phải hiểu chi tiết tầng lưu trữ bên dưới của chúng.
 
 ## 1.3.1 Array
 
@@ -192,7 +198,7 @@ type StringHeader struct {
 
 Cấu trúc của string chứa hai phần thông tin: đầu tiên là con trỏ array tới địa chỉ chứa string, thứ hai là chiều dài của string. Một string thực sự là một cấu trúc, do đó phép gán string thực chất là việc sao chép cấu trúc `reflect.StringHeader`, và không gây ra việc sao chép bên dưới phần dữ liệu. `[2]string`, cấu trúc bên dưới string được đề cập ở chương trước là `[2]reflect.StringHeader` cũng giống với cấu trúc dưới đây. 
 
-Chúng ta có thể thấy cấu trúc vùng nhớ tương ứng với dòng string "Hello, world" là 
+Chúng ta có thể thấy cấu trúc vùng nhớ tương ứng với dòng string "Hello World" là 
 
 <p align="center" width="600">
 <img src="../images/ch1-8-string-1.ditaa.png">
@@ -200,11 +206,11 @@ Chúng ta có thể thấy cấu trúc vùng nhớ tương ứng với dòng str
 <span>Hình 1-8 String layout</span>
 </p>
 
-Phân tích ra chúng ta có thể thấy rằng bên dưới dòng chữ "Hello, world" trong string chính xác là một array như sau
+Phân tích ra chúng ta có thể thấy rằng bên dưới dòng chữ "Hello World" trong string chính xác là một array như sau
 
 ```go
 var  data = [...] byte {
-    'H', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd',
+    'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd',
 }
 ```
 
@@ -214,11 +220,11 @@ var  data = [...] byte {
 Mặc dù string không phải là slice nhưng nó cũng hỗ trợ thao tác (slicing) cắt. Một vài phần của vùng nhớ cũng được truy cập bên dưới slice tại một số nơi khác nhau.
 
 ```go
-s := "hello, world"
+s := "hello world"
 hello := s[:5]
-world := s[7:]
-s1 := "hello, world"[:5]
-s2 := "hello, world"[7:]
+world := s[6:]
+s1 := "hello world"[:5]
+s2 := "hello world"[6:]
 ```
 
 [>> mã nguồn](../examples/ch1/ch1.3/2-strings/example-1/main.go)
@@ -271,7 +277,7 @@ fmt.Println("\xe7\x95\x8c")
 </p>
 
 
-Vì phần tử của string có thể  là những byte nhị phân, nên có thể bắt gặp một số trường hợp các kí tự UTF8 sẽ không được mã hóa chuẩn xác. Nếu bạn phát hiện được trường hợp nào mà UTF8 không encoded (mã hóa) đúng, một kí tự Unicode đặt biệt sẽ được in ra là 'uFFFD'. Kí tự này sẽ trông khác nhau ở những phầm mềm khác nhau. Thường thì kí tự này là một hình tứ giác hoặc kim cương màu đen, ở giữa chứa dấu hỏi.
+Vì phần tử của string có thể  là những byte nhị phân, nên có thể bắt gặp một số trường hợp các kí tự **UTF8** sẽ không được mã hóa chuẩn xác. Nếu bạn phát hiện được trường hợp nào mà UTF8 không encoded (mã hóa) đúng, một kí tự Unicode đặt biệt sẽ được in ra là `uFFFD` Kí tự này sẽ trông khác nhau ở những phầm mềm khác nhau. Thường thì kí tự này là một hình tứ giác hoặc kim cương màu đen, ở giữa chứa dấu hỏi.
 
 Trong chuỗi sau, chúng ta sẽ cố tình làm hỏng byte thứ hai và thứ ba của ký tự đầu tiên, do đó, ký tự đầu tiên sẽ được in là "�", byte thứ hai và thứ ba sẽ bị phớt lờ, tiếp theo là "abc" Vẫn có thể giải mã in bình thường (mã hóa lỗi không lan truyền ngược là một trong những tính năng tuyệt vời của mã hóa UTF8)
 
@@ -758,4 +764,4 @@ Cách ép kiểu đầu tiên ban đầu sẽ chuyển địa chỉ bắt đầu
 
 Cách chuyển đổi thứ hai sẽ chứa hai kiểu dữ liệu về thông tin header của slice và bên dưới cấu trúc `reflect.SliceHeader` của thông tin header sẽ ứng với cấu trúc slice, sau đó thông tin sẽ được cập nhật cấu trúc, sau đó hiện thực biến `a` ứng với kiểu `[]float64` bởi cấu trúc `[]int`. Đây là phép chuyển đổi kiểu của slice.
 
-Thông qua việc benmarking, chúng ta có thể thấy rằng hiệu suất của việc sắp xếp `sort.Ints` của kiểu `[]int` sẽ tốt hơn là `sort.Float64s`. Tuy nhiên, bạn phải chú ý rằng, tiền đề của phương pháp đó, sẽ đảm bảo rằng `[]float64` sẽ không có dấu phẩy động chính tắc như NaN và Inf (vì NaN không thể sắp xếp theo số đấu chấm động, dương 0 và âm 0 bằng nhau, nhưng không có trường hợp nào như vậy trong số nguyên).
+Thông qua việc benchmark, chúng ta có thể thấy rằng hiệu suất của việc sắp xếp `sort.Ints` của kiểu `[]int` sẽ tốt hơn là `sort.Float64s`. Tuy nhiên, bạn phải chú ý rằng, tiền đề của phương pháp đó, sẽ đảm bảo rằng `[]float64` sẽ không có dấu phẩy động chính tắc như NaN và Inf (vì NaN không thể sắp xếp theo số đấu chấm động, dương 0 và âm 0 bằng nhau, nhưng không có trường hợp nào như vậy trong số nguyên).
