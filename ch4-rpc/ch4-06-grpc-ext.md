@@ -215,7 +215,7 @@ service RestService {
 
 [>> mã nguồn](../examples/ch4/ch4.6/rest/helloworld.proto)
 
-Đầu tiên chúng ta sẽ định nghĩa các phương thức Post và Get cho gRPC, và sau đó chúng ta sẽ thêm vào phần thông tin liên quan đến routing trong phương thức tương ứng qua cú pháp meta-extension. Đường dẫn "/get/{value}" sẽ tương ứng với phương thức GET và `{value}` tương ứng với một số thành viên trong parameter, kết quả có thể được trả về theo định dạng json. Phương thức Post sẽ tương ứng với đường dẫn "/post" và phần thân chứa thông tin về request cũng định dạng theo kiểu json.
+Đầu tiên chúng ta sẽ định nghĩa các phương thức POST và GET cho gRPC, và sau đó chúng ta sẽ thêm vào phần thông tin liên quan đến routing trong phương thức tương ứng qua cú pháp meta-extension. Đường dẫn "/get/{value}" sẽ tương ứng với phương thức GET và `{value}` tương ứng với một số thành viên trong parameter, kết quả có thể được trả về theo định dạng json. Phương thức POST sẽ tương ứng với đường dẫn "/post" và phần thân chứa thông tin về request cũng định dạng theo kiểu json.
 
 Sau đó chúng ta cài đặt plugin `protoc-gen-grpc-gateway` với những lệnh sau:
 
