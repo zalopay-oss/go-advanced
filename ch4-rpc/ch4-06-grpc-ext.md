@@ -71,7 +71,7 @@ var E_DefaultInt = &proto.ExtensionDesc{
 
 Chúng ta có thể parse out phần mở rộng của option được định nghĩa trong mỗi thành viên của Message tại thời điểm thực thi bởi kiểu `reflection`, và sau đó parse out gía trị mặc định mà chúng ta đã định nghĩa sẵn từ những thông tin liên quan khác cho phần mở rộng.
 
-Trong cộng đồng opensource, `github.com/mwitkow/go-proto-validators` đã hiện thực hàm validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới
+Trong cộng đồng Open Source, `github.com/mwitkow/go-proto-validators` đã hiện thực hàm validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới
 
 ```
 $ go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
@@ -175,7 +175,7 @@ Thông qua hàm `validation` được sinh ra, chúng sẽ được kết hợp 
 
 ## 4.6.2 REST interface
 
-gRPC service thường được dùng trong việc giao tiếp giữa các cluster trong hệ thống. Nếu một service được yêu cầu phải giao tiếp với bên ngoài, thì thường một REST interface sẽ được sinh ra để làm việc đó. Để thuận tiện, phía front-end qua Javascript và phía back-end sẽ giao tiếp với nhau thông qua REST interface. Cộng đồng opensource đã hiện thực project với tên gọi là grpc-gateway, nó có khả năng chuyển đổi những gRPC service thành những REST service.
+gRPC service thường được dùng trong việc giao tiếp giữa các cluster trong hệ thống. Nếu một service được yêu cầu phải giao tiếp với bên ngoài, thì thường một REST interface sẽ được sinh ra để làm việc đó. Để thuận tiện, phía front-end qua Javascript và phía back-end sẽ giao tiếp với nhau thông qua REST interface. Cộng đồng opensource đã hiện thực project với tên gọi là grpc-gateway, nó giúp chúng ta chuyển các yêu cầu REST Http thành các yêu cầu gRPC HTTP2.
 
 Nguyên tắc hoạt động bên dưới của grpc-gateway sẽ như sau:
 
@@ -247,8 +247,6 @@ func RegisterRestServiceHandlerFromEndpoint(
 ```
 
 [>> mã nguồn](../examples/ch4/ch4.6/rest/helloworld.pb.gw.go)
-
-
 
 Hàm `RegisterRestServiceHandlerFromEndpoint` được dùng để chuyển tiếp những request được định nghĩa trong REST interface đến gRPC service thực sự. Sau khi registering the route handle, chúng ta sẽ bắt đầu web service.
 
@@ -325,4 +323,3 @@ Sau đó file `hello.swagger.json` sẽ được sinh ra. Trong trường hợp 
 ## 4.6.3 Nginx
 
 Phiên bản [Nginx](https://www.nginx.com/) hỗ trợ `gRPC`. Bên dưới back-end của nhiều gRPC services có thể được tổng hợp trong một Nginx service thông qua Nginx. Cùng một thời điểm, Nginx sẽ hỗ trợ khả năng register nhiều back-end tới cùng gRPC service, chúng sẽ làm cho việc hỗ trợ load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
-
