@@ -2,6 +2,8 @@
 
 ## Giới thiệu
 
+Cập nhật sau.
+
 ## Mục tiêu
 
 Chúng tôi thực hiện bộ tài liệu này với mục tiêu:
@@ -32,17 +34,18 @@ Các bạn có thể đóng góp bằng cách:
 
 ## Nhóm phát triển
 
+
 Dự án này được phát triển bởi các thành viên sau đây. 
 
-| [<img src="https://avatars1.githubusercontent.com/u/3270746?s=460&v=4" width="100px;"/><br /><sub><b>Anh Le (Andy)</b></sub>](https://github.com/anhldbk) | [<img src="https://avatars1.githubusercontent.com/u/38773351?s=460&v=4" width="100px;"/><br /><sub><b>AJPham</b></sub>](https://github.com/phamtai97) | [<img src="https://avatars1.githubusercontent.com/u/26034284?s=460&v=4" width="100px;"/><br /><sub><b>thinhda</b></sub>](https://github.com/thinhdanggroup) | [<img src="https://avatars3.githubusercontent.com/u/10187757?s=460&v=4" width="100px;"/><br /><sub><b>trungdv</b></sub>](https://github.com/dvt1996) | [<img src="https://avatars2.githubusercontent.com/u/23535926?s=460&v=4" width="100px;"/><br /><sub><b>Quoc Anh</b></sub>](https://github.com/quocanh1897) | [<img src="https://avatars2.githubusercontent.com/u/32214488?s=400&v=4" width="100px;"/><br /><sub><b>Nguyễn Huỳnh Thoại</b></sub>](https://github.com/thoainguyen) |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://avatars1.githubusercontent.com/u/38773351?s=460&v=4" width="100px;"/><br /><sub><b>AJPham</b></sub>](https://github.com/phamtai97) | [<img src="https://avatars1.githubusercontent.com/u/26034284?s=460&v=4" width="100px;"/><br /><sub><b>thinhda</b></sub>](https://github.com/thinhdanggroup) | [<img src="https://avatars3.githubusercontent.com/u/10187757?s=460&v=4" width="100px;"/><br /><sub><b>trungdv</b></sub>](https://github.com/dvt1996) | [<img src="https://avatars2.githubusercontent.com/u/23535926?s=460&v=4" width="100px;"/><br /><sub><b>Quoc Anh</b></sub>](https://github.com/quocanh1897) | [<img src="https://avatars2.githubusercontent.com/u/32214488?s=400&v=4" width="100px;"/><br /><sub><b>Nguyễn Huỳnh Thoại</b></sub>](https://github.com/thoainguyen) | [<img src="https://avatars1.githubusercontent.com/u/3270746?s=460&v=4" width="100px;"/><br /><sub><b>Anh Le (Andy)</b></sub>](https://github.com/anhldbk) |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
 ## Liên hệ
 
-- Gmail:
+- Gmail: cập nhật sau.
 
-- Facebook:
+- Facebook: cập nhật sau.
 
-- Blog:
+- Blog: cập nhật sau.
 
 - Bugs: [issues]()
