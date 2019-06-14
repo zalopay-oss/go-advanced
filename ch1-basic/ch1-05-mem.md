@@ -12,13 +12,13 @@ Goroutine là một đơn vị đồng thời của ngôn ngữ Go. Việc khở
 
 Đầu tiên kernel thread sẽ có một kích thước vùng nhớ stack cố định (thông thường vào khoảng 2MB). Vùng nhớ stack chủ yếu được dùng để lưu trữ những tham số và biến cục bộ khi chúng ta gọi đệ quy. Kích thước cố định của stack sẽ dẫn đến hai vấn đề, một là phần lớn vùng nhớ bị lãng phí khi khởi tạo nhiều thread nhưng thực tế chỉ cần một không gian stack nhỏ và vấn đề khác là rủi ro của việc stack overflow trong khi một số ít thread cần một lượng lớn không gian stack. Giải pháp cho vấn đề này chính là hoặc giảm kích thước không gian stack cấp phát cho mỗi thread và tăng không gian vùng nhớ sử dụng, hoặc tăng kích thước của stack để cho phép hàm đệ quy được gọi sâu hơn, nhưng cả hai cách này không có thể được kết hợp cùng lúc. Thay vì đó một gouroutine sẽ được bắt đầu bằng một vùng nhớ nhỏ (khoảng 2KB hoặc 4KB), và khi nó chạm ngưỡng đệ quy sâu hơn, không gian stack hiện tại là không đủ khoảng trống. Goroutine sẽ tự động tăng giảm không gian stack khi cần (kích thước tối đa của stack có thể được đạt tới 1GB). Bởi vì chi phí của việc khởi tạo là nhỏ, chúng ta có thể dễ dàng giải phóng hàng ngàn goroutines.
 
-Bộ thực thi Go có một bộ đồng thời cho riêng nó, nó dùng một số kĩ thuật để ghép kênh M Goroutines trên N thread của hệ thống. Cơ chế định thời goroutine tương tự với kernel, nhưng bộ định thời  chỉ tập trung vào việc Goroutines trên các chương trình Go riêng biệt. Goroutine sử dụng cơ chế semi-preemptive cooperative scheduling, nó có thể gây ra việc định thời khi mà chương trình goroutines hiện tại bị block, Cùng thời điểm đó. nó sẽ switch sang user mode. Bộ định thời chỉ lưu trữ những thanh ghi cần thiết cho một vài hàm đặc biệt, và chi phí chuyển ngữ cảnh của các goroutines sẽ thấp hơn nhiều so với việc chuyển ngữ cảnh của thread hệ thống. Bộ runtime có một biến là `runtime.GOMAXPROCS` nó sẽ điều khiển số lượng system thread hiện thời chạy trên cơ chế non-blocking Goroutine thông thường.
+Bộ thực thi Go có một bộ đồng thời cho riêng nó, nó dùng một số kĩ thuật để ghép kênh M Goroutines trên N thread của hệ thống. Cơ chế định thời goroutine tương tự với kernel, nhưng bộ định thời  chỉ tập trung vào việc Goroutines trên các chương trình Go riêng biệt. Goroutine sử dụng cơ chế `semi-preemptive cooperative scheduling`, nó có thể gây ra việc định thời (scheduler) khi mà chương trình goroutines hiện tại bị block, Cùng thời điểm đó. nó sẽ switch sang user mode. Bộ định thời chỉ lưu trữ những thanh ghi cần thiết cho một vài hàm đặc biệt, và chi phí chuyển ngữ cảnh của các goroutines sẽ thấp hơn nhiều so với việc chuyển ngữ cảnh của thread hệ thống. Bộ runtime có một biến là `runtime.GOMAXPROCS` nó sẽ điều khiển số lượng system thread hiện thời chạy trên cơ chế non-blocking Goroutine thông thường.
 
 Bắt đầu một goroutine trong go không chỉ là gọi một hàm, mà là kèm theo chi phí của việc định thời giữa các Goroutines. Những đặc điểm đó có sự ảnh hưởng lớn đến sự phổ biến và phát triển của lập trình đồng thời.
 
 ## 1.5.2 Toán tử Atomic
 
-Tác vụ atomic là những tác vụ nhỏ nhất và không thể song song được trong lập trình đồng thời. Về mặt chung, nếu nhiều tác vụ được thực thi đồng thời trên cùng một tài nguyên là atomic, sau đó nhiều nhất một thực thể có thể truy cập vào một tài nguyên. Từ góc độ thread, những thread khác không thể cùng truy cập vào tài nguyên. Tác vụ atomic trong mô hình lập trình đồng thời sẽ không khác nhau nhiều với mô hình single thread, và sự tương thích này đối với việc chia sẻ resource sẽ được đảm bảo.
+Tác vụ atomic là những tác vụ nhỏ nhất và không thể chạy song song được với các tác vụ khác waptrong lập trình đồng thời. Về mặt chung, nếu nhiều tác vụ được thực thi đồng thời trên cùng một tài nguyên là atomic, sau đó nhiều nhất một thực thể có thể truy cập vào một tài nguyên. Từ góc độ thread, những thread khác không thể cùng truy cập vào tài nguyên. Tác vụ atomic trong mô hình lập trình đồng thời sẽ không khác nhau nhiều với mô hình single thread, và sự tương thích này đối với việc chia sẻ resource sẽ được đảm bảo.
 Thông thường sẽ có một vài lệnh CPU đặc biệt giúp bảo vệ vùng nhớ này. chúng ta có thể dùng `sync.Mutex` để đạt được điều đó.
 
 ```go
@@ -89,8 +89,7 @@ func main() {
 
 Hàm `atomic.AddUint64` khi được gọi sẽ đảm bảo rằng biến `total` được đọc và cập nhật và lưu trữ như một tác vụ đơn nguyên, do đó việc truy cập bởi nhiều thread được an toàn.
 
-
-Tác vụ đơn nguyên với mutex có thể đạt được một cách hiệu quả trong một chế độ duy nhất. Phi phí của mutex sẽ cao hơn nhiều so với một biến interger bình thường. bạn có thể cộng một số numeric với một hiệu suất cao, để thay thể hiệu suất bằng việc làm giảm số lượng mutex cùng lock bởi việc bảo vệ tác vụ đơn nguyên.
+Tác vụ đơn nguyên với mutex có thể đạt được một cách hiệu quả trong một chế độ duy nhất. Chi phí của mutex sẽ cao hơn nhiều so với một biến interger bình thường. bạn có thể cộng một số numeric với một hiệu suất cao, để thay thể hiệu suất bằng việc làm giảm số lượng mutex cùng lock bởi việc bảo vệ tác vụ đơn nguyên.
 
 ```go
 type singleton struct {}
@@ -194,14 +193,14 @@ for i := 0; i < 10; i++ {
 
 ## 1.5.3 Mô hình thống nhất chuỗi vùng nhớ
 
-Nếu bạn muốn đồng bộ dữ liệu giữa các thread, tác vụ atomic sẽ cung câp một vài cơ chế đồng bộ để giúp cho người lập trình, Tuy nhiên, sự đảm bảo đó cũng có một tiền đề: một chuỗi mô hình  consistency memory (` sequential consistency memory model`) . Để hiểu thứ tự của chúng, hãy làm một ví dụ nhỏ
+Nếu bạn muốn đồng bộ dữ liệu giữa các thread, tác vụ atomic sẽ cung cấp một vài cơ chế đồng bộ để giúp cho người lập trình, Tuy nhiên, sự đảm bảo đó cũng có một tiền đề: một chuỗi mô hình  consistency memory (`sequential consistency memory model`) . Để hiểu thứ tự của chúng, hãy làm một ví dụ nhỏ
 
 ```go
 var a string
 var done bool
 
 func setup() {
-    a = "hello, world"
+    a = "hello world"
     done = true
 }
 
@@ -225,7 +224,7 @@ Do đó, nếu `a=1;b=2` hai mệnh đề trên sẽ được thực hiện tu�
 
 ```go
 func main() {
-    go println("你好, 世界");
+    go println("Hello World");
 }
 ```
 
@@ -238,7 +237,7 @@ func main() {
     done := make(chan int)
 
     go func(){
-        println("你好, 世界")
+        println("Hello World")
         done <- 1
     }()
 
@@ -258,7 +257,7 @@ func main() {
 
     mu.Lock()
     go func(){
-        println("你好, 世界")
+        println("Hello World")
         mu.Unlock()
     }()
 
@@ -269,7 +268,7 @@ func main() {
 [>> mã nguồn](../examples/ch1/ch1.5/3-sequence-consistency-mem-model/example-9/main.go)
 
 
-Có thể xác định rằng, bên dưới việc thực thi `mutex.UnLock()` sẽ phải là `println("你好, 世界")` hoàn thành trước. (một số thread thỏa mãn thứ tự nhất quán), và trong main, hàm thứ hai sẽ `mu.Lock()` sẽ phải là `mu.UnLock()` xảy ra bên dưới background thread (được đảm bảo bởi `sync.Mutex`) và bên dưới nền sẽ in ra công việc được hoàn thành một cách thành công.
+Có thể xác định rằng, bên dưới việc thực thi `mutex.UnLock()` sẽ phải là `println("Hello World")` hoàn thành trước. (một số thread thỏa mãn thứ tự nhất quán), và trong main, hàm thứ hai sẽ `mu.Lock()` sẽ phải là `mu.UnLock()` xảy ra bên dưới background thread (được đảm bảo bởi `sync.Mutex`) và bên dưới nền sẽ in ra công việc được hoàn thành một cách thành công.
 
 ## 1.5.4 Khởi tạo chuỗi
 
@@ -303,7 +302,7 @@ func f() {
 }
 
 func hello() {
-    a = "hello, world"
+    a = "hello world"
     go f()
 }
 ```
@@ -321,7 +320,7 @@ var done = make(chan bool)
 var msg string
 
 func aGoroutine() {
-    msg = "你好, 世界"
+    msg = "Hello World"
     done <- true
 }
 
@@ -335,7 +334,7 @@ func main() {
 [>> mã nguồn](../examples/ch1/ch1.5/6-channel-base-com/example-11/main.go)
 
 
-Cũng đảm bảo rằng, khi in dòng "hello, world". Vì thread nền sẽ tiếp nhận trước khi bắt đầu `main` thread là `done <- true` trước khi gửi `<-done`, sẽ đảm bảo rằng `msg = "hello, world"` được thực thi, do đó chuỗi `println(msg)` sẽ được gán rồi. Tóm lại, bên thread nền sẽ đầu tiên ghi vào biến `msg`, sau đó sẽ nhận tín hiệu từ `done`, theo sau bởi `main` là một thread để truyền tín hiệu tương ứng với lần thực thi hàm `println(msg)` kết thúc. Tuy nhiên, nếu Channel được buffered (ví dụ, `done = make(chan bool, 1)` ), main thread sẽ nhận tác vụ `done <- true` sẽ blocked cho đến khi thread nền nhận, và chương trình sẽ không đảm bảo in ra dòng chữ "hello, world".
+Cũng đảm bảo rằng, khi in dòng "hello world". Vì thread nền sẽ tiếp nhận trước khi bắt đầu `main` thread là `done <- true` trước khi gửi `<-done`, sẽ đảm bảo rằng `msg = "hello world"` được thực thi, do đó chuỗi `println(msg)` sẽ được gán rồi. Tóm lại, bên thread nền sẽ đầu tiên ghi vào biến `msg`, sau đó sẽ nhận tín hiệu từ `done`, theo sau bởi `main` là một thread để truyền tín hiệu tương ứng với lần thực thi hàm `println(msg)` kết thúc. Tuy nhiên, nếu Channel được buffered (ví dụ, `done = make(chan bool, 1)` ), main thread sẽ nhận tác vụ `done <- true` sẽ blocked cho đến khi thread nền nhận, và chương trình sẽ không đảm bảo in ra dòng chữ "hello world".
 
 Với `buffered Channel`, đầu tiên sẽ hoàn toàn nhận `K` tác vụ trên channel xảy ra trước khi `K+C` tác vụ gửi được hoàn thành, với `C` là kích thước của buffer Channel, trước khi truyền đến Channel được hoàn thành.
 
@@ -367,7 +366,7 @@ Như chúng ta phân tích trước, đoạn code sau sẽ không đảm bảo t
 
 ```go
 func main(){
-    go println("Hello, World")
+    go println("Hello World")
 }
 ```
 
@@ -375,7 +374,7 @@ Chỉ liên hệ với Go, bạn có thể  đảm bảo rằng kết quả sẽ
 
 ```go
 func main(){
-    go println("hello, world")
+    go println("hello world")
     time.Sleep(time.Second)
 }
 ```

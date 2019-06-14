@@ -12,7 +12,7 @@ if v, ok := m["key"]; ok {
 }
 ```
 
-Nhưng thông thường sẽ có nhiều hơn một nguyên nhân gây ra lỗi, và nhiều lần user muốn biến nhiều về lỗi đó. Nếu bạn chỉ sử dụng một biến boolean, thì bạn sẽ không giải quyết được yêu cầu trên. trong ngôn ngữ C, một số nguyên `errno` được sử dụng mặc định để truyền tải lỗi, do đó bạn có thể định nghĩa nhiều loại error theo nhu cầu. Trong ngôn ngữ Go, có thể gọi `syscall.Errno` là một `errno` ứng với mã lỗi trong ngôn ngữ C. `syscall` interface trong package, nếu có một error trả về, bên dưới cũng phải là `syscall.Errno` kiểu của error.
+Nhưng thông thường sẽ có nhiều hơn một nguyên nhân gây ra lỗi, và nhiều lần user muốn biết nhiều về lỗi đó. Nếu bạn chỉ sử dụng một biến boolean, thì bạn sẽ không giải quyết được yêu cầu trên. trong ngôn ngữ C, một số nguyên `errno` được sử dụng mặc định để truyền tải lỗi, do đó bạn có thể định nghĩa nhiều loại error theo nhu cầu. Trong ngôn ngữ Go, có thể gọi `syscall.Errno` là một `errno` ứng với mã lỗi trong ngôn ngữ C. `syscall` interface trong package, nếu có một error trả về, bên dưới cũng phải là `syscall.Errno` kiểu của error.
 
 Ví dụ, khi chúng ta sửa đổi `syscall` để thay đổi chế độ của một file thông qua interface của package đó, nếu chúng ta bắt gặp một error, chúng ta có thể xử lý chúng bởi việc gây ra `err` trong phần `assertion` như là `syscall.Errno` là một kiểu error.
 
@@ -23,7 +23,7 @@ if err != nil {
 }
 ```
 
-Chúng ta có thể xa hơn chứa true error type thông qua một loại truy vấn kiểu hoặc assertions, do đó chúng ta có thể lấy nhiều thông tin về loại error. Tuy nhiên, tổng quát, chúng ta không quan tâm về cách mà error được thể hiện bên dưới. Chúng ta có thể chỉ cần biết rằng đó là một lỗi. Khi chúng ta trả về một giá trị error không phải `nil`, chúng ta có thể lấy một thông điệp error bởi việc gọi error interface type hoặc phương thức `Error`.
+Xa hơn nữa, chúng ta có thể chứa true error type thông qua một loại truy vấn kiểu hoặc assertions, do đó chúng ta có thể lấy nhiều thông tin về loại error. Tuy nhiên, tổng quát, chúng ta không quan tâm về cách mà error được thể hiện bên dưới. Chúng ta có thể chỉ cần biết rằng đó là một lỗi. Khi chúng ta trả về một giá trị error không phải `nil`, chúng ta có thể lấy một thông điệp error bởi việc gọi error interface type hoặc phương thức `Error`.
 
 Trong ngôn ngữ Go, errors được xem xét như là một kết quả đã được đoán trước; ngoại lệ là một kết quả không thể đoán trước được, và một ngoại lệ có thể chỉ ra rằng một bug trong chương trình hoặc một vấn đề nào đó không được kiểm soát, nó sẽ cho phép user có thể quan tâm về những vấn đề về business liên quan đến việc xử lý lỗi.
 
@@ -291,7 +291,7 @@ func panic (interface{})
 func recover() interface{}
 ```
 
-Luồng thông thường trong ngôn ngữ Go là kết quả trả về của việc thực thi lệnh return. Đó không phải là một exception trong luồng, do đó lường thực thi của ngoại lệ `recover` sẽ catch function trong process sẽ luôn luôn trả về  `nil`. Cái khác là ngoại lệ exception. Khi một lời gọi `panic` sẽ ném ra một ngoại lệ, function sẽ kết thúc việc thực thi lệnh con, nhưng vì lời gọi registered `defer` sẽ vấn được thực thi một cách bình thường và sau đó trả về caller. Caller trong hàm hiện tại, bởi vì trạng thái xử lý ngoại lệ chưa được bắt, `panic` sẽ tương tự như hành vi gọi hàm một cách trực tiếp. Khi một ngoại lệ xảy ra, nếu `defer` được thực thi lời gọi `recover`, nó có thể được bắt bằng việc trigger tham số  `panic, và trả về luồng thực thi bình thường.
+Luồng thông thường trong ngôn ngữ Go là kết quả trả về của việc thực thi lệnh return. Đó không phải là một exception trong luồng, do đó luồng thực thi của ngoại lệ `recover` sẽ catch function trong process sẽ luôn luôn trả về  `nil`. Cái khác là ngoại lệ exception. Khi một lời gọi `panic` sẽ ném ra một ngoại lệ, function sẽ kết thúc việc thực thi lệnh con, nhưng vì lời gọi registered `defer` sẽ vấn được thực thi một cách bình thường và sau đó trả về caller. Caller trong hàm hiện tại, bởi vì trạng thái xử lý ngoại lệ chưa được bắt, `panic` sẽ tương tự như hành vi gọi hàm một cách trực tiếp. Khi một ngoại lệ xảy ra, nếu `defer` được thực thi lời gọi `recover`, nó có thể được bắt bằng việc trigger tham số  `panic, và trả về luồng thực thi bình thường.
 
 `defer` sẽ thực hiện lệnh gọi `recover` nó thường gây khó khăn cho những người mới bắt đầu.
 
@@ -309,9 +309,9 @@ func main() {
 }
 ```
 
-Không trong hai lời gọi trên sẽ có thể catch exceptions. Khi lời gọi recover đầu tiên được thực thi, hàm sẽ phải được trong một thứ tự thực thi bình thường, tại một điểm mà recover có thể trả về `nil`. Khi mà một exception xảy ra, lời gọi recover thứ hai sẽ không làm thay đổi việc thực thi, bởi vị lệnh gọi `panic` sẽ gây ra `defer` hàm sẽ trả về ngay lặp tức sau khi thực thi registered function.
+Cả hai lời gọi trên không có thể catch exceptions. Khi lời gọi recover đầu tiên được thực thi, hàm sẽ phải được trong một thứ tự thực thi bình thường, tại một điểm mà recover có thể trả về `nil`. Khi mà một exception xảy ra, lời gọi recover thứ hai sẽ không làm thay đổi việc thực thi, bởi vị lệnh gọi `panic` sẽ gây ra `defer` hàm sẽ trả về ngay lặp tức sau khi thực thi registered function.
 
-Trong thực tế, hàm `recover` sẽ có những yêu cầu nghiêm ngặt; chúng ta phải gọi lệnh `defer` để gọi chúng một cách trực tiếp từ hàm `recover`. Nếu hàm wrapper `defer` được gọi, `recover` sẽ catchup ngoại lệ sẽ bị fail. Ví dụ, thông thường chúng ta sẽ muốn gói hàm `MyRecover` và thêm những log cần thiết những thông tin bên trong, và sau đó gọi hàm `recover`. Đây là một hướng tiếp cận sai.
+Trong thực tế, hàm `recover` sẽ có những yêu cầu nghiêm ngặt: chúng ta phải gọi lệnh `defer` để gọi chúng một cách trực tiếp từ hàm `recover`. Nếu hàm wrapper `defer` được gọi, `recover` sẽ catchup ngoại lệ sẽ bị fail. Ví dụ, thông thường chúng ta sẽ muốn gói hàm `MyRecover` và thêm những log cần thiết những thông tin bên trong, và sau đó gọi hàm `recover`. Đây là một hướng tiếp cận sai.
 
 ```go
 func main() {
@@ -369,7 +369,7 @@ func main(){
 }
 ```
 
-Nó sẽ phải tách biết từ stack frame với một ngoại lệ bởi stack frame, do đó hàm `recover` sẽ có thể ném một ngoại lệ một cách bình thường. Hay nói cách khác, hàm `recover` sẽ bắt ngoại lệ  của mức trên gọi hàm stack frame (chỉ là một layer `defer` function)
+Nó sẽ phải tách biệt từ stack frame với một ngoại lệ bởi stack frame, do đó hàm `recover` sẽ có thể ném một ngoại lệ một cách bình thường. Hay nói cách khác, hàm `recover` sẽ bắt ngoại lệ  của mức trên gọi hàm stack frame (chỉ là một layer `defer` function)
 
 Dĩ nhiên, để tránh việc gọi `recover` không nhận ra được ngoại lệ, chúng ta nên tránh ném ra ngoại lệ `nil` như là một tham số.
 
@@ -426,4 +426,4 @@ func main {
 }
 ```
 
-Nhưng làm như vậy chạy ngược lại triết lý lập trình đơn giản và dễ hiểu của Go.
+Nhưng làm như vậy sẽ đi ngược lại với triết lý lập trình đơn giản và dễ hiểu của Go.

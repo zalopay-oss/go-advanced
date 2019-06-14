@@ -9,13 +9,13 @@ Trong lập trình đồng thời, việc truy cập đúng vào tài nguyên đ
 > Đừng giao tiếp bằng cách chia sẻ bộ nhớ, thay vào đó hãy chia sẻ bộ nhớ bằng cách giao tiếp.
 > Đừng giao tiếp thông qua bộ nhớ chia sẻ, nhưng hãy chia sẻ bộ nhớ thông qua giao tiếp.
 
-Đây là một cấp độ cao hơn của triết lý lập trình đồng thời (truyền các giá trị qua pipeline   luôn được Go khuyến nghị). Mặc dù các vấn đề tương tranh đơn giản như   tham chiếu đến biến đếm có thể được hiện thực bằng  *atomic operations* hoặc  *mutex lock*, nhưng việc kiểm soát truy cập thông qua Channel giúp cho code của chúng ta đúng và "sạch" hơn.
+Đây là một cấp độ cao hơn của triết lý lập trình đồng thời (truyền các giá trị qua pipeline   luôn được Go khuyến nghị). Mặc dù các vấn đề tương tranh đơn giản như   tham chiếu đến biến đếm có thể được hiện thực bằng  `atomic operations` hoặc `mutex lock`, nhưng việc kiểm soát truy cập thông qua Channel giúp cho code của chúng ta đúng và "sạch" hơn.
 
-## 1.6.1 Phiên bản đồng thời của *Hello world*
+## 1.6.1 Phiên bản đồng thời của *Hello World*
 
-Trước tiên, ta in ra "Hello world" trong Goroutine mới và đợi cho output của thread thread nền (chứ Goroutine này) kế thúc và thoát, chương trình với cơ chế đồng thời đơn giản này sẽ được thực thi.
+Trước tiên, ta in ra "Hello World" trong Goroutine mới và đợi cho output của thread nền (chứa Goroutine này) kết thúc và thoát, chương trình với cơ chế đồng thời đơn giản này sẽ được thực thi.
 
-Khái niệm cốt lõi của lập trình đồng thời là giao tiếp đồng bộ, nhưng có nhiều cách để đồng bộ hóa. Trước tiên chúng ta dùng `sync.Mutex` để giao tiếp đồng bộ với cơ chế mutex quen thuộc . Theo document, chúng ta không thể trực tiếp mở khóa `sync.Mutex` ở trạng thái đã mở khóa , điều này có thể gây ra runtime exceptions. Cách sau đây sẽ không thực thi bình thường được:
+Khái niệm cốt lõi của lập trình đồng thời là giao tiếp đồng bộ, nhưng có nhiều cách để đồng bộ hóa. Trước tiên chúng ta dùng `sync.Mutex` để giao tiếp đồng bộ với cơ chế mutex quen thuộc . Theo tài liệu của Golang, chúng ta không thể trực tiếp Unlock `sync.Mutex` khi nó đã ở trạng thái đã Unlock, điều này có thể gây ra runtime exceptions. Cách sau đây sẽ không thực thi bình thường được:
 
 [>> mã nguồn](../examples/ch1/ch1.6/1-hello-world-concurrent-ver/example-1/main.go)
 
@@ -345,7 +345,7 @@ Trong mô hình pub/sub, mỗi thông điệp được gửi tới nhiều subsc
 
 ## 1.6.4 Kiểm soát Concurrency Numbers
 
-Nhiều người dùng có xu hướng viết các chương trình đồng thời nhất có thể sau khi thích ứng với các tính năng đồng thời mạnh mẽ của Golang, vì điều này dường như cung cấp một hiệu suất tối đa. 
+Nhiều người dùng có xu hướng viết các chương trình có thể xử lý  đồng thời để tận dụng sức mạnh của Golang, vì điều này dường như cung cấp một hiệu suất tối đa.
 
 Tuy nhiên trong thực tế chúng ta cần kiểm soát mức độ đồng thời ở mức thích hợp, bởi vì nó không chỉ có thể bỏ bớt các ứng dụng/task, dự trữ một lượng tài nguyên của CPU, ta cũng có thể giảm mức tiêu thụ năng lượng để giảm bớt áp lực cho pin.
 
@@ -496,11 +496,11 @@ func main() {
 }
 ```
 
-Đầu tiên chúng ta gọi `GenerateNatural()` để tạo ra chuỗi số tự nhiên nguyên thủy nhất bắt đầu bằng 2. Sau đó bắt đầu một chu kỳ 100 lần lặp. Ở đầu mỗi lần lặp lặp, số đầu tiên trong channel phải là số nguyên tố. Ta đọc và in ra số này  trước. Sau đó, dựa trên chuỗi còn lại trong channel và lọc các số nguyên tố tiếp theo với các số nguyên tố hiện được trích xuất dưới dạng sàng. Các channel tương ứng với các sàng số nguyên tố khác nhau được kết nối thành chuỗi.
+Đầu tiên chúng ta gọi `GenerateNatural()` để tạo ra chuỗi số tự nhiên nguyên thủy nhất bắt đầu bằng 2. Sau đó bắt đầu một chu kỳ 100 lần lặp. Ở đầu mỗi lần lặp, số đầu tiên trong channel phải là số nguyên tố. Ta đọc và in ra số này  trước. Sau đó, dựa trên chuỗi còn lại trong channel và lọc các số nguyên tố tiếp theo với các số nguyên tố hiện được trích xuất dưới dạng sàng. Các channel tương ứng với các sàng số nguyên tố khác nhau được kết nối thành chuỗi.
 
 ## 1.6.7 Thoát khỏi  an toàn quá trình đồng thời
 
-Đôi khi chúng ta cần  goroutine   ngăn chặn những gì nó đang làm, đặc biệt là khi nó đang làm việc sai hướng. Golang không cung cấp cách chấm dứt trực tiếp Goroutine, vì điều này sẽ khiến biến chung được chia sẻ giữa các   goroutine ở trạng thái không xác định. Nhưng điều gì sẽ xảy ra nếu chúng ta muốn loại hai hoặc nhiều Goroutines?
+Đôi khi chúng ta cần thoát khỏi Goroutine đang được thực thi, đặc biệt là khi nó đang làm việc sai hướng. Golang không cung cấp cách chấm dứt trực tiếp Goroutine, vì điều này sẽ khiến biến chung được chia sẻ giữa các goroutine ở trạng thái không xác định. Nhưng điều gì sẽ xảy ra nếu chúng ta muốn loại hai hoặc nhiều Goroutines?
 
 Goroutines khác nhau trong Golang dựa vào các channel để giao tiếp và đồng bộ hóa. Để xử lý việc gửi hoặc nhận nhiều channel cùng một lúc, chúng ta cần sử dụng từ khóa `select` (từ khóa này hoạt động giống như một hàm `select` trong lập trình mạng ). Khi có nhiều nhánh khác nhau, `select` sẽ chọn một nhánh có sẵn ngẫu nhiên. Nếu không có nhánh có sẵn, nó sẽ chọn default, nếu không thì trạng thái block luôn được giữ.
 
@@ -557,7 +557,7 @@ func main() {
 }
 ```
 
-Chúng ta có thể dễ dàng thực hiện kiểm soát thoát Goroutine thông qua   nhánh `select` và  nhánh `default`:
+Chúng ta có thể dễ dàng thực hiện kiểm soát việc thoát Goroutine thông qua nhánh `select` và  nhánh `default`:
 
 [>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-2/main.go)
 
@@ -612,7 +612,7 @@ func main() {
 }
 ```
 
-Chúng ta sử dụng channel `cancel` để phát chỉ thị `close` đến nhiều Goroutine. Tuy nhiên, chương trình này vẫn chưa đủ mạnh: khi mỗi Goroutine nhận được lệnh thoát để thoát, nó thường thực hiện một số công việc dọn dẹp, nhưng việc dọn dẹp của exit không được đảm bảo hoàn thành, vì thread `main` không có cơ chế chờ mỗi công việc Goroutine thoát khỏi công việc của chúng. Ta có thể kết hợp `sync.WaitGroup` để cải thiện điều này:  
+Chúng ta sử dụng channel `cancel` để phát chỉ thị `close` đến nhiều Goroutine. Tuy nhiên, chương trình này vẫn chưa đủ mạnh: khi mỗi Goroutine nhận được lệnh thoát, nó thường thực hiện một số công việc dọn dẹp, nhưng việc dọn dẹp của exit không được đảm bảo hoàn thành, vì thread `main` không có cơ chế chờ mỗi công việc Goroutine thoát khỏi công việc của chúng. Ta có thể kết hợp `sync.WaitGroup` để cải thiện điều này:  
 
 [>> mã nguồn](../examples/ch1/ch1.6/7-concurrent-exit/example-4/main.go)
 

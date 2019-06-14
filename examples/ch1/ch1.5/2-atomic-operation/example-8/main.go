@@ -4,7 +4,7 @@ func main() {
 	done := make(chan int)
 
 	go func() {
-		println("你好, 世界")
+		println("Hello World")
 		done <- 1
 	}()
 

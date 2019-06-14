@@ -7,7 +7,7 @@ func f() {
 }
 
 func hello() {
-	a = "hello, world"
+	a = "hello world"
 	go f()
 }
 

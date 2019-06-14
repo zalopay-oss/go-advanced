@@ -16,5 +16,5 @@ func (p *UpperWriter) Write(data []byte) (n int, err error) {
 }
 
 func main() {
-    fmt.Fprintln(&UpperWriter{os.Stdout}, "hello, world")
+    fmt.Fprintln(&UpperWriter{os.Stdout}, "hello world")
 }

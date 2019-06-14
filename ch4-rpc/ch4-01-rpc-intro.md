@@ -2,9 +2,9 @@
 
 RPC là viết tắt của remote procedure call (lời gọi hàm từ xa) và nó là một cách thức giao tiếp giữa các node của distributed system (hệ thống phân tán). Trong lịch sử của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu giống như là IPC (inter process communication- giao tiếp giữa các tiến trình). Do đó, thư viện chuẩn của Go đã hỗ trợ phiên bản hiện thực RPC đơn giản, và chúng ta sẽ dùng chúng như là một đối tượng để học RPC.
 
-## 4.1.1 RPC phiên bản "Hello, World"
+## 4.1.1 RPC phiên bản "Hello World"
 
-Một nhánh hiện thực RPC của ngôn ngữ Go là `net/rpc`, nó sẽ nằm dưới đường dẫn của gói `net`. Do đó chúng ta có thể đoán được rằng gói RPC được hiện thực dựa trên gói `net`. Tại phần cuối của chương 1 phần "Cuộc cách mạng Hello, World", chúng ta đã hiện thực việc in ra một ví dụ mẫu dựa trên `http`. Bên dưới chúng ta sẽ thử hiện thực tương tự dựa trên `rpc`.
+Một nhánh hiện thực RPC của ngôn ngữ Go là `net/rpc`, nó sẽ nằm dưới đường dẫn của gói `net`. Do đó chúng ta có thể đoán được rằng gói RPC được hiện thực dựa trên gói `net`. Tại phần cuối của chương 1 phần "Cuộc cách mạng Hello World", chúng ta đã hiện thực việc in ra một ví dụ mẫu dựa trên `http`. Bên dưới chúng ta sẽ thử hiện thực tương tự dựa trên `rpc`.
 
 ```go
 type HelloService struct {}

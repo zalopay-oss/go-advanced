@@ -4,5 +4,5 @@
 #include <iostream>
 
 void SayHello() {
-	std::cout << "Hello, World!" << std::endl;
+	std::cout << "Hello World!" << std::endl;
 }

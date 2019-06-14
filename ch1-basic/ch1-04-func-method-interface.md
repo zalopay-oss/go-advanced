@@ -1,5 +1,5 @@
 # 1.4 Functions, Methods và Interfaces
-
+  
 Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function): hàm được đặt tên thường tương ứng với hàm cấp package (package function). Đây là trường hợp đặc biệt của hàm ẩn danh. Khi một hàm ẩn danh tham chiếu một biến trong phạm vi bên ngoài, nó sẽ trở thành hàm đóng. Các package function là cốt lõi của một ngôn ngữ lập trình hàm (functional programming).
 
 Phương thức (Method) được liên kết với một hàm đặc biệt của một kiểu cụ thể. Các phương thức trong ngôn ngữ Go phụ thuộc vào kiểu và phải được ràng buộc tĩnh tại thời gian biên dịch.
@@ -94,9 +94,9 @@ func Inc() (v int) {
 // giá trị v cuối cùng là 43
 ```
 
-Câu lệnh `defer` sẽ trì hoãn việc thực thi của hàm ẩn danh (trong ví dụ trên) vì hàm này lấy biến cục bộ `v` của hàm bên ngoài. Hàm này được gọi là bao đóng. Bao đóng không truy cập tới biến bên ngoài (như `v`) theo kiểu giá trị (value-by-value) mà truy cập bằng tham chiếu (reference).
+Câu lệnh `defer` sẽ trì hoãn việc thực thi của hàm ẩn danh (trong ví dụ trên) vì hàm này lấy biến cục bộ `v` của hàm bên ngoài. Hàm này được gọi là closure. closure không truy cập tới biến bên ngoài (như `v`) theo kiểu giá trị (value-by-value) mà truy cập bằng tham chiếu (reference).
 
-Hành vi truy cập các biến bên ngoài bằng tham chiếu này đến các bao đóng có thể dẫn đến một số vấn đề tiềm ẩn:
+Hành vi truy cập các biến bên ngoài bằng tham chiếu này đến các closure có thể dẫn đến một số vấn đề tiềm ẩn:
 
 ```go
 func main() {
@@ -110,11 +110,13 @@ func main() {
 // 3
 ```
 
-Bởi vì nó là một bao đóng (hàm trong câu lệnh lặp for), mỗi câu lệnh `defer` trì hoãn việc thực hiện tham chiếu hàm tới cùng một biến lặp i, giá trị của biến này sau khi kết thúc vòng lặp là 3, do đó đầu ra cuối cùng là 3.
+Bởi vì nó là một closure (hàm trong câu lệnh lặp for), mỗi câu lệnh `defer` trì hoãn việc thực hiện tham chiếu hàm tới cùng một biến lặp i, giá trị của biến này sau khi kết thúc vòng lặp là 3, do đó đầu ra cuối cùng là 3.
 
-Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này: ([source1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[(source2](../examples/ch1/ch1.4/1-function/example-3/main.go)
+Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này:
 
-[>> mã nguồn 1,](../examples/ch1/ch1.4/1-function/example-2/main.go)[>> mã nguồn 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
+[>> mã nguồn 1](../examples/ch1/ch1.4/1-function/example-2/main.go)
+
+[>> mã nguồn 2](../examples/ch1/ch1.4/1-function/example-3/main.go)
 
 ```go
 func main() {
@@ -133,8 +135,8 @@ func main() {
 }
 ```
 
-- Phương pháp đầu tiên là xác định một biến cục bộ bên trong thân vòng lặp, để hàm bao đóng của câu lệnh `defer` lấy các biến khác nhau cho mỗi lần lặp. Các giá trị của các biến này tương ứng với các giá trị tại thời điểm lặp.
-- Cách thứ hai là truyền biến lặp iterator thông qua các tham số của hàm bao đóng và câu lệnh `defer` sẽ ngay lập tức lấy các tham số từ lời gọi (trường hợp này là lấy `i`).
+- Phương pháp đầu tiên là xác định một biến cục bộ bên trong thân vòng lặp, để hàm closure của câu lệnh `defer` lấy các biến khác nhau cho mỗi lần lặp. Các giá trị của các biến này tương ứng với các giá trị tại thời điểm lặp.
+- Cách thứ hai là truyền biến lặp iterator thông qua các tham số của hàm closure và câu lệnh `defer` sẽ ngay lập tức lấy các tham số từ lời gọi (trường hợp này là lấy `i`).
 
 Cả hai phương pháp đều hoạt động. Tuy nhiên, đây không phải là cách thực hành tốt để thực thi câu lệnh `defer` bên trong vòng lặp for. Đây chỉ là ví dụ và không được khuyến khích.
 
@@ -198,7 +200,7 @@ func g() int {
 
 Phương thức (Method) là một tính năng của lập trình hướng đối tượng (OOP). Trong ngôn ngữ C++, phương thức  tương ứng với một hàm thành viên của một đối tượng lớp, được liên kết với một bảng ảo trên một đối tượng cụ thể. Tuy nhiên, phương thức trong ngôn ngữ Go được liên kết với kiểu, do đó liên kết tĩnh của phương thức có thể được tạo thành trong giai đoạn biên dịch.
 
-Một chương trình hướng đối tượng sử dụng các phương thức để thể hiện nhưng thao tác trên thuộc tính (properties) của nó, qua đó người dùng có thể sử dụng đối tượng mà không cần phải thao tác trực tiếp với đối tượng mà là thông qua các phương thức. C++ thường được xem là nơi mà lập trình hướng đối tượng bắt đầu phát triển mạnh. C++ hỗ trợ các tính năng hướng đối tượng (như lớp) dựa trên cơ sở ngôn ngữ C. Sau đó đến Java được gọi là ngôn ngữ hướng đối tượng thuần túy  vì các hàm của nó không thể tồn tại độc lập mà phải thuộc về một lớp nhất định.
+Một chương trình hướng đối tượng sử dụng các phương thức để thể hiện những thao tác trên thuộc tính (properties) của nó, qua đó người dùng có thể sử dụng đối tượng mà không cần phải thao tác trực tiếp với đối tượng mà là thông qua các phương thức. C++ thường được xem là nơi mà lập trình hướng đối tượng bắt đầu phát triển mạnh. C++ hỗ trợ các tính năng hướng đối tượng (như class) dựa trên cơ sở ngôn ngữ C. Sau đó đến Java được gọi là ngôn ngữ hướng đối tượng thuần túy  vì các hàm của nó không thể tồn tại độc lập mà phải thuộc về một class nhất định.
 
 Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C:
 
@@ -277,7 +279,7 @@ ReadFile(f, 0, data)
 CloseFile(f)
 ```
 
-Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính bao đóng (closure property):
+Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính closure (closure property):
 
 [>> mã nguồn](../examples/ch1/ch1.4/2-method/example-3/main.go)
 
@@ -377,7 +379,7 @@ Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi
 
 Các ngôn ngữ lập trình tĩnh nói chung có các hệ thống kiểu nghiêm ngặt, cho phép trình biên dịch đi sâu vào xem liệu lập trình viên có thực hiện bất kỳ động thái bất thường nào không. Tuy nhiên, một hệ thống kiểu quá nghiêm ngặt có thể làm cho việc lập trình trở nên quá cồng kềnh và khiến  lập trình viên lãng phí rất nhiều thời gian tuổi trẻ trong công cuộc đấu tranh với trình biên dịch.
 
-Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa lập trình an toàn và lập trình linh hoạt. Nó  hỗ trợ  duck-typing thông qua interface đồng thời cũng có  kiểm tra kiểu nghiêm ngặt, giúp việc lập trình tương đối nhẹ nhàng hơn.
+Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa lập trình an toàn và lập trình linh hoạt. Nó  hỗ trợ  `duck-typing` thông qua interface đồng thời cũng có  kiểm tra kiểu nghiêm ngặt, giúp việc lập trình tương đối nhẹ nhàng hơn.
 
 Interface type của Go là một sự trừu tượng hóa và khái quát hóa các loại hành vi khác, bởi vì kiểu interface không gắn với các chi tiết implement cụ thể, chúng ta có thể làm cho đối tượng linh hoạt hơn và dễ dùng hơn thông qua sự trừu tượng hóa này.
 
@@ -385,7 +387,7 @@ Nhiều ngôn ngữ hướng đối tượng có các khái niệm interface tư
 
 Nếu một đối tượng trông giống như phần  hiện thực của một interface, thì nó có thể được sử dụng như thể nó thuộc kiểu interface đó. Thiết kế này cho phép chúng ta tạo ra một interface mới thỏa mãn kiểu hiện có mà không phải  hủy đi định nghĩa ban đầu của chúng, thiết kế này đặc biệt linh hoạt và hữu ích khi các kiểu mà ta sử dụng đến từ những package không thuộc quyền kiểm soát của ta. Interface của ngôn ngữ Go là loại liên kết trễ (delay binding), có thể hiện thực các chức năng đa hình như các  hàm ảo.
 
-Các  interface có mặt khắp nơi trong ngôn ngữ Go. Trong ví dụ "Hello world", `fmt.Printf` là hàm có thiết kế hoàn toàn dựa trên  interface và chức năng thực sự của nó được `fmt.Fprintf` thực hiện bởi các hàm. Kiểu `error` được sử dụng để chỉ ra lỗi là  một kiểu  interface tích hợp. Trong C, `printf` chỉ cho phép một số lượng hạn chế các kiểu dữ liệu cơ bản có thể được in vào các đối tượng file. Tuy nhiên, nhờ tính năng  interface linh hoạt của Go mà `fmt.Fprintf` có thể in ra bất kỳ đối tượng output stream tùy chỉnh nào, in ra file hoặc output tiêu chuẩn, in ra mạng hoặc thậm chí in ra file nén. Đồng thời, dữ liệu in không bị giới hạn. Đối với các kiểu cơ bản được tích hợp vào ngôn ngữ, bất kỳđối tượng  `fmt.Stringer` nào hoàn toàn thỏa mãn  interface đều có thể được in. Nếu  interface của `fmt.Stringer` không được thỏa mãn , nó vẫn có thể được in bằng kỹ thuật reflection. Protorype của hàm `fmt.Fprintf`  như sau:
+Các  interface có mặt khắp nơi trong ngôn ngữ Go. Trong ví dụ "Hello World", `fmt.Printf` là hàm có thiết kế hoàn toàn dựa trên  interface và chức năng thực sự của nó được `fmt.Fprintf` thực hiện bởi các hàm. Kiểu `error` được sử dụng để chỉ ra lỗi là  một kiểu  interface tích hợp. Trong C, `printf` chỉ cho phép một số lượng hạn chế các kiểu dữ liệu cơ bản có thể được in vào các đối tượng file. Tuy nhiên, nhờ tính năng  interface linh hoạt của Go mà `fmt.Fprintf` có thể in ra bất kỳ đối tượng output stream tùy chỉnh nào, in ra file hoặc output tiêu chuẩn, in ra mạng hoặc thậm chí in ra file nén. Đồng thời, dữ liệu in không bị giới hạn. Đối với các kiểu cơ bản được tích hợp vào ngôn ngữ, bất kỳđối tượng  `fmt.Stringer` nào hoàn toàn thỏa mãn  interface đều có thể được in. Nếu  interface của `fmt.Stringer` không được thỏa mãn , nó vẫn có thể được in bằng kỹ thuật reflection. Protorype của hàm `fmt.Fprintf`  như sau:
 
 ```go
 func Fprintf(w io.Writer, format string, args ...interface{}) (int, error)
@@ -403,7 +405,7 @@ type error interface {
 }
 ```
 
-Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó: [(source)](../examples/ch1/ch1.4/3-interface/example-1/main.go)
+Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó:
 
 [>> mã nguồn](../examples/ch1/ch1.4/3-interface/example-1/main.go)
 
@@ -417,7 +419,7 @@ func (p *UpperWriter) Write(data []byte) (n int, err error) {
 }
 
 func main() {
-    fmt.Fprintln(&UpperWriter{os.Stdout}, "hello, world")
+    fmt.Fprintln(&UpperWriter{os.Stdout}, "hello world")
 }
 ```
 
@@ -437,7 +439,7 @@ type fmt.Stringer interface {
 }
 
 func main() {
-    fmt.Fprintln(os.Stdout, UpperString("hello, world"))
+    fmt.Fprintln(os.Stdout, UpperString("hello world"))
 }
 ```
 

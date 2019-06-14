@@ -4,5 +4,5 @@ main() {
 	putchar('!*n');
 }
 a 'hell';
-b 'o, w';
+b 'o  w';
 c 'orld';

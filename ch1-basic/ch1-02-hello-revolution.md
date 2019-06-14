@@ -1,6 +1,6 @@
-# 1.2 Sự tiến hóa của "Hello, World"
+# 1.2 Sự tiến hóa của "Hello World"
 
-Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ngôn ngữ cùng họ với Go, đồng thời là các ngôn ngữ lập trình song song được phát triển bởi Bell Labs. Cuối cùng là phiên bản Go với chương trình "Hello, World" được trình bày. Trên thực tế, chương trình "Hello, World" là ví dụ điển hình nhất cho thấy các tính năng của những ngôn ngữ khác nhau. Trong phần này, chúng ta sẽ nhìn lại dòng thời gian phát triển của từng ngôn ngữ và xem cách mà chương trình "Hello, World" phát triển thành ngôn ngữ Go hiện tại và hoàn thành sứ mệnh cách mạng của nó.
+Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ngôn ngữ cùng họ với Go, đồng thời là các ngôn ngữ lập trình song song được phát triển bởi Bell Labs. Cuối cùng là phiên bản Go với chương trình "Hello World" được trình bày. Trên thực tế, chương trình "Hello World" là ví dụ điển hình nhất cho thấy các tính năng của những ngôn ngữ khác nhau. Trong phần này, chúng ta sẽ nhìn lại dòng thời gian phát triển của từng ngôn ngữ và xem cách mà chương trình "Hello World" phát triển thành ngôn ngữ Go hiện tại và hoàn thành sứ mệnh cách mạng của nó.
 
 <p align="center">
 
@@ -13,7 +13,7 @@ Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ng�
 
 Đầu tiên là ngôn ngữ B, là một ngôn ngữ lập trình đa dụng được phát triển bởi Ken Thompson thuộc Bell Labs, cha đẻ của ngôn ngữ Go, được thiết kế để hỗ trợ phát triển hệ thống UNIX. Tuy nhiên, do thiếu sự linh hoạt trong hệ thống kiểu khiến cho B rất khó sử dụng. Sau đó, đồng nghiệp của Ken Thompson là Denis Ritchie phát triển ngôn ngữ C dựa trên B. C cung cấp cơ chế kiểu đa dạng, giúp tăng khả năng diễn đạt của ngôn ngữ. Cho đến ngày nay C vẫn là một trong những ngôn ngữ lập trình được sử dụng phổ biến nhất trên thế giới. Từ khi B được thay thế, nó chỉ còn xuất hiện trong một số tài liệu và trở thành lịch sử.
 
-Phiên bản "Hello, World" sau đây là từ hướng dẫn giới thiệu ngôn ngữ B được viết bởi Brian W. Kernighan (là người commit đầu tiên vào mã code của Go), chương trình như sau :
+Phiên bản "Hello World" sau đây là từ hướng dẫn giới thiệu ngôn ngữ B được viết bởi Brian W. Kernighan (là người commit đầu tiên vào mã code của Go), chương trình như sau :
 
 [>> mã nguồn](../examples/ch1/ch1.2/1-hello-b-1972/main.b)
 
@@ -24,7 +24,7 @@ main() {
     putchar('!*n');
 }
 a 'hell';
-b 'o, w';
+b 'o  w';
 c 'orld';
 ```
 
@@ -43,7 +43,7 @@ Trong hướng dẫn giới thiệu ngôn ngữ C được viết bởi Brian W.
 ```c
 main()
 {
-    printf("hello, world");
+    printf("Hello World");
 }
 ```
 
@@ -64,7 +64,7 @@ Năm 1988, 10 năm sau khi giới thiệu hướng dẫn của K&R, phiên bản
 
 main()
 {
-    printf("hello, world\n");
+    printf("Hello World\n");
 }
 
 ```
@@ -78,7 +78,7 @@ main()
 
 main(void)
 {
-    printf("hello, world\n");
+    printf("Hello World\n");
 }
 ```
 
@@ -91,7 +91,7 @@ Newsqueak là thế hệ thứ 2 của ngôn ngữ chuột do Rob Pike sáng t�
 Newsqueak tương tự như một ngôn ngữ kịch bản có chức năng in tích hợp. Chương trình "Hello World" của nó không có gì đặc biệt:
 
 ```c
-print("Hello,", "World", "\n");
+print("Hello ", "World", "\n");
 ```
 
 Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tham số, rất khó để thấy các tính năng liên quan đến ngôn ngữ Newsqueak. Bởi vì các tính năng liên quan đến ngôn ngữ Newsqueak và ngôn ngữ Go chủ yếu là đồng thời (concurrency) và pipeline. Do đó, ta sẽ xem xét các tính năng của ngôn ngữ Newsqueak thông qua phiên bản đồng thời của thuật toán "sàng số nguyên tố". Nguyên tắc "sàng số nguyên tố" như sau:
@@ -226,7 +226,7 @@ Hello: module
 init(ctxt: ref Draw->Context, args: list of string)
 {
     sys = load Sys Sys->PATH;
-    sys->print("hello, world\n");
+    sys->print("Hello World\n");
 }
 ```
 
@@ -246,7 +246,7 @@ Bell Labs sau khi trải qua nhiều biến động dẫn tới việc nhóm ph�
 package main
 
 func main() int {
-    print "hello, world\n";
+    print "Hello World\n";
     return 0;
 }
 ```
@@ -261,7 +261,7 @@ func main() int {
 package main
 
 func main() {
-    print "hello, world\n";
+    print "Hello World\n";
 }
 ```
 
@@ -275,7 +275,7 @@ Hàm `main` đã loại bỏ giá trị trả về và chương trình sẽ tr�
 package main
 
 func main() {
-    print("hello, world\n");
+    print("Hello World\n");
 }
 ```
 
@@ -291,7 +291,7 @@ package main
 import "fmt"
 
 func main() {
-    fmt.printf("hello, world\n");
+    fmt.printf("Hello World\n");
 }
 ```
 
@@ -307,7 +307,7 @@ package main
 import "fmt"
 
 func main() {
-    fmt.Printf("hello, world\n");
+    fmt.Printf("Hello World\n");
 }
 ```
 
@@ -323,15 +323,15 @@ package main
 import "fmt"
 
 func main() {
-    fmt.Printf("hello, world\n")
+    fmt.Printf("Hello World\n")
 }
 ```
 
 Ngôn ngữ Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu lệnh. Đây là cải tiến ngữ pháp quan trọng đầu tiên sau khi Go chính thức trở thành mã nguồn mở vào ngày 10 tháng 11 năm 2009. Từ quy tắc phân đoạn dấu chấm phẩy được giới thiệu trong phiên bản đầu tiên của ***C language tutorial*** năm 1978, các tác giả của Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu trong 32 năm. Theo tác giả nghĩ rằng đây phải là kết quả  sự cân nhắc của các nhà thiết kế ngôn ngữ Go. Hiện nay, các ngôn ngữ mới như Swift cũng bỏ qua dấu chấm phẩy.
 
-### 1.2.7 Hello, World! - V2.0
+### 1.2.7 Hello World! - V2.0
 
-Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello, World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service. [source](../examples/ch1.2/7-hello-world/example-1/main.go)
+Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service. [source](../examples/ch1.2/7-hello-world/example-1/main.go)
 
 [>> mã nguồn](../examples/ch1/ch1.2/7-hello-world-v2/example-1/main.go)
 

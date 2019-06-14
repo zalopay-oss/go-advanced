@@ -7,7 +7,7 @@ func main() {
 
 	mu.Lock()
 	go func() {
-		println("你好, 世界")
+		println("Hello World")
 		mu.Unlock()
 	}()
 
