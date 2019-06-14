@@ -8,7 +8,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	hs "ch4.4-2/HelloService"
+	hs "../HelloService"
 )
 
 type HelloServiceImpl struct{}

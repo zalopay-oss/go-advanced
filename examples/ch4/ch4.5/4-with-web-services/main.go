@@ -21,7 +21,7 @@ func (s *myGrpcServer) SayHello(ctx context.Context, in *HelloRequest) (*HelloRe
 }
 
 func main() {
-	go startServer()
+	startServer()
 	time.Sleep(time.Second)
 
 	doClientWork()
