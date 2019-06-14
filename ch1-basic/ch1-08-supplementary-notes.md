@@ -1,4 +1,4 @@
-# Ghi chú bổ sung
+# 1.8 Ghi chú bổ sung
 
 Quyển sách này được xác định là một trong những quyển sách nâng cao về Golang, vì vậy người đọc cần có một nền tảng Golang nhất định. Nếu bạn không biết nhiều về Golang, tác giả khuyên bạn nên học Golang với một số gợi ý sau.
 
