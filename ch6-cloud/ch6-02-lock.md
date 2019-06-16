@@ -1,29 +1,29 @@
 # 6.2 Distributed lock
 
-Khi một chương trình đồng thời hoặc song song sửa đổi biến toàn cục, hành vi sửa đổi cần phải được lock để tạo một vùng tranh chấp. Tại sao bạn cần phải lock? Hãy xem điều gì xảy ra khi trong bài toán đếm số một cách đồng thời mà không lock:
+Khi một chương trình đồng thời hoặc song song sửa đổi biến toàn cục, hành vi sửa đổi cần phải được lock để tạo một vùng tranh chấp. Tại sao bạn cần phải lock? Hãy xem điều gì xảy ra khi trong bài toán đếm số một cách đồng thời mà không lock ([ví dụ](../examples/ch6/ch6.2/1-counter-no-lock/main.go)):
 
 ```go
-Package main
+package main
 
-Import (
+import (
   "sync"
 )
 
 // biến toàn cục
-Var counter int
+var counter int
 
-Func main() {
-  Var wg sync.WaitGroup
-  For i := 0; i < 1000; i++ {
+func main() {
+  var wg sync.WaitGroup
+  for i := 0; i < 1000; i++ {
     wg.Add(1)
-    Go func() {
-    Defer wg.Done()
-      Counter++
+    go func() {
+    defer wg.Done()
+      counter++
     }()
   }
 
   wg.Wait()
-  Println(counter)
+  println(counter)
 }
 ```
 
@@ -40,24 +40,24 @@ Khi ta chạy nhiều lần, các kết quả sẽ khác nhau:
 
 ## 6.2.1 Lock quá trình đang thực hiện
 
-Để có kết quả chính xác, lock phần code thực thi của bộ đếm:
+Để có kết quả chính xác, lock phần code thực thi của bộ đếm([ví dụ](../examples/ch6/ch6.2/1-counter-lock/main.go)):
 
 ```go
 // ... bỏ qua phần trước
-Var wg sync.WaitGroup
-Var l sync.Mutex
-For i := 0; i < 1000; i++ {
+var wg sync.WaitGroup
+var l sync.Mutex
+for i := 0; i < 1000; i++ {
   wg.Add(1)
-  Go func() {
-    Defer wg.Done()
+  go func() {
+    defer wg.Done()
     l.Lock()
-    Counter++
+    counter++
     l.Unlock()
   }()
 }
 
 wg.Wait()
-Println(counter)
+println(counter)
 // ... after omitting the part
 ```
 
@@ -72,64 +72,64 @@ Kết quả tính toán sẽ ổn định:
 
 Trong một số tình huống, chúng ta chỉ muốn một tiến trình thực thi một nhiệm vụ. Ở ví dụ đếm số ở trên, tất cả goroutines đều thực hiện thành công. Giả sử có goroutine thất bại trong khi thực hiện, chúng ta cần phải bỏ qua tiến trình của nó. Đây là lúc cần `trylock`.
 
-Trylock, như tên của nó, cố gắng lock và nếu lock thành công thì thực hiện các công việc tiếp theo. Nếu lock bị lỗi, nó sẽ không bị chặn lại mà sẽ trả về kết quả lock. Trong lập trình Go, chúng ta có thể mô phỏng một trylock với kênh có kích thước 1:
+Trylock, như tên của nó, cố gắng lock và nếu lock thành công thì thực hiện các công việc tiếp theo. Nếu lock bị lỗi, nó sẽ không bị chặn lại mà sẽ trả về kết quả lock. Trong lập trình Go, chúng ta có thể mô phỏng một trylock với kênh có kích thước 1 ([ví dụ](../examples/ch6/ch6.2/3-try-lock)):
 
 ```go
-Package main
+package main
 
-Import (
- "sync"
+import (
+  "sync"
 )
 
 // Lock try lock
-Type lock struct {
- c chan struct{}
+type Lock struct {
+  c chan struct{}
 }
 
 // NewLock generate a try lock
-Func NewLock() Lock {
- Var l Lock
- Lc = make(chan struct{}, 1)
- Lc <- struct{}{}
- Return l
+func NewLock() Lock {
+  var l Lock
+  l.c = make(chan struct{}, 1)
+  l.c <- struct{}{}
+  return l
 }
 
 // Lock try lock, return lock result
-Func (l Lock) Lock() bool {
- lockResult := false
- Select {
- Case <-lc:
-  lockResult = true
- Default:
- }
- Return lockResult
+func (l Lock) Lock() bool {
+  lockResult := false
+  select {
+  case <-l.c:
+    lockResult = true
+  default:
+  }
+  return lockResult
 }
 
 // Unlock , Unlock the try lock
-Func (l Lock) Unlock() {
- Lc <- struct{}{}
+func (l Lock) Unlock() {
+  l.c <- struct{}{}
 }
 
-Var counter int
+var counter int
 
-Func main() {
- Var l = NewLock()
- Var wg sync.WaitGroup
- For i := 0; i < 10; i++ {
-  wg.Add(1)
-  Go func() {
-   Defer wg.Done()
-   If !l.Lock() {
-    // log error
-    Println("lock failed")
-    Return
-   }
-   Counter++
-   Println("current counter", counter)
-   l.Unlock()
-  }()
- }
- wg.Wait()
+func main() {
+  var l = NewLock()
+  var wg sync.WaitGroup
+  for i := 0; i < 10; i++ {
+    wg.Add(1)
+    go func() {
+      defer wg.Done()
+      if !l.Lock() {
+        // log error
+        println("lock failed")
+        return
+      }
+      counter++
+      println("current counter", counter)
+      l.Unlock()
+    }()
+  }
+  wg.Wait()
 }
 ```
 
@@ -144,68 +144,68 @@ Trong một hệ thống đơn, trylock không phải là một lựa chọn t�
 Trong ngữ cảnh phân tán, chúng ta cũng cần một loại logic "ưu tiên". Làm sao để có được nó? Chúng ta có thể sử dụng lệnh `setnx` do Redis cung cấp:
 
 ```go
-Package main
+package main
 
-Import (
- "fmt"
- "sync"
- "time"
+import (
+  "fmt"
+  "sync"
+  "time"
 
- "github.com/go-redis/redis"
+  "github.com/go-redis/redis"
 )
 
-Func incr() {
- Client := redis.NewClient(&redis.Options{
-  Addr: "localhost:6379",
-  Password: "", // no password set
-  DB: 0, // use default DB
- })
+func incr() {
+  client := redis.NewClient(&redis.Options{
+    Addr:     "localhost:6379",
+    Password: "", // no password set
+    DB:       0,  // use default DB
+  })
 
- Var lockKey = "counter_lock"
- Var counterKey = "counter"
+  var lockKey = "counter_lock"
+  var counterKey = "counter"
 
- // lock
- Resp := client.SetNX(lockKey, 1, time.Second*5)
- lockSuccess, err := resp.Result()
+  // lock
+  resp := client.SetNX(lockKey, 1, time.Second*5)
+  lockSuccess, err := resp.Result()
 
- If err != nil || !lockSuccess {
-  fmt.Println(err, "lock result: ", lockSuccess)
-  Return
- }
-
- // counter ++
- getResp := client.Get(counterKey)
- cntValue, err := getResp.Int64()
- If err == nil || err == redis.Nil {
-  cntValue++
-  Resp := client.Set(counterKey, cntValue, 0)
-  _, err := resp.Result()
-  If err != nil {
-   // log err
-   Println("set value error!")
+  if err != nil || !lockSuccess {
+    fmt.Println(err, "lock result: ", lockSuccess)
+    return
   }
- }
- Println("current counter is ", cntValue)
 
- delResp := client.Del(lockKey)
- unlockSuccess, err := delResp.Result()
- If err == nil && unlockSuccess > 0 {
-  Println("unlock success!")
- } else {
-  Println("unlock failed", err)
- }
+  // counter ++
+  getResp := client.Get(counterKey)
+  cntValue, err := getResp.Int64()
+  if err == nil || err == redis.Nil {
+    cntValue++
+    resp := client.Set(counterKey, cntValue, 0)
+    _, err := resp.Result()
+    if err != nil {
+      // log err
+      println("set value error!")
+    }
+  }
+  println("current counter is ", cntValue)
+
+  delResp := client.Del(lockKey)
+  unlockSuccess, err := delResp.Result()
+  if err == nil && unlockSuccess > 0 {
+    println("unlock success!")
+  } else {
+    println("unlock failed", err)
+  }
 }
 
-Func main() {
- Var wg sync.WaitGroup
- For i := 0; i < 10; i++ {
-  wg.Add(1)
-  Go func() {
-   Defer wg.Done()
-   Incr()
-  }()
- }
- wg.Wait()
+func main() {
+  var wg sync.WaitGroup
+  for i := 0; i < 10; i++ {
+    wg.Add(1)
+    go func() {
+      defer wg.Done()
+      incr()
+    }()
+  }
+  wg.Wait()
 }
 ```
 
@@ -235,31 +235,31 @@ Do đó, chúng ta cần dựa vào thứ tự của các yêu cầu này để 
 ## 6.2.4 Dựa trên ZooKeeper
 
 ```go
-Package main
+package main
 
-Import (
- "time"
+import (
+  "time"
 
- "github.com/samuel/go-zookeeper/zk"
+  "github.com/samuel/go-zookeeper/zk"
 )
 
-Func main() {
- c, _, err := zk.Connect([]string{"127.0.0.1"}, time.Second) //*10)
- If err != nil {
-  Panic(err)
- }
- l := zk.NewLock(c, "/lock", zk.WorldACL(zk.PermAll))
- Err = l.Lock()
- If err != nil {
-  Panic(err)
- }
- Println("lock succ, do your business logic")
+func main() {
+  c, _, err := zk.Connect([]string{"127.0.0.1"}, time.Second) //*10)
+  if err != nil {
+    panic(err)
+  }
+  l := zk.NewLock(c, "/lock", zk.WorldACL(zk.PermAll))
+  err = l.Lock()
+  if err != nil {
+    panic(err)
+  }
+  println("lock succ, do your business logic")
 
- time.Sleep(time.Second * 10)
+  time.Sleep(time.Second * 10)
 
- // do some thing
- l.Unlock()
- Println("unlock succ, finish business logic")
+  // do some thing
+  l.Unlock()
+  println("unlock succ, finish business logic")
 }
 ```
 
@@ -276,35 +276,35 @@ Loại khóa chặn phân tán này phù hợp hơn cho các ngữ cảnh địn
 Etcd là một thành phần của một hệ thống phân tán có chức năng giống với ZooKeeper và đã trở nên "hot" hơn trong hai năm qua. Dựa trên ZooKeeper, chúng tôi đã triển khai khóa chặn phân tán. Với etcd, chúng ta cũng có thể thực hiện các chức năng tương tự:
 
 ```go
-Package main
+package main
 
-Import (
- "log"
+import (
+  "log"
 
- "github.com/zieckey/etcdsync"
+  "github.com/zieckey/etcdsync"
 )
 
-Func main() {
- m, err := etcdsync.New("/lock", 10, []string{"http://127.0.0.1:2379"})
- If m == nil || err != nil {
-  log.Printf("etcdsync.New failed")
-  Return
- }
- Err = m.Lock()
- If err != nil {
-  log.Printf("etcdsync.Lock failed")
-  Return
- }
+func main() {
+  m, err := etcdsync.New("/lock", 10, []string{"http://127.0.0.1:2379"})
+  if m == nil || err != nil {
+    log.Printf("etcdsync.New failed")
+    return
+  }
+  err = m.Lock()
+  if err != nil {
+    log.Printf("etcdsync.Lock failed")
+    return
+  }
 
- log.Printf("etcdsync.Lock OK")
- log.Printf("Get the lock. Do something here.")
+  log.Printf("etcdsync.Lock OK")
+  log.Printf("Get the lock. Do something here.")
 
- Err = m.Unlock()
- If err != nil {
-  log.Printf("etcdsync.Unlock failed")
- } else {
-  log.Printf("etcdsync.Unlock OK")
- }
+  err = m.Unlock()
+  if err != nil {
+    log.Printf("etcdsync.Unlock failed")
+  } else {
+    log.Printf("etcdsync.Unlock OK")
+  }
 }
 ```
 
