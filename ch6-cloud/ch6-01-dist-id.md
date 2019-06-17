@@ -59,7 +59,7 @@ github.com/bwmarrin/snowflake Đây là một hiện thực Snowflake's Go khá 
 
 *Hình 6-2 thư viện snowflake*
 
-Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng:
+Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng như [ví dụ](../examples/ch6/ch6.1/example1/main.go) sau:
 
 ```go
 
@@ -148,7 +148,7 @@ Redis 127.0.0.1:6379> SADD base64_encoding_of_last16bits MzI0Mgo=
 (integer) 0
 ```
 
-Nó cũng khá đơn giản để sử dụng:
+Nó cũng khá đơn giản để sử dụng như [ví dụ](../examples/ch6/ch6.1/example2/main.go) sau:
 <!-- và một số hàm với logic đơn giản bị bỏ qua: -->
 
 ```go
