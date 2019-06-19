@@ -94,8 +94,142 @@ Hiện tại cộng đồng opensource có một web framework được rất nh
 
 Cấu trúc dữ liệu được dùng bởi httprouter và nhiều routers dẫn xuất khác là Radix Tree. Người đọc có thể sẽ liên tưởng đến những cây khác như `compressed dictionary tree` và hoặc đã nghe về dictionary tree (Trie Tree). Hình 5.1 là một kiểu cấu trúc dictionary tree.
 
-![](../images/ch6-02-trie.png)
+![](../images/ch5-02-trie.png)
 
-Dictionary tree thường được dùng để duyệt string, như là xây dựng một cây từ điển với một chuỗi kí tự. Với mỗi target string, cũng như việc tìm kiếm theo chiều sâu được bắt đầu từ node gốc, có thể đánh giá được khi nào string xuất hiện với độ phức tạp O(n), và n là chiều dài của string. Tại sao chúng ta lại làm như vậy? Bản thân string không phải là kiểu số học nên không thêm so sánh như số được, và thời giam xấp xỉ của hai chuỗi khi so sánh với nhau phụ thuộc vào chiều dài của chuỗi.Nếu bạn muốn dùng cây từ điển ở hàm trên, bạn cần phải sắp xếp lịch sử các chuỗi, và sau đó dùng thuật toán như là binary search, thời gian xấp xỉ chỉ cao. Cây từ điển có thể được xem xét như là một các thông thường để thay đổi khoảng cách thay đổi về thời gian.
+Cây dictionary thường được dùng để duyệt qua string, như là xây dựng một cây từ điển với một chuỗi string. Với target string, phương pháp tìm kiếm theo chiều sâu sẽ bắt đầu từ node gốc, có thể chắn chắn rằng chuỗi string đó có xuất hiện trong từ điển hay không, và thời gian xấp xỉ là `O(n)`, và n là độ dài của target string. Tại sao chúng ta muốn làm như vậy? Bản thân string không phải là một kiểu số học nên không thể so sánh trực tiếp như kiểu số, và thời gian xấp xỉ của việc so sánh hai string là phụ thuộc vào độ dài của strings, và sau đó dùng giải thuật như là binary search để tìm kiếm, độ phức tạp về thời gian có thể cao. Cây dictionary có thể được xem xét nhưng là một cách thông thường về  sự thay đổi không gian và thời gian.
 
-Nhưng cây từ điển thông thường có một điểm bất lợi, đó là, mỗi kí tự cần phải được thiết lập là một node con
+
+Nhìn chung, cây dictionary thì có một bất lợi là mỗi kí tự cần phải là một node con, nó sẽ dẫn đến một cây dictionary sâu hơn, và cây nén của dictionary có thể được cân bằng giữa điểm mạnh và điểm yếu của cây dictionary rất tốt. Đây là môt loại nén trên cấu trúc cây.
+
+
+![](../images/ch5-02-radix.png)
+
+Ý tưởng chính của một cây dictionary "compression" là mỗi node có thể chứa nhiều kí tự. Sử dụng cây compressed dictionary (cây từ điển nén) có thể giảm số tầng trong cây, và bởi vì dữ liệu được lưu trữ trong mỗi node nhiều hơn là một cây từ điển thông thường, tính cục bộ của chương trình sẽ tốt hơn (một đường dẫn tới node có thể được loaded trong cache để thể hiện nhiều ký tự, hoặc ngược lại), do đó sẽ làm CPU cache friendly hơn.
+
+
+## 5.2.3 Quá trình khởi tạo cây commpressed dictionary
+
+Hãy xét quy trình của một cây từ điển thông thường trong httprouter. Phần thiết lập routing có thể như sau
+
+```go
+PUT /user/installations/:installation_id/repositories/:repository_id
+
+GET /marketplace_listing/plans/
+GET /marketplace_listing/plans/:id/accounts
+GET /search
+GET /status
+GET /support
+
+GET /marketplace_listing/plans/ohyes
+```
+
+Phần route cuối cung được chúng tôi nghĩ ra, ngoại trừ việc tất cả các API route đến từ `api.github.io`
+
+## 5.2.3.1 Quá trình khởi tạo node
+
+Cây compression dictionary có thể được lưu trữ trong cấu trúc của Router trong httprouter sử dụng một số cấu trúc dữ liệu sau
+
+```go
+// Router struct
+type Router struct {
+    // ...
+    trees map[string]*node
+    // ...
+}
+```
+
+Phần tử `trees` trong `key` là những phương thức phổ biến được định nghĩa trong RFC
+
+```
+GET
+HEAD
+OPTIONS
+POST
+PUT
+PATCH
+DELETE
+```
+
+Mỗi phương thức sẽ tương ứng với một cây từ điển nén độc lập và không chia sẻ dữ liệu với các cây khác. Đặc để khi định tuyến trên hoạt động, `PUT` và `GET` hai cây thay vì một.
+
+Đơn giản mà nói, lần đầu tiên chèn một phương thức vào route, node gốc sẽ tương ứng với một cây từ điển mới được tạo ra. Để làm như vậy, đầu tiên chúng ta dùng `PUT`
+
+```go
+r := httprouter.New()
+r.PUT("/user/installations/:installation_id/repositories/:reposit", Hello)
+```
+
+`PUT` sẽ ứng với node gốc được tạo ra. Cây có dạng
+
+
+
+![](../images/ch5-02-radix-put.png)
+
+*Hình 5.3 Một cây từ điển nén được insert vào route*
+
+Kiểu của mỗi node trong cây radix là `*httprouter.node`, để thuận tiện cho việc giải thích, chúng ta hãy chú ý tới một số trường
+
+
+```
+path: //Chuỗi trong đường dẫn ứng với node hiện tại
+wildChild: // Cho dù là nút con tham số, nghĩa là nút có ký tự đại diện hoặc :id
+nType: // Loại nút có bốn giá trị liệt kê
+  static
+  root
+  param
+  catch
+indices: 
+```
+
+
+Dĩ nhiên, route của phương thức `PUT` chỉ là một đường dẫn. Tiếp theo, chúng ta theo một số đường dẫn GET trong ví dụ để giải thích về tiến trình chèn vào một node con.
+
+## 5.2.3.2 Chèn node con
+
+Khi chúng ta chèn `GET /marketplace_listing/plans`, qúa trình PUT sẽ tương tự như trước
+
+![](../images/ch5-05-radix-get-1.png)
+
+Bởi vì đường route đâì tiên không có tham số, đường dẫn chỉ được lưu trong node gốc. Do đó có thể xem là một node
+
+
+Sau đó chèn đường dẫn `GET /marketplace_listing/plans/:id/accounts` và một nhánh mới sẽ có tiền tố common, và có thể được inserted một cách trực tiếp đến node lá, sau đó kết quả trả về rất đơn giản, sau khi quá trình chèn vào cấu trúc cây được hoàn thành sẽ như sau
+
+![](../images/ch5-02-radix-get-2.png)
+ Inserting the compressed dictionary tree of the second node
+
+Do đó, `:id` trong node là một con của string, và chỉ số vẫn chưa cần được xử lý.
+
+Trường hợp trên, rất đơn giản, và một vài định tuyến mới có thể được chèn trực tiếp vào node từ node gốc.
+
+## 5.2.3.3 Edge spliting
+
+Tiếp theo chúng ta chèn `GET /search` , sau đó sẽ sinh ra cây split tree như hình 5.6
+
+
+![](../images/ch5-02-radix-get-3.png)
+
+*Figure 5-6 Inserting the third node causes the edge to split*
+
+Đường dẫn cũ và đường dẫn mới có điểm bắt đầu là `/` để phân tách, chuỗi truy vấn phải bắt đầu từ node gốc chính, sau đó một route là `search` cũng giống như một số node bên dưới node gốc của liked. Lúc này, bởi vì có nhiều nodes con. Node gốc sẽ chỉ ra index của node con, và trường thông tin này cần phải come in handy. "ms" biểu diễn sự bắt đầu của node con và m (marketplace) và s(search).
+
+Chúng tôi dùng `GET /status` và `GET /support` để chèn sum vào cây. Lúc này, sẽ dẫn đến `search split` một lần nữa, trên node, và kết quả cuối cùng được nhìn thấy ở hình `5.7`
+
+![](../images/ch5-02-radix-get-4.png)
+
+## 5.2.3.4 Subnode conflict handling
+
+Trong trường hợp này bản thân mỗi route sẽ chỉ là những chuỗi string, không có xung đột xảy ra. Điều có thể dẫn đến xung đột nếu route chứa wildcard (tương tự như :id) hoặc catchAll. Điều đó làm chúng ta đề cập ở trên:
+
+Việc xử lý xung đột ở node con rất đơn giản, trong vài trường hợp:
+
+1. When inserting a wildcard node, the parent node's children array is not empty and wildChild is set to false. For example: GET /user/getAlland GET /user/:id/getAddr, or GET /user/*aaaand GET /user/:id.
+2. When inserting a wildcard node, the parent node's children array is not empty and wildChild is set to true, but the parent card's wildcard child node has a different wildcard name to insert. For example: GET /user/:id/infoand GET /user/:name/info.
+3. When the catchAll node is inserted, the children of the parent node are not empty. For example: GET /src/abcand GET /src/*filename, or GET /src/:idand GET /src/*filename.
+4. When the static node is inserted, the wildChild field of the parent node is set to true.
+5. When a static node is inserted, the child of the parent node is not empty, and the child node nType is catchAll.
+
+Khi mà xung đột xảy ra, nó sẽ bắt lỗi panic tại thời điểm ban đầu. Ví dụ, khi chèn vào một route chúng ta muốn `GET /marketplace_listing/plans/ohyes`, kiểu xung đột thứ tư sẽ xảy ra; đó là node cha
+marketplace_listing/plans/'s wildChild field is true.
+
+
