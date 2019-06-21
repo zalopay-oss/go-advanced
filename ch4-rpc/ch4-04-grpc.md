@@ -39,8 +39,8 @@ service HelloService {
 
 Tạo gRPC code sử dụng hàm dựng sẵn trong gRPC plugin từ protoc-gen-go:
 
-```shell
-protoc --go_out=plugins=grpc:. hello.proto
+```sh
+$ protoc --go_out=plugins=grpc:. hello.proto
 ```
 
 gRPC plugin tạo ra các interface khác nhau cho server và client:
@@ -55,7 +55,7 @@ type HelloServiceClient interface {
 }
 ```
 
-gRPC cung cấp hỗ trợ ngữ cảnh cho mỗi lệnh gọi phương thức thông qua tham số `context.Context`. Khi client gọi phương thức, nó có thể cung cấp thông tin ngữ cảnh bổ sung thông qua các tham số tùy chọn của kiểu `grpc.CallOption`.
+gRPC cung cấp hỗ trợ context cho mỗi lệnh gọi phương thức thông qua tham số `context.Context`. Khi client gọi phương thức, nó có thể cung cấp thông tin context bổ sung thông qua các tham số tùy chọn của kiểu `grpc.CallOption`.
 
 `HelloSercieServer` interface dựa trên server có thể reimplement service `HelloService`:
 
@@ -70,7 +70,7 @@ func (p *HelloServiceImpl) Hello(
 }
 ```
 
-Quá trình khởi động của gRPC  service  tương tự như quá trình khởi động RPC   service của thư viện chuẩn:
+Quá trình khởi động của gRPC service  tương tự như quá trình khởi động RPC   service của thư viện chuẩn:
 
 ```go
 func main() {
