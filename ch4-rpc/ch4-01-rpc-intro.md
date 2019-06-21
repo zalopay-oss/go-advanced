@@ -4,7 +4,7 @@ RPC viết tắt của remote procedure call (lời gọi hàm từ xa) là mộ
 
 ## 4.1.1 RPC phiên bản "Hello World"
 
-Pakage RPC trong ngôn ngữ Go là `net/rpc`, được đặt trong thư mục package `net`. Do đó chúng ta có thể đoán được rằng package RPC được hiện thực dựa trên package `net`. Tại phần cuối của chương 1 phần "Cuộc cách mạng Hello World", chúng ta đã hiện thực việc in ra một ví dụ mẫu dựa trên `http`. Bên dưới chúng ta sẽ thử hiện thực tương tự dựa trên `rpc`.
+Package RPC trong ngôn ngữ Go là `net/rpc`, được đặt trong thư mục package `net`. Do đó chúng ta có thể đoán được rằng package RPC được hiện thực dựa trên package `net`. Tại phần cuối của chương 1 phần "Cuộc cách mạng Hello World", chúng ta đã hiện thực việc in ra một ví dụ mẫu dựa trên `http`. Bên dưới chúng ta sẽ thử hiện thực tương tự dựa trên `rpc`.
 
 ```go
 type HelloService struct {}
@@ -70,7 +70,7 @@ Từ ví dụ trên, có thể thấy rằng chúng ta dùng RPC thật sự r�
 
 ## 4.1.2 RPC Interface an toàn
 
-Trong ứng dụng gọi RPC, sẽ thường có ít nhất ba nhà phát triển: người thứ nhất là nhà phát triển sẽ hiện thực phương thức RPC ở bên phía server, người thứ hai là người gọi RPC bên phía client, và người cuối cùng là người cực kì quan trọng, họ sẽ phát triển giao diện giữa server và client RPC. Trong ví dụ trước, chúng ta đặt tất cả những vai trò trên lại với nhau cho đơn giản, mặc dùng nó dường như là cách đơn giản để hiện thực, nhưng nó không thuận lợi cho việc bảo trì và phân công công việc về sau.
+Trong ứng dụng gọi RPC, sẽ thường có ít nhất ba nhà phát triển: người thứ nhất là nhà phát triển sẽ hiện thực phương thức RPC ở bên phía server, người thứ hai là người gọi RPC bên phía client, và người cuối cùng là người cực kì quan trọng, họ sẽ phát triển interface giữa server và client RPC. Trong ví dụ trước, chúng ta đặt tất cả những vai trò trên lại với nhau cho đơn giản, mặc dùng nó dường như là cách đơn giản để hiện thực, nhưng nó không thuận lợi cho việc bảo trì và phân công công việc về sau.
 
 Nếu bạn muốn refactor lại service HelloService, bước đầu tiên là phân định rạch ròi giữa tên và inteface của service;
 
@@ -189,14 +189,14 @@ func main() {
 [>> mã nguồn](../examples/ch4/ch4.1/hello-service-v2/server/main.go)
 
 
-Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm `RegisterHelloService` để đăng kí, nó không chỉ tránh công việc đặt tên cho service với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của giao diện RPC. Cuối cùng, service mới của chúng ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
+Ở phiên bản hiện thực RPC mới, chúng ta sử dụng hàm `RegisterHelloService` để đăng kí, nó không chỉ tránh công việc đặt tên cho service với những tên gọi của service, mà còn đảm bảo rằng những đối tượng của service mang đến sẽ thỏa mãn định nghĩa của interface RPC. Cuối cùng, service mới của chúng ta sẽ hỗ trợ nhiều liên kết TCP và do đó sẽ cung cấp service RPC cho mỗi đường dẫn TCP.
 
 
 ## 4.1.3 Cross-language RPC (đa ngôn ngữ trên RPC)
 
 Thư viện chuẩn của RPC sẽ mặc định đóng gói dữ liệu theo đặc tả của Go encoding, do đó sẽ khó hơn nhiều để gọi service RPC từ những ngôn ngữ khác. Trong những micro-service trên môi trường mạng, mỗi RPC và người dùng dịch vụ có thể sử dụng những ngôn ngữ lập trình khác nhau, do đó để cross-language (vượt qua rào cản ngôn ngữ) là điều kiện chính cho sự tồn tại của RPC trên môi trường internet.
 
-Framework RPC của ngôn ngữ Go có nhiều hơn hai thiết kế đặc biệt: một là cho phép chúng ta có thể thay đổi quá trình encoding và decoding trong quá trình kết nối khi gói dữ liệu được đóng gói; và hai là giao diện RPC được xây dựng dựa trên interface `io.ReadWriteClose`, chúng ta có thể  xây dựng RPC trên những protocol giao tiếp khác nhau. Từ đây chúng ta có thể hiện thực việc cross-language thông qua phần mở rộng của `net/rpc/jsonrpc`
+Framework RPC của ngôn ngữ Go có nhiều hơn hai thiết kế đặc biệt: một là cho phép chúng ta có thể thay đổi quá trình encoding và decoding trong quá trình kết nối khi gói dữ liệu được đóng gói; và hai là interface RPC được xây dựng dựa trên interface `io.ReadWriteClose`, chúng ta có thể  xây dựng RPC trên những protocol giao tiếp khác nhau. Từ đây chúng ta có thể hiện thực việc cross-language thông qua phần mở rộng của `net/rpc/jsonrpc`
 
 Đầu tiên chúng ta có thể hiện thực lại RPC service dựa trên json encoding như sau:
 
@@ -310,7 +310,7 @@ Do đó không có vấn đề gì về rào cản ngôn ngữ, chỉ theo đị
 
 RPC framework sẽ thừa hưởng từ ngôn ngữ Go đã hỗ trợ sẵn dịch vụ RPC trên giao thức HTTP. Tuy nhiên, frameword http service cũng có giao thức được xây dựng sẵn, và nó không cung cấp interface để sử dụng cho những protocol khác. Trong ví dụ trước, chúng ta sẽ hiện thực jsonrpc service dựa trên giao thức TCP, và đã hiện thực thành công lời gọi RPC thông qua lệnh `nc`. Bây giờ chúng ta sẽ thử cung cấp service rpcjson trên giao thức HTTP.
 
-RPC Service  mới sẽ thực sự tuân thủ theo chuẩn giao diện REST, do đó chúng sẽ nhận yêu cầu và xử lý chúng theo quá trình bên dưới
+RPC Service  mới sẽ thực sự tuân thủ theo chuẩn interface REST, do đó chúng sẽ nhận yêu cầu và xử lý chúng theo quá trình bên dưới
 
 ```go
 func main() {

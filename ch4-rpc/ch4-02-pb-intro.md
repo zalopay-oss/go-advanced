@@ -105,7 +105,7 @@ Tuy nhiên gRPC plugin sẽ cung cấp cho chúng ta những ý tưởng mới. 
 
 Bộ biên dịch protoc của Protobuf sẽ hiện thực để hỗ trợ những ngôn ngữ khác nhau thông qua cơ chế plugin. Ví dụ, nếu lệnh protoc có tham số  được định dạng `--xxx_out`, thì sau đó proto sẽ yêu cầu plugin được xây dựng dựa trên ngôn ngữ `xxx`. Sau đó plugin sẽ sinh ra mã nguồn, ví dụ `protoc-gen-go` sẽ sinh ra mã nguồn Go bằng tham số `--go_out=plugins=grpc` sẽ sinh ra mã nguồn cho gRPC, nếu không chúng sẽ chỉ sinh ra mã nguồn liên quan đến message đó.
 
-Đề cập đến mã nguồn từ gRPC plugin, chúng ta có thể thấy rằng hàm `generator.RegisterPlugin` sẽ có thể được dùng để đăng kí `plugin` đó. Dưới đây sẽ sinh ra giao diện plugin.
+Đề cập đến mã nguồn từ gRPC plugin, chúng ta có thể thấy rằng hàm `generator.RegisterPlugin` sẽ có thể được dùng để đăng kí `plugin` đó. Dưới đây sẽ sinh ra interface plugin.
 
 ```go
 // A Plugin provides functionality to add to the output during
@@ -246,7 +246,7 @@ Tại thời điểm này, plugin được chúng ta tạo ra cuối cùng đã 
 
 ## 4.2.3 Tự động sinh ra toàn bộ mã nguồn RPC
 
-Trong ví dụ trước chúng ta đã xây dựng một plugin nho nhỏ là `netrpcPlugin` và tạo ra một plugin mới cho `protoc-gen-go-netrpc` bởi việc sao chép lại chương trình chính của protoc-gen-go. Bây giờ tiếp tục phát triển netrpcPlugin plugin với mục tiêu cuối cùng là sinh ra lớp giao diện RPC bảo mật.
+Trong ví dụ trước chúng ta đã xây dựng một plugin nho nhỏ là `netrpcPlugin` và tạo ra một plugin mới cho `protoc-gen-go-netrpc` bởi việc sao chép lại chương trình chính của protoc-gen-go. Bây giờ tiếp tục phát triển netrpcPlugin plugin với mục tiêu cuối cùng là sinh ra lớp interface RPC bảo mật.
 Đầu tiên chúng ta sẽ phải sinh ra mã nguồn của package được import bằng phương thức đã được định nghĩa genImportCode.
 
 ```go
