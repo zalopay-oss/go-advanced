@@ -1,6 +1,6 @@
 # 5.3 Middleware
 
-Chương này sẽ phân tích những nguyên tắc về middleware technology ngày nay với một framework web phổ biến và chỉ ra làm thế nào để dùng công nghệ middleware này trong mã nguồn business và non-business trả về.
+Chương này sẽ phân tích những nguyên tắc về kỹ thuật middleware ngày nay với một framework web phổ biến và chỉ ra làm thế nào để dùng kỹ thuật middleware này để tách biệt mã nguồn business và non-business.
 
 ## 5.3.1 Code mire
 
@@ -39,7 +39,7 @@ func hello(wr http.ResponseWriter, r *http.Request) {
 
 Việc này cho phép để in ra thời gian mà một request hiện tại chạy, mỗi khi nhận được một http request.
 
-Sau khi hoàn thành yêu cầu, chúng tôi sẽ tiếp tục phát triển service của chúng tôi, và API được cung cấp gia tăng một cách liên tục, Bây giờ route sẽ trông như sau:
+Sau khi hoàn thành yêu cầu, chúng tôi sẽ tiếp tục phát triển service của chúng tôi, và API được cung cấp gia tăng một cách liên tục, Bây giờ các route sẽ trông như sau:
 
 ```go
 // middleware/hello_with_more_routes.go
@@ -73,11 +73,11 @@ func main() {
 }
 ```
 
-Mỗi handler có một đoạn mã nguồn để ghi lại thời gian được đề cập từ trước. Mỗi lần chúng tôi thêm vào một route mới, cần phải sao chép những mã nguồn tương tự tới nơi chúng ta ta cần, bởi vì số lượng mã nguồn là rất nhiều, do đó sẽ là vấn đề lớn khi hiện thực mã nguồn.
+Mỗi handler có một đoạn mã nguồn để ghi lại thời gian được đề cập từ trước. Mỗi lần chúng tôi thêm vào một route mới, cần phải sao chép những mã nguồn tương tự tới nơi chúng ta ta cần, bởi vì số lượng route ít, nên không phải là vấn đề lớn khi hiện thực.
 
 Dần dần hệ thống của chúng ta có khoảng 30 routes và `handler` functions. Mỗi lần chúng ta thêm một handler, công việc đầu tiên là sao chép lại những phần mã nguồn ngoại vi không liên quan đến business logic.
 
-Sau đó, hệ thống sẽ chạy an toàn trong một số thời điểm, nhưng đột ngột một ngày, sếp tìm bạn. Chúng tôi đã tìm thấy được người có thể phát triển hệ thống monitoring mới. Hệ thống mới sẽ được điều khiển linh hoạt hơn, chúng tôi cần bản báo cáo về dữ liệu thời gian dành cho mỗi interface. Trong hệ thống monitoring. Đặt cho hệ thống một cái tên là metrics. Bây giờ chúng ta cần phải thay đổi mã nguồn và gửi thời gian đến hệ thống metrics thông HTTP POST. Hãy thay đổi nó `helloHandler()`
+Sau khi hệ thống sẽ chạy an toàn trong một quãng thời gian, nhưng bỗng nhiên một ngày, sếp tìm bạn. Chúng tôi đã tìm thấy được người có thể phát triển hệ thống monitoring mới. Hệ thống mới sẽ được điều khiển linh hoạt hơn, chúng tôi cần bản báo cáo về dữ liệu thời gian dành cho mỗi interface. Trong hệ thống monitoring. Đặt cho hệ thống một cái tên là metrics. Bây giờ chúng ta cần phải thay đổi mã nguồn và gửi thời gian đến hệ thống metrics thông qua HTTP POST. Hãy thay đổi nó `helloHandler()`
 
 ```go
 func helloHandler(wr http.ResponseWriter, r *http.Request) {
@@ -94,9 +94,9 @@ Khi thay đổi, chúng ta có thể dễ dàng thấy rằng công việc phát
 
 ## 5.3.2 Sử dụng middleware để xử lý non-business logic
 
-Hãy phân tích, khi chúng ta làm một số thứ sai tại thời điểm ban đầu? Chúng ta cần gặp gỡ yêu cầu theo từng bước, ghi xuống logic chúng ta cần phải theo tiến trình.
+Hãy phân tích, khi chúng ta làm một số thứ sai tại thời điểm ban đầu? Chúng ta cần hiện thực yêu cầu theo từng bước, ghi xuống luồng logic chúng ta cần phải theo tiến trình.
 
-Trong thực tế, lỗi lầm lớn nhất chúng ta gây ra là đặt mã nguồn business và non-business cùng nhau. Trong vài trường hợp, những yêu cầu non-business là làm một thứ gì đó trước khi xử lý http request, và làm một thứ gì đó ngay sau khi chúng hoàn thành. Có thể dùng một vài ý tưởng tái cấu trúc lại mã nguồn để tách riêng mã nguồn của non-business riêng. Trỏ lại ví dụ ban đầu, chúng ta cần một hàm `helloHandler()` để tăng thời gian thống kê về timeout, chúng ta có thể dùng phương thức function adapter gọi là `helloHandler()` để wrap:
+Trong thực tế, lỗi lầm lớn nhất chúng ta gây ra là đặt mã nguồn business và non-business cùng nhau. Trong hầu hết trường hợp, những yêu cầu non-business là làm một thứ gì đó trước khi xử lý HTTP request, và làm một thứ gì đó ngay sau khi chúng hoàn thành. Có thể dùng một vài ý tưởng tái cấu trúc lại mã nguồn để tách riêng mã nguồn của non-business riêng. Trở lại ví dụ ban đầu, chúng ta cần một hàm `helloHandler()` để tăng thời gian thống kê về timeout, chúng ta có thể dùng một `function adapter` gọi là `helloHandler()` để wrap:
 
 ```go
 func hello(wr http.ResponseWriter, r *http.Request) {
@@ -122,7 +122,7 @@ func main() {
 }
 ```
 
-Rất dễ đạt được sự tách biệt giữa business và non-business, điều thú vị là `timeMiddleware`. Có thể thấy rằn từ mã nguồn, hàm `timeMiddleware()` cũng là một hàm của các parameters `http.Handler` và `http.Handler` được định nghĩa trong gói `net/http`.
+Rất dễ đạt được sự tách biệt giữa business và non-business, mấu chốt nằm ở hàm `timeMiddleware`. Có thể thấy từ mã nguồn rằng, hàm `timeMiddleware()` cũng là một hàm chứa parameters `http.Handler` và `http.Handler` được định nghĩa trong gói `net/http`.
 
 ```go
 type Handler interface {
@@ -130,7 +130,7 @@ type Handler interface {
 }
 ```
 
-Bất cứ hàm nào định nghĩa `ServeHTTP`, nó sẽ hợp lệ trong `http.Handler`, bạn đọc nó và sẽ có một số mơ hồ, hãy chọn ra những http library `Handler`, `HandlerFunc` và `ServeHTTP` để thấy mối quan hệ giữa chúng.
+Bất cứ hàm nào định nghĩa `ServeHTTP`, nó sẽ hợp lệ trong `http.Handler`, bạn đọc nó và sẽ có một số mơ hồ, hãy chọn ra những HTTP library `Handler`, `HandlerFunc` và `ServeHTTP` để thấy mối quan hệ giữa chúng.
 
 ```go
 type Handler interface {
@@ -150,29 +150,28 @@ Trong thực tế, handler signature của chúng ta là:
 func (ResponseWriter, *Request)
 ```
 
-Sau đó, `handler` cộng `http.HandlerFunc()` sẽ có một sự đồng nhất chữ ký hàm, bạn có thể dùng kiểu `handler()` trong hàm, và chuyển đổi nó với `http.HandlerFunc`. Và interface `http.HandlerFunc` được hiện thực `http.Handler`. Khi thư viện `http` cần gọi hàm handler của bạn để xử lý request, `HandlerFunc()` hàm `ServeHTTP()` sẽ được gọi để chỉ ra những chuỗi gọi cơ bản của request như sau:
+Do đó `handler` và `http.HandlerFunc()` sẽ có một sự đồng nhất về function signature (chữ ký hàm), bạn có thể dùng kiểu `handler()` trong hàm, và chuyển đổi nó với `http.HandlerFunc`. Khi thư viện `http` cần gọi hàm `HandlerFunc()` của bạn để xử lý request, hàm `ServeHTTP()` sẽ được gọi để chỉ ra những chuỗi gọi cơ bản của request như sau:
 
 ```go
 h = getHandler() => h.ServeHTTP(w, r) => h(w, r)
 ```
 
-Bởi vì sự chuyển đổi `handler` để customize `http.HandlerFunc()`, quá trình này được đề cập ở trên là thật sự cần thiết, bởi vì `handler` có thể không hiện thực `ServeHTTP` một cách trực tiếp. Hàm `CastleFunc` (chú ý rằng không có sự khác nhau giữa `HandlerFunc` và `HandleFunc`) chúng ta nhìn thấy mã nguồn dưới để thấy quá trình cast.
+Hàm `handler` được chuyển đổi thành `http.HandlerFunc()`, quá trình này là cần thiết bởi vì chúng ta có `handler` không hiện thực interface `ServeHTTP` một cách trực tiếp. Hàm `CastleFunc` (chú ý rằng không có sự khác nhau giữa `HandlerFunc` và `HandleFunc`) chúng ta nhìn thấy mã nguồn dưới để thấy quá trình cast.
 
 ```go
 func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) {
     DefaultServeMux.HandleFunc(pattern, handler)
 }
 
-// 调用
 
 func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) {
     mux.Handle(pattern, HandlerFunc(handler))
 }
 ```
 
-Vai trò của handler ở trên là gì, middleware của chúng ta sẽ hiểu bởi việc bao bọc handleer và trả về một handler mới.
+Middleware sẽ được hiểu là một hàm truyền vào handler và trả về một handler mới.
 
-Để tóm tắt, những gì mà middleware được bao bọc hàm handler thông qua một hoặc nhiều hàm, trả về một chuỗi các hàm, nó bao gồm logic của mỗi middleware. Chúng ta có thể làm packageing trên trở nên phức tạp hơn.
+Để tóm tắt, những gì mà middleware được bao bọc hàm handler thông qua một hoặc nhiều hàm, trả về một chuỗi các hàm, nó bao gồm logic của mỗi middleware. Chúng ta có thể làm packaging trên trở nên phức tạp hơn.
 
 ```go
 customizedHandler = logger(timeout(ratelimit(helloHandler)))
@@ -180,33 +179,31 @@ customizedHandler = logger(timeout(ratelimit(helloHandler)))
 
 Ngữ cảnh của chuỗi các hàm trong quá trình thực thi có thể được thể hiện bởi hình 5.8
 
-
-
 ![](../images/ch5-03-middleware_flow.png)
 
 Một cách đơn giản, quá trình này thực hiện đẩy vào một function và sau đó lấy nó ra khi một request được hiện thực. Có một số luồng thực thi tương tự như gọi đệ quy.
 
 ```go
-[exec of logger logic]           函数栈: []
+[exec of logger logic]           Stack: []
 
-[exec of timeout logic]          函数栈: [logger]
+[exec of timeout logic]          Stack: [logger]
 
-[exec of ratelimit logic]        函数栈: [timeout/logger]
+[exec of ratelimit logic]        Stack: [timeout/logger]
 
-[exec of helloHandler logic]     函数栈: [ratelimit/timeout/logger]
+[exec of helloHandler logic]     Stack: [ratelimit/timeout/logger]
 
-[exec of ratelimit logic part2]  函数栈: [timeout/logger]
+[exec of ratelimit logic part2]  Stack: [timeout/logger]
 
-[exec of timeout logic part2]    函数栈: [logger]
+[exec of timeout logic part2]    Stack: [logger]
 
-[exec of logger logic part2]     函数栈: []
+[exec of logger logic part2]     Stack: []
 ```
 
 Khi hàm được hiện thực, nhưng chúng ta có thể thấy rằng ở trên, việc dùng hàm này không thực sự đệp, và nó không có bất cứ tính dễ đọc nào.
 
 ## 5.3.3 More elegant middleware writing
 
-Trong chương trước, sự tách biệt về mã nguồn hàm business và non-business function được giải quyết, nhưng chỉ đề cập rằng nó không trông tốt hơn, Nếu bạn cần phải thay đổi thứ tự của những hàm đó, hoặc thêm, hoặc xóa middleware vẫn còn một số khó khăn, phần này chúng ta sẽ thực hiện việc tối ưu bằng cách viết .
+Trong chương trước, sự tách biệt về mã nguồn hàm business và non-business function được giải quyết, nhưng cũng không tốt hơn lắm, Nếu bạn cần phải thay đổi thứ tự của những hàm đó, hoặc thêm, hoặc xóa middleware vẫn còn một số khó khăn, phần này chúng ta sẽ thực hiện việc tối ưu bằng cách viết .
 
 
 Nhìn vào ví dụ
@@ -218,6 +215,7 @@ r.Use(timeout)
 r.Use(ratelimit)
 r.Add("/", helloHandler)
 ```
+
 Qua nhiều bước thiết lập, chúng ta có một chuỗi thực thi các hàm tương tự như trước. Điểm khác biệt là trực quan hơn và dễ hơn để hiểu. Nêu bạn muốn thêm hoặc xóa middleware, đơn giản thêm và xóa dòng ứng với lời gọi `Use()`. Rất thuận tiện.
 
 Từ ngữ cảnh của framework, làm sao chúng ta đạt được hàm đó? Không phức tạp lắm
@@ -275,11 +273,11 @@ throttler.go
   => lưu trữ mã thông báo qua các kênh có độ dài cố định và giới hạn giao diện thông qua các mã thông báo này.
 ```
 
-Mỗi web framework sẽ có một phần tử middleware tương ứng. Nếu bạn quan tâm, bạn có thể bạn có thể đóng góp những middleware hữu ích cho dự án. Lý do để thông thường để người maintainers sẵn sàng để merge pull request của bạn.
+Mỗi web framework sẽ có những thành phần middleware tương ứng. Nếu bạn quan tâm, bạn có thể  đóng góp những middleware hữu ích cho dự án, đó là lý do để thông thường để người maintainers sẵn sàng để merge pull request của bạn.
 
-Ví dụ, cộng động opensource đóng góp cho fire gin framework, nó được thiết kế cho users để đóng góp vào kho middleware.
+Ví dụ, cộng động opensource đóng góp cho fire `gin` framework, nó được thiết kế cho users để đóng góp vào kho middleware.
 
 ![](../images/ch5-03-gin_contrib.png)
 
-Nếu người đọc đọc mã nguồn của gin, có thể thấy được rằng gin middleware không dùng `http.Handler`, nhưng `gin.HandlerFunc` thì gọi, với `http.Handler` khác với những mẫu signature trong phần này. tuy nhiên, gin thực sự `handler` chỉ một package cho framework của nó. Nguyên tắc của middleware sẽ đồng nhất với mô tả của  phần này.
+Nếu người đọc đọc mã nguồn của gin, có thể thấy được rằng gin middleware không dùng `http.Handler`, nhưng `gin.HandlerFunc` thì được gọi, và `http.Handler`sẽ khác với những mẫu signature trong phần này.
 

@@ -2,7 +2,7 @@
 
 Ở những framework web thông thường, router sẽ có nhiều thành phần. Router trong ngôn ngữ Go cũng thường gọi bộ `multiplexer` của gói `http`. Trong phần trước, chúng ta đã học được làm cách nào dùng `http mux` là một thư viện chuẩn để hiện thực hàm routing đơn giản. Nếu việc phát triển hệ thống Web không quan tâm đến thiết kế các URI chứa parameters thì chúng ta có thể dùng thư viện chuẩn `http`  `mux`.
 
-RESTful là một làn sóng thiết kế API bắt đầu những năm gần đây. Ngoài những phương thức GET, POST , RESTful cũng quy định vài tiêu chuẩn khác được định nghĩa bởi giao thức HTTP bao gồm
+RESTful là một làn sóng thiết kế API bắt đầu những năm gần đây. Ngoài những phương thức GET, POST , RESTful cũng quy định vài method khác được định nghĩa bởi giao thức HTTP bao gồm
 
 Nhìn vào những đường dẫn RESTful sau
 
@@ -36,7 +36,7 @@ GET /user/info/:name
 POST /user/:id
 ```
 
-Tóm lại, nếu hai routes có sự đồng nhất về http method (GET/POST/PUT/DELETE) và đồng nhất tiền tố request path, và một A route xuất hiện ở một nơi nào đó, nó sẽ là một kí tự đại diện (trường hợp trên là :id), B route là một string bình thường, thì một route sẽ xung đột, xung đột routing sẽ trực tiếp sẽ phát sinh ra lỗi có thể bắt được thông qua panic
+Tóm lại, nếu hai routes có sự đồng nhất về http method (GET/POST/PUT/DELETE) và đồng nhất tiền tố request path, và một A route xuất hiện ở một nơi nào đó, nó sẽ là một kí tự đại diện (trường hợp trên là :id), B route là một string bình thường, thì một route sẽ xung đột, xung đột routing sẽ trực tiếp sẽ phát sinh ra lỗi có thể in ra thông qua panic
 
 ```
 panic: wildcard route ':id' conflicts with existing children in path '/user/:id'
@@ -96,10 +96,10 @@ Cấu trúc dữ liệu được dùng bởi httprouter và nhiều routers dẫ
 
 ![](../images/ch5-02-trie.png)
 
-Cây dictionary thường được dùng để duyệt qua string, như là xây dựng một cây từ điển với một chuỗi string. Với target string, phương pháp tìm kiếm theo chiều sâu sẽ bắt đầu từ node gốc, có thể chắn chắn rằng chuỗi string đó có xuất hiện trong từ điển hay không, và thời gian xấp xỉ là `O(n)`, và n là độ dài của target string. Tại sao chúng ta muốn làm như vậy? Bản thân string không phải là một kiểu số học nên không thể so sánh trực tiếp như kiểu số, và thời gian xấp xỉ của việc so sánh hai string là phụ thuộc vào độ dài của strings, và sau đó dùng giải thuật như là binary search để tìm kiếm, độ phức tạp về thời gian có thể cao. Cây dictionary có thể được xem xét nhưng là một cách thông thường về  sự thay đổi không gian và thời gian.
+Cây dictionary thường được dùng để duyệt qua string, như là xây dựng một cây từ điển với các chuỗi string. Với target string, phương pháp tìm kiếm theo chiều sâu sẽ bắt đầu từ node gốc, có thể chắn chắn rằng chuỗi string đó có xuất hiện trong cây từ điển hay không, và thời gian xấp xỉ là `O(n)`, và n là độ dài của target string. Tại sao chúng ta muốn làm như vậy? Bản thân string không phải là một kiểu số học nên không thể so sánh trực tiếp như kiểu số, và thời gian xấp xỉ của việc so sánh hai string là phụ thuộc vào độ dài của strings, và sau đó dùng giải thuật như là binary search để tìm kiếm, độ phức tạp về thời gian có thể cao. Cây dictionary có thể được xem xét nhưng là một cách thông thường về  sự thay đổi không gian và thời gian.
 
 
-Nhìn chung, cây dictionary thì có một bất lợi là mỗi kí tự cần phải là một node con, nó sẽ dẫn đến một cây dictionary sâu hơn, và cây nén của dictionary có thể được cân bằng giữa điểm mạnh và điểm yếu của cây dictionary rất tốt. Đây là môt loại nén trên cấu trúc cây.
+Nhìn chung, cây dictionary thì có một bất lợi là mỗi kí tự cần phải là một node con, nó sẽ dẫn đến một cây dictionary sâu hơn, và cây nén của dictionary có thể được cân bằng giữa điểm mạnh và điểm yếu của cây dictionary rất tốt. Đây là một loại nén trên cấu trúc cây.
 
 
 ![](../images/ch5-02-radix.png)
@@ -123,9 +123,9 @@ GET /support
 GET /marketplace_listing/plans/ohyes
 ```
 
-Phần route cuối cung được chúng tôi nghĩ ra, ngoại trừ việc tất cả các API route đến từ `api.github.io`
+Phần route cuối cùng được chúng tôi nghĩ ra, ngoại trừ việc tất cả các API route đến từ `api.github.io`
 
-## 5.2.3.1 Quá trình khởi tạo node
+### 5.2.3.1 Quá trình khởi tạo node
 
 Cây compression dictionary có thể được lưu trữ trong cấu trúc của Router trong httprouter sử dụng một số cấu trúc dữ liệu sau
 
@@ -150,9 +150,8 @@ PATCH
 DELETE
 ```
 
-Mỗi phương thức sẽ tương ứng với một cây từ điển nén độc lập và không chia sẻ dữ liệu với các cây khác. Đặc để khi định tuyến trên hoạt động, `PUT` và `GET` hai cây thay vì một.
-
-Đơn giản mà nói, lần đầu tiên chèn một phương thức vào route, node gốc sẽ tương ứng với một cây từ điển mới được tạo ra. Để làm như vậy, đầu tiên chúng ta dùng `PUT`
+Mỗi phương thức sẽ tương ứng với một cây từ điển nén độc lập và không chia sẻ dữ liệu với các cây khác. Đặc biệt đối với route chúng ta dùng ở trên, `PUT` và `GET` trên hai cây thay vì một.
+Đơn giản mà nói, lần đầu chèn một phương thức vào route, node gốc sẽ tương ứng với một cây từ điển mới được tạo ra. Để làm như vậy, đầu tiên chúng ta dùng `PUT`
 
 ```go
 r := httprouter.New()
@@ -160,8 +159,6 @@ r.PUT("/user/installations/:installation_id/repositories/:reposit", Hello)
 ```
 
 `PUT` sẽ ứng với node gốc được tạo ra. Cây có dạng
-
-
 
 ![](../images/ch5-02-radix-put.png)
 
@@ -171,57 +168,60 @@ Kiểu của mỗi node trong cây radix là `*httprouter.node`, để thuận t
 
 
 ```
-path: //Chuỗi trong đường dẫn ứng với node hiện tại
-wildChild: // Cho dù là nút con tham số, nghĩa là nút có ký tự đại diện hoặc :id
-nType: // Loại nút có bốn giá trị liệt kê
-  static
-  root
-  param
-  catch
-indices: 
+path: // đường dẫn ứng với node hiện tại
+wildChild: // cho dù là nút con tham số, nghĩa là nút có ký tự đại diện hoặc :id
+nType:    // loại nút có bốn giá trị liệt kê static/root/param/catchAll
+  static  // chuỗi bình thường cho các node không gốc
+  root    // nút gốc
+  param   // nút tham số ví dụ :id
+  catch   // các nút ký tự đại diện, chẳng hạn như * anyway
+indices:
 ```
 
+Dĩ nhiên, route của phương thức `PUT` chỉ là một đường dẫn. Tiếp theo, chúng ta theo một số đường dẫn GET trong ví dụ để giải thích về quy trình chèn vào một node con.
 
-Dĩ nhiên, route của phương thức `PUT` chỉ là một đường dẫn. Tiếp theo, chúng ta theo một số đường dẫn GET trong ví dụ để giải thích về tiến trình chèn vào một node con.
+### 5.2.3.2 Chèn node con
 
-## 5.2.3.2 Chèn node con
-
-Khi chúng ta chèn `GET /marketplace_listing/plans`, qúa trình PUT sẽ tương tự như trước
+Khi chúng ta chèn `GET /marketplace_listing/plans`, qúa trình `PUT` sẽ tương tự như trước
 
 ![](../images/ch5-05-radix-get-1.png)
 
-Bởi vì đường route đâì tiên không có tham số, đường dẫn chỉ được lưu trong node gốc. Do đó có thể xem là một node
+*Hình 5.4: Chèn node đầu tiên vào cây compressed dictionary*
 
+Bởi vì đường route đầu tiên không có tham số, đường dẫn chỉ được lưu trong node gốc. Do đó có thể xem là một node
 
 Sau đó chèn đường dẫn `GET /marketplace_listing/plans/:id/accounts` và một nhánh mới sẽ có tiền tố common, và có thể được inserted một cách trực tiếp đến node lá, sau đó kết quả trả về rất đơn giản, sau khi quá trình chèn vào cấu trúc cây được hoàn thành sẽ như sau
 
 ![](../images/ch5-02-radix-get-2.png)
- Inserting the compressed dictionary tree of the second node
+
+*Hình 5.5: Chèn node thứ hai vào cây compressed dictionary*
+
 
 Do đó, `:id` trong node là một con của string, và chỉ số vẫn chưa cần được xử lý.
 
 Trường hợp trên, rất đơn giản, và một vài định tuyến mới có thể được chèn trực tiếp vào node từ node gốc.
 
-## 5.2.3.3 Edge spliting
+### 5.2.3.3 Edge spliting
 
 Tiếp theo chúng ta chèn `GET /search` , sau đó sẽ sinh ra cây split tree như hình 5.6
 
-
 ![](../images/ch5-02-radix-get-3.png)
 
-*Figure 5-6 Inserting the third node causes the edge to split*
+*Hình 5.6 Chèn vào node thứ ba sẽ gây ra việc phân nhánh*
 
-Đường dẫn cũ và đường dẫn mới có điểm bắt đầu là `/` để phân tách, chuỗi truy vấn phải bắt đầu từ node gốc chính, sau đó một route là `search` cũng giống như một số node bên dưới node gốc của liked. Lúc này, bởi vì có nhiều nodes con. Node gốc sẽ chỉ ra index của node con, và trường thông tin này cần phải come in handy. "ms" biểu diễn sự bắt đầu của node con và m (marketplace) và s(search).
+Đường dẫn cũ và đường dẫn mới có điểm bắt đầu là `/` để phân tách, chuỗi truy vấn phải bắt đầu từ node gốc chính, sau đó một route là `search` được phân nhánh từ gốc. Lúc này, bởi vì có nhiều nodes con. Node gốc sẽ chỉ ra index của node con, và trường thông tin này cần phải come in handy. "ms" biểu diễn sự bắt đầu của node con và m (marketplace) và s(search).
 
 Chúng tôi dùng `GET /status` và `GET /support` để chèn sum vào cây. Lúc này, sẽ dẫn đến `search split` một lần nữa, trên node, và kết quả cuối cùng được nhìn thấy ở hình `5.7`
 
 ![](../images/ch5-02-radix-get-4.png)
 
-## 5.2.3.4 Subnode conflict handling
+*Hình 5.7 Sau khi chèn tất cả các node*
 
-Trong trường hợp này bản thân mỗi route sẽ chỉ là những chuỗi string, không có xung đột xảy ra. Điều có thể dẫn đến xung đột nếu route chứa wildcard (tương tự như :id) hoặc catchAll. Điều đó làm chúng ta đề cập ở trên:
+### 5.2.3.4 Subnode conflict handling
 
-Việc xử lý xung đột ở node con rất đơn giản, trong vài trường hợp:
+Trong trường hợp bản thân các routes chỉ là string thì sẽ không có xung đột xảy ra. Chỉ có thể dẫn tới xung đột nếu route chứa wildcard (tương tự như :id hoặc catchAll). Nó đã được đề cập từ trước.
+
+Sau đây là một số trường hợp dẫn tới xung đột
 
 1. When inserting a wildcard node, the parent node's children array is not empty and wildChild is set to false. For example: GET /user/getAlland GET /user/:id/getAddr, or GET /user/*aaaand GET /user/:id.
 2. When inserting a wildcard node, the parent node's children array is not empty and wildChild is set to true, but the parent card's wildcard child node has a different wildcard name to insert. For example: GET /user/:id/infoand GET /user/:name/info.
@@ -229,7 +229,6 @@ Việc xử lý xung đột ở node con rất đơn giản, trong vài trườn
 4. When the static node is inserted, the wildChild field of the parent node is set to true.
 5. When a static node is inserted, the child of the parent node is not empty, and the child node nType is catchAll.
 
-Khi mà xung đột xảy ra, nó sẽ bắt lỗi panic tại thời điểm ban đầu. Ví dụ, khi chèn vào một route chúng ta muốn `GET /marketplace_listing/plans/ohyes`, kiểu xung đột thứ tư sẽ xảy ra; đó là node cha
-marketplace_listing/plans/'s wildChild field is true.
+Khi mà xung đột xảy ra, có thể in ra lỗi bằng `panic`. Ví dụ, khi chèn vào một route chúng ta muốn: `GET /marketplace_listing/plans/ohyes`, kiểu xung đột thứ tư sẽ xảy ra; đó là node cha marketplace_listing/plans/'s có trường wildChild thiết lập thành true.
 
 
