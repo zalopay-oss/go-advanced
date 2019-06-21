@@ -47,13 +47,9 @@ Không có sự khác biệt giữa thời gian quá hạn của phần tử và
 
 *Hình 6-6 Time Wheel*
 
-Khi sử dụng time wheel để hiện thực bộ đếm thời gian, chúng ta cần xác định "tỷ lệ" của mỗi ô. Bánh xe thời gian có thể được tưởng tượng như một chiếc đồng hồ và trung tâm có kim giây theo chiều kim đồng hồ. Mỗi lần chúng ta chuyển sang một ô, chúng ta cần xem danh sách nhiệm vụ được gắn trên ô đó có nhiệm vụ đã đến hạn hay không.
-
-Structurally, the time wheel is similar to the hash table, if we define the hash algorithm as: trigger time % time wheel element size. Then this is a simple hash table. In the case of a hash collision, a timer for hooking the hash collision is used.
+Khi sử dụng time wheel để hiện thực bộ đếm thời gian, chúng ta cần xác định `tỷ lệ` của mỗi ô. Bánh xe thời gian có thể được tưởng tượng như một chiếc đồng hồ và trung tâm có kim giây theo chiều kim đồng hồ. Mỗi lần chúng ta chuyển sang một ô, chúng ta cần xem danh sách nhiệm vụ được gắn trên ô đó có nhiệm vụ đã đến hạn hay không.
 
 Về mặt cấu trúc, time wheel tương tự như bảng băm, nếu chúng ta định nghĩa thuật toán băm là: thời gian kích hoạt % số phần tử của time wheel. Thì đây là một bảng băm đơn giản. Trong trường hợp xung đột băm, một danh sách liên kết được sử dụng.
-
-In addition to this single-layer time wheel, there are some time wheels in the industry that use multiple layers of implementation, so I won't go into details here.
 
 Ngoài time wheel một lớp, có một số time wheel trong thực tế sử dụng nhiều lớp. Tuy nhiên, tôi sẽ không đi vào chi tiết ở đây.
 
