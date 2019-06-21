@@ -68,7 +68,7 @@ func register(req RegisterReq) error{
 }
 ```
 
-Thế là đoạn code trở nên "sạch" hơn và nhìn bớt kì cục. Mặc dù phương thức tái cấu trúc được sử dụng để làm cho code của quy trình validate trông thanh lịch, chúng ta vẫn phải viết một tập hợp các hàm tương tự như `validate()` cho mỗi yêu cầu `http` . Có cách nào tốt hơn để giúp chúng ta cải thiện hơn không? Câu trả lời là sử dụng validator.
+Thế là đoạn code trở nên "sạch" hơn và nhìn bớt kì cục. Mặc dù phương thức tái cấu trúc được sử dụng để làm cho code của quy trình validate trông thanh lịch hơn, chúng ta vẫn phải viết một tập các hàm tương tự như `validate()` cho mỗi yêu cầu `http`. Có cách nào tốt hơn để giúp chúng ta cải thiện hơn không? Câu trả lời là sử dụng validator.
 
 ## 5.4.2 Cải tiến với validator
 
