@@ -59,7 +59,9 @@ github.com/bwmarrin/snowflake Đây là một hiện thực Snowflake's Go khá 
 
 *Hình 6-2 thư viện snowflake*
 
-Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng như [ví dụ](../examples/ch6/ch6.1/example1/main.go) sau:
+Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng như ví dụ sau:
+
+[>> mã nguồn](../examples/ch6/ch6.1/1-snowflake/main.go)
 
 ```go
 
@@ -148,14 +150,13 @@ Redis 127.0.0.1:6379> SADD base64_encoding_of_last16bits MzI0Mgo=
 (integer) 0
 ```
 
-Nó cũng khá đơn giản để sử dụng như [ví dụ](../examples/ch6/ch6.1/example2/main.go) sau:
+[>> mã nguồn](../examples/ch6/ch6.1/2-sonyflake/main.go)
 <!-- và một số hàm với logic đơn giản bị bỏ qua: -->
 
 ```go
+package main
 
-Package main
-
-Import (
+import (
    "fmt"
    "os"
    "time"
@@ -163,11 +164,11 @@ Import (
    "github.com/sony/sonyflake"
 )
 
-Func getMachineID() (uint16, error) {
-   Var machineID uint16
-   Var err error
+func getMachineID() (uint16, error) {
+   var machineID uint16
+   var err error
    machineID = readMachineIDFromLocalFile()
-   If machineID == 0 {
+   if machineID == 0 {
       machineID, err = generateMachineID()
       If err != nil {
          Return 0, err
@@ -177,31 +178,31 @@ Func getMachineID() (uint16, error) {
    Return machineID, nil
 }
 
-Func checkMachineID(machineID uint16) bool {
+func checkMachineID(machineID uint16) bool {
    saddResult, err := saddMachineIDToRedisSet()
-   If err != nil || saddResult == 0 {
+   if err != nil || saddResult == 0 {
       Return true
    }
 
-   Err := saveMachineIDToLocalFile(machineID)
-   If err != nil {
+   err := saveMachineIDToLocalFile(machineID)
+   if err != nil {
       Return true
    }
 
    Return false
 }
 
-Func main() {
+func main() {
    t, _ := time.Parse("2006-01-02", "2018-01-01")
-   Settings := sonyflake.Settings{
+   settings := sonyflake.Settings{
       StartTime: t,
       MachineID: getMachineID,
       CheckMachineID: checkMachineID,
    }
 
    Sf := sonyflake.NewSonyflake(settings)
-   Id, err := sf.NextID()
-   If err != nil {
+   id, err := sf.NextID()
+   if err != nil {
       fmt.Println(err)
       os.Exit(1)
    }
