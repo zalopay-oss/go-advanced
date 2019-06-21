@@ -49,6 +49,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch5/ch5.1/brief-intro.go) 
+
 Nếu bạn không thể hoàn thành chương trình trên trong vòng 30 giây, hãy kiểm tra việc bạn gõ phím quá chậm. Đó là ví dụ để minh họa viết một chương trình định tuyến HTTP trong Go sẽ đơn giản như thế nào. Nếu bạn bắt gặp một trường hợp phức tạp hơn, như là một ứng dụng doanh nghiệp cần một tá interfaces, `net/http` sẽ không phù hợp nếu dùng trực tiếp.
 
 Hãy nhìn một dự án Kafka monitoring trong cộng đồng opensource

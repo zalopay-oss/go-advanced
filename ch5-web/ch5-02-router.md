@@ -221,13 +221,11 @@ Chúng tôi dùng `GET /status` và `GET /support` để chèn sum vào cây. L�
 
 Trong trường hợp bản thân các routes chỉ là string thì sẽ không có xung đột xảy ra. Chỉ có thể dẫn tới xung đột nếu route chứa wildcard (tương tự như :id hoặc catchAll). Nó đã được đề cập từ trước.
 
-Sau đây là một số trường hợp dẫn tới xung đột
+Sau đây là một số ví dụ dẫn tới xung đột
 
-1. When inserting a wildcard node, the parent node's children array is not empty and wildChild is set to false. For example: GET /user/getAlland GET /user/:id/getAddr, or GET /user/*aaaand GET /user/:id.
-2. When inserting a wildcard node, the parent node's children array is not empty and wildChild is set to true, but the parent card's wildcard child node has a different wildcard name to insert. For example: GET /user/:id/infoand GET /user/:name/info.
-3. When the catchAll node is inserted, the children of the parent node are not empty. For example: GET /src/abcand GET /src/*filename, or GET /src/:idand GET /src/*filename.
-4. When the static node is inserted, the wildChild field of the parent node is set to true.
-5. When a static node is inserted, the child of the parent node is not empty, and the child node nType is catchAll.
+1. `GET /user/getAll` và `GET /user/:id/getAddr`, hoặc `GET /user/*aaa` và `GET /user/:id`.
+2. `GET /user/:id/info` và `GET /user/:name/info`.
+3. `GET /src/abc` và `GET /src/*filename`, hoặc `GET /src/:id` và `GET /src/*filename`.
 
 Khi mà xung đột xảy ra, có thể in ra lỗi bằng `panic`. Ví dụ, khi chèn vào một route chúng ta muốn: `GET /marketplace_listing/plans/ohyes`, kiểu xung đột thứ tư sẽ xảy ra; đó là node cha marketplace_listing/plans/'s có trường wildChild thiết lập thành true.
 

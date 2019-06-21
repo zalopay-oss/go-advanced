@@ -175,7 +175,7 @@ Thông qua hàm `validation` được sinh ra, chúng sẽ được kết hợp 
 
 ## 4.6.2 REST interface
 
-gRPC service thường được dùng trong việc giao tiếp giữa các cluster trong hệ thống. Nếu một service được yêu cầu phải giao tiếp với bên ngoài, thì thường một REST interface sẽ được sinh ra để làm việc đó. Để thuận tiện, phía front-end qua Javascript và phía back-end sẽ giao tiếp với nhau thông qua REST interface. Cộng đồng opensource đã hiện thực project với tên gọi là grpc-gateway, nó giúp chúng ta chuyển các yêu cầu REST Http thành các yêu cầu gRPC HTTP2.
+gRPC service thường được dùng trong việc giao tiếp giữa các cluster trong hệ thống. Nếu một service được yêu cầu phải giao tiếp với bên ngoài, thì thường một REST interface sẽ được sinh ra để làm việc đó. Để thuận tiện, phía front-end qua Javascript và phía back-end sẽ giao tiếp với nhau thông qua REST interface. Cộng đồng opensource đã hiện thực project với tên gọi là grpc-gateway, nó giúp chúng ta chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
 
 Nguyên tắc hoạt động bên dưới của grpc-gateway sẽ như sau:
 
@@ -183,7 +183,9 @@ Nguyên tắc hoạt động bên dưới của grpc-gateway sẽ như sau:
 
 Hình 4-2: gRPC-Gateway workflow
 
-Bởi việc thêm vào những thông tin liên quan trong phần routing trong file Protobuf, những quá trình liên quan đến routing sẽ được sinh ra thông qua file được tùy biến trong mã nguồn plugin, và cuối cùng REST request sẽ chuyển tiếp đến những service back-end được chạy bên dưới.
+Chúng ta có thể **sinh grpc-gateway dựa trên docker** theo [hướng dẫn](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c) hoặc theo cách thông thường như sau:
+
+Bằng việc thêm vào những thông tin liên quan trong phần routing trong file Protobuf, những quá trình liên quan đến routing sẽ được sinh ra thông qua file được tùy biến trong mã nguồn plugin, và cuối cùng REST request sẽ chuyển tiếp đến những service back-end được chạy bên dưới.
 
 Phần mở rộng của routing sẽ được cung cấp thông qua metadata của Protobuf như sau
 
@@ -307,7 +309,7 @@ $ curl localhost:8080/post -X POST --data '{"value":"grpc"}'
 {"value":"Post: grpc"}
 ```
 
-Khi chúng ta publishing giao diện REST interface, chúng ta thông thường sẽ cung cấp một swagger file theo định dạng interface được mô tả bên dưới.
+Khi chúng ta publishing REST interface, chúng ta thông thường sẽ cung cấp một swagger file theo định dạng interface được mô tả bên dưới.
 
 ```
 $ go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
@@ -319,6 +321,7 @@ $ protoc -I. \
 ```
 
 Sau đó file `hello.swagger.json` sẽ được sinh ra. Trong trường hợp này, chúng ta có thể dùng `swagger-ui project` để cung cấp tài liệu `REST interface` và testing dưới dạng web pages.
+
 
 ## 4.6.3 Nginx
 
