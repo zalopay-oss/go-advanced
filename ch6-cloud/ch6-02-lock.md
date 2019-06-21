@@ -1,6 +1,8 @@
 # 6.2 Distributed lock
 
-Khi một chương trình đồng thời hoặc song song sửa đổi biến toàn cục, hành vi sửa đổi cần phải được lock để tạo một vùng tranh chấp. Tại sao bạn cần phải lock? Hãy xem điều gì xảy ra khi trong bài toán đếm số một cách đồng thời mà không lock ([ví dụ](../examples/ch6/ch6.2/1-counter-no-lock/main.go)):
+Khi một chương trình đồng thời hoặc song song sửa đổi biến toàn cục, hành vi sửa đổi cần phải được lock để tạo một vùng tranh chấp. Tại sao bạn cần phải lock? Hãy xem điều gì xảy ra khi trong bài toán đếm số một cách đồng thời mà không lock dưới đây.
+
+[>> mã nguồn](../examples/ch6/ch6.2/1-counter-no-lock/main.go)
 
 ```go
 package main
@@ -29,18 +31,20 @@ func main() {
 
 Khi ta chạy nhiều lần, các kết quả sẽ khác nhau:
 
-```shell
-❯❯❯ go run local_lock.go
+```sh
+$ go run local_lock.go
 945
-❯❯❯ go run local_lock.go
+$ go run local_lock.go
 937
-❯❯❯ go run local_lock.go
+$ go run local_lock.go
 959
 ```
 
 ## 6.2.1 Lock quá trình đang thực hiện
 
-Để có kết quả chính xác, lock phần code thực thi của bộ đếm([ví dụ](../examples/ch6/ch6.2/1-counter-lock/main.go)):
+Để có kết quả chính xác, lock phần code thực thi của bộ đếm như ví dụ dưới đây.
+
+[>> mã nguồn](../examples/ch6/ch6.2/2-counter-lock/main.go)
 
 ```go
 // ... bỏ qua phần trước
@@ -64,7 +68,7 @@ println(counter)
 Kết quả tính toán sẽ ổn định:
 
 ```shell
-❯❯❯ go run local_lock.go
+$ go run local_lock.go
 1000
 ```
 
@@ -72,7 +76,9 @@ Kết quả tính toán sẽ ổn định:
 
 Trong một số tình huống, chúng ta chỉ muốn một tiến trình thực thi một nhiệm vụ. Ở ví dụ đếm số ở trên, tất cả goroutines đều thực hiện thành công. Giả sử có goroutine thất bại trong khi thực hiện, chúng ta cần phải bỏ qua tiến trình của nó. Đây là lúc cần `trylock`.
 
-Trylock, như tên của nó, cố gắng lock và nếu lock thành công thì thực hiện các công việc tiếp theo. Nếu lock bị lỗi, nó sẽ không bị chặn lại mà sẽ trả về kết quả lock. Trong lập trình Go, chúng ta có thể mô phỏng một trylock với kênh có kích thước 1 ([ví dụ](../examples/ch6/ch6.2/3-try-lock)):
+Trylock, như tên của nó, cố gắng lock và nếu lock thành công thì thực hiện các công việc tiếp theo. Nếu lock bị lỗi, nó sẽ không bị chặn lại mà sẽ trả về kết quả lock. Trong lập trình Go, chúng ta có thể mô phỏng một trylock với channel có kích thước 1.
+
+[>> mã nguồn](../examples/ch6/ch6.2/3-try-lock/main.go)
 
 ```go
 package main
@@ -133,7 +139,7 @@ func main() {
 }
 ```
 
-Bởi vì logic của chúng ta giới hạn mỗi con goroutine chỉ thực hiện logic sau khi nó `Lock` thành công. Còn đối với `Unlock`, nó đảm bảo rằng kênh của Lock ở đoạn code trên phải trống, nên nó sẽ không bị chặn hoặc thất bại giữa chừng. Đoạn code trên sử dụng kênh có kích thước 1 để mô phỏng một tryLock. Về lý thuyết, bạn có thể sử dụng CAS trong thư viện chuẩn để đạt được chức năng tương tự với chi phí thấp hơn. Bạn có thể thử dùng nó.
+Bởi vì logic của chúng ta giới hạn mỗi con goroutine chỉ thực hiện logic sau khi nó `Lock` thành công. Còn đối với `Unlock`, nó đảm bảo rằng channel của Lock ở đoạn code trên phải trống, nên nó sẽ không bị chặn hoặc thất bại giữa chừng. Đoạn code trên sử dụng channel có kích thước 1 để mô phỏng một tryLock. Về lý thuyết, bạn có thể sử dụng CAS trong thư viện chuẩn để đạt được chức năng tương tự với chi phí thấp hơn. Bạn có thể thử dùng nó.
 
 Trong một hệ thống đơn, trylock không phải là một lựa chọn tốt. Bởi vì khi có một lượng lớn khóa goroutine có thể gây lãng phí tài nguyên trong CPU một cách vô nghĩa. Có một danh từ thích hợp được sử dụng để mô tả kịch bản khóa này: `livelock`.
 
@@ -142,6 +148,8 @@ Trong một hệ thống đơn, trylock không phải là một lựa chọn t�
 ## 6.2.3 Redis dựa trên setnx
 
 Trong ngữ cảnh phân tán, chúng ta cũng cần một loại logic "ưu tiên". Làm sao để có được nó? Chúng ta có thể sử dụng lệnh `setnx` do Redis cung cấp:
+
+[>> mã nguồn](../examples/ch6/ch6.2/4-redis-lock/main.go)
 
 ```go
 package main
@@ -212,7 +220,7 @@ func main() {
 Nhìn vào kết quả khi chạy:
 
 ```shell
-❯❯❯ go run redis_setnx.go
+$ go run redis_setnx.go
 <nil> lock result: false
 <nil> lock result: false
 <nil> lock result: false
@@ -233,6 +241,8 @@ Thông qua code và kết quả chạy thực tế, chúng ta có thể thấy r
 Do đó, chúng ta cần dựa vào thứ tự của các yêu cầu này để node Redis để thực hiện thao tác khóa chính xác. Nếu môi trường mạng của người dùng tương đối kém, thì họ chỉ cần tạo thêm yêu cầu.
 
 ## 6.2.4 Dựa trên ZooKeeper
+
+[>> mã nguồn](../examples/ch6/ch6.2/5-zookeeper-lock/main.go)
 
 ```go
 package main
@@ -267,13 +277,13 @@ Lock dựa trên ZooKeeper khác với lock dựa trên Redis ở chỗ nó sẽ
 
 Nguyên tắc này cũng dựa trên node Thứ tự tạm thời và quan sát API. Ví dụ, chúng ta sử dụng node `/lock`. Các Lock sẽ chèn giá trị của chính nó vào danh sách node bên dưới node này. Khi các node con ở dưới node này thay đổi, nó sẽ thông báo cho tất cả các chương trình quan sát giá trị của node. Lúc này, chương trình sẽ kiểm tra xem id của node con gần node hiện tại nhất có giống với giá trị của chính nó không. Nếu chúng giống nhau, lock thành công.
 
-This kind of distributed blocking lock is more suitable for distributed task scheduling scenarios, but it is not suitable for stealing scenarios with high frequency locking time. According to Google's Chubby paper, locks based on strong consistent protocols apply to the "coarse-grained" locking operation. The coarse grain size here means that the lock takes a long time. We should also consider whether it is appropriate to use it in our own business scenarios.
-
 Loại khóa chặn phân tán này phù hợp hơn cho các ngữ cảnh định thời tác vụ phân tán, nhưng nó không phù hợp trong các ngữ cảnh thường xuyên cần lock trong thời gian lâu. Theo bài báo Chubby của Google, các lock dựa trên các giao thức nhất quán cao áp dụng cho loại khóa "coarse-grained". Loại "coarse-grained" có nghĩa là khóa mất nhiều thời gian. Chúng ta nên xem xét liệu kháo này có phù hợp để sử dụng với mục đích của chúng ta hay không.
 
 ## 6.2.5 Dựa trên etcd
 
 Etcd là một thành phần của một hệ thống phân tán có chức năng giống với ZooKeeper và đã trở nên "hot" hơn trong hai năm qua. Dựa trên ZooKeeper, chúng tôi đã triển khai khóa chặn phân tán. Với etcd, chúng ta cũng có thể thực hiện các chức năng tương tự:
+
+[>> mã nguồn](../examples/ch6/ch6.2/6-etcd-lock/main.go)
 
 ```go
 package main
@@ -308,7 +318,7 @@ func main() {
 }
 ```
 
-Không có node Thứ tự như ZooKeeper trong etcd. Vì vậy, việc thực hiện lock của nó khác với ZooKeeper. Quá trình lock cho etcdsync của đoạn code mẫu ở trên cụ thể như sau:
+Không có node thứ tự như ZooKeeper trong etcd. Vì vậy, việc thực hiện lock của nó khác với ZooKeeper. Quá trình lock cho etcdsync của đoạn code mẫu ở trên cụ thể như sau:
 
 1. Kiểm tra xem có giá trị nào trong đường dẫn `/lock` không. Nếu có một giá trị, khóa đã bị người khác lấy.
 2. Nếu không có giá trị, nó sẽ ghi giá trị của chính nó vào. Khi ghi giá trị thành công thì lock đã thành công. Giả sử có một node đang ghi thì node khác đến ghi, điều này khiến khóa bị lỗi. Tiếp bước 3.
