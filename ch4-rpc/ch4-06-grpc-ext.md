@@ -1,6 +1,6 @@
 # 4.6 gRPC và Protobuf extensions
 
-Hiện nay, cộng đồng Open Source đã phát triển rất nhiều extensions quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn.
+Hiện nay, cộng đồng Open Source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn.
 
 ## 4.6.1 Validator
 
@@ -131,7 +131,7 @@ Từ những chú thích được định nghĩa trong `FieldValidator` chúng t
 Chúng ta dùng lệnh sau để sinh ra mã nguồn của hàm validation
 
 ```
-protoc  \
+$ protoc  \
     --proto_path=${GOPATH}/src \
     --proto_path=${GOPATH}/src/github.com/google/protobuf/src \
     --proto_path=. \
@@ -139,7 +139,7 @@ protoc  \
     hello.proto
 ```
 
->windows: Thay thế ${GOPATH} thành %GOPATH% .
+> windows: Thay thế ${GOPATH} thành %GOPATH% .
 
 Lệnh trên sẽ gọi chương trình `protoc-gen-govalidators` sau đó sinh ra file với tên `hello.validator.pb.go`
 
@@ -220,7 +220,7 @@ service RestService {
 Sau đó chúng ta cài đặt plugin `protoc-gen-grpc-gateway` với những lệnh sau:
 
 ```
-go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+$ go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 ```
 
 Sau đó chúng ta sinh ra mã nguồn xử lý routing cần cho grpc-gateway thông qua plugin sau:
