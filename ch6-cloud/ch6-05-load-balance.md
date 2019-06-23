@@ -81,7 +81,7 @@ Rõ ràng, thuật toán xáo trộn được đưa ra ở đây có xác suất
 
 ### 6.5.2.2 Sửa thuật toán xáo trộn
 
-Thuật toán fishing-yates đã chứng minh về mặt toán học, ý tưởng chính của việc chọn một giá trị ngẫu nhiên là đặt nó ở cuối mảng. Ta chọn ngẫu nhiên một giá trị trong mảng rồi đặt nó ở cuối mảng, và cứ tiếp tục. Ví dụ:
+Thuật toán fishing-yates đã chứng minh tính đúng đắn về mặt toán học. Ý tưởng chính của nó là chọn một giá trị ngẫu nhiên rồi đặt ở cuối mảng, và cứ thế tiếp tục. Ví dụ:
 
 ```go
 func shuffle(indexes []int) {
@@ -101,7 +101,6 @@ func shuffle(n int) []int {
 	return b
 }
 ```
-
 
 Hiện tại, chúng ta có thể sử dụng `rand.Perm` để lấy mảng chỉ mục mà chúng ta muốn.
 
@@ -171,9 +170,9 @@ func main() {
 
 Kết quả:
 
-`` `vỏ
+```shell
 map[0:224436 1:128780 5:129310 6:129194 2:129643 3:129384 4:129253]
 map[6:143275 5:143054 3:143584 2:143031 1:141898 0:142631 4:142527]
-`` `
+```
 
-Kết quả trên phù hợp với kết luận chúng tôi đã rút ra.
+Kết quả trên phù hợp với kết luận đã đưa ra.
