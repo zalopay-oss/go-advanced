@@ -6,8 +6,7 @@ Cơ sở dữ liệu quan hệ thường được sử dụng để hiện thự
 
 > OLTP has also been used to refer to processing in which the system responds immediately to user requests. An automated teller machine (ATM) for a bank is an example of a commercial transaction processing application. Online transaction processing applications have high throughput and are insert- or update-intensive in database management. These applications are used concurrently by hundreds of users. The key goals of OLTP applications are availability, speed, concurrency and recoverability. Reduced paper trails and the faster, more accurate forecast for revenues and expenses are both examples of how OLTP makes things simpler for businesses. However, like many modern online information technology solutions, some systems require offline maintenance, which further affects the cost-benefit analysis of an online transaction processing system.
 
-In the business scenario of the Internet, there are also scenarios where the real-time requirements are not high (a delay of many seconds can be accepted), but the query complexity is high. For example, in an e-commerce WMS system, or in most CRM or customer service systems with rich business scenarios, it may be necessary to provide random combination query functions for dozens of fields. The data dimensions of such a system are inherently numerous, such as a description of a piece of goods in an e-commerce WMS, which may have the following fields:
-Trong kịch bản kinh doanh trên Internet, có những kịch bản mà yêu cầu thời gian thực không cao (có thể chấp nhận độ trễ vài giây), nhưng độ phức tạp khi truy vấn cao. Ví dụ: trong hệ thống WMS của thương mại điện tử hoặc trong hầu hết các hệ thống CRM hoặc dịch vụ khách hàng có kịch bản kinh doanh đa dạng, nó có thể cần phải cung cấp các hàm truy vấn kết hợp ngẫu nhiên cho rất nhiều trường. Kích thước dữ liệu của một hệ thống như vậy vốn đã rất nhiều, chẳng hạn như mô tả về một phần hàng hóa trong WMS thương mại điện tử, có thể có các trường sau:
+Trong các kịch bản kinh doanh trực tuyến, có những kịch bản mà yêu cầu tính thời gian thực không cao (có thể chấp nhận độ trễ vài giây), nhưng độ phức tạp cho việc truy vấn lại cao. Ví dụ: trong hệ thống WMS của thương mại điện tử, trong hầu hết các hệ thống CRM hoặc dịch vụ khách hàng phục vụ nhu cầu kinh doanh phức tạp. Nó cần phải cung cấp các hàm truy vấn kết hợp cho rất nhiều trường. Kích thước dữ liệu của một hệ thống như vậy vốn đã rất nhiều, chẳng hạn như mô tả về một hàng hóa trong WMS thương mại điện tử, có thể có các trường sau:
 
 > Warehouse id, warehousing time, location id, storage shelf id, warehousing operator id, outbound operator id, inventory quantity, expiration time, SKU type, product brand, product category, number of internals
 
@@ -16,18 +15,16 @@ Ngoài các thông tin trên, nếu hàng hóa được lưu thông trong kho. C
 Hãy tưởng tượng nếu chúng ta đang điều hành một công ty thương mại điện tử lớn với hàng chục triệu đơn hàng mỗi ngày, sẽ rất khó để truy vấn và xây dựng index thích hợp trong cơ sở dữ liệu này.
 
 In CRM or customer service systems, there is often a need to search by keyword, and large Internet companies receive tens of thousands of user complaints every day. Considering the source of the incident, the user's complaint must be at least 2 to 3 years. It is also tens of millions or even hundreds of millions of data. Performing a like query based on the keyword may hang the entire MySQL directly.
-Trong CRM hoặc hệ thống dịch vụ khách hàng, ta thường có nhu cầu tìm kiếm theo từ khóa, và các công ty Internet lớn nhận được hàng chục ngàn khiếu nại của người dùng mỗi ngày. Xem xét nguồn gốc của vụ việc, khiếu nại của người dùng phải có ít nhất 2 đến 3 năm. Có đến hàng chục triệu hoặc thậm chí hàng trăm triệu dữ liệu. Thực hiện một truy vấn "like" dựa trên từ khóa có thể trực tiếp làm treo toàn bộ MySQL.
+Trong CRM hoặc hệ thống dịch vụ khách hàng, ta thường có nhu cầu tìm kiếm theo từ khóa, và các công ty lớn nhận được hàng chục ngàn khiếu nại của người dùng mỗi ngày. Từ đó ta thấy được các khiếu nại của người dùng phải có ít nhất 2 đến 3 năm mới xử lý được. Có đến hàng chục triệu hoặc thậm chí hàng trăm triệu dữ liệu tồn tại trong hệ thống. Thực hiện một truy vấn "like" dựa trên từ khóa có thể trực tiếp làm treo toàn bộ MySQL.
 
-Lúc này, chúng tôi cần một công cụ tìm kiếm để cứu lấy trò chơi trên.
+Lúc này, chúng tôi cần một công cụ tìm kiếm để vượt qua được thách thức trên.
 
 ## Công cụ tìm kiếm
 
-Elasticsearch is the leader of the open source distributed search engine, which relies on the Lucene implementation and has made many optimizations in deployment and operation and maintenance. Building a distributed search engine today is much easier than the Sphinx era. Simply configure the client IP and port.
-Elaticsearch(ES) là đi đầu trong các công cụ tìm kiếm phân tán nguồn mở, dựa trên việc hiện thực Lucene và có nhiều tối ưu hóa trong triển khai, vận hành và bảo trì. Xây dựng một công cụ tìm kiếm phân tán ngày nay dễ dàng hơn nhiều so với thời đại Sphinx. Đơn giản chỉ cần cấu hình IP và cổng cho client.
+Elaticsearch(ES) là đi đầu trong các công cụ tìm kiếm phân tán nguồn mở, dựa trên việc hiện thực Lucene và có nhiều tối ưu hóa trong triển khai, vận hành và bảo trì. Xây dựng một công cụ tìm kiếm phân tán ngày nay dễ dàng hơn nhiều so với thời đại dùng Sphinx. Ta đơn giản chỉ cần cấu hình IP và cổng cho client.
 
 ### Inverted list
 
-Although es is customized for the search scenario, as mentioned earlier, es is often used as a database in practical applications because of the nature of the inverted list. You can understand the inverted index with a simpler perspective:
 Mặc dù ES được thiết kế cho việc tìm kiếm, nhưng ES thường được sử dụng làm cơ sở dữ liệu trong các ứng dụng vì bản chất của inverted list. Có thể dễ dàng hiểu được inverted index như sau:
 
 ![posting-list](../images/ch6-posting_list.png)
