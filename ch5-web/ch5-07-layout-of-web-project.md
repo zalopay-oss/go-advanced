@@ -8,7 +8,7 @@ MVC frameworks là những frameworks rất phổ biến trong việc phát tri�
 
 Trải qua quá trình phát triển, phần front-end của chương trình ngày càng phức tạp. Để phần kỹ thuật tốt hơn, những phần như thế sẽ thường phân chia ra thành nhiều kiến trúc con. Có thể nhìn thấy rằng, trước và sau khi phân chia lớp V (view) từ mô hình MVC thành các thành phần, một back-end project thường chỉ có lớp C và M. Phần front và back sẽ tương tác lẫn nhau thông qua ajax. Thỉnh thoảng, ta cần giải quyết vấn đề cross-domain, và đã có những giải pháp sẵn rồi. Hình 5.13 sẽ là một lưu đồ của hệ thống từ front tới back.
 
-![](../images/ch5-08-frontend-backend.png)
+![](../images/ch5-07-frontend-backend.png)
 
 *Hình 5-13  Separation interaction diagram*
 
@@ -23,13 +23,13 @@ Cách hiểu này hiển nhiên có vấn đề. Một business process cũng th
 Mỗi lớp sẽ thực thi công việc của nó, sau đó xây dựng lên cấu trúc của các phần parameters để truyền cho các lớp kế tiếp bằng việc tạo request từ context hiện tại
 , và sau đó gọi hàm để thực thi lớp tiếp theo. Sau khi công việc hoàn thành, kết quả của quá trình sẽ được trả về lớp đầu vào gọi nó.
 
-![](../images/ch5-08-controller-logic-dao.png)
+![](../images/ch5-07-controller-logic-dao.png)
 
 *Hình 5-14  Request processing flow*
 
 Sau khi chia ra ba lớp của CLD, chúng ta cần phải hỗ trợ nhiều giao thức tại cùng một lúc trong lớp C.  Thrift, gRPC và http được đề cập từ những chương trước, và chúng ta chỉ cần một trong số đó để đảm nhận công việc này. Thỉnh thoảng, chúng ta cần hỗ trợ hai trong số chúng, như là cùng một interface. Chúng ta cần cả hai efficient thrift và http hooks cho việc debugging. Do đó, trong CLD, một số lớp giao thức được phân tách có nhiệm vụ xử lý chi tiết trong nhiều giao thức tương tác đa dạng. Quá trình xử lý requesting sẽ như hình 5.15
 
-![](../images/ch5-08-control-flow.png)
+![](../images/ch5-07-control-flow.png)
 
 Do đó, entry function trong Controller sẽ như sau
 
@@ -78,7 +78,7 @@ Người đọc thông minh có thể nhìn thấy rằng, chi tiết của vi�
 Hãy nhìn vào cấu trúc của HTTP, cấu trúc này sẽ tương ứng với thrift, và một cấu trúc protocol độc lập khác của chúng ta.
 
 ```go
-// http 请求结构体
+// http request model
 type CreateOrder struct {
     OrderID   int64  `json:"order_id" validate:"required"`
     UserID    int64  `json:"user_id" validate:"required"`
@@ -86,7 +86,7 @@ type CreateOrder struct {
     Addr      string `json:"addr" validate:"required"`
 }
 
-// thrift 请求结构体
+// thrift request model
 type FeatureSetParams struct {
     DriverID  int64  `thrift:"driverID,1,required"`
     OrderID   int64  `thrift:"OrderID,2,required"`
@@ -119,7 +119,7 @@ type FeatureSetParams struct {
 
 Sau đó mã nguồn thrift được sinh ra từ IDL và HTTP requests được sinh ra từ cấu trúc.
 
-![](../examples/ch5-08-code-gen.png)
+![](../images/ch5-07-code-gen.png)
 
 *Hình 5-16 Creating a project entry through the Go code definition structure*
 
