@@ -498,7 +498,7 @@ func main() {
 
 Đầu tiên chúng ta gọi `GenerateNatural()` để tạo ra chuỗi số tự nhiên nguyên thủy nhất bắt đầu bằng 2. Sau đó bắt đầu một chu kỳ 100 lần lặp. Ở đầu mỗi lần lặp, số đầu tiên trong channel phải là số nguyên tố. Ta đọc và in ra số này  trước. Sau đó, dựa trên chuỗi còn lại trong channel và lọc các số nguyên tố tiếp theo với các số nguyên tố hiện được trích xuất dưới dạng sàng. Các channel tương ứng với các sàng số nguyên tố khác nhau được kết nối thành chuỗi.
 
-## 1.6.7 Thoát khỏi  an toàn quá trình đồng thời
+## 1.6.7 Thoát khỏi quá trình đồng thời một cách an toàn
 
 Đôi khi chúng ta cần thoát khỏi Goroutine đang được thực thi, đặc biệt là khi nó đang làm việc sai hướng. Golang không cung cấp cách chấm dứt trực tiếp Goroutine, vì điều này sẽ khiến biến chung được chia sẻ giữa các goroutine ở trạng thái không xác định. Nhưng điều gì sẽ xảy ra nếu chúng ta muốn loại hai hoặc nhiều Goroutines?
 
