@@ -1,7 +1,7 @@
 # 5.1 Giới thiệu về Web Development
 
 Bởi vì gói thư viện `net/http` của Golang chỉ hỗ trợ những hàm routing và hàm chức năng cơ bản. Cho nên trong cộng đồng Golang có một ý tưởng phổ biến là viết thêm các API hỗ trợ routing khác ngoài `net/http`. Theo ý kiến của tôi, nếu các project routing của bạn có những đặc điểm sau: URI cố định, và tham số không truyền thông qua URI, thì nên dùng thư viện chuẩn là đủ. Nhưng với những ngữ cảnh phức tạp hơn, thư viện chuẩn `http` vẫn còn một vài điểm yếu. Ví dụ, xét các route sau:
-
+ 
 ```
 GET   /card/:id
 POST  /card/:id
