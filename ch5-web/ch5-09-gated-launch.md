@@ -206,6 +206,8 @@ func murmur64() uint64 {
 }
 ```
 
+[>> mã nguồn](../examples/ch5/ch5.9/3-2-hash-algorithm/murmur3.go)
+
 Viết benchmark test cho các thuật toán đó
 
 ```go
@@ -237,6 +239,9 @@ func BenchmarkMurmurHash64(b *testing.B) {
     }
 }
 ```
+
+[>> mã nguồn](../examples/ch5/ch5.9/3-2-hash-algorithm/murmur3_test.go)
+
 
 Sau đó xem kết quả chạy như sau
 
@@ -285,6 +290,9 @@ func murmur64(p string) uint64 {
     return murmur3.Sum64([]byte(p))
 }
 ```
+
+[>> mã nguồn](../examples/ch5/ch5.9/3-3-hash-algorithm/main.go)
+
 
 Hãy xem kết quả thực thi
 

@@ -1,4 +1,4 @@
-# 5.7 Layout Common large web project layering (bố cục thông thường của các dự án web lớn)
+# 5.7 Bố cục thông thường của các dự án web lớn
 
 MVC frameworks là những frameworks rất phổ biến trong việc phát triển web. Khái niệm MVC được đề xuất đầu tiên bởi **Trygve Reenskaug** vào năm 1978. Để thuận tiện cho việc mở rộng ứng dụng GUI (graphical user interface), chương trình được chia thành:
 
@@ -18,20 +18,22 @@ Cách hiểu này hiển nhiên có vấn đề. Một business process cũng th
 
 1. **Controller** tương tự như ở trên, là một điểm đầu vào của service, chịu trách nhiệm để xử lý logic routing, kiểm tra tham số, chuyển tiếp request.
 2. **Logic/Service**  là lớp logical (service), nó thường là một điểm vào của business logic. Có thể xem rằng tất cả những tham số request sẽ phải được hợp lệ từ đây, Business logic và business processes cũng nằm trong lớp này. Nó thường được gọi là Business Rules trong những thiết kế thường thấy.
-3. **DAO/Responsitory**, lớp này thường có vai trò chính để thao tác với data (dữ liệu) và storage (vùng nhớ). Về cơ bản phần storage được gửi đến lớp Logic để dùng trong các hàm đơn giản, từ interface. Có trách nhiệm nhất quán dữ liệu.
+3. **DAO/Responsitory**, lớp này thường có vai trò chính để thao tác với data (dữ liệu) và storage (vùng nhớ). Về cơ bản phần storage được gửi đến lớp Logic để dùng trong các hàm đơn giản, interface form. Làm việc với dữ liệu bền vững.
 
 Mỗi lớp sẽ thực thi công việc của nó, sau đó xây dựng lên cấu trúc của các phần parameters để truyền cho các lớp kế tiếp bằng việc tạo request từ context hiện tại
-, và sau đó gọi hàm để thực thi lớp tiếp theo. Sau khi công việc hoàn thành, kết quả của quá trình sẽ được trả về lớp đầu vào gọi nó.
+, và sau đó gọi hàm để thực thi lớp tiếp theo. Sau khi công việc hoàn thành, kết quả của quá trình sẽ được trả về lớp ban đầu gọi nó.
 
 ![](../images/ch5-07-controller-logic-dao.png)
 
 *Hình 5-14  Request processing flow*
 
-Sau khi chia ra ba lớp của CLD, chúng ta cần phải hỗ trợ nhiều giao thức tại cùng một lúc trong lớp C.  Thrift, gRPC và http được đề cập từ những chương trước, và chúng ta chỉ cần một trong số đó để đảm nhận công việc này. Thỉnh thoảng, chúng ta cần hỗ trợ hai trong số chúng, như là cùng một interface. Chúng ta cần cả hai efficient thrift và http hooks cho việc debugging. Do đó, trong CLD, một số lớp giao thức được phân tách có nhiệm vụ xử lý chi tiết trong nhiều giao thức tương tác đa dạng. Quá trình xử lý requesting sẽ như hình 5.15
+Sau khi chia ra ba lớp của CLD, chúng ta cần phải hỗ trợ nhiều giao thức tại cùng một lúc trong lớp C.  Thrift, gRPC và HTTP được đề cập từ những chương trước, và chúng ta chỉ cần một trong số đó để đảm nhận công việc này. Thỉnh thoảng, chúng ta cần hỗ trợ hai trong số chúng, như là cùng một interface. Chúng ta cần cả hai efficient thrift và http hooks cho việc debugging. Do đó, thêm vào CLD, các lớp giao thức được phân tách được yêu cầu để xử lý chi tiết các giao thức tương tác đa dạng. Quá trình xử lý requesting sẽ như hình 5.15
+
+
 
 ![](../images/ch5-07-control-flow.png)
 
-Do đó, entry function trong Controller sẽ như sau
+Entry function trong Controller sẽ như sau
 
 ```go
 func CreateOrder(ctx context.Context, req *CreateOrderStruct) (
@@ -41,9 +43,9 @@ func CreateOrder(ctx context.Context, req *CreateOrderStruct) (
 }
 ```
 
-CreateOrder có hai parameters. ctx được dùng để truyền vào tham số toàn cục ví dụ `trace_id`, nó yêu cầu một chuỗi các request. Req lưu những thông tin về input mà chúng ta cần để tạo ra một order. Kết quả trả về là cấu trúc response và một error. Có thể nói rằng sau khi mã nguồn trên thực thi trên lớp Controller, sẽ không có mã nguồn nào liên kết với "protocol". Bạn không thể tìm nó ở đây, không thể tìm thấy `http.Request`, hoặc `http.ResponseWriter` hoặc bất cứ gì liên quan đến thrift hoặc gRPC.
+`CreateOrder` có hai parameters (tham số): `ctx` được dùng để truyền tham số toàn cục vào, ví dụ `trace_id` nó yêu cầu một serial request. `req` nắm giữ tất cả thông tin về input mà chúng ta cần để tạo ra một `order`. Kết quả trả về là cấu trúc `response` và một `error`. Có thể nói rằng sau khi mã nguồn trên thực thi trên lớp Controller, sẽ không có mã nguồn nào liên kết với "protocol". Bạn không thể tìm nó ở đây, không thể tìm thấy `http.Request`, hoặc `http.ResponseWriter` hoặc bất cứ gì liên quan đến `thrift` hoặc `gRPC`.
 
-Tại lớp protocol, một mã nguồn sẽ thao tác với giao thức http như sau
+Tại lớp protocol, một mã nguồn sẽ thao tác với giao thức HTTP như sau
 
 ```go
 // defined in protocol layer
@@ -71,10 +73,9 @@ func HTTPCreateOrderHandler(wr http.ResponseWriter, r *http.Request) {
 }
 ```
 
-Theo giả thuyết, chúng ta có thể dùng cùng một cấu trúc request để kết hợp nhiều tags để đạt được cấu trúc tái sử dụng cho nhiều giao thức. Không may, trong thrift, một cấu trúc request sẽ tự động được sinh ra từ IDL. Nội dụng ở trong sẽ tự động sinh ra trong file `ttypes.go`. Về mặt cấu trúc, gRPC cũng tương tự. Một phần của mã nguồn vẫn cần thiết.
+Theo giả thuyết, chúng ta có thể dùng cùng một cấu trúc request kết hợp nhiều tags khác nhau để đạt được một cấu trúc có thể tái sử dụng cho nhiều giao thức. Không may, trong thrift, một cấu trúc request sẽ tự động được sinh ra từ IDL (Interface Description Language). Nội dụng ở trong sẽ tự động sinh ra trong file `ttypes.go`. Ta cần kết hợp những cấu trúc được sinh ra với logic của chúng ta thành đầu vào thrift. Về mặt cấu trúc, gRPC cũng tương tự. Phần mã nguồn này vẫn cần có.
 
-Người đọc thông minh có thể nhìn thấy rằng, chi tiết của việc thao tác với protocol thực sự là một quá trình lặp đi lặp lại công việc. Việc xử lý mỗi interface trong lớp protocol không gì hơn là đọc dữ liệu từ một cấu trúc protocol cụ thể (ví dụ `http.Request`, thrift wrapped out) và kết hợp chúng với cấu trúc protocol độc lập của chúng ta, và map cấu trúc này tới Controller entry. Mã nguồn sẽ thực sự trông giống nhau. Ngoại trừ tuân theo một mẫu nào đó, sau đó có thể đơn giản tính trừu tượng của các mẫu và dùng hàm để sinh ra mã nguồn để trích xuất những giao thức xử lý phức tạp từ nội dung công việc.
-
+Người đọc thông minh có thể nhìn thấy rằng, chi tiết của việc thao tác với protocol thực sự là một quá trình lặp đi lặp lại công việc. Việc xử lý mỗi interface trong lớp protocol không gì hơn là đọc dữ liệu từ một cấu trúc protocol cụ thể (ví dụ `http.Request`, thrift wrapped out) và kết hợp chúng với cấu trúc protocol độc lập của chúng ta, và đưa cấu trúc này tới Controller entry. Mã nguồn sẽ thực sự trông giống nhau. Hầu hết chúng sẽ tuân theo một khuôn mẫu nào đó, chúng ta có thể phớt lờ đi việc hiện thực protocol bên dưới, và tập trung vào xử lý business logic trong các khuôn mẫu hàm được sinh ra sẵn.
 Hãy nhìn vào cấu trúc của HTTP, cấu trúc này sẽ tương ứng với thrift, và một cấu trúc protocol độc lập khác của chúng ta.
 
 ```go
@@ -104,7 +105,7 @@ type CreateOrderParams struct {
 }
 ```
 
-Để sinh ra HTTP và thrift entry code, chúng ta cần thông qua một cấu trúc mã nguồn. Nhìn vào ba cấu trúc được định nghĩa ở trên, thực tế, chúng ta có thể dùng cấu trúc để sinh ra IDL của thrift, và "IDL của HTTP service(cấu trúc định nghĩa với json hoặc form related tages)". Cấu trúc ban đầu này có thể được đặt thêm vào HTTP tags và thrift tags.
+Để sinh ra HTTP và thrift entry code, chúng ta cần thông qua một cấu trúc mã nguồn. Nhìn vào ba cấu trúc được định nghĩa ở trên, thực tế, chúng ta có thể dùng một trong số đó để sinh ra IDL của thrift, và "IDL của HTTP service(cấu trúc định nghĩa với json hoặc form related tages)". Từ cấu trúc ban đầu này có thể được đặt thêm vào HTTP tags và thrift tags cùng nhau.
 
 
 ```go
@@ -123,7 +124,7 @@ Sau đó mã nguồn thrift được sinh ra từ IDL và HTTP requests được
 
 *Hình 5-16 Creating a project entry through the Go code definition structure*
 
-Đối với phương tiện để tạo, bạn có thể đọc mã nguồn Go trong tệp văn bản thông qua Trình phân tích cú pháp được xây dựng bằng ngôn ngữ Go, sau đó tạo mã đích theo AST hoặc đơn giản là biên dịch cấu trúc nguồn và mã Trình tạo với nhau. Bạn có thể có cấu trúc làm tham số đầu vào cho Trình tạo (sẽ đơn giản hơn).
+Đối với phương tiện để tạo, bạn có thể đọc mã nguồn Go trong tệp văn bản thông qua Parser được xây dựng bằng ngôn ngữ Go, sau đó tạo mã đích theo AST hoặc đơn giản là biên dịch cấu trúc nguồn và mã Parser với nhau. Bạn có thể có cấu trúc làm tham số đầu vào cho Parser (sẽ đơn giản hơn).
 
 Dĩ nhiên, ý tưởng này không phải là lựa chọn duy nhất. Chúng ta có thể sinh ra một tập các cấu trúc HTTP interface bằng việc parsing IDL của thrift. Nếu chúng ta làm như vậy, toàn bộ quá trình sẽ như hình bên dưới
 
@@ -138,7 +139,7 @@ Bây giờ, workflow đã được định hình, chúng ta có thể nhận ra 
 Ví dụ, trong môi trường sinh mã đã được giới thiệu ở chương Web, cũng như user có thể sinh ra SDK với vài cú click chuột, người đọc có thể tự tìm hiểu.
 
 
-Mặc dù chúng ta đã thành công trong việc cho phép projects của chúng ta hỗ trợ nhiều giao thức tại portal, chúng vẫn có một số vấn đề cần được giải quyết. Việc phân lớp được mô tả trong chương này không dùng middleware để phân lớp project. Nếu chúng ta xem xét middleware, đâu là quá trình requesting? Nhìn vào hình 5-18 bên dưới.
+Mặc dù chúng ta đã thành công trong việc cho phép projects hỗ trợ nhiều giao thức tại portal, vẫn có một số vấn đề cần được giải quyết. Việc phân lớp được mô tả trong chương này không dùng middleware để phân lớp project. Nếu chúng ta xem xét middleware, đâu là quá trình requesting? Nhìn vào hình 5-18 bên dưới.
 
 ![](../images/ch5-08-control-flow-2.png)
 

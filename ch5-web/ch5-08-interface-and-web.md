@@ -1,20 +1,17 @@
-# 5.8 Interface and Table Driven Development
+# 5.8 Interface và Table Driven Development
 
-Trong dự án web, bạn sẽ thường bắt gặp sự thay đổi về môi trường dependency bên ngoài, như là:
+Trong dự án web, bạn sẽ thường bắt gặp sự thay đổi từ môi trường dependency bên ngoài, như là:
 
 1. Một hệ thống storage của công ty bị hư hỏng trong thời gian dài, và bây giờ không có người bảo trì nó. Hệ thống mới thì không có sự tích hợp trơn tru trên dòng, nhưng cuối cùng cũng phải hoàn thành, yêu cầu phải chuyển giao trong vòng N ngày.
 2. Hệ thống cũ của platform department bị hư hỏng trong thời gian dài, và bây giờ không có ai bảo trì chúng. Đó là một câu chuyện buồn. Hệ thống mới không tương thích với interface cũ, nhưng cuối cùng nó cũng bị sụp đổ, và yêu cầu phải chuyển giao trong vòng N ngày.
 3. Hệ thống hàng đợi tin tức của công ty bị hư hỏng. Những công nghệ mới không tương thích với nó, nhưng cuối cùng cũng phải thực hiện và chuyển giao trong vòng nửa năm.
 
-Bây giờ, bạn có thể thấy rằng, những external dependencies phải luôn được nâng cấp vì quyền lợi của chúng ta, và không muốn tương thích về phía trước, và sau đó đưa cho chúng ta một tối hậu thư. Nếu phòng ban của bạn đã bảo hòa, và người lãnh đạo rất cương quyết, do đó thỉnh thoảng các bên phải bắt buộc tương thích với nhau. Nhưng thế giới không cần phải như con người, mặc dù người lãnh đạo của chúng ta rất cương quyết, sự lãnh đạo của độc giả và bạn bè vẫn có thể được công nhận.
 
-Chúng ta sẽ nghĩ làm thế nào để  giảm bớt vấn đề.
-
-## 5.8.1 Business System Development Process (Quy trình phát triển hệ thống doanh nghiệp)
+## 5.8.1 Quy trình phát triển hệ thống doanh nghiệp
 
 Miễn là giá trị của các công ty Internet có thể sống trong vòng ba năm, vấn đề chính mà những người kỹ sư phải đối mặt là mã nguồn phình to. Sau khi mã nguồn hệ thống bị lớn lên, những phần của hệ thống có thể không liên quan đến business process của chúng ta có thể được tháo rời và không đồng bộ. Đâu là những phần liên quan đến business, như là thống kê, chống gian lận, tiếp thị, tính toán giá, cập nhật trạng thái user, v,v,.. Những yêu cầu đó, thường sẽ phụ thuộc vào dữ liệu trong main process nhưng chúng chỉ là một nhánh bên của main process, và chúng khép kín.
 
-Tại thời gian này, chúng ta có thể tháo rời những nhánh bên và deploy, phát triển và bảo trì chúng trong một hệ thống độc lập. Sự trì hoãn của những quá trình song song này rất nhạy cảm. Ví dụ, nếu user click vào button trên interface và cần phải trả về ngay lặp tức (tính toán giá, thanh toán), sau đó RPC comunication trong main process system được yêu cầu, và khi comunication faileds, kết quả có thể được trực tiếp trả về. Về phía user, nếu việc trì hoãn không quá nhạy cảm, như là hệ thống xổ số, và kết quả được công bố sau đó, hoặc hệ thống thống kê không cần phải theo thời gian thực, thì không cần phải hiện thực một tiến trình RPC cho mỗi system trong main process. Chúng ta chỉ cần package dữ liệu cần trong downstream vào trong một message và chuyển nó tới message queue. Những thứ tiếp theo sẽ không có gì để làm trong main process (dĩ nhiên, quá trình theo dõi người dùng vẫn cần phải được thực hiện).
+Tại thời gian này, chúng ta có thể tháo rời những nhánh bên và deploy, phát triển và bảo trì chúng trong một hệ thống độc lập. Sự trì hoãn của những quá trình song song này rất nhạy cảm. Ví dụ, nếu user click vào button trên interface và cần phải trả về ngay lặp tức (tính toán giá, thanh toán), sau đó RPC communication trong main process system được yêu cầu, và khi comunication faileds, kết quả có thể được trực tiếp trả về. Về phía user, nếu việc trì hoãn không quá nhạy cảm, như là hệ thống xổ số, và kết quả được công bố sau đó, hoặc hệ thống thống kê không cần phải theo thời gian thực, thì không cần phải hiện thực một tiến trình RPC cho mỗi system trong main process. Chúng ta chỉ cần package dữ liệu cần trong downstream vào trong một message và chuyển nó tới message queue. Những thứ tiếp theo sẽ không có gì để làm trong main process (dĩ nhiên, quá trình theo dõi người dùng vẫn cần phải được thực hiện).
 
 Mặc dù, một số vấn đề có thể được giải quyết thông qua việc tháo gỡ và không đồng bộ, chúng không thể được giải quyết tất cả. Trong quá trình phát triển business, những modules trong nguyên lý đơn trách nhiệm sẽ trở nên phức tạp hơn, chúng vẫn là một xu hướng không thể tránh khỏi. Nếu một thứ trở nên phức tạp, sau đó việc gỡ bỏ và không đồng bộ  không hoạt động. Chúng ta vẫn phải làm một số thứ nhất định của việc đóng gói abstraction trong bản thân nó.
 
@@ -52,9 +49,9 @@ func CreateOrder() {
 
 Khi đọc business process code, chúng ta cần đọc tên function để biết được chúng làm gì trong tiến trình. Nếu bạn cần phải thay đổi một số chi tiết, và sau đó đi đến mỗi bước business để xem một process cụ thể. Một business process code được viết tốt sẽ đẩy tất cả các processes vào một số hàm, trả về hàng trăm hoặc hàng ngàn dòng functions. Kiểu spaghetti-style code này khi đọc hoặc bảo trì rất kinh khủng. Trong development process, một package đơn giản như trên sẽ được thực thi ngay lập tức nếu đó là một điều kiện.
 
-## 5.8.3 Using interfaces to abstract
+## 5.8.3 Dùng interfaces để trừu tượng hóa
 
-Trong thời gian đầu của quá trình phát triển doanh nghiệp, không phù hợp để đưa interfaces vào. Trong nhiều trường hợp, business process thay đổi rất nhanh. Việc đưa vào các interfaces quá sớm có thể làm tăng độ phức tạp của hệ thống businesses bằng việc thêm vào các phân tầng không cần thiết, kết quả dẫn đến sự phủ định hoàn toàn của mỗi sử đổi.
+Trong thời gian đầu của quá trình phát triển doanh nghiệp, không phù hợp để đưa interfaces vào. Trong nhiều trường hợp, business process thay đổi rất nhanh. Việc đưa vào các interfaces quá sớm có thể làm tăng độ phức tạp của hệ thống businesses bằng việc thêm vào các phân tầng không cần thiết, kết quả dẫn đến sự phủ định hoàn toàn của mỗi sửa đổi.
 
 Khi hệ thống business phát triển tới mức độ nhất định, và main process đã ổn định, interface có thể được dùng cho việc trừu tượng hóa. Tính ổn định có nghĩa là hầu hết các bước của business trong main process sẽ phải được xác định. Nếu như những sự thay đổi được tạo ra, thì sẽ không có thay đổi theo quy mô lớn, nhưng chỉ một phần nhỏ được sửa lại, hoặc chỉ thêm hoặc xóa một số bước business.
 
@@ -71,7 +68,7 @@ type OrderCreator interface {
 }
 ```
 
-Chúng ta có thể hoàn toàn trừu tượng hóa bằng việc đề cập tới các bước  function signatures được viết ở trên.
+Chúng ta có thể hoàn toàn trừu tượng hóa bằng việc đề cập tới các bước function signatures được viết ở trên.
 
 Trước khi trừu tượng hóa, chúng ta cần phải hiển rằng, việc giới thiệu interfaces sẽ có ý nghĩa đối với hệ thống, nó sẽ được phân tích theo ngữ cảnh. Nếu hệ thông chỉ phục vụ cho một product line, và mã nguồn bên trong chỉ được thay đổi cho những ngữ cảnh cụ thể, thì việc giới thiệu interface không thực sự mang lại ý nghĩa to lớn. Liệu rằng nó có thuận tiện để test, chúng ta sẽ bàn về chúng trong các phần sau.
 
@@ -178,7 +175,7 @@ func (m MyType) Write(p []byte) (n int, err error) {
 }
 ```
 
-Sau đó chúng ta truyền `MyType` vào hàm `io.Writer` mà nó được dùng như là một parameter, như là : 
+Sau đó chúng ta truyền `MyType` vào hàm `io.Writer` mà nó được dùng như là một parameter, như là: 
 
 ```go
 package log
@@ -200,10 +197,11 @@ func init() {
 }
 ```
 
-Trong việc định nghĩa `MyType`, không cần phải `import "io"` để trực tiếp hiện thực `io.Writer` interface, chúng ta có thể kết hợp nhiều hàm để hiện thực các interfaces, trong khi phía interface không có thiết lập import các dependency được sinh ra. Do đó, nhiều người nghĩ rằng trực giao của Go rất tốt để thiết kế.
+Trong việc định nghĩa `MyType`, không cần phải `import "io"` để trực tiếp hiện thực `io.Writer` interface, chúng ta có thể kết hợp nhiều hàm để hiện thực các interfaces, trong khi phía interface không có thiết lập import các dependency được sinh ra. Do đó, nhiều người nghĩ rằng orthogonality của Go rất tốt để thiết kế.
 
 
-Nhưng kiểu "orthogonal" (trực giao) sẽ mang đến một số rắc rối. Khi chúng ta tiếp quản một system với hàng trăm và hàng ngàn dòng, nếu chúng ta nhìn thấy một interface nó định nghĩa một số interfaces, như là một order process, chúng ta hi vọng có thể tìm kiếm một cách trưc tiếp để hiện thực đối tượng bằng việc hiện thực các đối tượng khác. Nhưng cho đến bây giờ, những đó là nhu cầu đơn giản đó có thể được hiện thực bằng Goland, và kinh nghiệm được công nhận. Visual Studio Code cần phải quét qua toàn bộ project để thấy cấu trúc của chúng, nếu chúng hiện thực tất cả các functions của interface. Ngôn ngữ cụ thể được dùng để hiện thực interfaces sẽ thân thiện hơn để IDL interface lookups. Ở khía cạnh khác, chúng tôi nhìn thấy một cấu trúc và hy vọng có thể biết ngay lặp tức những interfaces mà structure hiện thực, nhưng cùng gặp phải vấn đề được đề cập ở trên.
+Nhưng kiểu "orthogonal" sẽ mang đến một số rắc rối. Khi chúng ta tiếp quản một system với hàng trăm và hàng ngàn rows, nếu chúng ta nhìn thấy một interface nó định nghĩa một số interfaces, như là một order process, chúng ta hi vọng có thể tìm kiếm một cách trưc tiếp để hiện thực đối tượng bằng việc hiện thực các đối tượng khác. Nhưng cho đến bây giờ, những đó là nhu cầu đơn giản đó có thể được hiện thực bằng Goland, và kinh nghiệm được công nhận. Visual Studio Code cần phải quét qua toàn bộ project để thấy cấu trúc của chúng, nếu chúng hiện thực tất cả các functions của interface. Ngôn ngữ cụ thể được dùng để hiện thực interfaces sẽ thân thiện hơn để IDL interface lookups. Ở khía cạnh khác, chúng tôi nhìn thấy một cấu trúc và hy vọng có thể biết ngay lặp tức những interfaces mà structure hiện thực, nhưng cùng gặp phải vấn đề được đề cập ở trên.
+
 
 Mặc dù sự thuận tiện, lợi ích mang lại bởi interface là hiển nhiên. Đầu tiên, dựa vào inversion, cái ảnh hưởng đến interface trên dự án phần mềm trong hầu hết các ngôn ngữ, trong việc thiết kế Go's orthogonal interface. Hoàn toàn có thể loại bỏ tất cả các dependencies; hai là bộ biên dịch sẽ giúp ta kiểm tra lỗi như "not fully implemented interfaces" tại thời điểm biên dịch, nếu business không hiện thực porcess, nhưng sử dụng nó trong một ví dụ miễn cưỡng sử dụng interface.
 
