@@ -291,7 +291,7 @@ func murmur64(p string) uint64 {
 }
 ```
 
-[>> mã nguồn](../examples/ch5/ch5.9/3-3-hash-algorithm/main.go)
+[>> mã nguồn](../examples/ch5/ch5.9/3-3-distribution-uniform/main.go)
 
 
 Hãy xem kết quả thực thi
