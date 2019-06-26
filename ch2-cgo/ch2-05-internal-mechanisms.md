@@ -31,7 +31,9 @@ func main() {
 }
 ```
 
-Không có lỗi trong quá trình build và thực thi ví dụ đầu tiên này. Tiếp theo sau đó tạo một file trung gian trong thư mục _obj thông qua command line cgo:
+[>> mã nguồn](../examples/ch2/ch2.5/2-go-call-c/example-1/main.go)
+
+Không có lỗi trong quá trình build và thực thi ví dụ đầu tiên này. Tiếp theo ta tạo một file trung gian trong thư mục _obj thông qua command line cgo:
 
 ```sh
 $ go tool cgo main.go
@@ -53,7 +55,7 @@ main.cgo2.c
 
 Trong đó `_cgo_.o`, `_cgo_flags` và `_cgo_main.c` có code không liên quan logic trực tiếp với nhau, bạn có thể bỏ qua.
 
-Trước tiên chúng ta hãy xem file `main.cgo1.go` chứa code Go sau khi file `main.go` expand các hàm và biến số liên quan trong package C ảo:
+Trước tiên chúng ta hãy xem file [`main.cgo1.go`](../examples/ch2/ch2.5/2-go-call-c/example-1/_obj/main.cgo1.go) chứa code Go sau khi file `main.go` expand các hàm và biến số liên quan trong package C ảo:
 
 ```go
 package main
@@ -68,7 +70,7 @@ func main() {
 
 Lời gọi `C.sum(1, 1)` được thay thế thành `(_Cfunc_sum)(1, 1)`. Mỗi dạng `C.xxx` của hàm được thay thế bằng hàm Go thuần túy dạng `_Cfunc_xxx`, trong đó tiền tố `_Cfunc_` chỉ ra rằng đây là hàm C, tương ứng với hàm cầu nối Go private.
 
-Hàm `_Cfunc_sum` được định nghĩa trong file `_cgo_gotypes.go` được CGO tạo ra:
+Hàm `_Cfunc_sum` được định nghĩa trong file [`_cgo_gotypes.go`](../examples/ch2/ch2.5/2-go-call-c/example-1/_obj/_cgo_gotypes.go) được CGO tạo ra như sau:
 
 ```go
 //go:cgo_unsafe_args
@@ -92,9 +94,9 @@ func runtime.cgocall(fn, arg unsafe.Pointer) int32
 
 Tham số đầu tiên là địa chỉ của hàm ngôn ngữ C và tham số thứ hai là địa chỉ của struct tham số tương ứng với hàm ngôn ngữ C.
 
-Trong ví dụ này, hàm trong C được truyền vào hàm `_cgo_506f45f9fa85_Cfunc_sum` cũng là một hàm trung gian được CGO tạo ra. Hàm `main.cgo2.c1` được định nghĩa:
+Trong ví dụ này, hàm trong C được truyền vào hàm `_cgo_506f45f9fa85_Cfunc_sum` cũng là một hàm trung gian được CGO tạo ra. Hàm  được định nghĩa trong [`main.cgo2.c1`(../examples/ch2/ch2.5/2-go-call-c/example-1/_obj/main.cgo2.c)]:
 
-```go
+```c
 void _cgo_506f45f9fa85_Cfunc_sum(void *v) {
     struct {
         int p0;
@@ -117,12 +119,12 @@ Tham số hàm này chỉ có một con trỏ trỏ tới kiểu void và hàm k
 Struct được trỏ  tới bởi con trỏ hàm  `_cgo_506f45f9fa85_Cfunc_sum` là:
 
 ```go
-    struct {
-        int p0;
-        int p1;
-        int r;
-        char __pad12[4];
-    } __attribute__((__packed__)) *a = v;
+struct {
+    int p0;
+    int p1;
+    int r;
+    char __pad12[4];
+} __attribute__((__packed__)) *a = v;
 ```
 
 Thành phần p0 tương ứng với tham số đầu tiên của `sum`, thành phần p1 tương ứng với tham số thứ hai  và thành phần `__pad12` được sử dụng để điền vào struct cho mục đích  đảm bảo alignment của CPU.
@@ -141,7 +143,7 @@ Trong đó hàm  `runtime.cgocall` là chìa khóa để thực hiện cuộc g�
 
 ## 2.5.3 C gọi hàm của Go
 
-Sau khi phân tích ngắn gọn về luồng của Go gọi hàm của C, bây giờ chúng ta sẽ phân tích luồng của cuộc gọi ngược lại: C gọi đến hàm Go. Tương tự, ta cũng khởi tạo một hàm Go, tên file cũng là main.go:
+Sau khi phân tích ngắn gọn về luồng của Go gọi hàm của C, bây giờ chúng ta sẽ phân tích luồng của cuộc gọi ngược lại: C gọi đến hàm Go. Tương tự, ta cũng khởi tạo một hàm Go, tên file là sum.go:
 
 ```go
 package main
@@ -157,6 +159,8 @@ func sum(a, b C.int) C.int {
 func main() {}
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.5/3-c-call-go/example-1/main.go)
+
 Các chi tiết về cú pháp của CGO không được mô tả ở đây. Để sử dụng hàm `sum` trong C, chúng ta cần biên dịch mã Go vào thư C viện tĩnh:
 
 ```sh
@@ -168,10 +172,10 @@ Nếu không có lỗi, lệnh biên dịch ở trên sẽ tạo ra một thư v
 Để phân tích luồng hoạt động của cuộc gọi hàm từ phiên bản ngôn ngữ C ta cũng cần phải phân tích các file trung gian do CGO tạo ra:
 
 ```sh
-$ go tool cgo main.go
+$ go tool cgo sum.go
 ```
 
-Thư mục _obj vẫn chứa các file trung gian được tạo tương tự như phần trước. Để thuận tiện, chúng tôi sẽ bỏ qua một vài file không liên quan:
+Thư mục _obj vẫn chứa các file trung gian được tạo tương tự như phần trước. Để ngắn gọn, chúng tôi sẽ bỏ qua một vài file không liên quan:
 
 ```sh
 $ ls _obj | awk '{print $NF}'
@@ -184,7 +188,7 @@ main.cgo2.c
 
 Trong đó nội dung của file `_cgo_export.h` và file do C tạo ra khi nó tạo thư viện tĩnh `sum.h` là giống nhau, đều khai báo hàm sum.
 
-Vì ngôn ngữ C là người gọi, chúng ta cần bắt đầu với việc hiện thực phiên bản ngôn ngữ C của hàm sum. Phiên bản này nằm trong file `_cgo_export.c` (file chứa phần hiện thực hàm của C tương ứng với hàm export  của Go):
+Vì ngôn ngữ C là bên gọi, chúng ta cần bắt đầu với việc hiện thực phiên bản ngôn ngữ C của hàm sum. Phiên bản này nằm trong file `_cgo_export.c` (file chứa phần hiện thực hàm của C tương ứng với hàm export  của Go):
 
 ```c
 int sum(int p0, int p1)
@@ -206,6 +210,8 @@ int sum(int p0, int p1)
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.5/3-c-call-go/example-1/_obj/_cgo_export.c)
+
 Hàm sum sử dụng một kỹ thuật tương tự như phần trước trình bày để đóng gói các tham số và trả về các giá trị của hàm thành một  struct, sau đó truyền struct `runtime/cgo.crosscall2` vào hàm thực thi thông qua hàm `_cgoexp_8313eaf44386_sum`.
 
 Hàm `runtime/cgo.crosscall2` được hiện thực bằng hợp ngữ và khai báo hàm của nó như sau:
@@ -220,7 +226,7 @@ func runtime/cgo.crosscall2(
 
 Điểm cần chú ý ở đây là `fn` và `a`, `fn` là con trỏ tới hàm trung gian (proxy) và `a` là con trỏ tới struct tương ứng với đối số truyền đi khi gọi (và cũng chứa luôn giá trị trả về).
 
-Hàm trung gian `_cgoexp_8313eaf44386_sum` có trong file `_cgo_gotypes.go`:
+Hàm trung gian `_cgoexp_8313eaf44386_sum` có trong file [`_cgo_gotypes.go`](../examples/ch2/ch2.5/3-c-call-go/example-1/_obj/_cgo_gotypes.go):
 
 ```go
 func _cgoexp_8313eaf44386_sum(a unsafe.Pointer, n int32, ctxt uintptr) {
@@ -233,7 +239,7 @@ func _cgoexpwrap_8313eaf44386_sum(p0 _Ctype_int, p1 _Ctype_int) (r0 _Ctype_int) 
 }
 ```
 
-Bàm bao ngoài `_cgoexpwrap_8313eaf44386_sum` của `sum`  được sử dụng như một con trỏ hàm và sau đó  hàm callback `_cgo_runtime_cgocallback` của ngôn ngữ C đến hàm trong Go được hàm hoàn thành.
+Hàm bao ngoài `_cgoexpwrap_8313eaf44386_sum` của `sum`  được sử dụng như một con trỏ hàm và sau đó  hàm callback `_cgo_runtime_cgocallback` của ngôn ngữ C đến hàm trong Go được hàm hoàn thành.
 
 Hàm `_cgo_runtime_cgocallback` tương ứng với hàm `runtime.cgocallback`:
 

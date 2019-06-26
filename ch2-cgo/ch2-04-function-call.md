@@ -1,11 +1,5 @@
 # 2.4 Lời gọi hàm
 
-- [2.4 Lời gọi hàm](#24-L%E1%BB%9Di-g%E1%BB%8Di-h%C3%A0m)
-  - [2.4.1 Go gọi hàm C](#241-Go-g%E1%BB%8Di-h%C3%A0m-C)
-  - [2.4.2 Giá trị trả về của hàm C](#242-Gi%C3%A1-tr%E1%BB%8B-tr%E1%BA%A3-v%E1%BB%81-c%E1%BB%A7a-h%C3%A0m-C)
-  - [2.4.3 Giá trị trả về của hàm void](#243-Gi%C3%A1-tr%E1%BB%8B-tr%E1%BA%A3-v%E1%BB%81-c%E1%BB%A7a-h%C3%A0m-void)
-  - [2.4.4 C gọi hàm export của Go](#244-C-g%E1%BB%8Di-h%C3%A0m-export-c%E1%BB%A7a-Go)
-
 Hàm là cốt lõi của ngôn ngữ lập trình C. Thông qua công cụ CGO, chúng ta không chỉ có thể gọi hàm của ngôn ngữ C bằng Go mà còn có thể export hàm của Go như là hàm ngôn ngữ C.
 
 ## 2.4.1 Go gọi hàm C
