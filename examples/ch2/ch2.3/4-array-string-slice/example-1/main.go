@@ -1,8 +1,9 @@
 package main
 
 /*
-static char arr[10];
-static char *s = "Hello";
+#include <string.h>
+char arr[10];
+char *s = "Hello";
 */
 import "C"
 import (
@@ -22,13 +23,15 @@ func main() {
 	// chuyển đổi slice
 	arr1 := (*[31]byte)(unsafe.Pointer(&C.arr[0]))[:10:10]
 
+
 	var s0 string
 	var s0Hdr = (*reflect.StringHeader)(unsafe.Pointer(&s0))
 	s0Hdr.Data = uintptr(unsafe.Pointer(C.s))
 	s0Hdr.Len = int(C.strlen(C.s))
 
 	sLen := int(C.strlen(C.s))
-	s1 := string((*[31]byte)(unsafe.Pointer(&C.s[0]))[:sLen:sLen])
+	s1 := string((*[31]byte)(unsafe.Pointer(C.s))[:sLen:sLen])
 
-	fmt.Println(arr1, s1)
+	fmt.Println("arr1: ", arr1)
+	fmt.Println("s1: ", s1)
 }
