@@ -272,9 +272,9 @@ Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá
 
 ## 2.3.4 Array, String và Slice
 
-Trong C, biến mảng thực ra tương ứng với một con trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, nhưng con trỏ này không thể được sửa đổi, khi truyền tên mảng vào một hàm, đó thực sự là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây chúng tôi sẽ đề cập đến một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL đại diện cho kết thúc. Không có kiểu slice trong ngôn ngữ C.
+Trong C, biến mảng thực ra tương ứng với một con trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, con trỏ này không thể được sửa đổi, khi truyền biến mảng vào một hàm, thực ra là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây ta xem một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
 
-Trong Go, mảng là một kiểu giá trị và độ dài của mảng là một phần của kiểu mảng. Chuỗi trong Go tương ứng với một vùng nhớ chỉ đọc có độ dài nhất định. Slice trong Go là phiên bản đơn giản hơn của mảng động (dynamic array).
+Trong Go, mảng là một kiểu giá trị và độ dài của mảng là một phần của kiểu mảng. Chuỗi trong Go tương ứng với một vùng nhớ "chỉ đọc" có độ dài nhất định. Slice trong Go là phiên bản đơn giản hơn của mảng động (dynamic array).
 
 Chuyển đổi giữa Go và C với các kiểu array, string và slice có thể được đơn giản hóa thành chuyển đổi giữa Go slice và C pointer trỏ tới vùng nhớ có độ dài nhất định.
 
@@ -305,7 +305,7 @@ func C.GoStringN(*C.char, C.int) string
 func C.GoBytes(unsafe.Pointer, C.int) []byte
 ```
 
-Đối với chuỗi Go đầu vào của `C.CString`, nó sẽ được sao chép sang chuỗi định dạng ngôn ngữ C, chuỗi trả về được gán bởi hàm `malloc` của và cần được release bằng `free` (của C) khi không sử dụng. Hàm `C.CBytes` và các hàm tương tự được sử dụng để nhân bản (clone) ra phiên bản C của một mảng byte từ slice byte ngôn ngữ Go đầu vào. Mảng trả về tương tự cần được release vào thời điểm thích hợp. `C.GoString` được sử dụng để nhân bản ra từ chuỗi kết thúc NULL của ngôn ngữ C. `C.GoStringN` hàm có chức năng nhân bản mảng khác. `C.GoBytes` được sử dụng để nhân bản một slice byte ngôn ngữ Go từ một mảng ngôn ngữ C.
+Đối với chuỗi Go đầu vào của `C.CString`, nó sẽ được sao chép sang chuỗi định dạng ngôn ngữ C, chuỗi trả về được gán bởi hàm `malloc` của C và cần phải được release bằng `free` (của C) khi không sử dụng. Hàm `C.CBytes` và các hàm tương tự được sử dụng để nhân bản (clone) ra phiên bản C của một mảng byte từ slice byte của ngôn ngữ Go đầu vào. Mảng trả về tương tự cần được release vào thời điểm thích hợp. `C.GoString` được sử dụng để nhân bản ra từ chuỗi kết thúc NULL của ngôn ngữ C. `C.GoBytes` được sử dụng để nhân bản một slice byte của ngôn ngữ Go từ một mảng trong C.
 
 Các hàm hỗ trợ này được chạy trong chế độ nhân bản. Khi string và slice của Go được chuyển đổi thành phiên bản trong C, bộ nhớ nhân bản được cấp phát bởi hàm `malloc` của C và cuối cùng có thể được giải phóng bằng `free`. Khi một chuỗi hoặc mảng trong C được chuyển đổi thành Go, bộ nhớ nhân bản được quản lý bởi ngôn ngữ Go. Với bộ hàm chuyển đổi này, bộ nhớ trước chuyển đổi và sau chuyển đổi vẫn ở trong vùng nhớ cục bộ tương ứng của chúng. Ưu điểm của chuyển đổi trong chế độ nhân bản là quản lý interface và bộ nhớ rất đơn giản. Nhược điểm là nhân bản cần phân bổ bộ nhớ mới và các hoạt động sao chép của nó sẽ dẫn nhiều đến chi phí phụ.
 
@@ -324,17 +324,19 @@ type SliceHeader struct {
 }
 ```
 
-Nếu không muốn phân bổ bộ nhớ riêng, bạn có thể truy cập trực tiếp vào không gian bộ nhớ của C bằng ngôn ngữ Go:
+Nếu không muốn phân bổ bộ nhớ riêng, bạn có thể truy cập trực tiếp vào không gian bộ nhớ của C bằng Go:
 
 ```go
 /*
-static char arr[10];
-static char *s = "Hello";
+#include <string.h>
+char arr[10];
+char *s = "Hello";
 */
 import "C"
 import (
-	"reflect"
-	"unsafe"
+    "reflect"
+    "unsafe"
+    "fmt"
 )
 
 func main() {
@@ -348,19 +350,23 @@ func main() {
     // chuyển đổi slice
     arr1 := (*[31]byte)(unsafe.Pointer(&C.arr[0]))[:10:10]
 
+
     var s0 string
     var s0Hdr = (*reflect.StringHeader)(unsafe.Pointer(&s0))
     s0Hdr.Data = uintptr(unsafe.Pointer(C.s))
     s0Hdr.Len = int(C.strlen(C.s))
 
     sLen := int(C.strlen(C.s))
-    s1 := string((*[31]byte)(unsafe.Pointer(&C.s[0]))[:sLen:sLen])
+    s1 := string((*[31]byte)(unsafe.Pointer(C.s))[:sLen:sLen])
+
+    fmt.Println("arr1: ", arr1)
+    fmt.Println("s1: ", s1)
 }
 ```
 
 [>> mã nguồn](../examples/ch2/ch2.3/4-array-string-slice/example-1/main.go)
 
-Vì chuỗi trong Go là chuỗi chỉ đọc, người dùng cần đảm bảo rằng nội dung của chuỗi C bên dưới sẽ không thay đổi trong quá trình sử dụng chuỗi trong Go và bộ nhớ sẽ không được giải phóng trước.
+Vì chuỗi trong Go là chuỗi chỉ đọc, người dùng cần đảm bảo rằng nội dung của chuỗi C bên dưới sẽ không thay đổi trong quá trình sử dụng chuỗi đó trong Go và bộ nhớ sẽ không được giải phóng trước.
 
 Trong CGO, phiên bản ngôn ngữ C của struct tương ứng với struct string và slice trên:
 
@@ -369,7 +375,7 @@ typedef struct { const char *p; GoInt n; } GoString;
 typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 ```
 
-Trong ngôn ngữ C có thể dùng `GoString` và `GoSlice` để truy cập chuỗi và slice trong Go. Nếu là một kiểu mảng trong Go, bạn có thể chuyển đổi mảng thành một slice và sau đó chuyển đổi nó. Nếu không gian bộ nhớ bên dưới tương ứng với một chuỗi hoặc slice được quản lý bởi runtime của Go thì đối tượng bộ nhớ Go có thể được lưu trong một thời gian dài trong ngôn ngữ C.
+Trong C có thể dùng `GoString` và `GoSlice` để truy cập chuỗi và slice trong Go. Nếu là một kiểu mảng trong Go, bạn có thể chuyển đổi mảng thành một slice và sau đó chuyển đổi nó. Nếu không gian bộ nhớ bên dưới tương ứng với một chuỗi hoặc slice được quản lý bởi runtime của Go thì đối tượng bộ nhớ Go có thể được lưu trong một thời gian dài trong ngôn ngữ C.
 
 Chi tiết về mô hình bộ nhớ CGO sẽ được thảo luận kĩ hơn trong các chương sau.
 
