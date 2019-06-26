@@ -89,16 +89,16 @@ func helloSlice(s []byte) {}
 
 File header `_cgo_export.h` được tạo bởi CGO sẽ chứa khai báo hàm sau:
 
-```go
+```c
 extern void helloString(GoString p0);
 extern void helloSlice(GoSlice p0);
 ```
 
 Nhưng lưu ý rằng nếu bạn sử dụng kiểu `GoString` thì sẽ phụ thuộc vào file header `_cgo_export.h` và tập file này có output động.
 
-Phiên bản Go1.10 thêm một chuỗi kiểu `_GoString_` định nghĩa trước, có thể làm giảm xuống code có rủi ro phụ thuộc file header `_cgo_export.h`. Chúng ta có thể điều chỉnh khai báo ngôn ngữ C của hàm `helloString` thành:
+Phiên bản Go1.10 thêm một chuỗi kiểu `_GoString_` định nghĩa trước, có thể làm giảm code có rủi ro phụ thuộc file header `_cgo_export.h`. Chúng ta có thể điều chỉnh khai báo ngôn ngữ C của hàm `helloString` thành:
 
-```go
+```c
 extern void helloString(_GoString_ p0);
 ```
 
@@ -109,7 +109,7 @@ Các kiểu struct, Union và Enumerate của ngôn ngữ C không thể đượ
 Cách sử dụng struct đơn giản như sau:
 
 ```go
-*/
+/*
 struct A {
     int i;
     float f;
@@ -125,7 +125,9 @@ func main() {
 }
 ```
 
-Nếu tên thành phần của struct tình cờ là một từ khóa trong ngôn ngữ Go, bạn có thể truy cập nó bằng cách thêm một dấu gạch dưới ở đầu tên thành viên:
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-1/main.go)
+
+Nếu tên thành phần của struct tình cờ là một từ khóa trong  Go, bạn có thể truy cập nó bằng cách thêm một dấu gạch dưới ở đầu tên thành viên:
 
 ```go
 /*
@@ -141,6 +143,8 @@ func main() {
     fmt.Println(a._type) // _type tương ứng với type
 }
 ```
+
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-2/main.go)
 
 Nhưng nếu có 2 thành phần: một thành phần được đặt tên theo từ khóa của Go và phần kia là trùng khi thêm vào dấu gạch dưới, thì các thành phần được đặt tên theo từ khóa ngôn ngữ Go sẽ không thể truy cập (bị chặn):
 
@@ -159,6 +163,8 @@ func main() {
     fmt.Println(a._type) // _type tương ứng với _type
 }
 ```
+
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-3/main.go)
 
 Các thành phần tương ứng với trường bit (biến được định nghĩa với giá trị độ lớn cho sẵn) trong cấu trúc ngôn ngữ C không thể được truy cập bằng ngôn ngữ Go. Nếu bạn cần thao tác với các thành phần này, bạn cần xác định hàm hỗ trợ trong ngôn ngữ C.
 
@@ -180,6 +186,8 @@ func main() {
     fmt.Println(a.arr)  // Lỗi mảng có độ dài bằng 0
 }
 ```
+
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-4/main.go)
 
 Trong ngôn ngữ C, chúng ta không thể truy cập trực tiếp vào kiểu struct được xác định bởi ngôn ngữ Go.
 
@@ -211,6 +219,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-5/main.go)
+
 Nếu bạn cần thao tác biến kiểu lồng nhau trong C (union), thường có ba phương pháp: cách thứ nhất là xác định hàm hỗ trợ trong C, cách thứ hai là giải mã thủ công các thành phần thông qua "encoding/binary" của ngôn ngữ Go (không phải vấn đề big endian), thứ ba là sử dụng package `unsafe` để chuyển sang kiểu tương ứng (đây là cách tốt nhất để thực hiện). Sau đây cho thấy cách truy cập các thành viên kiểu union thông qua package `unsafe`:
 
 ```go
@@ -231,6 +241,8 @@ func main() {
     fmt.Println("b.f:", *(*C.float)(unsafe.Pointer(&b)))
 }
 ```
+
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-6/main.go)
 
 Mặc dù truy cập bằng package `unsafe` là cách dễ nhất và tốt nhất về hiệu suất, nó có thể làm phức tạp vấn đề với các tình huống mà trong đó các kiểu union lồng nhau được xử lý. Đối với các kiểu này ta nên xử lý chúng bằng cách xác định các hàm hỗ trợ trong ngôn ngữ C.
 
@@ -254,11 +266,13 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-7/main.go)
+
 Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá trị âm. Chúng ta có thể truy cập trực tiếp các giá trị liệt kê được xác định bằng `C.ONE`, `C.TWO`, v.v.
 
 ## 2.3.4 Array, String và Slice
 
-Trong C, tên mảng thực sự tương ứng với một con trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, nhưng con trỏ này không thể được sửa đổi, khi truyền tên mảng vào một hàm, đó thực sự là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây chúng tôi sẽ đề cập đến một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL đại diện cho kết thúc. Không có kiểu slice trong ngôn ngữ C.
+Trong C, biến mảng thực ra tương ứng với một con trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, nhưng con trỏ này không thể được sửa đổi, khi truyền tên mảng vào một hàm, đó thực sự là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây chúng tôi sẽ đề cập đến một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL đại diện cho kết thúc. Không có kiểu slice trong ngôn ngữ C.
 
 Trong Go, mảng là một kiểu giá trị và độ dài của mảng là một phần của kiểu mảng. Chuỗi trong Go tương ứng với một vùng nhớ chỉ đọc có độ dài nhất định. Slice trong Go là phiên bản đơn giản hơn của mảng động (dynamic array).
 
@@ -318,7 +332,10 @@ static char arr[10];
 static char *s = "Hello";
 */
 import "C"
-import "fmt"
+import (
+	"reflect"
+	"unsafe"
+)
 
 func main() {
     // chuyển đổi bằng reflect.SliceHeader
@@ -341,9 +358,11 @@ func main() {
 }
 ```
 
-Vì chuỗi ngôn ngữ Go là chuỗi chỉ đọc, người dùng cần đảm bảo rằng nội dung của chuỗi C bên dưới sẽ không thay đổi trong quá trình sử dụng chuỗi trong Go và bộ nhớ sẽ không được giải phóng trước.
+[>> mã nguồn](../examples/ch2/ch2.3/4-array-string-slice/example-1/main.go)
 
-Trong CGO, phiên bản ngôn ngữ C của struct tương ứng với struct trên được tạo cho string và slice:
+Vì chuỗi trong Go là chuỗi chỉ đọc, người dùng cần đảm bảo rằng nội dung của chuỗi C bên dưới sẽ không thay đổi trong quá trình sử dụng chuỗi trong Go và bộ nhớ sẽ không được giải phóng trước.
+
+Trong CGO, phiên bản ngôn ngữ C của struct tương ứng với struct string và slice trên:
 
 ```go
 typedef struct { const char *p; GoInt n; } GoString;

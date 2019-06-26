@@ -1,5 +1,11 @@
 # 2.4 Lời gọi hàm
 
+- [2.4 Lời gọi hàm](#24-L%E1%BB%9Di-g%E1%BB%8Di-h%C3%A0m)
+  - [2.4.1 Go gọi hàm C](#241-Go-g%E1%BB%8Di-h%C3%A0m-C)
+  - [2.4.2 Giá trị trả về của hàm C](#242-Gi%C3%A1-tr%E1%BB%8B-tr%E1%BA%A3-v%E1%BB%81-c%E1%BB%A7a-h%C3%A0m-C)
+  - [2.4.3 Giá trị trả về của hàm void](#243-Gi%C3%A1-tr%E1%BB%8B-tr%E1%BA%A3-v%E1%BB%81-c%E1%BB%A7a-h%C3%A0m-void)
+  - [2.4.4 C gọi hàm export của Go](#244-C-g%E1%BB%8Di-h%C3%A0m-export-c%E1%BB%A7a-Go)
+
 Hàm là cốt lõi của ngôn ngữ lập trình C. Thông qua công cụ CGO, chúng ta không chỉ có thể gọi hàm của ngôn ngữ C bằng Go mà còn có thể export hàm của Go như là hàm ngôn ngữ C.
 
 ## 2.4.1 Go gọi hàm C
@@ -18,6 +24,8 @@ func main() {
     C.add(1, 1)
 }
 ```
+
+[>> mã nguồn](../examples/ch2/ch2.4/1-go-call-c/example-1/main.go)
 
 Code CGO ở trên trước tiên xác định hàm `add` hiển thị trong file hiện tại và sau đó chuyển sang `C.add`.
 
@@ -40,13 +48,15 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.4/2-return-val-c/example-1/main.go)
+
 Hàm `div` ở trên thực hiện một phép toán chia số nguyên và trả về kết quả của phép chia.
 
 Tuy nhiên, không có cách xử lý đặc biệt nào cho trường hợp số chia là 0. Vì ngôn ngữ C không hỗ trợ trả về nhiều kết quả, thư viện chuẩn <errno.h> cung cấp macro `errno` để trả về trạng thái lỗi. Nếu bạn muốn trả về lỗi khi số chia là 0 còn những lần khác trả về kết quả bình thường. Chúng ta có thể xem  `errno` là một biến toàn cục thread-safe có thể được sử dụng để ghi lại mã trạng thái của lỗi đây đây nhất.
 
 Hàm `div` cải tiến được hiện thực như sau:
 
-```go
+```c
 #include <errno.h>
 
 int div(int a, int b) {
@@ -84,6 +94,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.4/2-return-val-c/example-2/main.go)
+
 Thực thi đoạn code trên sẽ cho output như sau:
 
 ```sh
@@ -91,7 +103,7 @@ Thực thi đoạn code trên sẽ cho output như sau:
 0 invalid argument
 ```
 
-Chúng ta có thể xem hàm `div` như một hàm của các kiểu sau:
+Chúng ta có thể xem hàm `div` như một hàm với các kiểu tham số như sau:
 
 ```go
 func C.div(a, b C.int) (C.int, [error])
@@ -116,6 +128,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-1/main.go)
+
 Lúc này, chúng ta bỏ qua giá trị trả về đầu tiên và chỉ nhận được mã lỗi tương ứng với giá trị trả về thứ hai.
 
 Chúng ta cũng có thể thử lấy giá trị trả về đầu tiên, cũng chính là kiểu tương ứng trong Go với kiểu void trong ngôn ngữ C:
@@ -131,6 +145,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-2/main.go)
+
 Chạy code này sẽ tạo ra đầu ra sau:
 
 ```sh
@@ -139,6 +155,7 @@ main._Ctype_void{}
 
 Chúng ta có thể thấy rằng kiểu void của ngôn ngữ C tương ứng với kiểu trong package main  `_Ctype_void`. Trong thực tế, hàm `noreturn` của ngôn ngữ C cũng được coi là một hàm với kiểu trả về `_Ctype_void`, do đó bạn có thể trực tiếp nhận giá trị trả về của hàm kiểu void:
 
+```go
 //static void noreturn() {}
 import "C"
 import "fmt"
@@ -146,11 +163,15 @@ import "fmt"
 func main() {
     fmt.Println(C.noreturn())
 }
+```
+
 Chạy code này sẽ tạo ra đầu ra sau:
 
 ```sh
 []
 ```
+
+[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-3/main.go)
 
 Trong thực tế, trong code được tạo bởi CGO, kiểu `_Ctype_void` tương ứng với kiểu mảng có độ dài 0 `[0]byte`, do đó output `fmt.Println` là một dấu ngoặc vuông biểu thị một giá trị null.
 
