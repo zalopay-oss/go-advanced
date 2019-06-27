@@ -61,7 +61,7 @@ Một số hệ thống grayscale publishing phổ biến sẽ có một số ru
 
 Bởi vì nó liên quan đến company's business, cities, lines of business, UAs, distribution channels, v,v có thể trực tiếp mã hóa trong hệ thống, nhưng các functions thì tương tự nhau.
 
-Publishing bởi whitelist thì tương đối đơn giản. Khi tính năng đưa vào hoạt động, chúng ta hy vọng rằng chỉ những người nhân viên à testers trong công ty có thể truy cập các tính năng đó. Họ sẽ trực tiếp cho các accounts và mailboxs vào whitelist và từ chối acccess đến các accounts khác.
+Publishing bởi whitelist thì tương đối đơn giản. Khi tính năng đưa vào hoạt động, chúng ta hy vọng rằng chỉ những người nhân viên là testers trong công ty có thể truy cập các tính năng đó. Họ sẽ trực tiếp cho các accounts và mailboxs vào whitelist và từ chối acccess đến các accounts khác.
 
 Publishing theo xác suất có nghĩa hiện thực một function đơn giản
 
@@ -148,7 +148,7 @@ func isPassed(cityID int) bool {
 
 Theo như whitelist, bằng business line, hoặc UA, bằng distribution channel, đó là bản chất được release bởi city, và không được mô tả ở đây.
 
-Publishing bởi probability (xác suất) đặc biệt hơn tý, nhưng rất dễ để hiện thực mà không cần tới input.
+Publishing bởi probability (xác suất) đặc biệt hơn tí, nhưng rất dễ để hiện thực mà không cần tới input.
 
 ```go
 func init() {
@@ -173,7 +173,7 @@ Chú ý tới khởi tạo `seed`.
 
 ### 5.9.3.2 Hash algorithm
 
-Có nhiều thuật thoán hash như là `md5`, `crc32`, `sha1`, v, v, nhưng mục đính mà chúng ta hướng đến là ánh xạ những data tới từ khóa tương ứng, và ta không muốn sử dụng quá nhiều CPU cho việc tính toán hash. Đa số các thuật toán đều `murmurhash`, sau đây là kết quả benchmark cho những thuật toán hash phổ biến đó.
+Có nhiều thuật thoán hash như là `md5`, `crc32`, `sha1`, v,v,.. nhưng mục đính mà chúng ta hướng đến là ánh xạ những data tới từ khóa tương ứng, và ta không muốn sử dụng quá nhiều CPU cho việc tính toán hash. Đa số các thuật toán đều `murmurhash`, sau đây là kết quả benchmark cho những thuật toán hash phổ biến đó.
 
 Sau khi dùng thư viện chuẩn `md5`, `sha1` và opensource hiện thực `murmur3` cho việc so sánh
 
@@ -260,7 +260,7 @@ ok _/Users/caochunhui/test/go/hash_bench 7.050s
 
 Có thể thấy rằng **murmurhash** có hiệu suất cao gấp ba so với các hàm thuật toán hash khác. Hiển nhiên, để thực hiện việc `load balancing` (cân bằng tải), murmurhash sẽ tốt hơn `md5` và `sha1`. Thực tế, đó là thuật toán hash hiệu quả trong cộng đồng vài năm vừa qua, người đọc có thể tự nghiên cứu.
 
-### 5.9.3.3 Is the distribution uniform?
+### 5.9.3.3 Is the distribution uniform ?
 
 Cho một thuật toán hash, xem xét vấn đề hiệu suất, sẽ thực sự cần thiết khi xem xét khi nào giá trị hash sẽ theo phân phối chuẩn. Nếu giá trị sau khi hash không theo phân phối chuẩn, thì sẽ không đạt được hiệu ứng `uniform gray`.
 
