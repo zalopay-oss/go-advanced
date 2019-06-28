@@ -1,0 +1,201 @@
+# 2.4 Lời gọi hàm
+
+Hàm là cốt lõi của ngôn ngữ lập trình C. Thông qua công cụ CGO, chúng ta không chỉ có thể gọi hàm của ngôn ngữ C bằng Go mà còn có thể export hàm của Go như là hàm ngôn ngữ C.
+
+## 2.4.1 Go gọi hàm C
+
+Đối với chương trình kích hoạt các tính năng CGO, CGO xây dựng một package C ảo. Hàm ngôn ngữ C có thể được gọi qua package C ảo này.
+
+```go
+/*
+static int add(int a, int b) {
+    return a+b;
+}
+*/
+import "C"
+
+func main() {
+    C.add(1, 1)
+}
+```
+
+[>> mã nguồn](../examples/ch2/ch2.4/1-go-call-c/example-1/main.go)
+
+Code CGO ở trên trước tiên xác định hàm `add` hiển thị trong file hiện tại và sau đó chuyển sang `C.add`.
+
+## 2.4.2 Giá trị trả về của hàm C
+
+Đối với hàm của C có giá trị trả về, chúng ta có thể nhận giá trị trả về bình thường.
+
+```go
+/*
+static int div(int a, int b) {
+    return a/b;
+}
+*/
+import "C"
+import "fmt"
+
+func main() {
+    v := C.div(6, 3)
+    fmt.Println(v)
+}
+```
+
+[>> mã nguồn](../examples/ch2/ch2.4/2-return-val-c/example-1/main.go)
+
+Hàm `div` ở trên thực hiện một phép toán chia số nguyên và trả về kết quả của phép chia.
+
+Tuy nhiên, không có cách xử lý đặc biệt nào cho trường hợp số chia là 0. Vì ngôn ngữ C không hỗ trợ trả về nhiều kết quả, thư viện chuẩn <errno.h> cung cấp macro `errno` để trả về trạng thái lỗi. Nếu bạn muốn trả về lỗi khi số chia là 0 còn những lần khác trả về kết quả bình thường. Chúng ta có thể xem  `errno` là một biến toàn cục thread-safe có thể được sử dụng để ghi lại mã trạng thái của lỗi đây đây nhất.
+
+Hàm `div` cải tiến được hiện thực như sau:
+
+```c
+#include <errno.h>
+
+int div(int a, int b) {
+    if(b == 0) {
+        errno = EINVAL;
+        return 0;
+    }
+    return a/b;
+}
+```
+
+CGO cũng có hỗ trợ đặc biệt cho các macro `errno`  thuộc thư viện tiêu chuẩn <errno.h>: nếu có hai giá trị trả về khi CGO gọi hàm C thì giá trị trả về thứ hai sẽ tương ứng với trạng thái lỗi `errno`.
+
+```go
+/*
+#include <errno.h>
+
+static int div(int a, int b) {
+    if(b == 0) {
+        errno = EINVAL;
+        return 0;
+    }
+    return a/b;
+}
+*/
+import "C"
+import "fmt"
+
+func main() {
+    v0, err0 := C.div(2, 1)
+    fmt.Println(v0, err0)
+
+    v1, err1 := C.div(1, 0)
+    fmt.Println(v1, err1)
+}
+```
+
+[>> mã nguồn](../examples/ch2/ch2.4/2-return-val-c/example-2/main.go)
+
+Thực thi đoạn code trên sẽ cho output như sau:
+
+```sh
+2 <nil>
+0 invalid argument
+```
+
+Chúng ta có thể xem hàm `div` như một hàm với các kiểu tham số như sau:
+
+```go
+func C.div(a, b C.int) (C.int, [error])
+```
+
+Tham số thứ hai của interface (giá trị error trả về) có thể bỏ qua, tương ứng bên dưới là kiểu `syscall.Errno`.
+
+## 2.4.3 Giá trị trả về của hàm void
+
+Trong C cũng có hàm không trả về kiểu giá trị (thay vào đó trả về void). Nói chung, chúng ta không thể nhận được giá trị trả về của hàm kiểu void, bởi vì không có giá trị trả về để nhận. Như đã đề cập trong ví dụ trước, CGO hiện thực một phương pháp đặc biệt cho errno và có thể nhận về  trạng thái lỗi của ngôn ngữ C thông qua giá trị trả về thứ hai. Tính năng này vẫn hợp lệ cho các hàm kiểu void.
+
+Đoạn code sau là để lấy mã trạng thái lỗi của hàm không có giá trị trả về:
+
+```go
+//static void noreturn() {}
+import "C"
+import "fmt"
+
+func main() {
+    _, err := C.noreturn()
+    fmt.Println(err)
+}
+```
+
+[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-1/main.go)
+
+Lúc này, chúng ta bỏ qua giá trị trả về đầu tiên và chỉ nhận được mã lỗi tương ứng với giá trị trả về thứ hai.
+
+Chúng ta cũng có thể thử lấy giá trị trả về đầu tiên, cũng chính là kiểu tương ứng trong Go với kiểu void trong ngôn ngữ C:
+
+```go
+//static void noreturn() {}
+import "C"
+import "fmt"
+
+func main() {
+    v, _ := C.noreturn()
+    fmt.Printf("%#v", v)
+}
+```
+
+[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-2/main.go)
+
+Chạy code này sẽ tạo ra đầu ra sau:
+
+```sh
+main._Ctype_void{}
+```
+
+Chúng ta có thể thấy rằng kiểu void của ngôn ngữ C tương ứng với kiểu trong package main  `_Ctype_void`. Trong thực tế, hàm `noreturn` của ngôn ngữ C cũng được coi là một hàm với kiểu trả về `_Ctype_void`, do đó bạn có thể trực tiếp nhận giá trị trả về của hàm kiểu void:
+
+```go
+//static void noreturn() {}
+import "C"
+import "fmt"
+
+func main() {
+    fmt.Println(C.noreturn())
+}
+```
+
+Chạy code này sẽ tạo ra đầu ra sau:
+
+```sh
+[]
+```
+
+[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-3/main.go)
+
+Trong thực tế, trong code được tạo bởi CGO, kiểu `_Ctype_void` tương ứng với kiểu mảng có độ dài 0 `[0]byte`, do đó output `fmt.Println` là một dấu ngoặc vuông biểu thị một giá trị null.
+
+Mặc dù  hiệu quả của các tính năng ở trên có vẻ nhàm chán, nhưng nhờ đó chúng ta có thể nắm bắt chính xác ranh giới của code CGO thông qua các ví dụ đó và có thể nghĩ về các nguyên do cho các tính năng lạ này từ quan điểm thiết kế sâu hơn.
+
+## 2.4.4 C gọi hàm export của Go
+
+CGO có một tính năng mạnh mẽ là export các hàm Go thành các hàm ngôn ngữ C. Trong trường hợp này, chúng ta có thể xác định interface ngôn ngữ C và sau đó triển khai nó thông qua ngôn ngữ Go. Trong phần đầu tiên của chương này, chúng tôi đã chỉ ra các ví dụ về hàm ngôn ngữ C export vào ngôn ngữ Go.
+
+Đây là hiện thực lại hàm `add` trong chương đầu:
+
+```go
+import "C"
+
+//export add
+func add(a, b C.int) C.int {
+    return a+b
+}
+```
+
+Tên hàm `add` bắt đầu bằng một chữ cái viết thường và là một hàm riêng trong package cho ngôn ngữ Go. Nhưng theo cái nhìn của ngôn ngữ C thì hàm `add` là hàm ngôn ngữ C có thể được truy cập toàn cục. Nếu có một hàm `add` cùng tên được export dưới dạng hàm ngôn ngữ C trong hai package ngôn ngữ Go khác nhau, vấn đề về trùng tên sẽ xảy ra trong giai đoạn liên kết cuối cùng (link phase).
+
+Chúng ta có thể include file header `_cgo_export.h` để thêm tham chiếu đến các hàm export. Nếu bạn muốn sử dụng ngay lập tức hàm `add` của C được export trong file CGO hiện tại, bạn không thể tham khảo đến file `_cgo_export.h`,  bởi vì việc tạo file `_cgo_export.h`  cần phụ thuộc vào file hiện tại mà trong file hiện tại lại tham khảo tới `_cgo_export.h` (file chưa được tạo) thì sẽ gây ra lỗi.
+
+```c
+#include "_cgo_export.h"
+
+void foo() {
+    add(1, 1);
+}
+```
+
+Khi export interface của ngôn ngữ C, bạn cần đảm bảo rằng các tham số hàm và kiểu giá trị trả về là kiểu "thân thiện" với C đồng thời giá trị trả về không được trực tiếp hoặc gián tiếp chứa con trỏ vào không gian bộ nhớ ngôn ngữ Go.
