@@ -80,7 +80,7 @@ go func() {
 }()
 ```
 
-Bằng theo dõi những thay đổi sự kiển của đường dẫn cấu hình, khi có nội dung thay đổi trong đường dẫn, chúng ta có thể nhận được thông báo thay đổi và nhận giá trị đã thay đổi.
+Bằng cách theo dõi những thay đổi sự kiện của đường dẫn cấu hình, khi có nội dung thay đổi trong đường dẫn, chúng ta có thể nhận được thông báo thay đổi cùng với giá trị đã thay đổi.
 
 ### 6.6.2.5 Tích hợp
 
@@ -166,13 +166,13 @@ func main() {
 
 Nếu là doanh nghiệp nhỏ, có thể sử dụng luôn ví dụ trên để hiện thực chức năng mà bạn cần.
 
-Có lưu ý ở đây, chúng ta có rất nhiều hoạt động khi cập nhật cấu hình: phản hồi watch, phân tích json, và các hoạt động này không phải là `atomic`. Khi cấu hình bị thay đổi nhiều lần trong một quy trình dịch vụ, có thể có sự không thống nhất logic giữa các yêu cầu riêng lẻ xảy ra trước và sau khi cấu hình thay đổi . Do đó, khi bạn sử dụng cách tiếp cận tương tự để cập nhật cấu hình của mình, bạn cần sử dụng cùng một cấu hình trong suốt vòng đời của một yêu cầu. Cách thức thực hiện cụ thể là chỉ được lấy cấu hình một lần khi yêu cầu bắt đầu, và sau đó được truyền tiếp đi cho đến hết vòng đời của yêu cầu.
+Có một vài lưu ý ở đây, chúng ta sẽ làm rất nhiều thứ khi cập nhật cấu hình: phản hồi watch, phân tích json, và các hoạt động này không phải là `atomic`. Khi cấu hình bị thay đổi nhiều lần trong một quy trình dịch vụ, có thể xuất hiện sự không thống nhất logic giữa các yêu cầu xảy ra trước và sau khi cấu hình thay đổi. Do đó, khi bạn sử dụng cách tiếp cận trên để cập nhật cấu hình của mình, bạn cần sử dụng cùng một cấu hình trong suốt vòng đời của một yêu cầu. Cách thức thực hiện cụ thể nên lấy cấu hình một lần khi yêu cầu bắt đầu, và sau đó được truyền tiếp đi cho đến hết vòng đời của yêu cầu.
 
 ## 6.6.3 Sự phình to của cấu hình
 
-Khi doanh nghiệp phát triển, áp lực lên hệ thống cấu hình có thể ngày càng lớn hơn và các tệp cấu hình có thể là hàng chục nghìn. Máy khách cũng có hàng chục nghìn và việc lưu trữ nội dung cấu hình bên trong etcd không còn phù hợp nữa. Khi số lượng tệp cấu hình mở rộng, ngoài các vấn đề về throughput của hệ thống lưu trữ, còn có các vấn đề về quản lý đối với thông tin cấu hình. Chúng ta cần quản lý các quyền của cấu hình tương ứng và chúng ta cần cấu hình cụm lưu trữ theo lưu lượng truy cập. Nếu có quá nhiều máy khách, khiến hệ thống lưu trữ cấu hình không thể chịu được một lượng lớn QPS, thì cũng có thể cần phải thực hiện tối ưu hóa cache ở phía máy khách, v.v.
+Khi doanh nghiệp phát triển, áp lực lên hệ thống cấu hình có thể ngày càng lớn hơn và số lượng tệp cấu hình có thể là hàng chục nghìn. Máy khách cũng có hàng chục nghìn và việc lưu trữ nội dung cấu hình bên trong etcd không còn phù hợp nữa. Khi số lượng tệp cấu hình mở rộng, ngoài các vấn đề về thông lượng của hệ thống lưu trữ, còn có các vấn đề về quản lý đối với thông tin cấu hình. Chúng ta cần quản lý các quyền của cấu hình tương ứng và chúng ta cần cấu hình cụm lưu trữ theo lưu lượng truy cập. Nếu có quá nhiều máy khách, khiến hệ thống lưu trữ cấu hình không thể chịu được lượng lớn QPS, thì có thể cần phải thực hiện tối ưu hóa cache ở phía máy khách, v.v.
 
-Đó là lý do tại sao các công ty lớn phải phát triển một hệ thống cấu hình phức tạp cho doanh nghiệp của họ.
+Đó là lý do tại sao các công ty lớn luôn phải phát triển một hệ thống cấu hình phức tạp cho doanh nghiệp của họ.
 
 ## 6.6.4 Quản lý phiên bản của cấu hình
 
@@ -180,7 +180,7 @@ Trong quy trình quản lý cấu hình, không thể tránh khỏi việc ngư�
 
 Đôi khi việc sai cấu hình có thể không phải là do vấn đề với định dạng, mà là vấn đề logic. Ví dụ: khi chúng ta viết SQL, chúng ta chọn ít trường hơn. Khi chúng ta cập nhật cấu hình, chúng ta vô tình làm mất một trường trong chuỗi json và khiến chương trình hiểu cấu hình mới và thực hiện một logic mới. Cách nhanh nhất và hiệu quả nhất để ngăn chặn những lỗi lầm này nhanh chóng là quản lý phiên bản và hỗ trợ khôi phục theo phiên bản.
 
-Khi cấu hình được cập nhật, chúng ta sẽ chỉ định số phiên bản cho từng nội dung của cấu hình, và luôn ghi lại nội dung và số phiên bản trước khi sửa đổi, quay ngược bản trước khi phát hiện sự cố với cấu hình mới.
+Khi cấu hình được cập nhật, chúng ta sẽ chỉ định số phiên bản cho từng nội dung của cấu hình, và luôn ghi lại nội dung và số phiên bản trước mỗi lần thay đổi, thực hiện quay ngược bản trước khi phát hiện sự cố với cấu hình mới.
 
 Một cách phổ biến trong thực tế là sử dụng MySQL để lưu trữ các phiên bản khác nhau của tệp cấu hình hoặc chuỗi cấu hình. Khi bạn cần quay lại, chỉ cần thực hiện một truy vấn đơn giản.
 
