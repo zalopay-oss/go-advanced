@@ -51,6 +51,8 @@ func main() {
 }
 ```
 
+[>> mã nguồn](../examples/ch2/ch2.10/py3-config.go)
+
 Sau đó build và dùng công cụ `pkg-config` đã được custom với các lệnh sau
 
 ```
