@@ -38,7 +38,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../example/ch2/ch2.7/1-c-mem-access/main.go)
+[>> mã nguồn](../examples/ch2/ch2.7/1-c-mem-access/main.go)
 
 Trong ví dụ này, chúng ta sử dụng `makeByteSlize` để tạo ra một slice lớn hơn kích thước bộ nhớ 4G, do đó bỏ qua giới hạn trong hiện thực. Hàm hỗ trợ `freeByteSlice` được sử dụng để giải phóng slice được tạo từ hàm ngôn ngữ C.
 
@@ -75,7 +75,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../example/ch2/ch2.7/2-go-mem-access/example-1/main.go)
+[>> mã nguồn](../examples/ch2/ch2.7/2-go-mem-access/example-1/main.go)
 
 Khi bạn cần truyền chuỗi của Go sang ngôn ngữ C, trước tiên hãy sao chép dữ liệu bộ nhớ tương ứng với chuỗi `C.CString` ngôn ngữ Go sang không gian bộ nhớ ngôn ngữ C mới được tạo. Mặc dù ví dụ trên là an toàn, nhưng nó cực kỳ kém hiệu quả (vì phải phân bổ bộ nhớ nhiều lần và sao chép từng phần tử một), và nó cực kỳ cồng kềnh.
 
@@ -110,7 +110,7 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../example/ch2/ch2.7/2-go-mem-access/example-2/main.go)
+[>> mã nguồn](../examples/ch2/ch2.7/2-go-mem-access/example-2/main.go)
 
 Việc xử lý giờ đã đơn giản hơn và tránh phân bổ thêm bộ nhớ. Một lời giải hoàn hảo?
 
