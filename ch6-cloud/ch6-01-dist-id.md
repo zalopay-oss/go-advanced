@@ -61,8 +61,6 @@ github.com/bwmarrin/snowflake Đây là một hiện thực Snowflake's Go khá 
 
 Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng như ví dụ sau:
 
-[>> mã nguồn](../examples/ch6/ch6.1/1-snowflake/main.go)
-
 ```go
 
 package main
@@ -149,8 +147,6 @@ Redis 127.0.0.1:6379> SADD base64_encoding_of_last16bits MzI0Mgo=
 Redis 127.0.0.1:6379> SADD base64_encoding_of_last16bits MzI0Mgo=
 (integer) 0
 ```
-
-[>> mã nguồn](../examples/ch6/ch6.1/2-sonyflake/main.go)
 <!-- và một số hàm với logic đơn giản bị bỏ qua: -->
 
 ```go

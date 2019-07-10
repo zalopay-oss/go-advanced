@@ -22,8 +22,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.8/reflection-service/server/main.go)
-
 Nếu gRPC reflection service được khởi chạy thì các gRPC service   có thể được truy vấn hoặc gọi ra bằng reflection service do package reflection cung cấp.
 
 ## 4.8.2 Xem danh sách service
@@ -70,8 +68,6 @@ service HelloService {
     rpc Channel (stream String) returns (stream String);
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.8/reflection-service/HelloService/hello.proto)
 
 Kết quả với lệnh `list`:
 

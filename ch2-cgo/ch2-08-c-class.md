@@ -150,8 +150,6 @@ func cgo_MyBuffer_Size(p *cgo_MyBuffer_T) C.int {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.8/1-class-cpp-to-obj-go/my_buffer_capi.go)
-
 Để phân biệt, chúng ta thêm vào một tiền tố `cgo_` cho mỗi hàm được đặt tên trong Go. Ví dụ, `cgo_MyBuffer_T` là một kiểu `MyBuffer_T` trong C.
 
 Để đơn giản, khi đóng gói một hàm C thuần thành một hàm Go, bằng việc thêm vào kiểu `cgo_MyBuffer_T`, chúng ta vẫn dùng kiểu ngôn ngữ C bên dưới kiểu dữ liệu cho tham số đầu vào và cho kết quả trả về.
@@ -188,8 +186,6 @@ func (p *MyBuffer) Data() []byte {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.8/1-class-cpp-to-obj-go/my_buffer.go)
-
 Bởi vì bản thân ngôn ngữ Go có kiểu slice chứa thông tin về chiều dài, chúng ta có thể kết hợp hai hàm `cgo_MyBuffer_Data` và `cgo_MyBuffer_Size` vào trong phương thức `MyBuffer.Data`, chúng sẽ trả về một slice ứng với cache space trong ngôn ngữ C.
 
 Bây giờ chúng ta có thể dễ dàng sử dụng wrapped cache object trong ngôn ngữ Go (bên dưới là phần hiện thực `std::string` C++)
@@ -209,8 +205,6 @@ func main() {
     C.puts((*C.char)(unsafe.Pointer(&(buf.Data()[0]))))
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.8/1-class-cpp-to-obj-go/main.go)
 
 Trong ví dụ chúng ta tạo ra 1024-byte cache và sau đó phân bổ string bằng hàm copy. Để thuận tiện cho việc hiện thực các hàm C, chúng ta sẽ mặc định đặt cuối mỗi string kí tự `\0`. Cuối cùng, chúng ta sẽ trực tiếp lấy ra thông tin con trỏ của cache và in nội dung của bộ đệm bằng hàm `put` của C.
 
@@ -267,8 +261,6 @@ char* person_get_name(person_handle_t p, char* buf, int size);
 int person_get_age(person_handle_t p);
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.8/2-obj-go-to-class-cpp/person_capi.h)
-
 Sau đó, các hàm C này được thực hiện bằng ngôn ngữ Go.
 
 Cần lưu ý rằng khi export các hàm C thông qua CGO, cả hai kiểu của tham số đầu vào và kiểu của giá trị trả về đều không hỗ trợ sửa đổi hằng số *const* và cũng không hỗ trợ các hàm có tham số biến. Đồng thời, như được mô tả trong phần trước ([chương 2.7](./ch2-07-cgo-mem.md)), chúng ta không thể truy cập trực tiếp các đối tượng bộ nhớ Go trong C/C++ trong một thời gian dài. Vì vậy, chúng tôi đã sử dụng kỹ thuật được mô tả trong phần trước để ánh xạ đối tượng Go thành một id số nguyên.
@@ -320,8 +312,6 @@ func person_get_age(h C.person_handle_t) C.int {
     return C.int(age)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.8/2-obj-go-to-class-cpp/person_capi.go)
 
 Sau khi tạo đối tượng Go ta ánh xạ tới id thông qua `NewObjectId`. Sau đó, buộc id phải được exit dưới dạng `person_handle_t`. Các hàm interface khác dựa trên id được thể hiện bởi `person_handle_t`, nhờ đó đối tượng Go tương ứng được parse theo id.
 

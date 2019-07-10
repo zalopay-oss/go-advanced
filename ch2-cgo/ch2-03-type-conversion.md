@@ -125,8 +125,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-1/main.go)
-
 Nếu tên thành phần của struct tình cờ là một từ khóa trong  Go, bạn có thể truy cập nó bằng cách thêm một dấu gạch dưới ở đầu tên thành viên:
 
 ```go
@@ -143,8 +141,6 @@ func main() {
     fmt.Println(a._type) // _type tương ứng với type
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-2/main.go)
 
 Nhưng nếu có 2 thành phần: một thành phần được đặt tên theo từ khóa của Go và phần kia là trùng khi thêm vào dấu gạch dưới, thì các thành phần được đặt tên theo từ khóa ngôn ngữ Go sẽ không thể truy cập (bị chặn):
 
@@ -163,8 +159,6 @@ func main() {
     fmt.Println(a._type) // _type tương ứng với _type
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-3/main.go)
 
 Các thành phần tương ứng với trường bit (biến được định nghĩa với giá trị độ lớn cho sẵn) trong cấu trúc ngôn ngữ C không thể được truy cập bằng ngôn ngữ Go. Nếu bạn cần thao tác với các thành phần này, bạn cần xác định hàm hỗ trợ trong ngôn ngữ C.
 
@@ -186,8 +180,6 @@ func main() {
     fmt.Println(a.arr)  // Lỗi mảng có độ dài bằng 0
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-4/main.go)
 
 Trong ngôn ngữ C, chúng ta không thể truy cập trực tiếp vào kiểu struct được xác định bởi ngôn ngữ Go.
 
@@ -219,8 +211,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-5/main.go)
-
 Nếu bạn cần thao tác biến kiểu lồng nhau trong C (union), thường có ba phương pháp: cách thứ nhất là xác định hàm hỗ trợ trong C, cách thứ hai là giải mã thủ công các thành phần thông qua "encoding/binary" của ngôn ngữ Go (không phải vấn đề big endian), thứ ba là sử dụng package `unsafe` để chuyển sang kiểu tương ứng (đây là cách tốt nhất để thực hiện). Sau đây cho thấy cách truy cập các thành viên kiểu union thông qua package `unsafe`:
 
 ```go
@@ -241,8 +231,6 @@ func main() {
     fmt.Println("b.f:", *(*C.float)(unsafe.Pointer(&b)))
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-6/main.go)
 
 Mặc dù truy cập bằng package `unsafe` là cách dễ nhất và tốt nhất về hiệu suất, nó có thể làm phức tạp vấn đề với các tình huống mà trong đó các kiểu union lồng nhau được xử lý. Đối với các kiểu này ta nên xử lý chúng bằng cách xác định các hàm hỗ trợ trong ngôn ngữ C.
 
@@ -265,8 +253,6 @@ func main() {
     fmt.Println(C.TWO)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.3/3-struct-union-enum/example-7/main.go)
 
 Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá trị âm. Chúng ta có thể truy cập trực tiếp các giá trị liệt kê được xác định bằng `C.ONE`, `C.TWO`, v.v.
 
@@ -363,8 +349,6 @@ func main() {
     fmt.Println("s1: ", s1)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.3/4-array-string-slice/example-1/main.go)
 
 Vì chuỗi trong Go là chuỗi chỉ đọc, người dùng cần đảm bảo rằng nội dung của chuỗi C bên dưới sẽ không thay đổi trong quá trình sử dụng chuỗi đó trong Go và bộ nhớ sẽ không được giải phóng trước.
 

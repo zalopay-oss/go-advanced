@@ -35,8 +35,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch5/ch5.6/0-throughput/main.go)
-
 Chúng ta cần đo throughput của Web service này, đồng thời đó cũng là QPS của interface. Sử dụng [wrk](https://github.com/wg/wrk) trên máy tính cá nhân có cấu hình như sau:
 
 ```sh
@@ -207,8 +205,6 @@ func main() {
     time.Sleep(time.Hour)
 }
 ```
-
-[>> mã nguồn](../examples/ch5/ch5.6/2-principle/example-1/main.go)
 
 Kết quả sau khi thực thi thu được:
 

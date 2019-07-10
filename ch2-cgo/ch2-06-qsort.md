@@ -95,8 +95,6 @@ func Sort(base unsafe.Pointer, num, size int, cmp CompareFunc) {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.6/2-export-qsort/qsort/qsort.go)
-
 Chúng ta thay thế kiểu trong package C ảo bằng kiểu ngôn ngữ Go và chuyển đổi lại thành kiểu được yêu cầu bởi hàm C khi gọi hàm. Do đó, người dùng bên ngoài sẽ không còn phụ thuộc vào các package C ảo trong package qsort.
 
 Đoạn mã sau cho biết cách sử dụng hàm `Sort`:
@@ -131,8 +129,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.6/2-export-qsort/main.go)
-
 Để sử dụng hàm `Sort`, chúng ta cần lấy thông tin của địa chỉ phần tử đầu tiên, số lượng phần tử, kích thước của phần tử trong ngôn ngữ Go làm tham số cho hàm gọi và đồng thời cung cấp hàm so sánh của đặc tả ngôn ngữ C. Trong đó `go_qsort_compare` được hiện thực bằng ngôn ngữ Go và được export sang hàm  C.
 
 Việc đóng gói package ban đầu của qsort cho ngôn ngữ C đã được hiện thực và có thể được người dùng khác sử dụng thông qua package đó. Tuy nhiên, hàm `qsort.Sort` có rất nhiều bất tiện vì người dùng cần cung cấp hàm so sánh trong C, đây là một việc không dễ đối với nhiều người dùng ngôn ngữ Go. Cho nên tiếp theo sau đây chúng ta sẽ tiếp tục cải tiến hàm wrapper của hàm qsort, cố gắng thay thế hàm so sánh trong C bằng hàm closure. Từ đó hướng đến bỏ đi sự phụ thuộc  của người dùng vào code CGO.
@@ -162,8 +158,6 @@ func main() {
     fmt.Println(values)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.6/3-improve/example-1/main.go)
 
 Chúng ta cũng sẽ bọc hàm qsort của ngôn ngữ C dưới dạng hàm ngôn ngữ Go theo định dạng sau:
 
@@ -212,8 +206,6 @@ func Sort(base unsafe.Pointer, num, size int, cmp func(a, b unsafe.Pointer) int)
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.6/3-improve/example-2/qsort/qsort.go)
-
 Trước mỗi lần sắp xếp, lock biến toàn cục `go_qsort_compare_info`, lưu hàm closure hiện tại vào biến toàn cục và sau đó gọi hàm qsort của ngôn ngữ C.
 
 Dựa trên hàm mới được bọc, chúng ta có thể đơn giản hóa code sắp xếp trước đó:
@@ -232,8 +224,6 @@ func main() {
     fmt.Println(values)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.6/3-improve/example-2/main.go)
 
 Bây giờ việc sắp xếp không còn cần phải hiện thực phiên bản ngôn ngữ C của hàm so sánh thông qua CGO, bạn có thể chuyển hàm closure của ngôn ngữ Go làm hàm so sánh. Nhưng hàm `Sort` được import vẫn dựa vào package `unsafe`, điều này đi ngược lại thói quen lập trình ngôn ngữ Go.
 

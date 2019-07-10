@@ -228,8 +228,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch5/ch5.4/3-principle/main.go)
-
 Ví dụ trên kiểm tra định dạng email theo tag age, bạn có thể thực hiện thay đổi đơn giản trong chương trình để xem kết quả Validate cụ thể. Để tinh giản việc xử lý lỗi và các tiến trình phức tạp, ví dụ `reflect.Int8/16/32/64`, `reflect.Ptr`, nếu bạn viết thư viện xác minh cho môi trường doanh nghiệp, hãy đảm bảo cải thiện chức năng và khả năng chịu lỗi.
 
 Component  validation mã nguồn mở được giới thiệu trong phần trước phức tạp hơn về mặt chức năng so với ví dụ ở đây. Nhưng nguyên tắc chung rất đơn giản là duyệt cây của một struct với  reflection. Việc ta phải sử dụng một lượng lớn các reflection khi verify struct nhưng vì reflection trong Go không hiệu quả lắm nên đôi khi sẽ ảnh hưởng đến hiệu suất của chương trình. Ngữ cảnh đòi hỏi nhiều verify struct thường xuất hiện trong các web service. Đây không hẳn là vấn đề thắt cổ chai hiệu năng của chương trình. Hiệu quả thực tế là đưa ra phán đoán chính xác hơn từ pprof.

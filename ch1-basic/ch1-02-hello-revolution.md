@@ -15,8 +15,6 @@ Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ng�
 
 Phiên bản "Hello World" sau đây là từ hướng dẫn giới thiệu ngôn ngữ B được viết bởi Brian W. Kernighan (là người commit đầu tiên vào mã code của Go), chương trình như sau :
 
-[>> mã nguồn](../examples/ch1/ch1.2/1-hello-b-1972/main.b)
-
 ```B
 main() {
     extrn a, b, c;
@@ -38,8 +36,6 @@ Ngôn ngữ C được phát triển bởi Dennis Ritchie trên nền tảng c�
 
 Trong hướng dẫn giới thiệu ngôn ngữ C được viết bởi Brian W. Kernighan vào khoảng năm 1974, phiên bản ngôn ngữ C đầu tiên của chương trình "Hello World" đã xuất hiện. Điều này cung cấp quy ước cho chương trình đầu tiên với "Hello World" cho hầu hết các hướng dẫn ngôn ngữ lập trình sau này.
 
-[>> mã nguồn](../examples/ch1/ch1.2/2-hello-c/hello-c-1974/hello-c-01.c)
-
 ```c
 main()
 {
@@ -57,8 +53,6 @@ Ví dụ này cũng xuất hiện trong bản đầu tiên của **_C Programmin
 
 Năm 1988, 10 năm sau khi giới thiệu hướng dẫn của K&R, phiên bản thứ 2 của **_C Programming Language_** cuối cùng cũng được xuất bản. Thời điểm này, việc chuẩn hóa ngôn ngữ ANSI C đã được hoàn thành sơ bộ, nhưng phiên bản chính thức của document vẫn chưa được công bố. Tuy nhiên, chương trình "Hello World" trong cuốn sách đã thêm `#include <stdio.h>` là header file chứa câu lệnh đặc tả mới, dùng để khai báo hàm `printf` (trong tiêu chuẩn C89, chỉ riêng với hàm `printf`, có thể được dùng trực tiếp mà không cần khai báo hàm).
 
-[>> mã nguồn](../examples/ch1/ch1.2/2-hello-c/hello-c-1988/hello-c-03.c)
-
 ```c
 #include <stdio.h>
 
@@ -70,8 +64,6 @@ main()
 ```
 
 Đến năm 1989, tiêu chuẩn quốc tế đầu tiên cho ANSI C được công bố, thường được nhắc tới với tên C89. C89 là tiêu chuẩn phổ biến nhất của ngôn ngữ C và vẫn còn được sử dụng rộng rãi. Phiên bản thứ 2 của **_C Programming Language_** cũng được in lại bản mới, đối với đặc tả C89 mới này, `void` đã được thêm vào danh sách các tham số hàm, chỉ ra rằng không có tham số đầu vào.
-
-[>> mã nguồn](../examples/ch1/ch1.2/2-hello-c/hello-c-1989/hello-c-04.c)
 
 ```c
 #include <stdio.h>
@@ -104,8 +96,6 @@ Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tha
 
 
 Chương trình "sàng số nguyên tố" cho phiên bản đồng thời của ngôn ngữ Newsqueak như sau:
-
-[>> mã nguồn](../examples/ch1/ch1.2/3-hello-newsqueak-1989/prime-newsqueak/prime.newsqueak)
 
 ```go
     // xuất 1 chuỗi số int từ 2 vào pipeline
@@ -176,8 +166,6 @@ Hình 1-6. Mô hình đồng thời trong Alef
 
 Chương trình "Hello World" cho phiên bản đồng thời của ngôn ngữ Alef:
 
-[>> mã nguồn](../examples/ch1/ch1.2/4-hello-alef-1993/hello.alef)
-
 ```c
 #include <alef.h>
 
@@ -210,8 +198,6 @@ Limbo (Hell) là ngôn ngữ lập trình để phát triển các ứng dụng 
 
 Phiên bản  Limbo của chương trình "Hello World" như sau:
 
-[>> mã nguồn](../examples/ch1/ch1.2/5-hello-limbo-1995/hello.limbo)
-
 ```c
 implement Hello;
 
@@ -240,8 +226,6 @@ Bell Labs sau khi trải qua nhiều biến động dẫn tới việc nhóm ph�
 
 ### 1.2.6.1 hello.go - Tháng 6 năm 2008
 
-[>> mã nguồn](../examples/ch1/ch1.2/6-hello-go/hello-go-200806/hello.go.txt)
-
 ```go
 package main
 
@@ -255,8 +239,6 @@ func main() int {
 
 ### 1.2.6.2 hello.go - 27 tháng 6 năm 2008
 
-[>> mã nguồn](../examples/ch1/ch1.2/6-hello-go/hello-go-20080627/hello.go.txt)
-
 ```go
 package main
 
@@ -269,8 +251,6 @@ Hàm `main` đã loại bỏ giá trị trả về và chương trình sẽ tr�
 
 ### 1.2.6.3 hello.go - 11 tháng 8 năm 2008
 
-[>> mã nguồn](../examples/ch1/ch1.2/6-hello-go/hello-go-20080811/hello.go.txt)
-
 ```go
 package main
 
@@ -282,8 +262,6 @@ func main() {
 Lệnh dựng sẵn `print` để gỡ lỗi được thay đổi thành hàm dựng sẵn thông thường, làm cho cú pháp đơn giản và nhất quán hơn.
 
 ### 1.2.6.4 hello.go - 24 tháng 10 năm 2008
-
-[>> mã nguồn](../examples/ch1/ch1.2/6-hello-go/hello-go-2001024/hello.go.txt)
 
 ```go
 package main
@@ -299,8 +277,6 @@ Hàm `printf` có thể định dạng  chuỗi giống  trong ngôn ngữ C đ�
 
 ### 1.2.6.5 hello.go - 15 tháng 1 năm 2009
 
-[>> mã nguồn](../examples/ch1/ch1.2/6-hello-go/hello-go-20090115/hello.go.txt)
-
 ```go
 package main
 
@@ -314,8 +290,6 @@ func main() {
 Ngôn ngữ Go bắt đầu bằng việc chữ cái đầu tiên viết hoa được sử dụng để phân biệt xem ký hiệu đó có thể được export hay không. Các chữ cái viết hoa bắt đầu bằng ký hiệu công khai được export và các chữ cái viết thường bắt đầu bằng ký hiệu riêng bên trong package.
 
 ### 1.2.6.6 hello.go - 11 tháng 12 năm 2009
-
-[>> mã nguồn](../examples/ch1/ch1.2/6-hello-go/hello-go-20091211/hello.go)
 
 ```go
 package main
@@ -331,9 +305,7 @@ Ngôn ngữ Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu
 
 ### 1.2.7 Hello World! - V2.0
 
-Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service. [source](../examples/ch1.2/7-hello-world/example-1/main.go)
-
-[>> mã nguồn](../examples/ch1/ch1.2/7-hello-world-v2/example-1/main.go)
+Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello World", mà còn cung cấp dịch vụ in cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi máy khách truy cập vào service.
 
 ```go
 package main

@@ -21,8 +21,6 @@ Từ quan điểm của Protobuf, gRPC không gì khác hơn là một trình t�
 
 Tạo file *hello.proto* và định nghĩa interface `HelloService`:
 
-[>> mã nguồn](../examples/ch4/ch4.4/2-getting-started/helloService/hello.proto)
-
 ```protobuf
 syntax = "proto3";
 
@@ -85,8 +83,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.4/2-getting-started/server/main.go)
-
 Dòng đầu tiên để khởi tạo một đối tượng gRPC service, kế đó phần hiện thực của `HelloServiceImpl` service được đăng ký với grpcServer thông qua  hàm `RegisterHelloServiceServer` (của gRPC plugin). Cuối cùng `grpcServer.Serve(lis)` cung cấp gRPC service trên port `1234`.
 
 Tiếp theo bạn đã có thể kết nối tới gRPC service từ client:
@@ -108,8 +104,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.4/2-getting-started/client/main.go)
-
 Trong đó `grpc.Dial` chịu trách nhiệm thiết lập kết nối với dịch vụ gRPC và sau đó hàm `NewHelloServiceClient` xây dựng một đối tượng `HelloServiceClient` dựa trên kết nối đã thiết lập. Client được trả về  là một đối tượng thuộc interface `HelloServiceClient`. Phương thức được xác định bởi interface này có thể gọi phương thức được cung cấp bởi dịch vụ gRPC tương ứng ở server.
 
 Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: Framework được tạo bởi gRPC không hỗ trợ các cuộc gọi bất đồng bộ. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 cơ bản một cách an toàn  giữa các gRPC trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
@@ -127,8 +121,6 @@ service HelloService {
     rpc Channel (stream String) returns (stream String);
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.4/3-grpc-flow/HelloService/hello.proto)
 
 Từ khóa stream để thông báo chức năng stream được sử dụng, phần tham số là một stream mà nhận vào tham số client và trả về giá trị là một stream.
 
@@ -193,8 +185,6 @@ func (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.4/3-grpc-flow/server/main.go)
-
 Server nhận dữ liệu được gửi từ client trong vòng lặp. Nếu gặp `io.EOF`, client stream sẽ đóng. Nếu hàm exit,  Server stream sẽ đóng. Dữ liệu trả về được  gửi đến client thông qua stream và việc gửi nhận dữ liệu stream hai chiều là hoàn toàn độc lập. Cần lưu ý rằng thao tác gửi và nhận không cần sự tương ứng một-một và người dùng có thể tổ chức code theo ngữ cảnh thực tế.
 
 Client cần gọi phương thức Channel để lấy đối tượng stream trả về:
@@ -233,8 +223,6 @@ for {
     fmt.Println(reply.GetValue())
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.4/3-grpc-flow/client/main.go)
 
 ## 4.4.4 Mô hình Publishing - Subscription
 
@@ -294,8 +282,6 @@ service PubsubService {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.4/4-pubsub/pubsubservice/pubsubservice.proto)
-
 Với `Publish` là phương thức RPC thông thường và `Subscribe` là một service streaming 1 chiều. gRPC plugin sẽ tạo ra interface tương ứng cho server và client:
 
 ```go
@@ -315,8 +301,6 @@ type PubsubService_SubscribeServer interface {
     grpc.ServerStream
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.4/4-pubsub/pubsubservice/pubsubservice.pb.go)
 
 Bởi vì `Subscribe` là flow 1 chiều phía server nên chỉ có phương thức `Send` được tạo ra trong interface `HelloService_SubscribeServer`.
 
@@ -365,8 +349,6 @@ func (p *PubsubService) Subscribe(
     return nil
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.4/4-pubsub/server/main.go)
 
 Hàm `main` cho phép đăng mới thông tin từ client tới server:
 

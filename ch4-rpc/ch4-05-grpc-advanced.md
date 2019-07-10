@@ -108,8 +108,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.5/1-tls-certificate/main.go)
-
 Server cũng sử dụng hàm `credentials.NewTLS` để tạo chứng chỉ, chọn chứng chỉ CA root thông qua ClientCA và cho phép Client được xác thực bằng tùy chọn `ClientAuth`.
 
 Như vậy chúng ta đã xây dựng được một hệ thống gRPC đáng tin cậy để kết nối giữa Client và Server thông qua xác thực chứng chỉ từ cả 2 chiều.
@@ -218,8 +216,6 @@ func (a *Authentication) Auth(ctx context.Context) error {
 }
 ```
 
-Xem toàn bộ [>> mã nguồn](../examples/ch4/ch4.5/2-token-authentication/main.go)
-
 Công việc xác thực chi tiết chủ yếu được thực hiện trong phương thức `Authentication.Auth`. Đầu tiên, thông tin mô tả (meta infomation) được lấy từ biến ngữ cảnh  `ctx` thông qua `metadata.FromIncomeContext` và sau đó thông tin xác thực tương ứng được lấy ra để xác thực. Nếu xác thực thất bại, nó sẽ trả về lỗi thuộc kiểu `code.Unauthenticated`.
 
 ## 4.5.3 Interceptor
@@ -269,8 +265,6 @@ func filter(
     return handler(ctx, req)
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.5/3-interceptor/main.go)
 
 Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong dự án mã nguồn mở grpc-ecosystem có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
 
@@ -367,8 +361,6 @@ func main() {
     )
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.5/4-with-web-services/main.go)
 
 Hàm `if` đầu tiên để đảm bảo nếu HTTP không phải là phiên bản  HTTP/2 thì sẽ không hỗ trợ gRPC. Kế tiếp để xét nếu `Content-Type` ở header của request là  *"application/grpc"* thì thực thi lời gọi gRPC tương ứng (ở đây là `ServeHTTP`).
 
