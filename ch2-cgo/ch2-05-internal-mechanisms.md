@@ -92,7 +92,7 @@ func runtime.cgocall(fn, arg unsafe.Pointer) int32
 
 Tham số đầu tiên là địa chỉ của hàm ngôn ngữ C và tham số thứ hai là địa chỉ của struct tham số tương ứng với hàm ngôn ngữ C.
 
-Trong ví dụ này, hàm trong C được truyền vào hàm `_cgo_506f45f9fa85_Cfunc_sum` cũng là một hàm trung gian được CGO tạo ra. Hàm  được định nghĩa trong [`main.cgo2.c1`(../examples/ch2/ch2.5/2-go-call-c/example-1/_obj/main.cgo2.c)]:
+Trong ví dụ này, hàm trong C được truyền vào hàm `_cgo_506f45f9fa85_Cfunc_sum` cũng là một hàm trung gian được CGO tạo ra. Hàm  được định nghĩa trong `main.cgo2.c1`:
 
 ```c
 void _cgo_506f45f9fa85_Cfunc_sum(void *v) {

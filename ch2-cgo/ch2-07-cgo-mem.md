@@ -1,10 +1,10 @@
 # 2.7 Mô hình bộ nhớ CGO
 
-CGO là cầu nối giữa Go và C. Nó cho phép khả năng tương tác ở cấp độ nhị phân, nhưng chúng ta nên chú ý đến các vấn đề có thể phát sinh do sự khác biệt về mô hình bộ nhớ giữa hai ngôn ngữ. Nếu việc chuyển con trỏ có liên quan đến lệnh gọi hàm khác ngôn ngữ  được xử lý bởi CGO, có thể có trường hợp trong đó ngôn ngữ Go và ngôn ngữ C chia sẻ một segment bộ nhớ nhất định. Chúng ta biết rằng bộ nhớ của ngôn ngữ C là cố định sau khi cấp phát, nhưng ngôn ngữ Go có thể giữ địa chỉ bộ nhớ trong stack    cho mục đích dynamic scaling của hàm (đây là sự khác biệt lớn nhất giữa mô hình bộ nhớ Go và C). Nếu ngôn ngữ C giữ con trỏ Go trước khi di chuyển, việc truy cập đối tượng Go bằng con trỏ cũ sẽ khiến chương trình bị sập.
+CGO là cầu nối giữa Go và C. Nó cho phép khả năng tương tác ở cấp độ nhị phân, nhưng chúng ta nên chú ý đến các vấn đề có thể phát sinh do sự khác biệt về mô hình bộ nhớ giữa hai ngôn ngữ. Nếu việc chuyển con trỏ có liên quan đến lệnh gọi hàm khác ngôn ngữ  được xử lý bởi CGO, có thể có trường hợp trong đó ngôn ngữ Go và ngôn ngữ C chia sẻ một segment bộ nhớ nhất định. Chúng ta biết rằng bộ nhớ của ngôn ngữ C là cố định sau khi cấp phát, nhưng ngôn ngữ Go có thể giữ địa chỉ bộ nhớ trong stack cho mục đích dynamic scaling của hàm (đây là sự khác biệt lớn nhất giữa mô hình bộ nhớ Go và C). Nếu ngôn ngữ C giữ con trỏ Go trước khi di chuyển, việc truy cập đối tượng Go bằng con trỏ cũ sẽ khiến chương trình bị sập.
 
 ## 2.7.1 Truy cập bộ nhớ C
 
-Bộ nhớ của không gian ngôn ngữ C khá ổn định, miễn là nó không bị release trước, thì không gian ngôn ngữ Go có thể được sử dụng rất tự tin. Truy cập bộ nhớ C trong Go là trường hợp đơn giản nhất và chúng ta đã thấy nó nhiều lần trong các ví dụ trước.
+Bộ nhớ của không gian ngôn ngữ C khá ổn định, miễn là nó không bị release trước, thì không gian ngôn ngữ Go có thể được sử dụng. Truy cập bộ nhớ C trong Go là trường hợp đơn giản nhất và chúng ta đã thấy nó nhiều lần trong các ví dụ trước.
 
 Do những hạn chế của hiện thực, chúng ta không thể tạo các slice lớn hơn 2GB bộ nhớ trong Go. Nhưng với sự trợ giúp của cgo, chúng ta có thể tạo ra hơn 2GB bộ nhớ trong môi trường ngôn ngữ C, sau đó chuyển sang slice của ngôn ngữ Go:
 
@@ -48,7 +48,7 @@ Một yếu tố chính trong sự tồn tại của cgo là tạo điều kiệ
 
 Giả sử một trường hợp cực đoan: sau khi chúng ta truyền một hàm ngôn ngữ Go trên một stack của goroutinue, chúng ta sẽ truyền hàm ngôn ngữ C. Trong quá trình thực thi hàm ngôn ngữ C này, stack của goroutinue này được mở rộng do không đủ không gian, dẫn đến Bộ nhớ ngôn ngữ Go ban đầu sẽ được chuyển đến một vị trí mới. Nhưng tại thời điểm này, hàm ngôn ngữ C không biết rằng bộ nhớ ngôn ngữ Go đã di chuyển vị trí, vẫn sử dụng địa chỉ trước đó để vận hành bộ nhớ - điều này sẽ dẫn đến bộ nhớ vượt ngoài giới hạn. Trên đây là một hệ quả (có một số khác biệt trong tình huống thực tế), nghĩa là việc truy cập từ C vào bộ nhớ Go có thể không an toàn!
 
-Tất nhiên, người dùng có kinh nghiệm với các cuộc gọi thủ tục từ xa (RPC) có thể xử lý bằng cách truyền hoàn toàn bằng giá trị: với đặc tính ổn định bộ nhớ của ngôn ngữ C, trước tiên khởi tạo cùng một lượng bộ nhớ trong không gian ngôn ngữ C, sau đó điền bộ dữ liệu từ Go vào bộ nhớ đó của C. Lúc trả về cũng được xử lý như vậy. Ví dụ sau đây là một triển khai cụ thể của ý tưởng này:
+Tất nhiên, người dùng có kinh nghiệm với các cuộc gọi thủ tục từ xa (RPC) có thể xử lý bằng cách truyền hoàn toàn bằng giá trị. Với đặc tính ổn định bộ nhớ của ngôn ngữ C, trước tiên khởi tạo cùng một lượng bộ nhớ trong không gian ngôn ngữ C, sau đó điền bộ dữ liệu từ Go vào bộ nhớ đó của C. Lúc trả về cũng được xử lý như vậy. Ví dụ sau đây là một triển khai cụ thể của ý tưởng này:
 
 ```go
 package main
@@ -75,7 +75,7 @@ func main() {
 
 Khi bạn cần truyền chuỗi của Go sang ngôn ngữ C, trước tiên hãy sao chép dữ liệu bộ nhớ tương ứng với chuỗi `C.CString` ngôn ngữ Go sang không gian bộ nhớ ngôn ngữ C mới được tạo. Mặc dù ví dụ trên là an toàn, nhưng nó cực kỳ kém hiệu quả (vì phải phân bổ bộ nhớ nhiều lần và sao chép từng phần tử một), và nó cực kỳ cồng kềnh.
 
-Để đơn giản hóa và xử lý hiệu quả vấn đề chuyển bộ nhớ ngôn ngữ Go sang ngôn ngữ C, CGO xác định một quy tắc đặc biệt cho trường hợp này: trước khi hàm ngôn ngữ C được CGO gọi trả về, CGO đảm bảo rằng bộ nhớ ngôn ngữ Go không tồn tại trong giai đoạn này. Khi thay đổi địa chỉ diễn ra, hàm ngôn ngữ C giờ có thể mạnh dạn sử dụng bộ nhớ ngôn ngữ Go!
+Để đơn giản hóa và xử lý hiệu quả vấn đề chuyển bộ nhớ ngôn ngữ Go sang ngôn ngữ C, CGO xác định một quy tắc đặc biệt cho trường hợp này: trước khi hàm ngôn ngữ C được CGO gọi trả về, CGO đảm bảo rằng bộ nhớ ngôn ngữ Go không tồn tại trong giai đoạn này. Khi thay đổi địa chỉ diễn ra, hàm ngôn ngữ C giờ có thể sử dụng bộ nhớ ngôn ngữ Go!
 
 Theo các quy tắc mới, chúng ta có thể truyền trực tiếp vào bộ nhớ của chuỗi Go:
 

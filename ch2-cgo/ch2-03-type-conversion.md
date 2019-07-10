@@ -1,6 +1,6 @@
 # 2.3 Chuyển đổi kiểu
 
-Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng các hàm trong C (các hàm hiện thực khai báo Golang trong C) để sử dụng lại các tài nguyên của C (vì ngôn ngữ C cũng liên quan đến các hàm callback, dĩ nhiên nó liên quan đến việc gọi các hàm trong Go từ các hàm của C (các hàm thực hiện khai báo ngôn ngữ C trong Go)). Ngày nay, CGO đã phát triển thành cầu nối giao tiếp hai chiều giữa C và Go. Để tận dụng tính năng của CGO, việc hiểu các quy tắc chuyển đổi giữa hai loại ngôn ngữ là điều quan trọng. Đây là vấn đề sẽ được thảo luận trong phần này.
+Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng các hàm trong C (các hàm hiện thực khai báo Golang trong C) để sử dụng lại các tài nguyên của C (vì ngôn ngữ C cũng liên quan đến các hàm callback, dĩ nhiên nó liên quan đến việc gọi các hàm trong Go từ các hàm của C (các hàm thực hiện khai báo ngôn ngữ C trong Go)). Ngày nay, CGO đã phát triển thành cầu nối giao tiếp hai chiều giữa C và Go. Để tận dụng tính năng của CGO, việc hiểu các quy tắc chuyển đổi kiểu dữ liệu giữa hai loại ngôn ngữ là điều quan trọng. Đây là vấn đề sẽ được thảo luận trong phần này.
 
 ## 2.3.1 Các kiểu dữ liệu số học
 
@@ -29,7 +29,7 @@ _Bảng 2-1 So sánh kiểu trong các ngôn ngữ Go và C_
 
 Cần lưu ý rằng mặc dù kích thước của những kiểu không được chỉ rõ kích thước trong C như `int`, `short` v.v., kích thước của chúng đều được xác định trong CGO. Trong CGO, kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
 
-Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với GO thì `int` và `uint` có thể là 4 byte hoặc 8 byte. Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO.Trong file header này, mỗi kiểu giá trị Go cơ bản sẽ xác định kiểu tương ứng trong C có tiền tố "Go". Ví dụ sau trong hệ thống 64-bit, có file header `_cgo_export.h` được CGO định nghĩa các kiểu giá trị, nơi mà `GoInt` và `GoUint` lần lượt là `GoInt64` và `GoUint64`:
+Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với GO thì `int` và `uint` có thể là 4 byte hoặc 8 byte. Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị Go cơ bản sẽ xác định kiểu tương ứng trong C có tiền tố "Go". Ví dụ sau trong hệ thống 64-bit, có file header `_cgo_export.h` được CGO định nghĩa các kiểu giá trị, nơi mà `GoInt` và `GoUint` lần lượt là `GoInt64` và `GoUint64`:
 
 ```go
 typedef signed char GoInt8;
@@ -46,7 +46,7 @@ typedef float GoFloat32;
 typedef double GoFloat64;
 ```
 
-Bên cạnh `GoInt` và `GoUint`, chúng tôi không khuyên bạn nên sử dụng trực tiếp `GoInt32`, `GoInt64` và các kiểu khác. Cách tiếp cận tốt hơn là khai báo file header <stdint.h> thông qua tiêu chuẩn C99 của C. Để cải thiện tính linh hoạt của C, không chỉ mỗi kiểu số học được xác định kích thước rõ ràng trong file mà còn chúng còn sử dụng các tên phù hợp với tên kiểu tương ứng trong Golang. So sánh các kiểu tương ứng trong <stdint.h> được trình bày trong Bảng 2-2.
+Bên cạnh `GoInt` và `GoUint`, chúng tôi không khuyên bạn nên sử dụng trực tiếp `GoInt32`, `GoInt64` và các kiểu khác. Cách tiếp cận tốt hơn là khai báo file header <stdint.h> thông qua tiêu chuẩn C99 của C. Để cải thiện tính linh hoạt của C, không chỉ mỗi kiểu số học được xác định kích thước rõ ràng trong file mà chúng còn sử dụng các tên phù hợp với tên kiểu tương ứng trong Golang. So sánh các kiểu tương ứng trong <stdint.h> được trình bày trong Bảng 2-2.
 
 | Kiểu trong C | Kiểu trong CGO | Kiểu trong Go |
 | ------------ | -------------- | ------------- |
@@ -258,7 +258,7 @@ Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá
 
 ## 2.3.4 Array, String và Slice
 
-Trong C, biến mảng thực ra tương ứng với một con trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, con trỏ này không thể được sửa đổi, khi truyền biến mảng vào một hàm, thực ra là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây ta xem một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
+Trong C, biến mảng thực ra tương ứng với một con trỏ trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, con trỏ này không thể được sửa đổi, khi truyền biến mảng vào một hàm, thực ra là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây ta xem một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
 
 Trong Go, mảng là một kiểu giá trị và độ dài của mảng là một phần của kiểu mảng. Chuỗi trong Go tương ứng với một vùng nhớ "chỉ đọc" có độ dài nhất định. Slice trong Go là phiên bản đơn giản hơn của mảng động (dynamic array).
 
@@ -405,7 +405,7 @@ Việc chuyển đổi được chia thành nhiều giai đoạn và mục tiêu
 
 ## 2.3.7 Chuyển đổi giữa kiểu slice
 
-Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên, trong ngôn ngữ Go, slice tương ứng với một mảng hoặc một mảng không còn là kiểu con trỏ, vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
+Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên, trong ngôn ngữ Go, slice tương ứng với một con trỏ tới một mảng, vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
 
 Tuy nhiên, package `reflection` của ngôn ngữ Go đã cung cấp sẵn cấu trúc cơ bản của kiểu slice nhờ đó chuyển đổi slice có thể được hiện thực và kết hợp với kỹ thuật chuyển đổi con trỏ được thảo luận ở trên giữa các kiểu khác nhau:
 
@@ -421,7 +421,7 @@ pHdr.Len = qHdr.Len * unsafe.Sizeof(q[0]) / unsafe.Sizeof(p[0])
 pHdr.Cap = qHdr.Cap * unsafe.Sizeof(q[0]) / unsafe.Sizeof(p[0])
 ```
 
-Ý tưởng chuyển đổi giữa các kiểu slice khác nhau là trước tiên xây dựng một slice trống, sau đó điền vào slice đó với dữ liệubên dưới của slice gốc. Nếu kiểu X và Y có kích thước khác nhau, bạn cần đặt lại thuộc tính Len và Cap. Cần lưu ý rằng nếu X hoặc Y là kiểu null, đoạn code trên có thể gây ra lỗi chia cho 0 và code thực tế cần được xử lý khi thích hợp.
+Ý tưởng chuyển đổi giữa các kiểu slice khác nhau là trước tiên xây dựng một slice trống, sau đó điền vào slice đó với dữ liệu bên dưới của slice gốc. Nếu kiểu X và Y có kích thước khác nhau, bạn cần đặt lại thuộc tính Len và Cap. Cần lưu ý rằng nếu X hoặc Y là kiểu null, đoạn code trên có thể gây ra lỗi chia cho 0 và code thực tế cần được xử lý khi thích hợp.
 
 Sau đây cho thấy luồng cụ thể của thao tác chuyển đổi giữa các slice:
 

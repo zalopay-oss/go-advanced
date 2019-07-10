@@ -1,10 +1,10 @@
 # 2.8 C++ Class Packaging
 
-CGO là một cầu nối giữa C và Go. Về nguyên tắc, class trong C++ không được hỗ trợ trực tiếp. Nguyên nhân đến từ việc CGO thiếu hỗ trợ cho cú pháp C++. C++ không có sẵn một Binary Interface Specification (ABI) nào cả. Làm thế nào class C++ contructor có thể sinh ra link symbol names khi biên dịch ra các object files, các phương thức khác nhau từ các platform khác nhau của các phiên bản C++ khác nhau? Nhưng C++ cũng tương thích với ngôn ngữ C, do đó chúng ta có thể thêm một tập các hàm C interface như là cầu nối giữa C++ class và CGO, do đó, việc giao tiếp giữa C++ và Go có thể được nhận dạng một cách trực tiếp. Dĩ nhiên, Bởi vì CGO chỉ hỗ trợ kiểu dữ liệu của ngôn ngữ C, chúng ta không thể trực tiếp dùng C++ reference parameters và các tính năng khác.
+CGO là một cầu nối giữa C và Go. Về nguyên tắc, class trong C++ không được hỗ trợ trực tiếp. Nguyên nhân đến từ việc CGO thiếu hỗ trợ cho cú pháp C++. C++ không có sẵn một Binary Interface Specification (ABI) nào cả. Làm thế nào class C++ contructor có thể sinh ra link symbol names khi biên dịch ra các object files, các phương thức khác nhau từ các platform khác nhau của các phiên bản C++ khác nhau? Nhưng C++ cũng tương thích với ngôn ngữ C, do đó chúng ta có thể thêm một tập các hàm C interface như là cầu nối giữa C++ class và CGO, do đó, việc giao tiếp giữa C++ và Go có thể được nhận dạng một cách trực tiếp. Dĩ nhiên, bởi vì CGO chỉ hỗ trợ kiểu dữ liệu của ngôn ngữ C, chúng ta không thể trực tiếp dùng C++ reference parameters và các tính năng khác.
 
 ## 2.8.1 Từ Class trong C++ đến Object trong Go
 
-Việc hiện thực packaging C++ class thành Object trong Go yêu cầu một số bước: Đầu tiên, C++ class được bọc bởi một interface C thuần, tiếp theo, hàm interface C thuần sẽ map với hàm của Go bằng CGO, cuối cùng, đối tượng Go wrapper được tạo ra. Hiện thực class C++ thành các phương thức sử dụng Go objects.
+Việc hiện thực packaging C++ class thành Object trong Go yêu cầu một số bước. Đầu tiên, C++ class được bọc bởi một interface C thuần, tiếp theo, hàm interface C thuần sẽ map với hàm của Go bằng CGO, cuối cùng, đối tượng Go wrapper được tạo ra. Hiện thực class C++ thành các phương thức sử dụng Go objects.
 
 ### 2.8.1.1 Chuẩn bị một C++ class
 
@@ -156,7 +156,7 @@ func cgo_MyBuffer_Size(p *cgo_MyBuffer_T) C.int {
 
 ### 2.8.1.4 Wrapper là một đối tượng của Go
 
-Sau khi bọc interface C thuần thành một hàm Go, chúng ta có thể dễ dàng xây dựng một đối tượng Go dựa trên hàm wrapped Go. Bởi vì `cgo_MyBuffer_T` là một kiểu được imported trong không gian ngôn ngữ C, không thể định nghĩa những phương thức cho riêng chúng, do đó chúng ta phải xây dựng một kiểu `MyBuffer`   sẽ giữ đối tượng cache của ngôn ngữ C được trỏ tới bởi `cgo_MyBuffer_T`.
+Sau khi bọc interface C thuần thành một hàm Go, chúng ta có thể dễ dàng xây dựng một đối tượng Go dựa trên hàm wrapped Go. Bởi vì `cgo_MyBuffer_T` là một kiểu được imported trong không gian ngôn ngữ C, không thể định nghĩa những phương thức cho riêng chúng, do đó chúng ta phải xây dựng một kiểu `MyBuffer` sẽ giữ đối tượng cache của ngôn ngữ C được trỏ tới bởi `cgo_MyBuffer_T`.
 
 ```go
 // my_buffer.go
@@ -210,7 +210,7 @@ Trong ví dụ chúng ta tạo ra 1024-byte cache và sau đó phân bổ string
 
 ## 2.8.2 Chuyển đổi đối tượng Go sang class C++
 
-Để hiện thực việc đóng gói các đối tượng ngôn ngữ Go vào các class C++, cần có các bước sau: trước tiên, ánh xạ đối tượng Go sang một id, sau đó export hàm interface C tương ứng dựa trên id, cuối cùng đóng gói đối tượng C++ dựa trên hàm interface C.
+Để hiện thực việc đóng gói các đối tượng ngôn ngữ Go vào các class C++, cần có các bước như sau. Trước tiên, ánh xạ đối tượng Go sang một id. Sau đó export hàm interface C tương ứng dựa trên id. Cuối cùng đóng gói đối tượng C++ dựa trên hàm interface C.
 
 ### 2.8.2.1 Xây dựng một đối tượng Go
 
