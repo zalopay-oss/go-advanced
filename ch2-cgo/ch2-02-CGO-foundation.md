@@ -26,8 +26,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.2/1-simplest-go/main.go)
-
 Ví dụ này cho thấy việc sử dụng CGO cơ bản. Phần đầu của comment khai báo hàm C sẽ được gọi và file header được liên kết. Tất cả các thành phần ngôn ngữ C trong file header sau khi được đưa vào sẽ được thêm vào package "C" ảo. `Cần lưu ý rằng câu lệnh import "C" yêu cầu một dòng riêng và không thể được import cùng với các package khác`. Truyền tham số cho hàm C cũng rất đơn giản và nó có thể được chuyển đổi trực tiếp thành một kiểu trong C tương ứng. Trong ví dụ trên, `C.int(v)` được sử dụng để chuyển đổi giá trị kiểu int trong Go đến giá trị kiểu int trong ngôn ngữ C, sau đó gọi hàm printint được xác định bằng ngôn ngữ C để in.
 
 Cần lưu ý rằng Go là ngôn ngữ ràng buộc kiểu mạnh, do đó tham số được truyền phải chính xác với khai báo, và phải được chuyển đổi sang kiểu trong C bằng các hàm chuyển đổi trước khi truyền, không thể truyền trực tiếp bằng kiểu của Go. Đồng thời, các ký hiệu của C được import thông qua package C thì `không cần phải viết hoa`, không cần phải tuân theo quy tắc của Go.
@@ -53,8 +51,6 @@ func PrintCString(cs *C.char) {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.2/1-cchar/cgo_helper/cgo_helper.go)
-
 Bây giờ có thể ta muốn sử dụng hàm này trong các package Go khác:
 
 ```go
@@ -68,8 +64,6 @@ func main() {
     cgo_helper.PrintCString(C.cs)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.2/1-cchar/main/main.go)
 
 Nhưng đoạn code này sẽ không chạy được. Vì biến `C.cs` được đề cập trong package main hiện tại là kiểu của package ảo C được xây dựng trên `*char` (*C.char, chính xác hơn là *main.C.char), còn kiểu `*C.type` được đề cập đến trong package `cgo_helper` (`*cgo_helper.C.char`) là khác nhau. Trong ngôn ngữ Go, các phương thức phụ thuộc vào kiểu. Các kiểu được package C ảo được đề cập trong các package Go khác nhau là khác nhau (`main.C` không giống `cgo_helper.C`) chính là nguyên nhân khiến các kiểu Go được mở rộng từ chúng thành các kiểu khác nhau (`*main.C.char` khác `*cgo_helper.C.char`). Điều này cuối cùng đã khiến đoạn code đó không hoạt động được.
 
@@ -139,8 +133,6 @@ func main() {
     print(C.GoString(C.os))
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.2/2-cgo-statement/main.go)
 
 Bằng cách này, chúng ta có thể sử dụng các kỹ thuật thường được sử dụng trong C để xử lý mã nguồn khác biệt giữa các nền tảng khác nhau.
 

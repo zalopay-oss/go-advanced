@@ -29,8 +29,6 @@ message HttpRule {
 }
 ```
 
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/pbgo.proto)
-
 File `pbgo.proto` là một phần của framework `pbgo` và cần được imported bởi những file proto khác. Bản thân Protobuf có một hệ thống các package, và đường dẫn đến package này là `pbgo`. Ngôn ngữ Go cũng có một tập hợp một hệ thống các gói, chúng ta cần định nghĩa sự mapping mối quan hệ giữa Protobuf và Go thông qua cú pháp mở rộng của `go_package`. Sau khi định nghĩa mapping đó, những Protobuf file khác mà được import vào gói `pbgo.ptoto` sẽ sinh ra đường dẫn tới `Go language package` của `pbgo.proto` mapping khi ngôn ngữ Go sinh ra chúng.
 
 
@@ -56,8 +54,6 @@ service HelloService {
     }
 }
 ```
-
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/examples/hello.pb/hello.proto)
 
 
 
@@ -85,8 +81,6 @@ type Plugin interface {
 }
 ```
 
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/protoc-gen-pbgo/pbgo/pbgo.go)
-
 Chúng ta cần sinh ra mã nguồn thích hợp trong hai hàm `Generate` và `GenerateImports` một cách tương ứng. Toàn bộ thông tin của file Protobuf được miêu tả ở kiểu tham số `*generator.FileDescriptor`, do đó chúng ta cần mở rộng việc định nghĩa metadata trước các tham số hàm.
 
 Đối tượng plugin trong framework `pbgo` là `pbgoPlugin`. Trong hàm `Generate`, đầu tiên chúng ta cần duyệt lần lượt qua tất cả các `services` được định nghĩa trong file Protobuf, và sau đó duyệt mỗi phương thức trong mỗi `service`. Sau khi lấy được cấu trúc của phương thức, trích dẫn phần thông tin còn lại của extension thông qua phương thức `getServiceMethodOption` đã được custom.
@@ -102,8 +96,6 @@ func (p *pbgoPlugin) Generate(file *generator.FileDescriptor) {
 }
 ```
 
-
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/protoc-gen-pbgo/pbgo/pbgo.go)
 
 Trước khi chúng ta nói về phương thức `getServiceMethodOption`, hãy điểm lại định nghĩa phần extension của phương thức.
 
@@ -135,8 +127,6 @@ func (p *pbgoPlugin) getServiceMethodOption(
 }
 ```
 
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/protoc-gen-pbgo/pbgo/pbgo.go)
-
 
 Trước tiên, xác định khi nào mỗi phương thức được định nghĩa một extension bằng việc dùng hàm `proto.HasExtension`, và sau đó lấy thông tin của user-defined thông qua hàm `proto.GetExtension`, sau khi lấy được phần thông tin extension đó, chúng sẽ biến đổi extension thành kiểu `pbgo.HttpRule`.
 
@@ -161,8 +151,6 @@ service HelloService {
     }
 }
 ```
-
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/examples/hello.pb/hello.proto)
 
 
 Để final user dễ dàng sử dụng, chúng ta cần xây dựng một route đến `HelloService`. Do đó, chúng ta sẽ có một hàm giống như `HelloServiceHandler` để sinh ra mã nguồn route handler dựa trên interface của service `HelloServiceInterface`.
@@ -231,8 +219,6 @@ func (p *HelloService) Hello(request *hello_pb.String, reply *hello_pb.String) e
     return nil
 }
 ```
-
-[>> mã nguồn](https://github.com/chai2010/pbgo/blob/master/hello.go)
 
 
 Như đã đề cập mã nguồn RPC, đơn giản trả về kết quả của phương thức Hello. Sau đó chúng ta gọi hàm `HelloServiceHandler` tương ứng với service để sinh ra route processor và start service.

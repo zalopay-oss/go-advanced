@@ -20,8 +20,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch5/ch5.3/example1/main.go)
-
 Đây là một kiểu webservice sẽ mount tới một route đơn giản. Những service online của chúng tôi thường được phát triển và mở rộng từ những service đơn giản.
 
 Bây giờ có một số nhu cầu mới, chúng tôi muốn tính được thời gian xử lý của hello service được viết trước đây, nhu cầu này rất đơn giản, chúng tôi sẽ làm một số thay đổi nhỏ trên chương trình ở trên.
@@ -36,8 +34,6 @@ func hello(wr http.ResponseWriter, r *http.Request) {
     logger.Println(timeElapsed)
 }
 ```
-
-[>> mã nguồn](../examples/ch5/ch5.3/example2/main.go)
 
 Việc này cho phép để in ra thời gian mà một request hiện tại chạy, mỗi khi nhận được một http request.
 
@@ -73,8 +69,6 @@ func main() {
     // ...
 }
 ```
-
-[>> mã nguồn](../examples/ch5/ch5.3/example3/main.go)
 
 Mỗi handler có một đoạn mã nguồn để ghi lại thời gian được đề cập từ trước. Mỗi lần chúng tôi thêm vào một route mới, cần phải sao chép những mã nguồn tương tự tới nơi chúng ta ta cần, bởi vì số lượng route ít, nên không phải là vấn đề lớn khi hiện thực.
 
@@ -124,8 +118,6 @@ func main() {
     ...
 }
 ```
-
-[>> mã nguồn](../examples/ch5/ch5.3/example4/main.go)
 
 Rất dễ đạt được sự tách biệt giữa business và non-business, mấu chốt nằm ở hàm `timeMiddleware`. Có thể thấy từ mã nguồn rằng, hàm `timeMiddleware()` cũng là một hàm chứa parameters `http.Handler` và `http.Handler` được định nghĩa trong gói `net/http`.
 
@@ -252,8 +244,6 @@ func (r *Router) Add(route string, h http.Handler) {
     r.mux[route] = mergedHandler
 }
 ```
-
-[>> mã nguồn](../examples/ch5/ch5.3/example5/main.go)
 
 Chú ý rằng, duyệt `middleware` array theo thứ tự của mã nguồn ngược lại với thứ tự chúng ta muốn gọi, không khó để hiểu chúng.
 

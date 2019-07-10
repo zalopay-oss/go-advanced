@@ -38,8 +38,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.7/1-c-mem-access/main.go)
-
 Trong ví dụ này, chúng ta sử dụng `makeByteSlize` để tạo ra một slice lớn hơn kích thước bộ nhớ 4G, do đó bỏ qua giới hạn trong hiện thực. Hàm hỗ trợ `freeByteSlice` được sử dụng để giải phóng slice được tạo từ hàm ngôn ngữ C.
 
 Do không gian bộ nhớ ngôn ngữ C ổn định, các slice dựa trên cấu trúc bộ nhớ ngôn ngữ C cũng hoàn toàn ổn định và sẽ không bị di chuyển do những thay đổi trong stack của  Go.
@@ -75,8 +73,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.7/2-go-mem-access/example-1/main.go)
-
 Khi bạn cần truyền chuỗi của Go sang ngôn ngữ C, trước tiên hãy sao chép dữ liệu bộ nhớ tương ứng với chuỗi `C.CString` ngôn ngữ Go sang không gian bộ nhớ ngôn ngữ C mới được tạo. Mặc dù ví dụ trên là an toàn, nhưng nó cực kỳ kém hiệu quả (vì phải phân bổ bộ nhớ nhiều lần và sao chép từng phần tử một), và nó cực kỳ cồng kềnh.
 
 Để đơn giản hóa và xử lý hiệu quả vấn đề chuyển bộ nhớ ngôn ngữ Go sang ngôn ngữ C, CGO xác định một quy tắc đặc biệt cho trường hợp này: trước khi hàm ngôn ngữ C được CGO gọi trả về, CGO đảm bảo rằng bộ nhớ ngôn ngữ Go không tồn tại trong giai đoạn này. Khi thay đổi địa chỉ diễn ra, hàm ngôn ngữ C giờ có thể mạnh dạn sử dụng bộ nhớ ngôn ngữ Go!
@@ -109,8 +105,6 @@ func main() {
     printString(s)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.7/2-go-mem-access/example-2/main.go)
 
 Việc xử lý giờ đã đơn giản hơn và tránh phân bổ thêm bộ nhớ. Một lời giải hoàn hảo?
 

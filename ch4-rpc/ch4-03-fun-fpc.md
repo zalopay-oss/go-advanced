@@ -161,8 +161,6 @@ Tham số đầu vào của phương thức `Watch` là số giây timeout. Khó
 
 Quá trình đăng ký và khởi động service `KVStoreService` sẽ không được lặp lại. Hãy xem cách sử dụng phương thức `Watch` từ client:
 
-[>> mã nguồn](../examples/ch4/ch4.3/2-watch/example-1/client/main.go)
-
 ```go
 func doClientWork(client *rpc.Client) {
     go func() {
@@ -193,8 +191,6 @@ func doClientWork(client *rpc.Client) {
 RPC bình thường dựa trên cấu trúc client-server. Server của RPC tương ứng với server của mạng và client của RPC cũng tương ứng với client mạng. Tuy nhiên, đối với một số trường hợp đặc biệt, chẳng hạn như khi cung cấp dịch vụ RPC trên mạng nội bộ, nhưng mạng bên ngoài không thể  kết nối với server mạng nội bộ. Trong trường hợp này, có thể sử dụng công nghệ tương tự như reverse proxy. Trước tiên chủ động kết nối với server TCP của mạng bên ngoài từ mạng nội bộ, sau đó cung cấp dịch vụ RPC cho mạng bên ngoài dựa trên kết nối TCP đó.
 
 Sau đây là mã nguồn để khởi động một reverse RPC service:
-
-[>> mã nguồn](../examples/ch4/ch4.3/3-reverse-rpc/example-1/server/main.go)
 
 ```go
 func main() {
@@ -260,8 +256,6 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.3/3-reverse-rpc/example-1/client/main.go)
-
 Đầu tiên nhận vào đối tượng RPC client từ pipeline và sử dụng câu lệnh `defer` để xác định đóng kết nối với client trước khi hàm exit. Kế tiếp là thực hiện lời gọi RPC bình thường.
 
 ## 4.3.4 RPC theo ngữ cảnh
@@ -302,8 +296,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.3/4-context-info/example-1/server/main.go)
-
 Trong phương thức `Hello`, bạn có thể xác định lời gọi RPC cho các link khác nhau dựa trên biến `conn`:
 
 ```go
@@ -338,7 +330,5 @@ func (p *HelloService) Hello(request string, reply *string) error {
     return nil
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.3/4-context-info/example-2-auth/server/main.go)
 
 Theo cách này, khi client kết nối tới RPC service, chức năng login sẽ được thực hiện trước, và các service khác có thể thực thi bình thường sau khi login thành công.

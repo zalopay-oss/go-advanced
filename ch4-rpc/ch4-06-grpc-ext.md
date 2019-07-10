@@ -41,8 +41,6 @@ message Message {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.6/pb2-default-value/helloworld.proto)
-
 Trong dấu đóng mở ngoặc vuông sau mỗi thành viên là cú pháp mở rộng. Chúng ta sẽ sinh lại mã nguồn Go, chúng sẽ chứa những thông tin liên quan đến phần mở rộng của options.
 
 ```go
@@ -65,8 +63,6 @@ var E_DefaultInt = &proto.ExtensionDesc{
 }
 ```
 
-
-[>> mã nguồn](../examples/ch4/ch4.6/pb2-default-value/helloworld.pb.go)
 
 
 Chúng ta có thể parse out phần mở rộng của option được định nghĩa trong mỗi thành viên của Message tại thời điểm thực thi bởi kiểu `reflection`, và sau đó parse out gía trị mặc định mà chúng ta đã định nghĩa sẵn từ những thông tin liên quan khác cho phần mở rộng.
@@ -95,8 +91,6 @@ message Message {
     ];
 }
 ```
-
-[>> mã nguồn](../examples/ch4/ch4.6/validators/helloworld.proto)
 
 
 Ở phần mở rộng của thành viên được biểu diễn bởi dấu ngoặc vuông, `validator.field` chỉ ra rằng phần mở rộng là một trường tùy chọn trong gói `validator`. Kiểu của `validator.field` là cấu trúc `FieldValidator` được imported trong file `validator.proto`.
@@ -167,8 +161,6 @@ func (this *Message) Validate() error {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.6/validators/helloworld.validator.pb.go)
-
 Mã nguồn được sinh ra sẽ thêm phương thức `Validate` vào cấu trúc Message để xác định rằng những thành viên được định nghĩa trong nó sẽ thỏa mãn điều kiện ràng buộc trong Protobuf. Bất kể kiểu dữ liệu như thế nào, tất cả những phương thức Validate sẽ dùng chung một signature, do đó cùng một `authentication interface` có thể được chấp nhận.
 
 Thông qua hàm `validation` được sinh ra, chúng sẽ được kết hợp với `gRPC interceptor`, chúng ta có thể dễ dàng thẩm định giá trị của tham số đầu vào và kết quả trả về của mỗi hàm.
@@ -215,8 +207,6 @@ service RestService {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.6/rest/helloworld.proto)
-
 Đầu tiên chúng ta sẽ định nghĩa các phương thức POST và GET cho gRPC, và sau đó chúng ta sẽ thêm vào phần thông tin liên quan đến routing trong phương thức tương ứng qua cú pháp meta-extension. Đường dẫn "/get/{value}" sẽ tương ứng với phương thức GET và `{value}` tương ứng với một số thành viên trong parameter, kết quả có thể được trả về theo định dạng json. Phương thức POST sẽ tương ứng với đường dẫn "/post" và phần thân chứa thông tin về request cũng định dạng theo kiểu json.
 
 Sau đó chúng ta cài đặt plugin `protoc-gen-grpc-gateway` với những lệnh sau:
@@ -248,8 +238,6 @@ func RegisterRestServiceHandlerFromEndpoint(
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.6/rest/helloworld.pb.gw.go)
-
 Hàm `RegisterRestServiceHandlerFromEndpoint` được dùng để chuyển tiếp những request được định nghĩa trong REST interface đến gRPC service thực sự. Sau khi registering the route handle, chúng ta sẽ bắt đầu web service.
 
 ```go
@@ -272,8 +260,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch4/ch4.6/rest/main.go)
-
 
 Bắt đầu gRPC service tại port 5000
 
@@ -294,8 +280,6 @@ func main() {
     grpcServer.Serve(lis)
 }
 ```
-[>> mã nguồn](../examples/ch4/ch4.6/rest/main.go)
-
 
 Đầu tiên, chúng ta tạo ra route handler thông qua hàm thực thi `runtime.NewServeMux()`, và sau đó chuyển đổi REST interface liên quan đến RestService service đến phần subsequent gRPC service thông qua hàm RegisterRestServiceHandlerFromEndpoint. Lớp `runtime.ServeMux` sẽ được hỗ trợ bởi `grpc-gateway` chúng được hiện thực bên dưới interface `http.Handler`, do đó chúng ta có thể dùng những hàm liên quan được cung cấp trong thư viện chuẩn
 

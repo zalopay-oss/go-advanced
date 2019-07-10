@@ -59,8 +59,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch1/ch1.1/1-hello/main.go)
-
 Lưu đoạn code trên thành file `hello.go`. Sau đó, chuyển tới thư mục chứa file `hello.go`, nơi mà file được lưu trữ, Bây giờ chúng ta có thể sử dụng Go như là ngôn ngữ scripting bằng cách gõ `go run hello.go` đó là một câu lệnh command line trực tiếp cho ra kết quả là dòng chữ "Hello World".
 
 Bây giờ, giới thiệu ngắn về chương trình trên, tất cả những chương trình Go sẽ được thập hợp thành những đơn vị cơ bản là hàm và biến, Một hàm và biến được tổ chức thành các mã nguồn (source file). Những source đó được tổ chức thành một package phù hợp theo ý định của tác giả. Cuối cùng, những package đó cũng được tổ chức thành một khối thống nhất, chúng cấu thành chương trình Golang. Function được sử dụng chứa những chuỗi statements (mệnh đề) và những biến lưu trữ dữ liệu. Tên của hàm khởi nguồn toàn chương trình được gọi là hàm main. Mặc dù không có nhiều quy định về việc đặt tên hàm trong Go, hàm main phải được đặt trong package main và là điểm khởi đầu của toàn chương trình. Package được sử dụng để đóng gói những hàm, biến, hằng có liên quan và sử dụng cú pháp import để khai báo package, ví dụ chúng ta có thể sử dụng hàm `Println` trong package `fmt`.

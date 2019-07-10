@@ -2,8 +2,6 @@
 
 Khi một chương trình đồng thời hoặc song song sửa đổi biến toàn cục, hành vi sửa đổi cần phải được lock để tạo một vùng tranh chấp. Tại sao bạn cần phải lock? Hãy xem điều gì xảy ra khi trong bài toán đếm số một cách đồng thời mà không lock dưới đây.
 
-[>> mã nguồn](../examples/ch6/ch6.2/1-counter-no-lock/main.go)
-
 ```go
 package main
 
@@ -44,8 +42,6 @@ $ go run local_lock.go
 
 Để có kết quả chính xác, lock phần code thực thi của bộ đếm như ví dụ dưới đây.
 
-[>> mã nguồn](../examples/ch6/ch6.2/2-counter-lock/main.go)
-
 ```go
 // ... bỏ qua phần trước
 var wg sync.WaitGroup
@@ -77,8 +73,6 @@ $ go run local_lock.go
 Trong một số tình huống, chúng ta chỉ muốn một tiến trình thực thi một nhiệm vụ. Ở ví dụ đếm số ở trên, tất cả goroutines đều thực hiện thành công. Giả sử có goroutine thất bại trong khi thực hiện, chúng ta cần phải bỏ qua tiến trình của nó. Đây là lúc cần `trylock`.
 
 Trylock, như tên của nó, cố gắng lock và nếu lock thành công thì thực hiện các công việc tiếp theo. Nếu lock bị lỗi, nó sẽ không bị chặn lại mà sẽ trả về kết quả lock. Trong lập trình Go, chúng ta có thể mô phỏng một trylock với channel có kích thước 1.
-
-[>> mã nguồn](../examples/ch6/ch6.2/3-try-lock/main.go)
 
 ```go
 package main
@@ -148,8 +142,6 @@ Trong một hệ thống đơn, trylock không phải là một lựa chọn t�
 ## 6.2.3 Redis dựa trên setnx
 
 Trong ngữ cảnh phân tán, chúng ta cũng cần một loại logic "ưu tiên". Làm sao để có được nó? Chúng ta có thể sử dụng lệnh `setnx` do Redis cung cấp:
-
-[>> mã nguồn](../examples/ch6/ch6.2/4-redis-lock/main.go)
 
 ```go
 package main
@@ -242,8 +234,6 @@ Do đó, chúng ta cần dựa vào thứ tự của các yêu cầu này để 
 
 ## 6.2.4 Dựa trên ZooKeeper
 
-[>> mã nguồn](../examples/ch6/ch6.2/5-zookeeper-lock/main.go)
-
 ```go
 package main
 
@@ -282,8 +272,6 @@ Loại khóa chặn phân tán này phù hợp hơn cho các ngữ cảnh địn
 ## 6.2.5 Dựa trên etcd
 
 Etcd là một thành phần của một hệ thống phân tán có chức năng giống với ZooKeeper và đã trở nên "hot" hơn trong hai năm qua. Dựa trên ZooKeeper, chúng tôi đã triển khai khóa chặn phân tán. Với etcd, chúng ta cũng có thể thực hiện các chức năng tương tự:
-
-[>> mã nguồn](../examples/ch6/ch6.2/6-etcd-lock/main.go)
 
 ```go
 package main

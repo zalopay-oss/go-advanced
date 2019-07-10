@@ -19,8 +19,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.4/1-go-call-c/example-1/main.go)
-
 Code CGO ở trên trước tiên xác định hàm `add` hiển thị trong file hiện tại và sau đó chuyển sang `C.add`.
 
 ## 2.4.2 Giá trị trả về của hàm C
@@ -41,8 +39,6 @@ func main() {
     fmt.Println(v)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.4/2-return-val-c/example-1/main.go)
 
 Hàm `div` ở trên thực hiện một phép toán chia số nguyên và trả về kết quả của phép chia.
 
@@ -88,8 +84,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.4/2-return-val-c/example-2/main.go)
-
 Thực thi đoạn code trên sẽ cho output như sau:
 
 ```sh
@@ -122,8 +116,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-1/main.go)
-
 Lúc này, chúng ta bỏ qua giá trị trả về đầu tiên và chỉ nhận được mã lỗi tương ứng với giá trị trả về thứ hai.
 
 Chúng ta cũng có thể thử lấy giá trị trả về đầu tiên, cũng chính là kiểu tương ứng trong Go với kiểu void trong ngôn ngữ C:
@@ -138,8 +130,6 @@ func main() {
     fmt.Printf("%#v", v)
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-2/main.go)
 
 Chạy code này sẽ tạo ra đầu ra sau:
 
@@ -164,8 +154,6 @@ Chạy code này sẽ tạo ra đầu ra sau:
 ```sh
 []
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.4/3-void-return/example-3/main.go)
 
 Trong thực tế, trong code được tạo bởi CGO, kiểu `_Ctype_void` tương ứng với kiểu mảng có độ dài 0 `[0]byte`, do đó output `fmt.Println` là một dấu ngoặc vuông biểu thị một giá trị null.
 

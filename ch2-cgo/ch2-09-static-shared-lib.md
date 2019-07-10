@@ -14,8 +14,6 @@ Trong file `number/number.h` sẽ định nghĩa phần header chứa prototype 
 int number_add_mod(int a, int b, int mod);
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.9/1-static-library/number.h)
-
 File `number/number.c` là phần hiện thực hàm như sau
 
 ```c
@@ -25,8 +23,6 @@ int number_add_mod(int a, int b, int mod) {
     return (a+b)%mod;
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.9/1-static-library/number.c)
 
 Bởi vì CGO dùng lệnh `GCC` để biên dịch và liên kết mã nguồn `C` và `Go` lại. Do đó, thư viện tĩnh cũng phải tương thích theo định dạng `GCC`.
 
@@ -57,8 +53,6 @@ func main() {
     fmt.Println(C.number_add_mod(10, 5, 12))
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.9/1-static-library/main.go)
 
 Có hai lệnh `#cgo`, nó sẽ biên dịch và liên kết các tham số với nhau. Cờ `CFLAGS -I./number` sẽ thêm vào thư mục chứa các thư viện ứng với file header. Cờ `LDFLAGS` sẽ thể hiện liên kết tới thư viện tĩnh `libnumber.a` bằng cách thêm vào trường `-L${SRCDIR}/number`, nó sẽ đưa thư viện tĩnh `number` được biên dịch xong vào liên kết qua search path `-lnumber`. Nên chú ý rằng, phần search path trong liên kết không thể dùng trong các relative path (được giới hạn bởi mã nguồn `C/C++` linker). Chúng ta phải mở rộng thư mục hiện tại `${SRCDIR}` tương ứng với file mã nguồn đến một absolute path qua biến `cgo-specific` (cũng trên windows).  Absolute paths trong platform không thể chứa kí tự trống.
 
@@ -110,8 +104,6 @@ func main() {
     fmt.Println(C.number_add_mod(10, 5, 12))
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.9/2-dynamic-library/main.go)
 
 `CGO` sẽ tự động tìm `libnumber.a` hoặc `libnumber.so` trong ở bước linking trong thời gian biên dịch.
 
@@ -167,8 +159,6 @@ func number_add_mod(a, b, mod C.int) C.int {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.9/3-number-lib/number.go)
-
 Theo như mô tả của tài liệu `CGO`, chúng ta cần export C function trong main package. Với cách xây dựng thư viện C tĩnh, main function trong main package được phớt lờ, và C function sẽ đơn giản được exported. Xây dựng các lệnh sau
 
 ```
@@ -192,8 +182,6 @@ extern int number_add_mod(int p0, int p1, int p2);
 #endif
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.9/3-number-lib/number.h)
-
 Khi phần ngữ pháp `extern "C"` được thêm vào để  dùng đồng thời trên cả ngôn ngữ `C` và `C++`. Nội dung của phần lõi sẽ định nghĩa hàm `number_add_mod` để được exported.
 
 Sau đó chúng ta tạo ra file `_test_main.c` để kiểm tra việc sinh ra C static library (bên dưới là phần prefix dùng cho việc xây dựng C static library để bỏ qua file đó)
@@ -214,8 +202,6 @@ int main() {
     return 0;
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.9/3-number-lib/_test_main.c)
 
 Biên dịch và chạy chúng với những lệnh sau:
 
@@ -280,8 +266,6 @@ func number_add_mod(a, b, mod C.int) C.int {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.9/5-modular-func/number/number.go)
-
 Sau đó tạo ra một main package
 
 ```go
@@ -338,8 +322,6 @@ int main() {
     return 0;
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.9/5-modular-func/_test_main.c)
 
 Chúng sẽ không bao gộp header file `main.h` được tự động sinh ra bởi `CGO`, nhưng chúng ta có thể định nghĩa thủ công hai `export functions` goPrintln và number_add_mod. Cách này làm chúng ta sẽ phải hiện thực một export C functions từ nhiều Go package.
 

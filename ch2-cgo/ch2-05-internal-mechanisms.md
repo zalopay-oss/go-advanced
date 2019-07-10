@@ -31,8 +31,6 @@ func main() {
 }
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.5/2-go-call-c/example-1/main.go)
-
 Không có lỗi trong quá trình build và thực thi ví dụ đầu tiên này. Tiếp theo ta tạo một file trung gian trong thư mục _obj thông qua command line cgo:
 
 ```sh
@@ -159,8 +157,6 @@ func sum(a, b C.int) C.int {
 func main() {}
 ```
 
-[>> mã nguồn](../examples/ch2/ch2.5/3-c-call-go/example-1/main.go)
-
 Các chi tiết về cú pháp của CGO không được mô tả ở đây. Để sử dụng hàm `sum` trong C, chúng ta cần biên dịch mã Go vào thư C viện tĩnh:
 
 ```sh
@@ -209,8 +205,6 @@ int sum(int p0, int p1)
     return a.r0;
 }
 ```
-
-[>> mã nguồn](../examples/ch2/ch2.5/3-c-call-go/example-1/_obj/_cgo_export.c)
 
 Hàm sum sử dụng một kỹ thuật tương tự như phần trước trình bày để đóng gói các tham số và trả về các giá trị của hàm thành một  struct, sau đó truyền struct `runtime/cgo.crosscall2` vào hàm thực thi thông qua hàm `_cgoexp_8313eaf44386_sum`.
 
