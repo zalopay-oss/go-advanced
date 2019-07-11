@@ -20,7 +20,7 @@ Lúc này, chúng ta cần một công cụ tìm kiếm để thắng được t
 
 ## Công cụ tìm kiếm
 
-Elaticsearch(es) là dẫn đầu trong các công cụ tìm kiếm phân tán mã nguồn mở, dựa trên việc triển khai Lucene và kết hợp cùng nhiều tối ưu hóa trong quá trình triển khai, vận hành và bảo trì. Xây dựng một công cụ tìm kiếm phân tán ngày nay dễ dàng hơn nhiều so với thời đại trước. Đơn giản chỉ cần cấu hình IP máy khách và cổng.
+Elaticsearch(es) là dẫn đầu trong các công cụ tìm kiếm phân tán opensource, dựa trên việc triển khai Lucene và kết hợp cùng nhiều tối ưu hóa trong quá trình triển khai, vận hành và bảo trì. Xây dựng một công cụ tìm kiếm phân tán ngày nay dễ dàng hơn nhiều so với thời đại trước. Đơn giản chỉ cần cấu hình IP máy khách và cổng.
 
 ### Inverted index
 
@@ -381,7 +381,7 @@ Sau khi tăng khoảng thời gian lên 11 phút thì mọi thứ đã ổn hơn
 
 *Hình 6-13 Đồng bộ hóa dữ liệu dựa trên binlog*
 
-Canal là mã nguồn mở của Ali và nó  được dùng để phân tích cú pháp binlog và đồng bộ hóa bởi nhiều công ty. Canal sẽ hoạt động như một thư viện phụ thuộc MySQL, nó sẽ phân tích cú pháp bincode của từng dòng và gửi nó đến hàng đợi tin nhắn theo định dạng dễ hiểu hơn (chẳng hạn như json).
+Canal là opensource của Ali và nó  được dùng để phân tích cú pháp binlog và đồng bộ hóa bởi nhiều công ty. Canal sẽ hoạt động như một thư viện phụ thuộc MySQL, nó sẽ phân tích cú pháp bincode của từng dòng và gửi nó đến hàng đợi tin nhắn theo định dạng dễ hiểu hơn (chẳng hạn như json).
 
 Downstream Kafka consumer chịu trách nhiệm ghi khóa chính tự tăng của bảng dữ liệu upstream dưới dạng id của ES, mỗi khi nhận được binlog, dữ liệu có id tương ứng sẽ được cập nhật mới nhất. Binlog của một Row trong MySQL sẽ cung cấp tất cả các trường của record cho downstream. Vì vậy, trên thực tế, khi đồng bộ hóa dữ liệu, bạn không cần xem xét liệu dữ liệu được chèn hay cập nhật, miễn là bạn có chèn id.
 

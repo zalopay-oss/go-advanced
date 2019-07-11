@@ -1,12 +1,12 @@
 # Database và giao tiếp với Database
 
-Phần này sẽ thực hiện một số phân tích cơ bản về thư viện `db/sql` tiêu chuẩn và giới thiệu một số ORM và SQL Builder mã nguồn mở được sử dụng rộng rãi. Đứng ở góc độ phát triển ứng dụng doanh nghiệp, sẽ phù hợp hơn để phân tích kiến trúc công nghệ nào phù hợp cho các ứng dụng doanh nghiệp hiện đại.
+Phần này sẽ thực hiện một số phân tích cơ bản về thư viện `db/sql` tiêu chuẩn và giới thiệu một số ORM và SQL Builder opensource được sử dụng rộng rãi. Đứng ở góc độ phát triển ứng dụng doanh nghiệp, sẽ phù hợp hơn để phân tích kiến trúc công nghệ nào phù hợp cho các ứng dụng doanh nghiệp hiện đại.
 
 ## 5.5.1 Bắt đầu từ database/sql
 
 Go cung cấp một package `database/sql` để làm việc với cơ sở dữ liệu cho người dùng. Trên thực tế, thư viện `database/sql` chỉ cung cấp một bộ interface và thông số kỹ thuật để vận hành cơ sở dữ liệu, như SQL trừu tượng `prep`  (chuẩn bị), quản lý nhóm kết nối, liên kết dữ liệu (data binding), giao dịch, xử lý lỗi, và nhiều hơn nữa. Golang chính thức không cung cấp hỗ trợ giao thức cụ thể cho việc hiện thực cơ sở dữ liệu nhất định.
 
-Để giao tiếp với một cơ sở dữ liệu nhất định, như MySQL, bạn phải cung cấp driver MySQL như sau:
+Để giao tiếp với một cơ sở dữ liệu nhất định như MySQL, bạn phải cung cấp driver MySQL như sau:
 
 ```go
 import "database/sql"
@@ -15,7 +15,7 @@ import _ "github.com/go-sql-driver/mysql"
 db, err := sql.Open("mysql", "user:password@/dbname")
 ```
 
-Ở dòng thứ hai thực sư là một hàm `init` gọi tới package `mysql`:
+Ở dòng thứ hai thực sự là một hàm `init` gọi tới package `mysql`:
 
 ```go
 func init() {
@@ -41,7 +41,7 @@ type Conn interface {
 }
 ```
 
-Đó cũng là một interface. Trong thực thế, nếu nhìn vào code của `database/sql/driver/driver.go` sẽ thấy rằng tất cả  các thành phần trong file đều là interface cả. Để thực thi được các kiểu này, bạn sẽ phải gọi tới những phương thức `driver` phù hợp.
+Đó cũng là một interface. Trong thực tế, nếu nhìn vào code của `database/sql/driver/driver.go` sẽ thấy rằng tất cả pprof các thành phần trong file đều là interface cả. Để thực thi được các kiểu này, bạn sẽ phải gọi tới những phương thức `driver` phù hợp.
 
 Ở phía người dùng, trong process sử dụng package `databse/sql`, ta  có thể sử dụng các hàm được cung cấp trong những interface này,  hãy nhìn vào một ví dụ hoàn chỉnh sử dụng `database/sql` và `go-sql-driver/mysql`:
 
@@ -96,9 +96,9 @@ Nếu bạn đọc muốn biết `database/sql` chi tiết hơn, có thể xem t
 
 Một vài hiện thực bao gồm các hàm, giới thiệu, cách sử dụng, các cảnh báo và các phản trực quan (counter-intuition) về thư viện (ví dụ như `sql.DB`, các truy vấn trong cùng goroutine có thể ở trên nhiều connections) đều được đề cập, và chúng sẽ không được nhắc tới nữa trong chương này.
 
-Bạn có thể đã cảm thấy một vài chỗ tiêu cực từ đoạn code thủ tục ngắn trên. Hàm cung cấp `db` của thư viện chuẩn quá đơn giản. Chúng ta có cần phải viết cùng một đoạn code mỗi lần ta truy cập database để đọc dữ liệu? Hoặc nếu đối tượng là struct, việc binding `sql.Rows` với đối tượng trở nên trùng lặp và nhàm chán.
+Bạn có thể cảm thấy một vài chỗ tiêu cực từ đoạn code thủ tục ngắn trên. Hàm cung cấp `db` của thư viện chuẩn quá đơn giản. Chúng ta có cần phải viết cùng một đoạn code mỗi lần ta truy cập database để đọc dữ liệu? Hoặc nếu đối tượng là struct, việc binding `sql.Rows` với đối tượng trở nên trùng lặp và nhàm chán.
 
-Câu trả lời là Có, cho nên cộng dộng sẽ có rất nhiều  các SQL Builder và ORM khác nhau.
+Câu trả lời là Có, cho nên cộng đồng sẽ có rất nhiều các SQL Builder và ORM khác nhau.
 
 ## 5.5.2 ORM và SQL Builder để cải thiện hiệu suất
 
@@ -124,7 +124,7 @@ for product in productList {
 }
 ```
 
-Công cụ như ORM là để bảo vệ cơ sở dữ liệu ngay từ điểm bắt đầu, cho phép chúng ta  vận hành cơ sở dữ liệu gần hơn với cách suy nghĩ của con người. Vì vậy, nhiều lập trình viên mới tiếp xúc với ORM  cũng có thể viết được code như trên.
+Công cụ như ORM là để bảo vệ cơ sở dữ liệu ngay từ điểm bắt đầu, cho phép chúng ta vận hành cơ sở dữ liệu gần hơn với cách suy nghĩ của con người. Vì vậy, nhiều lập trình viên mới tiếp xúc với ORM cũng có thể viết được code như trên.
 
 Đoạn code trên sẽ phóng to yêu cầu đọc cơ sở dữ liệu theo hệ số của N. Nói cách khác, nếu danh sách sản phẩm có 15 SKU (Stock-Keeping Unit), mỗi lần người dùng mở trang, ít nhất 1 (danh sách mục truy vấn) + 15 (yêu cầu thông tin cửa hàng liên quan đến truy vấn) là bắt buộc. Ở đây N là 16. Nếu trang danh sách khá lớn, giả sử 600 mục, thì ta phải thực hiện ít nhất 1 + 600 truy vấn. Nếu số lượng truy vấn đơn giản lớn nhất mà cơ sở dữ liệu có thể chịu được là 120 000 QPS và truy vấn trên chỉ là truy vấn được sử dụng phổ biến nhất, thì khả năng service có thể cung cấp là bao nhiêu? 200 QPS! Một trong những nguyên tắc cấm kỵ của hệ thống Internet là sự khuếch đại số lượng thao tác đọc không cần thiết này.
 
@@ -145,11 +145,11 @@ Ngoài vấn đề giới hạn, chúng ta hãy xem truy vấn này dưới đâ
 num, err := o.QueryTable("cardgroup").Filter("Cards__Card__Name", cardName).All(&cardgroups)
 ```
 
-Bạn có thấy rằng `Filter` này là một thao tác join không? Rất khó để nhận ra vì ORM đã che giấu quá nhiều chi tiết khỏi thiết kế. Cái giá của sự tiện lợi là những hoạt động ẩn đằng sau nó hoàn toàn nằm ngoài kiểm soát. Một dự án như vậy sẽ trở nên ngày càng khó theo dõi và bảo trì chỉ sau một vài lần nâng cấp.
+Bạn có thấy rằng `Filter` này là một thao tác JOIN không? Rất khó để nhận ra vì ORM đã che giấu quá nhiều chi tiết khỏi thiết kế. Cái giá của sự tiện lợi là những hoạt động ẩn đằng sau nó hoàn toàn nằm ngoài kiểm soát. Một dự án như vậy sẽ trở nên ngày càng khó theo dõi và bảo trì chỉ sau một vài lần nâng cấp.
 
 Tất nhiên chúng ta không thể phủ nhận được tầm quan trọng của ORM. Mục đích ban đầu của nó là loại bỏ việc triển khai cụ thể các hoạt động với database và lưu trữ dữ liệu. Nhưng một số công ty đã dần xem ORM có thể là một thiết kế thất bại vì các chi tiết quan trọng bị ẩn giấu. Các chi tiết quan trọng ẩn rất quan trọng đối với sự phát triển của các hệ thống cần mở rộng quy mô.
 
-So sánh vơi ORM, SQL Builder đạt được sự cân bằng tốt hơn giữa SQL và khả năng bảo trì của dự án. Đầu tiên, sql builder không ẩn quá nhiều chi tiết như ORM. Thứ hai, từ góc độ phát triển, SQL Builder cũng có thể hoàn thiện rất hiệu quả chỉ sau vài thao tác đóng gói đơn giản:
+So sánh với ORM, SQL Builder đạt được sự cân bằng tốt hơn giữa SQL và khả năng bảo trì của dự án. Đầu tiên, sql builder không ẩn quá nhiều chi tiết như ORM. Thứ hai, từ góc độ phát triển, SQL Builder cũng có thể hoàn thiện rất hiệu quả chỉ sau vài thao tác đóng gói đơn giản:
 
 ```go
 where := map[string]interface{} {
@@ -162,7 +162,7 @@ orderBy := []string{"id asc", "create_time desc"}
 orders := orderModel.GetList(where, limit, orderBy)
 ```
 
-Việc code SQL Builder và đọc nó đều không gặp khó khăn gì. Chuyển đổi những dòng code này thành sql cũng không cần quá nhiều nỗ lực. Thông qua code ta có thể lấy được database index trên truy vấn này, xem kết quả thông qua index và nó xem liệu có thể phân tích với index đã join hay không.
+Việc code SQL Builder và đọc nó đều không gặp khó khăn gì. Chuyển đổi những dòng code này thành sql cũng không cần quá nhiều nỗ lực. Thông qua code ta có thể lấy được database index trên truy vấn này, xem kết quả thông qua index và nó liệu có thể phân tích với index đã JOIN hay không.
 
 Nói một cách dễ hiểu, SQL Builder là một cách biểu diễn ngôn ngữ đặc biệt của sql trong mã. Nếu bạn không có DBA, nhưng R & D có khả năng phân tích và tối ưu hóa sql hoặc DBA của công ty bạn không phản đối  các kiểu ngôn ngữ sql như thế này thì bạn sử dụng SQL Builder là một lựa chọn rất tốt.
 
@@ -172,7 +172,7 @@ Khi bạn đang thực hiện một hệ thống trực tuyến OLTP (On-line tr
 
 ## 5.5.3 Database mỏng manh
 
-Cả ORM và SQL Builder đều có một lỗ hổng nghiêm trọng  là không cách nào thực hiện việc kiểm toán trước-sql trên hệ thống. Mặc dù nhiều ORM và SQL Builder cũng cung cấp chức năng in sql khi chạy, nhưng nó chỉ có thể là đầu ra sau khi truy vấn. Chức năng được cung cấp bởi SQL Builder và ORM quá linh hoạt, nó khiến ta không thể liệt kê tất cả các sql có thể được thực thi trực tuyến bằng cách test. Ví dụ: ta có thể sử dụng SQL Builder để viết đoạn mã sau:
+Cả ORM và SQL Builder đều có một lỗ hổng nghiêm trọng là không cách nào thực hiện việc kiểm toán trước-sql trên hệ thống. Mặc dù nhiều ORM và SQL Builder cũng cung cấp chức năng in sql khi chạy, nhưng nó chỉ có thể là đầu ra sau khi truy vấn. Chức năng được cung cấp bởi SQL Builder và ORM quá linh hoạt, nó khiến ta không thể liệt kê tất cả các sql có thể được thực thi trực tuyến bằng cách test. Ví dụ: ta có thể sử dụng SQL Builder để viết đoạn mã sau:
 
 ```go
 where := map[string]interface{} {
@@ -193,7 +193,7 @@ Một hệ thống như vậy khi release sẽ sinh ra rủi ro rất lớn.
 
 Đối với các công ty Internet có dịch vụ 24/7, việc đảm bảo dịch vụ luôn vận hành là vấn đề rất quan trọng. Mặc dù kiến trúc công nghệ của tầng lưu trữ đã trải qua nhiều năm phát triển, nó vẫn là phần dễ bị hư hại nhất trong toàn hệ thống. Thời gian chết của hệ thống cũng chính là tổn thất kinh tế trực tiếp cho các công ty cung cấp kiểu này.
 
-Từ góc độ phân ngành, các công ty Internet ngày nay có chức vụ DBA toàn thời gian, hầu hết họ không nhất thiết phải có khả năng code. Từ quan điểm của DBA, tôi vẫn hy vọng sẽ có một cơ chế kiểm toán SQL đặc biệt để có được tất cả nội dung SQL của hệ thống với chi phí thấp, thay vì đọc code SQL Builder do bộ phận bussiness development viết.
+Từ góc độ phân ngành, các công ty Internet ngày nay có chức vụ DBA toàn thời gian, hầu hết họ không nhất thiết phải có khả năng code. Từ quan điểm của DBA, chúng tôi vẫn hy vọng sẽ có một cơ chế kiểm toán SQL đặc biệt để có được tất cả nội dung SQL của hệ thống với chi phí thấp, thay vì đọc code SQL Builder do bộ phận bussiness development viết.
 
 Ngày nay, core online business của các công ty lớn sẽ cung cấp SQL ở vị trí nổi bật trong code để DBA review, ví dụ:
 

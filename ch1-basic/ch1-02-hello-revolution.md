@@ -301,7 +301,7 @@ func main() {
 }
 ```
 
-Ngôn ngữ Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu lệnh. Đây là cải tiến ngữ pháp quan trọng đầu tiên sau khi Go chính thức trở thành mã nguồn mở vào ngày 10 tháng 11 năm 2009. Từ quy tắc phân đoạn dấu chấm phẩy được giới thiệu trong phiên bản đầu tiên của ***C language tutorial*** năm 1978, các tác giả của Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu trong 32 năm. Theo tác giả nghĩ rằng đây phải là kết quả  sự cân nhắc của các nhà thiết kế ngôn ngữ Go. Hiện nay, các ngôn ngữ mới như Swift cũng bỏ qua dấu chấm phẩy.
+Ngôn ngữ Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu lệnh. Đây là cải tiến ngữ pháp quan trọng đầu tiên sau khi Go chính thức trở thành opensource vào ngày 10 tháng 11 năm 2009. Từ quy tắc phân đoạn dấu chấm phẩy được giới thiệu trong phiên bản đầu tiên của ***C language tutorial*** năm 1978, các tác giả của Go cuối cùng đã loại bỏ dấu chấm phẩy ở cuối câu trong 32 năm. Theo tác giả nghĩ rằng đây phải là kết quả  sự cân nhắc của các nhà thiết kế ngôn ngữ Go. Hiện nay, các ngôn ngữ mới như Swift cũng bỏ qua dấu chấm phẩy.
 
 ### 1.2.7 Hello World! - V2.0
 

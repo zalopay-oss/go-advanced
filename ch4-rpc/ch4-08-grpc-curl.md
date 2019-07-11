@@ -26,7 +26,7 @@ Nếu gRPC reflection service được khởi chạy thì các gRPC service   c�
 
 ## 4.8.2 Xem danh sách service
 
-Grpcurl là công cụ được cộng đồng mã nguồn mở của Golang phát triển, quá trình cài đặt như sau:
+Grpcurl là công cụ được cộng đồng opensource của Golang phát triển, quá trình cài đặt như sau:
 
 ```sh
 $ go get github.com/fullstorydev/grpcurl
