@@ -405,7 +405,7 @@ Việc chuyển đổi được chia thành nhiều giai đoạn và mục tiêu
 
 ## 2.3.7 Chuyển đổi giữa kiểu slice
 
-Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên, trong ngôn ngữ Go, slice tương ứng với một con trỏ tới một mảng, vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
+Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên, trong ngôn ngữ Go, slice tương ứng với một con trỏ tới một mảng (fat pointer), vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
 
 Tuy nhiên, package `reflection` của ngôn ngữ Go đã cung cấp sẵn cấu trúc cơ bản của kiểu slice nhờ đó chuyển đổi slice có thể được hiện thực và kết hợp với kỹ thuật chuyển đổi con trỏ được thảo luận ở trên giữa các kiểu khác nhau:
 
