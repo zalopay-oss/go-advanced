@@ -14,7 +14,7 @@
   
 ## Giới thiệu
 
-![X](./images/background-book/ver1.0.png)
+![X](./images/background-book/ver1.0.0.png)
 
 Ngôn ngữ [Golang](https://golang.org/) không còn quá xa lạ trong giới lập trình nữa. Đây là một ngôn ngữ dễ học, các bạn có thể tự học Golang cơ bản ở trang [Go by Example](https://gobyexample.com/). Đa phần các tài liệu về Golang từ cơ bản hay đến nâng cao đều do các nhà lập trình viên nước ngoài biên soạn. Bộ tài liệu [Advanced Go Programming](#Go-Language-Advanced-Programming-Advanced-Go-Programming) được chúng tôi biên soạn hoàn toàn bằng Tiếng Việt. Bộ tài liệu này trình bày về những vấn đề nâng cao trong Golang như CGo, RPC framework, Web framework, distributed,.... và các ví dụ minh họa cụ thể theo các chủ đề. Chúng tôi rất mong bộ tài liệu này sẽ giúp các bạn lập trình viên có thêm những kiến thức mới và nâng cao kỹ năng lập trình của bản thân.
 
