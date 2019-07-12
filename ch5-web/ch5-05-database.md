@@ -1,4 +1,4 @@
-# Database và giao tiếp với Database
+# 5.5 Database và giao tiếp với Database
 
 Phần này sẽ thực hiện một số phân tích cơ bản về thư viện `db/sql` tiêu chuẩn và giới thiệu một số ORM và SQL Builder opensource được sử dụng rộng rãi. Đứng ở góc độ phát triển ứng dụng doanh nghiệp, sẽ phù hợp hơn để phân tích kiến trúc công nghệ nào phù hợp cho các ứng dụng doanh nghiệp hiện đại.
 

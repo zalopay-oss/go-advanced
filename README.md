@@ -38,8 +38,8 @@ Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 Các bạn có thể đóng góp bằng cách:
 
 - [Liên hệ](#li%C3%AAn-h%E1%BB%87) với chúng tôi.
-- Trả lời các câu hỏi trong [issues]().
-- Tạo các issues gặp phải trên [issues]().
+- Trả lời các câu hỏi trong [issues](https://gitlab.zalopay.vn/zalopay-oss/advanced-go-book/issues).
+- Tạo các issues gặp phải trên [issues](https://gitlab.zalopay.vn/zalopay-oss/advanced-go-book/issues).
 - Tạo pull request trên repository của chúng tôi.
 - ...
 
@@ -58,4 +58,4 @@ Dự án này được phát triển bởi các thành viên sau đây.
 
 - Blog: [Medium ZaloPay Engineering](https://medium.com/zalopay-engineering)
 
-- Bugs: [issues]()
+- Bugs: [issues](https://gitlab.zalopay.vn/zalopay-oss/advanced-go-book/issues)
