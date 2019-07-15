@@ -36,7 +36,7 @@ Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 
 ## Xem online
 
-- Xem trên [gitbook](https://zalopay-oss.github.io/go-advanced/).
+- Xem trên gitbook.
 
 ## Tham gia phát triển
 
