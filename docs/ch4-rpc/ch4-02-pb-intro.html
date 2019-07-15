@@ -1,0 +1,1198 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>4.2 Protobuf · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch4-03-fun-fpc.html" />
+    
+    
+    <link rel="prev" href="ch4-01-rpc-intro.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Các chế độ đồng thời thông dụng
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                    
+                    1.8 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10  Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-best-practice/">
+            
+                <a href="../ch3-best-practice/">
+            
+                    
+                    Chương 3: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 4: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="ch4-01-rpc-intro.html">
+            
+                <a href="ch4-01-rpc-intro.html">
+            
+                    
+                    4.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="ch4-02-pb-intro.html">
+            
+                <a href="ch4-02-pb-intro.html">
+            
+                    
+                    4.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="ch4-03-fun-fpc.html">
+            
+                <a href="ch4-03-fun-fpc.html">
+            
+                    
+                    4.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="ch4-04-grpc.html">
+            
+                <a href="ch4-04-grpc.html">
+            
+                    
+                    4.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="ch4-05-grpc-advanced.html">
+            
+                <a href="ch4-05-grpc-advanced.html">
+            
+                    
+                    4.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="ch4-06-grpc-ext.html">
+            
+                <a href="ch4-06-grpc-ext.html">
+            
+                    
+                    4.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="ch4-07-pbgo.html">
+            
+                <a href="ch4-07-pbgo.html">
+            
+                    
+                    4.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="ch4-08-grpc-curl.html">
+            
+                <a href="ch4-08-grpc-curl.html">
+            
+                    
+                    4.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="ch4-09-supplementary-notes.html">
+            
+                <a href="ch4-09-supplementary-notes.html">
+            
+                    
+                    4.9 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-web/">
+            
+                <a href="../ch5-web/">
+            
+                    
+                    Chương 5: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-web/ch5-01-introduction.html">
+            
+                <a href="../ch5-web/ch5-01-introduction.html">
+            
+                    
+                    5.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-web/ch5-02-router.html">
+            
+                <a href="../ch5-web/ch5-02-router.html">
+            
+                    
+                    5.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-web/ch5-03-middleware.html">
+            
+                <a href="../ch5-web/ch5-03-middleware.html">
+            
+                    
+                    5.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-web/ch5-04-request-verification.html">
+            
+                <a href="../ch5-web/ch5-04-request-verification.html">
+            
+                    
+                    5.4 Kiểm tra yêu cầu validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-web/ch5-05-database.html">
+            
+                <a href="../ch5-web/ch5-05-database.html">
+            
+                    
+                    5.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                <a href="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                    
+                    5.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                <a href="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                    
+                    5.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-web/ch5-08-interface-and-web.html">
+            
+                <a href="../ch5-web/ch5-08-interface-and-web.html">
+            
+                    
+                    5.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../ch5-web/ch5-09-gated-launch.html">
+            
+                <a href="../ch5-web/ch5-09-gated-launch.html">
+            
+                    
+                    5.9 Grayscale Publishing and A/B test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../ch5-web/ch5-10-ext.html">
+            
+                <a href="../ch5-web/ch5-10-ext.html">
+            
+                    
+                    5.10 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-cloud/">
+            
+                <a href="../ch6-cloud/">
+            
+                    
+                    Chương 6: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../ch6-cloud/ch6-01-dist-id.html">
+            
+                <a href="../ch6-cloud/ch6-01-dist-id.html">
+            
+                    
+                    6.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../ch6-cloud/ch6-02-lock.html">
+            
+                <a href="../ch6-cloud/ch6-02-lock.html">
+            
+                    
+                    6.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../ch6-cloud/ch6-03-delay-job.html">
+            
+                <a href="../ch6-cloud/ch6-03-delay-job.html">
+            
+                    
+                    6.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                <a href="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                    
+                    6.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../ch6-cloud/ch6-05-load-balance.html">
+            
+                <a href="../ch6-cloud/ch6-05-load-balance.html">
+            
+                    
+                    6.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../ch6-cloud/ch6-06-config.html">
+            
+                <a href="../ch6-cloud/ch6-06-config.html">
+            
+                    
+                    6.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../ch6-cloud/ch6-07-crawler.html">
+            
+                <a href="../ch6-cloud/ch6-07-crawler.html">
+            
+                    
+                    6.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../ch6-cloud/ch6-08-ext.html">
+            
+                <a href="../ch6-cloud/ch6-08-ext.html">
+            
+                    
+                    6.8 Phần mở rộng
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >4.2 Protobuf</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="42-protobuf">4.2 Protobuf</h1>
+<p>Protobuf l&#xE0; t&#xEA;n g&#x1ECD;i r&#xFA;t g&#x1ECD;n c&#x1EE7;a Protocols Buffers, m&#x1ED9;t ng&#xF4;n ng&#x1EEF; m&#xF4; t&#x1EA3; &#x111;&#x1B0;&#x1EE3;c ph&#xE1;t tri&#x1EC3;n b&#x1EDF;i Google v&#xE0; &#x111;&#x1B0;&#x1EE3;c c&#xF4;ng b&#x1ED1; v&#xE0;o n&#x103;m 2008. C&#xF3; th&#x1EC3; h&#xEC;nh dung Protobuf c&#x169;ng nh&#x1B0; XML, JSON hay nh&#x1EEF;ng ng&#xF4;n ng&#x1EEF; m&#xF4; t&#x1EA3; kh&#xE1;c. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; sinh ra code t&#x1EEB; n&#xF3; v&#xE0; cung c&#x1EA5;p c&#x1A1; ch&#x1EBF; &#x111;&#x1EC3; serialization c&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u th&#xF4;ng qua m&#x1ED9;t s&#x1ED1; c&#xF4;ng c&#x1EE5; &#x111;i k&#xE8;m. Nh&#x1B0;ng ch&#xFA;ng ta th&#x1B0;&#x1EDD;ng quan t&#xE2;m nhi&#x1EC1;u h&#x1A1;n v&#x1EC1; Protobuf nh&#x1B0; l&#xE0; m&#x1ED9;t ng&#xF4;n ng&#x1EEF; m&#xF4; t&#x1EA3; d&#x1EEF; li&#x1EC7;u &#x111;&#x1EC3; &#x111;&#x1EB7;c t&#x1EA3; l&#x1EDB;p interface, n&#xF3; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c xem nh&#x1B0; l&#xE0; m&#x1ED9;t ph&#x1B0;&#x1A1;ng ti&#x1EC7;n c&#x1A1; b&#x1EA3;n cho vi&#x1EC7;c thi&#x1EBF;t k&#x1EBF; nh&#x1EEF;ng l&#x1EDB;p interface RPC &#x111;&#x1B0;&#x1EE3;c b&#x1EA3;o m&#x1EAD;t v&#xE0; an to&#xE0;n h&#x1A1;n.</p>
+<h2 id="421-b&#x1EAF;t-&#x111;&#x1EA7;u-v&#x1EDB;i-protobuf">4.2.1 B&#x1EAF;t &#x111;&#x1EA7;u v&#x1EDB;i Protobuf</h2>
+<p>Cho nh&#x1EEF;ng ai ch&#x1B0;a t&#x1EEB;ng l&#xE0;m quen v&#x1EDB;i Protobuf, ch&#xFA;ng t&#xF4;i khuy&#xEA;n h&#xE3;y hi&#x1EC3;u c&#xE1;ch s&#x1EED; d&#x1EE5;ng c&#x1A1; b&#x1EA3;n ch&#xFA;ng t&#x1EEB; trang ch&#x1EE7; <a href="https://developers.google.com/protocol-buffers/" target="_blank">protobuf</a>. &#x1EDE; &#x111;&#xE2;y ch&#xFA;ng ta th&#x1EED; k&#x1EBF;t h&#x1EE3;p protobuf v&#xE0; RPC, v&#xE0; cu&#x1ED1;i c&#xF9;ng s&#x1EBD; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng interface &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EB7;c t&#x1EA3; v&#xE0; t&#xED;nh b&#x1EA3;o m&#x1EAD;t c&#x1EE7;a l&#x1EC7;nh g&#x1ECD;i RPC th&#xF4;ng qua protobuf. &#x110;&#x1A1;n v&#x1ECB; c&#x1A1; b&#x1EA3;n c&#x1EE7;a d&#x1EEF; li&#x1EC7;u Protobuf l&#xE0; m&#x1ED9;t <code>message</code>, ch&#xFA;ng c&#x169;ng t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; c&#x1EA5;u tr&#xFA;c c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go. C&#xE1;c th&#xE0;nh ph&#x1EA7;n c&#x1EE7;a message ho&#x1EB7;c nh&#x1EEF;ng message t&#x1EEB; nh&#x1EEF;ng ki&#x1EC3;u d&#x1EEF; li&#xEA;u b&#xEA;n d&#x1B0;&#x1EDB;i kh&#xE1;c c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c l&#x1ED3;ng v&#xE0;o message &#x111;&#xF3;.</p>
+<p>&#x110;&#x1EA7;u ti&#xEA;n ch&#xFA;ng ta t&#x1EA1;o file <code>hello.proto</code> n&#xF3; s&#x1EBD; ch&#x1EE9;a ki&#x1EC3;u string &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng cho HelloService service:</p>
+<pre><code class="lang-go">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
+
+<span class="hljs-keyword">package</span> main;
+
+message String {
+    <span class="hljs-keyword">string</span> value = <span class="hljs-number">1</span>;
+}
+</code></pre>
+<p>C&#xFA; ph&#xE1;p c&#x1EE7;a statement tr&#xEA;n b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng vi&#x1EC7;c &#x111;&#x1ECB;nh ngh&#x129;a tr&#x1B0;&#x1EDD;ng &quot;syntax&quot; l&#xE0; &quot;proto3&quot; - phi&#xEA;n b&#x1EA3;n ng&#xF4;n ng&#x1EEF; protobuf th&#x1EE9; ba, v&#xE0; t&#x1EA5;t c&#x1EA3; nh&#x1EEF;ng th&#xE0;nh ph&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i t&#x1EA1;o v&#x1EDB;i gi&#xE1; tr&#x1ECB; 0 gi&#x1ED1;ng nh&#x1B0; Go (kh&#xF4;ng c&#xF3; h&#x1ED7; tr&#x1EE3; custom), sau &#x111;&#xF3; nh&#x1EEF;ng th&#xE0;nh ph&#x1EA7;n c&#x1EE7;a message s&#x1EBD; kh&#xF4;ng c&#x1EA7;n nh&#x1EEF;ng thu&#x1ED9;c t&#xED;nh &#x111;&#x1B0;&#x1EE3;c y&#xEA;u c&#x1EA7;u. Sau &#x111;&#xF3; package &#x111;&#x1B0;&#x1EE3;c ch&#x1EC9; th&#x1ECB; l&#xE0; &quot;main package&quot; (n&#xF3; n&#xEA;n &#x111;&#x1ED3;ng nh&#x1EA5;t v&#x1EDB;i t&#xEA;n package trong Go, &#x111;&#x1A1;n gi&#x1EA3;n nh&#x1B0; code v&#xED; d&#x1EE5;). D&#x129; nhi&#xEA;n, user c&#x169;ng c&#xF3; th&#x1EC3; t&#xF9;y ch&#x1EC9;nh &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n package t&#x1B0;&#x1A1;ng &#x1EE9;ng kh&#xE1;c cho nh&#x1EEF;ng ng&#xF4;n ng&#x1EEF; kh&#xE1;c nhau. Cu&#x1ED1;i c&#xF9;ng, t&#x1EEB; kh&#xF3;a &quot;message&quot; s&#x1EBD; &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u string m&#x1EDB;i l&#xE0; String, n&#xF3; s&#x1EBD; &#x1EE9;ng v&#x1EDB;i c&#x1EA5;u tr&#xFA;c string &#x1EDF; m&#xE3; ngu&#x1ED3;n cu&#x1ED1;i c&#xF9;ng &#x111;&#x1B0;&#x1EE3;c sinh ra t&#x1EEB; ch&#xFA;ng trong Go, v&#xE0; nh&#x1EEF;ng th&#xE0;nh ph&#x1EA7;n s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a v&#x1EDB;i m&#x1ED9;t s&#x1ED1; t&#xEA;n g&#x1ECD;i.</p>
+<p>Trong ng&#xF4;n ng&#x1EEF; m&#xF4; t&#x1EA3; nh&#x1B0; l&#xE0; XML hay JSON, ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u t&#x1B0;&#x1A1;ng &#x1EE9;ng th&#xF4;ng th&#x1B0;&#x1EDD;ng s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c bao b&#x1ECD;c b&#x1EDF;i t&#xEA;n c&#xE1;c th&#xE0;nh vi&#xEA;n. Tuy nhi&#xEA;n, Protobuf encoding s&#x1EBD; k&#x1EBF;t h&#x1EE3;p nh&#x1EEF;ng d&#x1EEF; li&#x1EC7;u b&#x1EB1;ng m&#x1ED9;t s&#x1ED1; duy nh&#x1EA5;t c&#x1EE7;a d&#x1EEF; li&#x1EC7;u &#x111;&#xF3;, do &#x111;&#xF3; dung l&#x1B0;&#x1EE3;ng c&#x1EE7;a d&#x1EEF; li&#x1EC7;u protobuf &#x111;&#x1B0;&#x1EE3;c encoded s&#x1EBD; nh&#x1ECF;, nh&#x1B0;ng n&#xF3; kh&#xF4;ng d&#x1EC5; d&#xE0;ng &#x111;&#x1EC3; con ng&#x1B0;&#x1EDD;i c&#xF3; th&#x1EC3; &#x111;&#x1ECD;c &#x111;&#x1B0;&#x1EE3;c. Ch&#xFA;ng ta s&#x1EBD; kh&#xF4;ng quan t&#xE2;m &#x111;&#x1EBF;n c&#xF4;ng ngh&#x1EC7; encode d&#x1EEF; li&#x1EC7;u c&#x1EE7;a protobuf. K&#x1EBF;t qu&#x1EA3; c&#x1EE7;a c&#x1EA5;u tr&#xFA;c Go c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c encode b&#x1EB1;ng JSON hay kh&#xF4;ng, do &#x111;&#xF3; ch&#xFA;ng ta c&#xF3; th&#x1EC3; t&#x1EA1;m th&#x1EDD;i ph&#x1EDB;t l&#x1EDD; &#x111;i vi&#x1EC7;c Protobuf encode d&#x1EEF; li&#x1EC7;u trong t&#xE0;i li&#x1EC7;u n&#xE0;y.</p>
+<p>Ph&#x1EA7;n l&#xF5;i c&#x1EE7;a Protobuf &#x111;&#x1B0;&#x1EE3;c ph&#xE1;t tri&#x1EC3;n d&#x1EF1;a tr&#xEA;n ng&#xF4;n ng&#x1EEF; C++, v&#xE0; ch&#xFA;ng kh&#xF4;ng h&#x1ED7; tr&#x1EE3; ng&#xF4;n ng&#x1EEF; Go trong b&#x1ED9; bi&#xEA;n d&#x1ECB;ch <code>protoc</code>. &#x110;&#x1EC3; sinh ra m&#xE3; ngu&#x1ED3;n Go t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i file hello.go. &#x1EDF; tr&#xEA;n, ch&#xFA;ng ta s&#x1EBD; ph&#x1EA3;i c&#x1EA7;n c&#xE0;i &#x111;&#x1EB7;t m&#x1ED9;t s&#x1ED1; plugin kh&#xE1;c. &#x110;&#x1EA7;u ti&#xEA;n l&#xE0; c&#xE0;i &#x111;&#x1EB7;t b&#x1ED9; bi&#xEA;n d&#x1ECB;ch <code>protoc</code>, ch&#xFA;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c t&#x1EA3;i v&#x1EC1; t&#x1EA1;i <a href="https://github.com/google/protobuf/releases" target="_blank">https://github.com/google/protobuf/releases</a>. Sau &#x111;&#xF3; l&#xE0; c&#xE0;i &#x111;&#x1EB7;t m&#x1ED9;t plugin cho Go, ch&#xFA;ng ta c&#xF3; th&#x1EC3; c&#xE0;i &#x111;&#x1EB7;t th&#xF4;ng qua <code>go get github.com/golang/protobuf/protoc-gen-go</code>.</p>
+<p>Sau &#x111;&#xF3; ch&#xFA;ng ta s&#x1EBD; sinh ra m&#xE3; ngu&#x1ED3;n Go b&#x1EB1;ng l&#x1EC7;nh sau:</p>
+<pre><code>$ protoc --go_out=. hello.proto
+</code></pre><p>Tham s&#x1ED1; <code>go_out</code> ch&#x1EC9; ra cho protoc s&#x1EBD; t&#x1EA3;i c&#xF4;ng c&#x1EE5; <code>protoc-gen-go</code>, sau &#x111;&#xF3; sinh ra code th&#xF4;ng qua c&#xF4;ng c&#x1EE5; &#x111;&#xF3; v&#xE0; sinh code trong c&#xF9;ng m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n v&#x1EDB;i file <code>hello.proto</code>. Cu&#x1ED1;i c&#xF9;ng, sau &#x111;&#xE2;y l&#xE0; danh s&#xE1;ch chu&#x1ED7;i c&#xE1;c file protobuf cho ti&#x1EBF;n tr&#xEC;nh &#x111;&#xF3;.</p>
+<p>Ch&#x1EC9; c&#xF3; m&#x1ED9;t file <code>hello.pb.go</code> &#x111;&#x1B0;&#x1EE3;c sinh ra, c&#x1EA5;u tr&#xFA;c String s&#x1EBD; nh&#x1B0; sau</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> String <span class="hljs-keyword">struct</span> {
+    Value <span class="hljs-keyword">string</span> <span class="hljs-string">`protobuf:&quot;bytes,1,opt,name=value&quot; json:&quot;value,omitempty&quot;`</span>
+}
+
+<span class="hljs-keyword">func</span> (m *String) Reset()         { *m = String{} }
+<span class="hljs-keyword">func</span> (m *String) String() <span class="hljs-keyword">string</span> { <span class="hljs-keyword">return</span> proto.CompactTextString(m) }
+<span class="hljs-keyword">func</span> (*String) ProtoMessage()    {}
+<span class="hljs-keyword">func</span> (*String) Descriptor() ([]<span class="hljs-keyword">byte</span>, []<span class="hljs-keyword">int</span>) {
+    <span class="hljs-keyword">return</span> fileDescriptor_hello_069698f99dd8f029, []<span class="hljs-keyword">int</span>{<span class="hljs-number">0</span>}
+}
+
+<span class="hljs-keyword">func</span> (m *String) GetValue() <span class="hljs-keyword">string</span> {
+    <span class="hljs-keyword">if</span> m != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> m.Value
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>
+}
+</code></pre>
+<p>C&#x1EA5;u tr&#xFA;c &#x111;&#x1B0;&#x1EE3;c sinh ra c&#x169;ng ch&#x1EE9;a m&#x1ED9;t s&#x1ED1; h&#xE0;m v&#x1EDB;i ti&#x1EC1;n t&#x1ED1; <code>XXX_</code>, ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x1EA9;n &#x111;i nh&#x1EEF;ng th&#xE0;nh ph&#x1EA7;n &#x111;&#xF3;. C&#xF9;ng m&#x1ED9;t th&#x1EDD;i &#x111;i&#x1EC3;m, ki&#x1EC3;u String c&#x169;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c t&#x1EF1; &#x111;&#x1ED9;ng sinh ra m&#x1ED9;t t&#x1EAD;p h&#x1EE3;p c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c, trong s&#x1ED1; &#x111;&#xF3; ProtoMessage ch&#x1EC9; ra r&#x1EB1;ng &#x111;&#xF3; l&#xE0; m&#x1ED9;t h&#xE0;m &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c interface proto.Message. Th&#xEA;m v&#xE0;o &#x111;&#xF3;, Protobuf s&#x1EBD; sinh ra nh&#x1EEF;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c Get cho m&#x1ED7;i th&#xE0;nh ph&#x1EA7;n, trong n&#xF3; s&#x1EBD; ki&#x1EC3;m tra d&#x1EEF; li&#x1EC7;u null v&#xE0; tr&#x1EA3; v&#x1EC1; chu&#x1ED7;i r&#x1ED7;ng.</p>
+<p>D&#x1EF1;a tr&#xEA;n ki&#x1EC3;u String m&#x1EDB;i, ch&#xFA;ng ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i service HelloService</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloService <span class="hljs-keyword">struct</span>{}
+
+<span class="hljs-keyword">func</span> (p *HelloService) Hello(request *String, reply *String) error {
+    reply.Value = <span class="hljs-string">&quot;hello:&quot;</span> + request.GetValue()
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>Tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o v&#xE0; tham s&#x1ED1; &#x111;&#x1EA7;u ra c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c Hello &#x111;&#x1B0;&#x1EE3;c th&#x1EC3; hi&#x1EC7;n b&#x1EDF;i ki&#x1EC3;u String &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a b&#x1EDF;i protobuf. B&#x1EDF;i v&#xEC; tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o m&#x1EDB;i l&#xE0; m&#x1ED9;t ki&#x1EC3;u c&#x1EA5;u tr&#xFA;c, ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u con tr&#x1ECF; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng nh&#x1B0; l&#xE0; tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o, v&#xE0; m&#x1ED9;t m&#xE3; ngu&#x1ED3;n b&#xEA;n trong c&#x1EE7;a h&#xE0;m s&#x1EBD; c&#x169;ng &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;u ch&#x1EC9;nh cho ph&#xF9; h&#x1EE3;p.</p>
+<p>Cho &#x111;&#x1EBF;n &#x111;&#xE2;y ch&#xFA;ng ta s&#x1EBD; nh&#x1EAD;n ra s&#x1EF1; k&#x1EBF;t h&#x1EE3;p gi&#x1EEF;a Protobuf v&#xE0; RPC. Khi ch&#xFA;ng ta b&#x1EAF;t &#x111;&#x1EA7;u m&#x1ED9;t RPC service, ch&#xFA;ng ta c&#xF3; th&#x1EC3; v&#x1EAB;n ch&#x1ECD;n m&#x1ED9;t ki&#x1EC3;u m&#x1EB7;c &#x111;&#x1ECB;nh ho&#x1EB7;c &#x111;&#x1ECB;nh ngh&#x129;a l&#x1EA1;i v&#x1EDB;i JSON, v&#xE0; sau &#x111;&#xF3; s&#x1EBD; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i plugin d&#x1EF1;a tr&#xEA;n m&#xE3; ngu&#x1ED3;n protobuf. M&#x1EB7;c d&#xF9; ch&#xFA;ng ta c&#xF3; th&#x1EC3; l&#xE0;m r&#x1EA5;t nhi&#x1EC1;u c&#xF4;ng vi&#x1EC7;c, n&#xF3; d&#x1B0;&#x1EDD;ng nh&#x1B0; ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c g&#xEC; &#x111;&#xE1;ng k&#x1EC3;.</p>
+<p>Nh&#xEC;n l&#x1EA1;i interface RPC b&#x1EA3;o m&#x1EAD;t h&#x1A1;n &#x1EDF; ph&#x1EA7;n 1, ch&#xFA;ng t&#xF4;i &#x111;&#xE3; r&#x1EA5;t n&#x1ED7; l&#x1EF1;c &#x111;&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o b&#x1EA3;o m&#x1EAD;t cho service RPC. K&#x1EBF;t qu&#x1EA3; c&#x1EE7;a m&#xE3; ngu&#x1ED3;n RPC tr&#xEA;n s&#x1EBD; an to&#xE0;n h&#x1A1;n v&#xE0; r&#x1EA5;t l&#xE0; tuy&#x1EC7;t v&#x1EDD;i &#x111;&#x1EC3;  b&#x1EA3;o tr&#xEC; th&#x1EE7; c&#xF4;ng, ch&#xFA;ng ta c&#xF3; th&#x1EC3; b&#x1EA3;o m&#x1EAD;t h&#xF3;a nh&#x1EEF;ng m&#xE3; ngu&#x1ED3;n li&#xEA;n quan m&#xE0; n&#xF3; ch&#x1EC9; s&#x1EB5;n c&#xF3; &#x1EDF; m&#xF4;i tr&#x1B0;&#x1EDD;ng ng&#xF4;n ng&#x1EEF; Go. Do &#x111;&#xF3; &#x111;&#x1EA7;u v&#xE0;o v&#xE0; &#x111;&#x1EA7;u ra c&#x1EE7;a tham s&#x1ED1; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a b&#x1EDF;i Protobuf &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng, c&#xF3; th&#x1EC3; interface RPC &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a b&#x1EDF;i protobuf. Protobuf th&#x1EF1;c t&#x1EBF; &#x111;&#x1ECB;nh ngh&#x129;a interface cho service RPC &#x111;&#x1ED9;c l&#x1EAD;p v&#x1EDB;i ng&#xF4;n ng&#x1EEF; ch&#xED;nh l&#xE0; gi&#xE1; tr&#x1ECB; th&#x1EF1;c c&#x1EE7;a n&#xF3;!.</p>
+<p>C&#x1EAD;p nh&#x1EAD;t <code>hello.proto</code> file b&#xEA;n d&#x1B0;&#x1EDB;i d&#x1EC5; &#x111;&#x1ECB;nh ngh&#x129;a service RPC HelloService service th&#xF4;ng qua protobuf.</p>
+<pre><code class="lang-go">service HelloService {
+    rpc Hello (String) returns (String);
+}
+</code></pre>
+<p>Nh&#x1B0;ng khi sinh l&#x1EA1;i m&#xE3; ngu&#x1ED3;n Go, ch&#xFA;ng c&#x169;ng kh&#xF4;ng thay &#x111;&#x1ED5;i. &#x110;&#xF3; l&#xE0; b&#x1EDF;i v&#xEC; c&#xF3; h&#xE0;ng tri&#x1EC7;u hi&#x1EC7;n th&#x1EF1;c RPC tr&#xEA;n th&#x1EBF; gi&#x1EDB;i, v&#xE0; b&#x1ED9; bi&#xEA;n d&#x1ECB;ch <code>protoc</code> s&#x1EBD; kh&#xF4;ng th&#x1EC3; bi&#x1EBF;t sinh ra m&#xE3; ngu&#x1ED3;n c&#x1EE7;a HelloService nh&#x1B0; th&#x1EBF; n&#xE0;o.</p>
+<p>Tuy nhi&#xEA;n <code>grpc</code>, m&#x1ED9;t plugin kh&#xE1;c &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c t&#xED;ch h&#x1EE3;p b&#xEA;n trong <code>protoc-gen-go</code> &#x111;&#x1EC3; sinh ra m&#xE3; ngu&#x1ED3;n cho gRPC.</p>
+<pre><code>$ protoc --go_out=plugins=grpc:. hello.proto
+</code></pre><p>Trong m&#xE3; ngu&#x1ED3;n &#x111;&#x1B0;&#x1EE3;c sinh ra, s&#x1EBD; c&#xF3; m&#x1ED9;t s&#x1ED1; ki&#x1EC3;u m&#x1EDB;i nh&#x1B0; l&#xE0; HelloServiceServer v&#xE0; HelloServiceClient. Nh&#x1EEF;ng ki&#x1EC3;u &#x111;&#xF3; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng b&#x1EDF;i gRPC v&#xE0; kh&#xF4;ng c&#x1EA7;n trong ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c RPC c&#x1EE7;a ch&#xFA;ng ta.</p>
+<p>Tuy nhi&#xEA;n gRPC plugin s&#x1EBD; cung c&#x1EA5;p cho ch&#xFA;ng ta nh&#x1EEF;ng &#xFD; t&#x1B0;&#x1EDF;ng m&#x1EDB;i. B&#xEA;n d&#x1B0;&#x1EDB;i ch&#xFA;ng ta s&#x1EBD; kh&#xE1;m ph&#xE1; ra l&#xE0;m th&#x1EBF; n&#xE0;o &#x111;&#x1EC3; sinh ra m&#xE3; ngu&#x1ED3;n b&#x1EA3;o m&#x1EAD;t trong RPC.</p>
+<h2 id="422-t&#xF9;y-ch&#x1EC9;nh-m&#xE3;-ngu&#x1ED3;n-&#x111;&#x1B0;&#x1EE3;c-sinh-ra-b&#x1EDF;i-plugin">4.2.2 T&#xF9;y ch&#x1EC9;nh m&#xE3; ngu&#x1ED3;n &#x111;&#x1B0;&#x1EE3;c sinh ra b&#x1EDF;i plugin</h2>
+<p>B&#x1ED9; bi&#xEA;n d&#x1ECB;ch protoc c&#x1EE7;a Protobuf s&#x1EBD; hi&#x1EC7;n th&#x1EF1;c &#x111;&#x1EC3; h&#x1ED7; tr&#x1EE3; nh&#x1EEF;ng ng&#xF4;n ng&#x1EEF; kh&#xE1;c nhau th&#xF4;ng qua c&#x1A1; ch&#x1EBF; plugin. V&#xED; d&#x1EE5;, n&#x1EBF;u l&#x1EC7;nh protoc c&#xF3; tham s&#x1ED1;  &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh d&#x1EA1;ng <code>--xxx_out</code>, th&#xEC; sau &#x111;&#xF3; proto s&#x1EBD; y&#xEA;u c&#x1EA7;u plugin &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng d&#x1EF1;a tr&#xEA;n ng&#xF4;n ng&#x1EEF; <code>xxx</code>. Sau &#x111;&#xF3; plugin s&#x1EBD; sinh ra m&#xE3; ngu&#x1ED3;n, v&#xED; d&#x1EE5; <code>protoc-gen-go</code> s&#x1EBD; sinh ra m&#xE3; ngu&#x1ED3;n Go b&#x1EB1;ng tham s&#x1ED1; <code>--go_out=plugins=grpc</code> s&#x1EBD; sinh ra m&#xE3; ngu&#x1ED3;n cho gRPC, n&#x1EBF;u kh&#xF4;ng ch&#xFA;ng s&#x1EBD; ch&#x1EC9; sinh ra m&#xE3; ngu&#x1ED3;n li&#xEA;n quan &#x111;&#x1EBF;n message &#x111;&#xF3;.</p>
+<p>&#x110;&#x1EC1; c&#x1EAD;p &#x111;&#x1EBF;n m&#xE3; ngu&#x1ED3;n t&#x1EEB; gRPC plugin, ch&#xFA;ng ta c&#xF3; th&#x1EC3; th&#x1EA5;y r&#x1EB1;ng h&#xE0;m <code>generator.RegisterPlugin</code> s&#x1EBD; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; &#x111;&#x103;ng k&#xED; <code>plugin</code> &#x111;&#xF3;. D&#x1B0;&#x1EDB;i &#x111;&#xE2;y s&#x1EBD; sinh ra interface plugin.</p>
+<pre><code class="lang-go"><span class="hljs-comment">// A Plugin provides functionality to add to the output during</span>
+<span class="hljs-comment">// Go code generation, such as to produce RPC stubs.</span>
+<span class="hljs-keyword">type</span> Plugin <span class="hljs-keyword">interface</span> {
+    <span class="hljs-comment">// Name identifies the plugin.</span>
+    Name() <span class="hljs-keyword">string</span>
+    <span class="hljs-comment">// Init is called once after data structures are built but before</span>
+    <span class="hljs-comment">// code generation begins.</span>
+    Init(g *Generator)
+    <span class="hljs-comment">// Generate produces the code generated by the plugin for this file,</span>
+    <span class="hljs-comment">// except for the imports, by calling the generator&apos;s methods P, In,</span>
+    <span class="hljs-comment">// and Out.</span>
+    Generate(file *FileDescriptor)
+    <span class="hljs-comment">// GenerateImports produces the import declarations for this file.</span>
+    <span class="hljs-comment">// It is called after Generate.</span>
+    GenerateImports(file *FileDescriptor)
+}
+</code></pre>
+<p>Ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Name</code> s&#x1EBD; tr&#x1EA3; v&#x1EC1; t&#xEA;n c&#x1EE7;a plugin. &#x110;&#xF3; l&#xE0; m&#x1ED9;t plugin &#x1EDF; h&#x1EC7; th&#x1ED1;ng cho vi&#x1EC7;c hi&#x1EC7;n th&#x1EF1;c Protobuf c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go. S&#x1EBD; kh&#xF4;ng c&#xF3; g&#xEC; &#x111;&#x1EC3; l&#xE0;m v&#x1EDB;i t&#xEA;n c&#x1EE7;a protoc plugin. Sau &#x111;&#xF3; h&#xE0;m <code>Init</code> s&#x1EBD; kh&#x1EDF;i t&#x1EA1;o plugin v&#x1EDB;i tham s&#x1ED1; <code>g</code>, n&#xF3; s&#x1EBD; ch&#x1EE9;a to&#xE0;n b&#x1ED9; th&#xF4;ng tin v&#x1EC1; Proto file. Cu&#x1ED1;i c&#xF9;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c Generate v&#xE0; GenerateImports s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; sinh ra ph&#x1EA7;n th&#xE2;n c&#x1EE7;a m&#xE3; ngu&#x1ED3;n t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i package &#x111;&#x1B0;&#x1EE3;c import.</p>
+<p>Do &#x111;&#xF3; ch&#xFA;ng ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i h&#xE0;m <code>netrpcPlugin</code> &#x111;&#x1EC3; sinh ra m&#xE3; ngu&#x1ED3;n cho th&#x1B0; vi&#x1EC7;n RPC chu&#x1EA9;n c&#x1EE7;a Go.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/golang/protobuf/protoc-gen-go/generator&quot;</span>
+)
+
+<span class="hljs-keyword">type</span> netrpcPlugin <span class="hljs-keyword">struct</span>{ *generator.Generator }
+
+<span class="hljs-keyword">func</span> (p *netrpcPlugin) Name() <span class="hljs-keyword">string</span>                { <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;netrpc&quot;</span> }
+<span class="hljs-keyword">func</span> (p *netrpcPlugin) Init(g *generator.Generator) { p.Generator = g }
+
+<span class="hljs-keyword">func</span> (p *netrpcPlugin) GenerateImports(file *generator.FileDescriptor) {
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(file.Service) &gt; <span class="hljs-number">0</span> {
+        p.genImportCode(file)
+    }
+}
+
+<span class="hljs-keyword">func</span> (p *netrpcPlugin) Generate(file *generator.FileDescriptor) {
+    <span class="hljs-keyword">for</span> _, svc := <span class="hljs-keyword">range</span> file.Service {
+        p.genServiceCode(svc)
+    }
+}
+</code></pre>
+<p>&#x110;&#x1EA7;u ti&#xEA;n ph&#x1B0;&#x1A1;ng th&#x1EE9;c Name s&#x1EBD; tr&#x1EA3; v&#x1EC1; t&#xEA;n c&#x1EE7;a plugin. <code>netrpcPlugin</code> c&#xF3; m&#x1ED9;t h&#xE0;m d&#x1EF1;ng s&#x1EB5;n <code>*generator.Generator</code>, v&#xE0; &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i t&#x1EA1;o v&#x1EDB;i tham s&#x1ED1; <code>g</code> khi h&#xE0;m Init &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i t&#x1EA1;o, do &#x111;&#xF3;, plugin s&#x1EBD; k&#x1EBF; th&#x1EEB;a t&#x1EA5;t c&#x1EA3; nh&#x1EEF;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c &#x111;&#x1B0;&#x1EE3;c public  t&#x1EEB; tham s&#x1ED1; g n&#xE0;y. Ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>GenerateImports</code> s&#x1EBD; g&#x1ECD;i h&#xE0;m <code>genImportCode</code> &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a &#x111;&#x1EC3; sinh ra m&#xE3; ngu&#x1ED3;n import. V&#xE0; Ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Generate</code> s&#x1EBD; g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c &#x111;&#x1B0;&#x1EE3;c custom <code>genServiceCode</code> &#x111;&#x1EC3; sinh ra m&#xE3; ngu&#x1ED3;n cho m&#x1ED7;i service.</p>
+<p>Hi&#x1EC7;n t&#x1EA1;i, ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>genImportCode</code> v&#xE0; <code>genServiceCode</code> ch&#x1EC9; &#x111;&#x1A1;n gi&#x1EA3;n l&#xE0; c&#xF3; m&#x1ED9;t d&#xF2;ng comment &#x111;&#x1A1;n gi&#x1EA3;n</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
+    p.P(<span class="hljs-string">&quot;// TODO: import code&quot;</span>)
+}
+
+<span class="hljs-keyword">func</span> (p *netrpcPlugin) genServiceCode(svc *descriptor.ServiceDescriptorProto) {
+    p.P(<span class="hljs-string">&quot;// TODO: service code, Name = &quot;</span> + svc.GetName())
+}
+</code></pre>
+<p>&#x110;&#x1EC3; s&#x1EED; d&#x1EE5;ng plugin, ch&#xFA;ng ta c&#x1EA7;n ph&#x1EA3;i &#x111;&#x103;ng k&#xED; plugin &#x111;&#xF3; v&#x1EDB;i h&#xE0;m <code>generator.RegisterPlugin</code>, ch&#xFA;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n t&#x1EA5;t nh&#x1EDD; v&#xE0;o h&#xE0;m <code>init()</code>.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> init() {
+    generator.RegisterPlugin(<span class="hljs-built_in">new</span>(netrpcPlugin))
+}
+</code></pre>
+<p>B&#x1EDF;i v&#xEC; trong ng&#xF4;n ng&#x1EEF; Go, package ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c import m&#x1ED9;t c&#xE1;ch t&#x129;nh, ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; th&#xEA;m plugin m&#x1EDB;i v&#xE0;o plugin &#x111;&#xE3; c&#xF3; s&#x1EB5;n l&#xE0; <code>protoc-gen-go</code>. Ch&#xFA;ng ta s&#x1EBD; <code>re-clone</code> l&#x1EA1;i h&#xE0;m main &#x111;&#x1EC3; t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i <code>protoc-gen-go</code></p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;io/ioutil&quot;</span>
+    <span class="hljs-string">&quot;os&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/golang/protobuf/proto&quot;</span>
+    <span class="hljs-string">&quot;github.com/golang/protobuf/protoc-gen-go/generator&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> main() {
+    g := generator.New()
+
+    data, err := ioutil.ReadAll(os.Stdin)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        g.Error(err, <span class="hljs-string">&quot;reading input&quot;</span>)
+    }
+
+    <span class="hljs-keyword">if</span> err := proto.Unmarshal(data, g.Request); err != <span class="hljs-literal">nil</span> {
+        g.Error(err, <span class="hljs-string">&quot;parsing input proto&quot;</span>)
+    }
+
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(g.Request.FileToGenerate) == <span class="hljs-number">0</span> {
+        g.Fail(<span class="hljs-string">&quot;no files to generate&quot;</span>)
+    }
+
+    g.CommandLineParameters(g.Request.GetParameter())
+
+    <span class="hljs-comment">// Create a wrapped version of the Descriptors and EnumDescriptors that</span>
+    <span class="hljs-comment">// point to the file that defines them.</span>
+    g.WrapTypes()
+
+    g.SetPackageNames()
+    g.BuildTypeNameMap()
+
+    g.GenerateAllFiles()
+
+    <span class="hljs-comment">// Send back the results.</span>
+    data, err = proto.Marshal(g.Response)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        g.Error(err, <span class="hljs-string">&quot;failed to marshal output proto&quot;</span>)
+    }
+    _, err = os.Stdout.Write(data)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        g.Error(err, <span class="hljs-string">&quot;failed to write output proto&quot;</span>)
+    }
+}
+</code></pre>
+<p>&#x110;&#x1EC3; tr&#xE1;nh vi&#x1EC7;c tr&#xF9;ng t&#xEA;n v&#x1EDB;i protoc-gen-go plugin, ch&#xFA;ng ta s&#x1EBD; &#x111;&#x1EB7;t t&#xEA;n cho ch&#x1B0;&#x1A1;ng tr&#xEC;nh th&#x1EF1;c thi tr&#xEA;n l&#xE0; <code>protoc-gen-go-netrpc</code>, &#x111;i&#x1EC1;u &#x111;&#xF3; c&#xF3; &#xFD; ngh&#x129;a l&#xE0; <code>netrpc</code> plugin &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c bao g&#x1ED3;m. Sau &#x111;&#xF3; ch&#xFA;ng ta s&#x1EBD; bi&#xEA;n d&#x1ECB;ch l&#x1EA1;i hello.proto file v&#x1EDB;i l&#x1EC7;nh sau</p>
+<pre><code>$ protoc --go-netrpc_out=plugins=netrpc:. hello.proto
+</code></pre><p>Tham s&#x1ED1; <code>--go-netrpc_out</code> s&#x1EBD; n&#xF3;i cho b&#x1ED9; bi&#xEA;n d&#x1ECB;ch protoc bi&#x1EBF;t l&#xE0; n&#xF3; ph&#x1EA3;i t&#x1EA3;i m&#x1ED9;t plugin v&#x1EDB;i t&#xEA;n g&#x1ECD;i l&#xE0; protoc-gen-go-netrpc, v&#x1EDB;i <code>plugins=netrpc</code> ch&#x1EC9; ra r&#x1EB1;ng nh&#x1EEF;ng plugin n&#x1ED9;i b&#x1ED9; <code>netrpcPlugin</code> &#x111;&#x1B0;&#x1EE3;c k&#xED;ch ho&#x1EA1;t. Ch&#xFA;ng ta th&#xEA;m v&#xE0;o ch&#xFA; th&#xED;ch cho m&#xE3; ngu&#x1ED3;n tr&#xEA;n, ch&#xFA;ng s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c included trong file <code>hello.pb.go</code> m&#x1EDB;i sinh ra.</p>
+<p>T&#x1EA1;i th&#x1EDD;i &#x111;i&#x1EC3;m n&#xE0;y, plugin &#x111;&#x1B0;&#x1EE3;c ch&#xFA;ng ta t&#x1EA1;o ra cu&#x1ED1;i c&#xF9;ng &#x111;&#xE3; ho&#x1EA1;t &#x111;&#x1ED9;ng.</p>
+<h2 id="423-t&#x1EF1;-&#x111;&#x1ED9;ng-sinh-ra-to&#xE0;n-b&#x1ED9;-m&#xE3;-ngu&#x1ED3;n-rpc">4.2.3 T&#x1EF1; &#x111;&#x1ED9;ng sinh ra to&#xE0;n b&#x1ED9; m&#xE3; ngu&#x1ED3;n RPC</h2>
+<p>Trong v&#xED; d&#x1EE5; tr&#x1B0;&#x1EDB;c ch&#xFA;ng ta &#x111;&#xE3; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t plugin nho nh&#x1ECF; l&#xE0; <code>netrpcPlugin</code> v&#xE0; t&#x1EA1;o ra m&#x1ED9;t plugin m&#x1EDB;i cho <code>protoc-gen-go-netrpc</code> b&#x1EDF;i vi&#x1EC7;c sao ch&#xE9;p l&#x1EA1;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh ch&#xED;nh c&#x1EE7;a protoc-gen-go. B&#xE2;y gi&#x1EDD; ti&#x1EBF;p t&#x1EE5;c ph&#xE1;t tri&#x1EC3;n netrpcPlugin plugin v&#x1EDB;i m&#x1EE5;c ti&#xEA;u cu&#x1ED1;i c&#xF9;ng l&#xE0; sinh ra l&#x1EDB;p interface RPC b&#x1EA3;o m&#x1EAD;t.
+&#x110;&#x1EA7;u ti&#xEA;n ch&#xFA;ng ta s&#x1EBD; ph&#x1EA3;i sinh ra m&#xE3; ngu&#x1ED3;n c&#x1EE7;a package &#x111;&#x1B0;&#x1EE3;c import b&#x1EB1;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a genImportCode.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
+    p.P(<span class="hljs-string">`import &quot;net/rpc&quot;`</span>)
+}
+</code></pre>
+<p>Sau &#x111;&#xF3; sinh ra nh&#x1EEF;ng m&#xE3; ngu&#x1ED3;n li&#xEA;n quan cho m&#x1ED7;i service c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c genServiceCode &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; ph&#xE2;n t&#xED;ch th&#x1EA5;y r&#x1EB1;ng th&#x1EE9; quan tr&#x1ECD;ng nh&#x1EA5;t c&#x1EE7;a m&#x1ED7;i service l&#xE0; t&#xEA;n c&#x1EE7;a service, v&#xE0; sau &#x111;&#xF3; m&#x1ED7;i service s&#x1EBD; c&#xF3; m&#x1ED9;t t&#x1EAD;p h&#x1EE3;p c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c. Vi&#x1EC7;c &#x111;&#x1ECB;nh nghi&#xE3; ph&#x1B0;&#x1A1;ng th&#x1EE9;c c&#xF3; th&#xE0;nh ph&#x1EA7;n quan tr&#x1ECD;ng nh&#x1EA5;t l&#xE0; t&#xEA;n c&#x1EE7;a service c&#x169;ng nh&#x1B0; l&#xE0; tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o v&#xE0; tham s&#x1ED1; &#x111;&#x1EA7;u ra.</p>
+<p>Ch&#xFA;ng ta s&#x1EBD; &#x111;&#x1ECB;nh ngh&#x129;a ki&#x1EC3;u ServiceSpec &#x111;&#x1B0;&#x1EE3;c m&#xF4; t&#x1EA3; nh&#x1B0; l&#xE0; th&#xF4;ng tin th&#xEA;m v&#xE0;o c&#x1EE7;a service.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> ServiceSpec <span class="hljs-keyword">struct</span> {
+    ServiceName <span class="hljs-keyword">string</span>
+    MethodList  []ServiceMethodSpec
+}
+
+<span class="hljs-keyword">type</span> ServiceMethodSpec <span class="hljs-keyword">struct</span> {
+    MethodName     <span class="hljs-keyword">string</span>
+    InputTypeName  <span class="hljs-keyword">string</span>
+    OutputTypeName <span class="hljs-keyword">string</span>
+}
+</code></pre>
+<p>Ch&#xFA;ng ta s&#x1EBD; t&#x1EA1;o ra m&#x1ED9;t ph&#x1B0;&#x1A1;ng th&#x1EE9;c m&#x1EDB;i l&#xE0; <code>buildServiceSpec</code> n&#xF3; s&#x1EBD; parse th&#xF4;ng tin th&#xEA;m v&#xE0;o service &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a trong ServiceSpec cho m&#x1ED7;i service.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *netrpcPlugin) buildServiceSpec(
+    svc *descriptor.ServiceDescriptorProto,
+) *ServiceSpec {
+    spec := &amp;ServiceSpec{
+        ServiceName: generator.CamelCase(svc.GetName()),
+    }
+
+    <span class="hljs-keyword">for</span> _, m := <span class="hljs-keyword">range</span> svc.Method {
+        spec.MethodList = <span class="hljs-built_in">append</span>(spec.MethodList, ServiceMethodSpec{
+            MethodName:     generator.CamelCase(m.GetName()),
+            InputTypeName:  p.TypeName(p.ObjectNamed(m.GetInputType())),
+            OutputTypeName: p.TypeName(p.ObjectNamed(m.GetOutputType())),
+        })
+    }
+
+    <span class="hljs-keyword">return</span> spec
+}
+</code></pre>
+<p>Ki&#x1EC3;u tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o l&#xE0; <code>*descriptor.ServiceDescriptorProto</code> n&#xF3; s&#x1EBD; ho&#xE0;n to&#xE0;n m&#xF4; t&#x1EA3; t&#x1EA5;t c&#x1EA3; nh&#x1EEF;ng th&#xF4;ng tin v&#x1EC1; service. Sau &#x111;&#xF3; <code>svc.GetName()</code> s&#x1EBD; l&#x1EA5;y t&#xEA;n c&#x1EE7;a service &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a &#x1EDF; protobuf file. Sau khi t&#xEA;n c&#x1EE7;a Protobuf file &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n th&#xE0;nh t&#xEA;n trong ng&#xF4;n ng&#x1EEF; Go , <code>generator.CamelCase</code> m&#x1ED9;t s&#x1EF1; chuy&#x1EC3;n &#x111;&#x1ED5;i &#x111;&#x1B0;&#x1EE3;c y&#xEA;u c&#x1EA7;u trong h&#xE0;m &#x111;&#xF3;. T&#x1B0;&#x1A1;ng t&#x1EF1;, trong v&#xF2;ng l&#x1EB7;p ch&#xFA;ng ta s&#x1EBD; <code>m.GetName()</code> &#x111;&#x1EC3; l&#x1EA5;y ra t&#xEA;n c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c v&#xE0; sau &#x111;&#xF3; thay &#x111;&#x1ED5;i ch&#xFA;ng &#x111;&#x1EC3; &#x1EE9;ng v&#x1EDB;i t&#xEA;n trong ng&#xF4;n ng&#x1EEF; Go. V&#x1A1;i s&#x1EF1; ph&#x1EE9;c t&#x1EA1;p c&#x1EE7;a vi&#x1EC7;c ph&#xE2;n t&#xED;ch t&#xEA;n tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o v&#xE0; &#x111;&#x1EA7;u ra: &#x111;&#x1EA7;u ti&#xEA;n ch&#xFA;ng ta c&#x1EA7;n c&#xF3; <code>m.GetInputType()</code> &#x111;&#x1EC3; l&#x1EA5;y ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o, sau &#x111;&#xF3; l&#xE0; <code>p.ObjectNamed</code> &#x111;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng tin v&#x1EC1; class c&#x1EE7;a &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i ki&#x1EC3;u &#x111;&#xF3;.</p>
+<p>Sau &#x111;&#xF3; ch&#xFA;ng ta s&#x1EBD; sinh ra m&#xE3; ngu&#x1ED3;n c&#x1EE7;a service d&#x1EF1;a tr&#xEA;n th&#xF4;ng tin m&#xF4; t&#x1EA3; &#x111;&#xF3;, &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng b&#x1EDF;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>buildServiceSpec</code> :</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *netrpcPlugin) genServiceCode(svc *descriptor.ServiceDescriptorProto) {
+    spec := p.buildServiceSpec(svc)
+
+    <span class="hljs-keyword">var</span> buf bytes.Buffer
+    t := template.Must(template.New(<span class="hljs-string">&quot;&quot;</span>).Parse(tmplService))
+    err := t.Execute(&amp;buf, spec)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+
+    p.P(buf.String())
+}
+</code></pre>
+<p>&#x110;&#x1EC3; d&#x1EC5; d&#xE0;ng b&#x1EA3;o tr&#xEC;, ch&#xFA;ng ta s&#x1EBD; ph&#x1EA3;i sinh ra service code d&#x1EF1;a tr&#xEA;n template c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go, khi &#x111;&#xF3; <code>tmplService</code> l&#xE0; template c&#x1EE7;a service.</p>
+<p>B&#x1EDF;i vi&#x1EC7;c vi&#x1EBF;t template, h&#xE3;y nh&#xEC;n  nh&#x1EEF;ng g&#xEC; ch&#xFA;ng ta mong &#x111;&#x1EE3;i v&#xE0;o m&#xE3; ngu&#x1ED3;n cu&#x1ED1;i c&#xF9;ng &#x111;&#x1B0;&#x1EE3;c sinh ra</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloServiceInterface <span class="hljs-keyword">interface</span> {
+    Hello(in String, out *String) error
+}
+
+<span class="hljs-keyword">func</span> RegisterHelloService(srv *rpc.Server, x HelloService) error {
+    <span class="hljs-keyword">if</span> err := srv.RegisterName(<span class="hljs-string">&quot;HelloService&quot;</span>, x); err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> err
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-keyword">type</span> HelloServiceClient <span class="hljs-keyword">struct</span> {
+    *rpc.Client
+}
+
+<span class="hljs-keyword">var</span> _ HelloServiceInterface = (*HelloServiceClient)(<span class="hljs-literal">nil</span>)
+
+<span class="hljs-keyword">func</span> DialHelloService(network, address <span class="hljs-keyword">string</span>) (*HelloServiceClient, error) {
+    c, err := rpc.Dial(network, address)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err
+    }
+    <span class="hljs-keyword">return</span> &amp;HelloServiceClient{Client: c}, <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-keyword">func</span> (p *HelloServiceClient) Hello(in String, out *String) error {
+    <span class="hljs-keyword">return</span> p.Client.Call(<span class="hljs-string">&quot;HelloService.Hello&quot;</span>, in, out)
+}
+</code></pre>
+<p>HelloService l&#xE0; t&#xEA;n c&#x1EE7;a service, b&#xEA;n c&#x1EA1;nh m&#x1ED7;i chu&#x1ED7;i nh&#x1EEF;ng t&#xEA;n service li&#xEA;n quan kh&#xE1;c.</p>
+<p>Template sau &#x111;&#xE2;y s&#x1EBD; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng v&#x1EDB;i s&#x1EF1; reference t&#x1EDB;i m&#xE3; ngu&#x1ED3;n cu&#x1ED1;i c&#xF9;ng &#x111;&#x1B0;&#x1EE3;c sinh ra.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">const</span> tmplService =
+{{$root := .}}
+
+<span class="hljs-keyword">type</span> {{.ServiceName}}Interface <span class="hljs-keyword">interface</span> {
+    {{- <span class="hljs-keyword">range</span> $_, $m := .MethodList}}
+    {{$m.MethodName}}(*{{$m.InputTypeName}}, *{{$m.OutputTypeName}}) error
+    {{- end}}
+}
+
+<span class="hljs-keyword">func</span> Register{{.ServiceName}}(
+    srv *rpc.Server, x {{.ServiceName}}Interface,
+) error {
+    <span class="hljs-keyword">if</span> err := srv.RegisterName(<span class="hljs-string">&quot;{{.ServiceName}}&quot;</span>, x); err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> err
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-keyword">type</span> {{.ServiceName}}Client <span class="hljs-keyword">struct</span> {
+    *rpc.Client
+}
+
+<span class="hljs-keyword">var</span> _ {{.ServiceName}}Interface = (*{{.ServiceName}}Client)(<span class="hljs-literal">nil</span>)
+
+<span class="hljs-keyword">func</span> Dial{{.ServiceName}}(network, address <span class="hljs-keyword">string</span>) (
+    *{{.ServiceName}}Client, error,
+) {
+    c, err := rpc.Dial(network, address)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err
+    }
+    <span class="hljs-keyword">return</span> &amp;{{.ServiceName}}Client{Client: c}, <span class="hljs-literal">nil</span>
+}
+
+{{<span class="hljs-keyword">range</span> $_, $m := .MethodList}}
+<span class="hljs-keyword">func</span> (p *{{$root.ServiceName}}Client) {{$m.MethodName}}(
+    in *{{$m.InputTypeName}}, out *{{$m.OutputTypeName}},
+) error {
+    <span class="hljs-keyword">return</span> p.Client.Call(<span class="hljs-string">&quot;{{$root.ServiceName}}.{{$m.MethodName}}&quot;</span>, in, out)
+}
+{{end}}
+<span class="hljs-string">`
+</span></code></pre>
+<p>Khi plugin c&#x1EE7;a protobuf &#x111;&#x1B0;&#x1EE3;c t&#xF9;y ch&#x1EC9;nh ho&#xE0;n th&#xE0;nh, m&#xE3; ngu&#x1ED3;n c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c t&#x1EEB; &#x111;&#x1ED9;ng sinh ra m&#x1ED7;i th&#x1EDD;i &#x111;i&#x1EC3;m m&#xE0; RPC service thay &#x111;&#x1ED5;i trong hello.proto file. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x111;i&#x1EC1;u ch&#x1EC9;nh ho&#x1EB7;c t&#x103;ng n&#x1ED9;i dung c&#x1EE7;a m&#xE3; ngu&#x1ED3;n &#x111;&#x1B0;&#x1EE3;c sinh ra b&#x1EDF;i vi&#x1EC7;c c&#x1EAD;p nh&#x1EAD;t template &#x111;&#x1B0;&#x1EE3;c plugin. Sau khi ch&#xFA;ng ta &#x111;&#xE3; c&#xF3; th&#x1EC3; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t plugin ri&#xEA;ng, ch&#xFA;ng ta s&#x1EBD; ho&#xE0;n th&#xE0;nh to&#xE0;n b&#x1ED9; c&#xF4;ng ngh&#x1EC7; &#x111;&#xF3;.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch4-01-rpc-intro.html" class="navigation navigation-prev " aria-label="Previous page: 4.1 Bắt đầu với RPC">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch4-03-fun-fpc.html" class="navigation navigation-next " aria-label="Next page: 4.3 RPC trong Golang">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"4.2 Protobuf","level":"1.5.2","depth":2,"next":{"title":"4.3 RPC trong Golang","level":"1.5.3","depth":2,"path":"ch4-rpc/ch4-03-fun-fpc.md","ref":"ch4-rpc/ch4-03-fun-fpc.md","articles":[]},"previous":{"title":"4.1 Bắt đầu với RPC","level":"1.5.1","depth":2,"path":"ch4-rpc/ch4-01-rpc-intro.md","ref":"ch4-rpc/ch4-01-rpc-intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch4-rpc/ch4-02-pb-intro.md","mtime":"2019-07-15T08:31:39.957Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-15T08:49:14.910Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

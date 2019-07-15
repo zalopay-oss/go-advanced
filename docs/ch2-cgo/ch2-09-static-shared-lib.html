@@ -1,0 +1,1102 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>2.9 Thư viện tĩnh và động · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch2-10-link.html" />
+    
+    
+    <link rel="prev" href="ch2-05-internal-mechanisms.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Các chế độ đồng thời thông dụng
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                    
+                    1.8 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 2: lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="ch2-01-quick-start.html">
+            
+                <a href="ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="ch2-02-CGO-foundation.html">
+            
+                <a href="ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="ch2-03-type-conversion.html">
+            
+                <a href="ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="ch2-04-function-call.html">
+            
+                <a href="ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="ch2-05-internal-mechanisms.html">
+            
+                <a href="ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.6" data-path="ch2-09-static-shared-lib.html">
+            
+                <a href="ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="ch2-10-link.html">
+            
+                <a href="ch2-10-link.html">
+            
+                    
+                    2.10  Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="ch2-11-ext.html">
+            
+                <a href="ch2-11-ext.html">
+            
+                    
+                    2.11 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-best-practice/">
+            
+                <a href="../ch3-best-practice/">
+            
+                    
+                    Chương 3: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-rpc/">
+            
+                <a href="../ch4-rpc/">
+            
+                    
+                    Chương 4: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                <a href="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                    
+                    4.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                <a href="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                    
+                    4.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                <a href="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                    
+                    4.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-rpc/ch4-04-grpc.html">
+            
+                <a href="../ch4-rpc/ch4-04-grpc.html">
+            
+                    
+                    4.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                <a href="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                    
+                    4.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                <a href="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                    
+                    4.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-rpc/ch4-07-pbgo.html">
+            
+                <a href="../ch4-rpc/ch4-07-pbgo.html">
+            
+                    
+                    4.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                <a href="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                    
+                    4.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                <a href="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                    
+                    4.9 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-web/">
+            
+                <a href="../ch5-web/">
+            
+                    
+                    Chương 5: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-web/ch5-01-introduction.html">
+            
+                <a href="../ch5-web/ch5-01-introduction.html">
+            
+                    
+                    5.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-web/ch5-02-router.html">
+            
+                <a href="../ch5-web/ch5-02-router.html">
+            
+                    
+                    5.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-web/ch5-03-middleware.html">
+            
+                <a href="../ch5-web/ch5-03-middleware.html">
+            
+                    
+                    5.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-web/ch5-04-request-verification.html">
+            
+                <a href="../ch5-web/ch5-04-request-verification.html">
+            
+                    
+                    5.4 Kiểm tra yêu cầu validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-web/ch5-05-database.html">
+            
+                <a href="../ch5-web/ch5-05-database.html">
+            
+                    
+                    5.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                <a href="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                    
+                    5.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                <a href="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                    
+                    5.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-web/ch5-08-interface-and-web.html">
+            
+                <a href="../ch5-web/ch5-08-interface-and-web.html">
+            
+                    
+                    5.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../ch5-web/ch5-09-gated-launch.html">
+            
+                <a href="../ch5-web/ch5-09-gated-launch.html">
+            
+                    
+                    5.9 Grayscale Publishing and A/B test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../ch5-web/ch5-10-ext.html">
+            
+                <a href="../ch5-web/ch5-10-ext.html">
+            
+                    
+                    5.10 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-cloud/">
+            
+                <a href="../ch6-cloud/">
+            
+                    
+                    Chương 6: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../ch6-cloud/ch6-01-dist-id.html">
+            
+                <a href="../ch6-cloud/ch6-01-dist-id.html">
+            
+                    
+                    6.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../ch6-cloud/ch6-02-lock.html">
+            
+                <a href="../ch6-cloud/ch6-02-lock.html">
+            
+                    
+                    6.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../ch6-cloud/ch6-03-delay-job.html">
+            
+                <a href="../ch6-cloud/ch6-03-delay-job.html">
+            
+                    
+                    6.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                <a href="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                    
+                    6.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../ch6-cloud/ch6-05-load-balance.html">
+            
+                <a href="../ch6-cloud/ch6-05-load-balance.html">
+            
+                    
+                    6.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../ch6-cloud/ch6-06-config.html">
+            
+                <a href="../ch6-cloud/ch6-06-config.html">
+            
+                    
+                    6.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../ch6-cloud/ch6-07-crawler.html">
+            
+                <a href="../ch6-cloud/ch6-07-crawler.html">
+            
+                    
+                    6.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../ch6-cloud/ch6-08-ext.html">
+            
+                <a href="../ch6-cloud/ch6-08-ext.html">
+            
+                    
+                    6.8 Phần mở rộng
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >2.9 Thư viện tĩnh và động</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="29-th&#x1B0;-vi&#x1EC7;n-t&#x129;nh-v&#xE0;-&#x111;&#x1ED9;ng">2.9 Th&#x1B0; vi&#x1EC7;n t&#x129;nh v&#xE0; &#x111;&#x1ED9;ng</h1>
+<p>C&#xF3; ba c&#xE1;ch &#x111;&#x1EC3; d&#xF9;ng t&#xE0;i nguy&#xEA;n <code>C/C++</code> trong <code>CGO</code>: d&#xF9;ng tr&#x1EF1;c ti&#x1EBF;p m&#xE3; ngu&#x1ED3;n, li&#xEA;n k&#x1EBF;t t&#x129;nh, li&#xEA;n k&#x1EBF;t &#x111;&#x1ED9;ng. C&#xE1;ch tr&#x1EF1;c ti&#x1EBF;p s&#x1EED; d&#x1EE5;ng m&#xE3; ngu&#x1ED3;n l&#xE0; th&#xEA;m d&#xF2;ng <code>import &quot;C&quot;</code> v&#xE0; ph&#x1EA7;n comment m&#xE3; ngu&#x1ED3;n  C ph&#xED;a tr&#xEA;n, ho&#x1EB7;c bao g&#x1ED9;p m&#xE3; ngu&#x1ED3;n <code>C/C++</code> trong package hi&#x1EC7;n t&#x1EA1;i. C&#xE1;ch d&#xF9;ng li&#xEA;n k&#x1EBF;t t&#x129;nh v&#xE0; &#x111;&#x1ED9;ng th&#x1B0; vi&#x1EC7;n c&#x169;ng t&#x1B0;&#x1A1;ng t&#x1EF1;, b&#x1EB1;ng vi&#x1EC7;c &#x111;&#x1EB7;c t&#x1EA3; th&#x1B0; vi&#x1EC7;n li&#xEA;n k&#x1EBF;t trong c&#x1EDD; <code>LDFLAGS</code>. Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng ta s&#x1EBD; t&#x1EAD;p trung v&#xE0;o vi&#x1EC7;c d&#xF9;ng th&#x1B0; vi&#x1EC7;n t&#x129;nh v&#xE0; &#x111;&#x1ED9;ng trong <code>CGO</code> nh&#x1B0; th&#x1EBF; n&#xE0;o.</p>
+<h2 id="291-d&#xF9;ng-th&#x1B0;-vi&#x1EC7;n-c-t&#x129;nh">2.9.1 D&#xF9;ng th&#x1B0; vi&#x1EC7;n C t&#x129;nh</h2>
+<p>N&#x1EBF;u t&#xE0;i nguy&#xEA;n C/C++ &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1B0;a v&#xE0;o trong CGO c&#xF3; m&#xE3; ngu&#x1ED3;n, v&#xE0; k&#xED;ch th&#x1B0;&#x1EDB;c m&#xE3; ngu&#x1ED3;n l&#xE0; nh&#x1ECF;, c&#xE1;ch d&#xF9;ng m&#xE3; ngu&#x1ED3;n tr&#x1EF1;c ti&#x1EBF;p l&#xE0; m&#x1ED9;t &#xFD; t&#x1B0;&#x1EDF;ng ph&#x1ED5; bi&#x1EBF;n nh&#x1EA5;t, nh&#x1B0;ng nhi&#x1EC1;u khi ch&#xFA;ng ta kh&#xF4;ng c&#xF3; m&#xE3; ngu&#x1ED3;n, ho&#x1EB7;c qu&#xE1; tr&#xEC;nh x&#xE2;y d&#x1EF1;ng m&#xE3; ngu&#x1ED3;n <code>C/C++</code> r&#x1EA5;t ph&#x1EE9;c t&#x1EA1;p. &#x110;&#xE2;y l&#xE0; l&#xFA;c m&#xE0; vi&#x1EC7;c d&#xF9;ng th&#x1B0; vi&#x1EC7;n C t&#x129;nh l&#xE0; l&#x1EF1;a ch&#x1ECD;n t&#x1ED1;t nh&#x1EA5;t. B&#x1EDF;i v&#xEC; th&#x1B0; vi&#x1EC7;n t&#x129;nh l&#xE0; li&#xEA;n k&#x1EBF;t t&#x129;nh, ph&#x1EA7;n ch&#x1B0;&#x1A1;ng tr&#xEC;nh &#x111;&#xED;ch s&#x1EBD; kh&#xF4;ng sinh ra th&#xEA;m ph&#x1EA7;n ph&#x1EE5; thu&#x1ED9;c trong khi ch&#x1EA1;y, ho&#x1EB7;c kh&#xF4;ng c&#xF3; m&#x1ED9;t th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng c&#x1EE5; th&#x1EC3; n&#xE0;o c&#xF3; th&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o ki&#x1EC3;m so&#xE1;t l&#x1ED7;i ph&#xE1;t sinh gi&#x1EEF;a c&#xE1;c th&#xE0;nh ph&#x1EA7;n li&#xEA;n k&#x1EBF;t trong qu&#xE1; tr&#xEC;nh ch&#x1EA1;y. Tuy nhi&#xEA;n, th&#x1B0; vi&#x1EC7;n t&#x129;nh c&#x169;ng c&#xF3; m&#x1ED9;t y&#xEA;u c&#x1EA7;u nh&#x1EA5;t &#x111;&#x1ECB;nh trong pha li&#xEA;n k&#x1EBF;t. Th&#x1B0; vi&#x1EC7;n t&#x129;nh th&#x1B0;&#x1EDD;ng ch&#x1EE9;a ba th&#xE0;nh ph&#x1EA7;n m&#xE3; ngu&#x1ED3;n, n&#xF3; c&#xF3; m&#x1ED9;t l&#x1B0;&#x1EE3;ng l&#x1EDB;n c&#xE1;c k&#xFD; t&#x1EF1;. N&#x1EBF;u m&#x1ED9;t k&#xFD; t&#x1EF1; b&#x1ECB; xung &#x111;&#x1ED9;t trong qu&#xE1; tr&#xEC;nh li&#xEA;n k&#x1EBF;t t&#x129;nh, th&#xEC; to&#xE0;n b&#x1ED9; <code>link</code> s&#x1EBD; h&#x1ECF;ng.</p>
+<p>&#x110;&#x1EA7;u ti&#xEA;n, ch&#xFA;ng ta s&#x1EBD; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t th&#x1B0; vi&#x1EC7;n t&#x129;nh &#x111;&#x1A1;n gi&#x1EA3;n v&#x1EDB;i ng&#xF4;n ng&#x1EEF; C thu&#x1EA7;n. Th&#x1B0; vi&#x1EC7;n t&#x129;nh m&#xE0; ch&#xFA;ng ta x&#xE2;y d&#x1EF1;ng &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i l&#xE0; <code>number</code>. Ch&#x1EC9; c&#xF3; m&#x1ED9;t h&#xE0;m <code>number_add_mod</code> trong th&#x1B0; vi&#x1EC7;n d&#xF9;ng &#x111;&#x1EC3; l&#x1EA5;y modulo c&#x1EE7;a m&#x1ED9;t t&#x1ED5;ng hai s&#x1ED1; cho m&#x1ED9;t s&#x1ED1; th&#x1EE9; ba. Nh&#x1EEF;ng files c&#x1EE7;a th&#x1B0; vi&#x1EC7;n <code>number</code> &#x111;&#x1EB7;t trong c&#xF9;ng m&#x1ED9;t th&#x1B0; m&#x1EE5;c.</p>
+<p>Trong file <code>number/number.h</code> s&#x1EBD; &#x111;&#x1ECB;nh ngh&#x129;a ph&#x1EA7;n header ch&#x1EE9;a prototype c&#x1EE7;a h&#xE0;m:</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">number_add_mod</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> mod)</span></span>;
+</code></pre>
+<p>File <code>number/number.c</code> l&#xE0; ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c h&#xE0;m nh&#x1B0; sau:</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;number.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">number_add_mod</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> mod)</span> </span>{
+    <span class="hljs-keyword">return</span> (a+b)%mod;
+}
+</code></pre>
+<p>B&#x1EDF;i v&#xEC; CGO d&#xF9;ng l&#x1EC7;nh <code>GCC</code> &#x111;&#x1EC3; bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t m&#xE3; ngu&#x1ED3;n <code>C</code> v&#xE0; <code>Go</code> l&#x1EA1;i. Do &#x111;&#xF3;, th&#x1B0; vi&#x1EC7;n t&#x129;nh c&#x169;ng ph&#x1EA3;i t&#x1B0;&#x1A1;ng th&#xED;ch theo &#x111;&#x1ECB;nh d&#x1EA1;ng <code>GCC</code>.</p>
+<p>M&#x1ED9;t th&#x1B0; vi&#x1EC7;n t&#x129;nh s&#x1EBD; g&#x1ECD;i <code>libnumber.a</code> c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c sinh ra b&#x1EB1;ng l&#x1EC7;nh sau:</p>
+<pre><code>$ cd ./number
+$ gcc -c -o number.o number.c
+$ ar rcs libnumber.a number.o
+</code></pre><p>Sau khi sinh ra th&#x1B0; vi&#x1EC7;n t&#x129;nh mang t&#xEA;n <code>libnumber.a</code>, ch&#xFA;ng ta d&#xF9;ng n&#xF3; trong <code>CGO</code>.</p>
+<p>T&#x1EA1;o ra file  main.go nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-comment">//#cgo CFLAGS: -I./number</span>
+<span class="hljs-comment">//#cgo LDFLAGS: -L${SRCDIR}/number -lnumber</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//#include &quot;number.h&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    fmt.Println(C.number_add_mod(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>, <span class="hljs-number">12</span>))
+}
+</code></pre>
+<p>C&#xF3; hai l&#x1EC7;nh <code>#cgo</code>, n&#xF3; s&#x1EBD; bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t c&#xE1;c tham s&#x1ED1; v&#x1EDB;i nhau. C&#x1EDD; <code>CFLAGS -I./number</code> s&#x1EBD; th&#xEA;m v&#xE0;o th&#x1B0; m&#x1EE5;c ch&#x1EE9;a c&#xE1;c th&#x1B0; vi&#x1EC7;n &#x1EE9;ng v&#x1EDB;i file header. C&#x1EDD; <code>LDFLAGS</code> s&#x1EBD; th&#x1EC3; hi&#x1EC7;n li&#xEA;n k&#x1EBF;t t&#x1EDB;i th&#x1B0; vi&#x1EC7;n t&#x129;nh <code>libnumber.a</code> b&#x1EB1;ng c&#xE1;ch th&#xEA;m v&#xE0;o tr&#x1B0;&#x1EDD;ng <code>-L${SRCDIR}/number</code>, n&#xF3; s&#x1EBD; &#x111;&#x1B0;a th&#x1B0; vi&#x1EC7;n t&#x129;nh <code>number</code> &#x111;&#x1B0;&#x1EE3;c bi&#xEA;n d&#x1ECB;ch xong v&#xE0;o li&#xEA;n k&#x1EBF;t qua search path <code>-lnumber</code>. N&#xEA;n ch&#xFA; &#xFD; r&#x1EB1;ng, ph&#x1EA7;n search path trong li&#xEA;n k&#x1EBF;t kh&#xF4;ng th&#x1EC3; d&#xF9;ng trong c&#xE1;c relative path (&#x111;&#x1B0;&#x1EE3;c gi&#x1EDB;i h&#x1EA1;n b&#x1EDF;i m&#xE3; ngu&#x1ED3;n <code>C/C++</code> linker). Ch&#xFA;ng ta ph&#x1EA3;i m&#x1EDF; r&#x1ED9;ng th&#x1B0; m&#x1EE5;c hi&#x1EC7;n t&#x1EA1;i <code>${SRCDIR}</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i file m&#xE3; ngu&#x1ED3;n &#x111;&#x1EBF;n m&#x1ED9;t absolute path qua bi&#x1EBF;n <code>cgo-specific</code> (c&#x169;ng tr&#xEA;n Windows).  Absolute paths trong platform kh&#xF4;ng th&#x1EC3; ch&#x1EE9;a k&#xED; t&#x1EF1; tr&#x1ED1;ng.</p>
+<p>B&#x1EDF;i v&#xEC; ch&#xFA;ng ta &#x111;&#xE3; c&#xF3; t&#x1EA5;t c&#x1EA3; c&#xE1;c m&#xE3; ngu&#x1ED3;n cho th&#x1B0; vi&#x1EC7;n <code>number</code>, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng tr&#xEC;nh t&#x1EA1;o m&#xE3; &#x111;&#x1EC3; sinh ra th&#x1B0; vi&#x1EC7;n t&#x129;nh, ho&#x1EB7;c d&#xF9;ng Makefiles &#x111;&#x1EC3; x&#xE2;y d&#x1EF1;ng th&#x1B0; vi&#x1EC7;n t&#x129;nh. Do &#x111;&#xF3;, khi ch&#xFA;ng ta publishing m&#xE3; ngu&#x1ED3;n package CGO, ch&#xFA;ng ta s&#x1EBD; kh&#xF4;ng c&#x1EA7;n ph&#x1EA3;i bi&#xEA;n d&#x1ECB;ch C static library tr&#x1B0;&#x1EDB;c.</p>
+<p>B&#x1EDF;i v&#xEC; s&#x1EBD; c&#xF3; nhi&#x1EC1;u h&#x1A1;n m&#x1ED9;t b&#x1B0;&#x1EDB;c bi&#xEA;n d&#x1ECB;ch th&#x1B0; vi&#x1EC7;n t&#x129;nh, G&#xF3;i Go d&#xF9;ng &#x111;&#x1EC3; custom static library &#x111;&#xE3; ch&#x1EE9;a t&#x1EA5;t c&#x1EA3; c&#xE1;c m&#xE3; ngu&#x1ED3;n static library v&#xE0; kh&#xF4;ng c&#xF3; th&#x1EC3; c&#xE0;i &#x111;&#x1EB7;t tr&#x1EF1;c ti&#x1EBF;p v&#x1EDB;i <code>go get</code>. Tuy nhi&#xEA;n, ch&#xFA;ng ta c&#xF3; v&#x1EAB;n c&#xF3; th&#x1EC3; t&#x1EA3;i ch&#xFA;ng xu&#x1ED1;ng b&#x1EB1;ng <code>go get</code>, v&#xE0; d&#xF9;ng <code>go</code> &#x111;&#x1EC3; sinh ra &#x111;i&#x1EC3;m g&#x1ECD;i th&#x1B0; vi&#x1EC7;n t&#x129;nh &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng, v&#xE0; cu&#x1ED1;i c&#xF9;ng ch&#xFA;ng ta s&#x1EBD; <code>go install</code> &#x111;&#x1EC3; ho&#xE0;n th&#xE0;nh vi&#x1EC7;c c&#xE0;i &#x111;&#x1EB7;t.</p>
+<p>&#x110;&#x1EC3; h&#x1ED7; tr&#x1EE3; l&#x1EC7;nh <code>go get</code> cho vi&#x1EC7;c download v&#xE0; install m&#x1ED9;t c&#xE1;ch tr&#x1EF1;c ti&#x1EBF;p, ng&#xF4;n ng&#x1EEF; C c&#x1EE7;a ch&#xFA;ng ta s&#x1EBD; c&#xF3; c&#xFA; ph&#xE1;p <code>#include</code> d&#xF9;ng &#x111;&#x1EC3; li&#xEA;n k&#x1EBF;t file m&#xE3; ngu&#x1ED3;n c&#x1EE7;a th&#x1B0; vi&#x1EC7;n number &#x111;&#x1EBF;n g&#xF3;i hi&#x1EC7;n t&#x1EA1;i.</p>
+<p>T&#x1EA1;o ra file <code>z_link_number_c.c</code> nh&#x1B0; sau:</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;./number/number.c&quot;</span></span>
+</code></pre>
+<p>Sau &#x111;&#xF3; th&#x1EF1;c thi l&#x1EC7;nh <code>go get</code> ho&#x1EB7;c <code>go build</code>, <code>CGO</code> s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng bi&#xEA;n d&#x1ECB;ch m&#xE3; ngu&#x1ED3;n &#x1EE9;ng v&#x1EDB;i th&#x1B0; vi&#x1EC7;n <code>number</code>. K&#x129; thu&#x1EAD;t n&#xE0;y s&#x1EBD; chuy&#x1EC3;n &#x111;&#x1ED5;i th&#x1B0; vi&#x1EC7;n t&#x129;nh th&#xE0;nh m&#xE3; ngu&#x1ED3;n &#x111;&#x1EC3; references m&#xE0; kh&#xF4;ng c&#x1EA7;n thay &#x111;&#x1ED5;i k&#x1EBF;t c&#x1EA5;u t&#x1ED5; ch&#x1EE9;c c&#x1EE7;a m&#xE3; ngu&#x1ED3;n th&#x1B0; vi&#x1EC7;n t&#x129;nh. G&#xF3;i <code>CGO</code> th&#x1EAD;t ho&#xE0;n h&#x1EA3;o.</p>
+<p>N&#x1EBF;u ch&#xFA;ng ta s&#x1EED; d&#x1EE5;ng th&#x1B0; vi&#x1EC7;n t&#x129;nh t&#x1EEB; b&#xEA;n th&#x1EE9; ba, ch&#xFA;ng ta c&#x1EA7;n ph&#x1EA3;i t&#x1EA3;i ch&#xFA;ng v&#xE0; c&#xE0;i &#x111;&#x1EB7;t th&#x1B0; vi&#x1EC7;n t&#x129;nh &#x111;&#x1EBF;n m&#x1ED9;t n&#x1A1;i ph&#xF9; h&#x1EE3;p. Sau &#x111;&#xF3; &#x111;&#x1EB7;c t&#x1EA3; location c&#x1EE7;a header files v&#xE0; libraries qua c&#x1EDD; <code>CFLAGS</code> v&#xE0; <code>LDFLAGS</code> trong l&#x1EC7;nh <code>#cgo</code>. Trong c&#xE1;c h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh kh&#xE1;c nhau, ho&#x1EB7;c c&#xE1;c phi&#xEA;n b&#x1EA3;n kh&#xE1;c nhau c&#x1EE7;a c&#xF9;ng h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh, installation paths c&#x1EE7;a nh&#x1EEF;ng th&#x1B0; vi&#x1EC7;n c&#xF3; th&#x1EC3; kh&#xE1;c nhau, do &#x111;&#xF3; l&#xE0;m c&#xE1;ch n&#xE0;o &#x111;&#x1EC3; c&#xF3; th&#x1EC3; bi&#x1EBF;t &#x111;&#x1B0;&#x1EE3;c c&#xE1;c thay &#x111;&#x1ED5;i trong m&#xE3; ngu&#x1ED3;n?</p>
+<p>Trong m&#xF4;i tr&#x1B0;&#x1EDD;ng Linux, c&#xF3; m&#x1ED9;t l&#x1EC7;nh <code>pkg-config</code> &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; truy v&#x1EA5;n c&#xE1;c tham s&#x1ED1; <code>compile</code> v&#xE0; <code>link</code> khi d&#xF9;ng c&#xE1;c th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng/t&#x129;nh. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng l&#x1EC7;nh <code>pkg-config</code> tr&#x1EF1;c ti&#x1EBF;p trong l&#x1EC7;nh <code>#cgo</code> &#x111;&#x1EC3; generate compilation v&#xE0; linking parameters. B&#x1EA1;n c&#xF3; th&#x1EC3; customize l&#x1EC7;nh <code>pkg-config</code> v&#x1EDB;i bi&#x1EBF;n m&#xF4;i tr&#x1B0;&#x1EDD;ng <code>PKG_CONFIG</code>. B&#x1EDF;i v&#xEC; c&#xE1;c h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh kh&#xE1;c nhau c&#xF3; th&#x1EC3; h&#x1ED7; tr&#x1EE3; l&#x1EC7;nh <code>pkg-config</code> theo c&#xE1;ch kh&#xE1;c nhau, th&#x1EAD;t kh&#xF3; &#x111;&#x1EC3; l&#xE0;m t&#x1B0;&#x1A1;ng th&#xED;ch c&#xE1;c build parameters cho c&#xE1;c h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh kh&#xE1;c nhau. Tuy nhi&#xEA;n, trong h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh c&#x1EE5; th&#x1EC3; l&#xE0; Linux, l&#x1EC7;nh <code>pkg-config</code> ch&#x1EC9; &#x111;&#x1A1;n gi&#x1EA3;n qu&#x1EA3;n l&#xFD; c&#xE1;c build parameters. Chi ti&#x1EBF;t c&#x1EE7;a vi&#x1EC7;c d&#xF9;ng <code>pkg-config</code> kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c n&#xF3;i &#x1EDF; &#x111;&#xE2;y, do &#x111;&#xF3; b&#x1EA1;n c&#xF3; th&#x1EC3; th&#x1EA5;y ch&#xFA;ng trong c&#xE1;c t&#xE0;i li&#x1EC7;u li&#xEA;n quan kh&#xE1;c.</p>
+<h2 id="292-s&#x1EED;-d&#x1EE5;ng-th&#x1B0;-vi&#x1EC7;n-c-&#x111;&#x1ED9;ng">2.9.2 S&#x1EED; d&#x1EE5;ng th&#x1B0; vi&#x1EC7;n C &#x111;&#x1ED9;ng</h2>
+<p>&#xDD; &#x111;&#x1ECB;nh ban &#x111;&#x1EA7;u c&#x1EE7;a th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng l&#xE0; chia s&#x1EBB; c&#xF9;ng m&#x1ED9;t th&#x1B0; vi&#x1EC7;n, c&#xE1;c processes kh&#xE1;c nhau c&#xF3; th&#x1EC3; chia s&#x1EBB; tr&#xEA;n c&#xF9;ng m&#x1ED9;t t&#xE0;i nguy&#xEA;n b&#x1ED9; nh&#x1EDB; tr&#xEA;n RAM ho&#x1EB7;c &#x111;&#x129;a c&#x1EE9;ng. Nh&#x1B0;ng &#x111;&#x129;a c&#x1EE9;ng v&#xE0; RAM hi&#x1EC7;n nay c&#xF3; gi&#xE1; r&#x1EBB;, hai vai tr&#xF2; s&#x1EBD; tr&#x1EDF; n&#xEA;n kh&#xF4;ng &#x111;&#xE1;ng quan t&#xE2;m, do &#x111;&#xF3; &#x111;&#xE2;u l&#xE0; gi&#xE1; tr&#x1ECB; c&#x1EE7;a th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng &#x1EDF; &#x111;&#xE2;y? T&#x1EEB; g&#xF3;c nh&#xEC;n c&#x1EE7;a vi&#x1EC7;c ph&#xE1;t tri&#x1EC3;n th&#x1B0; vi&#x1EC7;n, th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng c&#xF3; th&#x1EC3; t&#xE1;ch bi&#x1EC7;t nhau v&#xE0; gi&#x1EA3;m thi&#x1EC3;u r&#x1EE7;i ro c&#x1EE7;a vi&#x1EC7;c xung &#x111;&#x1ED9;t trong khi li&#xEA;n k&#x1EBF;t. V&#xE0; v&#x1EDB;i nh&#x1EEF;ng n&#x1EC1;n t&#x1EA3;ng nh&#x1B0; Windows, th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng l&#xE0; m&#x1ED9;t c&#xE1;ch kh&#x1EA3; thi &#x111;&#x1EC3; m&#x1EDF; r&#x1ED9;ng c&#xE1;c n&#x1EC1;n t&#x1EA3;ng bi&#xEA;n d&#x1ECB;ch nh&#x1B0; <code>VC</code> v&#xE0; <code>GCC</code>.</p>
+<p>Trong <code>CGO</code>, vi&#x1EC7;c d&#xF9;ng th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng v&#xE0; t&#x129;nh l&#xE0; nh&#x1B0; nhau, b&#x1EDF;i v&#xEC; th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng s&#x1EBD; ph&#x1EA3;i c&#xF3; m&#x1ED9;t static export library nh&#x1ECF; d&#xF9;ng cho vi&#x1EC7;c li&#xEA;n k&#x1EBF;t (Linux c&#xF3; th&#x1EC3; tr&#x1EF1;c ti&#x1EBF;p li&#xEA;n k&#x1EBF;t c&#xE1;c files, nh&#x1B0;ng c&#x169;ng t&#x1EA1;o ra dll b&#xEA;n d&#x1B0;&#x1EDB;i file <code>.a</code> d&#xF9;ng cho li&#xEA;n k&#x1EBF;t). Ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng th&#x1B0; vi&#x1EC7;n <code>number</code> &#x1EDF; ph&#x1EA7;n tr&#x1B0;&#x1EDB;c nh&#x1B0; l&#xE0; m&#x1ED9;t v&#xED; d&#x1EE5; minh h&#x1ECD;a cho vi&#x1EC7;c d&#xF9;ng th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng.</p>
+<p>Trong m&#xF4;i tr&#x1B0;&#x1EDD;ng <code>gcc</code> d&#x1B0;&#x1EDB;i MacOS ho&#x1EB7;c Linux, ch&#xFA;ng ta c&#xF3; th&#x1EC3; sinh ra th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng c&#x1EE7;a m&#x1ED9;t s&#x1ED1; th&#x1B0; vi&#x1EC7;n v&#x1EDB;i nh&#x1EEF;ng l&#x1EC7;nh sau:</p>
+<pre><code>$ cd number
+$ gcc -shared -o libnumber.so number.c
+</code></pre><p>B&#x1EDF;i v&#xEC;, base names c&#x1EE7;a th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng v&#xE0; t&#x129;nh l&#xE0; <code>libnumber</code>, ch&#x1EC9; ph&#x1EA7;n h&#x1EAD;u t&#x1ED1; l&#xE0; s&#x1EBD; kh&#xE1;c. Do &#x111;&#xF3; trong m&#xE3; ngu&#x1ED3;n c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go s&#x1EBD; gi&#x1ED1;ng ch&#xED;nh x&#xE1;c v&#x1EDB;i phi&#xEA;n b&#x1EA3;n th&#x1B0; vi&#x1EC7;n t&#x129;nh.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-comment">//#cgo CFLAGS: -I./number</span>
+<span class="hljs-comment">//#cgo LDFLAGS: -L${SRCDIR}/number -lnumber</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">//#include &quot;number.h&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    fmt.Println(C.number_add_mod(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>, <span class="hljs-number">12</span>))
+}
+</code></pre>
+<p><code>CGO</code> s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng t&#xEC;m <code>libnumber.a</code> ho&#x1EB7;c <code>libnumber.so</code> &#x1EDF; b&#x1B0;&#x1EDB;c li&#xEA;n k&#x1EBF;t trong th&#x1EDD;i gian bi&#xEA;n d&#x1ECB;ch.</p>
+<p>V&#x1EDB;i n&#x1EC1;n t&#x1EA3;ng Windows, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng c&#xF4;ng c&#x1EE5; <code>VC</code> &#x111;&#x1EC3; sinh ra th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng (s&#x1EBD; c&#xF3; m&#x1ED9;t s&#x1ED1; th&#x1B0; vi&#x1EC7;n Windows ph&#x1EE9;c t&#x1EA1;p ch&#x1EC9; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c build v&#x1EDB;i <code>VC</code>). &#x110;&#x1EA7;u ti&#xEA;n, ch&#xFA;ng ta ph&#x1EA3;i t&#x1EA1;o m&#x1ED9;t file &#x111;&#x1ECB;nh ngh&#x129;a cho <code>number.dll</code> &#x111;&#x1EC3; qu&#x1EA3;n l&#xFD; c&#xE1;c k&#xED; hi&#x1EC7;u d&#xF9;ng &#x111;&#x1EC3; exported th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng.</p>
+<p>N&#x1ED9;i dung c&#x1EE7;a file <code>number.def</code> nh&#x1B0; sau:</p>
+<pre><code>LIBRARY number.dll
+
+EXPORTS
+number_add_mod
+</code></pre><p>D&#xF2;ng &#x111;&#x1EA7;u ti&#xEA;n <code>LIBRARY</code> s&#x1EBD; ch&#x1EC9; ra t&#xEA;n c&#x1EE7;a file v&#xE0; t&#xEA;n c&#x1EE7;a th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng, v&#xE0; sau &#x111;&#xF3; l&#xE0; m&#x1EC7;nh &#x111;&#x1EC1;  <code>EXPORTS</code> theo sau b&#x1EDF;i m&#x1ED9;t danh s&#xE1;ch c&#xE1;c t&#xEA;n d&#xF9;ng &#x111;&#x1EC3; exported.</p>
+<p>Gi&#x1EDD; &#x111;&#xE2;y, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng nh&#x1EEF;ng l&#x1EC7;nh sau &#x111;&#x1EC3; t&#x1EA1;o ra th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng (c&#x1EA7;n d&#xF9;ng <code>VC</code> tools)</p>
+<pre><code>$ cl /c number.c
+$ link /DLL /OUT:number.dll number.obj number.def
+</code></pre><p>V&#xE0;o l&#xFA;c n&#xE0;y, m&#x1ED9;t export library <code>number.lib</code> s&#x1EBD; sinh ra <code>dll</code> c&#xF9;ng l&#xFA;c. Nh&#x1B0;ng trong <code>CGO</code>, ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; d&#xF9;ng <code>link library</code> trong &#x111;&#x1ECB;nh d&#x1EA1;ng <code>lib</code>.</p>
+<p>&#x110;&#x1EC3; sinh ra &#x111;&#x1ECB;nh d&#x1EA1;ng <code>.a</code> cho vi&#x1EC7;c export library c&#x1EA7;n d&#xF9;ng <code>mingw Toolbox dlltool command</code>:</p>
+<pre><code>$ dlltool -dllname number.dll --def number.def --output-lib libnumber.a
+</code></pre><p>M&#x1ED9;t khi <code>libnumber.a</code> &#x111;&#x1B0;&#x1EE3;c sinh ra, c&#xF3; th&#x1EC3;  d&#xF9;ng <code>-lnumber</code> th&#xF4;ng qua c&#xE1;c  link parameters.</p>
+<p>N&#xEA;n ch&#xFA; &#xFD; r&#x1EB1;ng, t&#x1EA1;i th&#x1EDD;i &#x111;i&#x1EC3;m th&#x1EF1;c thi, th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng c&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EB7;t &#x1EDF; c&#xF9;ng n&#x1A1;i &#x111;&#x1EC3; system c&#xF3; th&#x1EC3; th&#x1EA5;y. Tr&#xEA;n Windows, b&#x1EA1;n c&#xF3; th&#x1EC3; &#x111;&#x1EB7;t <code>dynamic library</code> v&#xE0; <code>executable program</code> trong c&#xF9;ng m&#x1ED9;t th&#x1B0; m&#x1EE5;c, ho&#x1EB7;c th&#xEA;m &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n tuy&#x1EC7;t &#x111;&#x1ED1;i c&#x1EE7;a th&#x1B0; m&#x1EE5;c trong khi <code>dynamic library</code> &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1B0;a v&#xE0;o bi&#x1EBF;n m&#xF4;i tr&#x1B0;&#x1EDD;ng <code>PATH</code>. Trong MacOS, b&#x1EA1;n c&#x1EA7;n ph&#x1EA3;i thi&#x1EBF;t l&#x1EAD;p bi&#x1EBF;n m&#xF4;i tr&#x1B0;&#x1EDD;ng <code>DYLD_LIBRARY_PATH</code>. Trong h&#x1EC7; th&#x1ED1;ng Linux, b&#x1EA1;n c&#x1EA7;n thi&#x1EBF;t l&#x1EAD;p bi&#x1EBF;n <code>LD_LIBRARY_PATH</code>.</p>
+<h2 id="293--exporting-c-static-libraries">2.9.3  Exporting C Static Libraries</h2>
+<p><code>CGO</code> kh&#xF4;ng ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng trong th&#x1B0; vi&#x1EC7;n C t&#x129;nh, c&#xE1;c export functions &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c b&#x1EDF;i Go ho&#x1EB7;c C static libraries. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng Go &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c modulo addition function nh&#x1B0; ph&#x1EA7;n tr&#x1B0;&#x1EDB;c nh&#x1B0; sau</p>
+<p>T&#x1EA1;o <code>number.go</code> v&#x1EDB;i n&#x1ED9;i dung nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {}
+
+<span class="hljs-comment">//export number_add_mod</span>
+<span class="hljs-keyword">func</span> number_add_mod(a, b, mod C.<span class="hljs-keyword">int</span>) C.<span class="hljs-keyword">int</span> {
+    <span class="hljs-keyword">return</span> (a + b) % mod
+}
+</code></pre>
+<p>Theo nh&#x1B0; m&#xF4; t&#x1EA3; c&#x1EE7;a t&#xE0;i li&#x1EC7;u <code>CGO</code>, ch&#xFA;ng ta c&#x1EA7;n export C function trong main package. V&#x1EDB;i c&#xE1;ch x&#xE2;y d&#x1EF1;ng th&#x1B0; vi&#x1EC7;n C t&#x129;nh, h&#xE0;m main trong main package &#x111;&#x1B0;&#x1EE3;c ph&#x1EDB;t l&#x1EDD;, v&#xE0; h&#xE0;m C s&#x1EBD; &#x111;&#x1A1;n gi&#x1EA3;n &#x111;&#x1B0;&#x1EE3;c export. X&#xE2;y d&#x1EF1;ng c&#xE1;c l&#x1EC7;nh sau:</p>
+<pre><code>$ go build -buildmode=c-archive -o number.a
+</code></pre><p>Khi sinh ra th&#x1B0; vi&#x1EC7;n t&#x129;nh <code>number.a</code>, cgo c&#x169;ng s&#x1EBD; sinh ra file <code>number.h</code></p>
+<p>N&#x1ED9;i dung c&#x1EE7;a <code>number.h</code> s&#x1EBD; nh&#x1B0; sau:</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span>
+<span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> {
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">number_add_mod</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p0, <span class="hljs-keyword">int</span> p1, <span class="hljs-keyword">int</span> p2)</span></span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __cplusplus</span>
+}
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+</code></pre>
+<p>Khi ph&#x1EA7;n ng&#x1EEF; ph&#xE1;p <code>extern &quot;C&quot;</code> &#x111;&#x1B0;&#x1EE3;c th&#xEA;m v&#xE0;o &#x111;&#x1EC3;  d&#xF9;ng &#x111;&#x1ED3;ng th&#x1EDD;i tr&#xEA;n c&#x1EA3; ng&#xF4;n ng&#x1EEF; <code>C</code> v&#xE0; <code>C++</code>. N&#x1ED9;i dung c&#x1EE7;a ph&#x1EA7;n l&#xF5;i s&#x1EBD; &#x111;&#x1ECB;nh ngh&#x129;a h&#xE0;m <code>number_add_mod</code> &#x111;&#x1EC3; &#x111;&#x1B0;&#x1EE3;c exported.</p>
+<p>Sau &#x111;&#xF3; ch&#xFA;ng ta t&#x1EA1;o ra file <code>_test_main.c</code> &#x111;&#x1EC3; ki&#x1EC3;m tra vi&#x1EC7;c sinh ra C static library (b&#xEA;n d&#x1B0;&#x1EDB;i l&#xE0; ph&#x1EA7;n prefix d&#xF9;ng cho vi&#x1EC7;c x&#xE2;y d&#x1EF1;ng C static library &#x111;&#x1EC3; b&#x1ECF; qua file &#x111;&#xF3;)</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;number.h&quot;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">int</span> c = <span class="hljs-number">12</span>;
+
+    <span class="hljs-keyword">int</span> x = number_add_mod(a, b, c);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;(%d+%d)%%%d = %d\n&quot;</span>, a, b, c, x);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Bi&#xEA;n d&#x1ECB;ch v&#xE0; ch&#x1EA1;y ch&#xFA;ng v&#x1EDB;i nh&#x1EEF;ng l&#x1EC7;nh sau:</p>
+<pre><code class="lang-c">$ gcc -o a.out _test_main.c number.a
+$ ./a.out
+</code></pre>
+<p>Qu&#xE1; tr&#xEC;nh sinh ra static library d&#xF9;ng <code>CGO</code> th&#x1EF1;c s&#x1EF1; &#x111;&#x1A1;n gi&#x1EA3;n.</p>
+<h2 id="294-exporting-c-dynamic-library">2.9.4 Exporting C Dynamic Library</h2>
+<p>Qu&#xE1; tr&#xEC;nh exporting m&#x1ED9;t th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng b&#x1EB1;ng <code>CGO</code> s&#x1EBD; t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; m&#x1ED9;t th&#x1B0; vi&#x1EC7;n t&#x129;nh, ngo&#x1EA1;i tr&#x1EEB; build mode s&#x1EBD; thay &#x111;&#x1ED5;i <code>c-shared</code> v&#xE0; output file name &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ED5;i th&#xE0;nh <code>number.so</code>.</p>
+<pre><code>$ go build -buildmode=c-shared -o number.so
+</code></pre><p>N&#x1ED9;i dung c&#x1EE7;a file <code>_test_main.c</code> s&#x1EBD; kh&#xF4;ng thay &#x111;&#x1ED5;i, sau &#x111;&#xF3; bi&#xEA;n d&#x1ECB;ch v&#xE0; ch&#x1EA1;y ch&#xFA;ng v&#x1EDB;i c&#xE1;c l&#x1EC7;nh sau:</p>
+<pre><code>$ gcc -o a.out _test_main.c number.so
+$ ./a.out
+</code></pre><h2 id="295-exporting-functions-c&#x1EE7;a-non-main-packages">2.9.5 Exporting Functions c&#x1EE7;a Non-Main Packages</h2>
+<p>L&#x1EC7;nh <code>go help buildmode</code> c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; xem c&#x1EA5;u tr&#xFA;c l&#x1EC7;nh c&#x1EE7;a th&#x1B0; vi&#x1EC7;n C t&#x129;nh v&#xE0; th&#x1B0; vi&#x1EC7;n C &#x111;&#x1ED9;ng.</p>
+<pre><code>-buildmode=c-archive
+    Build the listed main package, plus all packages it imports,
+    into a C archive file. The only callable symbols will be those
+    functions exported using a cgo //export comment. Requires
+    exactly one main package to be listed.
+
+-buildmode=c-shared
+    Build the listed main package, plus all packages it imports,
+    into a C shared library. The only callable symbols will
+    be those functions exported using a cgo //export comment.
+    Requires exactly one main package to be listed.
+</code></pre><p>Ph&#x1EA7;n t&#xE0;i li&#x1EC7;u &#x111;&#xE3; n&#xF3;i r&#x1EB1;ng <code>exported C function</code>  ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c <code>export</code> trong main package tr&#x1B0;&#x1EDB;c khi sinh ra <code>header file</code> ch&#x1EE9;a nh&#x1EEF;ng declared statement. Nh&#x1B0;ng nhi&#x1EC1;u khi ch&#xFA;ng ta ph&#x1EA3;i &#x111;&#x1EC1; c&#x1EAD;p &#x111;&#x1EBF;n vi&#x1EC7;c t&#x1ED5; ch&#x1EE9;c c&#xE1;c ki&#x1EC3;u kh&#xE1;c nhau cho vi&#x1EC7;c export functions &#x111;&#x1EBF;n c&#xE1;c Go packages v&#xE0; sau &#x111;&#xF3; export ch&#xFA;ng nh&#x1B0; l&#xE0; th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;ng/t&#x129;nh.</p>
+<p>&#x110;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c h&#xE0;m C t&#x1EEB; m&#x1ED9;t package kh&#xE1;c <code>main</code> package, ho&#x1EB7;c &#x111;&#x1EC3; export C function t&#x1EEB; nhi&#x1EC1;u packages (b&#x1EDF;i v&#xEC; ch&#x1EC9; c&#xF3; th&#x1EC3; c&#xF3; m&#x1ED9;t main package), ch&#xFA;ng ta c&#x1EA7;n cung c&#x1EA5;p header file &#x1EE9;ng v&#x1EDB;i h&#xE0;m C &#x111;&#x1B0;&#x1EE3;c export ( b&#x1EDF;i v&#xEC; <code>CGO</code> kh&#xF4;ng th&#x1EC3; l&#xE0; m&#x1ED9;t non-main package). Export m&#x1ED9;t function &#x111;&#x1EC3; sinh ra header file.</p>
+<p>H&#x1ED7; tr&#x1EE3; cho vi&#x1EC7;c t&#x1EA1;o ra m&#x1ED9;t s&#x1ED1; package con, ch&#xFA;ng l&#xE0; m&#x1ED9;t h&#xE0;m modular addition.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> number
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+
+<span class="hljs-comment">//export number_add_mod</span>
+<span class="hljs-keyword">func</span> number_add_mod(a, b, mod C.<span class="hljs-keyword">int</span>) C.<span class="hljs-keyword">int</span> {
+    <span class="hljs-keyword">return</span> (a + b) % mod
+}
+</code></pre>
+<p>Sau &#x111;&#xF3; t&#x1EA1;o ra m&#x1ED9;t main package:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    _ <span class="hljs-string">&quot;./number&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Done&quot;</span>)
+}
+
+<span class="hljs-comment">//export goPrintln</span>
+<span class="hljs-keyword">func</span> goPrintln(s *C.char) {
+    fmt.Println(<span class="hljs-string">&quot;goPrintln:&quot;</span>, C.GoString(s))
+}
+</code></pre>
+<p><a href="../examples/ch2/ch2.9/5-modular-func/main.go">&gt;&gt;  m&#xE3; ngu&#x1ED3;n</a></p>
+<p>Trong &#x111;&#xF3;, ch&#xFA;ng ta ph&#x1EA3;i import m&#x1ED9;t s&#x1ED1; sub-package, c&#xF3; m&#x1ED9;t exported C function <code>number_add_mod</code> trong <code>number sub-package</code>, v&#xE0; ch&#xFA;ng ta c&#x169;ng ph&#x1EA3;i export h&#xE0;m <code>goPrintln</code> trong main package.</p>
+<p>T&#x1EA1;o m&#x1ED9;t <code>C static library</code> v&#x1EDB;i l&#x1EC7;nh sau:</p>
+<pre><code>$ go build -buildmode=c-archive -o main.a
+</code></pre><p>Gi&#x1EDD; &#x111;&#xE2;y, trong khi sinh ra th&#x1B0; vi&#x1EC7;n t&#x129;nh <code>main.a</code>, m&#x1ED9;t <code>main.h</code> header file c&#x169;ng &#x111;&#x1B0;&#x1EE3;c sinh ra. Tuy nhi&#xEA;n, header file <code>main.h</code> ch&#x1EC9; vi&#x1EC7;c &#x111;&#x1ECB;nh ngh&#x129;a  h&#xE0;m <code>goPrintln</code> t&#x1EEB; main package, v&#xE0; kh&#xF4;ng c&#xF3; b&#x1EA5;t k&#xEC; &#x111;&#x1ECB;nh ngh&#x129;a n&#xE0;o c&#x1EE7;a <code>number subpackage export function</code>. Th&#x1EF1;c t&#x1EBF;, h&#xE0;m <code>number_add_mod</code> t&#x1ED3;n t&#x1EA1;i trong khi sinh th&#x1B0; vi&#x1EC7;n C t&#x129;nh, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng ch&#xFA;ng m&#x1ED9;t c&#xE1;ch tr&#x1EF1;c ti&#x1EBF;p.</p>
+<p>T&#x1EA1;o ra m&#x1ED9;t <code>_test_main.c</code>  file s&#x1EBD; theo nh&#x1B0; sau:</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">goPrintln</span><span class="hljs-params">(<span class="hljs-keyword">char</span>*)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">number_add_mod</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> mod)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">10</span>;
+    <span class="hljs-keyword">int</span> b = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">int</span> c = <span class="hljs-number">12</span>;
+
+    <span class="hljs-keyword">int</span> x = number_add_mod(a, b, c);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;(%d+%d)%%%d = %d\n&quot;</span>, a, b, c, x);
+
+    goPrintln(<span class="hljs-string">&quot;done&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Ch&#xFA;ng s&#x1EBD; kh&#xF4;ng bao g&#x1ED9;p header file <code>main.h</code> &#x111;&#x1B0;&#x1EE3;c t&#x1EF1; &#x111;&#x1ED9;ng sinh ra b&#x1EDF;i <code>CGO</code>, nh&#x1B0;ng ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x111;&#x1ECB;nh ngh&#x129;a th&#x1EE7; c&#xF4;ng hai <code>export functions</code> goPrintln v&#xE0; number_add_mod. C&#xE1;ch n&#xE0;y l&#xE0;m ch&#xFA;ng ta s&#x1EBD; ph&#x1EA3;i hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t export C functions t&#x1EEB; nhi&#x1EC1;u Go package.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch2-05-internal-mechanisms.html" class="navigation navigation-prev " aria-label="Previous page: 2.5 Cơ chế bên trong CGO">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch2-10-link.html" class="navigation navigation-next " aria-label="Next page: 2.10  Biên dịch và liên kết các tham số">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2.9 Thư viện tĩnh và động","level":"1.3.6","depth":2,"next":{"title":"2.10  Biên dịch và liên kết các tham số","level":"1.3.7","depth":2,"path":"ch2-cgo/ch2-10-link.md","ref":"ch2-cgo/ch2-10-link.md","articles":[]},"previous":{"title":"2.5 Cơ chế bên trong CGO","level":"1.3.5","depth":2,"path":"ch2-cgo/ch2-05-internal-mechanisms.md","ref":"ch2-cgo/ch2-05-internal-mechanisms.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-09-static-shared-lib.md","mtime":"2019-07-15T08:31:39.953Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-15T08:49:14.910Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
