@@ -10,7 +10,7 @@
     * [1.6 Các chế độ đồng thời thông dụng](ch1-basic/ch1-06-common-concurrency-mode.md)
     * [1.7 Error và Exceptions](ch1-basic/ch1-07-error-and-panic.md)
     * [1.8 Ghi chú bổ sung](ch1-basic/ch1-08-supplementary-notes.md)
-* [Chương 2: lập trình CGO](ch2-cgo/README.md)
+* [Chương 2: Lập trình CGO](ch2-cgo/README.md)
     * [2.1 Quick Start](ch2-cgo/ch2-01-quick-start.md)
     * [2.2 CGO Foundation](ch2-cgo/ch2-02-CGO-foundation.md)
     * [2.3 Chuyển đổi kiểu](ch2-cgo/ch2-03-type-conversion.md)

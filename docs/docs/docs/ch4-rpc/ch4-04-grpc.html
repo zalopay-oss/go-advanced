@@ -1,0 +1,1229 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>4.4 Bắt đầu với gRPC · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch4-05-grpc-advanced.html" />
+    
+    
+    <link rel="prev" href="ch4-03-fun-fpc.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Các chế độ đồng thời thông dụng
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                    
+                    1.8 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10  Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-best-practice/">
+            
+                <a href="../ch3-best-practice/">
+            
+                    
+                    Chương 3: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 4: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="ch4-01-rpc-intro.html">
+            
+                <a href="ch4-01-rpc-intro.html">
+            
+                    
+                    4.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="ch4-02-pb-intro.html">
+            
+                <a href="ch4-02-pb-intro.html">
+            
+                    
+                    4.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="ch4-03-fun-fpc.html">
+            
+                <a href="ch4-03-fun-fpc.html">
+            
+                    
+                    4.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="ch4-04-grpc.html">
+            
+                <a href="ch4-04-grpc.html">
+            
+                    
+                    4.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="ch4-05-grpc-advanced.html">
+            
+                <a href="ch4-05-grpc-advanced.html">
+            
+                    
+                    4.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="ch4-06-grpc-ext.html">
+            
+                <a href="ch4-06-grpc-ext.html">
+            
+                    
+                    4.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="ch4-07-pbgo.html">
+            
+                <a href="ch4-07-pbgo.html">
+            
+                    
+                    4.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="ch4-08-grpc-curl.html">
+            
+                <a href="ch4-08-grpc-curl.html">
+            
+                    
+                    4.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="ch4-09-supplementary-notes.html">
+            
+                <a href="ch4-09-supplementary-notes.html">
+            
+                    
+                    4.9 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-web/">
+            
+                <a href="../ch5-web/">
+            
+                    
+                    Chương 5: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-web/ch5-01-introduction.html">
+            
+                <a href="../ch5-web/ch5-01-introduction.html">
+            
+                    
+                    5.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-web/ch5-02-router.html">
+            
+                <a href="../ch5-web/ch5-02-router.html">
+            
+                    
+                    5.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-web/ch5-03-middleware.html">
+            
+                <a href="../ch5-web/ch5-03-middleware.html">
+            
+                    
+                    5.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-web/ch5-04-request-verification.html">
+            
+                <a href="../ch5-web/ch5-04-request-verification.html">
+            
+                    
+                    5.4 Kiểm tra yêu cầu validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-web/ch5-05-database.html">
+            
+                <a href="../ch5-web/ch5-05-database.html">
+            
+                    
+                    5.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                <a href="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                    
+                    5.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                <a href="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                    
+                    5.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-web/ch5-08-interface-and-web.html">
+            
+                <a href="../ch5-web/ch5-08-interface-and-web.html">
+            
+                    
+                    5.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../ch5-web/ch5-09-gated-launch.html">
+            
+                <a href="../ch5-web/ch5-09-gated-launch.html">
+            
+                    
+                    5.9 Grayscale Publishing and A/B test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../ch5-web/ch5-10-ext.html">
+            
+                <a href="../ch5-web/ch5-10-ext.html">
+            
+                    
+                    5.10 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-cloud/">
+            
+                <a href="../ch6-cloud/">
+            
+                    
+                    Chương 6: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../ch6-cloud/ch6-01-dist-id.html">
+            
+                <a href="../ch6-cloud/ch6-01-dist-id.html">
+            
+                    
+                    6.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../ch6-cloud/ch6-02-lock.html">
+            
+                <a href="../ch6-cloud/ch6-02-lock.html">
+            
+                    
+                    6.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../ch6-cloud/ch6-03-delay-job.html">
+            
+                <a href="../ch6-cloud/ch6-03-delay-job.html">
+            
+                    
+                    6.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                <a href="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                    
+                    6.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../ch6-cloud/ch6-05-load-balance.html">
+            
+                <a href="../ch6-cloud/ch6-05-load-balance.html">
+            
+                    
+                    6.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../ch6-cloud/ch6-06-config.html">
+            
+                <a href="../ch6-cloud/ch6-06-config.html">
+            
+                    
+                    6.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../ch6-cloud/ch6-07-crawler.html">
+            
+                <a href="../ch6-cloud/ch6-07-crawler.html">
+            
+                    
+                    6.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../ch6-cloud/ch6-08-ext.html">
+            
+                <a href="../ch6-cloud/ch6-08-ext.html">
+            
+                    
+                    6.8 Phần mở rộng
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >4.4 Bắt đầu với gRPC</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="44-b&#x1EAF;t-&#x111;&#x1EA7;u-v&#x1EDB;i-grpc">4.4 B&#x1EAF;t &#x111;&#x1EA7;u v&#x1EDB;i gRPC</h1>
+<p>gRPC l&#xE0; m&#x1ED9;t framework RPC opensource &#x111;a ng&#xF4;n ng&#x1EEF; &#x111;&#x1B0;&#x1EE3;c Google ph&#xE1;t tri&#x1EC3;n d&#x1EF1;a tr&#xEA;n Protobuf. &#x110;&#x1B0;&#x1EE3;c thi&#x1EBF;t k&#x1EBF; d&#x1EF1;a tr&#xEA;n giao th&#x1EE9;c HTTP/2, gRPC c&#xF3; th&#x1EC3; cung c&#x1EA5;p nhi&#x1EC1;u d&#x1ECB;ch v&#x1EE5; d&#x1EF1;a tr&#xEA;n li&#xEA;n k&#x1EBF;t HTTP/2, gi&#xFA;p cho framework n&#xE0;y th&#xE2;n thi&#x1EC7;n h&#x1A1;n v&#x1EDB;i thi&#x1EBF;t b&#x1ECB; di &#x111;&#x1ED9;ng. Ph&#x1EA7;n n&#xE0;y s&#x1EBD; gi&#x1EDB;i thi&#x1EC7;u m&#x1ED9;t s&#x1ED1; c&#xE1;ch s&#x1EED; d&#x1EE5;ng gRPC &#x111;&#x1A1;n gi&#x1EA3;n.</p>
+<h2 id="441-ki&#x1EBF;n-tr&#xFA;c-grpc">4.4.1 Ki&#x1EBF;n tr&#xFA;c gRPC</h2>
+<p>Ki&#x1EBF;n tr&#xFA;c gRPC trong Golang &#x111;&#x1B0;&#x1EE3;c tr&#xEC;nh b&#xE0;y trong h&#xEC;nh 4-1</p>
+<p align="center">
+
+<img src="../images/ch4-1-grpc-go-stack.png">
+<span align="center">H&#xEC;nh 4-1 gRPC technology stack</span>
+
+</p>
+
+<p>L&#x1EDB;p d&#x1B0;&#x1EDB;i c&#xF9;ng l&#xE0; giao th&#x1EE9;c TCP ho&#x1EB7;c Unix Socket. Tr&#xEA;n &#x111;&#x1EA5;y ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a giao th&#x1EE9;c HTTP/2. Th&#x1B0; vi&#x1EC7;n gRPC core cho Golang &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng &#x1EDF; l&#x1EDB;p k&#x1EBF;. Stub code &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra b&#x1EDF;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh th&#xF4;ng qua plug-in gRPC giao ti&#x1EBF;p v&#x1EDB;i th&#x1B0; vi&#x1EC7;n gRPC core.</p>
+<h2 id="442-b&#x1EAF;t-&#x111;&#x1EA7;u-v&#x1EDB;i-grpc">4.4.2 B&#x1EAF;t &#x111;&#x1EA7;u v&#x1EDB;i gRPC</h2>
+<p>T&#x1EEB; quan &#x111;i&#x1EC3;m c&#x1EE7;a Protobuf, gRPC kh&#xF4;ng g&#xEC; kh&#xE1;c h&#x1A1;n l&#xE0; m&#x1ED9;t tr&#xEC;nh t&#x1EA1;o code cho interface service. B&#xE2;y gi&#x1EDD; ch&#xFA;ng ta s&#x1EBD; t&#xEC;m hi&#x1EC3;u c&#xE1;ch s&#x1EED; d&#x1EE5;ng gRPC.</p>
+<p>T&#x1EA1;o file <em>hello.proto</em> v&#xE0; &#x111;&#x1ECB;nh ngh&#x129;a interface <code>HelloService</code>:</p>
+<pre><code class="lang-protobuf">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
+
+<span class="hljs-keyword">package</span> main;
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">String</span> </span>{
+    <span class="hljs-built_in">string</span> value = <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">HelloService</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Hello (String) <span class="hljs-keyword">returns</span> (String)</span>;
+}
+</code></pre>
+<p>T&#x1EA1;o gRPC code s&#x1EED; d&#x1EE5;ng h&#xE0;m d&#x1EF1;ng s&#x1EB5;n trong gRPC plugin t&#x1EEB; protoc-gen-go:</p>
+<pre><code class="lang-sh">$ protoc --go_out=plugins=grpc:. hello.proto
+</code></pre>
+<p>gRPC plugin t&#x1EA1;o ra c&#xE1;c interface kh&#xE1;c nhau cho server v&#xE0; client:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloServiceServer <span class="hljs-keyword">interface</span> {
+    Hello(context.Context, *String) (*String, error)
+}
+
+<span class="hljs-keyword">type</span> HelloServiceClient <span class="hljs-keyword">interface</span> {
+    Hello(context.Context, *String, ...grpc.CallOption) (*String, error)
+}
+</code></pre>
+<p>gRPC cung c&#x1EA5;p h&#x1ED7; tr&#x1EE3; context cho m&#x1ED7;i l&#x1EC7;nh g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c th&#xF4;ng qua tham s&#x1ED1; <code>context.Context</code>. Khi client g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c, n&#xF3; c&#xF3; th&#x1EC3; cung c&#x1EA5;p th&#xF4;ng tin context b&#x1ED5; sung th&#xF4;ng qua c&#xE1;c tham s&#x1ED1; t&#xF9;y ch&#x1ECD;n c&#x1EE7;a ki&#x1EC3;u <code>grpc.CallOption</code>.</p>
+<p><code>HelloSercieServer</code> interface d&#x1EF1;a tr&#xEA;n server c&#xF3; th&#x1EC3; reimplement service <code>HelloService</code>:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloServiceImpl <span class="hljs-keyword">struct</span>{}
+
+<span class="hljs-keyword">func</span> (p *HelloServiceImpl) Hello(
+    ctx context.Context, args *String,
+) (*String, error) {
+    reply := &amp;String{Value: <span class="hljs-string">&quot;hello:&quot;</span> + args.GetValue()}
+    <span class="hljs-keyword">return</span> reply, <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>Qu&#xE1; tr&#xEC;nh kh&#x1EDF;i &#x111;&#x1ED9;ng c&#x1EE7;a gRPC service  t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; qu&#xE1; tr&#xEC;nh kh&#x1EDF;i &#x111;&#x1ED9;ng RPC   service c&#x1EE7;a th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    grpcServer := grpc.NewServer()
+    RegisterHelloServiceServer(grpcServer, <span class="hljs-built_in">new</span>(HelloServiceImpl))
+
+    lis, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;:1234&quot;</span>)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+    grpcServer.Serve(lis)
+}
+</code></pre>
+<p>D&#xF2;ng &#x111;&#x1EA7;u ti&#xEA;n &#x111;&#x1EC3; kh&#x1EDF;i t&#x1EA1;o m&#x1ED9;t &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng gRPC service, k&#x1EBF; &#x111;&#xF3; ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a <code>HelloServiceImpl</code> service &#x111;&#x1B0;&#x1EE3;c &#x111;&#x103;ng k&#xFD; v&#x1EDB;i grpcServer th&#xF4;ng qua  h&#xE0;m <code>RegisterHelloServiceServer</code> (c&#x1EE7;a gRPC plugin). Cu&#x1ED1;i c&#xF9;ng <code>grpcServer.Serve(lis)</code> cung c&#x1EA5;p gRPC service tr&#xEA;n port <code>1234</code>.</p>
+<p>Ti&#x1EBF;p theo b&#x1EA1;n &#x111;&#xE3; c&#xF3; th&#x1EC3; k&#x1EBF;t n&#x1ED1;i t&#x1EDB;i gRPC service t&#x1EEB; client:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    conn, err := grpc.Dial(<span class="hljs-string">&quot;localhost:1234&quot;</span>, grpc.WithInsecure())
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+    <span class="hljs-keyword">defer</span> conn.Close()
+
+    client := NewHelloServiceClient(conn)
+    reply, err := client.Hello(context.Background(), &amp;String{Value: <span class="hljs-string">&quot;hello&quot;</span>})
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+    fmt.Println(reply.GetValue())
+}
+</code></pre>
+<p>Trong &#x111;&#xF3; <code>grpc.Dial</code> ch&#x1ECB;u tr&#xE1;ch nhi&#x1EC7;m thi&#x1EBF;t l&#x1EAD;p k&#x1EBF;t n&#x1ED1;i v&#x1EDB;i d&#x1ECB;ch v&#x1EE5; gRPC v&#xE0; sau &#x111;&#xF3; h&#xE0;m <code>NewHelloServiceClient</code> x&#xE2;y d&#x1EF1;ng m&#x1ED9;t &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng <code>HelloServiceClient</code> d&#x1EF1;a tr&#xEA;n k&#x1EBF;t n&#x1ED1;i &#x111;&#xE3; thi&#x1EBF;t l&#x1EAD;p. Client &#x111;&#x1B0;&#x1EE3;c tr&#x1EA3; v&#x1EC1;  l&#xE0; m&#x1ED9;t &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng thu&#x1ED9;c interface <code>HelloServiceClient</code>. Ph&#x1B0;&#x1A1;ng th&#x1EE9;c &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh b&#x1EDF;i interface n&#xE0;y c&#xF3; th&#x1EC3; g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c &#x111;&#x1B0;&#x1EE3;c cung c&#x1EA5;p b&#x1EDF;i d&#x1ECB;ch v&#x1EE5; gRPC t&#x1B0;&#x1A1;ng &#x1EE9;ng &#x1EDF; server.</p>
+<p>C&#xF3; m&#x1ED9;t s&#x1EF1; kh&#xE1;c bi&#x1EC7;t gi&#x1EEF;a gRPC v&#xE0; framework RPC c&#x1EE7;a th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n: Framework &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o b&#x1EDF;i gRPC kh&#xF4;ng h&#x1ED7; tr&#x1EE3; c&#xE1;c cu&#x1ED9;c g&#x1ECD;i b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9;. Tuy nhi&#xEA;n, ta c&#xF3; th&#x1EC3; chia s&#x1EBB;  k&#x1EBF;t n&#x1ED1;i HTTP/2 c&#x1A1; b&#x1EA3;n m&#x1ED9;t c&#xE1;ch an to&#xE0;n  gi&#x1EEF;a c&#xE1;c gRPC tr&#xEA;n nhi&#x1EC1;u Goroutines, v&#xEC; v&#x1EAD;y c&#xF3; th&#x1EC3; m&#xF4; ph&#x1ECF;ng c&#xE1;c l&#x1EDD;i g&#x1ECD;i b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9; b&#x1EB1;ng c&#xE1;ch block c&#xE1;c l&#x1EDD;i g&#x1ECD;i trong Goroutine kh&#xE1;c.</p>
+<h2 id="443-grpc-flow">4.4.3 gRPC flow</h2>
+<p>RPC l&#xE0; l&#x1EDD;i g&#x1ECD;i h&#xE0;m t&#x1EEB; xa, v&#xEC; v&#x1EAD;y c&#xE1;c tham s&#x1ED1; h&#xE0;m v&#xE0; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a m&#x1ED7;i cu&#x1ED9;c g&#x1ECD;i kh&#xF4;ng th&#x1EC3; qu&#xE1; l&#x1EDB;n, n&#x1EBF;u kh&#xF4;ng th&#x1EDD;i gian ph&#x1EA3;n h&#x1ED3;i c&#x1EE7;a m&#x1ED7;i l&#x1EDD;i g&#x1ECD;i s&#x1EBD; b&#x1ECB; &#x1EA3;nh h&#x1B0;&#x1EDF;ng nghi&#xEA;m tr&#x1ECD;ng. Do &#x111;&#xF3;, c&#xE1;c l&#x1EDD;i g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c RPC truy&#x1EC1;n th&#x1ED1;ng kh&#xF4;ng ph&#xF9; h&#x1EE3;p &#x111;&#x1EC3; t&#x1EA3;i l&#xEA;n v&#xE0; t&#x1EA3;i xu&#x1ED1;ng trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p kh&#x1ED1;i l&#x1B0;&#x1EE3;ng d&#x1EEF; li&#x1EC7;u l&#x1EDB;n. &#x110;&#x1ED3;ng th&#x1EDD;i RPC truy&#x1EC1;n th&#x1ED1;ng kh&#xF4;ng &#xE1;p d&#x1EE5;ng cho c&#xE1;c m&#xF4; h&#xEC;nh &#x111;&#x103;ng k&#xFD; v&#xE0; ph&#xE1;t h&#xE0;nh kh&#xF4;ng ch&#x1EAF;c ch&#x1EAF;n v&#x1EC1; th&#x1EDD;i gian. &#x110;&#x1EC3; kh&#x1EAF;c ph&#x1EE5;c &#x111;i&#x1EC3;m n&#xE0;y, framework gRPC cung c&#x1EA5;p c&#xE1;c  flow cho server v&#xE0; client t&#x1B0;&#x1A1;ng &#x1EE9;ng.</p>
+<p>Flow m&#x1ED9;t chi&#x1EC1;u c&#x1EE7;a server ho&#x1EB7;c client l&#xE0; tr&#x1B0;&#x1EDD;ng h&#x1EE3;p &#x111;&#x1EB7;c bi&#x1EC7;t c&#x1EE7;a flow hai chi&#x1EC1;u. Ch&#xFA;ng t&#xF4;i th&#xEA;m ph&#x1B0;&#x1A1;ng th&#x1EE9;c channel h&#x1ED7; tr&#x1EE3; lu&#x1ED3;ng hai chi&#x1EC1;u trong <code>HelloService</code>:</p>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">HelloService</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Hello (String) <span class="hljs-keyword">returns</span> (String)</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Channel (stream String) <span class="hljs-keyword">returns</span> (stream String)</span>;
+}
+</code></pre>
+<p>T&#x1EEB; kh&#xF3;a stream &#x111;&#x1EC3; th&#xF4;ng b&#xE1;o ch&#x1EE9;c n&#x103;ng stream &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng, ph&#x1EA7;n tham s&#x1ED1; l&#xE0; m&#x1ED9;t stream m&#xE0; nh&#x1EAD;n v&#xE0;o tham s&#x1ED1; client v&#xE0; tr&#x1EA3; v&#x1EC1; gi&#xE1; tr&#x1ECB; l&#xE0; m&#x1ED9;t stream.</p>
+<p>T&#x1EA1;o l&#x1EA1;i code &#x111;&#x1EC3; th&#x1EA5;y &#x111;&#x1ECB;nh ngh&#x129;a m&#x1EDB;i &#x111;&#x1B0;&#x1EE3;c th&#xEA;m v&#xE0;o ph&#x1B0;&#x1A1;ng th&#x1EE9;c ki&#x1EC3;u channel trong interface:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloServiceServer <span class="hljs-keyword">interface</span> {
+    Hello(context.Context, *String) (*String, error)
+    Channel(HelloService_ChannelServer) error
+}
+
+<span class="hljs-keyword">type</span> HelloServiceClient <span class="hljs-keyword">interface</span> {
+    Hello(ctx context.Context, in *String, opts ...grpc.CallOption) (
+        *String, error,
+    )
+    Channel(ctx context.Context, opts ...grpc.CallOption) (
+        HelloService_ChannelClient, error,
+    )
+}
+</code></pre>
+<p>Tham s&#x1ED1; ph&#x1B0;&#x1A1;ng th&#x1EE9;c Channel &#x1EDF; ph&#xED;a server l&#xE0; tham s&#x1ED1; ki&#x1EC3;u <code>HelloService_ChannelServer</code> m&#x1EDB;i c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; li&#xEA;n l&#x1EA1;c hai chi&#x1EC1;u v&#x1EDB;i client. Ph&#x1B0;&#x1A1;ng th&#x1EE9;c Channel c&#x1EE7;a client tr&#x1EA3; v&#x1EC1; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; thu&#x1ED9;c ki&#x1EC3;u <code>HelloService_ChannelClient</code>, c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; li&#xEA;n l&#x1EA1;c hai chi&#x1EC1;u v&#x1EDB;i server.</p>
+<p><code>HelloService_ChannelServer</code> v&#xE0; <code>HelloService_ChannelClient</code> thu&#x1ED9;c ki&#x1EC3;u interface:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloService_ChannelServer <span class="hljs-keyword">interface</span> {
+    Send(*String) error
+    Recv() (*String, error)
+    grpc.ServerStream
+}
+
+<span class="hljs-keyword">type</span> HelloService_ChannelClient <span class="hljs-keyword">interface</span> {
+    Send(*String) error
+    Recv() (*String, error)
+    grpc.ClientStream
+}
+</code></pre>
+<p>C&#xF3; th&#x1EC3; th&#x1EA5;y c&#xE1;c interface h&#x1ED7; tr&#x1EE3; server v&#xE0; client stream &#x111;&#x1EC1;u c&#xF3; &#x111;&#x1ECB;nh ngh&#x129;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Send</code> v&#xE0; <code>Recv</code> cho giao ti&#x1EBF;p hai chi&#x1EC1;u c&#x1EE7;a d&#x1EEF; li&#x1EC7;u streaming.</p>
+<p>B&#xE2;y gi&#x1EDD; ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c c&#xE1;c streaming service:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
+    <span class="hljs-keyword">for</span> {
+        args, err := stream.Recv()
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+            <span class="hljs-keyword">if</span> err == io.EOF {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+            }
+            <span class="hljs-keyword">return</span> err
+        }
+
+        reply := &amp;String{Value: <span class="hljs-string">&quot;hello:&quot;</span> + args.GetValue()}
+
+        err = stream.Send(reply)
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+            <span class="hljs-keyword">return</span> err
+        }
+    }
+}
+</code></pre>
+<p>Server nh&#x1EAD;n d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c g&#x1EED;i t&#x1EEB; client trong v&#xF2;ng l&#x1EB7;p. N&#x1EBF;u g&#x1EB7;p <code>io.EOF</code>, client stream s&#x1EBD; &#x111;&#xF3;ng. N&#x1EBF;u h&#xE0;m exit,  Server stream s&#x1EBD; &#x111;&#xF3;ng. D&#x1EEF; li&#x1EC7;u tr&#x1EA3; v&#x1EC1; &#x111;&#x1B0;&#x1EE3;c  g&#x1EED;i &#x111;&#x1EBF;n client th&#xF4;ng qua stream v&#xE0; vi&#x1EC7;c g&#x1EED;i nh&#x1EAD;n d&#x1EEF; li&#x1EC7;u stream hai chi&#x1EC1;u l&#xE0; ho&#xE0;n to&#xE0;n &#x111;&#x1ED9;c l&#x1EAD;p. C&#x1EA7;n l&#x1B0;u &#xFD; r&#x1EB1;ng thao t&#xE1;c g&#x1EED;i v&#xE0; nh&#x1EAD;n kh&#xF4;ng c&#x1EA7;n s&#x1EF1; t&#x1B0;&#x1A1;ng &#x1EE9;ng m&#x1ED9;t-m&#x1ED9;t v&#xE0; ng&#x1B0;&#x1EDD;i d&#xF9;ng c&#xF3; th&#x1EC3; t&#x1ED5; ch&#x1EE9;c code theo ng&#x1EEF; c&#x1EA3;nh th&#x1EF1;c t&#x1EBF;.</p>
+<p>Client c&#x1EA7;n g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c Channel &#x111;&#x1EC3; l&#x1EA5;y &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng stream tr&#x1EA3; v&#x1EC1;:</p>
+<pre><code class="lang-go">stream, err := client.Channel(context.Background())
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+</code></pre>
+<p>&#x1EDE; ph&#xED;a client ta th&#xEA;m v&#xE0;o c&#xE1;c thao t&#xE1;c g&#x1EED;i v&#xE0; nh&#x1EAD;n trong c&#xE1;c Goroutine ri&#xEA;ng bi&#x1EC7;t. Tr&#x1B0;&#x1EDB;c h&#x1EBF;t l&#xE0; &#x111;&#x1EC3; g&#x1EED;i d&#x1EEF; li&#x1EC7;u t&#x1EDB;i server:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+    <span class="hljs-keyword">for</span> {
+        <span class="hljs-keyword">if</span> err := stream.Send(&amp;String{Value: <span class="hljs-string">&quot;hi&quot;</span>}); err != <span class="hljs-literal">nil</span> {
+            log.Fatal(err)
+        }
+        time.Sleep(time.Second)
+    }
+}()
+</code></pre>
+<p>K&#x1EBF; &#x111;&#x1EBF;n l&#xE0; nh&#x1EAD;n d&#x1EEF; li&#x1EC7;u tr&#x1EA3; v&#x1EC1; t&#x1EEB; server trong v&#xF2;ng l&#x1EB7;p:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">for</span> {
+    reply, err := stream.Recv()
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">if</span> err == io.EOF {
+            <span class="hljs-keyword">break</span>
+        }
+        log.Fatal(err)
+    }
+    fmt.Println(reply.GetValue())
+}
+</code></pre>
+<h2 id="444-m&#xF4;-h&#xEC;nh-publishing---subscription">4.4.4 M&#xF4; h&#xEC;nh Publishing - Subscription</h2>
+<p>Trong ph&#x1EA7;n tr&#x1B0;&#x1EDB;c ch&#xFA;ng ta &#x111;&#xE3; hi&#x1EC7;n th&#x1EF1;c phi&#xEA;n b&#x1EA3;n &#x111;&#x1A1;n gi&#x1EA3;n c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Watch</code> d&#x1EF1;a tr&#xEA;n th&#x1B0; vi&#x1EC7;n RPC d&#x1EF1;ng s&#x1EB5;n c&#x1EE7;a Go. &#xDD; t&#x1B0;&#x1EDF;ng &#x111;&#xF3; c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng cho h&#x1EC7; th&#x1ED1;ng publish-subscribe, nh&#x1B0;ng b&#x1EDF;i v&#xEC; RPC thi&#x1EBF;u &#x111;i c&#x1A1; ch&#x1EBF; streaming n&#xEA;n n&#xF3; ch&#x1EC9; c&#xF3; th&#x1EC3; tr&#x1EA3; v&#x1EC1; 1 k&#x1EBF;t qu&#x1EA3; trong 1 l&#x1EA7;n. Trong ch&#x1EBF; &#x111;&#x1ED9; publish-subscribe, h&#xE0;nh &#x111;&#x1ED9;ng publish &#x111;&#x1B0;a ra b&#x1EDF;i <em>caller</em> gi&#x1ED1;ng v&#x1EDB;i l&#x1EDD;i g&#x1ECD;i h&#xE0;m th&#xF4;ng th&#x1B0;&#x1EDD;ng, trong khi subscriber b&#x1ECB; &#x111;&#x1ED9;ng th&#xEC; gi&#x1ED1;ng v&#x1EDB;i <em>receiver</em> trong gRPC client flow m&#x1ED9;t chi&#x1EC1;u. B&#xE2;y gi&#x1EDD; ta c&#xF3; th&#x1EC3; th&#x1EED; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t h&#x1EC7; th&#x1ED1;ng publish - subscribe d&#x1EF1;a tr&#xEA;n &#x111;&#x1EB7;c &#x111;i&#x1EC3;m stream c&#x1EE7;a gRPC.</p>
+<p>Publishing - Subscription l&#xE0; m&#x1ED9;t m&#x1EAB;u thi&#x1EBF;t k&#x1EBF; th&#xF4;ng d&#x1EE5;ng v&#xE0; &#x111;&#xE3; c&#xF3; nhi&#x1EC1;u hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a m&#x1EAB;u thi&#x1EBF;t k&#x1EBF; n&#xE0;y trong c&#x1ED9;ng &#x111;&#x1ED3;ng opensource. Docker project cung c&#x1EA5;p hi&#x1EC7;n th&#x1EF1;c t&#x1ED1;i gi&#x1EA3;n c&#x1EE7;a pubsub nh&#x1B0; &#x111;o&#x1EA1;n code sau &#x111;&#xE2;y hi&#x1EC7;n th&#x1EF1;c c&#x1A1; ch&#x1EBF; publish - subscription d&#x1EF1;a tr&#xEA;n package pubsub:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/moby/moby/pkg/pubsub&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> main() {
+    p := pubsub.NewPublisher(<span class="hljs-number">100</span>*time.Millisecond, <span class="hljs-number">10</span>)
+
+    golang := p.SubscribeTopic(<span class="hljs-keyword">func</span>(v <span class="hljs-keyword">interface</span>{}) <span class="hljs-keyword">bool</span> {
+        <span class="hljs-keyword">if</span> key, ok := v.(<span class="hljs-keyword">string</span>); ok {
+            <span class="hljs-keyword">if</span> strings.HasPrefix(key, <span class="hljs-string">&quot;golang:&quot;</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    })
+    docker := p.SubscribeTopic(<span class="hljs-keyword">func</span>(v <span class="hljs-keyword">interface</span>{}) <span class="hljs-keyword">bool</span> {
+        <span class="hljs-keyword">if</span> key, ok := v.(<span class="hljs-keyword">string</span>); ok {
+            <span class="hljs-keyword">if</span> strings.HasPrefix(key, <span class="hljs-string">&quot;docker:&quot;</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    })
+
+    <span class="hljs-keyword">go</span> p.Publish(<span class="hljs-string">&quot;hi&quot;</span>)
+    <span class="hljs-keyword">go</span> p.Publish(<span class="hljs-string">&quot;golang: https://golang.org&quot;</span>)
+    <span class="hljs-keyword">go</span> p.Publish(<span class="hljs-string">&quot;docker: https://www.docker.com/&quot;</span>)
+    time.Sleep(<span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        fmt.Println(<span class="hljs-string">&quot;golang topic:&quot;</span>, &lt;-golang)
+    }()
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        fmt.Println(<span class="hljs-string">&quot;docker topic:&quot;</span>, &lt;-docker)
+    }()
+
+    &lt;-<span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
+}
+</code></pre>
+<p>Trong &#x111;&#xF3; <code>pubsub.NewPublisher</code> x&#xE2;y d&#x1EF1;ng m&#x1ED9;t &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng &#x111;&#x1EC3; release, ta c&#xF3; th&#x1EC3; subscribe c&#xE1;c topic th&#xF4;ng qua <code>p.SubscribeTopic()</code>.</p>
+<p>Gi&#x1EDD; th&#x1EED; cung c&#x1EA5;p m&#x1ED9;t h&#x1EC7; th&#x1ED1;ng publishing-subscription kh&#xE1;c m&#x1EA1;ng d&#x1EF1;a tr&#xEA;n gRPC v&#xE0; pubsub package. &#x110;&#x1EA7;u ti&#xEA;n &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t service publish subscription interface b&#x1EB1;ng protobuf:</p>
+<pre><code class="lang-protobuf"><span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">PubsubService</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Publish (String) <span class="hljs-keyword">returns</span> (String)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Subscribe (String) <span class="hljs-keyword">returns</span> (stream String)</span>;
+}
+</code></pre>
+<p>V&#x1EDB;i <code>Publish</code> l&#xE0; ph&#x1B0;&#x1A1;ng th&#x1EE9;c RPC th&#xF4;ng th&#x1B0;&#x1EDD;ng v&#xE0; <code>Subscribe</code> l&#xE0; m&#x1ED9;t service streaming 1 chi&#x1EC1;u. gRPC plugin s&#x1EBD; t&#x1EA1;o ra interface t&#x1B0;&#x1A1;ng &#x1EE9;ng cho server v&#xE0; client:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> PubsubServiceServer <span class="hljs-keyword">interface</span> {
+    Publish(context.Context, *String) (*String, error)
+    Subscribe(*String, PubsubService_SubscribeServer) error
+}
+<span class="hljs-keyword">type</span> PubsubServiceClient <span class="hljs-keyword">interface</span> {
+    Publish(context.Context, *String, ...grpc.CallOption) (*String, error)
+    Subscribe(context.Context, *String, ...grpc.CallOption) (
+        PubsubService_SubscribeClient, error,
+    )
+}
+
+<span class="hljs-keyword">type</span> PubsubService_SubscribeServer <span class="hljs-keyword">interface</span> {
+    Send(*String) error
+    grpc.ServerStream
+}
+</code></pre>
+<p>B&#x1EDF;i v&#xEC; <code>Subscribe</code> l&#xE0; flow 1 chi&#x1EC1;u ph&#xED;a server n&#xEA;n ch&#x1EC9; c&#xF3; ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Send</code> &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra trong interface <code>HelloService_SubscribeServer</code>.</p>
+<p>Sau &#x111;&#xF3; c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c c&#xE1;c service publish v&#xE0; subscribe nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> PubsubService <span class="hljs-keyword">struct</span> {
+    pub *pubsub.Publisher
+}
+
+<span class="hljs-keyword">func</span> NewPubsubService() *PubsubService {
+    <span class="hljs-keyword">return</span> &amp;PubsubService{
+        pub: pubsub.NewPublisher(<span class="hljs-number">100</span>*time.Millisecond, <span class="hljs-number">10</span>),
+    }
+}
+</code></pre>
+<p>K&#x1EBF; &#x111;&#x1EBF;n l&#xE0; c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c publishing v&#xE0; subscription:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *PubsubService) Publish(
+    ctx context.Context, arg *String,
+) (*String, error) {
+    p.pub.Publish(arg.GetValue())
+    <span class="hljs-keyword">return</span> &amp;String{}, <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-keyword">func</span> (p *PubsubService) Subscribe(
+    arg *String, stream PubsubService_SubscribeServer,
+) error {
+    ch := p.pub.SubscribeTopic(<span class="hljs-keyword">func</span>(v <span class="hljs-keyword">interface</span>{}) <span class="hljs-keyword">bool</span> {
+        <span class="hljs-keyword">if</span> key, ok := v.(<span class="hljs-keyword">string</span>); ok {
+            <span class="hljs-keyword">if</span> strings.HasPrefix(key,arg.GetValue()) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    })
+
+    <span class="hljs-keyword">for</span> v := <span class="hljs-keyword">range</span> ch {
+        <span class="hljs-keyword">if</span> err := stream.Send(&amp;String{Value: v.(<span class="hljs-keyword">string</span>)}); err != <span class="hljs-literal">nil</span> {
+            <span class="hljs-keyword">return</span> err
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>H&#xE0;m <code>main</code> cho ph&#xE9;p &#x111;&#x103;ng m&#x1EDB;i th&#xF4;ng tin t&#x1EEB; client t&#x1EDB;i server:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    conn, err := grpc.Dial(<span class="hljs-string">&quot;localhost:1234&quot;</span>, grpc.WithInsecure())
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+    <span class="hljs-keyword">defer</span> conn.Close()
+
+    client := NewPubsubServiceClient(conn)
+
+    _, err = client.Publish(
+        context.Background(), &amp;String{Value: <span class="hljs-string">&quot;golang: hello Go&quot;</span>},
+    )
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+    _, err = client.Publish(
+        context.Background(), &amp;String{Value: <span class="hljs-string">&quot;docker: hello Docker&quot;</span>},
+    )
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+}
+</code></pre>
+<p><a href="../examples/ch4/ch4.4/4-pubsub/clientpub/main.go">&gt;&gt; m&#xE3; ngu&#x1ED3;n clientpub</a></p>
+<p>Sau &#x111;&#xF3; c&#xF3; th&#x1EC3; subscribe th&#xF4;ng tin &#x111;&#xF3; t&#x1EEB; m&#x1ED9;t client kh&#xE1;c:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    conn, err := grpc.Dial(<span class="hljs-string">&quot;localhost:1234&quot;</span>, grpc.WithInsecure())
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+    <span class="hljs-keyword">defer</span> conn.Close()
+
+    client := NewPubsubServiceClient(conn)
+    stream, err := client.Subscribe(
+        context.Background(), &amp;String{Value: <span class="hljs-string">&quot;golang:&quot;</span>},
+    )
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+
+    <span class="hljs-keyword">for</span> {
+        reply, err := stream.Recv()
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+            <span class="hljs-keyword">if</span> err == io.EOF {
+                <span class="hljs-keyword">break</span>
+            }
+            log.Fatal(err)
+        }
+
+        fmt.Println(reply.GetValue())
+    }
+}
+</code></pre>
+<p><a href="../examples/ch4/ch4.4/4-pubsub/clientsub/main.go">&gt;&gt; m&#xE3; ngu&#x1ED3;n clientsub</a></p>
+<p>Cho &#x111;&#x1EBF;n gi&#x1EDD; ch&#xFA;ng ta &#x111;&#xE3; hi&#x1EC7;n th&#x1EF1;c &#x111;&#x1B0;&#x1EE3;c service publishing v&#xE0; subscription kh&#xE1;c m&#x1EA1;ng d&#x1EF1;a tr&#xEA;n gRPC. Trong ph&#x1EA7;n k&#x1EBF; ti&#x1EBF;p ch&#xFA;ng ta s&#x1EBD; x&#xE9;t m&#x1ED9;t s&#x1ED1; &#x1EE9;ng d&#x1EE5;ng n&#xE2;ng cao h&#x1A1;n c&#x1EE7;a Go trong gRPC.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch4-03-fun-fpc.html" class="navigation navigation-prev " aria-label="Previous page: 4.3 RPC trong Golang">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch4-05-grpc-advanced.html" class="navigation navigation-next " aria-label="Next page: 4.5 gRPC Nâng cao">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"4.4 Bắt đầu với gRPC","level":"1.5.4","depth":2,"next":{"title":"4.5 gRPC Nâng cao","level":"1.5.5","depth":2,"path":"ch4-rpc/ch4-05-grpc-advanced.md","ref":"ch4-rpc/ch4-05-grpc-advanced.md","articles":[]},"previous":{"title":"4.3 RPC trong Golang","level":"1.5.3","depth":2,"path":"ch4-rpc/ch4-03-fun-fpc.md","ref":"ch4-rpc/ch4-03-fun-fpc.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch4-rpc/ch4-04-grpc.md","mtime":"2019-07-15T08:31:39.958Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-15T08:49:14.910Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
