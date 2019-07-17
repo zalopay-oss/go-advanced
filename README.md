@@ -1,9 +1,9 @@
 # Go Language Advanced Programming
 
-## Table of Contents
+## Nội dung
 
 - [Go Language Advanced Programming](#Go-Language-Advanced-Programming)
-  - [Table of Contents](#Table-of-Contents)
+  - [Nội dung](#N%E1%BB%99i-dung)
   - [Giới thiệu](#Gi%E1%BB%9Bi-thi%E1%BB%87u)
   - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#T%E1%BA%A1i-sao-ch%C3%BAng-t%C3%B4i-th%E1%BB%B1c-hi%E1%BB%87n-b%E1%BB%99-t%C3%A0i-li%E1%BB%87u-n%C3%A0y)
   - [Tài liệu tham khảo](#T%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o)
