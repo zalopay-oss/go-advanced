@@ -86,7 +86,7 @@ Newsqueak tương tự như một ngôn ngữ kịch bản có chức năng in t
 print("Hello ", "World", "\n");
 ```
 
-Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tham số, rất khó để thấy các tính năng liên quan đến ngôn ngữ Newsqueak. Bởi vì các tính năng liên quan đến ngôn ngữ Newsqueak và ngôn ngữ Go chủ yếu là đồng thời (concurrency) và pipeline. Do đó, ta sẽ xem xét các tính năng của ngôn ngữ Newsqueak thông qua phiên bản đồng thời của thuật toán "sàng số nguyên tố". Nguyên tắc "sàng số nguyên tố" như sau:
+Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tham số, rất khó để thấy các tính năng liên quan đến ngôn ngữ Newsqueak. Bởi vì các tính năng liên quan đến ngôn ngữ Newsqueak và ngôn ngữ Go chủ yếu là đồng thời (concurrency) và pipeline. Do đó, ta sẽ xem xét các tính năng của ngôn ngữ Newsqueak thông qua phiên bản concurrency của thuật toán "sàng số nguyên tố". Nguyên tắc "sàng số nguyên tố" như sau:
 
 <p align="center">
 <img src="../images/ch1-5-prime-sieve.png"/>
@@ -94,8 +94,7 @@ Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tha
 <span>Hình 1-5. Sàng số nguyên tố</span>
 </p>
 
-
-Chương trình "sàng số nguyên tố" cho phiên bản đồng thời của ngôn ngữ Newsqueak như sau:
+Chương trình "sàng số nguyên tố" cho phiên bản concurrency của ngôn ngữ Newsqueak như sau:
 
 ```go
     // xuất 1 chuỗi số int từ 2 vào pipeline
@@ -144,27 +143,27 @@ Chương trình "sàng số nguyên tố" cho phiên bản đồng thời của 
 
 
 - Hàm `counter` dùng để xuất ra chuỗi gốc gồm các số tự nhiên vào các "đường ống" (pipeline). Mỗi hàm `filter` tương ứng với mỗi đường ống lọc số nguyên tố mới. Những đường ống lọc số nguyên tố này lọc các chuỗi đến theo sàng số nguyên tố hiện tại và đưa kết quả ra đường ống đầu ra. `mk(chan of int)` dùng để tạo 1 đường ống, tương tự như `make(chan int)` trong Go.
-- Từ khóa `begin filter(p,c,newc)` bắt đầu một hàm đồng thời, giống với câu lệnh `go filter(p,c,newc)` trong Go.
+- Từ khóa `begin filter(p,c,newc)` bắt đầu một hàm concurrency, giống với câu lệnh `go filter(p,c,newc)` trong Go.
 - `become` dùng để trả về kết quả của hàm, tương tự như `return`.
 
-Cú pháp xử lý đồng thời (concurrency) và đường ống (pipeline) trong ngôn ngữ Newsqueak khá tương tự với Go, ngay cả cách khai báo kiểu phía sau biến của 2 ngôn ngữ này cũng giống nhau.
+Cú pháp xử lý concurrency và đường ống (pipeline) trong ngôn ngữ Newsqueak khá tương tự với Go, ngay cả cách khai báo kiểu phía sau biến của 2 ngôn ngữ này cũng giống nhau.
 
 ## 1.2.4 Alef - Phil Winterbottom, 1993
 
-Trước khi xuất hiện ngôn ngữ Go, ngôn ngữ Alef là ngôn ngữ xử lý đồng thời hoàn hảo trong tâm trí của tác giả, hơn nữa cú pháp và thời gian chạy của Alef về cơ bản tương thích hoàn hảo với ngôn ngữ C. Hỗ trợ threads và process trong Alef là `proc receive(c)` dùng để bắt đầu một process và `task receive(c)` bắt đầu một thread với `c` để có thể giao tiếp qua pipes. Tuy nhiên, do thiếu cơ chế phục hồi bộ nhớ tự động, việc quản lý tài nguyên bộ nhớ của cơ chế đồng thời là vô cùng phức tạp. Hơn nữa, ngôn ngữ Alef chỉ cung cấp hỗ trợ ngắn hạn trong hệ thống Plan9 và các hệ điều hành khác không có môi trường phát triển Alef thực tế. Ngôn ngữ Alef chỉ có hai tài liệu công khai: **_Alef Language Specification_** và **_the Alef Programming Wizard_**. Do đó, không có nhiều thảo luận về ngôn ngữ Alef ngoài Bell Labs.
+Trước khi xuất hiện ngôn ngữ Go, ngôn ngữ Alef là ngôn ngữ xử lý concurrency hoàn hảo trong tâm trí của tác giả, hơn nữa cú pháp và thời gian chạy của Alef về cơ bản tương thích hoàn hảo với ngôn ngữ C. Hỗ trợ threads và process trong Alef là `proc receive(c)` dùng để bắt đầu một process và `task receive(c)` bắt đầu một thread với `c` để có thể giao tiếp qua pipes. Tuy nhiên, do thiếu cơ chế phục hồi bộ nhớ tự động, việc quản lý tài nguyên bộ nhớ của cơ chế concurrency là vô cùng phức tạp. Hơn nữa, ngôn ngữ Alef chỉ cung cấp hỗ trợ ngắn hạn trong hệ thống Plan9 và các hệ điều hành khác không có môi trường phát triển Alef thực tế. Ngôn ngữ Alef chỉ có hai tài liệu công khai: **_Alef Language Specification_** và **_the Alef Programming Wizard_**. Do đó, không có nhiều thảo luận về ngôn ngữ Alef ngoài Bell Labs.
 
-Vì ngôn ngữ Alef hỗ trợ cả thread và process trong cơ chế đồng thời, và nhiều tiến trình đồng thời có thể bắt đầu đồng thời, cho nên trạng thái đồng thời của Alef là cực kỳ phức tạp. Cùng với đó, Alef cũng không có cơ chế thu gom rác tự động (Alef có tính năng con trỏ linh hoạt dành riêng cho ngôn ngữ C, điều này cũng khiến cơ chế thu gom rác tự động khó thực hiện).
+Vì ngôn ngữ Alef hỗ trợ cả thread và process trong cơ chế concurrency, và nhiều tiến trình concurrency có thể bắt đầu đồng thời, cho nên trạng thái concurrency của Alef là cực kỳ phức tạp. Cùng với đó, Alef cũng không có cơ chế thu gom rác tự động (Alef có tính năng con trỏ linh hoạt dành riêng cho ngôn ngữ C, điều này cũng khiến cơ chế thu gom rác tự động khó thực hiện).
 
-Các tài nguyên khác nhau bị ngập giữa các thread và process khác nhau, ảnh hưởng lớn đến tài nguyên bộ nhớ đồng thời. Việc quản lý chúng sẽ vô cùng phức tạp. Ngôn ngữ Alef kế thừa cú pháp của ngôn ngữ C và có thể được coi là ngôn ngữ C tăng cường thêm cú pháp đồng thời. Hình ảnh sau đây là trạng thái đồng thời trong tài liệu ngôn ngữ Alef:
+Các tài nguyên khác nhau bị ngập giữa các thread và process khác nhau, ảnh hưởng lớn đến tài nguyên bộ nhớ concurrency. Việc quản lý chúng sẽ vô cùng phức tạp. Ngôn ngữ Alef kế thừa cú pháp của ngôn ngữ C và có thể được coi là ngôn ngữ C tăng cường thêm cú pháp concurrency. Hình ảnh sau đây là trạng thái concurrency trong tài liệu ngôn ngữ Alef:
 
 <p align="center"> 
 <img src="../images/ch1-6-alef.png">
 <div align="center">
-Hình 1-6. Mô hình đồng thời trong Alef
+Hình 1-6. Mô hình concurrency trong Alef
 </div>
 </p>
 
-Chương trình "Hello World" cho phiên bản đồng thời của ngôn ngữ Alef:
+Chương trình "Hello World" cho phiên bản concurrency của ngôn ngữ Alef:
 
 ```c
 #include <alef.h>
@@ -188,7 +187,7 @@ void main(void) {
 }
 ```
 
-Câu lệnh `#include <alef.h>` ở đầu chương trình dùng để khai báo thư viện runtime có chứa ngôn ngữ Alef. `receive` là một hàm bình thường, chương trình sử dụng như hàm nhập cho mỗi hàm đồng thời. câu lệnh `alloc c` trong hàm `main` trước tiên tạo ra một `chan(byte*)` loại đường ống, tương tự như `make(chan []byte)` của Go , sau đó `receive` khởi động hàm trong process và thread tương ứng, sau khi bắt đầu quá trình đồng thời, hàm `main` gửi đi hai dữ liệu chuỗi tới đường ống, hàm `receive` chạy trong process và thread nhận dữ liệu từ đường ống theo thứ tự không xác định, sau đó in riêng các chuỗi, cuối cùng mỗi chuỗi tự kết thúc bằng cách gọi `terminate(nil)`.
+Câu lệnh `#include <alef.h>` ở đầu chương trình dùng để khai báo thư viện runtime có chứa ngôn ngữ Alef. `receive` là một hàm bình thường, chương trình sử dụng như hàm nhập cho mỗi hàm concurrency. câu lệnh `alloc c` trong hàm `main` trước tiên tạo ra một `chan(byte*)` loại đường ống, tương tự như `make(chan []byte)` của Go , sau đó `receive` khởi động hàm trong process và thread tương ứng, sau khi bắt đầu quá trình concurrency, hàm `main` gửi đi hai dữ liệu chuỗi tới đường ống, hàm `receive` chạy trong process và thread nhận dữ liệu từ đường ống theo thứ tự không xác định, sau đó in riêng các chuỗi, cuối cùng mỗi chuỗi tự kết thúc bằng cách gọi `terminate(nil)`.
 
 Ngữ pháp của Alef về cơ bản giống như ngôn ngữ C. Nó có thể được coi là ngôn ngữ C ++ dựa trên ngữ pháp của ngôn ngữ C.
 

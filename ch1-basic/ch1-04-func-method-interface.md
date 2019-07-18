@@ -370,7 +370,7 @@ Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi
 
 Các ngôn ngữ lập trình tĩnh nói chung có các hệ thống kiểu nghiêm ngặt, cho phép trình biên dịch đi sâu vào xem liệu lập trình viên có thực hiện bất kỳ động thái bất thường nào không. Tuy nhiên, một hệ thống kiểu quá nghiêm ngặt có thể làm cho việc lập trình trở nên quá cồng kềnh và khiến  lập trình viên lãng phí rất nhiều thời gian tuổi trẻ trong công cuộc đấu tranh với trình biên dịch.
 
-Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa lập trình an toàn và lập trình linh hoạt. Nó  hỗ trợ  `duck-typing` thông qua interface đồng thời cũng có  kiểm tra kiểu nghiêm ngặt, giúp việc lập trình tương đối nhẹ nhàng hơn.
+Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa lập trình an toàn và lập trình linh hoạt. Nó  hỗ trợ  `duck-typing` thông qua interface concurrency cũng có  kiểm tra kiểu nghiêm ngặt, giúp việc lập trình tương đối nhẹ nhàng hơn.
 
 Interface type của Go là một sự trừu tượng hóa và khái quát hóa các loại hành vi khác, bởi vì kiểu interface không gắn với các chi tiết implement cụ thể, chúng ta có thể làm cho đối tượng linh hoạt hơn và dễ dùng hơn thông qua sự trừu tượng hóa này.
 
