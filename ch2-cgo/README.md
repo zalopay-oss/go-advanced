@@ -1,5 +1,6 @@
 # Chapter 2: CGO Programming
 
+![x](../images/ch2.png)
 Sau nhiều thập kỷ phát triển, với số lượng lớn phần mềm được viết bằng C/C++,, nhiều trong số đó được kiểm thử và tối ưu hiệu năng. Ngôn ngữ Go nên tận dụng ưu thế to lớn đó của C/C++.
 
 Vì C là ngôn ngữ cơ bản, nhiều thư viện sẽ chọn cung cấp API tương thích với C, sau đó được hiện thực lại bằng một ngôn ngữ khác.
