@@ -266,7 +266,7 @@ func filter(
 }
 ```
 
-Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong dự án mã nguồn mở grpc-ecosystem có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
+Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong dự án opensource grpc-ecosystem có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
 
 Một ví dụ về cách sử dụng chuỗi interceptor trong package go-grpc-middleware:
 

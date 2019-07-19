@@ -14,7 +14,7 @@ Khi doanh nghiệp đưa ra các yêu cầu mới, việc chúng ta cần làm l
 
 ### 6.6.1.2 Cấu hình mang tính doanh nghiệp
 
-Nền tảng (`Platform`) của một công ty lớn luôn phục vụ cho nhiều ngành nghề kinh doanh và mỗi ngành nghề kinh doanh được gán một id duy nhất. Nền tảng này được tạo thành từ nhiều mô-đun và cần chia sẻ một khái niệm kinh doanh. Khi công ty mở một dây chuyền sản phẩm mới, nó cần phải được thông qua bởi tất cả các hệ thống trong nền tảng. Lúc này, chắc chắn là sẽ tốn rất nhiều thời gian để nó có thể chạy được. Ngoài ra, các loại cấu hình toàn cục cần phải được quản lý theo cách thống nhất, các logic cộng và trừ cũng phải được quản lý theo cách thống nhất. Khi cấu hình này được thay đổi, hệ thống cần phải tự động thông báo cho toàn bộ hệ thống của nền tảng mà không cần sự can thiệp của con người (hoặc chỉ can thiệp rất đơn giản, chẳng hạn như kiểm toán nhấp chuột một phát).
+Nền tảng (Platform) của một công ty lớn luôn phục vụ cho nhiều ngành nghề kinh doanh và mỗi ngành nghề kinh doanh được gán một id duy nhất. Nền tảng này được tạo thành từ nhiều module và cần chia sẻ một khái niệm kinh doanh. Khi công ty mở một dây chuyền sản phẩm mới, nó cần phải được thông qua bởi tất cả các hệ thống trong nền tảng. Lúc này, chắc chắn là sẽ tốn rất nhiều thời gian để nó có thể chạy được. Ngoài ra, các loại cấu hình toàn cục cần phải được quản lý theo cách thống nhất, các logic cộng và trừ cũng phải được quản lý theo cách thống nhất. Khi cấu hình này được thay đổi, hệ thống cần phải tự động thông báo cho toàn bộ hệ thống của nền tảng mà không cần sự can thiệp của con người (hoặc chỉ can thiệp rất đơn giản, chẳng hạn như kiểm toán nhấp chuột một phát).
 
 Ngoài quản lý trong lĩnh vực kinh doanh, nhiều công ty Internet còn phải kinh doanh theo quy định của thành phố. Khi doanh nghiệp được mở ở một thành phố, id thành phố mới sẽ tự động được thêm vào danh sách trong hệ thống. Bằng cách này, quá trình kinh doanh có thể chạy tự động.
 
@@ -127,7 +127,6 @@ func init() {
 func watchAndUpdate() {
   w := kapi.Watcher(configPath, nil)
   go func() {
-    // watch 该节点下的每次变化
     for {
       resp, err := w.Next(context.Background())
       if err != nil {
@@ -192,4 +191,4 @@ Cụ thể, khi cung cấp SDK đọc cấu hình cho một dịch vụ, tốt n
 
 Hãy xem xét kỹ vấn đề thống nhất dữ liệu khi thêm bộ đệm. Các máy kinh doanh có thể không thống nhất về cấu hình do lỗi mạng, chúng tôi cần biết được nó đang diễn ra bằng hệ thống giám sát.
 
-Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng các đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thua lỗ khi vấn đề xảy ra.
+Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng cách đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thua lỗ khi vấn đề xảy ra.

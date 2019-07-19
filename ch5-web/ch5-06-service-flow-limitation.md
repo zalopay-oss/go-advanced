@@ -1,9 +1,9 @@
 # 5.6 Ratelimit Service Flow Limit
 
-Chương trình máy tính có thể được phân loại theo kiểu thắt cổ chai disk IO:
+Chương trình máy tính có thể bị thắt cổ chai disk IO theo các kiểu sau:
 
-- Thắt cổ chai do CPU tính toán
-- Thắt cổ chai do băng thông mạng
+- Thắt cổ chai do CPU tính toán.
+- Thắt cổ chai do băng thông mạng.
 - Và đôi khi hệ thống bên ngoài gây ra tình trạng thắt cổ chai trong hệ thống phân tán.
 
 Phần quan trọng nhất của hệ thống Web là mạng. Cho dù đó là tiếp nhận, phân tích request của người dùng, truy cập bộ nhớ hay trả về dữ liệu response đều cần phải truy cập trực tuyến. Trước IO multiplexing interface `epoll/kqueue` do hệ thống cung cấp đã từng có một sự cố C10k trong máy tính hiện đại đa lõi. Vấn đề C10k có thể khiến máy tính không thể sử dụng toàn bộ CPU để xử lý nhiều kết nối người dùng. Do đó cần phải chú ý tối ưu hóa chương trình để tăng mức sử dụng CPU.
@@ -111,7 +111,7 @@ Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có m
 ![token-bucket](../images/ch5-token-bucket.png)
 *Hình 5-12 Token bucket*
 
-Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng mã nguồn mở đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là <github.com/juju/ratelimit> cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
+Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng opensource đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là <github.com/juju/ratelimit> cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
 
   ```go
   func NewBucket(fillInterval time.Duration, capacity int64) *Bucket
@@ -142,7 +142,7 @@ func (tb *Bucket) Wait(count int64) {}
 func (tb *Bucket) WaitMaxDuration(count int64, maxWait time.Duration) bool {}
 ```
 
-Tên và chức năng tương của chúng khá đơn giản nên ta sẽ không đi vào chi tiết ở đây. So với công cụ ratelimiter do thư viện Java của Google cung cấp là Guava nổi tiếng hơn trong cộng đồng mã nguồn mở, thư viện này không hỗ trợ khởi động token và không thể sửa đổi dung lượng token ban đầu, do đó các yêu cầu trong các trường hợp cực đoan riêng lẻ có thể không được đáp ứng.
+Tên và chức năng tương của chúng khá đơn giản nên ta sẽ không đi vào chi tiết ở đây. So với công cụ ratelimiter do thư viện Java của Google cung cấp là Guava nổi tiếng hơn trong cộng đồng opensource, thư viện này không hỗ trợ khởi động token và không thể sửa đổi dung lượng token ban đầu, do đó các yêu cầu trong các trường hợp cực đoan riêng lẻ có thể không được đáp ứng.
 
 Nếu đã hiểu các nguyên tắc cơ bản của token bucket và vẫn không có api nào đáp ứng nhu cầu thì tin rằng bạn cũng có thể sửa đổi các mã nguồn có sẵn để dùng cho trường hợp của mình.
 

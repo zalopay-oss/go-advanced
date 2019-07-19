@@ -1,4 +1,4 @@
-# grpcurl tool
+# 4.8 grpcurl tool
 
 Bản thân Protobuf đã có chức năng phản chiếu (reflection) lại file Proto của đối tượng khi thực thi. gRPC cũng cung cấp một package reflection để thực hiện các truy vấn cho  gRPC service. Mặc dù gRPC có một hiện thực bằng C++ của công cụ `grpc_cli`, có thể được sử dụng để truy vấn danh sách gRPC hoặc gọi phương thức gRPC, nhưng bởi vì phiên bản đó cài đặt khá  phức tạp nên ở đây chúng ta sẽ dùng công cụ `grpcurl` được hiện thực thuần bằng Golang. Phần này ta sẽ cùng tìm hiểu cách sử dụng công cụ này.
 
@@ -26,7 +26,7 @@ Nếu gRPC reflection service được khởi chạy thì các gRPC service   c�
 
 ## 4.8.2 Xem danh sách service
 
-Grpcurl là công cụ được cộng đồng mã nguồn mở của Golang phát triển, quá trình cài đặt như sau:
+Grpcurl là công cụ được cộng đồng opensource của Golang phát triển, quá trình cài đặt như sau:
 
 ```sh
 $ go get github.com/fullstorydev/grpcurl

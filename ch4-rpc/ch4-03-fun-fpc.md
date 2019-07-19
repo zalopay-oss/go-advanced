@@ -1,6 +1,6 @@
 # 4.3 RPC trong Golang
 
-Trong những trường hợp khác nhau lại có nhu cầu về RPC khác nhau, vì vậy cộng đồng mã nguồn mở đã tạo ra khá nhiều framework RPC. Trong phần này, chúng tôi sẽ sử dụng framework RPC tích hợp sẵn trong một số  tình huống đặc biệt.
+Trong những trường hợp khác nhau lại có nhu cầu về RPC khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC. Trong phần này, chúng tôi sẽ sử dụng framework RPC tích hợp sẵn trong một số  tình huống đặc biệt.
 
 ## 4.3.1 Nguyên tắc hiện thực của RPC Client
 

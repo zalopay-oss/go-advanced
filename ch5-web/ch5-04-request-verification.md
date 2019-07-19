@@ -9,7 +9,7 @@ Thực tế đây là một trường hợp không liên quan gì tới ngôn ng
 
 ## 5.4.1 Tái cấu trúc hàm request validation
 
-Giả sử dữ liệu được liên kết tới một struct cụ thể thông qua binding bằng một thư viện nguồn mở.
+Giả sử dữ liệu được liên kết tới một struct cụ thể thông qua binding bằng một thư viện opensource.
 
 ```go
 type RegisterReq struct {
@@ -68,7 +68,7 @@ func register(req RegisterReq) error{
 }
 ```
 
-Thế là đoạn code trở nên "sạch" hơn và nhìn bớt kì cục. Mặc dù phương thức tái cấu trúc được sử dụng để làm cho code của quy trình validate trông thanh lịch hơn, chúng ta vẫn phải viết một tập các hàm tương tự như `validate()` cho mỗi yêu cầu `http`. Có cách nào tốt hơn để giúp chúng ta cải thiện hơn không? Câu trả lời là sử dụng validator.
+Thế là đoạn code trở nên "clean" hơn và nhìn bớt kì cục. Mặc dù phương thức tái cấu trúc được sử dụng để làm cho code của quy trình validate trông thanh lịch hơn, chúng ta vẫn phải viết một tập các hàm tương tự như `validate()` cho mỗi yêu cầu `http`. Có cách nào tốt hơn để giúp chúng ta cải thiện hơn không? Câu trả lời là sử dụng validator.
 
 ## 5.4.2 Cải tiến với validator
 
@@ -228,8 +228,8 @@ func main() {
 }
 ```
 
-Ví dụ trên kiểm tra định dạng email theo tag age, bạn có thể thực hiện thay đổi đơn giản trong chương trình để xem kết quả Validate cụ thể. Để tinh giản việc xử lý lỗi và các tiến trình phức tạp, ví dụ `reflect.Int8/16/32/64`, `reflect.Ptr`, nếu bạn viết thư viện xác minh cho môi trường doanh nghiệp, hãy đảm bảo cải thiện chức năng và khả năng chịu lỗi.
+Ví dụ trên kiểm tra định dạng email theo tag age, bạn có thể thực hiện thay đổi đơn giản trong chương trình để xem kết quả validate cụ thể. Để tinh giản việc xử lý lỗi và các tiến trình phức tạp, ví dụ `reflect.Int8/16/32/64`, `reflect.Ptr`, nếu bạn viết thư viện xác minh cho môi trường doanh nghiệp, hãy đảm bảo cải thiện chức năng và khả năng chịu lỗi.
 
-Component  validation mã nguồn mở được giới thiệu trong phần trước phức tạp hơn về mặt chức năng so với ví dụ ở đây. Nhưng nguyên tắc chung rất đơn giản là duyệt cây của một struct với  reflection. Việc ta phải sử dụng một lượng lớn các reflection khi verify struct nhưng vì reflection trong Go không hiệu quả lắm nên đôi khi sẽ ảnh hưởng đến hiệu suất của chương trình. Ngữ cảnh đòi hỏi nhiều verify struct thường xuất hiện trong các web service. Đây không hẳn là vấn đề thắt cổ chai hiệu năng của chương trình. Hiệu quả thực tế là đưa ra phán đoán chính xác hơn từ pprof.
+Component validation opensource được giới thiệu trong phần trước phức tạp hơn về mặt chức năng so với ví dụ ở đây. Nhưng nguyên tắc chung rất đơn giản là duyệt cây của một struct với reflection. Việc ta phải sử dụng một lượng lớn các reflection khi verify struct nhưng vì reflection trong Go không hiệu quả lắm nên đôi khi sẽ ảnh hưởng đến hiệu suất của chương trình. Ngữ cảnh đòi hỏi nhiều verify struct thường xuất hiện trong các web service. Đây không hẳn là vấn đề thắt cổ chai hiệu năng của chương trình. Hiệu quả thực tế là đưa ra phán đoán chính xác hơn từ thư viện `pprof`.
 
-Điều gì xảy ra nếu quá trình verify dựa trên reflection thực sự trở thành thắt cổ chai hiệu năng trong service của bạn? Có một ý tưởng để tránh dùng reflection: sử dụng Trình phân tích cú pháp tích hợp của Go (Parser) để quét mã nguồn và sau đó tạo mã xác thực dựa trên định nghĩa của struct. Chúng ta có thể đưa tất cả các struct cần được verify vào trong một package riêng. Vấn đề này được để lại cho người đọc khám phá.
+Điều gì xảy ra nếu quá trình verify dựa trên reflection thực sự trở thành thắt cổ chai hiệu năng trong service của bạn? Có một ý tưởng để tránh dùng reflection: sử dụng "Trình phân tích cú pháp tích hợp của Go (Parser)" để quét mã nguồn và sau đó tạo mã xác thực dựa trên định nghĩa của struct. Chúng ta có thể đưa tất cả các struct cần được verify vào trong một package riêng. Vấn đề này được để lại cho người đọc khám phá.

@@ -1,6 +1,6 @@
 # 4.4 Bắt đầu với gRPC
 
-gRPC là một framework RPC mã nguồn mở đa ngôn ngữ được Google phát triển dựa trên Protobuf. Được thiết kế dựa trên giao thức HTTP/2, gRPC có thể cung cấp nhiều dịch vụ dựa trên liên kết HTTP/2, giúp cho framework này thân thiện hơn với thiết bị di động. Phần này sẽ giới thiệu một số cách sử dụng gRPC đơn giản.
+gRPC là một framework RPC opensource đa ngôn ngữ được Google phát triển dựa trên Protobuf. Được thiết kế dựa trên giao thức HTTP/2, gRPC có thể cung cấp nhiều dịch vụ dựa trên liên kết HTTP/2, giúp cho framework này thân thiện hơn với thiết bị di động. Phần này sẽ giới thiệu một số cách sử dụng gRPC đơn giản.
 
 ## 4.4.1 Kiến trúc gRPC
 
@@ -228,7 +228,7 @@ for {
 
 Trong phần trước chúng ta đã hiện thực phiên bản đơn giản của phương thức `Watch` dựa trên thư viện RPC dựng sẵn của Go. Ý tưởng đó có thể sử dụng cho hệ thống publish-subscribe, nhưng bởi vì RPC thiếu đi cơ chế streaming nên nó chỉ có thể trả về 1 kết quả trong 1 lần. Trong chế độ publish-subscribe, hành động publish đưa ra bởi *caller* giống với lời gọi hàm thông thường, trong khi subscriber bị động thì giống với *receiver* trong gRPC client flow một chiều. Bây giờ ta có thể thử xây dựng một hệ thống publish - subscribe dựa trên đặc điểm stream của gRPC.
 
-Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng mã nguồn mở. Docker project cung cấp hiện thực tối giản của pubsub như đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
+Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng opensource. Docker project cung cấp hiện thực tối giản của pubsub như đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
 
 ```go
 import (

@@ -109,7 +109,7 @@ Tham số hàng đợi là tùy chọn. Nếu bạn muốn cân bằng tải cá
 
 #### Sản xuất tin nhắn
 
-Sản xuất tin nhắn được chỉ định bằng chủ đề:
+Sản xuất tin nhắn được chỉ định bằng `topic`:
 
 ```go
 nc, err := nats.Connect(nats.DefaultURL)

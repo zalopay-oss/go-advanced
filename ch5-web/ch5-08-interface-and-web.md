@@ -71,15 +71,15 @@ Chúng ta có thể hoàn toàn trừu tượng hóa bằng việc đề cập t
 
 Trước khi trừu tượng hóa, chúng ta cần phải hiểu rằng, việc giới thiệu interfaces sẽ có ý nghĩa đối với hệ thống, nó sẽ được phân tích theo ngữ cảnh. Nếu hệ thống chỉ phục vụ cho một product line, và mã nguồn bên trong chỉ được thay đổi cho những ngữ cảnh cụ thể, thì việc giới thiệu interface không thực sự mang lại ý nghĩa to lớn. Liệu rằng nó có thuận tiện để test, chúng ta sẽ bàn về chúng trong các phần sau.
 
-Nếu hiện thực một platform system mà nó yêu cầu một platform để định nghĩa các uniform business processes và  business specifications, sau đó interface-based abstraction make sense. Ví dụ:
+Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các uniform business processes và  business specifications, sau đó interface-based abstraction make sense. Ví dụ:
 
 ![](../images/ch5-interface-impl.uml.png)
 
 *Hình 5-19 Implementing a public interface*
 
-Flatform cần phải phục vụ nhiều lines of business, nhưng dữ liệu được định nghĩa cần phải thống nhất, do đó, hy vọng rằng theo một platform-defined process. Về phía platform, chúng ta có thể định nghĩa một tập các interfaces tương tự như trên, và sau đó yêu cầu bên business access chúng phải hiện thực lại. Nếu interface có một số bước không mong muốn, chỉ cần trả về `nil`, hoặc phớt lờ chúng.
+Flatform cần phải phục vụ nhiều business khác nhau, nhưng dữ liệu được định nghĩa cần phải thống nhất. Về phía platform, chúng ta có thể định nghĩa một tập các interfaces tương tự như trên, và sau đó yêu cầu bên business access chúng phải hiện thực lại. Nếu interface có một số bước không mong muốn, chỉ cần trả về `nil`, hoặc phớt lờ chúng.
 
-Khi business lặp đi lặp lại, platform code không được thay đổi, do đó, chúng ta giới thiệu cách access services như là một plugin của platform code. Điều gì xảy ra nếu chúng ta không có một interface?
+Khi business lặp đi lặp lại, platform không được thay đổi. Do đó, chúng ta sử dụng các services như là một plugin của platform đó. Điều gì xảy ra nếu chúng ta không có một interface?
 
 ```go
 import (
@@ -151,11 +151,11 @@ func BusinessProcess(bi BusinessInstance) {
 }
 ```
 
-Interface-oriented programming, sẽ không quan tâm về việc hiện thực cụ thể. Nếu những service tương ứng được thay đổi trong iteration, tất cả các logic sẽ hoàn toàn minh bạch ở phía platform.
+Chương trình Interface-oriented, sẽ không quan tâm về việc hiện thực cụ thể. Nếu những service tương ứng được thay đổi, tất cả các logic sẽ hoàn toàn minh bạch ở phía platform.
 
 ## 5.8.4 Điểm mạnh và yếu của interface
 
-Nơi phổ biến nhất trong Go là trung gian giữa các interface design. Modules không cần phải biết đến sự xuất hiện của những modules khác. Module A định nghĩa một interface và module B có thể hiện thực interface đó. Nếu không có kiểu dữ liệu được định nghĩa module A trong interface, thì sau đó module B sẽ không cần phải dùng `import A`. Ví dụ, trong thư viện chuẩn `io.Writer` :
+Interface design được thường xuyên sử dụng trong ngôn ngữ Go. Modules không cần phải biết đến sự xuất hiện của những modules khác. Module A định nghĩa một interface và module B có thể hiện thực interface đó. Nếu không có kiểu dữ liệu được định nghĩa module A trong interface, thì sau đó module B sẽ không cần phải dùng `import A`. Ví dụ, trong thư viện chuẩn `io.Writer` :
 
 ```go
 type Writer interface {
@@ -165,7 +165,6 @@ type Writer interface {
 
 Chúng tôi cần phải hiện thực interface `io.Writer` trong module của chúng ta:
 
-
 ```go
 type MyType struct {}
 
@@ -174,7 +173,7 @@ func (m MyType) Write(p []byte) (n int, err error) {
 }
 ```
 
-Sau đó chúng ta truyền `MyType` vào hàm `io.Writer` mà nó được dùng như là một parameter, như là: 
+Sau đó chúng ta truyền `MyType` vào hàm `io.Writer` mà nó được dùng như là một parameter, như là:
 
 ```go
 package log
@@ -184,7 +183,7 @@ func SetOutput(w io.Writer) {
 }
 ```
 
-sau đó:
+Sau đó:
 
 ```go
 package my-business
@@ -198,12 +197,7 @@ func init() {
 
 Trong việc định nghĩa `MyType`, không cần phải `import "io"` để trực tiếp hiện thực `io.Writer` interface, chúng ta có thể kết hợp nhiều hàm để hiện thực các interfaces, trong khi phía interface không có thiết lập import các dependency được sinh ra. Do đó, nhiều người nghĩ rằng orthogonality của Go rất tốt để thiết kế.
 
-
-Nhưng kiểu "orthogonal" sẽ mang đến một số rắc rối. Khi chúng ta tiếp quản một system với hàng trăm và hàng ngàn rows, nếu chúng ta nhìn thấy một interface nó định nghĩa một số interfaces, như là một order process, chúng ta hi vọng có thể tìm kiếm một cách trực tiếp để hiện thực đối tượng bằng việc hiện thực các đối tượng khác. Nhưng cho đến bây giờ, những đó là nhu cầu đơn giản đó có thể được hiện thực bằng Goland, và kinh nghiệm được công nhận. Visual Studio Code cần phải quét qua toàn bộ project để thấy cấu trúc của chúng, nếu chúng hiện thực tất cả các functions của interface. Ngôn ngữ cụ thể được dùng để hiện thực interfaces sẽ thân thiện hơn để IDL interface lookups. Ở khía cạnh khác, chúng tôi nhìn thấy một cấu trúc và hy vọng có thể biết ngay lặp tức những interfaces mà structure hiện thực, nhưng cùng gặp phải vấn đề được đề cập ở trên.
-
-
-Mặc dù sự thuận tiện, lợi ích mang lại bởi interface là hiển nhiên. Đầu tiên, dựa vào inversion, cái ảnh hưởng đến interface trên dự án phần mềm trong hầu hết các ngôn ngữ, trong việc thiết kế Go's orthogonal interface. Hoàn toàn có thể loại bỏ tất cả các dependencies; hai là bộ biên dịch sẽ giúp ta kiểm tra lỗi như "not fully implemented interfaces" tại thời điểm biên dịch, nếu business không hiện thực porcess, nhưng sử dụng nó trong một ví dụ miễn cưỡng sử dụng interface.
-
+Mặc dù sự thuận tiện, lợi ích mang lại bởi interface là hiển nhiên. Đầu tiên, dựa vào inversion, cái ảnh hưởng đến interface trên dự án phần mềm trong hầu hết các ngôn ngữ, trong việc thiết kế Go's orthogonal interface. Hoàn toàn có thể loại bỏ tất cả các dependencies; hai là bộ biên dịch sẽ giúp ta kiểm tra lỗi như "not fully implemented interfaces" tại thời điểm biên dịch, nếu business không hiện thực đủ các method trong Interface, nhưng sử dụng laị sử dụng nó.
 
 ```go
 package main
@@ -235,12 +229,11 @@ Những lỗi sau có thể được in ra
     BookOrderCreator does not implement OrderCreator (missing CreateOrder method)
 ```
 
-Do đó, interface có thể được xem như là một cách an toàn để kiểm tra kiểu tại thời điểm biên dịch
+Do đó, interface có thể được xem như là một cách an toàn để kiểm tra kiểu tại thời điểm biên dịch.
 
 ## 5.8.5 Table Driven Development
 
-Students, những người quen thuộc với opensource `lint tools` có thể thấy sự phức tạp của circle. Nếu có một `if` hoặc `switch` trong hàm, độ phức tạp sẽ tăng lên. Do đó, mỗi khi có một thành viên miễn cưỡng, nếu như bạn có một hàm trong khối `switch`, bạn phải muốn nó. `switch` Có cách nào để thoát khỏi nó? dĩ nhiên, đó là cách table-driven để store như ví dụ  dưới
-
+Nếu trong hàm có sử dụng `if` hoặc `switch` thì sẽ làm phức tạp hơn. Có cách
 ```go
 func entry() {
     var bi BusinessInstance
@@ -255,7 +248,7 @@ func entry() {
 }
 ```
 
-Có thể được sửa đổi thành
+Có thể được sửa đổi thành:
 
 ```go
 var businessInstanceMap = map[int]BusinessInstance {
@@ -268,6 +261,6 @@ func entry() {
 }
 ```
 
-Ở `Table-driven design`, nhiều thiết kế liên quan không dùng nó như một design pattern, nhưng tôi nghĩ nó vẫn có ý nghĩa quan trọng để giúp chúng ta đơn giản mã nguồn, bạn có thể nghĩa về lượng lớn thời gian cho công việc phát triển hằng ngày, `switch case` và bạn có thể dễ dàng làm nó với một dictionary và một dòng code.
+Ở `Table-driven design`, nhiều thiết kế liên quan không dùng nó như một design pattern, nhưng chúng tôi nghĩ nó vẫn có ý nghĩa quan trọng để giúp chúng ta đơn giản mã nguồn.
 
-Dĩ nhiên, `table-driven` không phải là một bất lợi, bởi vì bạn cần `key` để tính toán hash từ đầu vào, trong trường hợp đó, sự nhạy cảm về hiệu suất, bạn cần phải cân nhắc kĩ lưỡng.
+Dĩ nhiên, `table-driven` không phải là một lựa chọn hoàn hảo, bởi vì bạn cần tính hash từ `key`. Trong trường hợp hiệu suất là quan trọng ta cần phải cân nhắc kĩ lưỡng khi sử dụng.

@@ -49,7 +49,7 @@ Tất nhiên, sử dụng MySQL đồng nghĩa với việc thêm một phụ th
 
 Xem xét đến việc có một dịch vụ tạo id bị lỗi trong cluster, một phần của id bị mất trong một khoảng thời gian, thì chúng ta cần một cách mạnh tay là viết trực tiếp worker_id vào cấu hình của worker. Khi hệ thống đó hoạt động lại, đoạn script triển khai sẽ quy định giá trị worker_id.
 
-## 6.1.2 Các nguồn mở
+## 6.1.2 Các opensource
 
 ### 6.1.2.1 Hiện thực theo snowflake chuẩn
 
@@ -113,7 +113,7 @@ Dĩ nhiên, thư viện này cũng cho phép chúng ta tùy chỉnh vài thông 
 
 ### 6.1.2.2 Sonyflake
 
-Sonyflower là một dự án nguồn mở của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác. Xem *Hình 6-3*:
+Sonyflower là một dự án opensource của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác. Xem *Hình 6-3*:
 
 ![sonyflake](../images/ch6-snoyflake.png)
 
