@@ -1,11 +1,11 @@
 # 5.4 Kiểm tra yêu cầu validator
 
-Một số lập trình viên sử dụng chế giễu cấu trúc của PHP bằng hình sau:
+Một số lập trình viên thích chế giễu cấu trúc của PHP bằng hình sau:
 
 ![validator-process](../images/ch5-04-validate.jpg)
 *Hình 5-10 Quá trình validator*
 
-Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ. Có nhiều trường hợp mà các trường cần phải xác nhận (validate). Form hoặc JSON submit chỉ là một ví dụ điển hình. Chúng ta sử dụng Go để viết một ví dụ xác nhận giống với ở trên, sau đó sẽ xem xét để cải thiện nó theo từng bước.
+Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ. Có nhiều trường hợp mà các trường cần phải xác nhận (validate). Form hoặc JSON submit chỉ là một ví dụ điển hình. Chúng ta sử dụng Go để viết một ví dụ validate giống với ở trên, sau đó sẽ xem xét để cải thiện nó theo từng bước.
 
 ## 5.4.1 Tái cấu trúc hàm request validation
 
@@ -72,7 +72,7 @@ Thế là đoạn code trở nên "sạch" hơn và nhìn bớt kì cục. Mặc
 
 ## 5.4.2 Cải tiến với validator
 
-Từ quan điểm thiết kế, chúng ta chắc chắn sẽ phải khai báo một cấu trúc cho mỗi request. Các trường hợp validate được đề cập trong phần trước đều có thể được thực hiện thông qua validator. Đoạn code sau lấy lại struct trong phần trước làm ví dụ. Để cho gọn trước tiên chúng ta sẽ bỏ qua thẻ json.
+Từ quan điểm thiết kế, chúng ta chắc chắn sẽ phải khai báo một cấu trúc cho mỗi request. Các trường hợp validate được đề cập trong phần trước đều có thể được thực hiện thông qua validator. Đoạn code sau lấy lại struct trong phần trước làm ví dụ. Để cho gọn chúng ta sẽ bỏ qua thẻ json.
 
 Ở đây ta sử dụng một thư viện validator mới: <https://github.com/go-playground/validator>
 
