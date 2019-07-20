@@ -106,9 +106,16 @@ Hiện tại cộng đồng opensource có một web framework được rất nh
 
 ## 5.2.2 Principle
 
-Cấu trúc dữ liệu được dùng bởi httprouter và nhiều routers dẫn xuất khác là Radix Tree. Người đọc có thể sẽ liên tưởng đến những cây khác như `compressed dictionary tree` và hoặc đã nghe về dictionary tree (Trie Tree). Hình 5.1 là một kiểu cấu trúc dictionary tree.
+Cấu trúc dữ liệu được dùng bởi httprouter và nhiều routers dẫn xuất khác là Radix Tree. Người đọc có thể sẽ liên tưởng đến những cây khác như `compressed dictionary tree` và hoặc đã nghe về dictionary tree (Trie Tree).
 
-![](../images/ch5-02-trie.png)
+<div align="center">
+	<img src="../images/ch5-02-trie.png">
+	<br/>
+	<span align="center">
+		<i>Cấu trúc dictionary tree</i>
+	</span>
+</div>
+<br/>
 
 Cây dictionary thường được dùng để truy xuất chuỗi, như là xây dựng một cây từ điển với các chuỗi. Với chuỗi cần truy xuất, phương pháp tìm kiếm theo chiều sâu sẽ bắt đầu từ node gốc, có thể chắn chắn rằng chuỗi string đó có xuất hiện trong cây từ điển hay không, và thời gian xấp xỉ là `O(n)`, và n là độ dài của target string. Tại sao chúng ta muốn làm như vậy? Bản thân string không phải là một kiểu số học nên không thể so sánh trực tiếp như kiểu số, và thời gian xấp xỉ của việc so sánh hai string là phụ thuộc vào độ dài của strings, và sau đó dùng giải thuật như là binary search để tìm kiếm, độ phức tạp về thời gian có thể cao. Cây dictionary có thể được xem xét nhưng là một cách thông thường về  sự thay đổi không gian và thời gian.
 
@@ -172,9 +179,14 @@ r.PUT("/user/installations/:installation_id/repositories/:reposit", Hello)
 
 `PUT` sẽ ứng với node gốc được tạo ra. Cây có dạng:
 
-![](../images/ch5-02-radix-put.png)
-
-*Hình 5.3 Một cây từ điển nén được insert vào route*
+<div align="center">
+	<img src="../images/ch5-02-radix-put.png">
+	<br/>
+	<span align="center">
+		<i>Một cây từ điển nén được insert vào route</i>
+	</span>
+</div>
+<br/>
 
 Kiểu của mỗi node trong cây radix là `*httprouter.node`, để thuận tiện cho việc giải thích, chúng ta hãy chú ý tới một số trường:
 
@@ -195,17 +207,28 @@ Dĩ nhiên, route của phương thức `PUT` chỉ là một đường dẫn. T
 
 Khi chúng ta chèn `GET /marketplace_listing/plans`, quá trình `PUT` sẽ tương tự như trước:
 
-![](../images/ch5-05-radix-get-1.png)
-
-*Hình 5.4: Chèn node đầu tiên vào cây compressed dictionary*
+<div align="center">
+	<img src="../images/ch5-05-radix-get-1.png">
+	<br/>
+	<span align="center">
+		<i>Chèn node đầu tiên vào cây compressed dictionary</i>
+	</span>
+</div>
+<br/>
 
 Bởi vì đường route đầu tiên không có tham số, đường dẫn chỉ được lưu trong node gốc. Do đó có thể xem là một node.
 
 Sau đó chèn đường dẫn `GET /marketplace_listing/plans/:id/accounts` và một nhánh mới sẽ có tiền tố common, và có thể được chèn một cách trực tiếp đến node lá, sau đó kết quả trả về rất đơn giản, sau quá trình chèn, cấu trúc cây được hoàn thành sẽ như sau:
 
-![](../images/ch5-02-radix-get-2.png)
+<div align="center">
+	<img src="../images/ch5-02-radix-get-2.png">
+	<br/>
+	<span align="center">
+		<i>Chèn node thứ hai vào cây compressed dictionary</i>
+	</span>
+</div>
+<br/>
 
-*Hình 5.5: Chèn node thứ hai vào cây compressed dictionary*
 
 Do đó, `:id` trong node là một con của string, và chỉ số vẫn chưa cần được xử lý.
 
@@ -215,17 +238,27 @@ Trường hợp trên rất đơn giản, một route mới có thể được c
 
 Tiếp theo chúng ta chèn `GET /search`, sau đó sẽ sinh ra cây split tree như hình 5.6:
 
-![](../images/ch5-02-radix-get-3.png)
-
-*Hình 5.6 Chèn vào node thứ ba sẽ gây ra việc phân nhánh*
+<div align="center">
+	<img src="../images/ch5-02-radix-get-3.png">
+	<br/>
+	<span align="center">
+		<i>Chèn vào node thứ ba sẽ gây ra việc phân nhánh</i>
+	</span>
+</div>
+<br/>
 
 Đường dẫn cũ và đường dẫn mới có điểm bắt đầu là `/` để phân tách, chuỗi truy vấn phải bắt đầu từ node gốc chính, sau đó một route là `search` được phân nhánh từ gốc. Lúc này, bởi vì có nhiều nodes con. Node gốc sẽ chỉ ra index của node con, và trường thông tin này cần phải come in handy. "ms" biểu diễn sự bắt đầu của node con và m (marketplace) và s(search).
 
 Chúng tôi dùng `GET /status` và `GET /support` để chèn sum vào cây. Lúc này, sẽ dẫn đến `search split` một lần nữa, trên node, và kết quả cuối cùng được nhìn thấy ở hình `5.7`:
 
-![](../images/ch5-02-radix-get-4.png)
-
-*Hình 5.7 Sau khi chèn tất cả các node*
+<div align="center">
+	<img src="../images/ch5-02-radix-get-4.png">
+	<br/>
+	<span align="center">
+		<i>Sau khi chèn tất cả các node</i>
+	</span>
+</div>
+<br/>
 
 ### 5.2.3.4 Subnode conflict handling
 

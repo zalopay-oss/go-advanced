@@ -39,11 +39,14 @@ Cách thứ tư, là pha trộn giữa cách thứ hai và thứ ba, hai phần 
 
 Cấu trúc vùng nhớ của array thì rất đơn giản. Ví dụ cho một array `[4]int{2,3,5,7}` thì cấu trúc bên dưới sẽ như sau:
 
-<p align="center" width="600">
-<img src="../images/ch1-7-array-4int.ditaa.png">
+<div align="center">
+	<img src="../images/ch1-7-array-4int.ditaa.png">
+	<br/>
+	<span align="center">
+		<i>Array layout</i>
+	</span>
+</div>
 <br/>
-<span>Hình 1-7 Array layout</span>
-</p>
 
 Array trong ngôn ngữ Go mang ngữ nghĩa giá trị. Biến thể hiện array được xem như là toàn bộ array. Nó không phải là một con trỏ ngầm định tới phần tử đầu tiên (như trong ngôn ngữ C), mà hoàn toàn là một giá trị. Khi biến array được gán hoặc truyền, thì toàn bộ array sẽ được sao chép. Nếu kích thước của array lớn, thì phép gán array sẽ chịu tổn phí lớn. Để tránh việc `overhead` (tổn phí) trong việc sao chép array, bạn có thể truyền con trỏ tới array, lưu ý con trỏ array thì không phải là một array.
 
@@ -182,11 +185,14 @@ Cấu trúc của string chứa hai phần thông tin: đầu tiên là con tr�
 
 Chúng ta có thể thấy cấu trúc vùng nhớ tương ứng với dòng string "Hello World" là 
 
-<p align="center" width="600">
-<img src="../images/ch1-8-string-1.ditaa.png">
+<div align="center">
+	<img src="../images/ch1-8-string-1.ditaa.png"width="600">
+	<br/>
+	<span align="center">
+		<i>String layout</i>
+	</span>
+</div>
 <br/>
-<span>Hình 1-8 String layout</span>
-</p>
 
 Phân tích ra chúng ta có thể thấy rằng bên dưới dòng chữ "Hello World" trong string chính xác là một array như sau
 
@@ -235,11 +241,14 @@ fmt.Println("\xe7\x95\x8c")
 界
 ```
 
-<p align="center" width="600">
-<img src="../images/ch1-9-string-2.ditaa.png">
+<div align="center">
+	<img src="../images/ch1-9-string-2.ditaa.png">
+	<br/>
+	<span align="center">
+		<i>String layout</i>
+	</span>
+</div>
 <br/>
-<span>Hình 1-9 String layout</span>
-</p>
 
 Vì phần tử của string có thể  là những byte nhị phân, nên có thể bắt gặp một số trường hợp các kí tự **UTF8** sẽ không được mã hóa chuẩn xác. Nếu bạn phát hiện được trường hợp nào mà UTF8 không encoded (mã hóa) đúng, một kí tự Unicode đặt biệt sẽ được in ra là `uFFFD` Kí tự này sẽ trông khác nhau ở những phầm mềm khác nhau. Thường thì kí tự này là một hình tứ giác hoặc kim cương màu đen, ở giữa chứa dấu hỏi.
 
@@ -394,12 +403,14 @@ type  SliceHeader  struct {
 
 Có thể nhìn thấy rằng khởi đầu một slice là giống như Go String, nhưng slice có thêm thuộc tính `Cap` chỉ ra kích thước tối đa mà vùng nhớ trỏ tới slice được cấp phát. Hình bên dưới sẽ mô phỏng với `x := []int{2,3,5,7,11}` và `y := x[1:3]` cấu trúc vùng nhớ tương ứng với chương thứ hai.
 
-
-<p align="center" width="600">
-<img src="../images/ch1-10-slice-1.ditaa.png">
+<div align="center">
+	<img src="../images/ch1-10-slice-1.ditaa.png">
+	<br/>
+	<span align="center">
+		<i>Slice layout</i>
+	</span>
+</div>
 <br/>
-<span>Hình 1-10 Slice layout</span>
-</p>
 
 Hãy nhìn vào định nghiã slices bên dưới:
 

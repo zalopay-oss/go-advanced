@@ -12,12 +12,12 @@ Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ h�
 - Khi một package được import mà nó lại import các package khác, trước tiên Go sẽ import các package khác đó trước, sau đó  khởi tạo các hằng và biến của package, rồi gọi hàm `init` trong từng package.
 - Nếu một package có nhiều hàm `init` và thứ tự gọi không được xác định cụ thể (phần implement có thể được gọi theo thứ tự tên file), thì chúng sẽ được gọi theo thứ tự xuất hiện (`init` không phải là hàm thông thường, nó có thể có nhiều định nghĩa, và các hàm khác không thể sử dụng nó). Cuối cùng, khi `main` đã có đủ tất cả hằng và biến ở cấp package, chúng sẽ được khởi tạo bằng cách thực thi hàm `init`, tiếp theo chương trình đi vào hàm `main.main` và  bắt đầu thực thi. Hình dưới đây là sơ đồ nguyên lý  một chuỗi bắt đầu của chương trình hàm trong Go:
 
-<p align="center">
-
+<div align="center">
 <img src="../images/ch1-11-init.ditaa.png">
-<span align="center">Hình 1-11. Tiến trình khởi tạo package</span>
-
-</p>
+<br/>
+<span align="center"><i>Tiến trình khởi tạo package</i></span>
+</div>
+<br/>
 
 Cần lưu ý rằng trong `main.main` tất cả các mã lệnh đều chạy trong cùng một Goroutine trước khi hàm được thực thi, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi chạy từ hàm `main` trong một Goroutine mới với từ khóa go, thì Goroutine đó chỉ có `main.main` có thể được thực thi sau khi vào hàm.
 

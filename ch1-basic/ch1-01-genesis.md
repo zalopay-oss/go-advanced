@@ -4,11 +4,14 @@ Ngôn ngữ **Go** ban đầu được thiết kế và phát triển bởi mộ
 
 Ngôn ngữ Go thường được mô tả là "Ngôn ngữ tựa C" hoặc là "Ngôn ngữ C của thế kỉ 21". Từ nhiều khía cạnh, ngôn ngữ Go thừa hưởng những ý tưởng từ ngôn ngữ C, như là cú pháp, cấu trúc điều khiển, kiểu dữ liệu cơ bản, thủ tục gọi - trả về, con trỏ, v,v.., hoàn toàn kế thừa và phát triển ngôn ngữ C - một ngôn ngữ cấp thấp, hình bên dưới mô tả sự liên quan của ngôn ngữ Go với các ngôn ngữ khác. Theo đó chúng ta có thể thấy những ngôn ngữ ảnh hưởng tới Go.
 
-<p align="center">
-<img src="../images/ch1-1-go-family-tree.png" width="600"/>
-</p>
-
-*Hình 1-1 Cây phả hệ của ngôn ngữ Go*
+<div align="center">
+	<img src="../images/ch1-1-go-family-tree.png" width="600">
+	<br/>
+	<span align="center">
+		<i>Cây phả hệ của ngôn ngữ Go</i>
+	</span>
+</div>
+<br/>
 
 Đầu tiên, quan sát phía bên trái của sơ đồ, có thể được nhìn thấy rõ ràng rằng tính chất **concurrency** (đồng thời) của ngôn ngữ **Go** được phát triển từ học thuyết **CSP** được công bố bởi **Bell Labs' Hoare** vào năm 1978. Sau đó, mô hình **CSP** dần dần được tinh chế và được ứng dụng thực tế trong một số ngôn ngữ lập trình như là **Squeak/NewSqueak** và **Alef**. Những thực tiễn thiết kế mô hình **CSP** đó cuối cùng được hấp thu bởi ngôn ngữ Go. Mô hình concurrency của thế hệ ngôn ngữ Erlang là một hiện thực khác của học thuyết **CSP**.
 
@@ -25,23 +28,27 @@ Khả năng lập trình concurrency của Go đến từ một nghiên cứu í
 
 Ví dụ kinh điển của việc áp dụng mô hình CSP concurrent là ngôn ngữ  **Erlang**, được phát triển bởi **Ericsson**. Tuy nhiên, trong khi Erlang sử dụng học thuyết CSP trong mô hình lập trình concurrency, Rob Pike là người cũng đến từ Bell Labs và đồng nghiệp của ông cũng thử giới thiệu mô hình CSP concurrency vào việc phát triển một ngôn ngữ mới tại thời điểm đó. Lần đầu tiên họ cố gắng giới thiệu mô hình CSP concurency trong một ngôn ngữ được gọi là Squeak, đây là một ngôn ngữ xử lý sự kiện từ chuột và bàn phím trong những pipe được khởi tạo tĩnh. Sau đó có một phiên bản cải thiện là NewSqueak, cú pháp và mệnh đề của chúng cũng tương tự như C, và Pascal. NewSqueak thì chỉ là một ngôn ngữ lập trình hàm với cơ chế thu gom vùng nhớ thừa tự động từ các sự kiện của bàn phím, chuột, và màn hình. Tuy nhiên trong ngôn ngữ Newsquek, pipeline đã thực sự được khởi tạo động, pipeline là kiểu giá trị đầu tiên có thể lưu trữ trong biến. Sau đó, ngôn ngữ Alef (đó cũng là một ngôn ngữ được ưa thích bởi Ritchie - cha đẻ của ngôn ngữ C). Alef là sự chuyển đổi của Newsqueak thành một ngôn ngữ lập trình hệ thống, nhưng cực kỳ khó khăn để có mô hình concurrency trong một ngôn ngữ thiếu cơ chế thu gom vùng nhớ tự động (trong C, ta phải gọi hàm `free()` thủ công để làm việc này). Có một ngôn ngữ khác tên là Limbo sau ngôn ngữ Alef, nó là một ngôn ngữ nhúng chạy trên máy ảo. Limbo là thế hệ gần nhất với ngôn ngữ Go, nó có những cú pháp tương tự như Go. Qua việc thiết kế Go, Rob Pike đã tổng hợp nhiều thập kỉ trong việc thiết kế mô hình CSP concurrent. Tính chất lập trình concurrency trong Go hơi phức tạp, chúng sẽ được đề cập trong bộ tài liệu này.
 
-*Hình 1-2 chỉ ra lịch sử phát triển của ngôn ngữ Go qua codebase logs (Git is git log --before={2008-03-03} --reverseviewed with commands).*
+Hình dưới chỉ ra lịch sử phát triển của ngôn ngữ Go qua codebase logs (Git is git log --before={2008-03-03} --reverseviewed with commands).
 
-<p align="center">
-<img src="../images/ch1-2-go-log4.png" width="600"/>
-</p>
-
-*Hình 1-2 Go language development log*
+<div align="center">
+	<img src="../images/ch1-2-go-log4.png" width="600">
+	<br/>
+	<span align="center">
+		<i>Go language development log</i>
+	</span>
+</div>
+<br/>
 
 Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go được dần phát triển từ ngôn ngữ B - được phát minh bởi **Ken Thompson** và ngôn ngữ C được phát triển bởi **Dennis M.Ritchie**. Đó là thế hệ ngôn ngữ C đầu tiên, do đó nhiều người gọi Go là ngôn ngữ lập trình C của thế kỉ 21.
 
-Hình 1-3 chỉ ra cuộc cách mạng của các thế hệ ngôn ngữ lập trình từ Bell Labs và đến Go:
-
-<p align="center">
-<img src="../images/ch1-3-go-history.png" width="600"/>
-</p>
-
-*Hình 1-3 Lịch sử phát triển của lập trình concurrency trong Go*
+<div align="center">
+	<img src="../images/ch1-3-go-history.png" width="600">
+	<br/>
+	<span align="center">
+		<i>Lịch sử phát triển của lập trình concurrency trong Go</i>
+	</span>
+</div>
+<br/>
 
 Trong suốt quá trình phát triển ngôn ngữ lập trình từ Bell Labs, từ B đến C, NewSqueak, Alef, Limbo, ngôn ngữ Go thừa hưởng một nửa thế kỉ của việc thiết kế từ những thế hệ trước, cuối cùng hoàn thành sứ mệnh tạo ra một thế hệ ngôn ngữ tựa C mới. Trong vòng những năm gần đâu, Go trở thành một ngôn ngữ lập trình vô cùng quan trọng trong `cloud computing` và `cloud storage`.
 

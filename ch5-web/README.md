@@ -1,6 +1,13 @@
 # Chương 5: Go và Web
 
-![x](../images/ch5.png)
+<div align="center">
+	<img src="../images/ch5.png">
+	<br/>
+	<span align="center">
+		<i></i>
+	</span>
+</div>
+<br/>
 
 > Bất kể ngôn ngữ lập trình nào, tốt nhất cho bạn là tốt nhất. Bất kể ngôn ngữ lập trình nào, tốt nhất vẫn là giúp ta thực thiện công việc kinh doanh ổn định. Có hàng ngàn ngôn ngữ lập trình trên thế giới, và có hàng ngàn chương trình trên thế giới. Cách tốt nhất vẫn là hiểu chúng và áp dụng chúng một cách sâu sắc. __kenrong
 

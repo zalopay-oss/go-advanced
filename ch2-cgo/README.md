@@ -1,6 +1,13 @@
 # Chapter 2: CGO Programming
 
-![x](../images/ch2.png)
+<div align="center">
+	<img src="../images/ch2.png">
+	<br/>
+	<span align="center">
+		<i></i>
+	</span>
+</div>
+<br/>
 
 Sau nhiều thập kỷ phát triển, với số lượng lớn phần mềm được viết bằng C/C++,, nhiều trong số đó được kiểm thử và tối ưu hiệu năng. Ngôn ngữ Go nên tận dụng ưu thế to lớn đó của C/C++.
 

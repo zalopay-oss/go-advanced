@@ -1,6 +1,13 @@
 # Chapter 6 Hệ thống phân tán
 
-![x](../images/ch6.png)
+<div align="center">
+	<img src="../images/ch6.png">
+	<br/>
+	<span align="center">
+		<i></i>
+	</span>
+</div>
+<br/>
 
 "Khi bị người khác chỉ trích, đừng nghĩ về việc liệu người đó có làm được việc đó không, hãy nhìn vào những gì họ nói đúng, và sau đó cải thiện bản thân. Cho dù người khác có thể làm được việc đó nhưng họ là họ, họ có thể giỏi hơn ta nhưng liệu họ có thể develop tốt hơn ta" —— hustlihaifeng
 
