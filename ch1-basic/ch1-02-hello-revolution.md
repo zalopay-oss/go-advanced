@@ -2,12 +2,14 @@
 
 Trong phần trước, chúng tôi đã giới thiệu sơ lược về các ngôn ngữ cùng họ với Go, đồng thời là các ngôn ngữ lập trình song song được phát triển bởi Bell Labs. Cuối cùng là phiên bản Go với chương trình "Hello World" được trình bày. Trên thực tế, chương trình "Hello World" là ví dụ điển hình nhất cho thấy các tính năng của những ngôn ngữ khác nhau. Trong phần này, chúng ta sẽ nhìn lại dòng thời gian phát triển của từng ngôn ngữ và xem cách mà chương trình "Hello World" phát triển thành ngôn ngữ Go hiện tại và hoàn thành sứ mệnh cách mạng của nó.
 
-<p align="center">
-
-<img src="../images/ch1-4-go-history.png">
-<span align="center">Hình 1-4. Lịch sử tiến hóa của ngôn ngữ Go </span>
-
-</p>
+<div align="center">
+	<img src="../images/ch1-4-go-history.png">
+	<br/>
+	<span align="center">
+		<i>Lịch sử tiến hóa của ngôn ngữ Go</i>
+	</span>
+</div>
+<br/>
 
 ## 1.2.1 Ngôn ngữ B - Ken Thompson, 1972
 
@@ -88,11 +90,14 @@ print("Hello ", "World", "\n");
 
 Từ chương trình trên, ngoài hàm `print` có thể hỗ trợ nhiều tham số, rất khó để thấy các tính năng liên quan đến ngôn ngữ Newsqueak. Bởi vì các tính năng liên quan đến ngôn ngữ Newsqueak và ngôn ngữ Go chủ yếu là đồng thời (concurrency) và pipeline. Do đó, ta sẽ xem xét các tính năng của ngôn ngữ Newsqueak thông qua phiên bản concurrency của thuật toán "sàng số nguyên tố". Nguyên tắc "sàng số nguyên tố" như sau:
 
-<p align="center">
-<img src="../images/ch1-5-prime-sieve.png"/>
+<div align="center">
+	<img src="../images/ch1-5-prime-sieve.png">
+	<br/>
+	<span align="center">
+		<i>Sàng số nguyên tố</i>
+	</span>
+</div>
 <br/>
-<span>Hình 1-5. Sàng số nguyên tố</span>
-</p>
 
 Chương trình "sàng số nguyên tố" cho phiên bản concurrency của ngôn ngữ Newsqueak như sau:
 
@@ -156,12 +161,14 @@ Vì ngôn ngữ Alef hỗ trợ cả thread và process trong cơ chế concurre
 
 Các tài nguyên khác nhau bị ngập giữa các thread và process khác nhau, ảnh hưởng lớn đến tài nguyên bộ nhớ concurrency. Việc quản lý chúng sẽ vô cùng phức tạp. Ngôn ngữ Alef kế thừa cú pháp của ngôn ngữ C và có thể được coi là ngôn ngữ C tăng cường thêm cú pháp concurrency. Hình ảnh sau đây là trạng thái concurrency trong tài liệu ngôn ngữ Alef:
 
-<p align="center"> 
-<img src="../images/ch1-6-alef.png">
 <div align="center">
-Hình 1-6. Mô hình concurrency trong Alef
+	<img src="../images/ch1-6-alef.png">
+	<br/>
+	<span align="center">
+		<i>Mô hình concurrency trong Alef</i>
+	</span>
 </div>
-</p>
+<br/>
 
 Chương trình "Hello World" cho phiên bản concurrency của ngôn ngữ Alef:
 

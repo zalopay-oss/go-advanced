@@ -4,13 +4,25 @@ Khía cạnh hấp dẫn nhất của Golang có tích hợp sẵn cơ chế x�
 
 Điều đầu tiên cần làm rõ là khái niệm: "đồng thời" không phải "song song" (concurrency is not parallel). Concurrency quan tâm nhiều hơn ở cấp độ thiết kế của chương trình. Các chương trình concurrency có thể được thực thi tuần tự và chỉ trên các CPU đa lõi thực sự mới có thể chạy cùng một lúc.
 
-![concurrency](../images/ch1-06-concurrency.gif)
-*Hình 1-13 Mô tả quá trình tính toán concurrency*
+<div align="center">
+
+<img src="../images/ch1-06-concurrency.gif">
+<br/>
+<span align="center"><i>Mô tả quá trình tính toán concurrency</i></span>
+    <br/>
+
+</div>
 
 Parallel quan tâm nhiều hơn đến cấp độ thực thi của chương trình. Song song cơ bản là lặp lại một số lần rất lớn các vòng lặp đơn giản. Ví dụ như một số lượng lớn các thao tác  song song về xử lý hình ảnh được thực thi trong GPU.
 
-![parallel](../images/ch1-06-parralel.gif)
-*Hình 1-14 Mô tả quá trình tính toán parallel*
+<div align="center">
+
+<img src="../images/ch1-06-parralel.gif">
+<br/>
+<span align="center"><i>Mô tả quá trình tính toán parallel</i></span>
+    <br/>
+
+</div>
 
 Với mục đích viết chương trình chạy concurrency hiệu quả hơn, từ khi bắt đầu thiết kế Golang đã tập trung vào cách thiết kế một mô hình trừu tượng đơn giản, an toàn và hiệu quả ở cấp độ ngôn ngữ lập trình, cho phép các lập trình viên tập trung vào giải quyết vấn đề và kết hợp các giải thuật mà không phải quá chú tâm vào việc quản lý các thread và tín hiệu.
 
@@ -428,12 +440,14 @@ Ta luôn có thể áp dụng nhiều cách giải quyết cho vấn đề theo 
 
 Trong phần ***1.2***, chúng tôi đã trình bày việc triển khai phiên bản concurrency của sàng số nguyên tố để chứng minh sự concurrency của Newsqueak. Phiên bản concurrency của Prime Screen là một ví dụ  cổ điển giúp chúng ta hiểu sâu hơn về các tính năng về tương tranh của Go. Nguyên tắc "sàng số nguyên tố" như sau:
 
-<p align="center">
+<div align="center">
 
 <img src="../images/ch1-13-prime-sieve.png">
-<span align="center">Hình 1-13 Sàng số nguyên tố</span>
+<br/>
+<span align="center"><i>Sàng số nguyên tố</i></span>
+    <br/>
 
-</p>
+</div>
 
 Chúng ta cần khởi tạo một chuỗi các số tự nhiên `2, 3, 4, ...` (không bao gồm 0, 1):
 

@@ -6,11 +6,16 @@ MVC frameworks là những frameworks rất phổ biến trong việc phát tri�
 2. **View** - Giao diện đồ họa được thiết kế để tương tác với người dùng.
 3. **Model** - Programmer viết các hàm mà chương trình cần phải có (hiện thực thuật toán, v,v), quản lý cơ sở dữ liệu (thêm, xóa, sửa, truy vấn, v,v), thiết kế cơ sở dữ liệu.
 
-Trải qua quá trình phát triển, phần front-end của chương trình ngày càng phức tạp. Để phần kỹ thuật tốt hơn, những phần như thế sẽ thường phân chia ra thành nhiều kiến trúc con. Có thể nhìn thấy rằng, trước và sau khi phân chia lớp V (view) từ mô hình MVC thành các thành phần, một back-end project thường chỉ có lớp C và M. Phần front và back sẽ tương tác lẫn nhau thông qua ajax. Thỉnh thoảng, ta cần giải quyết vấn đề cross-domain, và đã có những giải pháp sẵn rồi. Hình 5.13 sẽ là một lưu đồ của hệ thống từ front tới back.
+Trải qua quá trình phát triển, phần front-end của chương trình ngày càng phức tạp. Để phần kỹ thuật tốt hơn, những phần như thế sẽ thường phân chia ra thành nhiều kiến trúc con. Có thể nhìn thấy rằng, trước và sau khi phân chia lớp V (view) từ mô hình MVC thành các thành phần, một back-end project thường chỉ có lớp C và M. Phần front và back sẽ tương tác lẫn nhau thông qua ajax. Thỉnh thoảng, ta cần giải quyết vấn đề cross-domain, và đã có những giải pháp sẵn rồi. Hình sau là một lưu đồ của hệ thống từ front tới back.
 
-![](../images/ch5-07-frontend-backend.png)
-
-*Hình 5-13  Separation interaction diagram*
+<div align="center">
+	<img src="../images/ch5-07-frontend-backend.png">
+	<br/>
+	<span align="center">
+		<i>Separation interaction diagram</i>
+	</span>
+</div>
+<br/>
 
 **Vue** và **React** trong hình là hai frameworks front-end phổ biến trên thế giới, bởi vì chúng ta không tập trung nói về nó, do đó, cấu trúc front-end của project không được nhấn mạnh trên lưu đồ. Thực tế trong vài projects đơn giản, ngành công nghiệp không hoàn toàn tuân theo mô hình MVC, đặc biệt là phần M và C. Có nhiều công ty mà project của họ có rất nhiều phần logic bên trong lớp Controller, và chỉ quản lý phần lưu trữ dữ liệu ở lớp Model. Điều đó thường dẫn đến việc hiểu sai ý nghĩa của lớp Model. Về nghĩa đen, lớp này sẽ được đối xử với một vài modeling, và cái gì là Model? nó là dữ liệu!
 
@@ -23,9 +28,14 @@ Cách hiểu này hiển nhiên có vấn đề. Một business process cũng th
 Mỗi lớp sẽ thực thi công việc của nó, sau đó xây dựng lên cấu trúc của các phần parameters để truyền cho các lớp kế tiếp bằng việc tạo request từ context hiện tại
 , và sau đó gọi hàm để thực thi lớp tiếp theo. Sau khi công việc hoàn thành, kết quả của quá trình sẽ được trả về lớp ban đầu gọi nó.
 
-![](../images/ch5-07-controller-logic-dao.png)
-
-*Hình 5-14  Request processing flow*
+<div align="center">
+	<img src="../images/ch5-07-controller-logic-dao.png">
+	<br/>
+	<span align="center">
+		<i>Request processing flow</i>
+	</span>
+</div>
+<br/>
 
 Sau khi chia ra ba lớp của CLD, chúng ta cần phải hỗ trợ nhiều giao thức tại cùng một lúc trong lớp C.  Thrift, gRPC và HTTP được đề cập từ những chương trước, và chúng ta chỉ cần một trong số đó để đảm nhận công việc này. Thỉnh thoảng, chúng ta cần hỗ trợ hai trong số chúng, như là cùng một interface. Chúng ta cần cả hai efficient thrift và http hooks cho việc debugging. Do đó, thêm vào CLD, các lớp giao thức được phân tách được yêu cầu để xử lý chi tiết các giao thức tương tác đa dạng. Quá trình xử lý requesting sẽ như hình 5.15
 
@@ -120,17 +130,27 @@ type FeatureSetParams struct {
 
 Sau đó mã nguồn thrift được sinh ra từ IDL và HTTP requests được sinh ra từ cấu trúc.
 
-![](../images/ch5-07-code-gen.png)
-
-*Hình 5-16 Creating a project entry through the Go code definition structure*
+<div align="center">
+	<img src="../images/ch5-07-code-gen.png">
+	<br/>
+	<span align="center">
+		<i>Creating a project entry through the Go code definition structure</i>
+	</span>
+</div>
+<br/>
 
 Đối với phương tiện để tạo, bạn có thể đọc mã nguồn Go trong tệp văn bản thông qua Parser được xây dựng bằng ngôn ngữ Go, sau đó tạo mã đích theo AST hoặc đơn giản là biên dịch cấu trúc nguồn và mã Parser với nhau. Bạn có thể có cấu trúc làm tham số đầu vào cho Parser (sẽ đơn giản hơn).
 
 Dĩ nhiên, ý tưởng này không phải là lựa chọn duy nhất. Chúng ta có thể sinh ra một tập các cấu trúc HTTP interface bằng việc parsing IDL của thrift. Nếu chúng ta làm như vậy, toàn bộ quá trình sẽ như hình bên dưới
 
-![](../images/ch5-08-code-gen-2.png)
-
-*Hình 5-17 can also generate other parts from thrift*
+<div align="center">
+	<img src="../images/ch5-08-code-gen-2.png">
+	<br/>
+	<span align="center">
+		<i>Can also generate other parts from thrift</i>
+	</span>
+</div>
+<br/>
 
 Quy trình này trông có vẻ mượt mà hơn trước, nhưng nếu chúng ta chọn nó để hiện thực, bạn cần phải parse IDL của thrift trước, nó sẽ tương tự với việc Parser sẽ phải viết IDL bằng tay, mặc dù **Antlr** hoặc **peg** có thể giúp bạn. Đơn giản hơn việc viết những Parser, nhưng ở bước "parsing" chúng tôi không muốn giới thiệu quá nhiều, do đó chúng ta có thể thực hiện nó.
 
@@ -138,12 +158,16 @@ Bây giờ, workflow đã được định hình, chúng ta có thể nhận ra 
 
 Ví dụ, trong môi trường sinh mã đã được giới thiệu ở chương Web, cũng như user có thể sinh ra SDK với vài cú click chuột, người đọc có thể tự tìm hiểu.
 
-
 Mặc dù chúng ta đã thành công trong việc cho phép projects hỗ trợ nhiều giao thức tại portal, vẫn có một số vấn đề cần được giải quyết. Việc phân lớp được mô tả trong chương này không dùng middleware để phân lớp project. Nếu chúng ta xem xét middleware, đâu là quá trình requesting? Nhìn vào hình 5-18 bên dưới.
 
-![](../images/ch5-08-control-flow-2.png)
-
-*Hình 5-18 Control flow after adding middleware*
+<div align="center">
+	<img src="../images/ch5-08-control-flow-2.png">
+	<br/>
+	<span align="center">
+		<i>Control flow after adding middleware</i>
+	</span>
+</div>
+<br/>
 
 Ở phần middleware trước mà chúng ta đã tìm hiểu, nó liên hệ chặt chẽ đến giao thức HTTP. Không may là không có middleware trong thrift có thể giải quyết những vấn đề về non-functional logic code dupplication problems với HTTP.
 

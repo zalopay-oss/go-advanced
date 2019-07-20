@@ -76,7 +76,7 @@ Trong dòng ghi chú `import "C"` phía trước các lệnh. Bạn có thể đ
 ```go
 // #cgo CFLAGS: -DPNG_DEBUG=1 -I./include   // Định nghĩa macro PNG_DEBUG, giá trị là 1
 // #cgo LDFLAGS: -L/usr/local/lib -lpng
-// #include <png.h>
+// #include <divng.h>
 import "C"
 ```
 

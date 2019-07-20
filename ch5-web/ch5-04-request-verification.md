@@ -2,8 +2,14 @@
 
 Một số lập trình viên thích chế giễu cấu trúc của PHP bằng hình sau:
 
-![validator-process](../images/ch5-04-validate.jpg)
-*Hình 5-10 Quá trình validator*
+<div align="center">
+	<img src="../images/ch5-04-validate.jpg">
+	<br/>
+	<span align="center">
+		<i>Quá trình validator</i>
+	</span>
+</div>
+<br/>
 
 Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ. Có nhiều trường hợp mà các trường cần phải xác nhận (validate). Form hoặc JSON submit chỉ là một ví dụ điển hình. Chúng ta sử dụng Go để viết một ví dụ validate giống với ở trên, sau đó sẽ xem xét để cải thiện nó theo từng bước.
 
@@ -141,8 +147,14 @@ type T struct {
 
 Sẽ được vẽ thành một cây như bên dưới:
 
-![tree](../images/ch5-04-validate-struct-tree.png)
-*Hình 5-11 Cây validator*
+<div align="center">
+	<img src="../images/ch5-04-validate-struct-tree.png">
+	<br/>
+	<span align="center">
+		<i>Cây validator</i>
+	</span>
+</div>
+<br/>
 
 Việc validate các trường có thể đi qua cây cấu trúc này (bằng cách duyệt chiều sâu hoặc theo chiều rộng). Thử viết một ví dụ duyệt cây theo chiều sâu:
 

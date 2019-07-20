@@ -337,9 +337,14 @@ Phần WHERE trong SQL là Boolean Expression. Như chúng ta đã biết, bool 
 
 Câu trả lời là chắc chắn được. Bây giờ, chúng ta thử so sánh cấu trúc của SQL với cấu trúc của Parse và cấu trúc của DSL của es :
 
-![ast](../images/ch6-ast-dsl.png)
-
-*Hình 6-12 Sự tương ứng giữa AST và DSL*
+<div align="center">
+	<img src="../images/ch6-ast-dsl.png">
+	<br/>
+	<span align="center">
+		<i>Sự tương ứng giữa AST và DSL</i>
+	</span>
+</div>
+<br/>
 
 Ta thấy cấu trúc chúng khá giống nhau nên chúng ta có thể chuyển đổi logic của chúng cho nhau. Trước tiên, chúng ta duyệt cây AST theo chiều rộng, sau đó chuyển đổi biểu thức nhị phân thành chuỗi json và tổng hợp nó lại.
 
@@ -353,9 +358,14 @@ Có hai chương trình đồng bộ hóa phổ biến:
 
 ### Đồng bộ dữ liệu theo timestamp
 
-![sync to es](../images/ch6-sync.png)
-
-*Hình 6-13 Dựa trên timestamp để đồng bộ hóa dữ liệu*
+<div align="center">
+	<img src="../images/ch6-sync.png">
+	<br/>
+	<span align="center">
+		<i>Dựa trên timestamp để đồng bộ hóa dữ liệu</i>
+	</span>
+</div>
+<br/>
 
 Phương thức đồng bộ hóa này cần phải phù hợp với nhu cầu của doanh nghiệp. Ví dụ, đối với đơn hàng trong hệ thống WMS, chúng ta không cần tính realtime cao và việc xử lý chậm có thể chấp nhận được. Vì vậy, chúng tôi có thể xử lý đơn hàng cứ mỗi 10 phút, logic cụ thể giống câu SQL sau:
 
@@ -375,9 +385,14 @@ Sau khi tăng khoảng thời gian lên 11 phút thì mọi thứ đã ổn hơn
 
 ### Đồng bộ hóa dữ liệu với binlog
 
-![binlog-sync](../images/ch6-binlog-sync.png)
-
-*Hình 6-13 Đồng bộ hóa dữ liệu dựa trên binlog*
+<div align="center">
+	<img src="../images/ch6-binlog-sync.png">
+	<br/>
+	<span align="center">
+		<i>Đồng bộ hóa dữ liệu dựa trên binlog</i>
+	</span>
+</div>
+<br/>
 
 Canal là opensource của Ali và nó  được dùng để phân tích cú pháp binlog và đồng bộ hóa bởi nhiều công ty. Canal sẽ hoạt động như một thư viện phụ thuộc MySQL, nó sẽ phân tích cú pháp bincode của từng dòng và gửi nó đến hàng đợi tin nhắn theo định dạng dễ hiểu hơn (chẳng hạn như json).
 

@@ -21,11 +21,16 @@ Việc hiện thực các bộ đếm thời gian đã là một vấn đề que
 
 ### 6.3.1.1 Time heap
 
-Time heap là phổ biến nhất và thường được hiện thực bằng min heap. Min heap là một cây nhị phân đặc biệt. Xem * Hình 6-4 *
+Time heap là phổ biến nhất và thường được hiện thực bằng min heap. Min heap là một cây nhị phân đặc biệt.
 
-![二叉堆](../images/ch6-binary_tree.png)
-
-*Hình 6-4 Cấu trúc heap nhị phân*
+<div align="center">
+	<img src="../images/ch6-binary_tree.png">
+	<br/>
+	<span align="center">
+		<i>Cấu trúc heap nhị phân</i>
+	</span>
+</div>
+<br/>
 
 Những lợi ích của min heap là gì? Trong thực tế, đối với bộ đếm thời gian, nếu phần tử trên cùng lớn hơn thời gian hiện tại, thì tất cả các phần tử trong heap đều lớn hơn thời gian hiện tại. Hơn nữa, chúng ta không cần quan tâm gì về time heap. Độ phức tạp thời gian của việc kiểm tra này là `O(1)`.
 
@@ -33,9 +38,14 @@ Khi ta thấy các phần tử đầu của heap nhỏ hơn thời điểm hiệ
 
 Bộ đếm thời gian tích hợp sẵn của Go được hiện thực với một time heap, nhưng thay vì sử dụng một heap nhị phân, một giải pháp tốt hơn được sử dụng. Hãy nhìn vào min heap với bốn cạnh trông như thế nào:
 
-![Quad fork](../images/ch6-four-branch-tree.png)
-
-*Hình 6-5 Quad Cross Stack Structure*
+<div align="center">
+	<img src="../images/ch6-four-branch-tree.png">
+	<br/>
+	<span align="center">
+		<i>Quad Cross Stack Structure</i>
+	</span>
+</div>
+<br/>
 
 Bản chất của min heap, node cha nhỏ hơn bốn node con của nó, không có mối quan hệ kích thước đặc biệt giữa các node con.
 
@@ -43,9 +53,14 @@ Không có sự khác biệt giữa thời gian quá hạn của phần tử và
 
 ### 6.3.1.2 Time Wheel
 
-![timewheel](../images/ch6-timewheel.png)
-
-*Hình 6-6 Time Wheel*
+<div align="center">
+	<img src="../images/ch6-timewheel.png">
+	<br/>
+	<span align="center">
+		<i>Time Wheel</i>
+	</span>
+</div>
+<br/>
 
 Khi sử dụng time wheel để hiện thực bộ đếm thời gian, chúng ta cần xác định `tỷ lệ` của mỗi ô. Bánh xe thời gian có thể được tưởng tượng như một chiếc đồng hồ và trung tâm có kim giây theo chiều kim đồng hồ. Mỗi lần chúng ta chuyển sang một ô, chúng ta cần xem danh sách nhiệm vụ được gắn trên ô đó có nhiệm vụ đã đến hạn hay không.
 
@@ -59,9 +74,14 @@ Thông qua cách hiện thực bộ đếm thời gian cơ bản, nếu chúng t
 
 Chúng ta cần phân bố các công việc theo "thời gian" hoặc "trì hoãn" công việc (về cơ bản cũng là thời gian). Ý tưởng là:
 
-![task-dist](../images/ch6-task-sched.png)
-
-*Hình 6-7 Distributed Task Distribution*
+<div align="center">
+	<img src="../images/ch6-task-sched.png">
+	<br/>
+	<span align="center">
+		<i>Distributed Task Distribution</i>
+	</span>
+</div>
+<br/>
 
 Mỗi giờ, mỗi instance sẽ vào cơ sở dữ liệu để truy xuất các tác vụ được định thời trước để xử lý trong giờ tiếp theo. Chỉ cần chọn các tác vụ đó với `task_id % shard_count = shard_id`.
 
@@ -78,22 +98,31 @@ Khi tác vụ của chúng ta thực hiện lỗi do một máy nào đó trong 
 
 Đây là một ý tưởng:
 
-Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của Elaticsearch, mỗi dữ liệu của tác vụ có nhiều bản sao. Giả sử hai bản sao như trong *Hình 6-8*:
+Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của Elaticsearch, mỗi dữ liệu của tác vụ có nhiều bản sao. Giả sử hai bản sao như trong sau:
 
-
-![Data Distribution](../images/ch6-data-dist1.png)
-
-*Hình 6-8 Task Data Distribution*
+<div align="center">
+	<img src="../images/ch6-data-dist1.png">
+	<br/>
+	<span align="center">
+		<i>Task Data Distribution</i>
+	</span>
+</div>
+<br/>
 
 Mặc dù có hai chủ sở hữu của một dữ liệu, dữ liệu sẽ có sự phân biệt: bản chính hay bản phụ. Bản chính là ô vuông có tô đậm viền trong hình và bản phụ có viền bình thường.
 
 Một tác vụ sẽ chỉ được thực hiện trên node có bản chính.
 
-Khi có máy bị lỗi, ta cần phân phối các dữ liệu của tác vụ trên máy này. Ví dụ, node 1 bị treo, xem *Hình 6-9*.
+Khi có máy bị lỗi, ta cần phân phối các dữ liệu của tác vụ trên máy này. Ví dụ, node 1 bị treo, xem hình sau.
 
-![Data Distribution 2](../images/ch6-data-dist2.png)
-
-*Hình 6-9 Data distribution at fault*
+<div align="center">
+	<img src="../images/ch6-data-dist2.png">
+	<br/>
+	<span align="center">
+		<i>Data distribution at fault</i>
+	</span>
+</div>
+<br/>
 
 Dữ liệu của node 1 sẽ được di chuyển đến node 2 và node 3.
 

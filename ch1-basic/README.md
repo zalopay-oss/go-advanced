@@ -1,6 +1,13 @@
 # Chương 1 Language Foundation
 
-![x](../images/ch1.png)
+<div align="center">
+	<img src="../images/ch1.png">
+	<br/>
+	<span align="center">
+		<i></i>
+	</span>
+</div>
+<br/>
 
 >*Tôi không biết tại sao bạn lại không vui trong suốt 10 năm qua. Nhưng hãy tin tôi đi, xóa bỏ đi những nặng nhọc trong quá khứ, dùng ngôn ngữ Go và trải nghiệm niềm hạnh phúc bắt đầu!*
 
