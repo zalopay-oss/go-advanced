@@ -40,7 +40,7 @@ func main() {
 }
 ```
 
-Bởi vì `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, vì vậy nó không đáp ứng được mô hình bộ nhớ nhất quán tuần tự. Đồng thời, chúng không có sự kiện đồng bộ hóa nào khác để tham chiếu tới. Hai sự kiện này vì thế không thể thực thi concurrency. Bởi vì khi chúng concurrency, rất có khả `mu.Unlock()` trong `main` sẽ thực thi trước và tại thời điểm này, mutex `mu` vẫn ở trạng thái mở khóa, điều này sẽ gây ra runtime exceptions.
+Bởi vì `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, vì vậy nó không đáp ứng được mô hình bộ nhớ nhất quán tuần tự. Đồng thời, chúng không có sự kiện đồng bộ hóa nào khác để tham chiếu tới. Hai sự kiện này vì thế không thể thực thi concurrency. Bởi vì khi chúng concurrency, rất có khả năng `mu.Unlock()` trong `main` sẽ thực thi trước và tại thời điểm này, mutex `mu` vẫn ở trạng thái unlocked, điều này sẽ gây ra runtime exceptions.
 
 Sau đây là đoạn code đã sửa:  
 
