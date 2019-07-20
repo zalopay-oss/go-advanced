@@ -18,10 +18,14 @@ Một array là một chuỗi độ dài cố định của các phần tử có
 Đầu tiên, xem cách định nghĩa một array.
 
 ```go
-var a [3]int  // Định nghĩa một mảng kiểu int độ dài 3, các phần tử đều bằng 0
-var b = [...]int{1, 2, 3} // Định nghĩa một mảng có ba phần tử 1, 2, 3, do đó độ dài là 3
-var c = [...]int{2: 3, 1: 2} // Mảng này có 3 phần tử theo thứ tự là 0, 2, 3
-var d = [...]int{1, 2, 4: 5, 6} // Mảng này chứa dãy các phần tử là 1, 2, 0 , 0, 5, 6
+// Định nghĩa một mảng kiểu int độ dài 3, các phần tử đều bằng 0
+var a [3]int
+// Định nghĩa một mảng có ba phần tử 1, 2, 3, do đó độ dài là 3
+var b = [...]int{1, 2, 3} 
+// Mảng này có 3 phần tử theo thứ tự là 0, 2, 3
+var c = [...]int{2: 3, 1: 2} 
+// Mảng này chứa dãy các phần tử là 1, 2, 0 , 0, 5, 6
+var d = [...]int{1, 2, 4: 5, 6} 
 ```
 
 
@@ -44,17 +48,19 @@ Cấu trúc vùng nhớ của array thì rất đơn giản. Ví dụ cho một 
 Array trong ngôn ngữ Go mang ngữ nghĩa giá trị. Biến thể hiện array được xem như là toàn bộ array. Nó không phải là một con trỏ ngầm định tới phần tử đầu tiên (như trong ngôn ngữ C), mà hoàn toàn là một giá trị. Khi biến array được gán hoặc truyền, thì toàn bộ array sẽ được sao chép. Nếu kích thước của array lớn, thì phép gán array sẽ chịu tổn phí lớn. Để tránh việc `overhead` (tổn phí) trong việc sao chép array, bạn có thể truyền con trỏ tới array, lưu ý con trỏ array thì không phải là một array.
 
 ```go
-var a = [...]int{1, 2, 3} // a là một array
-var b = &a                // b là một con trỏ tới array a
-
-fmt.Println(a[0], a[1])   // in ra hai phần tử đầu tiên của array a
-fmt.Println(b[0], b[1])   // truy xuất các phần tử của con trỏ array cũng giống như truy xuất các phần tử của array
-
-for i, v := range b {     // duyệt qua các phần tử trong con trỏ array, giống như duyệt qua array
+// a là một array
+var a = [...]int{1, 2, 3}
+// b là một con trỏ tới array a
+var b = &a
+// in ra hai phần tử đầu tiên của array a
+fmt.Println(a[0], a[1])
+// truy xuất các phần tử của con trỏ array cũng giống như truy xuất các phần tử của array
+fmt.Println(b[0], b[1])
+// duyệt qua các phần tử trong con trỏ array, giống như duyệt qua array
+for i, v := range b {
     fmt.Println(i, v)
 }
 ```
-
 
 Trong khi `b` là một con trỏ tới array `a`, nhưng khi làm việc với `b` cũng giống như `a`. Thì hoàn toàn có thể lặp qua (dùng `for range`) đối với con trỏ array, khi chúng ta gán hoặc truyền vào hàm một con trỏ array thì chỉ có giá trị con trỏ array được sao chép. Tuy nhiên con trỏ array cũng không đủ linh hoạt, bởi vì thông tin về chiều dài của array là một phần của array, do đó nếu hai con trỏ tới hai array có độ dài khác nhau thì hai con trỏ đó cũng thuộc kiểu khác nhau.
 
@@ -73,6 +79,7 @@ for i := 0; i < len(c); i++ {
     fmt.Printf("c[%d]: %d\n", i, c[i])
 }
 ```
+
 `for range` là cách tốt nhất để duyệt qua các phần tử trong array, bởi vì cách này sẽ đảm các việc truy xuất sẽ không vượt quá giới hạn của array.
 
 Khi dùng `for range`, chúng ta có thể phớt lờ đi các tham số  đi kèm bằng cách sau
@@ -83,6 +90,7 @@ for range times {
     fmt.Println("hello")
 }
 ```
+
 Biến `times` sẽ tương ứng với kiểu array `[5][0]int`, mặc dù chiều thứ nhất của array có độ dài là 5, nhưng độ dài của array `[0]int` là 0, do đó kích thước của toàn bộ `array` là 0. Bỏ qua chi phí cho việc khởi tạo vùng nhớ chúng ta sẽ thực hiện 5 vòng lặp nhanh chóng.
 
 Các phần tử của array không nhất thiết là kiểu số học, nên cũng có thể là string, struct, function, interface, và pipe, v,v..
@@ -112,13 +120,18 @@ var unknown2 = [...]interface{}{123, "Hello!"}
 // Mảng pipe
 var chanList = [2]chan int{}
 ```
+
 Chúng ta cũng có thể định nghĩa một array rỗng
 
 ```go
-var d [0]int       // Định nghĩa một array chiều dài 0
-var e = [0]int{}   // Tương tự trên
-var f = [...]int{} // Tương tự như trên
+// Định nghĩa một array chiều dài 0
+var d [0]int
+// Tương tự trên
+var e = [0]int{}
+// Tương tự như trên
+var f = [...]int{}
 ```
+
 Một array có chiều dài 0 thì không chiếm không gian lưu trữ. Một mảng rỗng hiếm khi được sử dụng trực tiếp, có có ích trong trường hợp như sau để đồng bộ luồng thực thi, khi mà việc phát sinh thêm vùng nhớ là không thực sự cần thiết
 
 ```go
@@ -129,6 +142,7 @@ go func() {
 }()
 <-c1
 ```
+
 Ở đây, chúng ta không quan tâm về kiểu thực sự được truyền vào pipeline, trong khi thực thi lệnh nhận hoặc gửi chỉ nhằm mục đích đồng bộ thông điệp. Trong ngữ cảnh đó, chúng ta có thể sử dụng mảng rỗng trong pipe để hạn chế phí tổn của phép gán pipe. Dĩ nhiên, nó thích hợp hơn khi thay thế bằng một kiểu struct vô danh.
 
 ```go
@@ -139,20 +153,21 @@ go func() {
 }()
 <-c2
 ```
+
 Chúng ta có thể sử dụng hàm `fmt.Printf`, chúng cho phép in ra kiểu cũng như chi tiết của array thông qua các chỉ thị `%T` hoặc `%#v`
 
 ```go
-fmt.Printf("b: %T\n", b)  // b: [3]int
-fmt.Printf("b: %#v\n", b) // b: [3]int{1, 2, 3}
+// b: [3]int
+fmt.Printf("b: %T\n", b)
+// b: [3]int{1, 2, 3}
+fmt.Printf("b: %#v\n", b)
 ```
-Trong Go, kiểu array là một kiểu cơ bản như là slice và strings. Nhiều ví dụ về array phía trên có thể được áp dụng trực tiếp cho strings hoặc slices
 
+Trong Go, kiểu array là một kiểu cơ bản như là slice và strings. Nhiều ví dụ về array phía trên có thể được áp dụng trực tiếp cho strings hoặc slices
 
 ## 1.3.2 String
 
-
 Một string là một chuỗi các giá trị `byte` không được thay đổi, và string thường được dùng để biểu diễn giá trị con người có thể đọc được. Không giống như array, những phần tử trong string sẽ không được thay đổi, và chỉ có thể đọc. Chiều dài của mỗi string sẽ được cố định, những thông tin chiều dài đó không là một phần của kiểu string. Do mã nguồn của Go được yêu cầu là kiểu `UTF8`. Nội dung của string trong mã nguồn với kiểu Unicode sẽ được chuyển thành UTF8. Bởi vì mỗi phần tử của string cũng thực chất được lưu trữ thành những byte chỉ-đọc, một string có thể chứa những dữ liệu tùy ý, có thể toàn những byte zero (không). Chúng ta có thể dùng string để biểu diễn kiểu không phải là UTF8 bằng cách mã hóa chúng như là GBK, nhưng cơ bản không nên làm như vậy bởi vì hàm mệnh đề `for range` trong Go không hỗ trợ duyệt string mang kí tự không phải kiểu UTF8.
-
 
 Bên dưới cấu trúc string của ngôn ngữ Go `reflect.StringHeader` được định nghĩa với 
 
@@ -162,6 +177,7 @@ type StringHeader struct {
     Len  int
 }
 ```
+
 Cấu trúc của string chứa hai phần thông tin: đầu tiên là con trỏ array tới địa chỉ chứa string, thứ hai là chiều dài của string. Một string thực sự là một cấu trúc, do đó phép gán string thực chất là việc sao chép cấu trúc `reflect.StringHeader`, và không gây ra việc sao chép bên dưới phần dữ liệu. `[2]string`, cấu trúc bên dưới string được đề cập ở chương trước là `[2]reflect.StringHeader` cũng giống với cấu trúc dưới đây. 
 
 Chúng ta có thể thấy cấu trúc vùng nhớ tương ứng với dòng string "Hello World" là 
@@ -179,6 +195,7 @@ var  data = [...] byte {
     'H', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd',
 }
 ```
+
 Mặc dù string không phải là slice nhưng nó cũng hỗ trợ thao tác (slicing) cắt. Một vài phần của vùng nhớ cũng được truy cập bên dưới slice tại một số nơi khác nhau.
 
 ```go
@@ -188,6 +205,7 @@ world := s[6:]
 s1 := "hello world"[:5]
 s2 := "hello world"[6:]
 ```
+
 Tương tự như array, String cũng có một hàm dựng sẵn là `len` dùng để trả về chiều dài của string, ngoài ra bạn có thể  dùng `reflect.StringHeader` để truy xuất chiều dài của string theo cách như sau
 
 ```go
@@ -195,6 +213,7 @@ fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
 fmt.Println("len(s1): ", (*reflect.StringHeader)(unsafe.Pointer(&s1)).Len)
 fmt.Println("len(s2): ", (*reflect.StringHeader)(unsafe.Pointer(&s2)).Len)
 ```
+
 Theo như mô tả của ngôn ngữ Go, mã nguồn của ngôn ngữ được encoded (mã hóa) dưới dạng UTF8. Do đó, hằng string cũng được mã hóa dưới dạng UTF8. Khi đề cập tới Go string, chúng ta thường giả định rằng string là tương ứng với một chuỗi kí tự UTF8 hợp lệ. Bạn có thể dùng hàm dựng sẵn là `print` hoặc `fmt.Print` để in trực tiếp nó, hoặc có thể dùng vòng lặp `for range` qua chuỗi UTF8 một cách trực tiếp.
 
 Chuỗi "Hello, 世界" chứa kí tự tiếng Trung có thể được in ra
@@ -222,7 +241,6 @@ fmt.Println("\xe7\x95\x8c")
 <span>Hình 1-9 String layout</span>
 </p>
 
-
 Vì phần tử của string có thể  là những byte nhị phân, nên có thể bắt gặp một số trường hợp các kí tự **UTF8** sẽ không được mã hóa chuẩn xác. Nếu bạn phát hiện được trường hợp nào mà UTF8 không encoded (mã hóa) đúng, một kí tự Unicode đặt biệt sẽ được in ra là `uFFFD` Kí tự này sẽ trông khác nhau ở những phầm mềm khác nhau. Thường thì kí tự này là một hình tứ giác hoặc kim cương màu đen, ở giữa chứa dấu hỏi.
 
 Trong chuỗi sau, chúng ta sẽ cố tình làm hỏng byte thứ hai và thứ ba của ký tự đầu tiên, do đó, ký tự đầu tiên sẽ được in là "�", byte thứ hai và thứ ba sẽ bị phớt lờ, tiếp theo là "abc" Vẫn có thể giải mã in bình thường (mã hóa lỗi không lan truyền ngược là một trong những tính năng tuyệt vời của mã hóa UTF8)
@@ -245,6 +263,7 @@ for i, c := range "\xe4\x00\x00\xe7\x95\x8cabc" {
 // 7 98     // b
 // 8 99     // c
 ```
+
 Nếu bạn không muốn decode (giải mã) chuỗi UTF8 và muốn duyệt trực tiếp qua nó, bạn có thể bắt string có thể chuyển qua chuỗi `[]byte` sau đó sẽ duyệt (sự chuyển đổi này sẽ không gây ra phí tổn khi chạy chương trình)  
 
 ```go
@@ -266,8 +285,10 @@ for i := 0; i < len(s); i++ {
 Hơn nữa, `for range` sẽ nhờ vào cú pháp UTF8 mà Go có thể hỗ trợ kiểu đặc biệt `[]rune` để chuyển từ kiểu string sang kiểu khác.
 
 ```go
-fmt.Printf("%#v\n", []rune("世界"))      // []int32{19990, 30028}
-fmt.Printf("%#v\n", string([]rune{'世', '界'})) // 世界
+// []int32{19990, 30028}
+fmt.Printf("%#v\n", []rune("世界"))
+// 世界
+fmt.Printf("%#v\n", string([]rune{'世', '界'}))
 ```
 
 Từ kết quả của đoạn mã nguồn trên, chúng ta có thể thấy `[]rune` thực sự là kiểu `[]int32`, từ đây, `rune` là một tên gọi khác của `int32`, `rune` được dùng để biểu diễn mỗi điểm unicode, hiện tại thì chỉ 21 bits được sử dụng.
@@ -384,15 +405,24 @@ Hãy nhìn vào định nghiã slices bên dưới:
 
 ```go
 var (
-	a [] int                // nil slice, equal to nil, generally used to represent a non-existent slice 
-	b = []int{}            // empty slice, not equal to nil, generally used to represent an empty set 
-	c = [] int {1,2,3}     // There are 3 elements of the slice, both len and cap are 3 
-	d = c[:2]              // There are 2 elements of the slice, len is 2, cap is 3 
-	e = c[0:2:cap(c)]      // There are 2 elements of the slice, len is 2, cap is 3 
-	f = c[:0]              // There are 0 elements of the slice, len is 0, cap is 3 
-	g = make ([]int,3)     // There are 3 elements of the slice, len and cap are 3 
-	h = make ([]int,2,3) // there are 2 elements of the slice, len is 2, cap is 3 
-	i = make ([]int,0,3) // There are 0 elements of the slice, len is 0, cap is 3 
+	// nil slice
+	a = []int
+	// empty slice, khác với nil
+	b = []int{}
+	// có 3 phần tử trong slice, cả len và cap đều bằng 3
+	c = []int{1,2,3}
+	// có 2 phần tử trong slice, len bằng 2 và cap bằng 3
+	d = c[:2]
+	// có 2 phần tử trong slice, len bằng 2 và cap bằng 3
+	e = c[0:2:cap(c)]
+	// có 0 phần tử trong slice, len bằng 0 và cap bằng 3
+	f = c[:0]
+	// có 3 phần tử trong slice, len và cap bằng 3
+	g = make ([]int,3)
+	// có 2 phần tử trong slice, len bằng 2, cap bằng 3
+	h = make ([]int,2,3)
+	// có 0 phần tử trong slice, len bằng 0, cap bằng 3
+	i = make ([]int,0,3)
 )
 ```
 
@@ -424,9 +454,12 @@ Hàm dựng sẵn `append` có thể thêm phần tử thứ `N` vào cuối cù
 
 ```go
 var a []int
-a = append(a, 1)               // nối thêm phần tử 1
-a = append(a, 1, 2, 3)         // nối thêm phần tử 1, 2, 3
-a = append(a, []int{1,2,3}...) // nối thêm các phần tử 1, 2, 3 bằng cách truyền vào một mảng
+// nối thêm phần tử 1
+a = append(a, 1)
+// nối thêm phần tử 1, 2, 3
+a = append(a, 1, 2, 3)
+// nối thêm các phần tử 1, 2, 3 bằng cách truyền vào một mảng
+a = append(a, []int{1,2,3}...)
 ```
 
 
@@ -436,8 +469,10 @@ Bên cạnh thêm phần tử vào cuối slice, chúng ta cũng có thể thêm
 
 ```go
 var a = []int{1,2,3}
-a = append([]int{0}, a...)        // thêm phần tử 0 vào đầu slice a
-a = append([]int{-3,-2,-1}, a...) // thêm các phần tử -3, -2, -1 vào đầu slice a
+// thêm phần tử 0 vào đầu slice a
+a = append([]int{0}, a...)
+// thêm các phần tử -3, -2, -1 vào đầu slice a
+a = append([]int{-3,-2,-1}, a...)
 ```
 
 
@@ -447,8 +482,21 @@ Do hàm `append` sẽ trả về một slice mới, nó sẽ hỗ trợ một d�
 
 ```go
 var a []int
-a = append(a[:i], append([]int{x}, a[i:]...)...)     // chèn x ở vị trí thứ i
-a = append(a[:i], append([]int{1,2,3}, a[i:]...)...) // chèn một slice con vào slice ở vị trí thứ i
+// chèn x ở vị trí thứ i
+a = append(
+		a[:i],
+		append(
+			[]int{x},a[i:]...
+		)...
+	)
+// chèn một slice con vào slice ở vị trí thứ i
+a = append(
+		a[:i],
+		append(
+			[]int{1,2,3},
+			a[i:]...
+		)...
+	)
 ```
 
 
@@ -457,31 +505,35 @@ Bạn cũng có thể sử dụng hàm `copy` và `append` kết hợp với nha
 
 ```go
 a = append(a, 0)
-copy(a[i+1:], a[i:]) // lùi những phần tử từ i trở về sau của a
-a[i] = x             // gán vị trí thứ i bằng x
+// lùi những phần tử từ i trở về sau của a
+copy(a[i+1:], a[i:])
+// gán vị trí thứ i bằng x
+a[i] = x
 ```
-
 
 Dòng đầu tiên dùng `append` để mở rộng kích thước của slice và tạo không gian cho phần tử mới được thêm vào. Ở dòng thứ hai sẽ sao chép các phần tử trong slice dời về sau kể từ vị trí thứ i. Dòng cuối cùng sẽ gán giá trị mới vào vị trí thứ i. Mặc dù cách làm trên sẽ dài dòng, tuy nhiên chúng ta có thể lượt bỏ việc phải sao chép một slice tạm thời khi so sánh với cách làm trước.
 
 Chúng ta cũng có thể chèn nhiều phần tử vào vị trí chính giữa bằng việc kết hợp hàm `copy` và `append` như sau
 
-
 ```go
-a = append(a, x...)       // mở rộng không gian của slice a với array x
-copy(a[i+len(x):], a[i:]) // sao chép len(x) phần tử lùi về sau
-copy(a[i:], x)            // sao chép array x vào giữa
+// mở rộng không gian của slice a với array x
+a = append(a, x...)
+// sao chép len(x) phần tử lùi về sau
+copy(a[i+len(x):], a[i:])
+// sao chép array x vào giữa
+copy(a[i:], x)
 ```
 
-
-**Xóa những phần tử trong slice** 
+**Xóa những phần tử trong slice**
 
 Có ba trường hợp phụ thuộc vào nơi mà chúng ta muốn xóa phần tử, từ đầu, từ cuối hoặc từ chính giữa, trong đó xóa phần tử từ cuối là nhanh nhất.
 
 ```go
 a = []int{1, 2, 3}
-a = a[:len(a)-1]   // xóa một phần tử ở cuối 
-a = a[:len(a)-N]   // xóa N phần tử ở cuối
+// xóa một phần tử ở cuối 
+a = a[:len(a)-1]
+// xóa N phần tử ở cuối
+a = a[:len(a)-N]
 ```
 
 
@@ -489,8 +541,10 @@ Xóa phần tử ở đầu thì thực chất là di chuyển con trỏ dữ li
 
 ```go
 a = []int{1, 2, 3}
-a = a[1:] // xóa phần tử đầu tiên
-a = a[N:] // xóa N phần tử đầu tiên
+// xóa phần tử đầu tiên
+a = a[1:]
+// xóa N phần tử đầu tiên
+a = a[N:]
 ```
 
 
@@ -498,30 +552,34 @@ Bạn cũng có thể xóa bỏ con trỏ dữ liệu mà không di chuyển ph�
 
 ```go
 a = []int{1, 2, 3}
-a = append(a[:0], a[1:]...) // xóa phần tử đầu tiên
-a = append(a[:0], a[N:]...) // xóa N phần tử đầu tiên
+// xóa phần tử đầu tiên
+a = append(a[:0], a[1:]...)
+// xóa N phần tử đầu tiên
+a = append(a[:0], a[N:]...)
 ```
-
 
 Bạn cũng có thể dùng hàm `copy` để hoàn thành nhiệm vụ xóa
 
 ```go
 a = []int{1, 2, 3}
-a = a[:copy(a, a[1:])] // xóa phần tử đầu tiên
-a = a[:copy(a, a[N:])] // xóa N phần tử đầu tiên
+// xóa phần tử đầu tiên
+a = a[:copy(a, a[1:])]
+// xóa N phần tử đầu tiên
+a = a[:copy(a, a[N:])]
 ```
-
 
 Khi xóa phần tử ở giữa, bạn cần dịch chuyển những phần tử ở phía sau lên trước, điều đó có thể được thực hiện như sau
 
 ```go
 a = []int{1, 2, 3, ...}
-
-a = append(a[:i], a[i+1:]...) //  xóa phần tử ở vị trí i
-a = append(a[:i], a[i+N:]...) //  xóa N phần tử từ vị trí i
-
-a = a[:i+copy(a[i:], a[i+1:])]  // xóa phần tử ở vị trí i
-a = a[:i+copy(a[i:], a[i+N:])]  // xáo N phần từ từ vị trí i
+// xóa phần tử ở vị trí i
+a = append(a[:i], a[i+1:]...)
+// xóa N phần tử từ vị trí i
+a = append(a[:i], a[i+N:]...)
+// xóa phần tử ở vị trí i
+a = a[:i+copy(a[i:], a[i+1:])]
+// xoá N phần từ từ vị trí i
+a = a[:i+copy(a[i:], a[i+N:])]
 ```
 
 
@@ -594,7 +652,9 @@ Vấn đề tương tự có thể gặp phải khi xóa những phần tử tro
 
 ```go
 var a []*int{ ... }
-a = a[:len(a)-1]    // phần tử cuối cùng dù được xóa nhưng vẫn được tham chiếu, do đó cơ chế thu gom rác tự động không thu hồi nó
+// phần tử cuối cùng dù được xóa nhưng vẫn được tham chiếu,
+// do đó cơ chế thu gom rác tự động không thu hồi nó
+a = a[:len(a)-1]
 ```
 
 
@@ -602,13 +662,13 @@ Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu
 
 ```go
 var a []*int{ ... }
-a[len(a)-1] = nil // phần tử cuối cùng sẽ được gán giá trị nil
-a = a[:len(a)-1]  // xóa phần tử cuối cùng ra khỏi slice
+// phần tử cuối cùng sẽ được gán giá trị nil
+a[len(a)-1] = nil
+// xóa phần tử cuối cùng ra khỏi slice
+a = a[:len(a)-1]
 ```
 
-
 Dĩ nhiên, nếu ở cách làm trước đối với slice có kích thước nhỏ, bạn sẽ không gặp phải vấn đề về  tham chiếu treo. Bởi vì nếu bản thân slice có thể được giải phóng bởi GC (Garbage collector), mỗi phần tử ứng với slice có thể được thu gom tự nhiên.
-
 
 **Ép kiểu slice**
 
@@ -637,7 +697,6 @@ func SortFloat64FastV2(a []float64) {
     sort.Ints(c)
 }
 ```
-
 
 Cách ép kiểu đầu tiên ban đầu sẽ chuyển địa chỉ bắt đầu của slice thành con trỏ đến mảng lớn hơn, sau đó sẽ `re-slice` array tương ứng với con trỏ array. Ở giữa `unsafe.Pointer` cần phải kết nối tới kiểu dữ liệu khác của pointer để truyền. Nên chú ý rằng, kiểu array none-zero sẽ tối đa 2GB chiều dài, do đó chúng ta có thể tính toán chiều dài tối đa của array cho kiểu array đó (kiểu `[]uint8` có kích thước tối đa 2GB, kiểu `[]uint16` tối đa 1GB, nhưng kiểu `[]struct{}` kích thước tối đa 2GB).
 
