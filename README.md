@@ -23,8 +23,8 @@ Ngôn ngữ [Golang](https://golang.org/) không còn quá xa lạ trong giới 
 Chúng tôi thực hiện bộ tài liệu nhằm:
 
 - Tạo ra bộ tài liệu về Go cho nội bộ Zalopay sử dụng.
-- Public ra bên ngoài để cộng đồng Golang Việt Nam có bộ tài liệu tiếng Việt do chính người Việt Nam biên soạn.
-- Đây tiền đề để mọi người biết tới teachnical stack của Zalopay. 
+- Đây là cơ hội để mọi người biết tới teachnical stack của Zalopay.
+- Public ra bên ngoài để cộng đồng Golang Việt Nam có bộ tài liệu tiếng Việt do chính người Việt Nam biên soạn. 
 - Đồng thời tạo ra sân chơi mới có cơ hội giao lưu mở rộng mối quan hệ với các bạn có cùng đam mê lập trình.
   
 ## Tài liệu tham khảo
