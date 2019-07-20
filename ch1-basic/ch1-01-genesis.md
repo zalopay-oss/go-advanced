@@ -10,7 +10,7 @@ Ngôn ngữ Go thường được mô tả là "Ngôn ngữ tựa C" hoặc là 
 
 *Hình 1-1 Cây phả hệ của ngôn ngữ Go*
 
-Đầu tiên, quan sát phía bên trái của sơ đồ, có thể được nhìn thấy rõ ràng rằng tính chất **concurrency** (đồng thời) của ngôn ngữ **Go** được phát triển từ học thuyết **CSP** được công bố bởi **Bell Labs' Hoare** vào năm 1978. Sau đó, mô hình **CSP** concurrency dần dần được tinh chế và được ứng dụng thực tế trong một số ngôn ngữ lập trình như là **Squeak/NewSqueak** và **Alef**. Những thực tiễn thiết kế mô hình **CSP** đó cuối cùng được hấp thu bởi ngôn ngữ Go. Mô hình concurrency của thế hệ ngôn ngữ Erlang là một hiện thực khác của học thuyết **CSP**.
+Đầu tiên, quan sát phía bên trái của sơ đồ, có thể được nhìn thấy rõ ràng rằng tính chất **concurrency** (đồng thời) của ngôn ngữ **Go** được phát triển từ học thuyết **CSP** được công bố bởi **Bell Labs' Hoare** vào năm 1978. Sau đó, mô hình **CSP** dần dần được tinh chế và được ứng dụng thực tế trong một số ngôn ngữ lập trình như là **Squeak/NewSqueak** và **Alef**. Những thực tiễn thiết kế mô hình **CSP** đó cuối cùng được hấp thu bởi ngôn ngữ Go. Mô hình concurrency của thế hệ ngôn ngữ Erlang là một hiện thực khác của học thuyết **CSP**.
 
 Chính giữa của sơ đồ chủ yếu thể hiện tính chất hướng đối tượng và đóng gói của **Go** được kế thừa từ **Pascal** - ngôn ngữ được thiết kế bởi Niklaus Wirth và những ngôn ngữ liên quan khác dẫn xuất từ chúng. Những cú pháp `package concept`, `package import` và `declaration` chủ yếu đến từ ngôn ngữ Modula-2. Cú pháp của các phương thức hỗ trợ tính hướng đối tượng đến từ ngôn ngữ Oberon, ngôn ngữ Go được phát triển có thêm những tính chất đặc trưng như là `implicit interface` để chúng hỗ trợ mô hình `duck object-oriented`.
 
@@ -21,7 +21,7 @@ Một vài những tính năng khác của ngôn ngữ Go đến từ một số
 
 ## 1.1.1 Di truyền từ Bell Labs
 
-Khả năng lập trình concurrency của Go đến từ một nghiên cứu ít người biết tới và được công bố bởi Tony Hoarce tại Bell Labs vào năm 1978 -  Commutative sequential processes (CSP). Về bài báo khoa học nói về CSP, chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `pipes` cho việc giao tiếp và điều khiển đồng bộ. Mô hình Tony Hoare's CSP concurrency chỉ là một ngôn ngữ mô tả cho những khái niệm cơ bản về concurrency (tính đồng thời), nó cũng không hẳn là một ngôn ngữ lập trình.
+Khả năng lập trình concurrency của Go đến từ một nghiên cứu ít người biết tới và được công bố bởi Tony Hoarce tại Bell Labs vào năm 1978 -  Commutative sequential processes (CSP). Về bài báo khoa học nói về CSP, chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `channel` cho việc giao tiếp và điều khiển đồng bộ. Mô hình Tony Hoare's CSP concurrency chỉ là một ngôn ngữ mô tả cho những khái niệm cơ bản về concurrency (tính đồng thời), nó cũng không hẳn là một ngôn ngữ lập trình.
 
 Ví dụ kinh điển của việc áp dụng mô hình CSP concurrent là ngôn ngữ  **Erlang**, được phát triển bởi **Ericsson**. Tuy nhiên, trong khi Erlang sử dụng học thuyết CSP trong mô hình lập trình concurrency, Rob Pike là người cũng đến từ Bell Labs và đồng nghiệp của ông cũng thử giới thiệu mô hình CSP concurrency vào việc phát triển một ngôn ngữ mới tại thời điểm đó. Lần đầu tiên họ cố gắng giới thiệu mô hình CSP concurency trong một ngôn ngữ được gọi là Squeak, đây là một ngôn ngữ xử lý sự kiện từ chuột và bàn phím trong những pipe được khởi tạo tĩnh. Sau đó có một phiên bản cải thiện là NewSqueak, cú pháp và mệnh đề của chúng cũng tương tự như C, và Pascal. NewSqueak thì chỉ là một ngôn ngữ lập trình hàm với cơ chế thu gom vùng nhớ thừa tự động từ các sự kiện của bàn phím, chuột, và màn hình. Tuy nhiên trong ngôn ngữ Newsquek, pipeline đã thực sự được khởi tạo động, pipeline là kiểu giá trị đầu tiên có thể lưu trữ trong biến. Sau đó, ngôn ngữ Alef (đó cũng là một ngôn ngữ được ưa thích bởi Ritchie - cha đẻ của ngôn ngữ C). Alef là sự chuyển đổi của Newsqueak thành một ngôn ngữ lập trình hệ thống, nhưng cực kỳ khó khăn để có mô hình concurrency trong một ngôn ngữ thiếu cơ chế thu gom vùng nhớ tự động (trong C, ta phải gọi hàm `free()` thủ công để làm việc này). Có một ngôn ngữ khác tên là Limbo sau ngôn ngữ Alef, nó là một ngôn ngữ nhúng chạy trên máy ảo. Limbo là thế hệ gần nhất với ngôn ngữ Go, nó có những cú pháp tương tự như Go. Qua việc thiết kế Go, Rob Pike đã tổng hợp nhiều thập kỉ trong việc thiết kế mô hình CSP concurrent. Tính chất lập trình concurrency trong Go hơi phức tạp, chúng sẽ được đề cập trong bộ tài liệu này.
 
@@ -53,6 +53,7 @@ Trong suốt quá trình phát triển ngôn ngữ lập trình từ Bell Labs, 
 package main
 
 import "fmt"
+
 
 func main() {
     fmt.Println("Hello World")
