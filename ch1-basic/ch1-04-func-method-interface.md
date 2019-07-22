@@ -1,31 +1,10 @@
 # 1.4 Functions, Methods và Interfaces
-  
-Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function): hàm được đặt tên thường tương ứng với hàm cấp package (package function). Đây là trường hợp đặc biệt của hàm ẩn danh. Khi một hàm ẩn danh tham chiếu một biến thuộc phạm vi bên ngoài hàm đó, nó sẽ trở thành closure function. Các package function là cốt lõi của một ngôn ngữ lập trình hàm (functional programming).
 
-Phương thức (Method) được liên kết với một hàm đặc biệt của một kiểu cụ thể. Các phương thức trong ngôn ngữ Go phụ thuộc vào kiểu và phải được ràng buộc tĩnh tại thời gian biên dịch.
-
-Một Interface xác định một tập hợp các phương thức phụ thuộc vào đối tượng Interface trong thời gian thực thi, vì vậy các phương thức tương ứng với Interface được ràng buộc động khi thực thi. Ngôn ngữ Go hiện thực mô hình hướng đối tượng thông qua cơ chế Interface ngầm định.
-
-Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ hàm `main.main`. Nếu package `main` có import  các package khác, chúng sẽ được thêm vào package `main` theo thứ tự khai báo.
-
-- Nếu một package được import nhiều lần, sẽ chỉ được tính là một khi thực thi.
-- Khi một package được import mà nó lại import các package khác, trước tiên Go sẽ import các package khác đó trước, sau đó  khởi tạo các hằng và biến của package, rồi gọi hàm `init` trong từng package.
-- Nếu một package có nhiều hàm `init` và thứ tự gọi không được xác định cụ thể (phần implement có thể được gọi theo thứ tự tên file), thì chúng sẽ được gọi theo thứ tự xuất hiện (`init` không phải là hàm thông thường, nó có thể có nhiều định nghĩa, và các hàm khác không thể sử dụng nó). Cuối cùng, khi `main` đã có đủ tất cả hằng và biến ở cấp package, chúng sẽ được khởi tạo bằng cách thực thi hàm `init`, tiếp theo chương trình đi vào hàm `main.main` và  bắt đầu thực thi. Hình dưới đây là sơ đồ nguyên lý  một chuỗi bắt đầu của chương trình hàm trong Go:
-
-<div align="center">
-<img src="../images/ch1-11-init.ditaa.png">
-<br/>
-<span align="center"><i>Tiến trình khởi tạo package</i></span>
-</div>
-<br/>
-
-Cần lưu ý rằng trong `main.main` tất cả các mã lệnh đều chạy trong cùng một Goroutine trước khi hàm được thực thi, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi chạy từ hàm `main` trong một Goroutine mới với từ khóa go, thì Goroutine đó chỉ có `main.main` có thể được thực thi sau khi vào hàm.
-
-Cần lưu ý rằng trước khi hàm `main.main` được thực thi thì tất cả code đều chạy trong cùng một Goroutine, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi động bên trong một Goroutine mới với từ khóa go, Goroutine đó chỉ có thể được thực thi sau khi vào hàm `main.main`.
+Trong phần này chúng ta sẽ tìm hiểu cụ thể về các khái niệm cơ bản trong Golang: Function, Method và Interface.
 
 ## 1.4.1 Function
 
-Trong Go, hàm là kiểu đầu tiên của đối tượng  và chúng ta có thể giữ hàm trong một biến. Hàm có thể được đặt tên hoặc ẩn danh (anonymous). Các hàm cấp độ package thường là các hàm được đặt tên. Hàm được đặt tên là một trường hợp đặc biệt của hàm ẩn danh. Tất nhiên, mỗi kiểu trong ngôn ngữ Go cũng có thể có các phương thức riêng, và đó có thể là là một hàm:
+Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function):
 
 ```go
 // hàm được đặt tên
@@ -40,7 +19,7 @@ var Add = func(a, b int) int {
 
 ```
 
-Một hàm trong ngôn ngữ Go có thể có nhiều tham số và nhiều giá trị trả về. Cả tham số và giá trị trả về trao đổi dữ liệu  với hàm được gọi theo cách truyền vào giá trị (pass by value). Về mặt cú pháp, hàm cũng hỗ trợ số lượng tham số thay đổi, biến số lượng tham số phải là tham số cuối cùng và biến này phải là kiểu slice.
+Một hàm trong ngôn ngữ Go có thể có nhiều tham số và nhiều giá trị trả về. Cả tham số và giá trị trả về trao đổi dữ liệu  với hàm theo cách truyền vào giá trị (pass by value). Về mặt cú pháp, hàm cũng hỗ trợ số lượng tham số thay đổi, biến số lượng tham số phải là tham số cuối cùng và biến này phải là kiểu slice.
 
 ```go
 // Nhiều tham số và nhiều giá trị trả về
@@ -64,7 +43,10 @@ Khi đối số có thể thay đổi là một kiểu interface null,  việc n
 func main() {
     var a = []interface{}{123, "abc"}
 
+    // tương đương với lời gọi trực tiếp `Print(123, "abc")`
     Print(a...) // 123 abc
+
+    // tương đương với lời gọi `Print([]interface{}{123, "abc"})`
     Print(a)    // [123 abc]
 }
 
@@ -72,8 +54,6 @@ func Print(a ...interface{}) {
     fmt.Println(a...)
 }
 ```
-
-Lời gọi `Print` đầu tiên  truyền vào  `a...` tương đương với lời gọi trực tiếp `Print(123, "abc")`. Lời gọi `Print` thứ hai truyền vào `a`, tương đương với lời gọi `Print([]interface{}{123, "abc"})`.
 
 Cả tham số truyền vào và các giá trị trả về đều có thể được đặt tên:
 
@@ -84,7 +64,9 @@ func Find(m map[int]int, key int) (value int, ok bool) {
 }
 ```
 
-Nếu giá trị trả về được đặt tên, nó có thể sửa đổi  bằng tên hoặc có thể sửa đổi bằng lệnh `defer` sẽ thực thi sau lệnh `return`
+### Defer trong Function
+
+Nếu giá trị trả về được đặt tên, nó có thể sửa đổi  bằng tên đó hoặc bằng lệnh `defer` sẽ thực thi sau lệnh `return`
 
 ```go
 func Inc() (v int) {
@@ -193,6 +175,8 @@ func g() int {
 - Hàm thứ hai, mặc dù lời gọi `new` tạo một đối tượng con trỏ kiểu `*int`, nhưng vẫn không biết nó sẽ được lưu ở đâu. Một điều nói riêng với những lập trình viên có kinh nghiệm với C/C ++ là trình biên dịch và thực thi (runtime) của Go sẽ giúp chúng ta không phải lo lắng về stack và heap của hàm. Do đó đừng cho rằng địa chỉ của biến trong bộ nhớ là cố định vì con trỏ có thể thay đổi bất cứ lúc nào, đặc biệt là những khi chúng ta không mong đợi nó thay đổi nhất.
 
 ## 1.4.2 Method
+
+Phương thức (Method) được liên kết với một hàm đặc biệt của một kiểu cụ thể. Các phương thức trong ngôn ngữ Go phụ thuộc vào kiểu và phải được ràng buộc tĩnh tại thời gian biên dịch.
 
 Phương thức (Method) là một tính năng của lập trình hướng đối tượng (OOP). Trong ngôn ngữ C++, phương thức  tương ứng với một hàm thành viên của một đối tượng lớp, được liên kết với một bảng ảo trên một đối tượng cụ thể. Tuy nhiên, phương thức trong ngôn ngữ Go được liên kết với kiểu, do đó liên kết tĩnh của phương thức có thể được tạo thành trong giai đoạn biên dịch.
 
@@ -362,6 +346,8 @@ Cấu trúc `Cache` nhúng một kiểu ẩn danh `sync.Mutex` để kế thừa
 Nếu cần tính chất đa hình ở các hàm ảo, chúng ta cần triển khai nó với Interface.
 
 ## 1.4.3 Interface
+
+Một Interface xác định một tập hợp các phương thức phụ thuộc vào đối tượng Interface trong thời gian thực thi, vì vậy các phương thức tương ứng với Interface được ràng buộc động khi thực thi. Ngôn ngữ Go hiện thực mô hình hướng đối tượng thông qua cơ chế Interface ngầm định.
 
 Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi tiếng:
 
@@ -558,3 +544,22 @@ type Plugin interface {
 Hàm `GenerateImports` được sử dụng trong phương thức của kiểu `generate.Plugin` tương ứng với interface `p.P(...)` được hiện thực bởi `Init` đối tượng `generator.Generator`. `generator.Generator` này tương ứng với một kiểu cụ thể, nhưng nếu nó là một kiểu interface, chúng ta  có thể vượt truyền nó thẳng vào trong phần hiện thực.
 
 Ngôn ngữ Go dễ dàng hiện thực các tính năng nâng cao như hướng đối tượng với duck-typing và kế thừa ảo thông qua sự kết hợp của một số tính năng đơn giản, điều này thực sự đáng kinh ngạc.
+
+## 1.4.4 Luồng thực thi của một chương trình Go
+
+Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ hàm `main.main`. Nếu package `main` có import  các package khác, chúng sẽ được thêm vào package `main` theo thứ tự khai báo.
+
+- Nếu một package được import nhiều lần, sẽ chỉ được tính là một khi thực thi.
+- Khi một package được import mà nó lại import các package khác, trước tiên Go sẽ import các package khác đó trước, sau đó  khởi tạo các hằng và biến của package, rồi gọi hàm `init` trong từng package.
+- Nếu một package có nhiều hàm `init` và thứ tự gọi không được xác định cụ thể (phần implement có thể được gọi theo thứ tự tên file), thì chúng sẽ được gọi theo thứ tự xuất hiện (`init` không phải là hàm thông thường, nó có thể có nhiều định nghĩa, và các hàm khác không thể sử dụng nó). Cuối cùng, khi `main` đã có đủ tất cả hằng và biến ở cấp package, chúng sẽ được khởi tạo bằng cách thực thi hàm `init`, tiếp theo chương trình đi vào hàm `main.main` và  bắt đầu thực thi. Hình dưới đây là sơ đồ nguyên lý  một chuỗi bắt đầu của chương trình hàm trong Go:
+
+<div align="center">
+<img src="../images/ch1-11-init.ditaa.png">
+<br/>
+<span align="center"><i>Tiến trình khởi tạo package</i></span>
+</div>
+<br/>
+
+Cần lưu ý rằng trong `main.main` tất cả các mã lệnh đều chạy trong cùng một Goroutine trước khi hàm được thực thi, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi chạy từ hàm `main` trong một Goroutine mới với từ khóa go, thì Goroutine đó chỉ có `main.main` có thể được thực thi sau khi vào hàm.
+
+Cần lưu ý rằng trước khi hàm `main.main` được thực thi thì tất cả code đều chạy trong cùng một Goroutine, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi động bên trong một Goroutine mới với từ khóa go, Goroutine đó chỉ có thể được thực thi sau khi vào hàm `main.main`.
