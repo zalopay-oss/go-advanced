@@ -385,7 +385,6 @@ a = a[1:]
 a = a[N:]
 ```
 
-
 Khi xóa phần tử ở giữa, bạn cần dịch chuyển những phần tử ở phía sau lên trước, điều đó có thể được thực hiện như sau
 
 ```go
@@ -407,8 +406,11 @@ Hàm `TrimSpace` sau sẽ xóa đi các khoảng trắng. Hiện thực hàm nà
 ```go
 func TrimSpace(s []byte) []byte {
     b := s[:0]
+    // duyệt qua slice s để tìm phần tử thỏa điều kiện
     for _, x := range s {
+        // kiểm tra điều kiện
         if x != ' ' {
+        // tạo ra slice mới từ slice ban đầu thêm vào phần tử x
             b = append(b, x)
         }
     }
@@ -485,39 +487,3 @@ a = a[:len(a)-1]
 ```
 
 Dĩ nhiên, nếu ở cách làm trước đối với slice có kích thước nhỏ, bạn sẽ không gặp phải vấn đề về  tham chiếu treo. Bởi vì nếu bản thân slice có thể được giải phóng bởi GC (Garbage collector), mỗi phần tử ứng với slice có thể được thu gom tự nhiên.
-
-#### 1.3.3.4 Ép kiểu slice
-
-Vì lý do an toàn, khi hai kiểu slice là `[]T` và `[]Y`, bên dưới phần dữ liệu thô sẽ khác nhau, ngôn ngữ Go sẽ không trực tiếp chuyển đổi kiểu. Tuy nhiên, tính an toàn đi kèm với một chi phí.
-
-Ví dụ, trên hệ điều hành 64 bit, bạn cần phải sắp xếp một mảng `[]float64` với tốc độ cao. Chúng ta có thể ép chúng về kiểu `[]int` slice và sắp xếp chúng (bởi vì `float64` là chuẩn dấu chấm động `IEEE754` được sử dụng, số nguyên ứng với nó cũng sẽ theo thứ tự đó) điều đó không có gì xa lạ.
-
-Đoạn mã bên dưới sẽ chuyển slice `[]float64` đến slice `[]int` bằng hai cách.
-
-```go
-// +build amd64 arm64
-
-import "sort"
-
-var a = []float64{4, 2, 5, 7, 2, 1, 88, 1}
-
-func SortFloat64FastV1(a []float64) {
-    var b []int = ((*[1 << 20]int)(unsafe.Pointer(&a[0])))[:len(a):cap(a)]
-    sort.Ints(b)
-}
-
-func SortFloat64FastV2(a []float64) {
-    var c []int
-    aHdr := (*reflect.SliceHeader)(unsafe.Pointer(&a))
-    cHdr := (*reflect.SliceHeader)(unsafe.Pointer(&c))
-    *cHdr = *aHdr
-
-    sort.Ints(c)
-}
-```
-
-Cách ép kiểu đầu tiên ban đầu sẽ chuyển địa chỉ bắt đầu của slice thành con trỏ đến mảng lớn hơn, sau đó sẽ `re-slice` array tương ứng với con trỏ array. Ở giữa `unsafe.Pointer` cần phải kết nối tới kiểu dữ liệu khác của pointer để truyền. Nên chú ý rằng, kiểu array none-zero sẽ tối đa 2GB chiều dài, do đó chúng ta có thể tính toán chiều dài tối đa của array cho kiểu array đó (kiểu `[]uint8` có kích thước tối đa 2GB, kiểu `[]uint16` tối đa 1GB, nhưng kiểu `[]struct{}` kích thước tối đa 2GB).
-
-Cách chuyển đổi thứ hai sẽ chứa hai kiểu dữ liệu về thông tin header của slice và bên dưới cấu trúc `reflect.SliceHeader` của thông tin header sẽ ứng với cấu trúc slice, sau đó thông tin sẽ được cập nhật cấu trúc, sau đó hiện thực biến `a` ứng với kiểu `[]float64` bởi cấu trúc `[]int`. Đây là phép chuyển đổi kiểu của slice.
-
-Thông qua việc benchmark, chúng ta có thể thấy rằng hiệu suất của việc sắp xếp `sort.Ints` của kiểu `[]int` sẽ tốt hơn là `sort.Float64s`. Tuy nhiên, bạn phải chú ý rằng, tiền đề của phương pháp đó, sẽ đảm bảo rằng `[]float64` sẽ không có dấu phẩy động chính tắc như NaN và Inf (vì NaN không thể sắp xếp theo số đấu chấm động, dương 0 và âm 0 bằng nhau, nhưng không có trường hợp nào như vậy trong số nguyên).
