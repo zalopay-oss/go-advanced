@@ -1,10 +1,10 @@
-# 1.3 Array, strings và slices
+# 1.3. Array, strings và slices
 
 `Arrays` và một số cấu trúc dữ liệu liên quan khác được sử dụng thường xuyên trong các ngôn ngữ lập trình. Chỉ khi chúng không đáp ứng được yêu cầu chúng ta mới cân nhắc sử dụng `linked lists` (danh sách liên kết) và `hash tables` (bảng băm) hoặc nhiều cấu trúc dữ liệu tự định nghĩa phức tạp khác.
 
 `Arrays`, `strings` và `slices` trong ngôn ngữ Go là các cấu trúc dữ liệu liên quan mật thiết với nhau. Ba kiểu dữ liệu đó có cùng cấu trúc vùng nhớ lưu trữ bên dưới, và chỉ có những hành vi thể hiện ra bên ngoài khác nhau tùy thuộc vào ràng buộc ngữ nghĩa.
 
-## 1.3.1 Array
+## 1.3.1. Array
 
 <div align="center">
 	<img src="../images/ch1-1-array-and-array-index-representation.png" width="600">
@@ -203,7 +203,7 @@ Tương tự như array, String cũng có một hàm build-in là `len` dùng đ
 fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
 ```
 
-## 1.3.3 Slice
+## 1.3.3. Slice
 
 <div align="center">
 	<img src="../images/1-3-golang-slices-length-capacity.jpg"width="600">
@@ -282,8 +282,7 @@ Các tác vụ cơ bản trong slice bao gồm:
   * Xóa phần tử trong slcie
   * Duyệt qua các phần tử của slice
 
-
-#### 1.3.3.1 Thêm phần tử vào slice
+#### Thêm phần tử vào slice
 
 Hàm  `append` có thể thêm phần tử thứ `N` vào cuối cùng của slice:
 
@@ -357,7 +356,7 @@ copy(a[i+len(x):], a[i:])
 copy(a[i:], x)
 ```
 
-#### 1.3.3.2 Xóa những phần tử trong slice
+#### Xóa những phần tử trong slice
 
 Có ba trường hợp xóa các phần tử:
   * Ở đầu
@@ -385,7 +384,6 @@ a = a[1:]
 a = a[N:]
 ```
 
-
 Khi xóa phần tử ở giữa, bạn cần dịch chuyển những phần tử ở phía sau lên trước, điều đó có thể được thực hiện như sau
 
 ```go
@@ -400,15 +398,18 @@ a = a[:i+copy(a[i:], a[i+1:])]
 a = a[:i+copy(a[i:], a[i+N:])]
 ```
 
-#### 1.3.3.3 Kỹ thuật quản lý vùng nhớ trong slice
+#### Kỹ thuật quản lý vùng nhớ trong slice
 
 Hàm `TrimSpace` sau sẽ xóa đi các khoảng trắng. Hiện thực hàm này với độ phức tạp O(n) để đạt được sự hiệu quả và đơn giản.
 
 ```go
 func TrimSpace(s []byte) []byte {
     b := s[:0]
+    // duyệt qua slice s để tìm phần tử thỏa điều kiện
     for _, x := range s {
+        // kiểm tra điều kiện
         if x != ' ' {
+        // tạo ra slice mới từ slice ban đầu thêm vào phần tử x
             b = append(b, x)
         }
     }
@@ -436,7 +437,7 @@ func Filter(s []byte, fn func(x byte) bool) []byte {
 
 Điểm chính của những tác vụ làm việc hiệu quả trên slice là hạn chế việc phải cấp lại vùng nhớ, cố gắng để hàm `append` sẽ không đạt tới `cap` sức chứa của slice, là giảm số lần cấp phát vùng nhớ và giảm kích thước vùng nhớ cấp phát tại mọi thời điểm.
 
-#### 1.3.3.4 Tránh gây ra memory leak trên slice
+####  Tránh gây ra memory leak trên slice
 
 Những tác vụ trên slice sẽ không thay đổi vùng nhớ bên dưới slice, mà thực chất là thay đổi các tham số như `Data`, `Len`. Vùng nhớ bên dưới vẫn còn cho đến khi nào không còn được tham chiếu nữa.
 
@@ -450,7 +451,6 @@ func FindPhoneNumber(filename string) []byte {
     return regexp.MustCompile("[0-9]+").Find(b)
 }
 ```
-
 
 Mã nguồn này sẽ trả về  một mảng các `byte` trỏ tới toàn bộ file. Bởi vì slice tham khảo tới toàn bộ array gốc, cơ chế tự động thu gom rác không thể giải phóng không gian bên dưới array trong thời gian đó. Một yêu cầu kết quả nhỏ, những phải lưu trữ toàn bộ dữ liệu trong một thời gian dài. Mặc dù nó không phải là `memory leak` trong ngữ cảnh truyền thống, nó có thể làm chậm hiệu suất của toàn hệ thống.
 
@@ -473,8 +473,7 @@ var a []*int{ ... }
 a = a[:len(a)-1]
 ```
 
-
-Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo giá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
+Cách giải quyết là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo giá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
 
 ```go
 var a []*int{ ... }
@@ -483,41 +482,3 @@ a[len(a)-1] = nil
 // xóa phần tử cuối cùng ra khỏi slice
 a = a[:len(a)-1]
 ```
-
-Dĩ nhiên, nếu ở cách làm trước đối với slice có kích thước nhỏ, bạn sẽ không gặp phải vấn đề về  tham chiếu treo. Bởi vì nếu bản thân slice có thể được giải phóng bởi GC (Garbage collector), mỗi phần tử ứng với slice có thể được thu gom tự nhiên.
-
-#### 1.3.3.4 Ép kiểu slice
-
-Vì lý do an toàn, khi hai kiểu slice là `[]T` và `[]Y`, bên dưới phần dữ liệu thô sẽ khác nhau, ngôn ngữ Go sẽ không trực tiếp chuyển đổi kiểu. Tuy nhiên, tính an toàn đi kèm với một chi phí.
-
-Ví dụ, trên hệ điều hành 64 bit, bạn cần phải sắp xếp một mảng `[]float64` với tốc độ cao. Chúng ta có thể ép chúng về kiểu `[]int` slice và sắp xếp chúng (bởi vì `float64` là chuẩn dấu chấm động `IEEE754` được sử dụng, số nguyên ứng với nó cũng sẽ theo thứ tự đó) điều đó không có gì xa lạ.
-
-Đoạn mã bên dưới sẽ chuyển slice `[]float64` đến slice `[]int` bằng hai cách.
-
-```go
-// +build amd64 arm64
-
-import "sort"
-
-var a = []float64{4, 2, 5, 7, 2, 1, 88, 1}
-
-func SortFloat64FastV1(a []float64) {
-    var b []int = ((*[1 << 20]int)(unsafe.Pointer(&a[0])))[:len(a):cap(a)]
-    sort.Ints(b)
-}
-
-func SortFloat64FastV2(a []float64) {
-    var c []int
-    aHdr := (*reflect.SliceHeader)(unsafe.Pointer(&a))
-    cHdr := (*reflect.SliceHeader)(unsafe.Pointer(&c))
-    *cHdr = *aHdr
-
-    sort.Ints(c)
-}
-```
-
-Cách ép kiểu đầu tiên ban đầu sẽ chuyển địa chỉ bắt đầu của slice thành con trỏ đến mảng lớn hơn, sau đó sẽ `re-slice` array tương ứng với con trỏ array. Ở giữa `unsafe.Pointer` cần phải kết nối tới kiểu dữ liệu khác của pointer để truyền. Nên chú ý rằng, kiểu array none-zero sẽ tối đa 2GB chiều dài, do đó chúng ta có thể tính toán chiều dài tối đa của array cho kiểu array đó (kiểu `[]uint8` có kích thước tối đa 2GB, kiểu `[]uint16` tối đa 1GB, nhưng kiểu `[]struct{}` kích thước tối đa 2GB).
-
-Cách chuyển đổi thứ hai sẽ chứa hai kiểu dữ liệu về thông tin header của slice và bên dưới cấu trúc `reflect.SliceHeader` của thông tin header sẽ ứng với cấu trúc slice, sau đó thông tin sẽ được cập nhật cấu trúc, sau đó hiện thực biến `a` ứng với kiểu `[]float64` bởi cấu trúc `[]int`. Đây là phép chuyển đổi kiểu của slice.
-
-Thông qua việc benchmark, chúng ta có thể thấy rằng hiệu suất của việc sắp xếp `sort.Ints` của kiểu `[]int` sẽ tốt hơn là `sort.Float64s`. Tuy nhiên, bạn phải chú ý rằng, tiền đề của phương pháp đó, sẽ đảm bảo rằng `[]float64` sẽ không có dấu phẩy động chính tắc như NaN và Inf (vì NaN không thể sắp xếp theo số đấu chấm động, dương 0 và âm 0 bằng nhau, nhưng không có trường hợp nào như vậy trong số nguyên).

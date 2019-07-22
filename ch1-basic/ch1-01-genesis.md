@@ -1,4 +1,4 @@
-# 1.1 Nguồn gốc của ngôn ngữ Go
+# 1.1. Nguồn gốc của ngôn ngữ Go
 
 Ngôn ngữ [Go](https://golang.org/) ban đầu được thiết kế và phát triển bởi một nhóm kĩ sư Google bao gồm **Robert Griesemer**, **Ken Thompson** và **Rob Pike** vào năm 2007. Mục đích của việc thiết kế ngôn ngữ mới bắt nguồn từ một số phản hồi về tính chất phức tạp của C++11 và nhu cầu thiết kế lại ngôn ngữ C trong môi trường network và multi-core.
 
@@ -29,7 +29,7 @@ Một vài những tính năng khác của ngôn ngữ Go đến từ một số
   * Go hỗ trợ `slice` để truy cập phần tử nhanh và có thể tự động tăng giảm kích thước.
   * Mệnh đề `defer` trong Go.
 
-## 1.1.1 Khởi nguồn từ Bell Labs
+## 1.1.1. Khởi nguồn từ Bell Labs
 
 Tính chất concurrency của Go đến từ học thuyết [Commutative sequential processes (CSP)](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf) được công bố bởi Tony Hoare tại Bell Labs vào năm 1978. Bài báo khoa học về CSP nói rằng chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `channel` cho việc giao tiếp và điều khiển đồng bộ.
 
@@ -61,7 +61,7 @@ Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go đượ
 
 Trong vòng những năm gần đây, Go là một ngôn ngữ được ưa chuộng khi viết các chương trình có kiến trúc Micro Services, vì những đặc tính nhỏ gọn, biên dịch nhanh, import thư viện từ github, cú pháp đơn giản nhưng hiện đại.
 
-## 1.1.2 Hello World
+## 1.1.2. Hello World
 
 Việc đầu tiên là cài đặt chương trình Go lang theo hướng dẫn trên trang chủ [golang.org](https://golang.org/)
 

@@ -1,6 +1,6 @@
-# 1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+# 1.5. Concurrent-oriented memory model
 
-Vào thời gian đầu, CPU sẽ thực thi những câu lệnh máy trên một lõi duy nhất. Thế hệ tổ tiên C của Go là tiêu biểu cho ngôn ngữ lập trình tuần tự. Thứ tự thực hiện của ngôn ngữ có nghĩa là cách mà những lệnh được thực thi, và chỉ có duy nhất một CPU được thực thi lệnh tại một thời điểm.
+Thời gian đầu, CPU sẽ thực thi những câu lệnh máy trên một lõi duy nhất. Thế hệ tổ tiên C của Go là tiêu biểu cho ngôn ngữ lập trình tuần tự. Thứ tự thực hiện của ngôn ngữ có nghĩa là cách mà những lệnh được thực thi, và chỉ có duy nhất một CPU được thực thi lệnh tại một thời điểm.
 
 Với sự phát triển của công nghệ bộ xử lý, kiến trúc đơn lõi sẽ bắt gặp một điểm bottlenecks (thắt cổ chai) theo cách làm tăng tần số của bộ xử lý để cải thiện tốc độ tính toán. Hiện nay nhiều hệ thống CPU thường có tần số rơi vào khoảng 3GHZ. Sự trì trệ của việc phát triển CPU đơn lõi sẽ đem đến cơ hội phát triển CPU đa lõi. Theo đó, ngôn ngữ lập trình đầu tiên sẽ được phát triển theo hướng song song. Ngôn ngữ Go là một ngôn ngữ tuyệt vời để hỗ trợ tính concurrency trong ngữ cảnh đa lõi và networking.
 
@@ -18,7 +18,7 @@ Bắt đầu một goroutine trong go không chỉ là gọi một hàm, mà là
 
 ## 1.5.2 Toán tử Atomic
 
-Tác vụ atomic là những tác vụ nhỏ nhất và không thể chạy song song được với các tác vụ khác waptrong lập trình concurrency. Về mặt chung, nếu nhiều tác vụ được thực thi đồng thời trên cùng một tài nguyên là atomic, sau đó nhiều nhất một thực thể có thể truy cập vào một tài nguyên. Từ góc độ thread, những thread khác không thể cùng truy cập vào tài nguyên. Tác vụ atomic trong mô hình lập trình concurrency sẽ không khác nhau nhiều với mô hình single thread, và sự tương thích này đối với việc chia sẻ resource sẽ được đảm bảo.
+Tác vụ atomic là những tác vụ nhỏ nhất và không thể chạy song song được với các tác vụ khác trong lập trình concurrency. Về mặt chung, nếu nhiều tác vụ được thực thi đồng thời trên cùng một tài nguyên là atomic, sau đó nhiều nhất một thực thể có thể truy cập vào một tài nguyên. Từ góc độ thread, những thread khác không thể cùng truy cập vào tài nguyên. Tác vụ atomic trong mô hình lập trình concurrency sẽ không khác nhau nhiều với mô hình single thread, và sự tương thích này đối với việc chia sẻ resource sẽ được đảm bảo.
 Thông thường sẽ có một vài lệnh CPU đặc biệt giúp bảo vệ vùng nhớ này. chúng ta có thể dùng `sync.Mutex` để đạt được điều đó.
 
 ```go
@@ -51,7 +51,6 @@ func main() {
     fmt.Println(total.value)
 }
 ```
-
 
 Trong vòng lặp của `worker`, theo thứ tự sẽ đảm bảo `total.value+=i` được đơn nguyên, chúng ta dùng `sync.Mutex` đẻ đảm bảo rằng mệnh đề chỉ được truy cập  bởi một thread trong cùng một thời điểm bằng cơ chế locking và unlocking. Trong chương trình với mô hình mutithread, rất cần thiết để lock và unlock trước và sau khi truy nhập vào vùng critical section. Với không có sự bảo vệ biến `total` , kết quả cuối cùng có thể bị sai khác do sự truy nhập đồng thời của nhiều thread.
 
@@ -265,7 +264,6 @@ Trong chương trước, chúng ta đã được giới thiệu ngắn gọn v�
 
 Việc khởi tạo và thực thi trong chương trình Go luôn luôn bắt đầu bằng hàm `main.main`. Tuy nhiên nếu package `main` import các package khác vào, chúng sẽ được import theo thứ tự của string của trên file và tên thư mục) Nếu một package được import nhiều lần, nó chỉ được import và thực thi đúng một lần. Khi mà một package được import, nếu nó cũng import những package khác nữa, thì đầu tiên sẽ bao gồm package khác, sau đó tạo ra và khởi tạo biến và hằng của package. Sau đó hàm `init` trong package, nêu một package có nhiều hàm `init` thì việc hiện thực sẽ gọi chúng theo thứ tự file name, nhiều hàm init trong cùng một file được gọi theo thứ tự chúng xuất hiện (`init` không phải là một hàm thông thường, chúng có thể được định nghĩa nhiều lần, chúng sẽ không được gọi từ những hàm khác). Cuối cùng, package `main` biến và hằng được khai báo và khởi tạo, và hàm `init` sẽ được thực thi trước khi hàm thực thi `main.main`. Chương trình bắt đầu thực thi một cách bình thường, theo sau là một sơ đồ ngữ nghĩa của việc khởi động hàm Go bên dưới.
 
-
 <div align="center" width="600">
 <img src="../images/ch1-12-init.ditaa.png">
 <br/>
@@ -294,7 +292,6 @@ func hello() {
     go f()
 }
 ```
-
 
 Việc thực thi của `go f()` sẽ tạo ra một Goroutine, và hàm `hello` sẽ thực thi cùng lúc với Goroutine. Theo thứ tự của các statement được viết, nó có thể được xác định bằng một khi việc khởi tạo Goroutine được xảy ra, nó có thể không được sắp xếp. Nó là việc concurrency. Việc gọi hello sẽ in ra tại một số điểm trong tương lai "hello,world", hoặc có thể là `hello` được in ra sao khi hàm đã thực thi xong
 
