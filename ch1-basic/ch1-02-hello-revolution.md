@@ -242,7 +242,7 @@ Bell Labs sau khi trải qua nhiều biến động dẫn tới việc nhóm ph�
 
 Đặc tả ngôn ngữ Go ban đầu được viết vào tháng 3 năm 2008 và chương trình Go gốc được biên dịch trực tiếp vào C và sau đó được dịch thành mã máy. Tháng 5 năm 2008, các nhà lãnh đạo Google cuối cùng đã phát hiện ra tiềm năng to lớn của ngôn ngữ Go và bắt đầu hỗ trợ cho dự án, cho phép các tác giả dành toàn bộ thời gian của mình để hoàn thiện ngôn ngữ. Sau khi phiên bản đầu tiên của đặc tả ngôn ngữ Go được hoàn thành, trình biên dịch ngôn ngữ Go cuối cùng có thể tạo ra mã máy trực tiếp (mà không phải thông qua C).
 
-### 1.2.6.1. hello.go - Tháng 6 năm 2008
+### hello.go - Tháng 6 năm 2008
 
 ```go
 package main
@@ -257,7 +257,7 @@ func main() int {
 }
 ```
 
-### 1.2.6.2. hello.go - 27 tháng 6 năm 2008
+### hello.go - 27 tháng 6 năm 2008
 
 ```go
 package main
@@ -271,7 +271,7 @@ func main() {
 }
 ```
 
-### 1.2.6.3. hello.go - 11 tháng 8 năm 2008
+### hello.go - 11 tháng 8 năm 2008
 
 ```go
 package main
@@ -282,7 +282,7 @@ func main() {
 }
 ```
 
-### 1.2.6.4. hello.go - 24 tháng 10 năm 2008
+### hello.go - 24 tháng 10 năm 2008
 
 ```go
 package main
@@ -298,7 +298,7 @@ func main() {
 }
 ```
 
-### 1.2.6.5. hello.go - 15 tháng 1 năm 2009
+### hello.go - 15 tháng 1 năm 2009
 
 ```go
 package main
@@ -313,7 +313,7 @@ func main() {
 }
 ```
 
-### 1.2.6.6. hello.go - 11 tháng 12 năm 2009
+### hello.go - 11 tháng 12 năm 2009
 
 ```go
 package main
@@ -326,7 +326,7 @@ func main() {
 }
 ```
 
-### 1.2.7. Hello World! - V2.0
+## 1.2.7. Hello World! - V2.0
 
 Sau nửa thế kỷ phát triển, ngôn ngữ Go không chỉ có thể in được phiên bản Unicode của "Hello World", mà còn có thể cung cấp service tương tự cho người dùng trên toàn thế giới. Phiên bản sau đây in ra kí tự tiếng Việt "Xin chào" và thời gian hiện tại của mỗi client truy cập vào service.
 
