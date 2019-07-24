@@ -1,8 +1,8 @@
-# 1.4 Functions, Methods và Interfaces
+# 1.4. Functions, Methods và Interfaces
 
 Trong phần này chúng ta sẽ tìm hiểu cụ thể về các khái niệm cơ bản trong Golang: Function, Method và Interface.
 
-## 1.4.1 Function
+## 1.4.1. Function
 
 Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function):
 
@@ -64,117 +64,118 @@ func Find(m map[int]int, key int) (value int, ok bool) {
 }
 ```
 
-### Defer trong Function
+### 1.4.1.1. Defer trong Function
 
-Nếu giá trị trả về được đặt tên, nó có thể sửa đổi  bằng tên đó hoặc bằng lệnh `defer` sẽ thực thi sau lệnh `return`
-
-```go
-func Inc() (v int) {
-    defer func(){ v++ } ()
-    return 42
-}
-// giá trị v cuối cùng là 43
-```
-
-Câu lệnh `defer` sẽ trì hoãn việc thực thi của hàm ẩn danh (trong ví dụ trên) vì hàm này lấy biến cục bộ `v` của hàm bên ngoài. Hàm này được gọi là closure. closure không truy cập tới biến bên ngoài (như `v`) theo kiểu giá trị (value-by-value) mà truy cập bằng tham chiếu (reference).
-
-Hành vi truy cập các biến bên ngoài bằng tham chiếu này đến các closure có thể dẫn đến một số vấn đề tiềm ẩn:
+Lệnh `defer` trì hoãn việc thực thi hàm cho tới khi hàm bao ngoài nó return. Các đối số trong lời gọi defer được đánh giá ngay lặp tức nhưng lời gọi không được thực thi cho tới khi hàm bao ngoài nó return.
 
 ```go
 func main() {
-    for i := 0; i < 3; i++ {
-        defer func(){ println(i) } ()
-    }
+    defer fmt.Println("world")
+
+    fmt.Println("hello")
 }
-// Output:
-// 3
-// 3
-// 3
+// kết quả: hello world
 ```
 
-Bởi vì nó là một closure (hàm trong câu lệnh lặp for), mỗi câu lệnh `defer` trì hoãn việc thực hiện tham chiếu hàm tới cùng một biến lặp i, giá trị của biến này sau khi kết thúc vòng lặp là 3, do đó đầu ra cuối cùng là 3.
+Mỗi lời gọi `defer` được push vào stack và thực thi theo thứ tự ngược lại khi hàm bao ngoài nó kết thúc.
 
-Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này:
+Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài nguyên:
+
+- Đóng file giống như `try-finally`:
+
+    ```go
+    func main() {
+        f, err := os.Create("file")
+        if err != nil {
+            panic("cannot create file")
+        }
+        defer f.Close()
+        // no matter what happens here file will be closed
+        // for sake of simplicity I skip checking close result
+        fmt.Fprintf(f,"hello")
+    }
+    ```
+
+- Đóng file và xử lý panic giống như `try-catch-finally`:
+
+    ```go
+    func main() {
+        defer func() {
+            msg := recover()
+            fmt.Println(msg)
+        }()
+
+        // . là folder hiện tại
+        f, err := os.Create(".")
+        if err != nil {
+            panic("cannot create file")
+        }
+        defer f.Close()
+
+        // không quan trọng chuyện gì xảy ra thì file cũng sẽ được close
+        // để đơn giản nên ở đây bỏ qua bước kiểm ra close result
+        fmt.Fprintf(f,"hello")
+    }
+    ```
+
+- Cũng giống như block `finally` thì lời gọi defer cũng có thể làm cho kết quả trả về thay đổi:
+
+    ```go
+    func yes() (text string) {
+        defer func() {
+            text = "no"
+        }()
+        return "yes"
+    }
+
+    func main() {
+        fmt.Println(yes())
+    }
+    ```
+
+### 1.4.1.2. Slice trong Function
+
+Mọi thứ trong Go đều được truyền theo kiểu pass by value, slice cũng thế. Nhưng vì giá trị của slice là một *header*, nó chứa con trỏ tới dữ liệu array bên dưới, nên khi truyền slice vào hàm, quá trình copy sẽ bao gồm luôn địa chỉ tới array chứa dữ liệu thực sự.
+
+Ví dụ sau cho thấy ý nghĩa của việc truyền tham số kiểu slice vào hàm thay vì array:
 
 ```go
-func main() {
-    for i := 0; i < 3; i++ {
-        i := i // Xác định một biến cục bộ i trong vòng lặp
-        defer func(){ println(i) } ()
+// truyền vào array sẽ giúp
+// nội dung của biến x không bị thay đổi
+func once(x [3]int) {
+    for i := range x {
+        x[i] *= 2
     }
 }
 
-func main() {
-    for i := 0; i < 3; i++ {
-        // truyền i vào hàm (pass by value)
-        // câu lệnh defer sẽ lấy các tham số từ lời gọi
-        defer func(i int){ println(i) } (i)
-    }
-}
-```
-
-- Phương pháp đầu tiên là xác định một biến cục bộ bên trong thân vòng lặp, để hàm closure của câu lệnh `defer` lấy các biến khác nhau cho mỗi lần lặp. Các giá trị của các biến này tương ứng với các giá trị tại thời điểm lặp.
-- Cách thứ hai là truyền biến lặp iterator thông qua các tham số của hàm closure và câu lệnh `defer` sẽ ngay lập tức lấy các tham số từ lời gọi (trường hợp này là lấy `i`).
-
-Cả hai phương pháp đều hoạt động. Tuy nhiên, đây không phải là cách thực hành tốt để thực thi câu lệnh `defer` bên trong vòng lặp for. Đây chỉ là ví dụ và không được khuyến khích.
-
-Trong ngôn ngữ Go, nếu một hàm được gọi với tham số là kiểu slice thì một tham số ảo sẽ được truyền vào bởi vì phần tử của slice có thể được sửa đổi bên trong hàm được gọi.
-
-Trong thực tế, trường hợp mà một tham số ở lời gọi hàm bị sửa đổi bởi thao tác trong  hàm là bởi vì nó là con trỏ được truyền tường minh hoặc ngầm định vào tham số hàm. Đặc tả tham số hàm chỉ đề cập đến phần cố định của cấu trúc dữ liệu, chẳng hạn như cấu trúc con trỏ hoặc độ dài chuỗi (trong cấu trúc chuỗi) hoặc slice tương ứng, nhưng không chứa nội dung trỏ tới bởi con trỏ gián tiếp.
-
-Việc thay thế tham số của kiểu slice với cấu trúc tương tự là `reflect.SliceHeader` là một ví dụ để hiểu ý nghĩa của việc truyền vào giá trị kiểu slice (pass by value):
-
-```go
-// truyền vào con trỏ ngầm định khiến
-// nội dung của biến x bị thay đổi
+// truyền vào con trỏ ngầm định (slice)
+// khiến nội dung của biến x bị thay đổi
 func twice(x []int) {
     for i := range x {
         x[i] *= 2
     }
 }
 
-type IntSliceHeader struct {
-    Data []int
-    Len  int
-    Cap  int
-}
+func main() {
+    data := [3]int{8,9,0}
 
-func twice(x IntSliceHeader) {
-    for i := 0; i < x.Len; i++ {
-        x.Data[i] *= 2
-    }
-}
-```
+    once(data)
+    fmt.Println(data)
 
-Vì phần array bên dưới của kiểu slice được truyền bởi con trỏ ngầm định (chính con trỏ vẫn được truyền, nhưng con trỏ trỏ đến cùng một dữ liệu), nên hàm được gọi có thể sửa đổi dữ liệu trong slice thông qua con trỏ.  cấu trúc `IntSliceHeader` chứa không chỉ dữ liệu mà còn có thông tin về độ dài và dung lượng slice, hai thành phần này cũng được truyền theo giá trị. Nếu có hàm nào điều chỉnh `Len` hoặc `Cap` được gọi, nó sẽ không thể hiện sự thay đổi đó trong biến slice của tham số hàm được. Lúc này, ta nên cập nhật slice trước bằng cách trả về slice đã sửa đổi. Đây cũng là lý do tại sao hàm `append` (built-in) phải trả về một slice.
+    twice(data[0:])
+    fmt.Println(data)
 
-Trong ngôn ngữ Go, các hàm cũng có thể tự gọi chính nó trực tiếp hoặc gián tiếp (gọi đệ quy). Không có giới hạn về độ sâu của lệnh gọi đệ quy trong Go. Stack của lệnh gọi hàm không có lỗi tràn, vì trong thời gian thực thi Go tự động điều chỉnh kích thước của stack hàm khi cần.
-
-Mỗi Goroutine sẽ  được phân bổ một stack nhỏ (4 hoặc 8KB, tùy thuộc vào implement) ngay sau khi khởi động. Kích thước stack có thể được điều chỉnh động khi cần. Stack có thể đạt đến mức GB (tùy theo cách implement, trong phiên bản hiện tại là 32 bit) Kiến trúc là 250MB và kiến ​​trúc 64 bit là 1GB).
-
-Trước phiên bản 1.4, Go sử dụng stack động phân đoạn (Segmented dynamic stack). Về cơ bản thì một danh sách liên kết (linked list) được sử dụng để hiện thực các stack động. Địa chỉ bộ nhớ của các node trong mỗi danh sách liên kết là không thay đổi. Tuy nhiên, các stack động này có ảnh hưởng lớn đến hiệu suất của một số lời gọi ở những thời điểm quan trọng. Nguyên nhân là bởi  vì các node  trong danh sách liên kết dù có liền kề cũng sẽ không liền kề trong địa chỉ bộ nhớ, làm tăng khả năng xảy ra lỗi bộ nhớ cache của CPU (cache hit failure).
-
-Để giải quyết vấn đề về tỉ lệ trúng CPU cache (hit rate) nói trên, Go 1.4 sử dụng hiện thực stack động liên tục (Continuous dynamic stack), nghĩa là dùng một cấu trúc tương tự như mảng động để biểu diễn stack. Tuy nhiên, stack động liên tục cũng mang đến một vấn đề mới: khi stack tăng kích thước động, nó cần di chuyển dữ liệu trước đó sang không gian bộ nhớ mới, điều này sẽ khiến địa chỉ của tất cả các biến trong stack trước đó thay đổi.
-
-Mặc dù trong thời điểm thực thi Go tự động cập nhật các con trỏ để lưu trữ (vào stack) các biến tham chiếu tới địa chỉ mới, nhưng quan trọng  là các con trỏ trong Go không còn cố định nữa(vì vậy ta không thể giữ con trỏ trong các biến theo ý muốn, địa chỉ trong Go không thể được lưu vào môi trường không được kiểm soát bởi GC, đó là lý do địa chỉ của đối tượng Go không thể được giữ bằng ngôn ngữ C trong một thời gian dài khi sử dụng CGO).
-
-Vì stack của các hàm trong Go sẽ tự động thay đổi kích thước, lập trình viên hiếm khi cần quan tâm đến cơ chế hoạt động của stack. Trong đặc tả ngôn ngữ, ngay cả khái niệm stack và heap cũng không được đề cập một cách có chủ ý. Chúng ta không thể biết được một tham số hàm hoặc một biến cục bộ sẽ lưu trữ trên stack hay trên heap. Chúng ta chỉ cần biết rằng chúng hoạt động tốt là được. Hãy xem ví dụ sau:
-
-```go
-func f(x int) *int {
-    return &x
-}
-
-func g() int {
-    x = new(int)
-    return *x
+    // kết quả:
+    // [8 9 0]
+    // [16 18 0]
 }
 ```
 
-- Hàm đầu tiên trả về trực tiếp địa chỉ của biến tham số hàm (biến `x`) - điều này có vẻ là không khả thi bởi vì nếu biến tham số nằm trên stack sẽ trở thành không hợp lệ sau khi hàm trả về và địa chỉ được trả về dĩ nhiên bị lỗi. Nhưng trình biên dịch của  Go thông minh hơn khi đảm bảo rằng các biến được trỏ bởi con trỏ sẽ ở đúng vị trí.
-- Hàm thứ hai, mặc dù lời gọi `new` tạo một đối tượng con trỏ kiểu `*int`, nhưng vẫn không biết nó sẽ được lưu ở đâu. Một điều nói riêng với những lập trình viên có kinh nghiệm với C/C ++ là trình biên dịch và thực thi (runtime) của Go sẽ giúp chúng ta không phải lo lắng về stack và heap của hàm. Do đó đừng cho rằng địa chỉ của biến trong bộ nhớ là cố định vì con trỏ có thể thay đổi bất cứ lúc nào, đặc biệt là những khi chúng ta không mong đợi nó thay đổi nhất.
+### 1.4.1.3. Tham số trả về được đặt tên
 
-## 1.4.2 Method
+Cũng như tham số nhận vào, giá trị trả về cũng có thể được 
+
+## 1.4.2. Method
 
 Phương thức (Method) được liên kết với một hàm đặc biệt của một kiểu cụ thể. Các phương thức trong ngôn ngữ Go phụ thuộc vào kiểu và phải được ràng buộc tĩnh tại thời gian biên dịch.
 
@@ -239,7 +240,6 @@ func (f *File) Read(offset int64, data []byte) int {
 Việc di chuyển tham số đầu tiên của hàm lên phía đầu của tên hàm chỉ là một thay đổi nhỏ trong code, nhưng từ quan điểm triết lý lập trình, ngôn ngữ Go đã đứng trong hàng ngũ của các ngôn ngữ hướng đối tượng. Ta có thể thêm một hoặc nhiều phương thức cho bất kỳ kiểu tùy chỉnh nào (custom type). Phương thức cho mỗi kiểu phải nằm trong cùng một package với định nghĩa kiểu, do đó không thể thêm phương thức vào các kiểu dựng sẵn đó (vì định nghĩa của phương thức và định nghĩa của kiểu không nằm trong package). Đối với một kiểu nhất định, tên của mỗi phương thức phải là duy nhất và các phương thức cũng như hàm đều không hỗ trợ overload.
 
 Phương thức được bắt nguồn từ hàm, chỉ là di chuyển tham số đối tượng đầu tiên của hàm lên phía trước tên hàm. Vì vậy, chúng ta vẫn có thể sử dụng phương thức theo tư duy thủ tục (procedure). Ta có thể biến một phương thức thành một loại hàm thông thường bằng cách gọi các thuộc tính trong biểu thức của nó:
-
 
 ```go
 // không phụ thuộc vào đối tượng file cụ thể
@@ -345,13 +345,13 @@ Cấu trúc `Cache` nhúng một kiểu ẩn danh `sync.Mutex` để kế thừa
 
 Nếu cần tính chất đa hình ở các hàm ảo, chúng ta cần triển khai nó với Interface.
 
-## 1.4.3 Interface
+## 1.4.3. Interface
 
 Một Interface xác định một tập hợp các phương thức phụ thuộc vào đối tượng Interface trong thời gian thực thi, vì vậy các phương thức tương ứng với Interface được ràng buộc động khi thực thi. Ngôn ngữ Go hiện thực mô hình hướng đối tượng thông qua cơ chế Interface ngầm định.
 
 Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi tiếng:
 
-> Languages ​​that try to disallow idiocy become themselves idiotic 
+> Languages ​​that try to disallow idiocy become themselves idiotic
 > (Các ngôn ngữ cố gắng tránh các hành vi ngu ngốc cuối cùng trở thành ngôn ngữ ngu ngốc).
 
 Các ngôn ngữ lập trình tĩnh nói chung có các hệ thống kiểu nghiêm ngặt, cho phép trình biên dịch đi sâu vào xem liệu lập trình viên có thực hiện bất kỳ động thái bất thường nào không. Tuy nhiên, một hệ thống kiểu quá nghiêm ngặt có thể làm cho việc lập trình trở nên quá cồng kềnh và khiến  lập trình viên lãng phí rất nhiều thời gian tuổi trẻ trong công cuộc đấu tranh với trình biên dịch.
@@ -545,7 +545,7 @@ Hàm `GenerateImports` được sử dụng trong phương thức của kiểu `
 
 Ngôn ngữ Go dễ dàng hiện thực các tính năng nâng cao như hướng đối tượng với duck-typing và kế thừa ảo thông qua sự kết hợp của một số tính năng đơn giản, điều này thực sự đáng kinh ngạc.
 
-## 1.4.4 Luồng thực thi của một chương trình Go
+## 1.4.4. Luồng thực thi của một chương trình Go
 
 Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ hàm `main.main`. Nếu package `main` có import  các package khác, chúng sẽ được thêm vào package `main` theo thứ tự khai báo.
 
