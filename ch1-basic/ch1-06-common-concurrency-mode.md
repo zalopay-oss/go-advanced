@@ -1,58 +1,57 @@
-# 1.6. Một số Concurrency Mode thường gặp
+# 1.6. Concurrency Mode
 
-Khía cạnh hấp dẫn nhất của Golang có tích hợp sẵn cơ chế xử lý đồng thời (concurrency). Lý thuyết về hệ thống tương tranh của Go là CSP (Communicating Sequential Process) được đề xuất bởi CAR Hoare vào năm 1978. CSP  được áp dụng lần đầu cho máy tính đa dụng T9000 mà Hoare có tham gia. Từ NewSqueak, Alef, Limbo đến Golang hiện tại, Rob Pike, người có hơn 20 năm kinh nghiệm thực tế với CSP, rất quan tâm  đến tiềm năng áp dụng CSP vào ngôn ngữ lập trình đa dụng. Khái niệm cốt lõi của lý thuyết CSP cũng là  của lập trình concurrency trong Go: giao tiếp đồng bộ (synchronous communication). Chủ đề về giao tiếp đồng bộ đã được đề cập trong phần trước. Trong phần này chúng tôi sẽ giới thiệu ngắn gọn về các mẫu concurrency phổ biến trong Golang.
-
-Điều đầu tiên cần làm rõ là khái niệm: "đồng thời" không phải "song song" (concurrency is not parallel). Concurrency quan tâm nhiều hơn ở cấp độ thiết kế của chương trình. Các chương trình concurrency có thể được thực thi tuần tự và chỉ trên các CPU đa lõi thực sự mới có thể chạy cùng một lúc.
+Một điểm mạnh của Golang là tích hợp sẵn cơ chế xử lý đồng thời (concurrency). Lý thuyết về hệ thống tương tranh của Go là CSP (Communicating Sequential Process) được đề xuất bởi CAR Hoare vào năm 1978. CSP  được áp dụng lần đầu cho máy tính đa dụng T9000 mà Hoare có tham gia. Từ NewSqueak, Alef, Limbo đến Golang hiện tại, Rob Pike, người có hơn 20 năm kinh nghiệm thực tế với CSP, rất quan tâm  đến tiềm năng áp dụng CSP vào ngôn ngữ lập trình đa dụng. Khái niệm cốt lõi của lý thuyết CSP cũng là  của lập trình concurrency trong Go: giao tiếp đồng bộ (synchronous communication). Chủ đề về giao tiếp đồng bộ đã được đề cập trong phần trước. Trong phần này chúng ta sẽ tìm hiểu sơ lược về các mẫu concurrency phổ biến trong Golang.
 
 <div align="center">
 
-<img src="../images/ch1-06-concurrency.gif">
+<img src="../images/gophercomplex5.jpg" width="800">
 <br/>
-<span align="center"><i>Mô tả quá trình tính toán concurrency</i></span>
+<span align="center"><i>Go concurrency</i></span>
     <br/>
 
 </div>
 
-Parallel quan tâm nhiều hơn đến cấp độ thực thi của chương trình. Song song cơ bản là lặp lại một số lần rất lớn các vòng lặp đơn giản. Ví dụ như một số lượng lớn các thao tác  song song về xử lý hình ảnh được thực thi trong GPU.
+Trong hầu hết các ngôn ngữ hiện đại, vấn đề chia sẻ tài nguyên được giải quyết bằng cơ chế đồng bộ hóa như khóa (lock) nhưng Golang có cách tiếp cận riêng là chia sẻ giá trị (Value) thông qua channel.
 
 <div align="center">
 
-<img src="../images/ch1-06-parralel.gif">
+<img src="../images/channel.jpg" width="400">
 <br/>
-<span align="center"><i>Mô tả quá trình tính toán parallel</i></span>
+<span align="center"><i>Goroutine trao đổi giá trị qua channel</i></span>
     <br/>
 
 </div>
 
-Với mục đích viết chương trình chạy concurrency hiệu quả hơn, từ khi bắt đầu thiết kế Golang đã tập trung vào cách thiết kế một mô hình trừu tượng đơn giản, an toàn và hiệu quả ở cấp độ ngôn ngữ lập trình, cho phép các lập trình viên tập trung vào giải quyết vấn đề và kết hợp các giải thuật mà không phải quá chú tâm vào việc quản lý các thread và tín hiệu.
+Trên thực tế khi nhiều thread thực thi độc lập chúng hiếm khi chủ động chia sẻ tài nguyên. Tại bất kỳ thời điểm nào, tốt nhất là chỉ Goroutine sở hữu tài nguyên của chính mình. Golang có một triết lý được thể hiện bằng slogan:
 
-Trong lập trình concurrency, việc truy cập đúng vào tài nguyên được chia sẻ đòi hỏi sự kiểm soát chính xác. Trong hầu hết các ngôn ngữ hiện đại, vấn đề khó khăn này được giải quyết bằng cơ chế đồng bộ hóa như khóa (lock) nhưng Golang có cách tiếp cận riêng là chia sẻ Giá trị (Value) được truyền qua channel (trên thực tế, nhiều thread thực thi độc lập hiếm khi chủ động chia sẻ tài nguyên). Tại bất kỳ thời điểm nào, tốt nhất là chỉ có một Goroutine để sở hữu tài nguyên. Cạnh tranh dữ liệu đã được loại bỏ từ cấp độ thiết kế. Để thúc đẩy lối suy nghĩ này, Golang đã triết lý hóa chương trình concurrency của nó thành một slogan:
+> Do not communicate by sharing memory; instead, share memory by communicating.
+>
+>Do not communicate through shared memory, but share memory through communication.
 
-> Đừng giao tiếp bằng cách chia sẻ bộ nhớ, thay vào đó hãy chia sẻ bộ nhớ bằng cách giao tiếp.
-> Đừng giao tiếp thông qua bộ nhớ chia sẻ, nhưng hãy chia sẻ bộ nhớ thông qua giao tiếp.
-
-Đây là một cấp độ cao hơn của triết lý lập trình concurrency (truyền các giá trị qua pipeline   luôn được Go khuyến nghị). Mặc dù các vấn đề tương tranh đơn giản như   tham chiếu đến biến đếm có thể được hiện thực bằng  `atomic operations` hoặc `mutex lock`, nhưng việc kiểm soát truy cập thông qua Channel giúp cho code của chúng ta đúng và "sạch" hơn.
+Mặc dù các vấn đề tương tranh đơn giản như   tham chiếu đến biến đếm có thể được hiện thực bằng  `atomic operations` hoặc `mutex lock`, nhưng việc kiểm soát truy cập thông qua Channel giúp cho code của chúng ta clean và "Golang" hơn.
 
 ## 1.6.1 Phiên bản concurrency của *Hello World*
 
-Trước tiên, ta in ra "Hello World" trong Goroutine mới và đợi cho output của thread nền (chứa Goroutine này) kết thúc và thoát, chương trình với cơ chế concurrency đơn giản này sẽ được thực thi.
-
-Khái niệm cốt lõi của lập trình concurrency là giao tiếp đồng bộ, nhưng có nhiều cách để đồng bộ hóa. Trước tiên chúng ta dùng `sync.Mutex` để giao tiếp đồng bộ với cơ chế mutex quen thuộc . Theo tài liệu của Golang, chúng ta không thể trực tiếp Unlock `sync.Mutex` khi nó đã ở trạng thái đã Unlock, điều này có thể gây ra runtime exceptions. Cách sau đây sẽ không thực thi bình thường được:
+Xem xét đoạn code sau:
 
 ```go
 func main() {
     var mu sync.Mutex
 
+    // khởi chạy một goroutine chạy đồng thời với main
     go func(){
         fmt.Println("Hello World")
+
+        // không thể đảm bảo hàm này sẽ chạy trước `mu.Unlock()` phía dưới
         mu.Lock()
     }()
 
+    // xảy ra lỗi vì `mu` đang ở trạng thái unlocked
     mu.Unlock()
 }
 ```
 
-Bởi vì `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, vì vậy nó không đáp ứng được mô hình bộ nhớ nhất quán tuần tự. Đồng thời, chúng không có sự kiện đồng bộ hóa nào khác để tham chiếu tới. Hai sự kiện này vì thế không thể thực thi concurrency. Bởi vì khi chúng concurrency, rất có khả năng `mu.Unlock()` trong `main` sẽ thực thi trước và tại thời điểm này, mutex `mu` vẫn ở trạng thái unlocked, điều này sẽ gây ra runtime exceptions.
+Ở đây, `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, vì vậy nó không đáp ứng được mô hình bộ nhớ nhất quán tuần tự.
 
 Sau đây là đoạn code đã sửa:  
 
@@ -60,9 +59,13 @@ Sau đây là đoạn code đã sửa:
 func main() {
     var mu sync.Mutex
 
+    // lệnh này khiến main thread bị block
     mu.Lock()
+
     go func(){
         fmt.Println("Hello World")
+
+        // lệnh này Unlock cho main thread
         mu.Unlock()
     }()
 
@@ -70,9 +73,7 @@ func main() {
 }
 ```
 
-Cách khắc phục là thực hiện 2 lần `mu.Lock()` trong hàm `main`. Khi khóa thứ hai bị block, nó sẽ bị block vì khóa đã bị chiếm (không phải là khóa đệ quy). Trạng thái block của hàm `main` khiến thread nền tiếp tục thực thi. Khi thread nền được mở khóa `mu.Unlock()`, công việc `print` được hoàn thành và việc mở khóa sẽ khiến trạng thái block của `mu.Lock()` thứ hai được hủy. Tại thời điểm này, thread nền và thread `main` không có tham chiếu sự kiện đồng bộ hóa nào khác, và sự kiện thoát của chúng sẽ là concurrency: Khi hàm `main` thoát và chương trình thoát, thread nền có thể đã thoát hoặc không thể thoát. Mặc dù không thể xác định khi nào hai thread sẽ thoát, công việc `print` vẫn có thể được thực hiện chính xác.
-
-Đồng bộ hóa với mutex là một cách tiếp cận ở mức độ tương đối thấp. Bây giờ ta sẽ sử dụng một pipeline không được  cache để đạt được đồng bộ hóa:  
+Đồng bộ hóa với mutex là một cách tiếp cận ở mức độ tương đối đơn giản. Bây giờ ta sẽ sử dụng một unbuffered channel để hiện thực đồng bộ hóa:  
 
 ```go
 func main() {
@@ -80,39 +81,43 @@ func main() {
 
     go func(){
         fmt.Println("Hello World")
+
+        // chỉ sau khi goroutine này hoàn thành thao tác nhận
+        // thì thao tác gửi ở main thread mới được kết thúc
         <-done
     }()
 
+    // thao tác gửi qua channel `done`
     done <- 1
 }
 ```
 
-Theo đặc tả mô hình bộ nhớ Golang, thao tác nhận từ một channel không phải buffer thực hiện trước khi việc truyền tới channel được hoàn thành (kết thúc việc truyền). Do đó, sau khi thread nền hoàn thành thao tác nhận `<-done`, thao tác gửi  của thread `main` là `done <- 1` mới được hoàn thành (do đó thoát khỏi `main` rồi thoát khỏi chương trình) và công việc in được thực thi xong.
-
-Mặc dù đoạn code trên có thể được đồng bộ đúng đắn, nhưng nó quá nhạy cảm với kích thước cache của  pipeline: nếu pipeline có cache, không có gì đảm bảo rằng thread nền sẽ in đúng trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của pipeline để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước cache của pipeline:  
+Cách này gặp bất cập với channel có buffer vì lúc đó không có gì đảm bảo rằng goroutine sẽ in ra trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của channel để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước buffer của nó:  
 
 ```go
 func main() {
-    done := make(chan int, 1) // pipeline cache
+    done := make(chan int, 1)
 
     go func(){
         fmt.Println("Hello World")
+
+        // gửi 1 giá trị vào channel thông báo kết thúc goroutine này
         done <- 1
     }()
 
+    // main thread nhận giá trị từ channel và thoát khỏi
+    // trạng thái block
     <-done
 }
 ```
 
-Đối với buffered channel, thao tác nhận thứ `K` cho channel xảy ra trước khi hoàn thành thao tác truyền thứ `K + C`, trong đó `C` là kích thước cache của channel. Mặc dù pipeline được lưu vào cache, việc thread `main` tiếp nhận  được hoàn thành tại thời điểm khi thread nền gửi nhưng chưa hoàn thành, và thao tác `print` được hoàn thành.
-
-Dựa trên pipeline với cache, chúng ta có thể dễ dàng mở rộng thread print đến N. Ví dụ sau là mở 10 thread nền để in riêng biệt:  
+Dựa trên buffered channel, chúng ta có thể dễ dàng mở rộng thread print đến N. Ví dụ sau là mở 10 goroutine để in riêng biệt:  
 
 ```go
 func main() {
     done := make(chan int, 10)
 
-    // Mở ra N thread
+    // Mở ra N goroutine
     for i := 0; i < cap(done); i++ {
         go func(){
             fmt.Println("Hello World")
@@ -120,41 +125,52 @@ func main() {
         }()
     }
 
-    // Đợi cả 10 thread hoàn thành
+    // Đợi cả 10 goroutine hoàn thành
     for i := 0; i < cap(done); i++ {
         <-done
     }
 }
 ```
 
-Một cách đơn giản để làm điều này là đợi N thread hoàn thành trước khi tiến hành thao tác đồng bộ hóa tiếp theo, đó là sử dụng `sync.WaitGroup` để chờ một tập các sự kiện: 
+Một cách đơn giản hơn là sử dụng `sync.WaitGroup` để chờ một tập các sự kiện:
 
 ```go
 func main() {
     var wg sync.WaitGroup
 
-    // Mở N thread
+    // Mở N goroutine
     for i := 0; i < 10; i++ {
+        // tăng số lượng sự kiện chờ
+        // hàm này phải được đảm bảo thực thi trước khi bắt đầu goroutine chạy nền
         wg.Add(1)
 
         go func() {
             fmt.Println("Hello World")
+
+            // cho biết hoàn thành một sự kiện
             wg.Done()
         }()
     }
 
-    // Đợi N thread hoàn thành
+    // Đợi N goroutine hoàn thành
     wg.Wait()
 }
 ```
 
-Trong đó `wg.Add(1)` sử dụng để tăng số lượng sự kiện chờ, hàm này phải được đảm bảo thực thi trước khi bắt đầu thread nền (nếu nó được thực thi trong thread nền, nó không được đảm bảo có thể thực thi bình thường). Khi thread nền kết thúc việc in, lời gọi `wg.Done()` cho biết hoàn thành một sự kiện. Hàm `wg.Wait()` trong `main` để chờ tất cả các sự kiện hoàn thành.
-
 ## 1.6.2 Mô hình Producer Consumer
 
-Ví dụ phổ biến nhất về lập trình concurrency là mô hình Producer Consumer, giúp tăng tốc độ xử lý chung của chương trình bằng cách cân bằng sức mạnh làm việc của các thread "sản xuất" (produce) và "tiêu thụ" (consume). Nói một cách đơn giản, producer tạo ra một số dữ liệu và sau đó đưa nó vào hàng đợi kết quả, cùng lúc đó consumer cũng lấy dữ liệu từ hàng đợi này. Điều này làm cho sản xuất và tiêu thụ trở thành hai quá trình không đồng bộ. Khi không có dữ liệu trong hàng đợi kết quả, consumer sẽ chờ đợi ở trạng thái "đói", còn khi dữ liệu trong hàng đợi kết quả bị đầy, producer phải đối mặt với vấn đề CPU sẽ loại bỏ dữ liệu trong hàng đợi để nạp thêm.
+<div align="center">
 
-Golang hiện thực cơ chế này rất đơn giản: 
+<img src="../images/producer-consumer.png" width="800">
+<br/>
+<span align="center"><i>Mô hình Producer - Consumer</i></span>
+    <br/>
+
+</div>
+
+Ví dụ phổ biến nhất về lập trình concurrency là mô hình Producer Consumer, giúp tăng tốc độ xử lý chung của chương trình bằng cách cân bằng sức mạnh của các thread "sản xuất" (produce) và "tiêu thụ" (consume). Nói một cách đơn giản, producer tạo ra một số dữ liệu và sau đó đưa nó vào hàng đợi, cùng lúc đó consumer cũng lấy dữ liệu từ hàng đợi này ra để xử lý. Điều này làm cho produce và consume trở thành hai quá trình không đồng bộ. Khi không có dữ liệu trong hàng đợi kết quả, consumer sẽ chờ đợi ở trạng thái "đói", còn khi dữ liệu trong hàng đợi kết quả bị đầy, producer phải đối mặt với vấn đề mất mát dữ liệu khi CPU phải loại bỏ bớt trong hàng đợi để nạp thêm.
+
+Golang hiện thực cơ chế này rất đơn giản:
 
 ```go
 // Producer: tạo ra một chuỗi số nguyên dựa trên bội số factor
@@ -182,9 +198,7 @@ func main() {
 }
 ```
 
-Chúng ta đã mở hai producer để tạo ra hai chuỗi bội số của 3 và 5. Sau đó mở một consumer và in ra kết quả. Ta  cho phép các producer và consumer làm việc trong một khoảng thời gian nhất định bằng hàm `time.Sleep`. Như đã đề cập trong phần trước, chế độ ngủ này không đảm bảo output ổn định.
-
-Chúng ta có thể để hàm `main` giữ trạng thái block mà không thoát và chỉ  thoát khỏi chương trình khi người dùng gõ `Ctrl-C`: 
+Chúng ta có thể để hàm `main` giữ trạng thái block mà không thoát và chỉ  thoát khỏi chương trình khi người dùng gõ `Ctrl-C`:
 
 ```go
 func main() {
@@ -201,9 +215,18 @@ func main() {
 }
 ```
 
-Có 2 producer trong ví dụ trên và không có sự kiện đồng bộ nào giữa hai producer mà chúng concurrency. Do đó, thứ tự của chuỗi output ở consumer là không xác định, tuy nhiên điều này không có vấn đề gì, và producer và consumer vẫn có thể làm việc cùng nhau.
+Có 2 producer trong ví dụ trên và không có sự kiện đồng bộ nào giữa hai producer mà chúng concurrency. Do đó, thứ tự của chuỗi output ở consumer là không xác định, tuy nhiên producer và consumer đã có thể làm việc cùng nhau.
 
 ## 1.6.3 Mô hình Publish Subscribe
+
+<div align="center">
+
+<img src="../images/pubsub.png" width="800">
+<br/>
+<span align="center"><i>Mô hình Publish - Subscribe</i></span>
+    <br/>
+
+</div>
 
 Mô hình publish-and-subscribe thường được viết tắt là mô hình pub/sub. Trong mô hình này, producer trở thành publisher và consumer  trở thành subscriber, đồng thời producer:consumer là mối quan hệ M:N. Trong mô hình producer-consumer truyền thống, thông điệp được gửi đến hàng đợi và mô hình publish-subscription sẽ publish thông điệp đến một topic.
 
@@ -365,7 +388,7 @@ func main() {
 }
 ```
 
-Trong trường hợp các cấu trúc hệ thống tập tin local  dựa trên một hệ thống tập tin ảo `vfs.OS("/path")`,  một cơ chế concurrency `gatefs.New` sẽ kiểm soát hệ thống tập tin ảo dựa trên cấu trúc hệ thống tập tin ảo đang tồn tại. Nguyên tắc kiểm soát tương tranh đã được thảo luận ở phần trước, đó là để đạt được block concurrency tối đa bằng cách gửi và nhận các rule với pipeline cache:
+Trong trường hợp các cấu trúc hệ thống tập tin local  dựa trên một hệ thống tập tin ảo `vfs.OS("/path")`,  một cơ chế concurrency `gatefs.New` sẽ kiểm soát hệ thống tập tin ảo dựa trên cấu trúc hệ thống tập tin ảo đang tồn tại. Nguyên tắc kiểm soát tương tranh đã được thảo luận ở phần trước, đó là để đạt được block concurrency tối đa bằng cách gửi và nhận các rule với channel cache:
 
 ```go
 var limit = make(chan int, 3)
@@ -406,7 +429,7 @@ func (fs gatefs) Lstat(p string) (os.FileInfo, error) {
 }
 ```
 
-Chúng ta không chỉ có thể kiểm soát số lượng concurrency tối đa mà còn xác định tốc độ concurrency của chương trình đang chạy bằng tỷ lệ sử dụng và dung lượng tối đa của channel được lưu trữ. Khi pipeline trống, nó có thể được coi như ở trạng thái không hoạt động. Khi pipeline đầy, tác vụ bận. Đây là giá trị tham chiếu cho hoạt động của một số tác vụ cấp thấp trong nền.
+Chúng ta không chỉ có thể kiểm soát số lượng concurrency tối đa mà còn xác định tốc độ concurrency của chương trình đang chạy bằng tỷ lệ sử dụng và dung lượng tối đa của channel được lưu trữ. Khi channel trống, nó có thể được coi như ở trạng thái không hoạt động. Khi channel đầy, tác vụ bận. Đây là giá trị tham chiếu cho hoạt động của một số tác vụ cấp thấp trong nền.
 
 ## 1.6.5 Kẻ thắng làm vua
 
@@ -432,7 +455,7 @@ func main() {
 }
 ```
 
-Đầu tiên,   ta   tạo ra một pipeline   với cache đủ lớn để đảm bảo rằng không bị block không cần thiết do kích thước của cache. Sau đó, ta mở nhiều goroutine dưới nền và gửi yêu cầu tìm kiếm đến các công cụ tìm kiếm khác nhau. Khi bất kỳ công cụ tìm kiếm nào có kết quả đầu tiên, nó sẽ ngay lập tức gửi kết quả đến pipeline (vì pipeline có đủ bộ đệm, quá trình này sẽ không block). Nhưng cuối cùng,  chỉ cần lấy kết quả đầu tiên từ pipeline, đó là kết quả trả về đầu tiên.
+Đầu tiên,   ta   tạo ra một channel   với cache đủ lớn để đảm bảo rằng không bị block không cần thiết do kích thước của cache. Sau đó, ta mở nhiều goroutine dưới nền và gửi yêu cầu tìm kiếm đến các công cụ tìm kiếm khác nhau. Khi bất kỳ công cụ tìm kiếm nào có kết quả đầu tiên, nó sẽ ngay lập tức gửi kết quả đến channel (vì channel có đủ bộ đệm, quá trình này sẽ không block). Nhưng cuối cùng,  chỉ cần lấy kết quả đầu tiên từ channel, đó là kết quả trả về đầu tiên.
 
 Ta luôn có thể áp dụng nhiều cách giải quyết cho vấn đề theo các hướng khác nhau và cuối cùng cải thiện hiệu suất bằng cách chọn lấy cách giành chiến thắng trong cuộc đua thời gian.
 
@@ -464,7 +487,7 @@ func GenerateNatural() chan int {
 }
 ```
 
-Tiếp theo xây dựng một sàng cho mỗi số nguyên tố: đề xuất một số là bội số của số nguyên tố trong chuỗi đầu vào và trả về một chuỗi mới, đó là một pipeline mới.
+Tiếp theo xây dựng một sàng cho mỗi số nguyên tố: đề xuất một số là bội số của số nguyên tố trong chuỗi đầu vào và trả về một chuỗi mới, đó là một channel mới.
 
 ```go
 // Bộ lọc: xóa các số có thể chia hết cho số nguyên tố
@@ -502,7 +525,7 @@ func main() {
 
 Goroutines khác nhau trong Golang dựa vào các channel để giao tiếp và đồng bộ hóa. Để xử lý việc gửi hoặc nhận nhiều channel cùng một lúc, chúng ta cần sử dụng từ khóa `select` (từ khóa này hoạt động giống như một hàm `select` trong lập trình mạng ). Khi có nhiều nhánh khác nhau, `select` sẽ chọn một nhánh có sẵn ngẫu nhiên. Nếu không có nhánh có sẵn, nó sẽ chọn default, nếu không thì trạng thái block luôn được giữ.
 
-Timeout dựa trên hiện thực của pipeline:
+Timeout dựa trên hiện thực của channel:
 
 ```go
 select {
