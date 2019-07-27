@@ -637,6 +637,8 @@ func worker(ctx context.Context, wg *sync.WaitGroup) error {
 }
 
 func main() {
+    // nhận vào context parent (Background) và trả về context child (ctx) và hàm cancel
+    // deadline 10 secs
     ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
     var wg sync.WaitGroup
@@ -648,6 +650,10 @@ func main() {
     }
 
     time.Sleep(time.Second)
+
+    // mặc dù ctx sẽ expire theo timeout đã set trước đó
+    // ta vẫn gọi cancel để đóng context child và các children của nó
+    // để tránh giữ chúng tồn tại không cần thiết
     cancel()
 
     // sử dụng waitGroup thay cho done channel
