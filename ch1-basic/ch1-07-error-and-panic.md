@@ -1,8 +1,12 @@
-# 1.7 Error và Exceptions
+# 1.7. Error và Exceptions
 
-Error handling là một chủ đề quan trọng được đề cập trong mỗi ngôn ngữ lập trình. Trong Go error handling, errors là một phần quan trọng trong package API và application's user interface.
+Error handling (xử lý lỗi) là một chủ đề quan trọng được đề cập trong mỗi ngôn ngữ lập trình. Go có một cơ chế xử lý lỗi đơn giản khác với `try catch` trên các ngôn ngữ lập trình khác dựa vào giá trị lỗi trả về của hàm. Ngoài ra, package `errors` giúp chúng ta định nghĩa các lỗi.
 
-Có một số hàm trong chương trình luôn yêu cầu phải chạy thành công. Ví dụ `strconv.Itoa` chuyển một số nguyên thành string, đọc và ghi phần tử từ array hoặc slice, đọc một phần tử tồn tại trong `map` và tương tự. Những tác vụ như thế sẽ khó để có lỗi trong thời gian chạy trừ phi có bug trong chương trình hoặc những tình huống không thể đoán trước được như là memory leak tại thời điểm chạy. Nếu bạn thực sự bắt gặp một tình huống khác thường như thế, chúng ta sẽ ngừng thực thi chương trình.
+## 1.7.0. Ngữ cảnh thường gặp
+
+Có một số hàm trong chương trình luôn yêu cầu phải chạy thành công. Ví dụ `strconv.Itoa` chuyển một số nguyên thành string, đọc và ghi phần tử từ array hoặc slice, đọc một phần tử tồn tại trong `map` và tương tự.
+
+Những tác vụ như thế sẽ khó để có lỗi trong thời gian chạy trừ phi có `bug` trong chương trình hoặc những tình huống không thể đoán trước được như là memory leak tại thời điểm chạy. Nếu bạn thực sự bắt gặp một tình huống khác thường như thế, chương trình sẽ ngừng thực thi.
 
 Khi một chương trình bị lỗi và dừng, chúng ta có thể cân nhắc một số khả năng xảy ra. Đối với các hàm xử lý lỗi tốt, nó sẽ trả về thêm một giá trị phụ, thường thì giá trị này được dùng để chứa thông điệp lỗi. Nếu chỉ có một lý do dẫn đến lỗi, giá trị thêm vào này có thể là một biến Boolean, thường đặt tên là `ok`. Ví dụ như bên dưới :
 
@@ -23,8 +27,6 @@ if err != nil {
 }
 ```
 
-
-Hơn nữa, chúng ta có thể chứa true error type thông qua một loại truy vấn kiểu hoặc assertions, do đó chúng ta có thể lấy nhiều thông tin về loại error. Tuy nhiên, tổng quát, chúng ta không quan tâm về cách mà error được thể hiện bên dưới. Chúng ta có thể chỉ cần biết rằng đó là một lỗi. Khi chúng ta trả về một giá trị error không phải `nil`, chúng ta có thể lấy một thông điệp error bởi việc gọi error interface type hoặc phương thức `Error`.
 
 Trong ngôn ngữ Go, errors được xem xét như là một kết quả đã được đoán trước; exceptions là một kết quả không thể đoán trước được, và một ngoại lệ có thể chỉ ra rằng một bug trong chương trình hoặc một vấn đề nào đó không được kiểm soát. Ngôn ngữ Go đề xuất dùng hàm `recover` để chuyển đổi exceptions thành error handling, chúng cho phép users thực sự quan tâm về những lỗi liên quan đến business.
 
@@ -66,7 +68,7 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 }
 ```
 
-Khi đoạn code trên chạy, nhưng ẩn đi bug. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file. Mặc dù chúng ta có thể  fix bug bằng việc gọi `src.Close()` trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường khi được mở cũng sẽ được đóng.
+Khi đoạn code trên chạy, sẽ tìm ẩn rủi ro. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file. Mặc dù chúng ta có thể  fix bug bằng việc gọi `src.Close()` trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường khi được mở cũng sẽ được đóng.
 
 
 ```go
@@ -89,7 +91,9 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 
 Mệnh đề `defer` được thực thi khi ra khỏi tầm vực của hàm, chúng ta nghĩ về làm cách nào để đóng một file ngay khi mở file đó. Bất kể làm thế nào hàm được trả về, bởi về mệnh đề close có thể luôn luôn được thực thi. Cùng một thời điểm, mệnh đề defer sẽ đảm bảo rằng `io.Copy` file có thể được đóng an toàn nếu một ngoại lệ xảy ra.
 
-Như chúng ta đã đề cập trước đó, hàm exported trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình. Nhưng với những framework Web services, chúng thường cần sự truy cập từ bên thứ ba ở middleware. Bởi vì thư viện middleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
+Như chúng ta đã đề cập trước đó, hàm exported trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình. Nhưng với những framework Web services, chúng thường cần sự truy cập từ bên thứ ba ở middleware.
+
+Bởi vì thư viện middleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
 
 Chúng ta hãy xem JSON parse là một ví dụ minh họa cho việc dùng ngữ cảnh của việc phục hồi. Cho một hệ thống JSON parser phức tạp, mặc dù một ngôn ngữ parse có thể làm việc một cách phù hợp, có một điều không chắc chắn rằng nó không có lỗ hỏng. Do đó, khi một ngoại lệ xảy ra, chúng ta sẽ không chọn cách crash parser. Thay vì thế chúng ta sẽ làm việc với ngoại lệ panic nhưng là một lỗi parsing thông thường và đính kèm chúng với một thông tin thêm để thông báo cho user biết mà báo cáo lỗi.
 
