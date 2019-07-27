@@ -140,8 +140,8 @@ func main() {
 
     // Mở N goroutine
     for i := 0; i < 10; i++ {
-        // tăng số lượng sự kiện chờ
-        // hàm này phải được đảm bảo thực thi trước khi bắt đầu goroutine chạy nền
+        // tăng số lượng sự kiện chờ, hàm này phải được
+        // đảm bảo thực thi trước khi bắt đầu 1 goroutine chạy nền
         wg.Add(1)
 
         go func() {
@@ -168,30 +168,38 @@ func main() {
 
 </div>
 
-Ví dụ phổ biến nhất về lập trình concurrency là mô hình Producer Consumer, giúp tăng tốc độ xử lý chung của chương trình bằng cách cân bằng sức mạnh của các thread "sản xuất" (produce) và "tiêu thụ" (consume). Nói một cách đơn giản, producer tạo ra một số dữ liệu và sau đó đưa nó vào hàng đợi, cùng lúc đó consumer cũng lấy dữ liệu từ hàng đợi này ra để xử lý. Điều này làm cho produce và consume trở thành hai quá trình không đồng bộ. Khi không có dữ liệu trong hàng đợi kết quả, consumer sẽ chờ đợi ở trạng thái "đói", còn khi dữ liệu trong hàng đợi kết quả bị đầy, producer phải đối mặt với vấn đề mất mát dữ liệu khi CPU phải loại bỏ bớt trong hàng đợi để nạp thêm.
+Ví dụ phổ biến nhất về lập trình concurrency là mô hình Producer Consumer, giúp tăng tốc độ xử lý chung của chương trình bằng cách cân bằng sức mạnh của các thread "sản xuất" (produce) và "tiêu thụ" (consume).
 
-Golang hiện thực cơ chế này rất đơn giản:
+Producer tạo ra một số dữ liệu và sau đó đưa nó vào hàng đợi, cùng lúc đó consumer cũng lấy dữ liệu từ hàng đợi này ra để xử lý. Điều này làm cho produce và consume trở thành hai quá trình bất đồng bộ. Khi không có dữ liệu trong hàng đợi kết quả, consumer sẽ chờ đợi ở trạng thái "đói", còn khi dữ liệu trong hàng đợi bị đầy, producer phải đối mặt với vấn đề mất mát dữ liệu khi CPU phải loại bỏ bớt dữ liệu trong đó để nạp thêm.
+
+Golang hiện thực cơ chế này khá đơn giản:
 
 ```go
-// Producer: tạo ra một chuỗi số nguyên dựa trên bội số factor
+// Producer: liên tục tạo ra một chuỗi số nguyên dựa trên bội số factor và đưa vào channel
 func Producer(factor int, out chan<- int) {
     for i := 0; ; i++ {
         out <- i*factor
     }
 }
 
-// Consumer
+// Consumer: liên tục lấy các số từ channel ra để print
 func Consumer(in <-chan int) {
     for v := range in {
         fmt.Println(v)
     }
 }
 func main() {
-    ch := make(chan int, 64) // hàng đợi kết quả
+    // hàng đợi
+    ch := make(chan int, 64)
 
-    go Producer(3, ch) // Tạo một chuỗi số với bội số 3
-    go Producer(5, ch) // Tạo một chuỗi số với bội số 5
-    go Consumer(ch)    // Tạo consumer
+    // Tạo một chuỗi số với bội số 3
+    go Producer(3, ch)
+
+    // Tạo một chuỗi số với bội số 5
+    go Producer(5, ch)
+
+    // Tạo consumer
+    go Consumer(ch)
 
     // Thoát ra sau khi chạy trong một khoảng thời gian nhất định
     time.Sleep(5 * time.Second)
@@ -202,11 +210,12 @@ Chúng ta có thể để hàm `main` giữ trạng thái block mà không thoá
 
 ```go
 func main() {
-    ch := make(chan int, 64) // hàng đợi kết quả
+    // hàng đợi
+    ch := make(chan int, 64)
 
-    go Producer(3, ch) // Tạo một chuỗi số với bội số 3
-    go Producer(5, ch) // Tạo một chuỗi số với bội số 5
-    go Consumer(ch)    // Tạo consumer
+    go Producer(3, ch)
+    go Producer(5, ch)
+    go Consumer(ch)
 
     // Ctrl+C để thoát
     sig := make(chan os.Signal, 1)
@@ -215,9 +224,11 @@ func main() {
 }
 ```
 
-Có 2 producer trong ví dụ trên và không có sự kiện đồng bộ nào giữa hai producer mà chúng concurrency. Do đó, thứ tự của chuỗi output ở consumer là không xác định, tuy nhiên producer và consumer đã có thể làm việc cùng nhau.
+Có 2 producer trong ví dụ trên và không có sự kiện đồng bộ nào giữa hai producer mà chúng concurrency. Do đó, thứ tự của chuỗi output ở consumer là không xác định.
 
 ## 1.6.3 Mô hình Publish Subscribe
+
+Mô hình publish-and-subscribe thường được viết tắt là mô hình pub/sub. Trong mô hình này, producer trở thành publisher và consumer  trở thành subscriber, đồng thời producer:consumer là mối quan hệ M:N.
 
 <div align="center">
 
@@ -228,9 +239,9 @@ Có 2 producer trong ví dụ trên và không có sự kiện đồng bộ nào
 
 </div>
 
-Mô hình publish-and-subscribe thường được viết tắt là mô hình pub/sub. Trong mô hình này, producer trở thành publisher và consumer  trở thành subscriber, đồng thời producer:consumer là mối quan hệ M:N. Trong mô hình producer-consumer truyền thống, thông điệp được gửi đến hàng đợi và mô hình publish-subscription sẽ publish thông điệp đến một topic.
+Trong mô hình producer-consumer truyền thống, thông điệp được gửi đến hàng đợi và mô hình publish-subscription sẽ publish thông điệp đến một topic.
 
-Để làm điều này, chúng tôi đã xây dựng một package  hỗ trợ mô hình pub/sub  tên là `pubsub`:
+Để hiện thực mô hình này ta implement package `pubsub`:
 
 ```go
 // Package pubsub implements a simple multi-topic pub-sub library.
@@ -242,15 +253,25 @@ import (
 )
 
 type (
-    subscriber chan interface{}         // subscriber kiểu channel
-    topicFunc  func(v interface{}) bool // topic là một filter
+    // subscriber thuộc kiểu channel
+    subscriber chan interface{}
+
+    // topic là một filter
+    topicFunc func(v interface{}) bool
 )
 
 type Publisher struct {
-    m           sync.RWMutex             // khóa đọc ghi
-    buffer      int                      // kích thước  hàng đợi subscribe
-    timeout     time.Duration            // hết thời gian publish
-    subscribers map[subscriber]topicFunc // thông tin subscriber
+    // Read/Write Mutex
+    m sync.RWMutex
+
+    // kích thước  hàng đợi
+    buffer int
+
+    // timeout cho việc publishing
+    timeout time.Duration
+
+    // subscriber đã subscribe vào topic nào
+    subscribers map[subscriber]topicFunc
 }
 
 // constructor với timeout và độ dài hàng đợi
@@ -267,7 +288,7 @@ func (p *Publisher) Subscribe() chan interface{} {
     return p.SubscribeTopic(nil)
 }
 
-// Thêm subscriber mới, đăng ký các filter được lọc theo topic
+// Thêm subscriber mới, subscribe các topic đã được filter lọc
 func (p *Publisher) SubscribeTopic(topic topicFunc) chan interface{} {
     ch := make(chan interface{}, p.buffer)
     p.m.Lock()
@@ -276,7 +297,7 @@ func (p *Publisher) SubscribeTopic(topic topicFunc) chan interface{} {
     return ch
 }
 
-// hủy đăng ký
+// hủy subscribe
 func (p *Publisher) Evict(sub chan interface{}) {
     p.m.Lock()
     defer p.m.Unlock()
@@ -285,7 +306,7 @@ func (p *Publisher) Evict(sub chan interface{}) {
     close(sub)
 }
 
-// đăng 1 topic
+// publish ra 1 topic
 func (p *Publisher) Publish(v interface{}) {
     p.m.RLock()
     defer p.m.RUnlock()
@@ -335,10 +356,16 @@ import (
     "fmt"
 )
 func main() {
+    // khởi tạo 1 publisher
     p := pubsub.NewPublisher(100*time.Millisecond, 10)
+
+    // để đảm bảo p được đóng trước khi exit
     defer p.Close()
 
+    // `all` subscribe hết tất cả topic
     all := p.Subscribe()
+
+    // subscribe các topic có "golang"
     golang := p.SubscribeTopic(func(v interface{}) bool {
         if s, ok := v.(string); ok {
             return strings.Contains(s, "golang")
@@ -346,15 +373,18 @@ func main() {
         return false
     })
 
+    // publish ra 2 topic
     p.Publish("hello,  world!")
     p.Publish("hello, golang!")
 
+    // print những gì subscriber `all` nhận được
     go func() {
         for  msg := range all {
             fmt.Println("all:", msg)
         }
     } ()
 
+    // print những gì subscriber `golang` nhận được
     go func() {
         for  msg := range golang {
             fmt.Println("golang:", msg)
@@ -366,102 +396,129 @@ func main() {
 }
 ```
 
-Trong mô hình pub/sub, mỗi thông điệp được gửi tới nhiều subscriber. Publisher thường không biết hoặc không quan tâm subscriber nào nhận được thông điệp. Subscriber và publisher có thể được thêm vào động ở thời điểm thực thi, một quan hệ không chặt cho phép hệ thống phức tạp có thể phát triển theo thời gian. Trong thực tế, những ứng dụng như dự báo thời tiết có thể áp dụng mô hình concurrency này.
+Trong mô hình pub/sub, mỗi thông điệp được gửi tới nhiều subscriber. Publisher thường không biết hoặc không quan tâm subscriber nào nhận được thông điệp. Subscriber và publisher có thể được thêm vào động ở thời điểm thực thi, cho phép các hệ thống phức tạp có thể phát triển theo thời gian. Trong thực tế, những ứng dụng như dự báo thời tiết có thể áp dụng mô hình concurrency này.
 
-## 1.6.4 Kiểm soát Concurrency Numbers
+## 1.6.4 Kiểm soát số lượng goroutine
 
-Nhiều người dùng có xu hướng viết các chương trình có thể xử lý  concurrency để tận dụng sức mạnh của Golang, vì điều này dường như cung cấp một hiệu suất tối đa.
+Goroutine là một tính năng mạnh mẽ của Go, mất chi phí rất ít để sử dụng, những tất nhiên nếu dùng với số lượng quá lớn sẽ chiếm gây nhiều lãng phí và cần có một cơ chế để kiểm soát. Một cách thông dụng để đạt được mục đích trên là dùng worker pool.
 
-Tuy nhiên trong thực tế chúng ta cần kiểm soát mức độ concurrency ở mức thích hợp, bởi vì nó không chỉ có thể bỏ bớt các ứng dụng/task, dự trữ một lượng tài nguyên của CPU, ta cũng có thể giảm mức tiêu thụ năng lượng để giảm bớt áp lực cho pin.
+<div align="center">
 
-Trong chương trình Godoc của Golang,  package `vfs`  tương ứng với hệ thống tập tin ảo. Package phụ `gatefs` trong package 'vfs' với mục đích  là kiểm soát số lượng truy cập concurrency tối đa vào hệ thống tập tin ảo. Ứng dụng của  package `gatefs`  rất đơn giản:
+<img src="../images/worker-pool.png" width="500">
+<br/>
+<span align="center"><i>Mô hình Worker pool</i></span>
+    <br/>
 
-```go
-import (
-    "golang.org/x/tools/godoc/vfs"
-    "golang.org/x/tools/godoc/vfs/gatefs"
-)
+</div>
 
-func main() {
-    fs := gatefs.New(vfs.OS("/path"), make(chan bool, 8))
-    // ...
-}
-```
-
-Trong trường hợp các cấu trúc hệ thống tập tin local  dựa trên một hệ thống tập tin ảo `vfs.OS("/path")`,  một cơ chế concurrency `gatefs.New` sẽ kiểm soát hệ thống tập tin ảo dựa trên cấu trúc hệ thống tập tin ảo đang tồn tại. Nguyên tắc kiểm soát tương tranh đã được thảo luận ở phần trước, đó là để đạt được block concurrency tối đa bằng cách gửi và nhận các rule với channel cache:
+Đầu tiên tạo ra các worker:
 
 ```go
-var limit = make(chan int, 3)
-
-func main() {
-    for _, w := range work {
-        go func() {
-            limit <- 1
-            w()
-            <-limit
-        }()
+func worker(queue chan int, worknumber int, done chan bool) {
+    for j := range queue {
+        fmt.Println("worker", worknumber, "finished job", j)
+        done <- true
     }
-    select{}
 }
 ```
 
-Ta bổ sung thêm phương thức `enter` và `leave` tương ứng để nhập vào và rời đi. Khi vượt quá số lượng giới hạn concurrency, phương thức `enter` sẽ chặn cho đến khi số lượng concurrency giảm xuống.
-
-```go
-type gate chan bool
-
-func (g gate) enter() { g <- true }
-func (g gate) leave() { <-g }
-```
-
-Hệ thống tập tin ảo mới `gatefs` được đóng gói là để thêm  lời gọi các phương thức `enter` và `leave`  cần kiểm soát concurrency :
-
-```go
-type gatefs struct {
-    fs vfs.FileSystem
-    gate
-}
-
-func (fs gatefs) Lstat(p string) (os.FileInfo, error) {
-    fs.enter()
-    defer fs.leave()
-    return fs.fs.Lstat(p)
-}
-```
-
-Chúng ta không chỉ có thể kiểm soát số lượng concurrency tối đa mà còn xác định tốc độ concurrency của chương trình đang chạy bằng tỷ lệ sử dụng và dung lượng tối đa của channel được lưu trữ. Khi channel trống, nó có thể được coi như ở trạng thái không hoạt động. Khi channel đầy, tác vụ bận. Đây là giá trị tham chiếu cho hoạt động của một số tác vụ cấp thấp trong nền.
-
-## 1.6.5 Kẻ thắng làm vua
-
-Có nhiều động lực để lập trình concurrency nhưng tiêu biểu là vì lập trình concurrency có thể đơn giản hóa các vấn đề. Lập trình concurrency cũng có thể cải thiện hiệu năng. Mở hai thread trên CPU đa lõi thường nhanh hơn mở một thread.  Trên thực tế về mặt cải thiện hiệu suất, chương trình không chỉ đơn giản là chạy nhanh, mà trong nhiều trường hợp chương trình có thể đáp ứng yêu cầu của người dùng một cách nhanh chóng là điều quan trọng nhất. Khi không có yêu cầu từ người dùng cần xử lý, nên xử lý một số tác vụ nền có độ ưu tiên thấp.
-
-Giả sử chúng ta muốn nhanh chóng tìm kiếm các chủ đề liên quan đến "golang", có thể mở nhiều công cụ tìm kiếm như Bing, Google hoặc Yahoo. Khi tìm kiếm trả về kết quả trước, ta có thể đóng các trang tìm kiếm khác. Do ảnh hưởng của môi trường mạng và thuật toán của công cụ tìm kiếm mà một số công cụ tìm kiếm có thể trả về kết quả tìm kiếm nhanh hơn. Chúng ta có thể sử dụng một chiến lược tương tự để viết chương trình này:  
+Sau đó có thể áp dụng như sau:
 
 ```go
 func main() {
-    ch := make(chan string, 32)
 
-    go func() {
-        ch <- searchByBing("golang")
-    }()
-    go func() {
-        ch <- searchByGoogle("golang")
-    }()
-    go func() {
-        ch <- searchByBaidu("golang")
-    }()
+    // queue of jobs
+    q := make(chan int)
 
-    fmt.Println(<-ch)
+    // done channel lấy ra kết quả của jobs
+    done := make(chan bool)
+
+    // số lượng worker trong pool
+    numberOfWorkers := 4
+    for i := 0; i < numberOfWorkers; i++ {
+        go worker(q, i, done)
+    }
+
+    // đưa job vào queue
+    numberOfJobs := 17
+    for j := 0; j < numberOfJobs; j++ {
+        go func(j int) {
+            q <- j
+        }(j)
+    }
+
+    // chờ nhận đủ kết quả
+    for c := 0; c < numberOfJobs; c++ {
+        <-done
+    }
 }
 ```
 
-Đầu tiên,   ta   tạo ra một channel   với cache đủ lớn để đảm bảo rằng không bị block không cần thiết do kích thước của cache. Sau đó, ta mở nhiều goroutine dưới nền và gửi yêu cầu tìm kiếm đến các công cụ tìm kiếm khác nhau. Khi bất kỳ công cụ tìm kiếm nào có kết quả đầu tiên, nó sẽ ngay lập tức gửi kết quả đến channel (vì channel có đủ bộ đệm, quá trình này sẽ không block). Nhưng cuối cùng,  chỉ cần lấy kết quả đầu tiên từ channel, đó là kết quả trả về đầu tiên.
+## 1.6.5 Dọn dẹp Goroutine
 
-Ta luôn có thể áp dụng nhiều cách giải quyết cho vấn đề theo các hướng khác nhau và cuối cùng cải thiện hiệu suất bằng cách chọn lấy cách giành chiến thắng trong cuộc đua thời gian.
+Sau khi job queue rỗng, ta sẽ phải dừng tất cả worker. Goroutine dù khá nhẹ nhưng vẫn không phải miễn phí, nhất là với các hệ thống lớn, dù chỉ là các chi phí nhỏ nhất cũng có thể trở nên khác biệt lớn nếu thay đổi.
+
+Cách đơn giản là dùng kill channel để phát ra tín hiệu ngừng cho goroutine.
+
+```go
+func main() {
+    // channel để terminate các worker
+    killsignal := make(chan bool)
+
+    // queue các jobs
+    q := make(chan int)
+    // done channel nhận vào kết quả của các job
+    done := make(chan bool)
+
+    // số lượng worker trong pool
+    numberOfWorkers := 4
+    for i := 0; i < numberOfWorkers; i++ {
+        go worker(q, i, done, killsignal)
+    }
+
+    // đưa job vào queue
+    numberOfJobs := 17
+    for j := 0; j < numberOfJobs; j++ {
+        go func(j int) {
+            q <- j
+        }(j)
+    }
+
+    // chờ để nhận đủ kết quả
+    for c := 0; c < numberOfJobs; c++ {
+        <-done
+    }
+
+    // dọn dẹp các worker
+    close(killsignal)
+    time.Sleep(2 * time.Second)
+}
+```
+
+Trong đó các worker được thiết kế như sau:
+
+```go
+func worker(queue chan int, worknumber int, done, ks chan bool) {
+    for true {
+        // dùng select để chờ cùng lúc trên cả 2 channel
+        select {
+        // xử lý job trong channel queue
+        case k := <-queue:
+            fmt.Println("doing work!", k, "worknumber", worknumber)
+            done <- true
+
+        // nếu nhận được kill signal thì return
+        case <-ks:
+            fmt.Println("worker halted, number", worknumber)
+            return
+        }
+    }
+}
+```
 
 ## 1.6.6 Sàng số nguyên tố
 
-Trong phần ***1.2***, chúng tôi đã trình bày việc triển khai phiên bản concurrency của sàng số nguyên tố để chứng minh sự concurrency của Newsqueak. Phiên bản concurrency của Prime Screen là một ví dụ  cổ điển giúp chúng ta hiểu sâu hơn về các tính năng về tương tranh của Go. Nguyên tắc "sàng số nguyên tố" như sau:
+Trong phần ***1.2***, chúng tôi đã trình bày việc triển khai phiên bản concurrency của sàng số nguyên tố để chứng minh tính concurrency của Newsqueak. Nguyên tắc "sàng số nguyên tố" như sau:
 
 <div align="center">
 
@@ -508,161 +565,62 @@ Bây giờ ta có thể sử dụng bộ lọc này trong hàm `main`:
 
 ```go
 func main() {
-    ch := GenerateNatural() // chuỗi số: 2, 3, 4, ...
+    // chuỗi số: 2, 3, 4, ...
+    ch := GenerateNatural()
     for i := 0; i < 100; i++ {
-        prime := <-ch // số nguyên tố mới
+        // số nguyên tố mới
+        prime := <-ch
+
+        // Bộ lọc dựa trên số nguyên tố mới
         fmt.Printf("%v: %v\n", i+1, prime)
-        ch = PrimeFilter(ch, prime) // Bộ lọc dựa trên số nguyên tố mới
+        ch = PrimeFilter(ch, prime)
+
+        // Dựa trên chuỗi số còn lại trong channel để lọc
+        // các số nguyên tố tiếp theo với các số được
+        // trích xuất dưới dạng filter. Các channel tương ứng
+        // với các sàng số nguyên tố khác nhau được kết nối liên tiếp nhau.
     }
 }
 ```
 
-Đầu tiên chúng ta gọi `GenerateNatural()` để tạo ra chuỗi số tự nhiên nguyên thủy nhất bắt đầu bằng 2. Sau đó bắt đầu một chu kỳ 100 lần lặp. Ở đầu mỗi lần lặp, số đầu tiên trong channel phải là số nguyên tố. Ta đọc và in ra số này  trước. Sau đó, dựa trên chuỗi còn lại trong channel và lọc các số nguyên tố tiếp theo với các số nguyên tố hiện được trích xuất dưới dạng sàng. Các channel tương ứng với các sàng số nguyên tố khác nhau được kết nối thành chuỗi.
+## 1.6.7 Kẻ thắng làm vua
 
-## 1.6.7 Thoát khỏi quá trình concurrency một cách an toàn
+Có nhiều động lực để lập trình concurrency nhưng tiêu biểu là vì lập trình concurrency có thể đơn giản hóa các vấn đề. Lập trình concurrency cũng có thể cải thiện hiệu năng. Mở hai thread trên CPU đa lõi thường nhanh hơn mở một thread.  Trên thực tế về mặt cải thiện hiệu suất, chương trình không chỉ đơn giản là chạy nhanh, mà trong nhiều trường hợp chương trình có thể đáp ứng yêu cầu của người dùng một cách nhanh chóng là điều quan trọng nhất. Khi không có yêu cầu từ người dùng cần xử lý, nên xử lý một số tác vụ nền có độ ưu tiên thấp.
 
-Đôi khi chúng ta cần thoát khỏi Goroutine đang được thực thi, đặc biệt là khi nó đang làm việc sai hướng. Golang không cung cấp cách chấm dứt trực tiếp Goroutine, vì điều này sẽ khiến biến chung được chia sẻ giữa các goroutine ở trạng thái không xác định. Nhưng điều gì sẽ xảy ra nếu chúng ta muốn loại hai hoặc nhiều Goroutines?
-
-Goroutines khác nhau trong Golang dựa vào các channel để giao tiếp và đồng bộ hóa. Để xử lý việc gửi hoặc nhận nhiều channel cùng một lúc, chúng ta cần sử dụng từ khóa `select` (từ khóa này hoạt động giống như một hàm `select` trong lập trình mạng ). Khi có nhiều nhánh khác nhau, `select` sẽ chọn một nhánh có sẵn ngẫu nhiên. Nếu không có nhánh có sẵn, nó sẽ chọn default, nếu không thì trạng thái block luôn được giữ.
-
-Timeout dựa trên hiện thực của channel:
-
-```go
-select {
-case v := <-in:
-    fmt.Println(v)
-case <-time.After(time.Second):
-    return // hết giờ
-}
-```
-
-Thông qua `select` nhánh `default` được gửi hoặc nhận nonblocking:
-
-```go
-select {
-case v := <-in:
-    fmt.Println(v)
-default:
-    // ...
-}
-```
-
-Dùng `select` để block `main` không thoát:
+Giả sử chúng ta muốn nhanh chóng tìm kiếm các chủ đề liên quan đến "golang", có thể mở nhiều công cụ tìm kiếm như Bing, Google hoặc Yahoo. Khi tìm kiếm trả về kết quả trước, ta có thể đóng các trang tìm kiếm khác. Do ảnh hưởng của môi trường mạng và thuật toán của công cụ tìm kiếm mà một số công cụ tìm kiếm có thể trả về kết quả tìm kiếm nhanh hơn. Chúng ta có thể sử dụng một chiến lược tương tự để viết chương trình này:  
 
 ```go
 func main() {
-    // do some thins
-    select{}
-}
-```
+    // tạo ra một channel với buffer đủ lớn để đảm bảo
+    // không bị block do kích thước của buffer.
+    ch := make(chan string, 32)
 
-Khi có nhiều channel có thể được thực thi, một channel sẽ được chọn ngẫu nhiên. Dựa trên tính năng này, ta có thể  thực hiện một chương trình tạo ra một chuỗi các số ngẫu nhiên:
-
-```go
-func main() {
-    ch := make(chan int)
+    // chạy nhiều goroutine dưới nền và gửi yêu cầu
+    // tìm kiếm đến các công cụ tìm kiếm khác nhau
     go func() {
-        for {
-            select {
-            case ch <- 0:
-            case ch <- 1:
-            }
-        }
+        ch <- searchByBing("golang")
+    }()
+    go func() {
+        ch <- searchByGoogle("golang")
+    }()
+    go func() {
+        ch <- searchByBaidu("golang")
     }()
 
-    for v := range ch {
-        fmt.Println(v)
-    }
+    // Khi bất kỳ công cụ tìm kiếm nào có kết quả
+    // nó sẽ ngay lập tức gửi kết quả đến channel
+    // ta chỉ lấy kết quả đầu tiên từ channel
+    fmt.Println(<-ch)
 }
 ```
 
-Chúng ta có thể dễ dàng thực hiện kiểm soát việc thoát Goroutine thông qua nhánh `select` và  nhánh `default`:
-
-```go
-func worker(cannel chan bool) {
-    for {
-        select {
-        default:
-            fmt.Println("hello")
-            // thực hiện bình thường
-        case <-cannel:
-            // thoát
-        }
-    }
-}
-
-func main() {
-    cannel := make(chan bool)
-    go worker(cannel)
-
-    time.Sleep(time.Second)
-    cannel <- true
-}
-```
-
-Tuy nhiên, các hoạt động gửi và nhận của channel là một đối một. Nếu ta muốn dừng nhiều Goroutines, ta  cần phải tạo ra cùng một số lượng channel. Điều này quá tốn kém. Trên thực tế, chúng ta có thể đạt được hiệu quả của việc broadcast bằng cách đóng một channel bằng `close`. Tất cả các hoạt động nhận được từ channel sẽ nhận được giá trị bằng 0 và cờ lỗi tùy chọn.
-
-```go
-func worker(cannel chan bool) {
-    for {
-        select {
-        default:
-            fmt.Println("hello")
-            // hoạt động bình thường
-        case <-cannel:
-            // thoát
-        }
-    }
-}
-
-func main() {
-    cancel := make(chan bool)
-
-    for i := 0; i < 10; i++ {
-        go worker(cancel)
-    }
-
-    time.Sleep(time.Second)
-    close(cancel)
-}
-```
-
-Chúng ta sử dụng channel `cancel` để phát chỉ thị `close` đến nhiều Goroutine. Tuy nhiên, chương trình này vẫn chưa đủ mạnh: khi mỗi Goroutine nhận được lệnh thoát, nó thường thực hiện một số công việc dọn dẹp, nhưng việc dọn dẹp của exit không được đảm bảo hoàn thành, vì thread `main` không có cơ chế chờ mỗi công việc Goroutine thoát khỏi công việc của chúng. Ta có thể kết hợp `sync.WaitGroup` để cải thiện điều này:  
-
-```go
-func worker(wg *sync.WaitGroup, cannel chan bool) {
-    defer wg.Done()
-
-    for {
-        select {
-        default:
-            fmt.Println("hello")
-        case <-cannel:
-            return
-        }
-    }
-}
-
-func main() {
-    cancel := make(chan bool)
-
-    var wg sync.WaitGroup
-    for i := 0; i < 10; i++ {
-        wg.Add(1)
-        go worker(&wg, cancel)
-    }
-
-    time.Sleep(time.Second)
-    close(cancel)
-    wg.Wait()
-}
-```
-
-Bây giờ việc tạo, thực thi, đình chỉ và thoát khỏi quá trình concurrency của mỗi thread worker nằm dưới sự kiểm soát bảo mật của hàm `main`.
+Áp dụng ý tưởng trên có thể giúp cải thiện hiệu suất bằng cách chọn lấy kẻ chiến thắng trong cuộc đua thời gian.
 
 ## 1.6.8 Context package
 
-Ở thời điểm phát hành Go1.7, thư viện tiêu chuẩn đã thêm một package context để đơn giản hóa hoạt động của dữ liệu, thời gian chờ và thoát giữa nhiều Goroutines. Chúng ta có thể sử dụng package context để hiện thực lại cơ chế kiểm soát thoát thread-safe hoặc kiểm soát timeout:
+Ở thời điểm phát hành Go1.7, thư viện tiêu chuẩn đã thêm một package context để đơn giản hóa hoạt động của dữ liệu, thời gian chờ và thoát giữa nhiều Goroutines. Package context định nghĩa kiểu Context, chứa deadline, cancelation signal và các giá trị request-scope giữa các API và giữa các process.
+
+Chúng ta có thể sử dụng package context để hiện thực lại cơ chế kiểm soát timeout:
 
 ```go
 func worker(ctx context.Context, wg *sync.WaitGroup) error {
@@ -682,6 +640,8 @@ func main() {
     ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
     var wg sync.WaitGroup
+
+    // đơn giản hoá worker pool cho ngắn gọn
     for i := 0; i < 10; i++ {
         wg.Add(1)
         go worker(ctx, &wg)
@@ -690,13 +650,12 @@ func main() {
     time.Sleep(time.Second)
     cancel()
 
+    // sử dụng waitGroup thay cho done channel
     wg.Wait()
 }
 ```
 
-Khi cơ thể concurrency hết thời gian hoặc `main` chủ động dừng  Goroutine worker, mỗi worker có thể hủy bỏ công việc một cách an toàn.
-
-Golang tự động lấy lại   bộ nhớ, do đó bộ nhớ thường không bị rò rỉ (memory leak). Trong ví dụ trước về sàng số nguyên tố, một Goroutine mới  được đưa vào bên trong hàm `GenerateNatural` và Goroutine nền `PrimeFilter` có nguy cơ bị rò rỉ khi hàm `main` không còn sử dụng channel. Chúng ta có thể tránh vấn đề này với package context. Dưới đây là phần triển khai sàng số nguyên tố được cải thiện:  
+Golang tự động lấy lại   bộ nhớ, do đó bộ nhớ thường không bị rò rỉ (memory leak). Trong ví dụ trước về sàng số nguyên tố, một Goroutine mới  được đưa vào bên trong hàm `GenerateNatural` và Goroutine nền `PrimeFilter` có nguy cơ bị leak khi hàm `main` không còn sử dụng channel. Chúng ta có thể tránh vấn đề này với package context. Dưới đây là phần triển khai sàng số nguyên tố được cải thiện:  
 
 ```go
 // Trả về channel có chuỗi số: 2, 3, 4, ...
@@ -746,6 +705,6 @@ func main() {
 }
 ```
 
-Khi hàm `main` kết thúc hoạt động, nó được thông báo bằng lệnh `cancel()` gọi đến Goroutine nền để thoát, do đó tránh khỏi việc rò rỉ Goroutine.
+Khi hàm `main` kết thúc hoạt động, nó được thông báo bằng lệnh `cancel()` gọi đến Goroutine nền để thoát, do đó tránh khỏi việc leak Goroutine.
 
-concurrency là một chủ đề rất lớn, và ở đây chúng tôi chỉ đưa ra một vài ví dụ về lập trình concurrency rất cơ bản. Tài liệu chính thức cũng có rất nhiều cuộc thảo luận về lập trình concurrency, có khá nhiều  cuốn sách  thảo luận cụ thể về lập trình concurrency trong Golang. Độc giả có thể tham khảo các tài liệu liên quan theo nhu cầu của mình.
+Concurrency là một chủ đề rất lớn, và ở đây chúng tôi chỉ đưa ra một vài ví dụ về lập trình concurrency rất cơ bản. Tài liệu chính thức cũng có rất nhiều cuộc thảo luận về lập trình concurrency, có khá nhiều  cuốn sách  thảo luận cụ thể về lập trình concurrency trong Golang. Độc giả có thể tham khảo các tài liệu liên quan theo nhu cầu của mình.
