@@ -1,10 +1,10 @@
-# 1.3 Array, strings và slices
+# 1.3. Array, strings và slices
 
 `Arrays` và một số cấu trúc dữ liệu liên quan khác được sử dụng thường xuyên trong các ngôn ngữ lập trình. Chỉ khi chúng không đáp ứng được yêu cầu chúng ta mới cân nhắc sử dụng `linked lists` (danh sách liên kết) và `hash tables` (bảng băm) hoặc nhiều cấu trúc dữ liệu tự định nghĩa phức tạp khác.
 
 `Arrays`, `strings` và `slices` trong ngôn ngữ Go là các cấu trúc dữ liệu liên quan mật thiết với nhau. Ba kiểu dữ liệu đó có cùng cấu trúc vùng nhớ lưu trữ bên dưới, và chỉ có những hành vi thể hiện ra bên ngoài khác nhau tùy thuộc vào ràng buộc ngữ nghĩa.
 
-## 1.3.1 Array
+## 1.3.1. Array
 
 <div align="center">
 	<img src="../images/ch1-1-array-and-array-index-representation.png" width="600">
@@ -203,7 +203,7 @@ Tương tự như array, String cũng có một hàm build-in là `len` dùng đ
 fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
 ```
 
-## 1.3.3 Slice
+## 1.3.3. Slice
 
 <div align="center">
 	<img src="../images/1-3-golang-slices-length-capacity.jpg"width="600">
@@ -282,8 +282,7 @@ Các tác vụ cơ bản trong slice bao gồm:
   * Xóa phần tử trong slcie
   * Duyệt qua các phần tử của slice
 
-
-#### 1.3.3.1 Thêm phần tử vào slice
+#### Thêm phần tử vào slice
 
 Hàm  `append` có thể thêm phần tử thứ `N` vào cuối cùng của slice:
 
@@ -357,7 +356,7 @@ copy(a[i+len(x):], a[i:])
 copy(a[i:], x)
 ```
 
-#### 1.3.3.2 Xóa những phần tử trong slice
+#### Xóa những phần tử trong slice
 
 Có ba trường hợp xóa các phần tử:
   * Ở đầu
@@ -399,7 +398,7 @@ a = a[:i+copy(a[i:], a[i+1:])]
 a = a[:i+copy(a[i:], a[i+N:])]
 ```
 
-#### 1.3.3.3 Kỹ thuật quản lý vùng nhớ trong slice
+#### Kỹ thuật quản lý vùng nhớ trong slice
 
 Hàm `TrimSpace` sau sẽ xóa đi các khoảng trắng. Hiện thực hàm này với độ phức tạp O(n) để đạt được sự hiệu quả và đơn giản.
 
@@ -438,7 +437,7 @@ func Filter(s []byte, fn func(x byte) bool) []byte {
 
 Điểm chính của những tác vụ làm việc hiệu quả trên slice là hạn chế việc phải cấp lại vùng nhớ, cố gắng để hàm `append` sẽ không đạt tới `cap` sức chứa của slice, là giảm số lần cấp phát vùng nhớ và giảm kích thước vùng nhớ cấp phát tại mọi thời điểm.
 
-#### 1.3.3.4 Tránh gây ra memory leak trên slice
+####  Tránh gây ra memory leak trên slice
 
 Những tác vụ trên slice sẽ không thay đổi vùng nhớ bên dưới slice, mà thực chất là thay đổi các tham số như `Data`, `Len`. Vùng nhớ bên dưới vẫn còn cho đến khi nào không còn được tham chiếu nữa.
 
@@ -452,7 +451,6 @@ func FindPhoneNumber(filename string) []byte {
     return regexp.MustCompile("[0-9]+").Find(b)
 }
 ```
-
 
 Mã nguồn này sẽ trả về  một mảng các `byte` trỏ tới toàn bộ file. Bởi vì slice tham khảo tới toàn bộ array gốc, cơ chế tự động thu gom rác không thể giải phóng không gian bên dưới array trong thời gian đó. Một yêu cầu kết quả nhỏ, những phải lưu trữ toàn bộ dữ liệu trong một thời gian dài. Mặc dù nó không phải là `memory leak` trong ngữ cảnh truyền thống, nó có thể làm chậm hiệu suất của toàn hệ thống.
 
@@ -475,8 +473,7 @@ var a []*int{ ... }
 a = a[:len(a)-1]
 ```
 
-
-Phương pháp đảm bảo là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo giá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
+Cách giải quyết là đầu tiên thiết lập phần tử cần thu hồi về `nil` để đảm bảo giá trị thu gom tự động có thể tìm thấy chúng, sau đó xóa slices đó.
 
 ```go
 var a []*int{ ... }
@@ -485,5 +482,3 @@ a[len(a)-1] = nil
 // xóa phần tử cuối cùng ra khỏi slice
 a = a[:len(a)-1]
 ```
-
-Dĩ nhiên, nếu ở cách làm trước đối với slice có kích thước nhỏ, bạn sẽ không gặp phải vấn đề về  tham chiếu treo. Bởi vì nếu bản thân slice có thể được giải phóng bởi GC (Garbage collector), mỗi phần tử ứng với slice có thể được thu gom tự nhiên.
