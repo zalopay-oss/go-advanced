@@ -226,86 +226,43 @@ for i := 0; i < 10; i++ {
 
 Đó là một mô hình producer và comsumer. Bên dưới thread sẽ sinh ra thông tin cấu hình gần nhất. Phía front-end sẽ có nhiều worker thread để lấy thông tin cấu hình gần nhất.
 
-## 1.5.3. Mô hình thực thi tuần tự nhất quán
+## 1.5.3. Mô hình thực thi tuần tự
 
-Ví dụ bên dưới minh họa cho việc điều khiển thứ tự thực thi giữa các Goroutines:
-
-```go
-// biến string
-var a string
-// cờ done cho biết trạng thái thực thi
-var done bool
-// hàm này phải được chạy trước
-func setup() {
-    a = "hello world"
-    // biến done để đánh dấu thực thi xong
-    done = true
-}
-
-func main() {
-    // chạy setup
-    go setup()
-    // thực thi vòng lặp busy waiting để chờ setup thực thi xong
-    for !done {}
-    // in ra giá trị
-    print(a)
-}
-```
-
-Tuy nhiên, cách làm này có vấn đề khi không đảm bảo rằng việc ghi trong main sẽ được xem xét là `done` xảy ra sau khi phép toán ghi của string `a`, bởi vì cấu trúc vùng nhớ liên tục được đảm bảo trong cùng một Goroutines nhưng không được đảm bảo khi khác Goroutines
-
-Trong ngôn ngữ Go, một cấu trúc vùng nhớ liên tục sẽ được đảm bảo trong cùng một Goroutine thread. tuy nhiên giữa những Goroutine khác nhau, tính chất đồng bộ của chuỗi nhớ sẽ không được đảm bảo. và một cách định nghĩa đồng bộ sự kiện sẽ cần thiết để tăng tối đa tính song song, bộ biên dịch Go sẽ biên dịch và bộ xử lý sẽ sắp xếp lại thứ thự các lệnh mà không ảnh hưởng đến những quy luật trên (CPU sẽ biểu diễn một vài lệnh ngoài thứ tự đó)
-
-Do đó, nếu `a=1;b=2` hai mệnh đề trên sẽ được thực hiện tuần tự trong goroutine, mặc dù `a=1` hay là `b=2` được thực thi trước. Những sự thay đổi đó không theo dự đoán trước. Nếu chương trình đồng bộ không thể được xác đinh dựa vào thứ tự các mối liên hệ của sự kiện, kết quả của chương trình sẽ không chắn chắn, ví dụ bên dưới
+Xem xét ví dụ như sau:
 
 ```go
 func main() {
+    // in ra Hello World trên một Goroutine khác
+    // tuy nhiên thông thường main sẽ chạy và kết thúc chương trình trước Goroutine
+    // dẫn tới dòng chữ Hello World không được in ra
     go println("Hello World");
 }
 ```
 
-Theo đặc tả của ngôn ngữ Go, hàm main sẽ kết thúc và khi hàm kết thúc nó sẽ không đợi bất kỳ quá trình nào chạy nền bên dưới. Bởi vì việc thực thi goroutine trong hàm main sẽ trả về một sự kiện là concurrency, bất cứ phần nào cũng có thể chạy trước. Do đó, khi in ra màn hình, bất cứ khi nào chúng in ra là không biết.
-
-Sử dụng tác vụ atomic trước không giúp giải bài toán trên bởi vì chúng ta không xác định thứ tự của hai phép toán atomic, Hướng giải quyết của vấn đề này là cụ thể cho chúng chạy theo thứ tự nhờ vào việc cơ chế bên dưới,
+Có thể đồng bộ thứ tự thực thi nhờ vào channel như bên dưới:
 
 ```go
-func main() {
+func main() { // Goroutine (1)
+    // done ban đầu là một channel chưa có giá trị
     done := make(chan int)
-
-    go func(){
+    // chạy anynomous func trên một Goroutine khác
+    go func(){ // Goroutine (2)
+        // in ra dòng chữ Hello World
         println("Hello World")
+        // đưa 1 vào channel, và bắt đầu dừng tới khi Goroutine (1) lấy 1 ra
         done <- 1
     }()
-
+    // lấy ra giá trị, nên phải dừng cho tới khi channel done có giá trị để lấy ra
     <-done
 }
 ```
 
-Khi mà `<-done` được thực thi, thì những yêu cầu không thể thay thế `done <- 1` sẽ được hiện thực. Theo như trong cùng một goroutine sẽ thỏa mãn quy luật nhất quán. Chúng ta có thể nói rằng khi `done <- 1` được thực thi, thì mệnh đề `println()` sẽ được thực thi trước rồi,  Do đó chương trình hiện tại sẽ có kết quả được in ra màn hình bình thường.
+## 1.5.4 Chuỗi khởi tạo
 
-Dĩ nhiên, cơ chế đồng bộ của `sync.Mutex` sẽ có thể đạt được thông qua `Mutex`
-
-```go
-func main() {
-    var mu sync.Mutex
-
-    mu.Lock()
-    go func(){
-        println("Hello World")
-        mu.Unlock()
-    }()
-
-    mu.Lock()
-}
-```
-
-Có thể xác định rằng, bên dưới việc thực thi `mutex.UnLock()` sẽ phải là `println("Hello World")` hoàn thành trước. (một số thread thỏa mãn thứ tự nhất quán), và trong main, hàm thứ hai sẽ `mu.Lock()` sẽ phải là `mu.UnLock()` xảy ra bên dưới background thread (được đảm bảo bởi `sync.Mutex`) và bên dưới nền sẽ in ra công việc được hoàn thành một cách thành công.
-
-## 1.5.4 Khởi tạo chuỗi
-
-Trong chương trước, chúng ta đã được giới thiệu ngắn gọn về việc khởi tạo một chuỗi trong chương trình, nó là một số đặc điểm đặt biệt của ngôn ngữ Go theo mô hình vùng nhớ concurrency.
-
-Việc khởi tạo và thực thi trong chương trình Go luôn luôn bắt đầu bằng hàm `main.main`. Tuy nhiên nếu package `main` import các package khác vào, chúng sẽ được import theo thứ tự của string của trên file và tên thư mục) Nếu một package được import nhiều lần, nó chỉ được import và thực thi đúng một lần. Khi mà một package được import, nếu nó cũng import những package khác nữa, thì đầu tiên sẽ bao gồm package khác, sau đó tạo ra và khởi tạo biến và hằng của package. Sau đó hàm `init` trong package, nêu một package có nhiều hàm `init` thì việc hiện thực sẽ gọi chúng theo thứ tự file name, nhiều hàm init trong cùng một file được gọi theo thứ tự chúng xuất hiện (`init` không phải là một hàm thông thường, chúng có thể được định nghĩa nhiều lần, chúng sẽ không được gọi từ những hàm khác). Cuối cùng, package `main` biến và hằng được khai báo và khởi tạo, và hàm `init` sẽ được thực thi trước khi hàm thực thi `main.main`. Chương trình bắt đầu thực thi một cách bình thường, theo sau là một sơ đồ ngữ nghĩa của việc khởi động hàm Go bên dưới.
+* Việc khởi tạo và thực thi chương trình Go luôn luôn bắt đầu bằng hàm `main.main`.
+* Tuy nhiên nếu package `main` import các package khác vào, chúng sẽ được import theo thứ tự của string của trên file và tên thư mục.
+* Nếu một package được import nhiều lần, thì những lần import sau được bỏ qua.
+* Nếu các package lại import các package khác nữa, chúng sẽ import vào khởi tạo các biến theo chiều sâu như hình bên dưới:
 
 <div align="center" width="600">
 <img src="../images/ch1-12-init.ditaa.png">
@@ -314,10 +271,7 @@ Việc khởi tạo và thực thi trong chương trình Go luôn luôn bắt đ
 </div>
 <br/>
 
-Nên chú ý rằng `main.main` trong những mã nguồn sẽ được thực thi trong cùng Goroutine trong cùng một hàm mà nó thực thi, và nó cũng là việc chạy trong main thread của chương trình. Nếu hàm `init` giải phóng một Goroutine mới với từ khóa `go`, thì Goroutine và `main.main` sẽ được thực thi một cách tuần tự.
-
-Bởi vì tất cả hàm `init` và hàm `main` sẽ được hoàn thành trong cùng một thread, nó cũng sẽ thoả mãn thứ tự về mô hình nhất quán.
-
+* Nếu hàm `init` giải phóng một Goroutine mới với từ khóa `go`, thì Goroutine và `main.main` sẽ được thực thi một cách tuần tự. Bởi vì tất cả hàm `init` và hàm `main` sẽ được hoàn thành trong cùng một thread, nó cũng sẽ thoả mãn thứ tự về mô hình nhất quán.
 
 ## 1.5.5 Khởi tạo một Goroutine
 
@@ -358,28 +312,34 @@ func main() {
 }
 ```
 
-Cũng đảm bảo rằng, khi in dòng "hello world". Vì thread nền sẽ tiếp nhận trước khi bắt đầu `main` thread là `done <- true` trước khi gửi `<-done`, sẽ đảm bảo rằng `msg = "hello world"` được thực thi, do đó chuỗi `println(msg)` sẽ được gán rồi. Tóm lại, bên thread nền sẽ đầu tiên ghi vào biến `msg`, sau đó sẽ nhận tín hiệu từ `done`, theo sau bởi `main` là một thread để truyền tín hiệu tương ứng với lần thực thi hàm `println(msg)` kết thúc. Tuy nhiên, nếu Channel được buffered (ví dụ, `done = make(chan bool, 1)` ), main thread sẽ nhận tác vụ `done <- true` sẽ blocked cho đến khi thread nền nhận, và chương trình sẽ không đảm bảo in ra dòng chữ "hello world".
+Đảm bảo rằng, khi in dòng "hello world" được in ra, thread nền sẽ tiếp nhận trước khi bắt đầu `main` thread là `done <- true` trước khi gửi `<-done`, sẽ đảm bảo rằng `msg = "hello world"` được thực thi, do đó chuỗi `println(msg)` sẽ được gán rồi.
+
 
 Với `buffered Channel`, đầu tiên sẽ hoàn toàn nhận `K` tác vụ trên channel xảy ra trước khi `K+C` tác vụ gửi được hoàn thành, với `C` là kích thước của buffer Channel, trước khi truyền đến Channel được hoàn thành.
 
 Chúng ta có thể diều khiển số Gouroutine chạy concurrency dựa trên kích thước của bộ nhớ đệm control channel, ví dụ như sau
 
 ```go
+// tạo ra một buffer channel có số lượng 3
 var limit = make(chan int, 3)
-
 func main() {
+    // lặp qua một dãy các công việc
     for _, w := range work {
         go func() {
+            // gửi 1 tới limit
             limit <- 1
+            // thực thi hàm w()
             w()
+            // lấy giá trị ra khỏi limit
             <-limit
         }()
     }
+    // select{} sẽ dừng chương trình main
     select{}
 }
 ```
 
-Dòng `select{}` cuối cùng là một mệnh đề lựa chọn một empty pipe sẽ làm cho main thread bị block, ngăn chặn chương trình kết thúc sớm. Tương tự `for{}` và `<- make(chan int)` nhiều hàm khác sẽ đạt được kết quả tương tự. Bởi vì thread main sẽ bị blocked. nó có thể là `os.Exit(0)` được hiện thực nếu chương trình cần kết thúc một cách thông thường.
+Dòng `select{}` cuối cùng là một mệnh đề lựa chọn một empty channel sẽ làm cho main thread bị block, ngăn chặn chương trình kết thúc sớm. Tương tự `for{}` và `<- make(chan int)` nhiều hàm khác sẽ đạt được kết quả tương tự.
 
 ## 1.5.7 Tác vụ đồng bộ không tin cậy
 
@@ -391,7 +351,7 @@ func main(){
 }
 ```
 
-Chỉ liên hệ với Go, bạn có thể  đảm bảo rằng kết quả sẽ xuất ra bình thường bởi việc thêm vào thời gian sleep như sau
+Với Go, bạn có thể  đảm bảo rằng kết quả sẽ xuất ra bình thường bởi việc thêm vào thời gian sleep như sau
 
 ```go
 func main(){
@@ -400,8 +360,6 @@ func main(){
 }
 ```
 
-Bởi vì thread main sleep một giây, chương trình sẽ có xác suất lớn rằng kết quả được in ra một cách bình thường. Do đó, nhiều người sẽ cảm thấy rằng chương trình sẽ không còn là một vấn đề. Nhưng chương trình này sẽ không ổn đi và đó sẽ vẫn dẫn đến failure. Đầu tiên hãy giả sử rằng chương trình có thể được ổn định kết quả đầu ra. Bởi vì việc bắt đầu thực thi thì thread Go sẽ không bị blocking, thread `main` sẽ cụ thể sleep một giây và chương trình sẽ kết thúc. Chúng ta có thể giả sử rằng chương trình sẽ thực nhiều hơn một giây. Bây giờ giả sử hàm `println` sẽ sleep lâu hơn main thread bị sleep. Nó có thể dẫn đến hai mặt đối lập sau: do bên dưới thread nền main thread sẽ kết thúc trước khi việc in ra hoàn thành, thời gian thực thi sẽ nhỏ hơn thời gian thực thi của thread chính. Dĩ nhiên điều đó là hoàn toàn có thể.
+Thread main sleep một giây sẽ đảm bảo đủ để Goroutine in ra dòng chữ "hello world" ra màn hình trước khi main thread thực thi xong. Tuy nhiên cũng không đảm bảo chắc chắn việc Goroutine thực thi xong sau một giây dẫn tới kết quả không như mong đợi.
 
-Tính chất đúng đắn của của việc thực thi chương trình concurrency nghiêm ngặt không nên phụ thuộc vào các yếu tố không đáng tin cậy như tốc độ thực thi CPU và thời gian ngủ. concurrency, cũng có thể lấy được kết quả tĩnh, theo tính chất nhất quán  của đơn hàng trong luồng, kết hợp với khả năng sắp xếp của các sự kiện đồng bộ hóa kênh, hoặc đồng bộ hóa sự kiện dẫn xuất. Nếu hai sự kiện không thể được sắp xếp theo quy tắc đó, sau đó là thực thi concurrency, do đó việc thực thi sẽ không tin cậy.
-
-Ý tưởng của việc giải quyết thực thi concurrency cũng giống nhau: cụ thể sử dụng cơ chế đồng bộ.
+Tính chất đúng đắn của của việc thực thi chương trình concurrency nghiêm ngặt không nên phụ thuộc vào các yếu tố không đáng tin cậy như tốc độ thực thi CPU và thời gian sleep.
