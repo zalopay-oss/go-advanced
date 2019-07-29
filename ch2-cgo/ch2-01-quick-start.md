@@ -93,42 +93,43 @@ func main() {
 
 ## 2.1.4 Module hóa C code
 
-Trừu tượng và module hóa là cách để đơn giản hóa các vấn đề trong lập trình.
+Trừu tượng và module hóa là cách để đơn giản hóa các vấn đề trong lập trình:
 
 - Khi code quá dài, ta có thể đưa các lệnh tương tự nhau vào chung một hàm.
 - Khi có nhiều hàm hơn, ta chia chúng vào các file hoặc module.
 
-Cốt lõi của việc này là lập trình theo `interface` (interface không phải là khái niệm interface trong ngôn ngữ Go mà là khái niệm về API).
-
 Trong ví dụ trước, ta trừu tượng hóa một module tên là `hello` và tất cả các interface của module đó được khai báo trong file header `hello.h`:
 
-```h
-// hello.h
+***hello.h***
+
+```c
 void SayHello(const char* s);
 ```
 
-Và chỉ có 1 khai báo cho hàm `SayHello` nhưng ta có thể an tâm sử dụng mà không phải lo lắng về việc hiện thực cụ thể  hàm đó. Khi hiện thực hàm `SayHello`, ta chỉ cần đáp ứng đúng đặc tả của khai báo hàm trong file header. Ví dụ sau là hiện thực hàm `SayHello` trong file `hello.c`:
+Và hiện thực hàm `SayHello` trong file `hello.c`:
+
+***hello.c***
 
 ```c
-// hello.c
-
-#include "hello.h" // Đảm bảo việc hiện thực hàm thỏa mãn interface của module.
+#include "hello.h"
 #include <stdio.h>
 
+// Đảm bảo việc hiện thực hàm thỏa mãn interface của module.
 void SayHello(const char* s) {
     puts(s);
 }
 ```
 
-Trong file `hello.c` chúng ta include file `hello.h` và sau đó cài đặt hàm SayHello đúng như đặc tả ở file `hello.h`.
+Ngoài ra ta có thể hiện thực hàm này bằng C++ cũng được:
 
-File interface `hello.h` chỉ là thỏa thuận giữa người hiện thực và người sử dụng của module `hello`. Ta có thể hiện thực nó bằng ngôn ngữ C hoặc C++.
+***hello.cpp***
 
-```cpp
-// hello.cpp
-
+```c
 #include <iostream>
 
+// extern giúp function C++ có được các liên kết (linkage)
+// của C. Chỉ ra rằng liên hệ giữa hello.cpp và hello.h
+// vẫn theo quy tắc của C
 extern "C" {
     #include "hello.h"
 }
@@ -138,25 +139,23 @@ void SayHello(const char* s) {
 }
 ```
 
-Tuy nhiên, để đảm bảo rằng hàm SayHello được hiện thực bởi C++ đáp ứng đặc tả hàm bởi file header của ngôn ngữ C, ta cần phải thêm lệnh `extern "C"` để chỉ ra rằng mối liên hệ đó ([hello.h](../examples/ch2/ch2.1/4-modularization/hello.h) và [hello.cpp](../examples/ch2/ch2.1/4-modularization/hello.cpp)) vẫn tuân theo quy tắc của C.
-
-Với việc lập trình C bằng API interface, ta có thể hiện thực module bằng bất kỳ ngôn ngữ nào, miễn là đáp ứng được API. Ta có thể hiện thực SayHello bằng C, C++, Go hoặc kể cả Assembly.
+Với việc lập trình C bằng API interface, ta có thể hiện thực module bằng bất kỳ ngôn ngữ nào, miễn là đáp ứng được API: SayHello có thể được viết bằng C, C++, Go hoặc kể cả Assembly.
 
 ## 2.1.5 Sử dụng Go để hiện thực hàm trong C
 
-Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn được dùng để xuất các hàm (viết bằng) ngôn ngữ Go sang các lời gọi hàm của C.
+Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn được dùng để export các hàm (viết bằng) ngôn ngữ Go sang các lời gọi hàm của C.
 
-Trong ví dụ trước, chúng ta đã trừu tượng hóa một module có tên hello và tất cả các chức năng interface của module được xác định trong tệp header hello.h:
+Trong ví dụ trước, chúng ta đã trừu tượng hóa một module có tên hello và tất cả các chức năng interface của module được xác định trong file header `hello.h`:
 
-```h
-// hello.h
-void SayHello(/*const*/ char* s);
+```c
+void SayHello(const char* s);
 ```
 
-Bây giờ, chúng ta tạo một tệp hello.go và hiện thực lại chức năng SayHello của interface ngôn ngữ C bằng ngôn ngữ Go:
+Bây giờ, chúng ta tạo một file `hello.go` và hiện thực lại hàm `SayHello` của interface bằng ngôn ngữ Go:
+
+***hello.go***
 
 ```go
-// hello.go
 package main
 
 import "C"
@@ -169,7 +168,9 @@ func SayHello(s *C.char) {
 }
 ```
 
-Ta sử dụng chỉ thị `//export SayHello` của CGO để xuất hàm được hiện thực bằng Go sang hàm sử dụng được cho C. Tuy nhiên để đáp ứng được các hàm của ngôn ngữ C được hiện thực bằng Go, ta cần bỏ `const` trong file header. Vậy nên cần chú ý là ta sẽ có hai phiên bản `SayHello`: một là trong môi trường cục bộ của Go, hai là của C. Phiên bản SayHello của C được sinh ra bởi CGO cuối cùng cũng sẽ gọi phiên bản SayHello của Go thông qua `bridge code`.
+Sử dụng chỉ thị `//export SayHello` của CGO để export hàm được hiện thực bằng Go sang hàm sử dụng được cho C.
+
+Cần chú ý là ta sẽ có hai phiên bản `SayHello`: một là trong môi trường cục bộ của Go, hai là của C. Phiên bản `SayHello` của C được sinh ra bởi CGO cuối cùng cũng sẽ gọi phiên bản `SayHello` của Go thông qua `bridge code`.
 
 Với việc lập trình ngôn ngữ C qua inteface, ta có thể tự do hiện thực và đơn giản hóa việc sử dụng hàm. Bây giờ ta có thể dùng SayHello như là một thư viện:
 
@@ -186,9 +187,7 @@ func main() {
 
 ## 2.1.6 Sử dụng Go để lập trình interface cho C
 
-Trong ví dụ trên, tất cả đoạn mã CGO của chúng ta đều nằm trong tệp Go. Sau đó, SayHello được chia thành các tệp C khác nhau bằng kỹ thuật lập trình interface C và hàm main vẫn là tệp Go. Sau đó, hàm SayHello của interface ngôn ngữ C được thực hiện lại bằng hàm trong Go. Nhưng đối với ví dụ hiện tại chỉ có một chức năng và việc chia thành ba tệp khác nhau thì hơi cồng kềnh.
-
-Nếu các bạn làm những project lớn thì nên chia rõ ràng các file như ví dụ trên, còn ở đây chúng tôi sẽ gộp lại thành một file main.go duy nhất như ví dụ dưới đây.
+Để cho đơn giản chúng ta sẽ gộp tất cả thành một file `main.go` duy nhất như ví dụ dưới đây.
 
 ```go
 package main
@@ -210,7 +209,7 @@ func SayHello(s *C.char) {
 }
 ```
 
-Tỉ lệ đoạn mã C trong chương trình bây giờ ít hơn. Tuy nhiên vẫn phải sử dụng chuỗi trong C thông qua hàm `C.CString` chứ không thể dùng trực tiếp chuỗi của Go. Trong `Go1.10`, CGO đã thêm một loại `_GoString_pred` xác để thể hiện chuỗi trong ngôn ngữ Go. Đây là mã nguồn được cải tiến.
+Tỉ lệ code C trong chương trình bây giờ ít hơn. Tuy nhiên vẫn phải sử dụng chuỗi trong C thông qua hàm `C.CString` chứ không thể dùng trực tiếp chuỗi của Go. Trong `Go1.10`, CGO đã thêm kiểu `_GoString_pred` để thể hiện chuỗi trong ngôn ngữ Go. Sau đây là code đã được cải tiến:
 
 ```go
 // +build go1.10
@@ -234,4 +233,4 @@ func SayHello(s string) {
 }
 ```
 
-Mặc dù có vẻ như tất cả đều được viết bằng ngôn ngữ Go, nhưng việc triển khai từ hàm `main()` của ngôn ngữ Go đến phiên bản ngôn ngữ C đã tự động tạo ra hàm SayHello, và cuối cùng cũng trở lại môi trường ngôn ngữ Go. Đoạn mã này vẫn chứa bản chất của lập trình CGO và người đọc cần hiểu sâu về nó.
+Có vẻ như tất cả đều được viết bằng Go, nhưng việc triển khai từ hàm `main()` của ngôn ngữ Go đến phiên bản ngôn ngữ C đã tự động tạo ra hàm `SayHello`, rồi cuối cùng trở lại môi trường ngôn ngữ Go.
