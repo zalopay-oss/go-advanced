@@ -1,28 +1,30 @@
 # 2.1 Quick Start
 
-Trong phần này, chúng tôi sẽ hướng dẫn cách sử dụng cơ bản của CGO thông qua một loạt các ví dụ nhỏ từ dễ đến khó.
+Trong phần này, chúng ta sẽ tìm hiểu cách sử dụng CGO cơ bản  thông qua loạt ví dụ từ đơn giản đến phức tạp.
 
 ## 2.1.1 Chương trình CGO đơn giản
 
-Các chương trình CGO thực tế thường phức tạp hơn. Nhưng chúng ta có thể đi từ chương trình dễ đến khó. Để xây dựng một chương trình CGO đơn giản, trước tiên hãy bỏ qua một số tính năng CGO phức tạp. Đây là chương trình CGO đơn giản nhất mà chúng tôi xây dựng:
+Đầu tiên là một chương trình CGO đơn giản nhất:
+
+***main.go***
 
 ```go
-// main.go
 package main
 
-import "C"//Sẵn sàng lập trình CGO
+import "C"
 
 func main() {
     println("hello cgo")
 }
 ```
 
-Chúng ta import package CGO thông qua câu lệnh `import "C"`. Chương trình trên chưa thực hiện bất kì thao tác nào với CGO, chỉ mới thông báo sẵn sàng cho việc lập trình với CGO. Mặc dù chúng ta chưa sử dụng gì đến CGO nhưng lệnh `go build` vẫn sẽ gọi trình biên dịch `gcc` trong suốt quá trình biên dịch do nó đã là một chương trình CGO hoàn chỉnh.
+Chúng ta import package CGO thông qua câu lệnh `import "C"`. Chương trình trên chưa thực hiện bất kì thao tác nào với CGO, chỉ mới thông báo sẵn sàng cho việc lập trình với CGO. Mặc dù chưa sử dụng gì đến CGO nhưng lệnh `go build` vẫn sẽ gọi trình biên dịch `gcc` trong suốt quá trình biên dịch do đây được là một chương trình CGO hoàn chỉnh.
 
 ## 2.1.2 Xuất chuỗi dựa trên thư viện chuẩn của C
 
+***main.go***
+
 ```go
-// main.go
 package main
 
 //#include <stdio.h>
@@ -33,18 +35,17 @@ func main() {
 }
 ```
 
-Chúng ta `import package "C"` để thực hiện các chức năng của CGO và include thư viện <stdio.h> của ngôn ngữ C. Tiếp theo, chuỗi string trong `C.CString` của ngôn ngữ Go được chuyển đổi thành chuỗi string trong ngôn ngữ C bằng phương thức `C.puts` của gói CGO. Cuối cùng phương thức của package CGo được gọi để in ra kết quả.
+`import package "C"` để thực hiện các chức năng của CGO và include thư viện <stdio.h> của ngôn ngữ C. Tiếp theo, chuỗi string trong `C.CString` của ngôn ngữ Go được chuyển đổi thành chuỗi string trong ngôn ngữ C bằng phương thức `C.puts` của package CGO.
 
-So với các ngôn ngữ khác trên thế giới khi in câu "Hello World", điểm khác biệt lớn nhất của chương trình CGO là chương trình chúng ta sẽ không giải phóng trước khi chương trình kết thúc việc tạo chuỗi bằng lệnh C.CString. Ở đó chúng ta chuyển phương thức `puts` để in sang đầu ra tiêu chuẩn (stdout) trước khi áp dụng việc in bằng `fputs`.
-
-Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.CString của ngôn ngữ C sẽ dẫn đến việc rò rỉ bộ nhớ. Nhưng đối với chương trình nhỏ trên điều này không đáng lo ngại, bởi vì hệ điều hành sẽ tự động lấy lại các tài nguyên của chương trình sau khi chương trình kết thúc.
+Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.CString của ngôn ngữ C sẽ dẫn đến rò rỉ bộ nhớ. Nhưng đối với chương trình nhỏ ở trên điều này không đáng lo ngại  vì hệ điều hành sẽ tự động lấy lại các tài nguyên của chương trình sau khi chương trình kết thúc.
 
 ## 2.1.3 Sử dụng hàm C tự khai báo
 
-Phần trên chúng tôi đã sử dụng các chức năng đã có trong thư viện tiêu chuẩn. Bây giờ, chúng tôi sẽ tùy chỉnh một hàm `SayHello` của ngôn ngữ C. Chức năng hàm này là in ra chuỗi chúng ta truyền vào hàm. Sau đó gọi hàm `SayHello` trong hàm main.
+Phần trên chúng tôi đã sử dụng các chức năng đã có trong `stdio`. Bây giờ ta sẽ sử dụng một hàm `SayHello` của ngôn ngữ C. Chức năng hàm này là in ra chuỗi chúng ta truyền vào hàm. Sau đó gọi hàm `SayHello` trong hàm main:
+
+***main.go***
 
 ```go
-// main.go
 package main
 
 /*
@@ -61,12 +62,11 @@ func main() {
 }
 ```
 
-Chúng ta có thể cài đặt hàm `SayHello` trong file nguồn với đuôi tệp là `.c`. Bởi vì hàm `SayHello` được viết bởi một tệp riêng biệt, để có thể sử dụng hàm `SayHello` chúng ta cần loại bỏ các dấu `*/`
+Hoặc có thể đặt hàm `SayHello` trong file `hello.c` như sau:
 
-Chúng ta tạo file hello.go và cài đặt như sau:
+***hello.c***
 
 ```C
-// hello.c
 #include <stdio.h>
 
 void SayHello(const char* s) {
@@ -76,8 +76,9 @@ void SayHello(const char* s) {
 
 Sau đó bên file main.go chúng chỉ cần khai báo hàm `SayHello` trong phần CGO như bên dưới.
 
+***main.go***
+
 ```Go
-// main.go
 package main
 
 //void SayHello(const char* s);
@@ -88,13 +89,16 @@ func main() {
 }
 ```
 
-`Lưu ý`: thay vì chạy lệnh `go run main.go` hoặc `go build main.go`, chúng ta phải sử dụng `go run "your/package"` hoặc `go build "your/package"`. Nếu bạn đang đứng trong thư mục chứa mã nguồn thì bạn có thể chạy chương trình bằng lệnh `go run .` hoặc `go build .`
-
-Vì `SayHello` được đặt trong file riêng, ta có thể biên dịch thành các thư viện tĩnh hoặc động để sử dụng. Nếu sử dụng dưới dạng thư viện, file nguồn (`hello.c`) cần được đưa ra ngoài thư mục hiện tại (CGO tự động build các file nguồn của C, gây ra xung đột tên hàm). Chi tiết sẽ được đề cập sau.
+`Lưu ý`: thay vì chạy lệnh `go run main.go` hoặc `go build main.go`, chúng ta phải sử dụng `go run "tên/của/package"` hoặc `go build "tên/của/package"`. Nếu đang đứng trong thư mục chứa mã nguồn thì bạn có thể chạy chương trình bằng lệnh `go run .` hoặc `go build .`
 
 ## 2.1.4 Module hóa C code
 
-Trừu tượng và module hóa là cách để đơn giản hóa các vấn đề phức tạp trong lập trình. Khi code dài hơn, ta có thể đưa các lệnh tương tự nhau vào chung một hàm. Khi có nhiều hàm hơn, ta chia chúng vào các file hoặc module. Cốt lõi của việc này là lập trình theo `interface` (interface không phải là khái niệm interface trong ngôn ngữ Go mà là khái niệm về API).
+Trừu tượng và module hóa là cách để đơn giản hóa các vấn đề trong lập trình.
+
+- Khi code quá dài, ta có thể đưa các lệnh tương tự nhau vào chung một hàm.
+- Khi có nhiều hàm hơn, ta chia chúng vào các file hoặc module.
+
+Cốt lõi của việc này là lập trình theo `interface` (interface không phải là khái niệm interface trong ngôn ngữ Go mà là khái niệm về API).
 
 Trong ví dụ trước, ta trừu tượng hóa một module tên là `hello` và tất cả các interface của module đó được khai báo trong file header `hello.h`:
 
