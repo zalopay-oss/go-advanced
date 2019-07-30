@@ -260,7 +260,7 @@ func main() { // Goroutine (1)
 ## 1.5.4 Chuỗi khởi tạo
 
 * Việc khởi tạo và thực thi chương trình Go luôn luôn bắt đầu bằng hàm `main.main`.
-* Tuy nhiên nếu package `main` import các package khác vào, chúng sẽ được import theo thứ tự của string của trên file và tên thư mục.
+* Tuy nhiên nếu package `main` import các package khác vào, chúng sẽ được import theo thứ tự string của tên file và tên thư mục.
 * Nếu một package được import nhiều lần, thì những lần import sau được bỏ qua.
 * Nếu các package lại import các package khác nữa, chúng sẽ import vào khởi tạo các biến theo chiều sâu như hình bên dưới:
 
@@ -275,49 +275,52 @@ func main() { // Goroutine (1)
 
 ## 1.5.5 Khởi tạo một Goroutine
 
-Mệnh đề đứng trước từ khóa `go` sẽ tạo ra một Goroutine mới trước khi trả về một goroutine hiện tại, ví dụ :
+Mệnh đề đứng sau từ khóa `go` sẽ tạo ra một Goroutine mới, ví dụ :
 
 ```go
+// biến a lưu trữ thông tin giao tiếp
 var a string
-
+// hàm thực thi việc in ra a
 func f() {
     print(a)
 }
-
+// hàm hello đầu tiên sẽ gán giá trị cho a, sau đó chạy f() trên một Goroutines khác
 func hello() {
     a = "hello world"
+    // khởi tạo một Goroutine mới để thực thi f()
     go f()
 }
 ```
 
-Việc thực thi của `go f()` sẽ tạo ra một Goroutine, và hàm `hello` sẽ thực thi cùng lúc với Goroutine. Theo thứ tự của các statement được viết, nó có thể được xác định bằng một khi việc khởi tạo Goroutine được xảy ra, nó có thể không được sắp xếp. Nó là việc concurrency. Việc gọi hello sẽ in ra tại một số điểm trong tương lai "hello,world", hoặc có thể là `hello` được in ra sao khi hàm đã thực thi xong
-
 ## 1.5.6 Giao tiếp thông qua kênh Channel
 
-Giao tiếp thông qua channel là một phương pháp chính trong việc đồng bộ giữa các goroutine. Mỗi lần thực hiện thao tác gửi trên một `unbufferred Channel` thường đi đôi với tác vụ nhận. Tác vụ gửi và nhận thường xảy ra ở những Goroutine khác nhau (hai tác vụ diễn ra trên cùng một goroutine có thể dễ dàng dẫn đến deadlocks). **Tác vụ gửi trên một unbufferred Channel luôn luôn xảy ra trước khi tác vụ nhận hoàn thành**.
+* Tác vụ gửi trên một unbufferred Channel luôn luôn xảy ra trước tác vụ nhận, dùng tính chất này cho việc đồng bộ giữa các goroutines.
 
 ```go
+// dùng channel done để đồng bộ thứ tự thực thi
 var done = make(chan bool)
+// thông điệp cần in ra
 var msg string
 
 func aGoroutine() {
+    // gán thông điệp vào biến msg
     msg = "Hello World"
+    // truyền giá trị vào channel
     done <- true
 }
 
 func main() {
+    // khởi tạo Goroutines
     go aGoroutine()
+    // nhận giá trị từ channel
     <-done
     println(msg)
 }
 ```
 
-Đảm bảo rằng, khi in dòng "hello world" được in ra, thread nền sẽ tiếp nhận trước khi bắt đầu `main` thread là `done <- true` trước khi gửi `<-done`, sẽ đảm bảo rằng `msg = "hello world"` được thực thi, do đó chuỗi `println(msg)` sẽ được gán rồi.
-
-
 Với `buffered Channel`, đầu tiên sẽ hoàn toàn nhận `K` tác vụ trên channel xảy ra trước khi `K+C` tác vụ gửi được hoàn thành, với `C` là kích thước của buffer Channel, trước khi truyền đến Channel được hoàn thành.
 
-Chúng ta có thể diều khiển số Gouroutine chạy concurrency dựa trên kích thước của bộ nhớ đệm control channel, ví dụ như sau
+Chúng ta có thể diều khiển số Gouroutines chạy concurrency dựa trên kích thước của bộ nhớ đệm control channel, ví dụ như sau:
 
 ```go
 // tạo ra một buffer channel có số lượng 3
