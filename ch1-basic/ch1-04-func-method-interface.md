@@ -89,9 +89,9 @@ Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài ngu
         if err != nil {
             panic("cannot create file")
         }
+
+        // chắc chắn file sẽ được close dù hàm có bị panic hay return
         defer f.Close()
-        // no matter what happens here file will be closed
-        // for sake of simplicity I skip checking close result
         fmt.Fprintf(f,"hello")
     }
     ```
@@ -134,6 +134,15 @@ Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài ngu
     ```
 
 ### Slice trong Function
+
+<div align="center">
+	<img src="../images/slice_1.png" width="300">
+	<br/>
+	<span align="center">
+		<i>Minh hoạ slice</i>
+	</span>
+</div>
+<br/>
 
 Mọi thứ trong Go đều được truyền theo kiểu pass by value, slice cũng thế. Nhưng vì giá trị của slice là một *header* (chứa con trỏ tới dữ liệu array bên dưới) nên khi truyền slice vào hàm, quá trình copy sẽ bao gồm luôn địa chỉ tới array chứa dữ liệu thực sự.
 
@@ -263,7 +272,6 @@ func main() {
 Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính closure (closure property):
 
 ```go
-
 func main() {
     var data []byte
 
@@ -399,6 +407,14 @@ Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa sự li
 Duck-typing với ý tưởng đơn giản:
 
 > If something looks like a duck, swims like a duck and quacks like a duck then it’s probably a duck.
+
+<div align="center">
+	<img src="../images/duck-typing.png" width="300">
+	<br/>
+	<span align="center">
+	</span>
+</div>
+<br/>
 
 Ví dụ có một interface con vịt, xác định khả năng `Quacks`:
 

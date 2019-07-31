@@ -1,6 +1,6 @@
 # 1.6. Concurrency Mode
 
-Một điểm mạnh của Golang là tích hợp sẵn cơ chế xử lý đồng thời (concurrency). Lý thuyết về hệ thống tương tranh của Go là CSP (Communicating Sequential Process) được đề xuất bởi CAR Hoare vào năm 1978. CSP  được áp dụng lần đầu cho máy tính đa dụng T9000 mà Hoare có tham gia. Từ NewSqueak, Alef, Limbo đến Golang hiện tại, Rob Pike, người có hơn 20 năm kinh nghiệm thực tế với CSP, rất quan tâm  đến tiềm năng áp dụng CSP vào ngôn ngữ lập trình đa dụng. Khái niệm cốt lõi của lý thuyết CSP cũng là  của lập trình concurrency trong Go: giao tiếp đồng bộ (synchronous communication). Chủ đề về giao tiếp đồng bộ đã được đề cập trong phần trước. Trong phần này chúng ta sẽ tìm hiểu sơ lược về các mẫu concurrency phổ biến trong Golang.
+Một điểm mạnh của Golang là tích hợp sẵn cơ chế xử lý đồng thời (concurrency). Lý thuyết về hệ thống tương tranh của Go là CSP (Communicating Sequential Process) được đề xuất bởi Hoare vào năm 1978. CSP  được áp dụng lần đầu cho máy tính đa dụng T9000 mà Hoare có tham gia. Từ NewSqueak, Alef, Limbo đến Golang hiện tại, Rob Pike, người có hơn 20 năm kinh nghiệm thực tế với CSP, rất quan tâm  đến tiềm năng áp dụng CSP vào ngôn ngữ lập trình đa dụng. Khái niệm cốt lõi của lý thuyết CSP cũng là  của lập trình concurrency trong Go: giao tiếp đồng bộ (synchronous communication). Chủ đề về giao tiếp đồng bộ đã được đề cập trong phần trước. Trong phần này chúng ta sẽ tìm hiểu sơ lược về các mẫu concurrency phổ biến trong Golang.
 
 <div align="center">
 
@@ -32,6 +32,8 @@ Mặc dù các vấn đề tương tranh đơn giản như   tham chiếu đến
 
 ## 1.6.1 Phiên bản concurrency của *Hello World*
 
+### Áp dụng Mutex
+
 Xem xét đoạn code sau:
 
 ```go
@@ -51,9 +53,9 @@ func main() {
 }
 ```
 
-Ở đây, `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, vì vậy nó không đáp ứng được mô hình bộ nhớ nhất quán tuần tự.
+Ở đây, `mu.Lock()` và `mu.Unlock()` không ở trong cùng một Goroutine, vì vậy nó không đáp ứng được mô hình bộ nhớ nhất quán tuần tự (sequential consistency memory model).
 
-Sau đây là đoạn code đã sửa:  
+Sửa lại đoạn code trên như sau:
 
 ```go
 func main() {
@@ -72,6 +74,8 @@ func main() {
     mu.Lock()
 }
 ```
+
+### Áp dụng Channel
 
 Đồng bộ hóa với mutex là một cách tiếp cận ở mức độ tương đối đơn giản. Bây giờ ta sẽ sử dụng một unbuffered channel để hiện thực đồng bộ hóa:  
 
@@ -92,7 +96,7 @@ func main() {
 }
 ```
 
-Cách này gặp bất cập với channel có buffer vì lúc đó không có gì đảm bảo rằng goroutine sẽ in ra trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của channel để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước buffer của nó:  
+Cách này gặp bất cập với buffered channel  vì lúc đó không có gì đảm bảo rằng goroutine sẽ in ra trước khi thoát `main`. Cách tiếp cận tốt hơn là hoán đổi hướng gửi và nhận của channel để tránh các sự kiện đồng bộ hóa bị ảnh hưởng bởi kích thước buffer của nó:  
 
 ```go
 func main() {
@@ -131,6 +135,8 @@ func main() {
     }
 }
 ```
+
+### Sử dụng sync.WaitGroup thay cho Channel
 
 Một cách đơn giản hơn là sử dụng `sync.WaitGroup` để chờ một tập các sự kiện:
 
