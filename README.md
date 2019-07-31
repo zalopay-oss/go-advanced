@@ -71,4 +71,4 @@ Dự án này được phát triển bởi các thành viên sau đây.
 
 - Blog: [Medium ZaloPay Engineering](https://medium.com/zalopay-engineering)
 
-- Bugs: [issues](https://gitlab.zalopay.vn/zalopay-oss/advanced-go-book/issues)
+- Bugs: [issues](https://github.com/zalopay-oss/go-advanced/issues)
