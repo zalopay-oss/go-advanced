@@ -1,31 +1,10 @@
-# 1.4 Functions, Methods và Interfaces
-  
-Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function): hàm được đặt tên thường tương ứng với hàm cấp package (package function). Đây là trường hợp đặc biệt của hàm ẩn danh. Khi một hàm ẩn danh tham chiếu một biến trong phạm vi bên ngoài, nó sẽ trở thành hàm đóng. Các package function là cốt lõi của một ngôn ngữ lập trình hàm (functional programming).
+# 1.4. Functions, Methods và Interfaces
 
-Phương thức (Method) được liên kết với một hàm đặc biệt của một kiểu cụ thể. Các phương thức trong ngôn ngữ Go phụ thuộc vào kiểu và phải được ràng buộc tĩnh tại thời gian biên dịch.
+Trong phần này chúng ta sẽ tìm hiểu cụ thể về các khái niệm cơ bản trong Golang: Function, Method và Interface.
 
-Một Interface xác định một tập hợp các phương thức phụ thuộc vào đối tượng Interface trong thời gian thực thi, vì vậy các phương thức tương ứng với Interface được ràng buộc động khi thực thi. Ngôn ngữ Go hiện thực mô hình hướng đối tượng thông qua cơ chế Interface ngầm định.
+## 1.4.1. Function
 
-Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ hàm `main.main`. Nếu package `main` có import  các package khác, chúng sẽ được thêm vào package `main` theo thứ tự khai báo.
-
-- Nếu một package được import nhiều lần, sẽ chỉ được tính là một khi thực thi.
-- Khi một package được import mà nó lại import các package khác, trước tiên Go sẽ import các package khác đó trước, sau đó  khởi tạo các hằng và biến của package, rồi gọi hàm `init` trong từng package.
-- Nếu một package có nhiều hàm `init` và thứ tự gọi không được xác định cụ thể (phần implement có thể được gọi theo thứ tự tên file), thì chúng sẽ được gọi theo thứ tự xuất hiện (`init` không phải là hàm thông thường, nó có thể có nhiều định nghĩa, và các hàm khác không thể sử dụng nó). Cuối cùng, khi `main` đã có đủ tất cả hằng và biến ở cấp package, chúng sẽ được khởi tạo bằng cách thực thi hàm `init`, tiếp theo chương trình đi vào hàm `main.main` và  bắt đầu thực thi. Hình dưới đây là sơ đồ nguyên lý  một chuỗi bắt đầu của chương trình hàm trong Go:
-
-<p align="center">
-
-<img src="../images/ch1-11-init.ditaa.png">
-<span align="center">Hình 1-11. Tiến trình khởi tạo package</span>
-
-</p>
-
-Cần lưu ý rằng trong `main.main` tất cả các mã lệnh đều chạy trong cùng một Goroutine trước khi hàm được thực thi, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi chạy từ hàm `main` trong một Goroutine mới với từ khóa go, thì Goroutine đó chỉ có `main.main` có thể được thực thi sau khi vào hàm.
-
-Cần lưu ý rằng trước khi hàm `main.main` được thực thi thì tất cả code đều chạy trong cùng một Goroutine, đây là thread chính của chương trình. Do đó, nếu một hàm `init` khởi động bên trong một Goroutine mới với từ khóa go, Goroutine đó chỉ có thể được thực thi sau khi vào hàm `main.main`.
-
-## 1.4.1 Function
-
-Trong Go, hàm là kiểu đầu tiên của đối tượng  và chúng ta có thể giữ hàm trong một biến. Hàm có thể được đặt tên hoặc ẩn danh (anonymous). Các hàm cấp độ package thường là các hàm được đặt tên. Hàm được đặt tên là một trường hợp đặc biệt của hàm ẩn danh. Tất nhiên, mỗi kiểu trong ngôn ngữ Go cũng có thể có các phương thức riêng, và đó có thể là là một hàm:
+Hàm (function) là  thành phần cơ bản của chương trình. Các hàm trong ngôn ngữ Go có thể có tên hoặc ẩn danh (anonymous function):
 
 ```go
 // hàm được đặt tên
@@ -40,7 +19,7 @@ var Add = func(a, b int) int {
 
 ```
 
-Một hàm trong ngôn ngữ Go có thể có nhiều tham số và nhiều giá trị trả về. Cả tham số và giá trị trả về trao đổi dữ liệu  với hàm được gọi theo cách truyền vào giá trị (pass by value). Về mặt cú pháp, hàm cũng hỗ trợ số lượng tham số thay đổi, biến số lượng tham số phải là tham số cuối cùng và biến này phải là kiểu slice.
+Một hàm trong ngôn ngữ Go có thể có nhiều tham số và nhiều giá trị trả về. Cả tham số và giá trị trả về trao đổi dữ liệu  với hàm theo cách truyền vào giá trị (pass by value). Về mặt cú pháp, hàm cũng hỗ trợ số lượng tham số thay đổi, biến số lượng tham số phải là tham số cuối cùng và biến này phải là kiểu slice.
 
 ```go
 // Nhiều tham số và nhiều giá trị trả về
@@ -64,7 +43,10 @@ Khi đối số có thể thay đổi là một kiểu interface null,  việc n
 func main() {
     var a = []interface{}{123, "abc"}
 
+    // tương đương với lời gọi trực tiếp `Print(123, "abc")`
     Print(a...) // 123 abc
+
+    // tương đương với lời gọi `Print([]interface{}{123, "abc"})`
     Print(a)    // [123 abc]
 }
 
@@ -72,8 +54,6 @@ func Print(a ...interface{}) {
     fmt.Println(a...)
 }
 ```
-
-Lời gọi `Print` đầu tiên  truyền vào  `a...` tương đương với lời gọi trực tiếp `Print(123, "abc")`. Lời gọi `Print` thứ hai truyền vào `a`, tương đương với lời gọi `Print([]interface{}{123, "abc"})`.
 
 Cả tham số truyền vào và các giá trị trả về đều có thể được đặt tên:
 
@@ -84,247 +64,263 @@ func Find(m map[int]int, key int) (value int, ok bool) {
 }
 ```
 
-Nếu giá trị trả về được đặt tên, nó có thể sửa đổi  bằng tên hoặc có thể sửa đổi bằng lệnh `defer` sẽ thực thi sau lệnh `return`
+### Defer trong Function
 
-```go
-func Inc() (v int) {
-    defer func(){ v++ } ()
-    return 42
-}
-// giá trị v cuối cùng là 43
-```
-
-Câu lệnh `defer` sẽ trì hoãn việc thực thi của hàm ẩn danh (trong ví dụ trên) vì hàm này lấy biến cục bộ `v` của hàm bên ngoài. Hàm này được gọi là closure. closure không truy cập tới biến bên ngoài (như `v`) theo kiểu giá trị (value-by-value) mà truy cập bằng tham chiếu (reference).
-
-Hành vi truy cập các biến bên ngoài bằng tham chiếu này đến các closure có thể dẫn đến một số vấn đề tiềm ẩn:
+Lệnh `defer` trì hoãn việc thực thi hàm cho tới khi hàm bao ngoài nó return. Các đối số trong lời gọi defer được đánh giá ngay lặp tức nhưng lời gọi không được thực thi cho tới khi hàm bao ngoài nó return.
 
 ```go
 func main() {
-    for i := 0; i < 3; i++ {
-        defer func(){ println(i) } ()
-    }
+    defer fmt.Println("world")
+
+    fmt.Println("hello")
 }
-// Output:
-// 3
-// 3
-// 3
+// kết quả: hello world
 ```
 
-Bởi vì nó là một closure (hàm trong câu lệnh lặp for), mỗi câu lệnh `defer` trì hoãn việc thực hiện tham chiếu hàm tới cùng một biến lặp i, giá trị của biến này sau khi kết thúc vòng lặp là 3, do đó đầu ra cuối cùng là 3.
+Mỗi lời gọi `defer` được push vào stack và thực thi theo thứ tự ngược lại khi hàm bao ngoài nó kết thúc.
 
-Với ý tưởng là tạo ra một biến duy nhất cho mỗi hàm `defer` trong mỗi lần lặp. Có hai cách để làm điều này:
+Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài nguyên:
+
+- Đóng file giống như `try-finally`:
+
+    ```go
+    func main() {
+        f, err := os.Create("file")
+        if err != nil {
+            panic("cannot create file")
+        }
+        defer f.Close()
+        // no matter what happens here file will be closed
+        // for sake of simplicity I skip checking close result
+        fmt.Fprintf(f,"hello")
+    }
+    ```
+
+- Đóng file và xử lý panic giống như `try-catch-finally`:
+
+    ```go
+    func main() {
+        defer func() {
+            msg := recover()
+            fmt.Println(msg)
+        }()
+
+        // . là folder hiện tại
+        f, err := os.Create(".")
+        if err != nil {
+            panic("cannot create file")
+        }
+        defer f.Close()
+
+        // không quan trọng chuyện gì xảy ra thì file cũng sẽ được close
+        // để đơn giản nên ở đây bỏ qua bước kiểm ra close result
+        fmt.Fprintf(f,"hello")
+    }
+    ```
+
+- Cũng giống như block `finally` thì lời gọi defer cũng có thể làm cho kết quả trả về thay đổi:
+
+    ```go
+    func yes() (text string) {
+        defer func() {
+            text = "no"
+        }()
+        return "yes"
+    }
+
+    func main() {
+        fmt.Println(yes())
+    }
+    ```
+
+### Slice trong Function
+
+Mọi thứ trong Go đều được truyền theo kiểu pass by value, slice cũng thế. Nhưng vì giá trị của slice là một *header* (chứa con trỏ tới dữ liệu array bên dưới) nên khi truyền slice vào hàm, quá trình copy sẽ bao gồm luôn địa chỉ tới array chứa dữ liệu thực sự.
+
+Ví dụ sau cho thấy ý nghĩa của việc truyền tham số kiểu slice vào hàm thay vì array:
 
 ```go
-func main() {
-    for i := 0; i < 3; i++ {
-        i := i // Xác định một biến cục bộ i trong vòng lặp
-        defer func(){ println(i) } ()
+// truyền vào array sẽ giúp
+// nội dung của biến x không bị thay đổi
+func once(x [3]int) {
+    for i := range x {
+        x[i] *= 2
     }
 }
 
-func main() {
-    for i := 0; i < 3; i++ {
-        // truyền i vào hàm (pass by value)
-        // câu lệnh defer sẽ lấy các tham số từ lời gọi
-        defer func(i int){ println(i) } (i)
-    }
-}
-```
-
-- Phương pháp đầu tiên là xác định một biến cục bộ bên trong thân vòng lặp, để hàm closure của câu lệnh `defer` lấy các biến khác nhau cho mỗi lần lặp. Các giá trị của các biến này tương ứng với các giá trị tại thời điểm lặp.
-- Cách thứ hai là truyền biến lặp iterator thông qua các tham số của hàm closure và câu lệnh `defer` sẽ ngay lập tức lấy các tham số từ lời gọi (trường hợp này là lấy `i`).
-
-Cả hai phương pháp đều hoạt động. Tuy nhiên, đây không phải là cách thực hành tốt để thực thi câu lệnh `defer` bên trong vòng lặp for. Đây chỉ là ví dụ và không được khuyến khích.
-
-Trong ngôn ngữ Go, nếu một hàm được gọi với tham số là kiểu slice thì một tham số ảo sẽ được truyền vào bởi vì phần tử của slice có thể được sửa đổi bên trong hàm được gọi.
-
-Trong thực tế, trường hợp mà một tham số ở lời gọi hàm bị sửa đổi bởi thao tác trong  hàm là bởi vì nó là con trỏ được truyền tường minh hoặc ngầm định vào tham số hàm. Đặc tả tham số hàm chỉ đề cập đến phần cố định của cấu trúc dữ liệu, chẳng hạn như cấu trúc con trỏ hoặc độ dài chuỗi (trong cấu trúc chuỗi) hoặc slice tương ứng, nhưng không chứa nội dung trỏ tới bởi con trỏ gián tiếp.
-
-Việc thay thế tham số của kiểu slice với cấu trúc tương tự là `reflect.SliceHeader` là một ví dụ để hiểu ý nghĩa của việc truyền vào giá trị kiểu slice (pass by value):
-
-```go
-// truyền vào con trỏ ngầm định khiến
-// nội dung của biến x bị thay đổi
+// truyền vào con trỏ ngầm định (slice)
+// khiến nội dung của biến x bị thay đổi
 func twice(x []int) {
     for i := range x {
         x[i] *= 2
     }
 }
 
-type IntSliceHeader struct {
-    Data []int
-    Len  int
-    Cap  int
-}
+func main() {
+    data := [3]int{8,9,0}
 
-func twice(x IntSliceHeader) {
-    for i := 0; i < x.Len; i++ {
-        x.Data[i] *= 2
+    once(data)
+    fmt.Println(data)
+
+    twice(data[0:])
+    fmt.Println(data)
+
+    // kết quả:
+    // [8 9 0]
+    // [16 18 0]
+}
+```
+
+### Tham số trả về được đặt tên
+
+Cũng như tham số nhận vào, giá trị trả về cũng có thể được đặt tên, nhờ đó có thể đơn giản hoá lệnh return:
+
+```go
+func ReadFull(r Reader, buf []byte) (n int, err error) {
+    for len(buf) > 0 && err == nil {
+        var nr int
+        nr, err = r.Read(buf)
+        n += nr
+        buf = buf[nr:]
     }
+
+    // hàm trả về n mà không cần phải chỉ rõ
+    return
 }
 ```
 
-Vì phần array bên dưới của kiểu slice được truyền bởi con trỏ ngầm định (chính con trỏ vẫn được truyền, nhưng con trỏ trỏ đến cùng một dữ liệu), nên hàm được gọi có thể sửa đổi dữ liệu trong slice thông qua con trỏ.  cấu trúc `IntSliceHeader` chứa không chỉ dữ liệu mà còn có thông tin về độ dài và dung lượng slice, hai thành phần này cũng được truyền theo giá trị. Nếu có hàm nào điều chỉnh `Len` hoặc `Cap` được gọi, nó sẽ không thể hiện sự thay đổi đó trong biến slice của tham số hàm được. Lúc này, ta nên cập nhật slice trước bằng cách trả về slice đã sửa đổi. Đây cũng là lý do tại sao hàm `append` (built-in) phải trả về một slice.
+## 1.4.2. Method
 
-Trong ngôn ngữ Go, các hàm cũng có thể tự gọi chính nó trực tiếp hoặc gián tiếp (gọi đệ quy). Không có giới hạn về độ sâu của lệnh gọi đệ quy trong Go. Stack của lệnh gọi hàm không có lỗi tràn, vì trong thời gian thực thi Go tự động điều chỉnh kích thước của stack hàm khi cần.
+Go không có class, tuy nhiên chúng ta có thể định nghĩa các phương thức (Method) cho *type* (kiểu).
 
-Mỗi Goroutine sẽ  được phân bổ một stack nhỏ (4 hoặc 8KB, tùy thuộc vào implement) ngay sau khi khởi động. Kích thước stack có thể được điều chỉnh động khi cần. Stack có thể đạt đến mức GB (tùy theo cách implement, trong phiên bản hiện tại là 32 bit) Kiến trúc là 250MB và kiến ​​trúc 64 bit là 1GB).
-
-Trước phiên bản 1.4, Go sử dụng stack động phân đoạn (Segmented dynamic stack). Về cơ bản thì một danh sách liên kết (linked list) được sử dụng để hiện thực các stack động. Địa chỉ bộ nhớ của các node trong mỗi danh sách liên kết là không thay đổi. Tuy nhiên, các stack động này có ảnh hưởng lớn đến hiệu suất của một số lời gọi ở những thời điểm quan trọng. Nguyên nhân là bởi  vì các node  trong danh sách liên kết dù có liền kề cũng sẽ không liền kề trong địa chỉ bộ nhớ, làm tăng khả năng xảy ra lỗi bộ nhớ cache của CPU (cache hit failure).
-
-Để giải quyết vấn đề về tỉ lệ trúng CPU cache (hit rate) nói trên, Go 1.4 sử dụng hiện thực stack động liên tục (Continuous dynamic stack), nghĩa là dùng một cấu trúc tương tự như mảng động để biểu diễn stack. Tuy nhiên, stack động liên tục cũng mang đến một vấn đề mới: khi stack tăng kích thước động, nó cần di chuyển dữ liệu trước đó sang không gian bộ nhớ mới, điều này sẽ khiến địa chỉ của tất cả các biến trong stack trước đó thay đổi.
-
-Mặc dù trong thời điểm thực thi Go tự động cập nhật các con trỏ để lưu trữ (vào stack) các biến tham chiếu tới địa chỉ mới, nhưng quan trọng  là các con trỏ trong Go không còn cố định nữa(vì vậy ta không thể giữ con trỏ trong các biến theo ý muốn, địa chỉ trong Go không thể được lưu vào môi trường không được kiểm soát bởi GC, đó là lý do địa chỉ của đối tượng Go không thể được giữ bằng ngôn ngữ C trong một thời gian dài khi sử dụng CGO).
-
-Vì stack của các hàm trong Go sẽ tự động thay đổi kích thước, lập trình viên hiếm khi cần quan tâm đến cơ chế hoạt động của stack. Trong đặc tả ngôn ngữ, ngay cả khái niệm stack và heap cũng không được đề cập một cách có chủ ý. Chúng ta không thể biết được một tham số hàm hoặc một biến cục bộ sẽ lưu trữ trên stack hay trên heap. Chúng ta chỉ cần biết rằng chúng hoạt động tốt là được. Hãy xem ví dụ sau:
+Phương thức là một hàm với đối số (argument) đặc biệt gọi là *receiver*.
 
 ```go
-func f(x int) *int {
-    return &x
+type Vertex struct {
+    X, Y float64
 }
 
-func g() int {
-    x = new(int)
-    return *x
+// method Abs() với receiver 'v'
+func (v Vertex) Abs() float64 {
+    return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+    v := Vertex{3, 4}
+    fmt.Println(v.Abs())
+
+    // kết quả:
+    // 5
 }
 ```
 
-- Hàm đầu tiên trả về trực tiếp địa chỉ của biến tham số hàm (biến `x`) - điều này có vẻ là không khả thi bởi vì nếu biến tham số nằm trên stack sẽ trở thành không hợp lệ sau khi hàm trả về và địa chỉ được trả về dĩ nhiên bị lỗi. Nhưng trình biên dịch của  Go thông minh hơn khi đảm bảo rằng các biến được trỏ bởi con trỏ sẽ ở đúng vị trí.
-- Hàm thứ hai, mặc dù lời gọi `new` tạo một đối tượng con trỏ kiểu `*int`, nhưng vẫn không biết nó sẽ được lưu ở đâu. Một điều nói riêng với những lập trình viên có kinh nghiệm với C/C ++ là trình biên dịch và thực thi (runtime) của Go sẽ giúp chúng ta không phải lo lắng về stack và heap của hàm. Do đó đừng cho rằng địa chỉ của biến trong bộ nhớ là cố định vì con trỏ có thể thay đổi bất cứ lúc nào, đặc biệt là những khi chúng ta không mong đợi nó thay đổi nhất.
+Phương thức (Method) là một tính năng của lập trình hướng đối tượng (OOP). Trong ngôn ngữ C++, phương thức  tương ứng với một hàm thành viên của một class, liên kết với một  đối tượng cụ thể. Tuy nhiên, phương thức trong ngôn ngữ Go được liên kết với kiểu, do đó liên kết tĩnh của phương thức có thể được tạo thành trong giai đoạn biên dịch.
 
-## 1.4.2 Method
+Một chương trình hướng đối tượng sử dụng các phương thức để thể hiện những thao tác trên thuộc tính (properties) của nó, qua đó người dùng có thể sử dụng đối tượng mà không cần phải thao tác trực tiếp với đối tượng mà là thông qua các phương thức. C++ thường được xem là một dấu mốc mà lập trình hướng đối tượng bắt đầu phát triển mạnh mẽ, nó hỗ trợ các tính năng hướng đối tượng (như class) dựa trên cơ sở ngôn ngữ C. Kế đến là Java, ngôn ngữ được gọi là hướng đối tượng thuần túy  vì các hàm của nó không thể tồn tại độc lập mà phải thuộc về một class nhất định.
 
-Phương thức (Method) là một tính năng của lập trình hướng đối tượng (OOP). Trong ngôn ngữ C++, phương thức  tương ứng với một hàm thành viên của một đối tượng lớp, được liên kết với một bảng ảo trên một đối tượng cụ thể. Tuy nhiên, phương thức trong ngôn ngữ Go được liên kết với kiểu, do đó liên kết tĩnh của phương thức có thể được tạo thành trong giai đoạn biên dịch.
+Đối với một kiểu nhất định, tên của mỗi phương thức phải là duy nhất và các phương thức cũng như hàm đều không hỗ trợ overload.
 
-Một chương trình hướng đối tượng sử dụng các phương thức để thể hiện những thao tác trên thuộc tính (properties) của nó, qua đó người dùng có thể sử dụng đối tượng mà không cần phải thao tác trực tiếp với đối tượng mà là thông qua các phương thức. C++ thường được xem là nơi mà lập trình hướng đối tượng bắt đầu phát triển mạnh. C++ hỗ trợ các tính năng hướng đối tượng (như class) dựa trên cơ sở ngôn ngữ C. Sau đó đến Java được gọi là ngôn ngữ hướng đối tượng thuần túy  vì các hàm của nó không thể tồn tại độc lập mà phải thuộc về một class nhất định.
-
-Lập trình hướng đối tượng là một ý tưởng. Nhiều ngôn ngữ tuyên bố hỗ trợ lập trình hướng đối tượng chỉ đơn giản là kết hợp các tính năng thường được sử dụng vào ngôn ngữ. Mặc dù ngôn ngữ C tổ tiên của ngôn ngữ Go không phải là ngôn ngữ hướng đối tượng, các hàm liên quan đến file trong thư viện chuẩn ngôn ngữ C cũng sử dụng ý tưởng lập trình hướng đối tượng. Dưới đây là hiện thực một tập hợp các hàm làm việc với file theo kiểu ngôn ngữ C:
+Dưới đây là hiện thực các phương thức làm việc với File theo kiểu ngôn ngữ C:
 
 ```go
-// đối tượng File
 type File struct {
     fd int
 }
 
 // mở file
 func OpenFile(name string) (f *File, err error) {
-    // ...
+    fmt.Println("Opening file ", name)
+    return nil, nil
 }
 
-// đóng file
-func CloseFile(f *File) error {
-    // ...
-}
-
-// đọc dữ liệu từ file
-func ReadFile(f *File, offset int64, data []byte) int {
-    // ...
-}
-```
-
-Hàm `OpenFile` xây dựng như constructor để mở một đối tượng kiểu file, `CloseFile` tương tự như destructor dùng để đóng lại đối tượng, `ReadFile` là một hàm thành viên, ba hàm này đều là các hàm thông thường. Với `CloseFile` Và `ReadFile` ta cần chiếm tài nguyên tên trong không gian cấp độ package. Tuy nhiên `CloseFile` hay `ReadFile` chỉ là các hàm thao tác trên đối tượng kiểu `File`. Tại thời điểm này, ta muốn các hàm đó được gắn chặt với các kiểu đối tượng hoạt động.
-
-Ngôn ngữ Go thực hiện `CloseFile` và `ReadFile` bằng cách chuyển tham số đầu tiên lên đầu của tên hàm:
-
-```go
-// đóng file
-func (f *File) CloseFile() error {
-    // ...
-}
-
-// đọc dữ liệu từ file
-func (f *File) ReadFile (offset int64, data []byte) int {
-    // ...
-}
-```
-
-Trong trường hợp này, hàm `CloseFile` và `ReadFile` trở thành  phương thức duy nhất của kiểu  `File`(thay vì phương thức đối tượng `File`). Chúng cũng không còn chiếm tài nguyên tên trong không gian cấp độ package và kiểu `File` đã làm rõ các thao tác trên đối tượng của chúng, vì vậy tên phương thức thường được đơn giản hóa thành `Close` và `Read`:
-
-```go
 // đóng file
 func (f *File) Close() error {
-    // ...
+    fmt.Println("Close file")
+    return nil
 }
 
 // đọc dữ liệu từ file
 func (f *File) Read(offset int64, data []byte) int {
-    // ...
+    fmt.Println("Read file")
+    return 0
 }
 ```
 
-Việc di chuyển tham số đầu tiên của hàm lên phía đầu của tên hàm chỉ là một thay đổi nhỏ trong code, nhưng từ quan điểm triết lý lập trình, ngôn ngữ Go đã đứng trong hàng ngũ của các ngôn ngữ hướng đối tượng. Ta có thể thêm một hoặc nhiều phương thức cho bất kỳ kiểu tùy chỉnh nào (custom type). Phương thức cho mỗi kiểu phải nằm trong cùng một package với định nghĩa kiểu, do đó không thể thêm phương thức vào các kiểu dựng sẵn đó (vì định nghĩa của phương thức và định nghĩa của kiểu không nằm trong package). Đối với một kiểu nhất định, tên của mỗi phương thức phải là duy nhất và các phương thức cũng như hàm đều không hỗ trợ overload.
-
-Phương thức được bắt nguồn từ hàm, chỉ là di chuyển tham số đối tượng đầu tiên của hàm lên phía trước tên hàm. Vì vậy, chúng ta vẫn có thể sử dụng phương thức theo tư duy thủ tục (procedure). Ta có thể biến một phương thức thành một loại hàm thông thường bằng cách gọi các thuộc tính trong biểu thức của nó:
-
+Ta sử dụng các phương thức này như sau:
 
 ```go
-// không phụ thuộc vào đối tượng file cụ thể
-// func CloseFile(f *File) error
-var CloseFile = (*File).Close
+func main() {
+    var data []byte
 
-// không phụ thuộc vào đối tượng file cụ thể
-// func ReadFile(f *File, offset int64, data []byte) int
-var ReadFile = (*File).Read
+    // khởi tạo một đối tượng File
+    f, _ := OpenFile("foo.dat")
 
-// xử lý file
-f, _ := OpenFile("foo.dat")
-ReadFile(f, 0, data)
-CloseFile(f)
+    f.Read(0, data)
+    f.Close()
+}
 ```
 
 Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính closure (closure property):
 
-
 ```go
-// mở đối tượng file
-f, _ := OpenFile("foo.dat")
 
-// liên kết với đối tượng f
-// func Close() error
-var Close = func() error {
-    return (*File).Close(f)
+func main() {
+    var data []byte
+
+    // khởi tạo một đối tượng File
+    f, _ := OpenFile("foo.dat")
+
+    // một hàm closure có thể gọi tới đối tượng f ngoài hàm
+    // sẽ liên kết với đối tượng f
+    var Close = func() error {
+        return (*File).Close(f)
+    }
+
+    // tương tự với hàm Close
+    var Read = func (offset int64, data []byte) int {
+        return (*File).Read(f, offset, data)
+    }
+
+    // xử lý file
+    Read(0, data)
+    Close()
 }
-
-// liên kết với đối tượng f
-// func Read (offset int64, data []byte) int
-var Read = func(offset int64, data []byte) int {
-    return (*File).Read(f, offset, data)
-}
-
-// xử lý file
-Read(0, data)
-Close()
 ```
 
-Đây chính là vấn đề mà giá trị phương thức cần giải quyết. Chúng ta có thể đơn giản hóa việc  hiện thực với các tính năng:
-
+Chúng ta có thể đơn giản hóa thành như sau:
 
 ```go
-// mở đối tượng file
-f, _ := OpenFile("foo.dat")
+func main() {
+    var data []byte
 
-// giá trị phương thức: ràng buộc với đối tượng f
-// func Close() error
-var Close = f.Close
+    // mở đối tượng file
+    f, _ := OpenFile("foo.dat")
 
-// giá trị phương thức: ràng buộc với đối tượng f
-// func Read (offset int64, data []byte) int
-var Read = f.Read
+    // ràng buộc với đối tượng f
+    var Close = f.Close
 
-// xử lý file
-Read(0, data)
-Close()
+    // ràng buộc với đối tượng f
+    var Read = f.Read
+
+    // khi gọi không cần chỉ rõ đối tượng nữa
+    // vì đã được ràng buộc trước đó
+    Read(0, data)
+    Close()
+}
 ```
 
-Go không hỗ trợ tính năng kế thừa như các ngôn ngữ hướng đối tượng truyền thống nhưng sẽ hỗ trợ việc kế thừa phương thức theo sự kết hợp độc đáo của riêng mình. Với ngôn ngữ Go, tính kế thừa đạt được bằng cách xây dựng các thành phần ẩn danh trong structure:
+### Kế thừa phương thức
+
+Go không hỗ trợ tính năng kế thừa như các ngôn ngữ hướng đối tượng truyền thống mà có cách của riêng mình. Tính kế thừa đạt được bằng cách xây dựng các thuộc tính ẩn danh trong struct:
 
 ```go
-import "image/color"
-
 type Point struct{ X, Y float64 }
 
 type ColoredPoint struct {
+    // thuộc tính ẩn danh
     Point
+
+    // thuộc tính bình thường
     Color color.RGBA
 }
 ```
@@ -332,22 +328,45 @@ type ColoredPoint struct {
 Chúng ta có thể định nghĩa `ColoredPoint` như một struct có 3 trường, nhưng ở đây chúng ta sẽ dùng struct `Point` chứa `X` và `Y` để thay thế.
 
 ```go
+// khai báo một đối tượng thuộc struct
 var cp ColoredPoint
+
+// có thể gán thẳng vào thuộc tính X
+// không cần phải thông qua Point
 cp.X = 1
-fmt.Println(cp.Point.X) // "1"
+
+// có thể truy cập X bằng cách này
+fmt.Println(cp.Point.X)
+// "1"
+
+// hoặc gán vào Y thông qua Point
 cp.Point.Y = 2
-fmt.Println(cp.Y)       // "2"
+
+// và truy cập Y bằng cách này
+fmt.Println(cp.Y)
+// "2"
 ```
 
-Bằng cách sử dụng các thành phần ẩn danh, chúng ta có thể kế thừa không chỉ các thành phần nội bộ (`X` và `Y`), mà cả các phương thức tương ứng với các kiểu của chúng. Ta thường nghĩ rằng `Point` là một lớp cơ sở và `ColoredPoint` là lớp kế thừa hoặc lớp con của nó. Tuy nhiên, phương thức được kế thừa theo cách này không thể hiện tính đa hình của  hàm ảo trong C++. Tham số chỗ  hàm nhận của tất cả các phương thức được kế thừa vẫn là thành phần ẩn danh, không phải là biến hiện tại.
+Có thể đạt được kết quả tương tự ngay cả với phương thức.
 
 ```go
+// lấy ví dụ với struct Mutex có sẵn
+type Mutex struct {}
+func (m *Mutex) Lock()
+func (m *Mutex) Unlock()
+
+// struct Cache kế thừa Mutex bằng cách
+// khai báo một thuộc tính ẩn danh là sync.Mutex
 type Cache struct {
     m map[string]string
     sync.Mutex
 }
 
+
+// Lookup tìm trên Cache với dữ liệu key và trả về value tương ứng
 func (p *Cache) Lookup(key string) string {
+    // p có thể gọi thẳng tới phương thức Lock và Unlock
+    // nhờ kế thừa từ sync.Mutex
     p.Lock()
     defer p.Unlock()
 
@@ -355,106 +374,102 @@ func (p *Cache) Lookup(key string) string {
 }
 ```
 
-Cấu trúc `Cache` nhúng một kiểu ẩn danh `sync.Mutex` để kế thừa phương thức  `Lock` và `Unlock` từ đó, các lời gọi `p.Lock()` và `p.Unlock()` với `p`là đối tượng nhận của phương thức,  chúng sẽ được triển khai thành `p.Mutex.Lock()` và `p.Mutex.Unlock()`. Sự mở rộng này được hoàn thành lúc biên dịch và không mất chi phí runtime.
+Khả năng liên kết trực tiếp tới kiểu được kế thừa này được hoàn thành lúc biên dịch và không mất chi phí runtime.
 
-Đối với tính kế thừa trong  ngôn ngữ hướng đối tượng truyền thống (như C ++ hoặc Java), phương thức ở lớp con được liên kết động với đối tượng khi chạy, do đó một số phương thức hiện thực lớp cơ sở `this` có thể không tương ứng với kiểu của lớp cơ sở. Những đối tượng khác nhau gây ra sự không chắc chắn trong hoạt động của phương thức lớp cơ sở. Phương thức của lớp cơ sở trong ngôn ngữ Go "kế thừa" bằng cách nhúng thêm các thành phần ẩn danh `this` là đối tượng hiện thực kiểu của phương thức. Phương thức trong ngôn ngữ Go bị ràng buộc tĩnh tại thời gian biên dịch.
+Ví dụ trên có thể làm ta nghĩ rằng `sync.Mutex` là một lớp cơ sở và `Cache` là lớp kế thừa hoặc lớp con của nó. Tuy nhiên, phương thức được kế thừa theo cách này không thể hiện được tính đa hình bởi vì cái mà đối tượng `p` gọi tới là phương thức gốc mà không phải của nó (của struct Cache).
 
-Nếu cần tính chất đa hình ở các hàm ảo, chúng ta cần triển khai nó với Interface.
+Nếu cần tính chất đa hình như các ngôn ngữ OOP khác, chúng ta cần triển khai nó với Interface.
 
-## 1.4.3 Interface
+## 1.4.3. Interface
+
+Các interface trong Go cung cấp một cách để xác định hành vi của một đối tượng: nếu đối tượng đó có thể làm những việc *như thế này*, thì nó có thể được sử dụng *ở đây*.
+
+Ngôn ngữ Go hiện thực mô hình hướng đối tượng thông qua cơ chế Interface.
 
 Rob Pike, cha đẻ của ngôn ngữ Go, đã từng nói một câu nói nổi tiếng:
 
-> Languages ​​that try to disallow idiocy become themselves idiotic 
-> (Các ngôn ngữ cố gắng tránh các hành vi ngu ngốc cuối cùng trở thành ngôn ngữ ngu ngốc).
+> Languages ​​that try to disallow idiocy become themselves idiotic
 
-Các ngôn ngữ lập trình tĩnh nói chung có các hệ thống kiểu nghiêm ngặt, cho phép trình biên dịch đi sâu vào xem liệu lập trình viên có thực hiện bất kỳ động thái bất thường nào không. Tuy nhiên, một hệ thống kiểu quá nghiêm ngặt có thể làm cho việc lập trình trở nên quá cồng kềnh và khiến  lập trình viên lãng phí rất nhiều thời gian tuổi trẻ trong công cuộc đấu tranh với trình biên dịch.
+Các ngôn ngữ lập trình tĩnh nói chung có các hệ thống kiểu nghiêm ngặt, cho phép trình biên dịch đi sâu vào xem liệu lập trình viên có thực hiện bất kỳ động thái bất thường nào không. Tuy nhiên, một hệ thống kiểu quá nghiêm ngặt có thể làm cho việc lập trình trở nên quá cồng kềnh và khiến chúng ta phải mất nhiều thời gian cho nó.
 
-Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa lập trình an toàn và lập trình linh hoạt. Nó  hỗ trợ  `duck-typing` thông qua interface đồng thời cũng có  kiểm tra kiểu nghiêm ngặt, giúp việc lập trình tương đối nhẹ nhàng hơn.
+Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa sự linh hoạt và tính an toàn: có cơ chế `duck-typing` thông qua interface nhưng đồng thời cũng  kiểm tra kiểu nghiêm ngặt.
 
-Interface type của Go là một sự trừu tượng hóa và khái quát hóa các loại hành vi khác, bởi vì kiểu interface không gắn với các chi tiết implement cụ thể, chúng ta có thể làm cho đối tượng linh hoạt hơn và dễ dùng hơn thông qua sự trừu tượng hóa này.
+### Duck typing
 
-Nhiều ngôn ngữ hướng đối tượng có các khái niệm interface tương tự, nhưng interface trong Go là duy nhất ở chỗ nó là duck-typing thỏa mãn việc implement ngầm định. Duck-type nói rằng: *Miễn là nó đi như vịt và kêu như vịt, bạn có thể sử dụng nó như một con vịt*.
+Duck-typing với ý tưởng đơn giản:
 
-Nếu một đối tượng trông giống như phần  hiện thực của một interface, thì nó có thể được sử dụng như thể nó thuộc kiểu interface đó. Thiết kế này cho phép chúng ta tạo ra một interface mới thỏa mãn kiểu hiện có mà không phải  hủy đi định nghĩa ban đầu của chúng, thiết kế này đặc biệt linh hoạt và hữu ích khi các kiểu mà ta sử dụng đến từ những package không thuộc quyền kiểm soát của ta. Interface của ngôn ngữ Go là loại liên kết trễ (delay binding), có thể hiện thực các chức năng đa hình như các  hàm ảo.
+> If something looks like a duck, swims like a duck and quacks like a duck then it’s probably a duck.
 
-Các  interface có mặt khắp nơi trong ngôn ngữ Go. Trong ví dụ "Hello World", `fmt.Printf` là hàm có thiết kế hoàn toàn dựa trên  interface và chức năng thực sự của nó được `fmt.Fprintf` thực hiện bởi các hàm. Kiểu `error` được sử dụng để chỉ ra lỗi là  một kiểu  interface tích hợp. Trong C, `printf` chỉ cho phép một số lượng hạn chế các kiểu dữ liệu cơ bản có thể được in vào các đối tượng file. Tuy nhiên, nhờ tính năng  interface linh hoạt của Go mà `fmt.Fprintf` có thể in ra bất kỳ đối tượng output stream tùy chỉnh nào, in ra file hoặc output tiêu chuẩn, in ra mạng hoặc thậm chí in ra file nén. Đồng thời, dữ liệu in không bị giới hạn. Đối với các kiểu cơ bản được tích hợp vào ngôn ngữ, bất kỳđối tượng  `fmt.Stringer` nào hoàn toàn thỏa mãn  interface đều có thể được in. Nếu  interface của `fmt.Stringer` không được thỏa mãn , nó vẫn có thể được in bằng kỹ thuật reflection. Protorype của hàm `fmt.Fprintf`  như sau:
-
-```go
-func Fprintf(w io.Writer, format string, args ...interface{}) (int, error)
-```
-
-Trong đó `io.Writer` là interface output, `error` là built-in interface làm việc với lỗi được định nghĩa như sau:
+Ví dụ có một interface con vịt, xác định khả năng `Quacks`:
 
 ```go
-type io.Writer interface {
-    Write(p []byte) (n int, err error)
-}
-
-type error interface {
-    Error() string
+type Duck interface {
+   Quacks()
 }
 ```
 
-Chúng ta có thể output từng kí tự thành kí tự in hoa bằng cách tùy chỉnh lại đối tượng output của nó:
-
+Và cách ta áp dụng *duck-typing*:
 
 ```go
-type UpperWriter struct {
-    io.Writer
+// một struct động vật bất kì
+type Animal struct {
 }
 
-func (p *UpperWriter) Write(data []byte) (n int, err error) {
-    return p.Writer.Write(bytes.ToUpper(data))
+// con này có khả năng `Quacks` như vịt
+func (a Animal) Quacks() {
+   fmt.Println("The animal quacks");
+}
+
+// hàm dành cho vịt
+func Scream(duck Duck) {
+   duck.Quacks()
 }
 
 func main() {
-    fmt.Fprintln(&UpperWriter{os.Stdout}, "hello world")
+    // a là một một vật thuộc struct Animal
+   a := Animal{}
+
+   // vì a có khẳng năng `Quacks` như vịt nên
+   // ta có thể sử dụng nó như một con vịt trong hàm này
+   Scream(a)
 }
 ```
 
-Tất nhiên ta cũng có thể định nghĩa định dạng in riêng để đạt được hiệu quả tương tự. Với mỗi đối tượng được in ra, nếu interface `fmt.Stringer` được thỏa mãn, kết quả kiểu `String` được trả về bởi phương thức của đối tượng được in mặc định:
+Thiết kế này cho phép chúng ta tạo ra một interface mới thỏa mãn kiểu hiện có mà không phải  hủy đi định nghĩa ban đầu của chúng, điều này đặc biệt linh hoạt và hữu ích khi các kiểu mà ta sử dụng đến từ những package không thuộc quyền kiểm soát của mình.
 
+### Chuyển đổi kiểu trong Go
 
-```go
-type UpperString string
+Trong Golang, chuyển đổi kiểu ngầm định không được hỗ trợ với các kiểu cơ bản (kiểu không có interface): không thể gán giá trị  của một biến kiểu `int` trực tiếp cho một biến  kiểu `int64`.
 
-func (s UpperString) String() string {
-    return strings.ToUpper(string(s))
-}
-
-type fmt.Stringer interface {
-    String() string
-}
-
-func main() {
-    fmt.Fprintln(os.Stdout, UpperString("hello world"))
-}
-```
-
-Trong ngôn ngữ Go, chuyển đổi ngầm định không được hỗ trợ với các kiểu cơ bản (kiểu không có interface). Chúng ta không thể gán giá trị  của một kiểu `int` trực tiếp cho một biến  kiểu `int64`, chúng ta cũng không thể gán giá trị của kiểu `int` cho kiểu được đặt tên mới của kiểu cơ sở.
-
-Các yêu cầu về tính nhất quán của ngôn ngữ Go đối với kiểu cơ bản là rất nghiêm ngặt, nhưng Go rất linh hoạt để chuyển đổi kiểu interface. Chuyển đổi giữa các đối tượng và interface, chuyển đổi giữa các interface và interface đều có thể là chuyển đổi ngầm định. Bạn có thể xem ví dụ sau:
+Các yêu cầu về tính nhất quán của ngôn ngữ Go đối với kiểu cơ bản nghiêm ngặt là thế, nhưng nó lại khá linh hoạt để chuyển đổi kiểu giữa các interface: Chuyển đổi giữa đối tượng - interface hoặc chuyển đổi giữa interface - interface đều có thể là chuyển đổi ngầm định. Bạn có thể xem ví dụ sau:
 
 ```go
 var (
-    a io.ReadCloser = (*os.File)(f) // chuyển đổi ngầm định, *os.File thỏa  interface io.ReadCloser
-    b io.Reader     = a             // chuyển đổi ngầm định, io.ReadCloser thỏa interface io.Reader
-    c io.Closer     = a             // chuyển đổi ngầm định, io.ReadCloser thỏa interface io.Closer
-    d io.Reader     = c.(io.Reader) // chuyển đổi tường minh, io.Closer 不thỏa interface io.Reader
+    // chuyển đổi ngầm định khi *os.File thỏa  interface io.ReadCloser
+    a io.ReadCloser = (*os.File)(f)
+
+    // chuyển đổi ngầm định khi io.ReadCloser thỏa interface io.Reader
+    b io.Reader  = a
+
+    // chuyển đổi ngầm định khi io.ReadCloser thỏa interface io.Closer
+    c io.Closer  = a
+
+    // chuyển đổi tường minh khi io.Closer thỏa interface io.Reader
+    d io.Reader     = c.(io.Reader)
 )
 ```
 
-Đôi khi đối tượng và interface quá linh hoạt dẫn đến việc chúng ta bị hạn chế vào việc bắt buộc phải sử dụng chúng. Một ví dụ phổ biến là định nghĩa một phương thức đặc biệt để phân biệt các interface. Ví dụ: interface `runtime` trong package `Error` xác định một phương thức duy nhất `RuntimeError` để chặn các kiểu khác vô tình điều chỉnh interface:
+#### Một số sai lầm khi sử dụng Interface
+
+Đôi khi đối tượng và interface quá linh hoạt dẫn đến việc chúng ta có thể mắc sai lầm khi struct khác vô tình điều chỉnh interface. Để khắc phục ta định nghĩa một phương thức đặc biệt để phân biệt các interface:
 
 ```go
 type runtime.Error interface {
     error
 
-    // RuntimeError is a no-op function but
-    // serves to distinguish types that are run time
-    // errors from ordinary errors: a type is a
-    // run time error if it has a RuntimeError method.
+    // RuntimeError là một hàm rỗng được dùng chỉ với mục đích là
+    // phân biệt lỗi runtime  với các lỗi khác nhờ tính chất:
+    // một type là runtime error chỉ khi nào nó có method RuntimeError
     RuntimeError()
 }
 ```
@@ -469,7 +484,7 @@ type proto.Message interface {
 }
 ```
 
-`proto.Message` rất dễ  bị ai đó cố tình giả mạo interface. Một cách tiếp cận chặt chẽ hơn là xác định một phương thức riêng cho  interface. Chỉ các đối tượng thỏa mãn phương thức riêng  này mới có thể thỏa mãn interface đó và tên của phương thức riêng chứa tên đường dẫn tuyệt đối của package, vì vậy phương thức riêng này chỉ có thể được hiện thực bên trong package để đáp ứng  interface này. `testing.TB` interface trong gói thử nghiệm sử dụng một kỹ thuật tương tự:
+Interface `proto.Message` rất dễ  bị "giả mạo", để tránh điều đó ta nên định nghĩa một phương thức riêng cho nó. Chỉ các đối tượng thỏa mãn phương thức riêng  này mới có thể thỏa mãn interface đó và tên của phương thức riêng chứa tên đường dẫn tuyệt đối của package, vì vậy phương thức này chỉ có thể được hiện thực bên trong package để đáp ứng  interface. `testing.TB` là interface trong package `test` sử dụng kỹ thuật này:
 
 ```go
 type testing.TB interface {
@@ -477,19 +492,16 @@ type testing.TB interface {
     Errorf(format string, args ...interface{})
     ...
 
-    // A private method to prevent users implementing the
-    // interface and so future additions to it will not
-    // violate Go 1 compatibility.
+    // Phương thức private ngăn user khác implement interface
     private()
 }
 ```
 
-Tuy nhiên, phương pháp chặn  các đối tượng bên ngoài thực hiện interface thông qua các phương thức private phải lưu ý:
+#### Khả năng bị "làm giả" phương thức thuộc interface
 
-- Thứ nhất, interface này chỉ có thể được sử dụng bên trong gói và các gói bên ngoài thường không thể tạo ra các đối tượng thỏa mãn interface,
-- Thứ hai, cơ chế bảo vệ này cũng không phải tuyệt đối, người dùng nếu cố tình vẫn có thể bỏ qua được.
+Như  đã đề cập trong phần Method, ta có thể kế thừa các phương thức của  kiểu ẩn danh bằng cách thêm các thuộc tính ẩn danh thuộc  kiểu đó vào struct. Vậy điều gì xảy ra nếu thuộc tính ẩn danh này không phải là một kiểu bình thường  mà là một kiểu interface?
 
-Như  đã đề cập trong phần Method, ta có thể kế thừa các phương thức của  kiểu ẩn danh bằng cách nhúng các thành phần thuộc  kiểu đó vào struct. Trong thực tế, thành phần ẩn danh này không nhất thiết phải là một kiểu bình thường, mà có thể một kiểu interface cũng được. Chúng ta có thể làm giả  phương thức private `testing.TB` bằng cách nhúng vào các interface ẩn danh, bởi vì các phương thức trong interface thuộc loại lazy binding và không thành vấn đề nếu phương thức `private` thực sự tồn tại ở compile-time.
+Chúng ta có thể làm giả  phương thức `private` của `testing.TB` bằng cách nhúng vào struct `TB` interface ẩn danh:
 
 ```go
 package main
@@ -499,62 +511,40 @@ import (
     "testing"
 )
 
+// TB có thể kế thừa phương thức `private` từ interface `testing.TB`
 type TB struct {
     testing.TB
 }
 
+// phương thức thuộc struct TB
 func (p *TB) Fatal(args ...interface{}) {
     fmt.Println("TB.Fatal disabled!")
 }
 
 func main() {
+    // khởi tạo một đối tượng thuộc interface testing.TB
     var tb testing.TB = new(TB)
+
+    // lúc này nó có thể sử dụng phương thức Fatal mà TB đã hiện thực
     tb.Fatal("Hello, playground")
 }
 ```
 
-Kế thừa  bằng cách nhúng vào interface ẩn danh hoặc nhúng vào đối tượng con trỏ ẩn danh thực sự implement là một thừa kế ảo thuần túy. Ta chỉ kế thừa đặc tả được chỉ định bởi interface và phần hiện thực chỉ thực sự được đưa vào trong thời gian thực thi. Ví dụ: chúng ta có thể mô phỏng một plugin thực hiện gRPC:
+## 1.4.4. Luồng thực thi của một chương trình Go
 
-```go
-type grpcPlugin struct {
-    *generator.Generator
-}
+Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ hàm `main.main`. Nếu package `main` có import  các package khác, chúng sẽ được thêm vào package `main` theo thứ tự khai báo.
 
-func (p *grpcPlugin) Name() string { return "grpc" }
+`init` không phải là hàm thông thường, nó có thể có nhiều định nghĩa, và các hàm khác không thể sử dụng nó.
 
-func (p *grpcPlugin) Init(g *generator.Generator) {
-    p.Generator = g
-}
+- Nếu một package được import nhiều lần, sẽ chỉ được tính là một khi thực thi.
+- Khi một package được import mà nó lại import các package khác, trước tiên Go sẽ import các package khác đó trước, sau đó  khởi tạo các hằng và biến của package, rồi gọi hàm `init` trong từng package.
+- Nếu một package có nhiều hàm `init` và thứ tự gọi không được xác định cụ thể thì chúng sẽ được gọi theo thứ tự xuất hiện. Cuối cùng, khi `main` đã có đủ tất cả hằng và biến ở package-level thì nó sẽ được khởi tạo bằng cách thực thi hàm `init`, tiếp theo chương trình đi vào hàm `main.main` và  bắt đầu thực thi. Hình dưới đây là sơ đồ nguyên lý  một chuỗi bắt đầu của chương trình hàm trong Go:
 
-func (p *grpcPlugin) GenerateImports(file *generator.FileDescriptor) {
-    if len(file.Service) == 0 {
-        return
-    }
+<div align="center">
+<img src="../images/ch1-11-init.ditaa.png">
+<br/>
+<span align="center"><i>Tiến trình khởi tạo package</i></span>
+</div>
+<br/>
 
-    p.P(`import "google.golang.org/grpc"`)
-    // ...
-}
-```
-
-Đối tượng kiểu `grpcPlugin`  được xây dựng phải thỏa mãn  interface `generate.Plugin` (trong package "github.com/golang/protobuf/protoc-gen-go/generator"):
-
-```go
-type Plugin interface {
-    // Name identifies the plugin.
-    Name() string
-    // Init is called once after data structures are built but before
-    // code generation begins.
-    Init(g *Generator)
-    // Generate produces the code generated by the plugin for this file,
-    // except for the imports, by calling the generator's methods
-    // P, In, and Out.
-    Generate(file *FileDescriptor)
-    // GenerateImports produces the import declarations for this file.
-    // It is called after Generate.
-    GenerateImports(file *FileDescriptor)
-}
-```
-
-Hàm `GenerateImports` được sử dụng trong phương thức của kiểu `generate.Plugin` tương ứng với interface `p.P(...)` được hiện thực bởi `Init` đối tượng `generator.Generator`. `generator.Generator` này tương ứng với một kiểu cụ thể, nhưng nếu nó là một kiểu interface, chúng ta  có thể vượt truyền nó thẳng vào trong phần hiện thực.
-
-Ngôn ngữ Go dễ dàng hiện thực các tính năng nâng cao như hướng đối tượng với duck-typing và kế thừa ảo thông qua sự kết hợp của một số tính năng đơn giản, điều này thực sự đáng kinh ngạc.
+Cần lưu ý rằng trước khi hàm nào khác được thực thi thì tất cả code đều chạy trong cùng một Goroutine `main.main`, đây là thread chính của chương trình. Do đó, nếu một Goroutine khởi chạy trong hàm `main.main` thì nó chỉ có thể được thực thi sau khi vào chương trình đã thực thi xong `init`.

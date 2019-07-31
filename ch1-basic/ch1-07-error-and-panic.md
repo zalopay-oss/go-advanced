@@ -1,10 +1,14 @@
-# 1.7 Error và Exceptions
+# 1.7. Error và Exceptions
 
-Error handling là một chủ đề quan trọng để cân nhắc lựa chọn một ngôn ngữ lập trình. Trong Go error handling, errors là một phần quan trọng của gói API và giao diện người dùng.
+Error handling (xử lý lỗi) là một chủ đề quan trọng được đề cập trong mỗi ngôn ngữ lập trình. Go có một cơ chế xử lý lỗi đơn giản khác với `try catch` trên các ngôn ngữ lập trình khác dựa vào giá trị lỗi trả về của hàm. Ngoài ra, package `errors` giúp chúng ta định nghĩa các lỗi.
 
-Đó cũng là một số hàm trong chương trình luôn luôn yêu cầu phải chạy thành công. Ví dụ `strconv.Itoa` chuyển một số nguyên thành string, đọc và ghi phần tử từ array đến slice, đọc một phần tử tồn tại trong `map` và tương tự. Những tác vụ như thế sẽ khó để có lỗi trong thời gian chạy trừ phi có bug trong chương trình và những tình huống không đoán trước được, như là memory leak tại thời điểm chạy. Nếu bạn thực sự bắt gặp một tình huống khác thường như thế, chúng ta có thể đơn giản là ngừng thực thi chương trình.
+## 1.7.0. Ngữ cảnh thường gặp
 
-Ngoại trừ trường hợp bất thường, nếu chương trình bị lỗi và dừng, có thể cần nhắc đến vài kết quả không mong đợi. Những hàm sẽ xem xét function như mong đợi, chúng ta sẽ trả về một kết quả phụ, thông thường kết quả cuối cùng có thể truyền vào thông điệp lỗi. Nếu chúng chỉ có một nguyên nhân gây ra lỗi, thông tin thêm đó có thể đơn giản là một giá trị Boolean, thông thường đặt tên là ok. cho một ví dụ, khi kết quả truy vấn `map`, bạn có thể sử dụng thêm một giá trị Boolean để xác định chúng có thành công hay không:
+Có một số hàm trong chương trình luôn yêu cầu phải chạy thành công. Ví dụ `strconv.Itoa` chuyển một số nguyên thành string, đọc và ghi phần tử từ array hoặc slice, đọc một phần tử tồn tại trong `map` và tương tự.
+
+Những tác vụ như thế sẽ khó để có lỗi trong thời gian chạy trừ phi có `bug` trong chương trình hoặc những tình huống không thể đoán trước được như là memory leak tại thời điểm chạy. Nếu bạn thực sự bắt gặp một tình huống khác thường như thế, chương trình sẽ ngừng thực thi.
+
+Khi một chương trình bị lỗi và dừng, chúng ta có thể cân nhắc một số khả năng xảy ra. Đối với các hàm xử lý lỗi tốt, nó sẽ trả về thêm một giá trị phụ, thường thì giá trị này được dùng để chứa thông điệp lỗi. Nếu chỉ có một lý do dẫn đến lỗi, giá trị thêm vào này có thể là một biến Boolean, thường đặt tên là `ok`. Ví dụ như bên dưới :
 
 ```go
 if v, ok := m["key"]; ok {
@@ -12,9 +16,9 @@ if v, ok := m["key"]; ok {
 }
 ```
 
-Nhưng thông thường sẽ có nhiều hơn một nguyên nhân gây ra lỗi, và nhiều lần user muốn biết nhiều về lỗi đó. Nếu bạn chỉ sử dụng một biến boolean, thì bạn sẽ không giải quyết được yêu cầu trên. trong ngôn ngữ C, một số nguyên `errno` được sử dụng mặc định để truyền tải lỗi, do đó bạn có thể định nghĩa nhiều loại error theo nhu cầu. Trong ngôn ngữ Go, có thể gọi `syscall.Errno` là một `errno` ứng với mã lỗi trong ngôn ngữ C. `syscall` interface trong package, nếu có một error trả về, bên dưới cũng phải là `syscall.Errno` kiểu của error.
+Nhưng thông thường sẽ có nhiều hơn một nguyên nhân gây ra lỗi, và nhiều khi user muốn biết nhiều thêm về lỗi đó. Nếu bạn chỉ sử dụng một biến boolean, thì bạn sẽ không giải quyết được yêu cầu trên. Trong ngôn ngữ C, một số nguyên `errno` được sử dụng mặc định để thể hiện lỗi, do đó bạn có thể định nghĩa nhiều loại error theo nhu cầu. Trong ngôn ngữ Go, có thể gọi `syscall.Errno` giống như với mã lỗi `errno` trong ngôn ngữ C.
 
-Ví dụ, khi chúng ta sửa đổi `syscall` để thay đổi chế độ của một file thông qua interface của package đó, nếu chúng ta bắt gặp một error, chúng ta có thể xử lý chúng bởi việc gây ra `err` trong phần `assertion` như là `syscall.Errno` là một kiểu error.
+Ví dụ, khi chúng ta dùng `syscall.Chmod` để thay đổi `mode` của một file, chúng ta có thể thấy thông tin về lỗi qua biến `err` như bên dưới :
 
 ```go
 err := syscall.Chmod(":invalid path:", 0666)
@@ -23,11 +27,10 @@ if err != nil {
 }
 ```
 
-Xa hơn nữa, chúng ta có thể chứa true error type thông qua một loại truy vấn kiểu hoặc assertions, do đó chúng ta có thể lấy nhiều thông tin về loại error. Tuy nhiên, tổng quát, chúng ta không quan tâm về cách mà error được thể hiện bên dưới. Chúng ta có thể chỉ cần biết rằng đó là một lỗi. Khi chúng ta trả về một giá trị error không phải `nil`, chúng ta có thể lấy một thông điệp error bởi việc gọi error interface type hoặc phương thức `Error`.
 
-Trong ngôn ngữ Go, errors được xem xét như là một kết quả đã được đoán trước; ngoại lệ là một kết quả không thể đoán trước được, và một ngoại lệ có thể chỉ ra rằng một bug trong chương trình hoặc một vấn đề nào đó không được kiểm soát, nó sẽ cho phép user có thể quan tâm về những vấn đề về business liên quan đến việc xử lý lỗi.
+Trong ngôn ngữ Go, errors được xem xét như là một kết quả đã được đoán trước; exceptions là một kết quả không thể đoán trước được, và một ngoại lệ có thể chỉ ra rằng một bug trong chương trình hoặc một vấn đề nào đó không được kiểm soát. Ngôn ngữ Go đề xuất dùng hàm `recover` để chuyển đổi exceptions thành error handling, chúng cho phép users thực sự quan tâm về những lỗi liên quan đến business.
 
-Nếu một interface đơn giản ném tất cả những lỗi thông thường như là một ngoại lệ, chúng sẽ làm thông báo lỗi lộn xộn và không có giá trị. Chỉ như `main` bao gồm mọi thứ trực tiếp trong một hàm, nó không mang lại ý nghĩa gì.
+Nếu một interface đơn giản ném tất cả những lỗi thông thường như là một ngoại lệ, chúng sẽ làm thông báo lỗi lộn xộn và không có giá trị.  Như `main` trực tiếp bao gồm mọi thứ trong một hàm, nó không mang lại ý nghĩa gì.
 
 ```go
 func main() {
@@ -41,7 +44,6 @@ func main() {
 ```
 
 Bao bọc một mã lỗi không phải là một kết quả cuối cùng. Nếu một ngoại lệ không thể đoán trước được, trực tiếp gây ra một ngoại lệ là một cách tốt nhất để xử lý chúng.
-
 
 ## 1.7.1 Chiến lược xử lý lỗi
 
@@ -66,7 +68,7 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 }
 ```
 
-Khi đoạn code trên chạy, nhưng bỏ qua một bug. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file đầu tiên. Mặc dù chúng ta có thể gọi `src.Close()` để fix bug bằng việc thêm vào lệnh gọi đó trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường được mở sẽ được đóng bình thường.
+Khi đoạn code trên chạy, sẽ tìm ẩn rủi ro. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file. Mặc dù chúng ta có thể  fix bug bằng việc gọi `src.Close()` trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường khi được mở cũng sẽ được đóng.
 
 
 ```go
@@ -87,11 +89,11 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 }
 ```
 
-Mệnh đề `defer` sẽ cho phép chúng ta nghĩ về làm cách nào để đóng một file ngay sau khi mở file đó. Bất kể làm thế nào hàm được trả về, bởi về mệnh đề close có thể luôn luôn được thực thi. Cùng một thời điểm, mệnh đề defer sẽ đảm bảo rằng `io.Copy` file có thể được đóng an toàn nếu một ngoại lệ xảy ra.
+Mệnh đề `defer` được thực thi khi ra khỏi tầm vực của hàm, chúng ta nghĩ về làm cách nào để đóng một file ngay khi mở file đó. Bất kể làm thế nào hàm được trả về, bởi về mệnh đề close có thể luôn luôn được thực thi. Cùng một thời điểm, mệnh đề defer sẽ đảm bảo rằng `io.Copy` file có thể được đóng an toàn nếu một ngoại lệ xảy ra.
 
-Như chúng ta đã đề cập trước đó, hàm exported trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình.
+Như chúng ta đã đề cập trước đó, hàm exported trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình. Nhưng với những framework Web services, chúng thường cần sự truy cập từ bên thứ ba ở middleware.
 
-Nhưng với những framework chúng cung cấp những web service tương tự, chúng thường cần sự truy cập từ bên thứ ba ở middleware. Bởi vì thư viện middleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
+Bởi vì thư viện middleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
 
 Chúng ta hãy xem JSON parse là một ví dụ minh họa cho việc dùng ngữ cảnh của việc phục hồi. Cho một hệ thống JSON parser phức tạp, mặc dù một ngôn ngữ parse có thể làm việc một cách phù hợp, có một điều không chắc chắn rằng nó không có lỗ hỏng. Do đó, khi một ngoại lệ xảy ra, chúng ta sẽ không chọn cách crash parser. Thay vì thế chúng ta sẽ làm việc với ngoại lệ panic nhưng là một lỗi parsing thông thường và đính kèm chúng với một thông tin thêm để thông báo cho user biết mà báo cáo lỗi.
 
@@ -108,11 +110,11 @@ func ParseJSON(input string) (s *Syntax, err error) {
 
 Gói `json` trong một thư viện chuẩn, nếu chúng gặp phải một error khi đệ quy parsing dữ liệu JSON bên trong, chúng sẽ nhanh chóng nhảy về mức cao nhất ở phía ngoài, và sau đó sẽ trả về thông điệp lỗi tương ứng.
 
-Ngôn ngữ Go có cách hiện thực thư viện như vậy; mặc dù sử dụng package panic, chúng sẽ có thể được chuyển đổi đến một giá trị lỗi cụ thể khi một  hàm được export.
+Ngôn ngữ Go có cách hiện thực thư viện như vậy; mặc dù sử dụng package `panic`, chúng sẽ có thể được chuyển đổi đến một giá trị lỗi cụ thể khi một hàm được export.
 
 ## 1.7.2 Getting the wrong context
 
-Thỉnh thoảng rất đễ cho những user có cấp độ cao được hiểu, bên dưới sự hiện thực sẽ đóng gói lại error như là một loai error mới và trả kết quả về cho user.
+Thỉnh thoảng rất đễ cho những user có cấp độ cao được hiểu, bên dưới sự hiện thực sẽ đóng gói lại error như là một loại error mới và trả kết quả về cho user.
 
 ```go
 if _, err := html.Parse(resp.Body); err != nil {
@@ -122,7 +124,7 @@ if _, err := html.Parse(resp.Body); err != nil {
 
 Khi một upper user bắt gặp một lỗi, nó có thể dễ dàng để hiểu rằng lỗi đó được gây ra trong thời gian chạy từ cấp business. Nhưng rất khó để có cả hai. Khi một upper user nhận được một sai sót mới, chúng ta cũng mất những error type bên dưới (chỉ những thông tin về mô tả sẽ bị mất).
 
-Để cần ghi nhận thông tin về kiểu lỗi trong package transition, chúng ta có thể định nghĩa một hàm `WrapError` nó sẽ gói những lỗi gốc khi bảo vệ toàn kiểu error. Để tạo điều kiện cho việc định vị vấn đến và để ghi nhận lại trạng thái lời gọi hàm, khi xảy ra lỗi, chúng ta thường muốn lưu trữ toàn bộ thông tin về lời gọi hàm hiện tại khi có lỗi xảy ra. Cùng lúc đó, để hỗ trợ network transmission như là RPC, chúng ta sẽ phải cần serialize error thành những dữ liệu tương tự như  định dạng JSON, và sau đó khôi phục lại error decoding từ dữ liệu.
+Để ghi nhận thông tin về kiểu lỗi, chúng ta thông thường sẽ định nghĩa một hàm `WrapError` chúng bọc lấy lỗi gốc. Để tạo điều kiện cho những vấn đề như vậy, và để ghi nhận lại trạng thái của hàm khi một lỗi xảy ra, chúng ta sẽ muốn lưu trữ toàn bộ thông tin về hàm thực thi khi một lỗi xảy ra. Lúc này, để hỗ trợ transition như là RPC, chúng ta cần phải serialize error thành những dữ liệu tương tự như  định dạng JSON, và sau đó khôi phục lại err từ việc decoding dữ liệu.
 
 Để làm việc đó, chúng ta sẽ phải tự định nghĩa cấu trúc lỗi riêng ví dụ như `github.com/chai2010/errors` với những kiểu cơ bản sau:
 
@@ -156,7 +158,7 @@ func FromJson(json string) (Error, error)
 func ToJson(err error) string
 ```
 
-`New` dùng để xây dựng một loại error mới tương tự như `errors.New` trong thư viện chuẩn, nhưng với việc thêm vào thông tin gọi hàm tại thời điểm gây ra error. `FromJson` được dùng để khôi phục một kiểu đối tượng error từ chuỗi JSON. `NewWithCode` nó cũng gây dựng một error với một mã error, chúng cũng có thể chứa thông tin về gọi hàm call stack. `Wrap` và `WrapWithCode` là một hàm error secondary wrapper chúng sẽ gói error như là một error mới, nhưng sẽ giữ lại message error gốc. Đối tượng error sẽ trả về từ đây và có thể trực tiếp gọi `json.Marshal`  để encode error như là JSON string.
+`New` dùng để tạo ra một loại error mới tương tự như `errors.New` trong thư viện chuẩn, nhưng với việc thêm vào thông tin gọi hàm tại thời điểm gây ra error. `FromJson` được dùng để khôi phục một kiểu đối tượng error từ chuỗi JSON. `NewWithCode` nó cũng gây dựng một error với một mã error, chúng cũng có thể chứa thông tin về gọi hàm call stack. `Wrap` và `WrapWithCode` là một hàm error secondary wrapper chúng sẽ gói error như là một error mới, nhưng sẽ giữ lại message error gốc. Đối tượng error sẽ trả về từ đây và có thể trực tiếp gọi `json.Marshal`  để encode error như là JSON string.
 
 Chúng ta có thể sử dụng wrapper function như sau:
 
@@ -235,7 +237,7 @@ fmt.Println(err)
 fmt.Println(err.(errors.Error).Code())
 ```
 
-Trong ngôn ngữ Go, error handling cũng có một coding style duy nhất. Sau khi kiểm tra chức năng phụ bị failed, chúng ta thường đặt logic code tại sao chúng failed vào process trước khi code process thành công. Nếu một error gây ra function return, sau đó logic code về thành công sẽ không được đặt trên mệnh đề `else`, nó nên được đặt trực tiếp trong body của function.
+Trong ngôn ngữ Go, error handling cũng có một coding style duy nhất. Sau khi kiểm tra nếu chức năng phụ bị failed, chúng ta thường đặt logic code tại sao chúng failed vào process trước khi code process thành công. Nếu một error gây ra function return, sau đó logic code về thành công sẽ không được đặt trên mệnh đề `else`, nó nên được đặt trực tiếp trong body của function.
 
 ```go
 f, err := os.Open("filename.ext")
@@ -250,7 +252,7 @@ Cấu trúc code của hầu hết các hàm trong ngôn ngữ Go cũng tương 
 
 ## 1.7.3 Incorrect error return
 
-Error trong ngôn ngữ Go là một kiểu interface. Thông tin về interface sẽ chứa kiểu dữ liệu nguyên mâu, và kiểu dữ liệu gốc. Giá trị của interface chỉ tương ứng nếu như cả kiểu interface và giá trị gốc cả hai đều empty `nil`. Thực tế, khi kiểu của interface là empty, kiểu gốc sẽ tương ứng với interface sẽ không cần thiết phải empty.
+Error trong ngôn ngữ Go là một kiểu interface. Thông tin về interface sẽ chứa kiểu dữ liệu nguyên mẫu, và kiểu dữ liệu gốc. Giá trị của interface chỉ tương ứng nếu như cả kiểu interface và giá trị gốc cả hai đều empty `nil`. Thực tế, khi kiểu của interface là empty, kiểu gốc sẽ tương ứng với interface sẽ không cần thiết phải empty.
 
 Ví dụ sau, tôi thử cố gắng trả về một custom error type và trả về chỉ khi không có errors `nil`:
 
@@ -280,10 +282,12 @@ Do đó, khi đối mặt với giá trị error được return về, giá tr�
 
 Ngôn ngữ Go sẽ có một kiểu dữ liệu mạnh, và cụ thể chuyển đổi sẽ được thực hiện giữa những kiểu khác nhau (và sẽ phải bên dưới cùng kiểu dữ liệu). Tuy nhiên, `interface` là một ngoại lệ của ngôn ngữ Go: non-interface kiểu đến kiểu interface, hoặc chuyển đổi từ interface type là cụ thể. Nó cũng sẽ hỗ trợ ducktype, dĩ nhiên, chúng sẽ thỏa mãn cấp độ 3 về bảo mật.
 
-
 ## 1.7.4 Parsing Exception
 
-`panic` Support sẽ ném một `panic` liên quan đến việc ném ngoại lệ (không chỉ là error thông thường), `recover` sẽ trả về một giá trị của lời gọi hàm và `panic` cũng như thông tin về kiểu tham số của hàm
+`Panic` là một hàm dựng sẵn được dùng để dừng luồng thực thi thông thường và bắt đầu `panicking`. Khi hàm `F` gọi `panic`, hàm F sẽ dừng thực thi, bất cứ hàm liên quan tới F sẽ thực thi một cách bình thường, và sau đó lệnh return F sẽ được gọi.
+
+`Panic` được hỗ trợ để ném ra một kiểu ngoại lệ tùy ý (không chỉ là kiểu `error`), `recover` sẽ trả về một giá trị của lời gọi hàm và `panic` cũng như thông tin về kiểu tham số của hàm
+
 và những nguyên mẫu của hàm sẽ như sau:
 
 ```go
