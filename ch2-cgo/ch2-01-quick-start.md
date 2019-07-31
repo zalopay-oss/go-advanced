@@ -41,7 +41,7 @@ Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.C
 
 ## 2.1.3 Sử dụng hàm C tự khai báo
 
-Phần trên chúng tôi đã sử dụng các chức năng đã có trong `stdio`. Bây giờ ta sẽ sử dụng một hàm `SayHello` của ngôn ngữ C. Chức năng hàm này là in ra chuỗi chúng ta truyền vào hàm. Sau đó gọi hàm `SayHello` trong hàm main:
+Phần trên chúng ta đã sử dụng các hàm đã có trong `stdio`. Bây giờ ta sẽ sử dụng một hàm `SayHello` của ngôn ngữ C. Chức năng hàm này là in ra chuỗi chúng ta truyền vào hàm. Sau đó gọi hàm `SayHello` trong hàm main:
 
 ***main.go***
 
@@ -136,6 +136,21 @@ extern "C" {
 
 void SayHello(const char* s) {
     std::cout << s;
+}
+```
+
+Trong hàm main của Go ta gọi file header như sau:
+
+***main.go***
+
+```go
+package main
+
+//#include <hello.h>
+import "C"
+
+func main() {
+    C.SayHello(C.CString("Hello World"))
 }
 ```
 
