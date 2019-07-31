@@ -89,9 +89,9 @@ Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài ngu
         if err != nil {
             panic("cannot create file")
         }
+
+        // chắc chắn file sẽ được close dù hàm có bị panic hay return
         defer f.Close()
-        // no matter what happens here file will be closed
-        // for sake of simplicity I skip checking close result
         fmt.Fprintf(f,"hello")
     }
     ```
@@ -272,7 +272,6 @@ func main() {
 Trong một số tình huống, ta quan tâm nhiều hơn đến một chuỗi thao tác ví dụ  như `Read` đọc một số mảng và sau đó gọi `Close` để đóng, trong ngữ cảnh này, người dùng không quan tâm đến kiểu của đối tượng, miễn là nó có thể đáp ứng được các thao tác của `Read` và `Close`. Tuy nhiên trong các biểu thức phương thức của `ReadFile`, `CloseFile` có chỉ rõ kiểu `File` trong tham số kiểu sẽ khiến chúng không bị phụ thuộc vào đối tượng nào cụ thể. Việc này có thể khắc phục bằng cách sử dụng thuộc tính closure (closure property):
 
 ```go
-
 func main() {
     var data []byte
 

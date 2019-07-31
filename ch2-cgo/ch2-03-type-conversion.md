@@ -281,40 +281,56 @@ Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá
 
 ## 2.3.4 Array, String và Slice
 
+Chuỗi (string) trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
+
 ### Array
 
 Trong C, biến mảng thực ra tương ứng với một con trỏ trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, con trỏ này không thể được sửa đổi, khi truyền biến mảng vào một hàm, thực ra là truyền địa chỉ phần tử đầu tiên của mảng.
 
-Ở đây ta xem một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
+<div align="center">
+
+<img src="../images/array-c.png" width="450">
+<br/>
+<span align="center"><i>Array trong C</i></span>
+    <br/>
+
+</div>
 
 Trong Go, mảng là một kiểu giá trị và độ dài của mảng là một phần của kiểu mảng. Chuỗi trong Go tương ứng với một vùng nhớ "chỉ đọc" có độ dài nhất định. Slice trong Go là phiên bản đơn giản hơn của mảng động (dynamic array).
+
+<div align="center">
+	<img src="../images/ch1-1-array-and-array-index-representation.png" width="600">
+	<br/>
+	<span align="center">
+		<i>Array trong Go</i>
+	</span>
+</div>
+<br/>
 
 Chuyển đổi giữa Go và C với các kiểu array, string và slice có thể được đơn giản hóa thành chuyển đổi giữa Go slice và C pointer trỏ tới vùng nhớ có độ dài nhất định.
 
 Package C ảo của CGO cung cấp tập các hàm sau để chuyển đổi hai chiều array và string giữa Go và C:
 
 ```go
-// Go string to C string
-// The C string is allocated in the C heap using malloc.
-// It is the caller's responsibility to arrange for it to be
-// freed, such as by calling C.free (be sure to include stdlib.h
-// if C.free is needed).
+// Go string -> C string
+// C string được cấp phát trong C heap sử dụng malloc.
+// Caller có trách nhiệm free nó sau khi sử dụng
+// bằng cách như gọi C.free (nhớ include stdlib.h
 func C.CString(string) *C.char
 
-// Go []byte slice to C array
-// The C array is allocated in the C heap using malloc.
-// It is the caller's responsibility to arrange for it to be
-// freed, such as by calling C.free (be sure to include stdlib.h
-// if C.free is needed).
+// Go []byte slice -> C array
+// C array được cấp phát trong C heap using malloc.
+// Caller có trách nhiệm free nó sau khi sử dụng
+// bằng cách như gọi C.free (nhớ include stdlib.h
 func C.CBytes([]byte) unsafe.Pointer
 
-// C string to Go string
+// C string -> Go string
 func C.GoString(*C.char) string
 
-// C data with explicit length to Go string
+// C data với length được chỉ định -> Go string
 func C.GoStringN(*C.char, C.int) string
 
-// C data with explicit length to Go []byte
+// C data với length được chỉ định -> Go []byte
 func C.GoBytes(unsafe.Pointer, C.int) []byte
 ```
 
