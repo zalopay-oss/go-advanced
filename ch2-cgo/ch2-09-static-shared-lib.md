@@ -6,7 +6,7 @@ Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
   3. Liên kết động mã nguồn.
 
 <div align="center">
-	<img src="../images/../images/ch2-9-static-dynamic-lib.gif"width="400">
+	<img src="../images/ch2-9-static-dynamic-lib.gif"width="400">
 </div>
 <br/>
 
