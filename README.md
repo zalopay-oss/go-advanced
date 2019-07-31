@@ -1,14 +1,14 @@
 # Go Language Advanced Programming
 
-- [Go Language Advanced Programming](#Go-Language-Advanced-Programming)
-  - [Giới thiệu](#Gi%E1%BB%9Bi-thi%E1%BB%87u)
-  - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#T%E1%BA%A1i-sao-ch%C3%BAng-t%C3%B4i-th%E1%BB%B1c-hi%E1%BB%87n-b%E1%BB%99-t%C3%A0i-li%E1%BB%87u-n%C3%A0y)
-  - [Tài liệu tham khảo](#T%C3%A0i-li%E1%BB%87u-tham-kh%E1%BA%A3o)
-  - [Mục lục](#M%E1%BB%A5c-l%E1%BB%A5c)
-  - [Xem online](#Xem-online)
-  - [Tham gia phát triển](#Tham-gia-ph%C3%A1t-tri%E1%BB%83n)
-  - [Nhóm phát triển](#Nh%C3%B3m-ph%C3%A1t-tri%E1%BB%83n)
-  - [Liên hệ](#Li%C3%AAn-h%E1%BB%87)
+- [Go Language Advanced Programming](#go-language-advanced-programming)
+  - [Giới thiệu](#gi%e1%bb%9bi-thi%e1%bb%87u)
+  - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#t%e1%ba%a1i-sao-ch%c3%bang-t%c3%b4i-th%e1%bb%b1c-hi%e1%bb%87n-b%e1%bb%99-t%c3%a0i-li%e1%bb%87u-n%c3%a0y)
+  - [Tài liệu tham khảo](#t%c3%a0i-li%e1%bb%87u-tham-kh%e1%ba%a3o)
+  - [Mục lục](#m%e1%bb%a5c-l%e1%bb%a5c)
+  - [Xem online](#xem-online)
+  - [Tham gia phát triển](#tham-gia-ph%c3%a1t-tri%e1%bb%83n)
+  - [Nhóm phát triển](#nh%c3%b3m-ph%c3%a1t-tri%e1%bb%83n)
+  - [Liên hệ](#li%c3%aan-h%e1%bb%87)
   
 ## Giới thiệu
 

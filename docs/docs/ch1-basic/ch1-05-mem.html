@@ -1,0 +1,1171 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1.5 Điều khiển tuần tự cấu trúc vùng nhớ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch1-06-common-concurrency-mode.html" />
+    
+    
+    <link rel="prev" href="ch1-04-func-method-interface.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="ch1-01-genesis.html">
+            
+                <a href="ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="ch1-02-hello-revolution.html">
+            
+                <a href="ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="ch1-03-array-string-and-slice.html">
+            
+                <a href="ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="ch1-04-func-method-interface.html">
+            
+                <a href="ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.5" data-path="ch1-05-mem.html">
+            
+                <a href="ch1-05-mem.html">
+            
+                    
+                    1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="ch1-06-common-concurrency-mode.html">
+            
+                <a href="ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Các chế độ đồng thời thông dụng
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="ch1-07-error-and-panic.html">
+            
+                <a href="ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="ch1-08-supplementary-notes.html">
+            
+                <a href="ch1-08-supplementary-notes.html">
+            
+                    
+                    1.8 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10  Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-best-practice/">
+            
+                <a href="../ch3-best-practice/">
+            
+                    
+                    Chương 3: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-rpc/">
+            
+                <a href="../ch4-rpc/">
+            
+                    
+                    Chương 4: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                <a href="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                    
+                    4.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                <a href="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                    
+                    4.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                <a href="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                    
+                    4.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-rpc/ch4-04-grpc.html">
+            
+                <a href="../ch4-rpc/ch4-04-grpc.html">
+            
+                    
+                    4.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                <a href="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                    
+                    4.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                <a href="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                    
+                    4.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-rpc/ch4-07-pbgo.html">
+            
+                <a href="../ch4-rpc/ch4-07-pbgo.html">
+            
+                    
+                    4.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                <a href="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                    
+                    4.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                <a href="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                    
+                    4.9 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-web/">
+            
+                <a href="../ch5-web/">
+            
+                    
+                    Chương 5: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-web/ch5-01-introduction.html">
+            
+                <a href="../ch5-web/ch5-01-introduction.html">
+            
+                    
+                    5.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-web/ch5-02-router.html">
+            
+                <a href="../ch5-web/ch5-02-router.html">
+            
+                    
+                    5.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-web/ch5-03-middleware.html">
+            
+                <a href="../ch5-web/ch5-03-middleware.html">
+            
+                    
+                    5.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-web/ch5-04-request-verification.html">
+            
+                <a href="../ch5-web/ch5-04-request-verification.html">
+            
+                    
+                    5.4 Kiểm tra yêu cầu validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-web/ch5-05-database.html">
+            
+                <a href="../ch5-web/ch5-05-database.html">
+            
+                    
+                    5.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                <a href="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                    
+                    5.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                <a href="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                    
+                    5.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-web/ch5-08-interface-and-web.html">
+            
+                <a href="../ch5-web/ch5-08-interface-and-web.html">
+            
+                    
+                    5.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../ch5-web/ch5-09-gated-launch.html">
+            
+                <a href="../ch5-web/ch5-09-gated-launch.html">
+            
+                    
+                    5.9 Grayscale Publishing and A/B test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../ch5-web/ch5-10-ext.html">
+            
+                <a href="../ch5-web/ch5-10-ext.html">
+            
+                    
+                    5.10 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-cloud/">
+            
+                <a href="../ch6-cloud/">
+            
+                    
+                    Chương 6: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../ch6-cloud/ch6-01-dist-id.html">
+            
+                <a href="../ch6-cloud/ch6-01-dist-id.html">
+            
+                    
+                    6.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../ch6-cloud/ch6-02-lock.html">
+            
+                <a href="../ch6-cloud/ch6-02-lock.html">
+            
+                    
+                    6.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../ch6-cloud/ch6-03-delay-job.html">
+            
+                <a href="../ch6-cloud/ch6-03-delay-job.html">
+            
+                    
+                    6.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                <a href="../ch6-cloud/Ch6-04-search-engine.html">
+            
+                    
+                    6.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../ch6-cloud/ch6-05-load-balance.html">
+            
+                <a href="../ch6-cloud/ch6-05-load-balance.html">
+            
+                    
+                    6.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../ch6-cloud/ch6-06-config.html">
+            
+                <a href="../ch6-cloud/ch6-06-config.html">
+            
+                    
+                    6.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="../ch6-cloud/ch6-07-crawler.html">
+            
+                <a href="../ch6-cloud/ch6-07-crawler.html">
+            
+                    
+                    6.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="../ch6-cloud/ch6-08-ext.html">
+            
+                <a href="../ch6-cloud/ch6-08-ext.html">
+            
+                    
+                    6.8 Phần mở rộng
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >1.5 Điều khiển tuần tự cấu trúc vùng nhớ</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="15-&#x111;i&#x1EC1;u-khi&#x1EC3;n-tu&#x1EA7;n-t&#x1EF1;-c&#x1EA5;u-tr&#xFA;c-v&#xF9;ng-nh&#x1EDB;">1.5 &#x110;i&#x1EC1;u khi&#x1EC3;n tu&#x1EA7;n t&#x1EF1; c&#x1EA5;u tr&#xFA;c v&#xF9;ng nh&#x1EDB;</h1>
+<p>V&#xE0;o th&#x1EDD;i gian &#x111;&#x1EA7;u, CPU s&#x1EBD; th&#x1EF1;c thi nh&#x1EEF;ng c&#xE2;u l&#x1EC7;nh m&#xE1;y tr&#xEA;n m&#x1ED9;t l&#xF5;i duy nh&#x1EA5;t. Th&#x1EBF; h&#x1EC7; t&#x1ED5; ti&#xEA;n C c&#x1EE7;a Go l&#xE0; ti&#xEA;u bi&#x1EC3;u cho ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh tu&#x1EA7;n t&#x1EF1;. Th&#x1EE9; t&#x1EF1; th&#x1EF1;c hi&#x1EC7;n c&#x1EE7;a ng&#xF4;n ng&#x1EEF; c&#xF3; ngh&#x129;a l&#xE0; c&#xE1;ch m&#xE0; nh&#x1EEF;ng l&#x1EC7;nh &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi, v&#xE0; ch&#x1EC9; c&#xF3; duy nh&#x1EA5;t m&#x1ED9;t CPU &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi l&#x1EC7;nh t&#x1EA1;i m&#x1ED9;t th&#x1EDD;i &#x111;i&#x1EC3;m.</p>
+<p>V&#x1EDB;i s&#x1EF1; ph&#xE1;t tri&#x1EC3;n c&#x1EE7;a c&#xF4;ng ngh&#x1EC7; b&#x1ED9; x&#x1EED; l&#xFD;, ki&#x1EBF;n tr&#xFA;c &#x111;&#x1A1;n l&#xF5;i s&#x1EBD; b&#x1EAF;t g&#x1EB7;p m&#x1ED9;t &#x111;i&#x1EC3;m bottlenecks (th&#x1EAF;t c&#x1ED5; chai) theo c&#xE1;ch l&#xE0;m t&#x103;ng t&#x1EA7;n s&#x1ED1; c&#x1EE7;a b&#x1ED9; x&#x1EED; l&#xFD; &#x111;&#x1EC3; c&#x1EA3;i thi&#x1EC7;n t&#x1ED1;c &#x111;&#x1ED9; t&#xED;nh to&#xE1;n. Hi&#x1EC7;n nay nhi&#x1EC1;u h&#x1EC7; th&#x1ED1;ng CPU th&#x1B0;&#x1EDD;ng c&#xF3; t&#x1EA7;n s&#x1ED1; r&#x1A1;i v&#xE0;o kho&#x1EA3;ng 3GHZ. S&#x1EF1; tr&#xEC; tr&#x1EC7; c&#x1EE7;a vi&#x1EC7;c ph&#xE1;t tri&#x1EC3;n CPU &#x111;&#x1A1;n l&#xF5;i s&#x1EBD; &#x111;em &#x111;&#x1EBF;n c&#x1A1; h&#x1ED9;i ph&#xE1;t tri&#x1EC3;n CPU &#x111;a l&#xF5;i. Theo &#x111;&#xF3;, ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh &#x111;&#x1EA7;u ti&#xEA;n s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c ph&#xE1;t tri&#x1EC3;n theo h&#x1B0;&#x1EDB;ng song song. Ng&#xF4;n ng&#x1EEF; Go l&#xE0; m&#x1ED9;t ng&#xF4;n ng&#x1EEF; tuy&#x1EC7;t v&#x1EDD;i &#x111;&#x1EC3; h&#x1ED7; tr&#x1EE3; t&#xED;nh &#x111;&#x1ED3;ng th&#x1EDD;i trong ng&#x1EEF; c&#x1EA3;nh &#x111;a l&#xF5;i v&#xE0; networking.</p>
+<p>Nh&#x1EEF;ng ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh th&#xF4;ng th&#x1B0;&#x1EDD;ng s&#x1EBD; c&#xF3; nhi&#x1EC1;u m&#xF4; h&#xEC;nh &#x111;a d&#x1EA1;ng, &#x111;a lu&#x1ED3;ng, th&#xF4;ng &#x111;i&#x1EC7;p,v,v.. Theo l&#xFD; thuy&#x1EBF;t, &#x111;a lu&#x1ED3;ng (muti-threading) v&#xE0; message-based concurrent programming (l&#x1EAD;p tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i d&#x1EF1;a tr&#xEA;n truy&#x1EC1;n th&#xF4;ng &#x111;i&#x1EC7;p) l&#xE0; t&#x1B0;&#x1A1;ng &#x111;&#x1B0;&#x1A1;ng. Do m&#xF4; h&#xEC;nh <code>muti-thread concurrency</code> (&#x111;a lu&#x1ED3;ng) v&#x1EC1; m&#x1EB7;t t&#x1EF1; nhi&#xEA;n t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i <code>muti-core processors</code> (&#x111;a x&#x1EED; l&#xFD;) v&#xE0; nh&#x1EEF;ng h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh &#x111;&#xF3; s&#x1EBD; cung c&#x1EA5;p m&#x1EE9;c h&#x1EC7; th&#x1ED1;ng &#x111;&#x1EC3; l&#x1EAD;p tr&#xEC;nh <code>muti-threading</code> v&#xE0; kh&#xE1;i ni&#x1EC7;m v&#x1EC1; multi-threading d&#x1B0;&#x1EDD;ng nh&#x1B0; s&#x1EBD; tr&#x1EF1;c quan h&#x1A1;n, t&#x1EEB; &#x111;&#xF3; m&#xF4; h&#xEC;nh l&#x1EAD;p tr&#xEC;nh <code>muti-threading</code> s&#x1EBD; d&#x1EA7;n d&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c h&#x1EA5;p thu. Go l&#xE0; m&#x1ED9;t ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh h&#x1EC7; th&#x1ED1;ng cung c&#x1EA5;p nh&#x1EEF;ng th&#x1B0; vi&#x1EC7;n t&#xED;nh n&#x103;ng chuy&#xEA;n bi&#x1EC7;t. Ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh h&#x1EC7; th&#x1ED1;ng s&#x1EBD; h&#x1ED7; tr&#x1EE3; &#xED;t h&#x1A1;n m&#xF4; h&#xEC;nh l&#x1EAD;p tr&#xEC;nh message-based. C&#xF3; th&#x1EC3; t&#xED;ch h&#x1EE3;p l&#xFD; thuy&#x1EBF;t l&#x1EAD;p tr&#xEC;nh CSP &#x111;&#x1ED3;ng b&#x1ED9;. N&#xF3; c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng &#x111;&#x1EC3; b&#x1EAF;t &#x111;&#x1EA7;u m&#x1ED9;t Goroutine v&#x1EDB;i t&#x1EEB; kh&#xF3;a <code>go</code>. Kh&#xF4;ng gi&#x1ED1;ng nh&#x1B0; <code>Erlang</code>, ng&#xF4;n ng&#x1EEF; <code>Go</code> s&#x1EBD; chia s&#x1EBB; v&#xF9;ng nh&#x1EDB; v&#x1EDB;i nhau.</p>
+<h2 id="151-goroutine-v&#xE0;-thread-system">1.5.1 Goroutine v&#xE0; thread system</h2>
+<p>Goroutine l&#xE0; m&#x1ED9;t &#x111;&#x1A1;n v&#x1ECB; &#x111;&#x1ED3;ng th&#x1EDD;i c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go. Vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o goroutine s&#x1EBD; nh&#x1EB9; h&#x1A1;n thread nhi&#x1EC1;u v&#xE0; th&#xF4;ng qua t&#x1EEB; kh&#xF3;a <code>go</code>. Trong vi&#x1EC7;c hi&#x1EC7;n th&#x1EF1;c ng&#xF4;n ng&#x1EEF; Go, goroutines v&#xE0; system thread kh&#xF4;ng t&#x1B0;&#x1A1;ng &#x111;&#x1B0;&#x1A1;ng nhau. S&#x1EF1; kh&#xE1;c nhau &#x111;&#xF3; ch&#x1EC9; tr&#xEA;n c&#x1A1; s&#x1EDF; &#x111;&#x1ECB;nh l&#x1B0;&#x1EE3;ng, ch&#xED;nh v&#x1EC1; s&#x1EF1; thay &#x111;&#x1ED5;i v&#x1EC1; l&#x1B0;&#x1EE3;ng n&#xE0;y s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n s&#x1EF1; thay &#x111;&#x1ED5;i v&#x1EC1; ch&#x1EA5;t c&#x1EE7;a ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh Go.</p>
+<p>&#x110;&#x1EA7;u ti&#xEA;n kernel thread s&#x1EBD; c&#xF3; m&#x1ED9;t k&#xED;ch th&#x1B0;&#x1EDB;c v&#xF9;ng nh&#x1EDB; stack c&#x1ED1; &#x111;&#x1ECB;nh (th&#xF4;ng th&#x1B0;&#x1EDD;ng v&#xE0;o kho&#x1EA3;ng 2MB). V&#xF9;ng nh&#x1EDB; stack ch&#x1EE7; y&#x1EBF;u &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; l&#x1B0;u tr&#x1EEF; nh&#x1EEF;ng tham s&#x1ED1; v&#xE0; bi&#x1EBF;n c&#x1EE5;c b&#x1ED9; khi ch&#xFA;ng ta g&#x1ECD;i &#x111;&#x1EC7; quy. K&#xED;ch th&#x1B0;&#x1EDB;c c&#x1ED1; &#x111;&#x1ECB;nh c&#x1EE7;a stack s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n hai v&#x1EA5;n &#x111;&#x1EC1;, m&#x1ED9;t l&#xE0; ph&#x1EA7;n l&#x1EDB;n v&#xF9;ng nh&#x1EDB; b&#x1ECB; l&#xE3;ng ph&#xED; khi kh&#x1EDF;i t&#x1EA1;o nhi&#x1EC1;u thread nh&#x1B0;ng th&#x1EF1;c t&#x1EBF; ch&#x1EC9; c&#x1EA7;n m&#x1ED9;t kh&#xF4;ng gian stack nh&#x1ECF; v&#xE0; v&#x1EA5;n &#x111;&#x1EC1; kh&#xE1;c l&#xE0; r&#x1EE7;i ro c&#x1EE7;a vi&#x1EC7;c stack overflow trong khi m&#x1ED9;t s&#x1ED1; &#xED;t thread c&#x1EA7;n m&#x1ED9;t l&#x1B0;&#x1EE3;ng l&#x1EDB;n kh&#xF4;ng gian stack. Gi&#x1EA3;i ph&#xE1;p cho v&#x1EA5;n &#x111;&#x1EC1; n&#xE0;y ch&#xED;nh l&#xE0; ho&#x1EB7;c gi&#x1EA3;m k&#xED;ch th&#x1B0;&#x1EDB;c kh&#xF4;ng gian stack c&#x1EA5;p ph&#xE1;t cho m&#x1ED7;i thread v&#xE0; t&#x103;ng kh&#xF4;ng gian v&#xF9;ng nh&#x1EDB; s&#x1EED; d&#x1EE5;ng, ho&#x1EB7;c t&#x103;ng k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a stack &#x111;&#x1EC3; cho ph&#xE9;p h&#xE0;m &#x111;&#x1EC7; quy &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i s&#xE2;u h&#x1A1;n, nh&#x1B0;ng c&#x1EA3; hai c&#xE1;ch n&#xE0;y kh&#xF4;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t h&#x1EE3;p c&#xF9;ng l&#xFA;c. Thay v&#xEC; &#x111;&#xF3; m&#x1ED9;t gouroutine s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng m&#x1ED9;t v&#xF9;ng nh&#x1EDB; nh&#x1ECF; (kho&#x1EA3;ng 2KB ho&#x1EB7;c 4KB), v&#xE0; khi n&#xF3; ch&#x1EA1;m ng&#x1B0;&#x1EE1;ng &#x111;&#x1EC7; quy s&#xE2;u h&#x1A1;n, kh&#xF4;ng gian stack hi&#x1EC7;n t&#x1EA1;i l&#xE0; kh&#xF4;ng &#x111;&#x1EE7; kho&#x1EA3;ng tr&#x1ED1;ng. Goroutine s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng t&#x103;ng gi&#x1EA3;m kh&#xF4;ng gian stack khi c&#x1EA7;n (k&#xED;ch th&#x1B0;&#x1EDB;c t&#x1ED1;i &#x111;a c&#x1EE7;a stack c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA1;t t&#x1EDB;i 1GB). B&#x1EDF;i v&#xEC; chi ph&#xED; c&#x1EE7;a vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o l&#xE0; nh&#x1ECF;, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng gi&#x1EA3;i ph&#xF3;ng h&#xE0;ng ng&#xE0;n goroutines.</p>
+<p>B&#x1ED9; th&#x1EF1;c thi Go c&#xF3; m&#x1ED9;t b&#x1ED9; &#x111;&#x1ED3;ng th&#x1EDD;i cho ri&#xEA;ng n&#xF3;, n&#xF3; d&#xF9;ng m&#x1ED9;t s&#x1ED1; k&#x129; thu&#x1EAD;t &#x111;&#x1EC3; gh&#xE9;p k&#xEA;nh M Goroutines tr&#xEA;n N thread c&#x1EE7;a h&#x1EC7; th&#x1ED1;ng. C&#x1A1; ch&#x1EBF; &#x111;&#x1ECB;nh th&#x1EDD;i goroutine t&#x1B0;&#x1A1;ng t&#x1EF1; v&#x1EDB;i kernel, nh&#x1B0;ng b&#x1ED9; &#x111;&#x1ECB;nh th&#x1EDD;i  ch&#x1EC9; t&#x1EAD;p trung v&#xE0;o vi&#x1EC7;c Goroutines tr&#xEA;n c&#xE1;c ch&#x1B0;&#x1A1;ng tr&#xEC;nh Go ri&#xEA;ng bi&#x1EC7;t. Goroutine s&#x1EED; d&#x1EE5;ng c&#x1A1; ch&#x1EBF; <code>semi-preemptive cooperative scheduling</code>, n&#xF3; c&#xF3; th&#x1EC3; g&#xE2;y ra vi&#x1EC7;c &#x111;&#x1ECB;nh th&#x1EDD;i (scheduler) khi m&#xE0; ch&#x1B0;&#x1A1;ng tr&#xEC;nh goroutines hi&#x1EC7;n t&#x1EA1;i b&#x1ECB; block, C&#xF9;ng th&#x1EDD;i &#x111;i&#x1EC3;m &#x111;&#xF3;. n&#xF3; s&#x1EBD; switch sang user mode. B&#x1ED9; &#x111;&#x1ECB;nh th&#x1EDD;i ch&#x1EC9; l&#x1B0;u tr&#x1EEF; nh&#x1EEF;ng thanh ghi c&#x1EA7;n thi&#x1EBF;t cho m&#x1ED9;t v&#xE0;i h&#xE0;m &#x111;&#x1EB7;c bi&#x1EC7;t, v&#xE0; chi ph&#xED; chuy&#x1EC3;n ng&#x1EEF; c&#x1EA3;nh c&#x1EE7;a c&#xE1;c goroutines s&#x1EBD; th&#x1EA5;p h&#x1A1;n nhi&#x1EC1;u so v&#x1EDB;i vi&#x1EC7;c chuy&#x1EC3;n ng&#x1EEF; c&#x1EA3;nh c&#x1EE7;a thread h&#x1EC7; th&#x1ED1;ng. B&#x1ED9; runtime c&#xF3; m&#x1ED9;t bi&#x1EBF;n l&#xE0; <code>runtime.GOMAXPROCS</code> n&#xF3; s&#x1EBD; &#x111;i&#x1EC1;u khi&#x1EC3;n s&#x1ED1; l&#x1B0;&#x1EE3;ng system thread hi&#x1EC7;n th&#x1EDD;i ch&#x1EA1;y tr&#xEA;n c&#x1A1; ch&#x1EBF; non-blocking Goroutine th&#xF4;ng th&#x1B0;&#x1EDD;ng.</p>
+<p>B&#x1EAF;t &#x111;&#x1EA7;u m&#x1ED9;t goroutine trong go kh&#xF4;ng ch&#x1EC9; l&#xE0; g&#x1ECD;i m&#x1ED9;t h&#xE0;m, m&#xE0; l&#xE0; k&#xE8;m theo chi ph&#xED; c&#x1EE7;a vi&#x1EC7;c &#x111;&#x1ECB;nh th&#x1EDD;i gi&#x1EEF;a c&#xE1;c Goroutines. Nh&#x1EEF;ng &#x111;&#x1EB7;c &#x111;i&#x1EC3;m &#x111;&#xF3; c&#xF3; s&#x1EF1; &#x1EA3;nh h&#x1B0;&#x1EDF;ng l&#x1EDB;n &#x111;&#x1EBF;n s&#x1EF1; ph&#x1ED5; bi&#x1EBF;n v&#xE0; ph&#xE1;t tri&#x1EC3;n c&#x1EE7;a l&#x1EAD;p tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i.</p>
+<h2 id="152-to&#xE1;n-t&#x1EED;-atomic">1.5.2 To&#xE1;n t&#x1EED; Atomic</h2>
+<p>T&#xE1;c v&#x1EE5; atomic l&#xE0; nh&#x1EEF;ng t&#xE1;c v&#x1EE5; nh&#x1ECF; nh&#x1EA5;t v&#xE0; kh&#xF4;ng th&#x1EC3; ch&#x1EA1;y song song &#x111;&#x1B0;&#x1EE3;c v&#x1EDB;i c&#xE1;c t&#xE1;c v&#x1EE5; kh&#xE1;c waptrong l&#x1EAD;p tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i. V&#x1EC1; m&#x1EB7;t chung, n&#x1EBF;u nhi&#x1EC1;u t&#xE1;c v&#x1EE5; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi &#x111;&#x1ED3;ng th&#x1EDD;i tr&#xEA;n c&#xF9;ng m&#x1ED9;t t&#xE0;i nguy&#xEA;n l&#xE0; atomic, sau &#x111;&#xF3; nhi&#x1EC1;u nh&#x1EA5;t m&#x1ED9;t th&#x1EF1;c th&#x1EC3; c&#xF3; th&#x1EC3; truy c&#x1EAD;p v&#xE0;o m&#x1ED9;t t&#xE0;i nguy&#xEA;n. T&#x1EEB; g&#xF3;c &#x111;&#x1ED9; thread, nh&#x1EEF;ng thread kh&#xE1;c kh&#xF4;ng th&#x1EC3; c&#xF9;ng truy c&#x1EAD;p v&#xE0;o t&#xE0;i nguy&#xEA;n. T&#xE1;c v&#x1EE5; atomic trong m&#xF4; h&#xEC;nh l&#x1EAD;p tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i s&#x1EBD; kh&#xF4;ng kh&#xE1;c nhau nhi&#x1EC1;u v&#x1EDB;i m&#xF4; h&#xEC;nh single thread, v&#xE0; s&#x1EF1; t&#x1B0;&#x1A1;ng th&#xED;ch n&#xE0;y &#x111;&#x1ED1;i v&#x1EDB;i vi&#x1EC7;c chia s&#x1EBB; resource s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o.
+Th&#xF4;ng th&#x1B0;&#x1EDD;ng s&#x1EBD; c&#xF3; m&#x1ED9;t v&#xE0;i l&#x1EC7;nh CPU &#x111;&#x1EB7;c bi&#x1EC7;t gi&#xFA;p b&#x1EA3;o v&#x1EC7; v&#xF9;ng nh&#x1EDB; n&#xE0;y. ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng <code>sync.Mutex</code> &#x111;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c &#x111;i&#x1EC1;u &#x111;&#xF3;.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;sync&quot;</span>
+)
+
+<span class="hljs-keyword">var</span> total <span class="hljs-keyword">struct</span> {
+    sync.Mutex
+    value <span class="hljs-keyword">int</span>
+}
+
+<span class="hljs-keyword">func</span> worker(wg *sync.WaitGroup) {
+    <span class="hljs-keyword">defer</span> wg.Done()
+
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++ {
+        total.Lock()
+        total.value += i
+        total.Unlock()
+    }
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+    wg.Add(<span class="hljs-number">2</span>)
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    wg.Wait()
+
+    fmt.Println(total.value)
+}
+</code></pre>
+<p>Trong v&#xF2;ng l&#x1EB7;p c&#x1EE7;a <code>worker</code>, theo th&#x1EE9; t&#x1EF1; s&#x1EBD; &#x111;&#x1EA3;m b&#x1EA3;o <code>total.value+=i</code> &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1A1;n nguy&#xEA;n, ch&#xFA;ng ta d&#xF9;ng <code>sync.Mutex</code> &#x111;&#x1EBB; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng m&#x1EC7;nh &#x111;&#x1EC1; ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p  b&#x1EDF;i m&#x1ED9;t thread trong c&#xF9;ng m&#x1ED9;t th&#x1EDD;i &#x111;i&#x1EC3;m b&#x1EB1;ng c&#x1A1; ch&#x1EBF; locking v&#xE0; unlocking. Trong ch&#x1B0;&#x1A1;ng tr&#xEC;nh v&#x1EDB;i m&#xF4; h&#xEC;nh mutithread, r&#x1EA5;t c&#x1EA7;n thi&#x1EBF;t &#x111;&#x1EC3; lock v&#xE0; unlock tr&#x1B0;&#x1EDB;c v&#xE0; sau khi truy nh&#x1EAD;p v&#xE0;o v&#xF9;ng critical section. V&#x1EDB;i kh&#xF4;ng c&#xF3; s&#x1EF1; b&#x1EA3;o v&#x1EC7; bi&#x1EBF;n <code>total</code> , k&#x1EBF;t qu&#x1EA3; cu&#x1ED1;i c&#xF9;ng c&#xF3; th&#x1EC3; b&#x1ECB; sai kh&#xE1;c do s&#x1EF1; truy nh&#x1EAD;p &#x111;&#x1ED3;ng th&#x1EDD;i c&#x1EE7;a nhi&#x1EC1;u thread.</p>
+<p>S&#x1EED; d&#x1EE5;ng mutex &#x111;&#x1EC3; b&#x1EA3;o v&#x1EC7; bi&#x1EBF;n s&#x1ED1; h&#x1ECD;c &#x111;&#x1B0;&#x1EE3;c chia s&#x1EBB; chung l&#xE0; m&#x1ED9;t c&#xE1;ch c&#x1ED3;ng k&#x1EC1;nh v&#xE0; kh&#xF4;ng hi&#x1EC7;u qu&#x1EA3;. Th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n <code>sync/atomic</code> s&#x1EBD; c&#xF9;ng c&#x1EA5;p m&#x1ED9;t g&#xF3;i v&#x1EDB;i s&#x1EF1; h&#x1ED7; tr&#x1EE3; cho to&#xE1;n t&#x1EED; &#x111;&#x1A1;n nguy&#xEA;n. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i &#x111;o&#x1EA1;n code tr&#xEA;n nh&#x1B0; sau.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;sync&quot;</span>
+    <span class="hljs-string">&quot;sync/atomic&quot;</span>
+)
+
+<span class="hljs-keyword">var</span> total <span class="hljs-keyword">uint64</span>
+
+<span class="hljs-keyword">func</span> worker(wg *sync.WaitGroup) {
+    <span class="hljs-keyword">defer</span> wg.Done()
+
+    <span class="hljs-keyword">var</span> i <span class="hljs-keyword">uint64</span>
+    <span class="hljs-keyword">for</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++ {
+        atomic.AddUint64(&amp;total, i)
+    }
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+    wg.Add(<span class="hljs-number">2</span>)
+
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    wg.Wait()
+}
+</code></pre>
+<p>H&#xE0;m <code>atomic.AddUint64</code> khi &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i s&#x1EBD; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng bi&#x1EBF;n <code>total</code> &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECD;c v&#xE0; c&#x1EAD;p nh&#x1EAD;t v&#xE0; l&#x1B0;u tr&#x1EEF; nh&#x1B0; m&#x1ED9;t t&#xE1;c v&#x1EE5; &#x111;&#x1A1;n nguy&#xEA;n, do &#x111;&#xF3; vi&#x1EC7;c truy c&#x1EAD;p b&#x1EDF;i nhi&#x1EC1;u thread &#x111;&#x1B0;&#x1EE3;c an to&#xE0;n.</p>
+<p>T&#xE1;c v&#x1EE5; &#x111;&#x1A1;n nguy&#xEA;n v&#x1EDB;i mutex c&#xF3; th&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c m&#x1ED9;t c&#xE1;ch hi&#x1EC7;u qu&#x1EA3; trong m&#x1ED9;t ch&#x1EBF; &#x111;&#x1ED9; duy nh&#x1EA5;t. Chi ph&#xED; c&#x1EE7;a mutex s&#x1EBD; cao h&#x1A1;n nhi&#x1EC1;u so v&#x1EDB;i m&#x1ED9;t bi&#x1EBF;n interger b&#xEC;nh th&#x1B0;&#x1EDD;ng. b&#x1EA1;n c&#xF3; th&#x1EC3; c&#x1ED9;ng m&#x1ED9;t s&#x1ED1; numeric v&#x1EDB;i m&#x1ED9;t hi&#x1EC7;u su&#x1EA5;t cao, &#x111;&#x1EC3; thay th&#x1EC3; hi&#x1EC7;u su&#x1EA5;t b&#x1EB1;ng vi&#x1EC7;c l&#xE0;m gi&#x1EA3;m s&#x1ED1; l&#x1B0;&#x1EE3;ng mutex c&#xF9;ng lock b&#x1EDF;i vi&#x1EC7;c b&#x1EA3;o v&#x1EC7; t&#xE1;c v&#x1EE5; &#x111;&#x1A1;n nguy&#xEA;n.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> singleton <span class="hljs-keyword">struct</span> {}
+
+<span class="hljs-keyword">var</span> (
+    instance    *singleton
+    initialized <span class="hljs-keyword">uint32</span>
+    mu          sync.Mutex
+)
+
+<span class="hljs-keyword">func</span> Instance() *singleton {
+    <span class="hljs-keyword">if</span> atomic.LoadUint32(&amp;initialized) == <span class="hljs-number">1</span> {
+        <span class="hljs-keyword">return</span> instance
+    }
+
+    mu.Lock()
+    <span class="hljs-keyword">defer</span> mu.Unlock()
+
+    <span class="hljs-keyword">if</span> instance == <span class="hljs-literal">nil</span> {
+        <span class="hljs-keyword">defer</span> atomic.StoreUint32(&amp;initialized, <span class="hljs-number">1</span>)
+        instance = &amp;singleton{}
+    }
+    <span class="hljs-keyword">return</span> instance
+}
+</code></pre>
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3;  tr&#xED;ch xu&#x1EA5;t ph&#x1EA7;n code tr&#xEA;n tr&#x1EDF; th&#xE0;nh <code>sync.One</code> b&#x1EB1;ng vi&#x1EC7;c hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n nh&#x1B0; sau.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> Once <span class="hljs-keyword">struct</span> {
+    m    Mutex
+    done <span class="hljs-keyword">uint32</span>
+}
+
+<span class="hljs-keyword">func</span> (o *Once) Do(f <span class="hljs-keyword">func</span>()) {
+    <span class="hljs-keyword">if</span> atomic.LoadUint32(&amp;o.done) == <span class="hljs-number">1</span> {
+        <span class="hljs-keyword">return</span>
+    }
+
+    o.m.Lock()
+    <span class="hljs-keyword">defer</span> o.m.Unlock()
+
+    <span class="hljs-keyword">if</span> o.done == <span class="hljs-number">0</span> {
+        <span class="hljs-keyword">defer</span> atomic.StoreUint32(&amp;o.done, <span class="hljs-number">1</span>)
+        f()
+    }
+}
+</code></pre>
+<p>D&#x1EF1;a tr&#xEA;n <code>sync.One</code> ch&#xFA;ng ta s&#x1EBD; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i ch&#x1EBF; &#x111;&#x1ED9; single piece nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> (
+    instance *singleton
+    once     sync.Once
+)
+
+<span class="hljs-keyword">func</span> Instance() *singleton {
+    once.Do(<span class="hljs-keyword">func</span>() {
+        instance = &amp;singleton{}
+    })
+    <span class="hljs-keyword">return</span> instance
+}
+</code></pre>
+<p><code>sync/atomic</code> package n&#xE0;y s&#x1EBD; h&#x1ED7; tr&#x1EE3; nh&#x1EEF;ng t&#xE1;c v&#x1EE5; atomic cho nh&#x1EEF;ng ki&#x1EC3;u c&#x1A1; b&#x1EA3;n v&#xE0; cho vi&#x1EC7;c &#x111;&#x1ECD;c v&#xE0; ghi m&#x1ED9;t &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng ph&#x1EE9;c t&#x1EA1;p, <code>atomic.Value</code> s&#x1EBD; h&#x1ED7; tr&#x1EE3; hai h&#xE0;m <code>Load</code> v&#xE0; <code>Store</code> hai h&#xE0;m l&#xE0;m vi&#x1EC7;c load v&#xE0; save d&#x1EEF; li&#x1EC7;u, tr&#x1EA3; v&#x1EC1; gi&#xE1; tr&#x1ECB; v&#xE0; tham s&#x1ED1; l&#xE0; <code>interface{}</code> n&#xF3; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng trong m&#x1ED9;t v&#xE0;i ki&#x1EC3;u &#x111;&#x1EB7;c bi&#x1EC7;t.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> config atomic.Value <span class="hljs-comment">// To&#xE1;n t&#x1EED; atomic</span>
+
+<span class="hljs-comment">// L&#x1B0;u gi&#xE1; tr&#x1ECB; v&#xE0;o atomic</span>
+config.Store(loadConfig())
+
+<span class="hljs-comment">// &#x111;&#x1ECB;nh th&#x1EDD;i sau m&#x1ED7;i gi&#xE2;y s&#x1EBD; c&#x1EAD;p nh&#x1EAD;t l&#x1EA1;i</span>
+<span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+    <span class="hljs-keyword">for</span> {
+        time.Sleep(time.Second)
+        config.Store(loadConfig())
+    }
+}()
+
+<span class="hljs-comment">// Gi&#x1EA3;i ph&#xF3;ng 10 thread &#x111;&#x1EC3; l&#x1EA5;y gi&#xE1; tr&#x1ECB;</span>
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span> r := <span class="hljs-keyword">range</span> requests() {
+            c := config.Load()
+        }
+    }()
+}
+</code></pre>
+<p>&#x110;&#xF3; l&#xE0; m&#x1ED9;t m&#xF4; h&#xEC;nh producer v&#xE0; comsumer. B&#xEA;n d&#x1B0;&#x1EDB;i thread s&#x1EBD; sinh ra th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh g&#x1EA7;n nh&#x1EA5;t; &#x1EDF; ph&#xED;a front-end s&#x1EBD; c&#xF3; nhi&#x1EC1;u worker thread &#x111;&#x1EC3; l&#x1EA5;y th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh g&#x1EA7;n nh&#x1EA5;t.</p>
+<h2 id="153-m&#xF4;-h&#xEC;nh-th&#x1ED1;ng-nh&#x1EA5;t-chu&#x1ED7;i-v&#xF9;ng-nh&#x1EDB;">1.5.3 M&#xF4; h&#xEC;nh th&#x1ED1;ng nh&#x1EA5;t chu&#x1ED7;i v&#xF9;ng nh&#x1EDB;</h2>
+<p>N&#x1EBF;u b&#x1EA1;n mu&#x1ED1;n &#x111;&#x1ED3;ng b&#x1ED9; d&#x1EEF; li&#x1EC7;u gi&#x1EEF;a c&#xE1;c thread, t&#xE1;c v&#x1EE5; atomic s&#x1EBD; cung c&#x1EA5;p m&#x1ED9;t v&#xE0;i c&#x1A1; ch&#x1EBF; &#x111;&#x1ED3;ng b&#x1ED9; &#x111;&#x1EC3; gi&#xFA;p cho ng&#x1B0;&#x1EDD;i l&#x1EAD;p tr&#xEC;nh, Tuy nhi&#xEA;n, s&#x1EF1; &#x111;&#x1EA3;m b&#x1EA3;o &#x111;&#xF3; c&#x169;ng c&#xF3; m&#x1ED9;t ti&#x1EC1;n &#x111;&#x1EC1;: m&#x1ED9;t chu&#x1ED7;i m&#xF4; h&#xEC;nh  consistency memory (<code>sequential consistency memory model</code>) . &#x110;&#x1EC3; hi&#x1EC3;u th&#x1EE9; t&#x1EF1; c&#x1EE7;a ch&#xFA;ng, h&#xE3;y l&#xE0;m m&#x1ED9;t v&#xED; d&#x1EE5; nh&#x1ECF;</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> a <span class="hljs-keyword">string</span>
+<span class="hljs-keyword">var</span> done <span class="hljs-keyword">bool</span>
+
+<span class="hljs-keyword">func</span> setup() {
+    a = <span class="hljs-string">&quot;hello world&quot;</span>
+    done = <span class="hljs-literal">true</span>
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">go</span> setup()
+    <span class="hljs-keyword">for</span> !done {}
+    <span class="hljs-built_in">print</span>(a)
+}
+</code></pre>
+<p>Ch&#xFA;ng ta s&#x1EBD; t&#x1EA1;o ra m&#x1ED9;t set up thread cho vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o chu&#x1ED7;i ban &#x111;&#x1EA7;u kh&#x1EDF;i t&#x1EA1;o c&#x1EDD; <code>done</code> theo sau t&#xE1;c v&#x1EE5; kh&#x1EDF;i t&#x1EA1;o l&#xE0; true. Trong thread main, n&#x1A1;i m&#xE0; h&#xE0;m &#x111;&#x1B0;&#x1EE3;c l&#x1B0;u gi&#x1EEF;, khi m&#xE0; c&#xE2;u l&#x1EC7;nh <code>for !done{}</code> ki&#x1EC3;m tra bi&#x1EBF;n done c&#xF3; th&#x1EC3; chuy&#x1EC3;n th&#xE0;nh true, n&#xF3; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c xem x&#xE9;t nh&#x1B0; t&#xE1;c v&#x1EE5; kh&#x1EDF;i t&#x1EA1;o string &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n th&#xE0;nh, sau &#x111;&#xF3; m&#x1ED9;t k&#xED; t&#x1EF1; trong string s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c in ra.</p>
+<p>Tuy nhi&#xEA;n, ng&#xF4;n ng&#x1EEF; Go s&#x1EBD; kh&#xF4;ng &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng vi&#x1EC7;c ghi trong main s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c xem x&#xE9;t l&#xE0; <code>done</code> x&#x1EA3;y ra sau khi ph&#xE9;p to&#xE1;n ghi c&#x1EE7;a string <code>a</code>, do &#x111;&#xF3; ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; nh&#x1B0; l&#xE0; in ra m&#x1ED9;t chu&#x1ED7;i r&#x1ED7;ng. &#x110;&#x1EC3; l&#xE0;m v&#x1EA5;n &#x111;&#x1EC1; t&#x1EC7; h&#x1A1;n, b&#x1EDF;i v&#xEC; kh&#xF4;ng c&#xF3; m&#x1ED9;t c&#x1A1; ch&#x1EBF; &#x111;&#x1ED3;ng b&#x1ED9; s&#x1EF1; ki&#x1EC7;n gi&#x1EEF;a hai thread, v&#xE0; h&#xE0;m main s&#x1EBD; r&#x1A1;i v&#xE0;o tr&#x1EA1;ng th&#xE1;i l&#x1EB7;p kh&#xF4;ng gi&#x1EDB;i h&#x1EA1;n.</p>
+<p>Trong ng&#xF4;n ng&#x1EEF; Go, m&#x1ED9;t c&#x1EA5;u tr&#xFA;c v&#xF9;ng nh&#x1EDB; li&#xEA;n t&#x1EE5;c s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o trong c&#xF9;ng m&#x1ED9;t Goroutine thread. tuy nhi&#xEA;n gi&#x1EEF;a nh&#x1EEF;ng Goroutine kh&#xE1;c nhau, t&#xED;nh ch&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9; c&#x1EE7;a chu&#x1ED7;i nh&#x1EDB; s&#x1EBD; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o. v&#xE0; m&#x1ED9;t c&#xE1;ch &#x111;&#x1ECB;nh ngh&#x129;a &#x111;&#x1ED3;ng b&#x1ED9; s&#x1EF1; ki&#x1EC7;n s&#x1EBD; c&#x1EA7;n thi&#x1EBF;t &#x111;&#x1EC3; t&#x103;ng t&#x1ED1;i &#x111;a t&#xED;nh song song, b&#x1ED9; bi&#xEA;n d&#x1ECB;ch Go s&#x1EBD; bi&#xEA;n d&#x1ECB;ch v&#xE0; b&#x1ED9; x&#x1EED; l&#xFD; s&#x1EBD; s&#x1EAF;p x&#x1EBF;p l&#x1EA1;i th&#x1EE9; th&#x1EF1; c&#xE1;c l&#x1EC7;nh m&#xE0; kh&#xF4;ng &#x1EA3;nh h&#x1B0;&#x1EDF;ng &#x111;&#x1EBF;n nh&#x1EEF;ng quy lu&#x1EAD;t tr&#xEA;n (CPU s&#x1EBD; bi&#x1EC3;u di&#x1EC5;n m&#x1ED9;t v&#xE0;i l&#x1EC7;nh ngo&#xE0;i th&#x1EE9; t&#x1EF1; &#x111;&#xF3;)</p>
+<p>Do &#x111;&#xF3;, n&#x1EBF;u <code>a=1;b=2</code> hai m&#x1EC7;nh &#x111;&#x1EC1; tr&#xEA;n s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n tu&#x1EA7;n t&#x1EF1; trong goroutine, m&#x1EB7;c d&#xF9; <code>a=1</code> hay l&#xE0; <code>b=2</code> &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi tr&#x1B0;&#x1EDB;c. Nh&#x1EEF;ng s&#x1EF1; thay &#x111;&#x1ED5;i &#x111;&#xF3; kh&#xF4;ng theo d&#x1EF1; &#x111;o&#xE1;n tr&#x1B0;&#x1EDB;c. N&#x1EBF;u ch&#x1B0;&#x1A1;ng tr&#xEC;nh &#x111;&#x1ED3;ng b&#x1ED9; kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;inh d&#x1EF1;a v&#xE0;o th&#x1EE9; t&#x1EF1; c&#xE1;c m&#x1ED1;i li&#xEA;n h&#x1EC7; c&#x1EE7;a s&#x1EF1; ki&#x1EC7;n, k&#x1EBF;t qu&#x1EA3; c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; kh&#xF4;ng ch&#x1EAF;n ch&#x1EAF;n, v&#xED; d&#x1EE5; b&#xEA;n d&#x1B0;&#x1EDB;i</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">go</span> <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Hello World&quot;</span>);
+}
+</code></pre>
+<p>Theo &#x111;&#x1EB7;c t&#x1EA3; c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go, h&#xE0;m main s&#x1EBD; k&#x1EBF;t th&#xFA;c v&#xE0; khi h&#xE0;m k&#x1EBF;t th&#xFA;c n&#xF3; s&#x1EBD; kh&#xF4;ng &#x111;&#x1EE3;i b&#x1EA5;t k&#x1EF3; qu&#xE1; tr&#xEC;nh n&#xE0;o ch&#x1EA1;y n&#x1EC1;n b&#xEA;n d&#x1B0;&#x1EDB;i. B&#x1EDF;i v&#xEC; vi&#x1EC7;c th&#x1EF1;c thi goroutine trong h&#xE0;m main s&#x1EBD; tr&#x1EA3; v&#x1EC1; m&#x1ED9;t s&#x1EF1; ki&#x1EC7;n l&#xE0; &#x111;&#x1ED3;ng th&#x1EDD;i, b&#x1EA5;t c&#x1EE9; ph&#x1EA7;n n&#xE0;o c&#x169;ng c&#xF3; th&#x1EC3; ch&#x1EA1;y tr&#x1B0;&#x1EDB;c. Do &#x111;&#xF3;, khi in ra m&#xE0;n h&#xEC;nh, b&#x1EA5;t c&#x1EE9; khi n&#xE0;o ch&#xFA;ng in ra l&#xE0; kh&#xF4;ng bi&#x1EBF;t.</p>
+<p>S&#x1EED; d&#x1EE5;ng t&#xE1;c v&#x1EE5; atomic tr&#x1B0;&#x1EDB;c kh&#xF4;ng gi&#xFA;p gi&#x1EA3;i b&#xE0;i to&#xE1;n tr&#xEA;n b&#x1EDF;i v&#xEC; ch&#xFA;ng ta kh&#xF4;ng x&#xE1;c &#x111;&#x1ECB;nh th&#x1EE9; t&#x1EF1; c&#x1EE7;a hai ph&#xE9;p to&#xE1;n atomic, H&#x1B0;&#x1EDB;ng gi&#x1EA3;i quy&#x1EBF;t c&#x1EE7;a v&#x1EA5;n &#x111;&#x1EC1; n&#xE0;y l&#xE0; c&#x1EE5; th&#x1EC3; cho ch&#xFA;ng ch&#x1EA1;y theo th&#x1EE9; t&#x1EF1; nh&#x1EDD; v&#xE0;o vi&#x1EC7;c c&#x1A1; ch&#x1EBF; b&#xEA;n d&#x1B0;&#x1EDB;i,</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+        <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Hello World&quot;</span>)
+        done &lt;- <span class="hljs-number">1</span>
+    }()
+
+    &lt;-done
+}
+</code></pre>
+<p>Khi m&#xE0; <code>&lt;-done</code> &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi, th&#xEC; nh&#x1EEF;ng y&#xEA;u c&#x1EA7;u kh&#xF4;ng th&#x1EC3; thay th&#x1EBF; <code>done &lt;- 1</code> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c. Theo nh&#x1B0; trong c&#xF9;ng m&#x1ED9;t goroutine s&#x1EBD; th&#x1ECF;a m&#xE3;n quy lu&#x1EAD;t nh&#x1EA5;t qu&#xE1;n. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; n&#xF3;i r&#x1EB1;ng khi <code>done &lt;- 1</code> &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi, th&#xEC; m&#x1EC7;nh &#x111;&#x1EC1; <code>println()</code> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi tr&#x1B0;&#x1EDB;c r&#x1ED3;i,  Do &#x111;&#xF3; ch&#x1B0;&#x1A1;ng tr&#xEC;nh hi&#x1EC7;n t&#x1EA1;i s&#x1EBD; c&#xF3; k&#x1EBF;t qu&#x1EA3; &#x111;&#x1B0;&#x1EE3;c in ra m&#xE0;n h&#xEC;nh b&#xEC;nh th&#x1B0;&#x1EDD;ng.</p>
+<p>D&#x129; nhi&#xEA;n, c&#x1A1; ch&#x1EBF; &#x111;&#x1ED3;ng b&#x1ED9; c&#x1EE7;a <code>sync.Mutex</code> s&#x1EBD; c&#xF3; th&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng qua <code>Mutex</code></p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> mu sync.Mutex
+
+    mu.Lock()
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+        <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Hello World&quot;</span>)
+        mu.Unlock()
+    }()
+
+    mu.Lock()
+}
+</code></pre>
+<p>C&#xF3; th&#x1EC3; x&#xE1;c &#x111;&#x1ECB;nh r&#x1EB1;ng, b&#xEA;n d&#x1B0;&#x1EDB;i vi&#x1EC7;c th&#x1EF1;c thi <code>mutex.UnLock()</code> s&#x1EBD; ph&#x1EA3;i l&#xE0; <code>println(&quot;Hello World&quot;)</code> ho&#xE0;n th&#xE0;nh tr&#x1B0;&#x1EDB;c. (m&#x1ED9;t s&#x1ED1; thread th&#x1ECF;a m&#xE3;n th&#x1EE9; t&#x1EF1; nh&#x1EA5;t qu&#xE1;n), v&#xE0; trong main, h&#xE0;m th&#x1EE9; hai s&#x1EBD; <code>mu.Lock()</code> s&#x1EBD; ph&#x1EA3;i l&#xE0; <code>mu.UnLock()</code> x&#x1EA3;y ra b&#xEA;n d&#x1B0;&#x1EDB;i background thread (&#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o b&#x1EDF;i <code>sync.Mutex</code>) v&#xE0; b&#xEA;n d&#x1B0;&#x1EDB;i n&#x1EC1;n s&#x1EBD; in ra c&#xF4;ng vi&#x1EC7;c &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n th&#xE0;nh m&#x1ED9;t c&#xE1;ch th&#xE0;nh c&#xF4;ng.</p>
+<h2 id="154-kh&#x1EDF;i-t&#x1EA1;o-chu&#x1ED7;i">1.5.4 Kh&#x1EDF;i t&#x1EA1;o chu&#x1ED7;i</h2>
+<p>Trong ch&#x1B0;&#x1A1;ng tr&#x1B0;&#x1EDB;c, ch&#xFA;ng ta &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c gi&#x1EDB;i thi&#x1EC7;u ng&#x1EAF;n g&#x1ECD;n v&#x1EC1; vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o m&#x1ED9;t chu&#x1ED7;i trong ch&#x1B0;&#x1A1;ng tr&#xEC;nh, n&#xF3; l&#xE0; m&#x1ED9;t s&#x1ED1; &#x111;&#x1EB7;c &#x111;i&#x1EC3;m &#x111;&#x1EB7;t bi&#x1EC7;t c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go theo m&#xF4; h&#xEC;nh v&#xF9;ng nh&#x1EDB; &#x111;&#x1ED3;ng th&#x1EDD;i.</p>
+<p>Vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o v&#xE0; th&#x1EF1;c thi trong ch&#x1B0;&#x1A1;ng tr&#xEC;nh Go lu&#xF4;n lu&#xF4;n b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng h&#xE0;m <code>main.main</code>. Tuy nhi&#xEA;n n&#x1EBF;u package <code>main</code> import c&#xE1;c package kh&#xE1;c v&#xE0;o, ch&#xFA;ng s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c import theo th&#x1EE9; t&#x1EF1; c&#x1EE7;a string c&#x1EE7;a tr&#xEA;n file v&#xE0; t&#xEA;n th&#x1B0; m&#x1EE5;c) N&#x1EBF;u m&#x1ED9;t package &#x111;&#x1B0;&#x1EE3;c import nhi&#x1EC1;u l&#x1EA7;n, n&#xF3; ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c import v&#xE0; th&#x1EF1;c thi &#x111;&#xFA;ng m&#x1ED9;t l&#x1EA7;n. Khi m&#xE0; m&#x1ED9;t package &#x111;&#x1B0;&#x1EE3;c import, n&#x1EBF;u n&#xF3; c&#x169;ng import nh&#x1EEF;ng package kh&#xE1;c n&#x1EEF;a, th&#xEC; &#x111;&#x1EA7;u ti&#xEA;n s&#x1EBD; bao g&#x1ED3;m package kh&#xE1;c, sau &#x111;&#xF3; t&#x1EA1;o ra v&#xE0; kh&#x1EDF;i t&#x1EA1;o bi&#x1EBF;n v&#xE0; h&#x1EB1;ng c&#x1EE7;a package. Sau &#x111;&#xF3; h&#xE0;m <code>init</code> trong package, n&#xEA;u m&#x1ED9;t package c&#xF3; nhi&#x1EC1;u h&#xE0;m <code>init</code> th&#xEC; vi&#x1EC7;c hi&#x1EC7;n th&#x1EF1;c s&#x1EBD; g&#x1ECD;i ch&#xFA;ng theo th&#x1EE9; t&#x1EF1; file name, nhi&#x1EC1;u h&#xE0;m init trong c&#xF9;ng m&#x1ED9;t file &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i theo th&#x1EE9; t&#x1EF1; ch&#xFA;ng xu&#x1EA5;t hi&#x1EC7;n (<code>init</code> kh&#xF4;ng ph&#x1EA3;i l&#xE0; m&#x1ED9;t h&#xE0;m th&#xF4;ng th&#x1B0;&#x1EDD;ng, ch&#xFA;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a nhi&#x1EC1;u l&#x1EA7;n, ch&#xFA;ng s&#x1EBD; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i t&#x1EEB; nh&#x1EEF;ng h&#xE0;m kh&#xE1;c). Cu&#x1ED1;i c&#xF9;ng, package <code>main</code> bi&#x1EBF;n v&#xE0; h&#x1EB1;ng &#x111;&#x1B0;&#x1EE3;c khai b&#xE1;o v&#xE0; kh&#x1EDF;i t&#x1EA1;o, v&#xE0; h&#xE0;m <code>init</code> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi tr&#x1B0;&#x1EDB;c khi h&#xE0;m th&#x1EF1;c thi <code>main.main</code>. Ch&#x1B0;&#x1A1;ng tr&#xEC;nh b&#x1EAF;t &#x111;&#x1EA7;u th&#x1EF1;c thi m&#x1ED9;t c&#xE1;ch b&#xEC;nh th&#x1B0;&#x1EDD;ng, theo sau l&#xE0; m&#x1ED9;t s&#x1A1; &#x111;&#x1ED3; ng&#x1EEF; ngh&#x129;a c&#x1EE7;a vi&#x1EC7;c kh&#x1EDF;i &#x111;&#x1ED9;ng h&#xE0;m Go b&#xEA;n d&#x1B0;&#x1EDB;i.</p>
+<p align="center" width="600">
+<img src="../images/ch1-12-init.ditaa.png">
+<br>
+<span>H&#xEC;nh 1-12 Qu&#xE1; tr&#xEC;nh kh&#x1EDF;i t&#x1EA1;o package</span>
+</p>
+
+<p>N&#xEA;n ch&#xFA; &#xFD; r&#x1EB1;ng <code>main.main</code> trong nh&#x1EEF;ng m&#xE3; ngu&#x1ED3;n s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi trong c&#xF9;ng Goroutine trong c&#xF9;ng m&#x1ED9;t h&#xE0;m m&#xE0; n&#xF3; th&#x1EF1;c thi, v&#xE0; n&#xF3; c&#x169;ng l&#xE0; vi&#x1EC7;c ch&#x1EA1;y trong main thread c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh. N&#x1EBF;u h&#xE0;m <code>init</code> gi&#x1EA3;i ph&#xF3;ng m&#x1ED9;t Goroutine m&#x1EDB;i v&#x1EDB;i t&#x1EEB; kh&#xF3;a <code>go</code>, th&#xEC; Goroutine v&#xE0; <code>main.main</code> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi m&#x1ED9;t c&#xE1;ch tu&#x1EA7;n t&#x1EF1;.</p>
+<p>B&#x1EDF;i v&#xEC; t&#x1EA5;t c&#x1EA3; h&#xE0;m <code>init</code> v&#xE0; h&#xE0;m <code>main</code> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n th&#xE0;nh trong c&#xF9;ng m&#x1ED9;t thread, n&#xF3; c&#x169;ng s&#x1EBD; tho&#x1EA3; m&#xE3;n th&#x1EE9; t&#x1EF1; v&#x1EC1; m&#xF4; h&#xEC;nh nh&#x1EA5;t qu&#xE1;n.</p>
+<h2 id="155-kh&#x1EDF;i-t&#x1EA1;o-m&#x1ED9;t-goroutine">1.5.5 Kh&#x1EDF;i t&#x1EA1;o m&#x1ED9;t Goroutine</h2>
+<p>M&#x1EC7;nh &#x111;&#x1EC1; &#x111;&#x1EE9;ng tr&#x1B0;&#x1EDB;c t&#x1EEB; kh&#xF3;a <code>go</code> s&#x1EBD; t&#x1EA1;o ra m&#x1ED9;t Goroutine m&#x1EDB;i tr&#x1B0;&#x1EDB;c khi tr&#x1EA3; v&#x1EC1; m&#x1ED9;t goroutine hi&#x1EC7;n t&#x1EA1;i, v&#xED; d&#x1EE5; :</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> a <span class="hljs-keyword">string</span>
+
+<span class="hljs-keyword">func</span> f() {
+    <span class="hljs-built_in">print</span>(a)
+}
+
+<span class="hljs-keyword">func</span> hello() {
+    a = <span class="hljs-string">&quot;hello world&quot;</span>
+    <span class="hljs-keyword">go</span> f()
+}
+</code></pre>
+<p>Vi&#x1EC7;c th&#x1EF1;c thi c&#x1EE7;a <code>go f()</code> s&#x1EBD; t&#x1EA1;o ra m&#x1ED9;t Goroutine, v&#xE0; h&#xE0;m <code>hello</code> s&#x1EBD; th&#x1EF1;c thi c&#xF9;ng l&#xFA;c v&#x1EDB;i Goroutine. Theo th&#x1EE9; t&#x1EF1; c&#x1EE7;a c&#xE1;c statement &#x111;&#x1B0;&#x1EE3;c vi&#x1EBF;t, n&#xF3; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh b&#x1EB1;ng m&#x1ED9;t khi vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o Goroutine &#x111;&#x1B0;&#x1EE3;c x&#x1EA3;y ra, n&#xF3; c&#xF3; th&#x1EC3; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c s&#x1EAF;p x&#x1EBF;p. N&#xF3; l&#xE0; vi&#x1EC7;c &#x111;&#x1ED3;ng th&#x1EDD;i. Vi&#x1EC7;c g&#x1ECD;i hello s&#x1EBD; in ra t&#x1EA1;i m&#x1ED9;t s&#x1ED1; &#x111;i&#x1EC3;m trong t&#x1B0;&#x1A1;ng lai &quot;hello,world&quot;, ho&#x1EB7;c c&#xF3; th&#x1EC3; l&#xE0; <code>hello</code> &#x111;&#x1B0;&#x1EE3;c in ra sao khi h&#xE0;m &#x111;&#xE3; th&#x1EF1;c thi xong</p>
+<h2 id="156-giao-ti&#x1EBF;p-th&#xF4;ng-qua-k&#xEA;nh-channel">1.5.6 Giao ti&#x1EBF;p th&#xF4;ng qua k&#xEA;nh Channel</h2>
+<p>Giao ti&#x1EBF;p th&#xF4;ng qua channel l&#xE0; m&#x1ED9;t ph&#x1B0;&#x1A1;ng ph&#xE1;p ch&#xED;nh trong vi&#x1EC7;c &#x111;&#x1ED3;ng b&#x1ED9; gi&#x1EEF;a c&#xE1;c goroutine. M&#x1ED7;i l&#x1EA7;n th&#x1EF1;c hi&#x1EC7;n thao t&#xE1;c g&#x1EED;i tr&#xEA;n m&#x1ED9;t <code>unbufferred Channel</code> th&#x1B0;&#x1EDD;ng &#x111;i &#x111;&#xF4;i v&#x1EDB;i t&#xE1;c v&#x1EE5; nh&#x1EAD;n. T&#xE1;c v&#x1EE5; g&#x1EED;i v&#xE0; nh&#x1EAD;n th&#x1B0;&#x1EDD;ng x&#x1EA3;y ra &#x1EDF; nh&#x1EEF;ng Goroutine kh&#xE1;c nhau (hai t&#xE1;c v&#x1EE5; di&#x1EC5;n ra tr&#xEA;n c&#xF9;ng m&#x1ED9;t goroutine c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng d&#x1EAB;n &#x111;&#x1EBF;n deadlocks). <strong>T&#xE1;c v&#x1EE5; g&#x1EED;i tr&#xEA;n m&#x1ED9;t unbufferred Channel lu&#xF4;n lu&#xF4;n x&#x1EA3;y ra tr&#x1B0;&#x1EDB;c khi t&#xE1;c v&#x1EE5; nh&#x1EAD;n ho&#xE0;n th&#xE0;nh</strong>.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> done = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
+<span class="hljs-keyword">var</span> msg <span class="hljs-keyword">string</span>
+
+<span class="hljs-keyword">func</span> aGoroutine() {
+    msg = <span class="hljs-string">&quot;Hello World&quot;</span>
+    done &lt;- <span class="hljs-literal">true</span>
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">go</span> aGoroutine()
+    &lt;-done
+    <span class="hljs-built_in">println</span>(msg)
+}
+</code></pre>
+<p>C&#x169;ng &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng, khi in d&#xF2;ng &quot;hello world&quot;. V&#xEC; thread n&#x1EC1;n s&#x1EBD; ti&#x1EBF;p nh&#x1EAD;n tr&#x1B0;&#x1EDB;c khi b&#x1EAF;t &#x111;&#x1EA7;u <code>main</code> thread l&#xE0; <code>done &lt;- true</code> tr&#x1B0;&#x1EDB;c khi g&#x1EED;i <code>&lt;-done</code>, s&#x1EBD; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng <code>msg = &quot;hello world&quot;</code> &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi, do &#x111;&#xF3; chu&#x1ED7;i <code>println(msg)</code> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c g&#xE1;n r&#x1ED3;i. T&#xF3;m l&#x1EA1;i, b&#xEA;n thread n&#x1EC1;n s&#x1EBD; &#x111;&#x1EA7;u ti&#xEA;n ghi v&#xE0;o bi&#x1EBF;n <code>msg</code>, sau &#x111;&#xF3; s&#x1EBD; nh&#x1EAD;n t&#xED;n hi&#x1EC7;u t&#x1EEB; <code>done</code>, theo sau b&#x1EDF;i <code>main</code> l&#xE0; m&#x1ED9;t thread &#x111;&#x1EC3; truy&#x1EC1;n t&#xED;n hi&#x1EC7;u t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i l&#x1EA7;n th&#x1EF1;c thi h&#xE0;m <code>println(msg)</code> k&#x1EBF;t th&#xFA;c. Tuy nhi&#xEA;n, n&#x1EBF;u Channel &#x111;&#x1B0;&#x1EE3;c buffered (v&#xED; d&#x1EE5;, <code>done = make(chan bool, 1)</code> ), main thread s&#x1EBD; nh&#x1EAD;n t&#xE1;c v&#x1EE5; <code>done &lt;- true</code> s&#x1EBD; blocked cho &#x111;&#x1EBF;n khi thread n&#x1EC1;n nh&#x1EAD;n, v&#xE0; ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; kh&#xF4;ng &#x111;&#x1EA3;m b&#x1EA3;o in ra d&#xF2;ng ch&#x1EEF; &quot;hello world&quot;.</p>
+<p>V&#x1EDB;i <code>buffered Channel</code>, &#x111;&#x1EA7;u ti&#xEA;n s&#x1EBD; ho&#xE0;n to&#xE0;n nh&#x1EAD;n <code>K</code> t&#xE1;c v&#x1EE5; tr&#xEA;n channel x&#x1EA3;y ra tr&#x1B0;&#x1EDB;c khi <code>K+C</code> t&#xE1;c v&#x1EE5; g&#x1EED;i &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n th&#xE0;nh, v&#x1EDB;i <code>C</code> l&#xE0; k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a buffer Channel, tr&#x1B0;&#x1EDB;c khi truy&#x1EC1;n &#x111;&#x1EBF;n Channel &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n th&#xE0;nh.</p>
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; di&#x1EC1;u khi&#x1EC3;n s&#x1ED1; Gouroutine ch&#x1EA1;y &#x111;&#x1ED3;ng th&#x1EDD;i d&#x1EF1;a tr&#xEA;n k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a b&#x1ED9; nh&#x1EDB; &#x111;&#x1EC7;m control channel, v&#xED; d&#x1EE5; nh&#x1B0; sau</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> limit = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, <span class="hljs-number">3</span>)
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">for</span> _, w := <span class="hljs-keyword">range</span> work {
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+            limit &lt;- <span class="hljs-number">1</span>
+            w()
+            &lt;-limit
+        }()
+    }
+    <span class="hljs-keyword">select</span>{}
+}
+</code></pre>
+<p>D&#xF2;ng <code>select{}</code> cu&#x1ED1;i c&#xF9;ng l&#xE0; m&#x1ED9;t m&#x1EC7;nh &#x111;&#x1EC1; l&#x1EF1;a ch&#x1ECD;n m&#x1ED9;t empty pipe s&#x1EBD; l&#xE0;m cho main thread b&#x1ECB; block, ng&#x103;n ch&#x1EB7;n ch&#x1B0;&#x1A1;ng tr&#xEC;nh k&#x1EBF;t th&#xFA;c s&#x1EDB;m. T&#x1B0;&#x1A1;ng t&#x1EF1; <code>for{}</code> v&#xE0; <code>&lt;- make(chan int)</code> nhi&#x1EC1;u h&#xE0;m kh&#xE1;c s&#x1EBD; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t qu&#x1EA3; t&#x1B0;&#x1A1;ng t&#x1EF1;. B&#x1EDF;i v&#xEC; thread main s&#x1EBD; b&#x1ECB; blocked. n&#xF3; c&#xF3; th&#x1EC3; l&#xE0; <code>os.Exit(0)</code> &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c n&#x1EBF;u ch&#x1B0;&#x1A1;ng tr&#xEC;nh c&#x1EA7;n k&#x1EBF;t th&#xFA;c m&#x1ED9;t c&#xE1;ch th&#xF4;ng th&#x1B0;&#x1EDD;ng.</p>
+<h2 id="157-t&#xE1;c-v&#x1EE5;-&#x111;&#x1ED3;ng-b&#x1ED9;-kh&#xF4;ng-tin-c&#x1EAD;y">1.5.7 T&#xE1;c v&#x1EE5; &#x111;&#x1ED3;ng b&#x1ED9; kh&#xF4;ng tin c&#x1EAD;y</h2>
+<p>Nh&#x1B0; ch&#xFA;ng ta ph&#xE2;n t&#xED;ch tr&#x1B0;&#x1EDB;c, &#x111;o&#x1EA1;n code sau s&#x1EBD; kh&#xF4;ng &#x111;&#x1EA3;m b&#x1EA3;o th&#x1EE9; t&#x1EF1; in ra k&#x1EBF;t qu&#x1EA3; b&#xEC;nh th&#x1B0;&#x1EDD;ng. Vi&#x1EC7;c ch&#x1EA1;y th&#x1EF1;c s&#x1EF1; b&#xEA;n d&#x1B0;&#x1EDB;i s&#x1EBD; c&#xF3; m&#x1ED9;t x&#xE1;c su&#x1EA5;t l&#x1EDB;n k&#x1EBF;t qu&#x1EA3; s&#x1EBD; kh&#xF4;ng b&#xEC;nh th&#x1B0;&#x1EDD;ng.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main(){
+    <span class="hljs-keyword">go</span> <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Hello World&quot;</span>)
+}
+</code></pre>
+<p>Ch&#x1EC9; li&#xEA;n h&#x1EC7; v&#x1EDB;i Go, b&#x1EA1;n c&#xF3; th&#x1EC3;  &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng k&#x1EBF;t qu&#x1EA3; s&#x1EBD; xu&#x1EA5;t ra b&#xEC;nh th&#x1B0;&#x1EDD;ng b&#x1EDF;i vi&#x1EC7;c th&#xEA;m v&#xE0;o th&#x1EDD;i gian sleep nh&#x1B0; sau</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main(){
+    <span class="hljs-keyword">go</span> <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;hello world&quot;</span>)
+    time.Sleep(time.Second)
+}
+</code></pre>
+<p>B&#x1EDF;i v&#xEC; thread main sleep m&#x1ED9;t gi&#xE2;y, ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; c&#xF3; x&#xE1;c su&#x1EA5;t l&#x1EDB;n r&#x1EB1;ng k&#x1EBF;t qu&#x1EA3; &#x111;&#x1B0;&#x1EE3;c in ra m&#x1ED9;t c&#xE1;ch b&#xEC;nh th&#x1B0;&#x1EDD;ng. Do &#x111;&#xF3;, nhi&#x1EC1;u ng&#x1B0;&#x1EDD;i s&#x1EBD; c&#x1EA3;m th&#x1EA5;y r&#x1EB1;ng ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; kh&#xF4;ng c&#xF2;n l&#xE0; m&#x1ED9;t v&#x1EA5;n &#x111;&#x1EC1;. Nh&#x1B0;ng ch&#x1B0;&#x1A1;ng tr&#xEC;nh n&#xE0;y s&#x1EBD; kh&#xF4;ng &#x1ED5;n &#x111;i v&#xE0; &#x111;&#xF3; s&#x1EBD; v&#x1EAB;n d&#x1EAB;n &#x111;&#x1EBF;n failure. &#x110;&#x1EA7;u ti&#xEA;n h&#xE3;y gi&#x1EA3; s&#x1EED; r&#x1EB1;ng ch&#x1B0;&#x1A1;ng tr&#xEC;nh c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c &#x1ED5;n &#x111;&#x1ECB;nh k&#x1EBF;t qu&#x1EA3; &#x111;&#x1EA7;u ra. B&#x1EDF;i v&#xEC; vi&#x1EC7;c b&#x1EAF;t &#x111;&#x1EA7;u th&#x1EF1;c thi th&#xEC; thread Go s&#x1EBD; kh&#xF4;ng b&#x1ECB; blocking, thread <code>main</code> s&#x1EBD; c&#x1EE5; th&#x1EC3; sleep m&#x1ED9;t gi&#xE2;y v&#xE0; ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; k&#x1EBF;t th&#xFA;c. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; gi&#x1EA3; s&#x1EED; r&#x1EB1;ng ch&#x1B0;&#x1A1;ng tr&#xEC;nh s&#x1EBD; th&#x1EF1;c nhi&#x1EC1;u h&#x1A1;n m&#x1ED9;t gi&#xE2;y. B&#xE2;y gi&#x1EDD; gi&#x1EA3; s&#x1EED; h&#xE0;m <code>println</code> s&#x1EBD; sleep l&#xE2;u h&#x1A1;n main thread b&#x1ECB; sleep. N&#xF3; c&#xF3; th&#x1EC3; d&#x1EAB;n &#x111;&#x1EBF;n hai m&#x1EB7;t &#x111;&#x1ED1;i l&#x1EAD;p sau: do b&#xEA;n d&#x1B0;&#x1EDB;i thread n&#x1EC1;n main thread s&#x1EBD; k&#x1EBF;t th&#xFA;c tr&#x1B0;&#x1EDB;c khi vi&#x1EC7;c in ra ho&#xE0;n th&#xE0;nh, th&#x1EDD;i gian th&#x1EF1;c thi s&#x1EBD; nh&#x1ECF; h&#x1A1;n th&#x1EDD;i gian th&#x1EF1;c thi c&#x1EE7;a thread ch&#xED;nh. D&#x129; nhi&#xEA;n &#x111;i&#x1EC1;u &#x111;&#xF3; l&#xE0; ho&#xE0;n to&#xE0;n c&#xF3; th&#x1EC3;.</p>
+<p>T&#xED;nh ch&#x1EA5;t &#x111;&#xFA;ng &#x111;&#x1EAF;n c&#x1EE7;a c&#x1EE7;a vi&#x1EC7;c th&#x1EF1;c thi ch&#x1B0;&#x1A1;ng tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i nghi&#xEA;m ng&#x1EB7;t kh&#xF4;ng n&#xEA;n ph&#x1EE5; thu&#x1ED9;c v&#xE0;o c&#xE1;c y&#x1EBF;u t&#x1ED1; kh&#xF4;ng &#x111;&#xE1;ng tin c&#x1EAD;y nh&#x1B0; t&#x1ED1;c &#x111;&#x1ED9; th&#x1EF1;c thi CPU v&#xE0; th&#x1EDD;i gian ng&#x1EE7;. &#x110;&#x1ED3;ng th&#x1EDD;i, c&#x169;ng c&#xF3; th&#x1EC3; l&#x1EA5;y &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t qu&#x1EA3; t&#x129;nh, theo t&#xED;nh ch&#x1EA5;t nh&#x1EA5;t qu&#xE1;n  c&#x1EE7;a &#x111;&#x1A1;n h&#xE0;ng trong lu&#x1ED3;ng, k&#x1EBF;t h&#x1EE3;p v&#x1EDB;i kh&#x1EA3; n&#x103;ng s&#x1EAF;p x&#x1EBF;p c&#x1EE7;a c&#xE1;c s&#x1EF1; ki&#x1EC7;n &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a k&#xEA;nh, ho&#x1EB7;c &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a s&#x1EF1; ki&#x1EC7;n d&#x1EAB;n xu&#x1EA5;t. N&#x1EBF;u hai s&#x1EF1; ki&#x1EC7;n kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EAF;p x&#x1EBF;p theo quy t&#x1EAF;c &#x111;&#xF3;, sau &#x111;&#xF3; l&#xE0; th&#x1EF1;c thi &#x111;&#x1ED3;ng th&#x1EDD;i, do &#x111;&#xF3; vi&#x1EC7;c th&#x1EF1;c thi s&#x1EBD; kh&#xF4;ng tin c&#x1EAD;y.</p>
+<p>&#xDD; t&#x1B0;&#x1EDF;ng c&#x1EE7;a vi&#x1EC7;c gi&#x1EA3;i quy&#x1EBF;t th&#x1EF1;c thi &#x111;&#x1ED3;ng th&#x1EDD;i c&#x169;ng gi&#x1ED1;ng nhau: c&#x1EE5; th&#x1EC3; s&#x1EED; d&#x1EE5;ng c&#x1A1; ch&#x1EBF; &#x111;&#x1ED3;ng b&#x1ED9;.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch1-04-func-method-interface.html" class="navigation navigation-prev " aria-label="Previous page: 1.4 Functions, Methods và Interfaces">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch1-06-common-concurrency-mode.html" class="navigation navigation-next " aria-label="Next page: 1.6 Các chế độ đồng thời thông dụng">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1.5 Điều khiển tuần tự cấu trúc vùng nhớ","level":"1.2.5","depth":2,"next":{"title":"1.6 Các chế độ đồng thời thông dụng","level":"1.2.6","depth":2,"path":"ch1-basic/ch1-06-common-concurrency-mode.md","ref":"ch1-basic/ch1-06-common-concurrency-mode.md","articles":[]},"previous":{"title":"1.4 Functions, Methods và Interfaces","level":"1.2.4","depth":2,"path":"ch1-basic/ch1-04-func-method-interface.md","ref":"ch1-basic/ch1-04-func-method-interface.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-05-mem.md","mtime":"2019-07-15T08:31:39.944Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-17T13:01:24.213Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
