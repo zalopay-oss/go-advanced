@@ -1,7 +1,6 @@
 # Summary
 
 * [Giới thiệu](README.md)
-
 * [Chương 1: Nền tảng ngôn ngữ Go](ch1-basic/README.md)
     * [1.1 Nguồn gốc của ngôn ngữ Go](ch1-basic/ch1-01-genesis.md)
     * [1.2 Sự tiến hóa của chương trình "Hello World"](ch1-basic/ch1-02-hello-revolution.md)
