@@ -1,6 +1,10 @@
 # 2.7 Mô hình bộ nhớ CGO
 
+<<<<<<< HEAD
+CGO là cầu nối giữa Go và C. Nó cho phép khả năng tương tác ở cấp độ nhị phân, nhưng chúng ta nên chú ý đến các vấn đề có thể phát sinh do sự khác biệt về mô hình bộ nhớ giữa hai ngôn ngữ. Nếu việc chuyển con trỏ có liên quan đến lệnh gọi hàm khác ngôn ngữ được xử lý bởi CGO, có thể có trường hợp trong đó ngôn ngữ Go và ngôn ngữ C chia sẻ một segment bộ nhớ nhất định. Chúng ta biết rằng bộ nhớ của ngôn ngữ C là cố định sau khi cấp phát, nhưng ngôn ngữ Go có thể giữ địa chỉ bộ nhớ trong stack cho mục đích dynamic scaling của hàm (đây là sự khác biệt lớn nhất giữa mô hình bộ nhớ Go và C). Nếu ngôn ngữ C giữ con trỏ Go trước khi di chuyển, việc truy cập đối tượng Go bằng con trỏ cũ sẽ khiến chương trình bị sập.
+=======
 CGO là cầu nối giữa Go và C. Nó cho phép khả năng tương tác ở cấp độ nhị phân, nhưng chúng ta nên chú ý đến các vấn đề có thể phát sinh do sự khác biệt về mô hình bộ nhớ giữa hai ngôn ngữ. Nếu việc chuyển con trỏ có liên quan đến lệnh gọi hàm khác ngôn ngữ  được xử lý bởi CGO, có thể có trường hợp trong đó ngôn ngữ Go và ngôn ngữ C chia sẻ một segment bộ nhớ nhất định. Chúng ta biết rằng bộ nhớ của ngôn ngữ C là cố định sau khi cấp phát, nhưng ngôn ngữ Go có thể giữ địa chỉ bộ nhớ trong stack cho mục đích dynamic scaling của hàm (đây là sự khác biệt lớn nhất giữa mô hình bộ nhớ Go và C). Nếu ngôn ngữ C giữ con trỏ Go trước khi di chuyển, việc truy cập đối tượng Go bằng con trỏ cũ sẽ khiến chương trình bị sập.
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 ## 2.7.1 Truy cập bộ nhớ C
 
