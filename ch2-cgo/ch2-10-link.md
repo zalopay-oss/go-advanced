@@ -9,11 +9,14 @@ Biên dịch và liên kết các parameters là một vấn đề mà các lậ
 
 ## 2.10.1. Compilation Parameters : CFLAGS/CPPFLAGS/CXXFLAGS
 
-CGO cung cấp ba tham số CFLAGS/CPPFLAGS/CXXFLAGS, trong đó CFLAGS sẽ ứng với việc biên dịch ngôn ngữ C (.c), CPPFLAGS sẽ ứng với C/C++ (.c, .cc, .cpp, .cxx), và CXXFLAGS ứng với C++ thuần (.cc, .cpp, *.cxx).
+CGO cung cấp ba tham số CFLAGS/CPPFLAGS/CXXFLAGS. Trong đó:
+  * CFLAGS sẽ ứng với việc biên dịch ngôn ngữ C (.c).
+  * CPPFLAGS sẽ ứng với C/C++ (.c, .cc, .cpp, .cxx).
+  * CXXFLAGS ứng với C++ thuần (.cc, .cpp, *.cxx).
 
 ## 2.10.2. Link parameters: LDFLAGS
 
-`${SRCDIR}` trong CGO là một đường dẫn tuyệt đối trong thư mục hiện tại. Các file định dạng của đối tượng C và C++ sau khi được biên dịch là như nhau, do đó `LDFLAGS` sẽ ứng với các C/C++ link parameters.
+Trong CGO `${SRCDIR}` là một đường dẫn tuyệt đối trong thư mục hiện tại, các file định dạng của đối tượng C và C++ sau khi được biên dịch là như nhau, do đó `LDFLAGS` sẽ ứng với các C/C++ link parameters.
 
 ## 2.10.3. pkg-config
 
