@@ -3,7 +3,7 @@
 Biên dịch và liên kết các parameters là một vấn đề mà các lập trình viên C/C++ thường gặp phải. Xây dựng một ứng dụng C/C++ yêu cầu hai bước gồm biên dịch và liên kết như trong CGO. Trong phần này, chúng tôi sẽ giới thiệu ngắn các bước biên dịch và link parameters thường được dùng trong CGO.
 
 <div align="center">
-	<img src="../images/../images/compileAndLink.gif" width="400">
+	<img src="../images/compileAndLink.gif" width="400">
 </div>
 <br/>
 
