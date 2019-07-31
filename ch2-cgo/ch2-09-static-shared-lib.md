@@ -16,7 +16,7 @@ Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đ�
 
 Nếu mã nguồn C/C++ được dùng trong CGO có kích thước nhỏ thì cách đưa trực tiếp chúng vào chương trình là một ý tưởng phổ biến nhất, nhưng nhiều lúc chúng ta không tự xây dựng mã nguồn, hoặc quá trình xây dựng mã nguồn C/C++ rất phức tạp thì đây là lúc thư viện C tĩnh phát huy thế mạnh của mình.
 
-Ở ví dụ đầu tiên, chúng ta sẽ xây dựng một thư viện tĩnh đơn giản với ngôn ngữ C thuần. Thư viện tĩnh mà chúng ta xây dựng được gọi là `number`. Chỉ có một hàm `number_add_mod` trong thư viện dùng để lấy modulo của một tổng hai số cho một số thứ ba. Những files của thư viện `number` đặt trong cùng một thư mục:
+Ở ví dụ đầu tiên, chúng ta sẽ xây dựng một thư viện tĩnh đơn giản được gọi là `number`, chỉ có một hàm `number_add_mod` trong thư viện dùng để lấy modulo của một tổng hai số cho một số thứ ba, những files của thư viện `number` đặt trong cùng một thư mục:
 
 ***number/number.h*** : header chứa prototype của hàm:
 
