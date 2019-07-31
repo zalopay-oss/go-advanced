@@ -6,7 +6,6 @@ gRPC là một framework RPC opensource đa ngôn ngữ được Google phát tr
 
 Kiến trúc gRPC trong Golang được trình bày trong hình 4-1
 
-<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch4-1-grpc-go-stack.png">
 	<br/>
@@ -15,15 +14,6 @@ Kiến trúc gRPC trong Golang được trình bày trong hình 4-1
 	</span>
 </div>
 <br/>
-=======
-<p align="center">
-
-<img src="../images/ch4-1-grpc-go-stack.png">
-<span align="center">Hình 4-1 gRPC technology stack</span>
-
-</p>
-
->>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Trên đấy phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Golang được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
 ## 4.4.2 Bắt đầu với gRPC
