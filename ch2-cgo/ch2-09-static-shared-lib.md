@@ -6,7 +6,7 @@ Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
   3. Liên kết động mã nguồn.
 
 <div align="center">
-	<img src="../images/ch2-9-static-dynamic-lib.gif"width="400">
+	<img src="../images/ch2-9-static-dynamic-lib.gif" width="400">
 </div>
 <br/>
 
@@ -78,17 +78,15 @@ $ go run main.go
 3
 ```
 
-Nếu chúng ta sử dụng thư viện tĩnh từ bên thứ ba, chúng ta cần phải tải chúng và cài đặt thư viện tĩnh đến một nơi phù hợp. Sau đó đặc tả location của header files và libraries qua cờ `CFLAGS` và `LDFLAGS` trong lệnh `#cgo`.
+Nếu chúng ta sử dụng thư viện tĩnh từ bên thứ ba, chúng ta cần phải tải chúng và cài đặt thư viện tĩnh đến một nơi phù hợp, sau đó đặc tả location của header files và libraries qua cờ `CFLAGS` và `LDFLAGS` trong lệnh `#cgo`.
 
-Trong môi trường Linux, có một lệnh [pkg-config](https://linux.die.net/man/1/pkg-config) được dùng để truy vấn các tham số compile và link khi dùng các thư viện động/tĩnh. Chúng ta có thể dùng lệnh pkg-config trực tiếp trong lệnh #cgo để generate compilation và linking parameters. Bạn có thể customize lệnh pkg-config với biến môi trường `PKG_CONFIG`.
-
-Vì các hệ điều hành khác nhau hỗ trợ lệnh pkg-config theo cách khác nhau, rất khó để làm các build parameters tương thích với hầu hết các hệ điều hành. Trong hệ điều hành Linux, lệnh pkg-config chỉ đơn giản quản lý các build parameters. Chi tiết của việc dùng pkg-config không được nói ở đây, do đó bạn có thể thấy chúng trong các tài liệu liên quan khác.
+Trong môi trường Linux, có một lệnh [pkg-config](https://linux.die.net/man/1/pkg-config) được dùng để truy vấn các tham số compile và link khi dùng các thư viện tĩnh, chúng ta có thể dùng lệnh pkg-config trực tiếp trong lệnh `#cgo` để generate compilation và linking parameters, bạn có thể customize lệnh pkg-config với biến môi trường `PKG_CONFIG`.
 
 ## 2.9.2. Sử dụng thư viện C động
 
-Ý tưởng của thư viện động là share library, các process khác nhau có thể chia sẻ trên cùng một tài nguyên bộ nhớ trên RAM hoặc đĩa cứng. Nhưng hiện nay giá thành đĩa cứng và RAM cũng tương đối rẻ, dường như hai vai trò sẽ trở nên không đáng quan tâm, do đó đâu là giá trị của thư viện động ở đây ?
+Ý tưởng của thư viện động là shared library, các process khác nhau có thể chia sẻ trên cùng một tài nguyên bộ nhớ trên RAM hoặc đĩa cứng, nhưng hiện nay giá thành đĩa cứng và RAM cũng tương đối rẻ, nên hai vai trò sẽ trở nên không đáng quan tâm, do đó đâu là giá trị của thư viện động ở đây?
 
-Từ góc nhìn của việc phát triển thư viện, thư viện động có thể tách biệt nhau và giảm thiểu rủi ro của việc xung đột trong khi liên kết. Và với những nền tảng như Windows, thư viện động là một cách khả thi để mở rộng các nền tảng biên dịch như `VC` và `GCC`.
+Từ góc nhìn của việc phát triển thư viện, thư viện động có thể tách biệt nhau và giảm thiểu rủi ro của việc xung đột trong khi liên kết, với những nền tảng như Windows, thư viện động là một cách khả thi để mở rộng các nền tảng biên dịch như `VC` và `GCC`.
 
 Trong CGO, việc dùng thư viện động và tĩnh là như nhau, bởi vì thư viện động sẽ phải có một static export library nhỏ dùng cho việc liên kết (Linux có thể trực tiếp liên kết các files, nhưng cũng tạo ra file `.dll` hoặc file `.a` dùng cho liên kết). Chúng ta có thể dùng thư viện `number` ở phần trước như là một ví dụ minh họa cho việc dùng thư viện động.
 
