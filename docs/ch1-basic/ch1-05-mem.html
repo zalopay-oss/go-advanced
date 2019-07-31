@@ -816,23 +816,11 @@
                                 
                                 <h1 id="15-concurrent-oriented-memory-model">1.5. Concurrent-oriented memory model</h1>
 <p>Th&#x1EDD;i gian &#x111;&#x1EA7;u, CPU ch&#x1EC9; c&#xF3; m&#x1ED9;t l&#xF5;i duy nh&#x1EA5;t, c&#xE1;c ng&#xF4;n ng&#x1EEF; khi &#x111;&#xF3; s&#x1EBD; theo m&#xF4; h&#xEC;nh l&#x1EAD;p tr&#xEC;nh tu&#x1EA7;n t&#x1EF1;, &#x111;i&#x1EC3;n h&#xEC;nh l&#xE0; ng&#xF4;n ng&#x1EEF; C. Ng&#xE0;y nay, v&#x1EDB;i s&#x1EF1; ph&#xE1;t tri&#x1EC3;n c&#x1EE7;a c&#xF4;ng ngh&#x1EC7; &#x111;a x&#x1EED; l&#xFD;, &#x111;&#x1EC3; t&#x1EAD;n d&#x1EE5;ng t&#x1ED1;i &#x111;a s&#x1EE9;c m&#x1EA1;nh c&#x1EE7;a CPU, m&#xF4; h&#xEC;nh l&#x1EAD;p tr&#xEC;nh song song hay <a href="https://en.wikipedia.org/wiki/Multithreading_(computer_architecture" target="_blank">multi-threading</a>) th&#x1B0;&#x1EDD;ng th&#x1EA5;y tr&#xEA;n c&#xE1;c ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh ra &#x111;&#x1EDD;i. Ng&#xF4;n ng&#x1EEF; Go c&#x169;ng ph&#xE1;t tri&#x1EC3;n m&#xF4; h&#xEC;nh l&#x1EAD;p tr&#xEC;nh song song r&#x1EA5;t hi&#x1EC7;u qu&#x1EA3; v&#x1EDB;i kh&#xE1;i ni&#x1EC7;m Goroutines.</p>
-<div align="center">
-
-<table>
-<thead>
-<tr>
-<th>L&#x1EAD;p tr&#xEC;nh tu&#x1EA7;n t&#x1EF1;</th>
-<th>L&#x1EAD;p tr&#xEC;nh song song</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="../images/ch1-5-sequence-programming.png" alt=""></td>
-<td><img src="../images/ch1-5-parallelprograming.png" alt=""></td>
-</tr>
-</tbody>
-</table>
-<p>&lt;/div&gt;
+<p><div align="center" width="600">
+<img src="../images/concurency.jpg">
+<br>
+<span align="center"><i>Qu&#xE1; tr&#xEC;nh kh&#x1EDF;i t&#x1EA1;o package</i></span>
+</div>
 <br></p>
 <h2 id="151-goroutines-v&#xE0;-system-threads">1.5.1. Goroutines v&#xE0; system threads</h2>
 <p>Goroutines l&#xE0; m&#x1ED9;t &#x111;&#x1A1;n v&#x1ECB; concurrency c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go. Vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o goroutines s&#x1EBD; &#xED;t t&#x1ED1;n chi ph&#xED; h&#x1A1;n kh&#x1EDF;i t&#x1EA1;o <code>thread</code> nhi&#x1EC1;u v&#xE0; &#x111;&#x1A1;n gi&#x1EA3;n th&#xF4;ng qua t&#x1EEB; kh&#xF3;a <code>go</code>. V&#x1EC1; g&#xF3;c nh&#xEC;n hi&#x1EC7;n th&#x1EF1;c, <code>goroutines</code> v&#xE0; <code>system thread</code> kh&#xF4;ng gi&#x1ED1;ng nhau.</p>
@@ -1140,7 +1128,7 @@ config.Store(loadConfig())
 </code></pre>
 <p>Thread main sleep m&#x1ED9;t gi&#xE2;y s&#x1EBD; &#x111;&#x1EA3;m b&#x1EA3;o &#x111;&#x1EE7; &#x111;&#x1EC3; Goroutine in ra d&#xF2;ng ch&#x1EEF; &quot;hello world&quot; ra m&#xE0;n h&#xEC;nh tr&#x1B0;&#x1EDB;c khi main thread th&#x1EF1;c thi xong. Tuy nhi&#xEA;n c&#x169;ng kh&#xF4;ng &#x111;&#x1EA3;m b&#x1EA3;o ch&#x1EAF;c ch&#x1EAF;n vi&#x1EC7;c Goroutine th&#x1EF1;c thi xong sau m&#x1ED9;t gi&#xE2;y d&#x1EAB;n t&#x1EDB;i k&#x1EBF;t qu&#x1EA3; kh&#xF4;ng nh&#x1B0; mong &#x111;&#x1EE3;i.</p>
 <p>T&#xED;nh ch&#x1EA5;t &#x111;&#xFA;ng &#x111;&#x1EAF;n c&#x1EE7;a c&#x1EE7;a vi&#x1EC7;c th&#x1EF1;c thi ch&#x1B0;&#x1A1;ng tr&#xEC;nh concurrency nghi&#xEA;m ng&#x1EB7;t kh&#xF4;ng n&#xEA;n ph&#x1EE5; thu&#x1ED9;c v&#xE0;o c&#xE1;c y&#x1EBF;u t&#x1ED1; kh&#xF4;ng &#x111;&#xE1;ng tin c&#x1EAD;y nh&#x1B0; t&#x1ED1;c &#x111;&#x1ED9; th&#x1EF1;c thi CPU v&#xE0; th&#x1EDD;i gian sleep.</p>
-</div>
+
                                 
                                 </section>
                             
@@ -1183,7 +1171,7 @@ config.Store(loadConfig())
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.5 Điều khiển tuần tự cấu trúc vùng nhớ","level":"1.2.5","depth":2,"next":{"title":"1.6 Các chế độ đồng thời thông dụng","level":"1.2.6","depth":2,"path":"ch1-basic/ch1-06-common-concurrency-mode.md","ref":"ch1-basic/ch1-06-common-concurrency-mode.md","articles":[]},"previous":{"title":"1.4 Functions, Methods và Interfaces","level":"1.2.4","depth":2,"path":"ch1-basic/ch1-04-func-method-interface.md","ref":"ch1-basic/ch1-04-func-method-interface.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-05-mem.md","mtime":"2019-07-31T07:38:22.854Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.5 Điều khiển tuần tự cấu trúc vùng nhớ","level":"1.2.5","depth":2,"next":{"title":"1.6 Các chế độ đồng thời thông dụng","level":"1.2.6","depth":2,"path":"ch1-basic/ch1-06-common-concurrency-mode.md","ref":"ch1-basic/ch1-06-common-concurrency-mode.md","articles":[]},"previous":{"title":"1.4 Functions, Methods và Interfaces","level":"1.2.4","depth":2,"path":"ch1-basic/ch1-04-func-method-interface.md","ref":"ch1-basic/ch1-04-func-method-interface.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-05-mem.md","mtime":"2019-07-31T08:25:15.070Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

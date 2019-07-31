@@ -818,38 +818,15 @@
 <p>gRPC l&#xE0; m&#x1ED9;t framework RPC opensource &#x111;a ng&#xF4;n ng&#x1EEF; &#x111;&#x1B0;&#x1EE3;c Google ph&#xE1;t tri&#x1EC3;n d&#x1EF1;a tr&#xEA;n Protobuf. &#x110;&#x1B0;&#x1EE3;c thi&#x1EBF;t k&#x1EBF; d&#x1EF1;a tr&#xEA;n giao th&#x1EE9;c HTTP/2, gRPC c&#xF3; th&#x1EC3; cung c&#x1EA5;p nhi&#x1EC1;u d&#x1ECB;ch v&#x1EE5; d&#x1EF1;a tr&#xEA;n li&#xEA;n k&#x1EBF;t HTTP/2, gi&#xFA;p cho framework n&#xE0;y th&#xE2;n thi&#x1EC7;n h&#x1A1;n v&#x1EDB;i thi&#x1EBF;t b&#x1ECB; di &#x111;&#x1ED9;ng. Ph&#x1EA7;n n&#xE0;y s&#x1EBD; gi&#x1EDB;i thi&#x1EC7;u m&#x1ED9;t s&#x1ED1; c&#xE1;ch s&#x1EED; d&#x1EE5;ng gRPC &#x111;&#x1A1;n gi&#x1EA3;n.</p>
 <h2 id="441-ki&#x1EBF;n-tr&#xFA;c-grpc">4.4.1 Ki&#x1EBF;n tr&#xFA;c gRPC</h2>
 <p>Ki&#x1EBF;n tr&#xFA;c gRPC trong Golang &#x111;&#x1B0;&#x1EE3;c tr&#xEC;nh b&#xE0;y trong h&#xEC;nh 4-1</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch4-1-grpc-go-stack.png">
     <br>
     <span align="center">
         <i>gRPC technology stack</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p align="center">
-
-<img src="../images/ch4-1-grpc-go-stack.png">
-<span align="center">H&#xEC;nh 4-1 gRPC technology stack</span>
-
-</p>
-
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376
+</div>
+<br>
 L&#x1EDB;p d&#x1B0;&#x1EDB;i c&#xF9;ng l&#xE0; giao th&#x1EE9;c TCP ho&#x1EB7;c Unix Socket. Tr&#xEA;n &#x111;&#x1EA5;y ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a giao th&#x1EE9;c HTTP/2. Th&#x1B0; vi&#x1EC7;n gRPC core cho Golang &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng &#x1EDF; l&#x1EDB;p k&#x1EBF;. Stub code &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra b&#x1EDF;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh th&#xF4;ng qua plug-in gRPC giao ti&#x1EBF;p v&#x1EDB;i th&#x1B0; vi&#x1EC7;n gRPC core.</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <h2 id="442-b&#x1EAF;t-&#x111;&#x1EA7;u-v&#x1EDB;i-grpc">4.4.2 B&#x1EAF;t &#x111;&#x1EA7;u v&#x1EDB;i gRPC</h2>
 <p>T&#x1EEB; quan &#x111;i&#x1EC3;m c&#x1EE7;a Protobuf, gRPC kh&#xF4;ng g&#xEC; kh&#xE1;c h&#x1A1;n l&#xE0; m&#x1ED9;t tr&#xEC;nh t&#x1EA1;o code cho interface service. B&#xE2;y gi&#x1EDD; ch&#xFA;ng ta s&#x1EBD; t&#xEC;m hi&#x1EC3;u c&#xE1;ch s&#x1EED; d&#x1EE5;ng gRPC.</p>
 <p>T&#x1EA1;o file <em>hello.proto</em> v&#xE0; &#x111;&#x1ECB;nh ngh&#x129;a interface <code>HelloService</code>:</p>
@@ -1214,7 +1191,7 @@ L&#x1EDB;p d&#x1B0;&#x1EDB;i c&#xF9;ng l&#xE0; giao th&#x1EE9;c TCP ho&#x1EB7;c 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4.4 Bắt đầu với gRPC","level":"1.5.4","depth":2,"next":{"title":"4.5 gRPC Nâng cao","level":"1.5.5","depth":2,"path":"ch4-rpc/ch4-05-grpc-advanced.md","ref":"ch4-rpc/ch4-05-grpc-advanced.md","articles":[]},"previous":{"title":"4.3 RPC trong Golang","level":"1.5.3","depth":2,"path":"ch4-rpc/ch4-03-fun-fpc.md","ref":"ch4-rpc/ch4-03-fun-fpc.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch4-rpc/ch4-04-grpc.md","mtime":"2019-07-31T07:32:25.966Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.4 Bắt đầu với gRPC","level":"1.5.4","depth":2,"next":{"title":"4.5 gRPC Nâng cao","level":"1.5.5","depth":2,"path":"ch4-rpc/ch4-05-grpc-advanced.md","ref":"ch4-rpc/ch4-05-grpc-advanced.md","articles":[]},"previous":{"title":"4.3 RPC trong Golang","level":"1.5.3","depth":2,"path":"ch4-rpc/ch4-03-fun-fpc.md","ref":"ch4-rpc/ch4-03-fun-fpc.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch4-rpc/ch4-04-grpc.md","mtime":"2019-07-31T08:36:17.911Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -906,32 +906,14 @@ Transfer/sec:      8.55MB
 <li>&#x110;i&#x1EC1;u &#x111;&#xF3; ngh&#x129;a l&#xE0; token bucket cho ph&#xE9;p m&#x1ED9;t m&#x1EE9;c &#x111;&#x1ED9; &#x111;&#x1ED3;ng th&#x1EDD;i nh&#x1EA5;t &#x111;&#x1ECB;nh. V&#xED; d&#x1EE5; c&#xF9;ng l&#xFA;c c&#xF3; 100 y&#xEA;u c&#x1EA7;u ng&#x1B0;&#x1EDD;i d&#xF9;ng g&#x1EED;i t&#x1EDB;i, mi&#x1EC5;n l&#xE0; c&#xF3; 100 token trong bucket th&#xEC; t&#x1EA5;t c&#x1EA3; 100 y&#xEA;u c&#x1EA7;u s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1B0;a ra.</li>
 <li>Token bucket c&#x169;ng c&#xF3; th&#x1EC3; suy bi&#x1EBF;n th&#xE0;nh m&#xF4; h&#xEC;nh leaky bucket n&#x1EBF;u kh&#xF4;ng c&#xF3; token trong bucket.</li>
 </ul>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-token-bucket.png">
     <br>
     <span align="center">
         <i>Token bucket</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-token-bucket.png" alt="token-bucket">
-<em>H&#xEC;nh 5-12 Token bucket</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>Trong c&#xE1;c &#x1EE9;ng d&#x1EE5;ng th&#x1EF1;c t&#x1EBF;, token bucket &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng r&#x1ED9;ng r&#xE3;i v&#xE0; h&#x1EA7;u h&#x1EBF;t c&#xE1;c limiter ph&#x1ED5; bi&#x1EBF;n hi&#x1EC7;n nay trong c&#x1ED9;ng &#x111;&#x1ED3;ng opensource &#x111;&#x1EC1;u d&#x1EF1;a tr&#xEA;n token bucket. Tr&#xEA;n c&#x1A1; s&#x1EDF; n&#xE0;y, c&#xF3; m&#x1ED9;t phi&#xEA;n b&#x1EA3;n limiter l&#xE0; <github.com juju="" ratelimit=""> cung c&#x1EA5;p m&#x1ED9;t s&#x1ED1; ph&#x1B0;&#x1A1;ng th&#x1EE9;c th&#xEA;m v&#xE0;o token v&#x1EDB;i c&#xE1;c &#x111;&#x1EB7;c &#x111;i&#x1EC3;m kh&#xE1;c nhau nh&#x1B0; sau:</github.com></p>
 <pre><code class="lang-go">  <span class="hljs-keyword">func</span> NewBucket(fillInterval time.Duration, capacity <span class="hljs-keyword">int64</span>) *Bucket
 </code></pre>
@@ -1095,7 +1077,7 @@ cur = cur &gt; <span class="hljs-built_in">cap</span> ? <span class="hljs-built_
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.6 Ratelimit Service Flow Limit","level":"1.6.6","depth":2,"next":{"title":"5.7 Bố cục thông thường của các dự án web lớn","level":"1.6.7","depth":2,"path":"ch5-web/ch5-07-layout-of-web-project.md","ref":"ch5-web/ch5-07-layout-of-web-project.md","articles":[]},"previous":{"title":"5.5 Database và giao tiếp với Database","level":"1.6.5","depth":2,"path":"ch5-web/ch5-05-database.md","ref":"ch5-web/ch5-05-database.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-06-service-flow-limitation.md","mtime":"2019-07-31T07:32:25.954Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.6 Ratelimit Service Flow Limit","level":"1.6.6","depth":2,"next":{"title":"5.7 Bố cục thông thường của các dự án web lớn","level":"1.6.7","depth":2,"path":"ch5-web/ch5-07-layout-of-web-project.md","ref":"ch5-web/ch5-07-layout-of-web-project.md","articles":[]},"previous":{"title":"5.5 Database và giao tiếp với Database","level":"1.6.5","depth":2,"path":"ch5-web/ch5-05-database.md","ref":"ch5-web/ch5-05-database.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-06-service-flow-limitation.md","mtime":"2019-07-31T08:36:17.913Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

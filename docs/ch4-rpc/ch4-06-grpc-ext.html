@@ -945,32 +945,14 @@ message FieldValidator {
 <h2 id="462-rest-interface">4.6.2 REST interface</h2>
 <p>gRPC service th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng trong vi&#x1EC7;c giao ti&#x1EBF;p gi&#x1EEF;a c&#xE1;c cluster trong h&#x1EC7; th&#x1ED1;ng. N&#x1EBF;u m&#x1ED9;t service &#x111;&#x1B0;&#x1EE3;c y&#xEA;u c&#x1EA7;u ph&#x1EA3;i giao ti&#x1EBF;p v&#x1EDB;i b&#xEA;n ngo&#xE0;i, th&#xEC; th&#x1B0;&#x1EDD;ng m&#x1ED9;t REST interface s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c sinh ra &#x111;&#x1EC3; l&#xE0;m vi&#x1EC7;c &#x111;&#xF3;. &#x110;&#x1EC3; thu&#x1EAD;n ti&#x1EC7;n, ph&#xED;a front-end qua Javascript v&#xE0; ph&#xED;a back-end s&#x1EBD; giao ti&#x1EBF;p v&#x1EDB;i nhau th&#xF4;ng qua REST interface. C&#x1ED9;ng &#x111;&#x1ED3;ng opensource &#x111;&#xE3; hi&#x1EC7;n th&#x1EF1;c project v&#x1EDB;i t&#xEA;n g&#x1ECD;i l&#xE0; grpc-gateway, n&#xF3; gi&#xFA;p ch&#xFA;ng ta chuy&#x1EC3;n c&#xE1;c y&#xEA;u c&#x1EA7;u REST HTTP th&#xE0;nh c&#xE1;c y&#xEA;u c&#x1EA7;u gRPC HTTP2.</p>
 <p>Nguy&#xEA;n t&#x1EAF;c ho&#x1EA1;t &#x111;&#x1ED9;ng b&#xEA;n d&#x1B0;&#x1EDB;i c&#x1EE7;a grpc-gateway s&#x1EBD; nh&#x1B0; sau:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch4-2-grpc-gateway.png">
     <br>
     <span align="center">
         <i>gRPC-Gateway workflow</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch4-2-grpc-gateway.png" alt=""></p>
-<p>H&#xEC;nh 4-2: gRPC-Gateway workflow</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; <strong>sinh grpc-gateway d&#x1EF1;a tr&#xEA;n docker</strong> theo <a href="https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c" target="_blank">h&#x1B0;&#x1EDB;ng d&#x1EAB;n</a> ho&#x1EB7;c theo c&#xE1;ch th&#xF4;ng th&#x1B0;&#x1EDD;ng nh&#x1B0; sau:</p>
 <p>B&#x1EB1;ng vi&#x1EC7;c th&#xEA;m v&#xE0;o nh&#x1EEF;ng th&#xF4;ng tin li&#xEA;n quan trong ph&#x1EA7;n routing trong file Protobuf, nh&#x1EEF;ng qu&#xE1; tr&#xEC;nh li&#xEA;n quan &#x111;&#x1EBF;n routing s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c sinh ra th&#xF4;ng qua file &#x111;&#x1B0;&#x1EE3;c t&#xF9;y bi&#x1EBF;n trong m&#xE3; ngu&#x1ED3;n plugin, v&#xE0; cu&#x1ED1;i c&#xF9;ng REST request s&#x1EBD; chuy&#x1EC3;n ti&#x1EBF;p &#x111;&#x1EBF;n nh&#x1EEF;ng service back-end &#x111;&#x1B0;&#x1EE3;c ch&#x1EA1;y b&#xEA;n d&#x1B0;&#x1EDB;i.</p>
 <p>Ph&#x1EA7;n m&#x1EDF; r&#x1ED9;ng c&#x1EE7;a routing s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c cung c&#x1EA5;p th&#xF4;ng qua metadata c&#x1EE7;a Protobuf nh&#x1B0; sau</p>
@@ -1114,7 +1096,7 @@ $ protoc -I. \
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4.6 gRPC và Protobuf extensions","level":"1.5.6","depth":2,"next":{"title":"4.7 pbgo : Protobuf-based framework","level":"1.5.7","depth":2,"path":"ch4-rpc/ch4-07-pbgo.md","ref":"ch4-rpc/ch4-07-pbgo.md","articles":[]},"previous":{"title":"4.5 gRPC Nâng cao","level":"1.5.5","depth":2,"path":"ch4-rpc/ch4-05-grpc-advanced.md","ref":"ch4-rpc/ch4-05-grpc-advanced.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch4-rpc/ch4-06-grpc-ext.md","mtime":"2019-07-31T07:32:25.964Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4.6 gRPC và Protobuf extensions","level":"1.5.6","depth":2,"next":{"title":"4.7 pbgo : Protobuf-based framework","level":"1.5.7","depth":2,"path":"ch4-rpc/ch4-07-pbgo.md","ref":"ch4-rpc/ch4-07-pbgo.md","articles":[]},"previous":{"title":"4.5 gRPC Nâng cao","level":"1.5.5","depth":2,"path":"ch4-rpc/ch4-05-grpc-advanced.md","ref":"ch4-rpc/ch4-05-grpc-advanced.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch4-rpc/ch4-06-grpc-ext.md","mtime":"2019-07-31T08:36:17.911Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

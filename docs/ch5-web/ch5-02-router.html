@@ -885,33 +885,15 @@ r.NotFound = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 </code></pre>
 <p>Hi&#x1EC7;n t&#x1EA1;i c&#x1ED9;ng &#x111;&#x1ED3;ng opensource c&#xF3; m&#x1ED9;t web framework &#x111;&#x1B0;&#x1EE3;c r&#x1EA5;t nhi&#x1EC1;u star l&#xE0; <a href="https://github.com/gin-gonic/gin" target="_blank">gin</a> s&#x1EED; d&#x1EE5;ng httprouter.</p>
 <h2 id="522-principle">5.2.2 Principle</h2>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-C&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng b&#x1EDF;i httprouter v&#xE0; nhi&#x1EC1;u routers d&#x1EAB;n xu&#x1EA5;t kh&#xE1;c l&#xE0; Radix Tree. Ng&#x1B0;&#x1EDD;i &#x111;&#x1ECD;c c&#xF3; th&#x1EC3; s&#x1EBD; li&#xEA;n t&#x1B0;&#x1EDF;ng &#x111;&#x1EBF;n nh&#x1EEF;ng c&#xE2;y kh&#xE1;c nh&#x1B0; <code>compressed dictionary tree</code> v&#xE0; ho&#x1EB7;c &#x111;&#xE3; nghe v&#x1EC1; dictionary tree (Trie Tree).</p>
+<p>C&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng b&#x1EDF;i httprouter v&#xE0; nhi&#x1EC1;u routers d&#x1EAB;n xu&#x1EA5;t kh&#xE1;c l&#xE0; Radix Tree. Ng&#x1B0;&#x1EDD;i &#x111;&#x1ECD;c c&#xF3; th&#x1EC3; s&#x1EBD; li&#xEA;n t&#x1B0;&#x1EDF;ng &#x111;&#x1EBF;n nh&#x1EEF;ng c&#xE2;y kh&#xE1;c nh&#x1B0; <code>compressed dictionary tree</code> v&#xE0; ho&#x1EB7;c &#x111;&#xE3; nghe v&#x1EC1; dictionary tree (Trie Tree).</p>
 <p><div align="center">
     <img src="../images/ch5-02-trie.png">
     <br>
     <span align="center">
         <i>C&#x1EA5;u tr&#xFA;c dictionary tree</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p>C&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng b&#x1EDF;i httprouter v&#xE0; nhi&#x1EC1;u routers d&#x1EAB;n xu&#x1EA5;t kh&#xE1;c l&#xE0; Radix Tree. Ng&#x1B0;&#x1EDD;i &#x111;&#x1ECD;c c&#xF3; th&#x1EC3; s&#x1EBD; li&#xEA;n t&#x1B0;&#x1EDF;ng &#x111;&#x1EBF;n nh&#x1EEF;ng c&#xE2;y kh&#xE1;c nh&#x1B0; <code>compressed dictionary tree</code> v&#xE0; ho&#x1EB7;c &#x111;&#xE3; nghe v&#x1EC1; dictionary tree (Trie Tree). H&#xEC;nh 5.1 l&#xE0; m&#x1ED9;t ki&#x1EC3;u c&#x1EA5;u tr&#xFA;c dictionary tree.</p>
-<p><img src="../images/ch5-02-trie.png" alt=""></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>C&#xE2;y dictionary th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; truy xu&#x1EA5;t chu&#x1ED7;i, nh&#x1B0; l&#xE0; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t c&#xE2;y t&#x1EEB; &#x111;i&#x1EC3;n v&#x1EDB;i c&#xE1;c chu&#x1ED7;i. V&#x1EDB;i chu&#x1ED7;i c&#x1EA7;n truy xu&#x1EA5;t, ph&#x1B0;&#x1A1;ng ph&#xE1;p t&#xEC;m ki&#x1EBF;m theo chi&#x1EC1;u s&#xE2;u s&#x1EBD; b&#x1EAF;t &#x111;&#x1EA7;u t&#x1EEB; node g&#x1ED1;c, c&#xF3; th&#x1EC3; ch&#x1EAF;n ch&#x1EAF;n r&#x1EB1;ng chu&#x1ED7;i string &#x111;&#xF3; c&#xF3; xu&#x1EA5;t hi&#x1EC7;n trong c&#xE2;y t&#x1EEB; &#x111;i&#x1EC3;n hay kh&#xF4;ng, v&#xE0; th&#x1EDD;i gian x&#x1EA5;p x&#x1EC9; l&#xE0; <code>O(n)</code>, v&#xE0; n l&#xE0; &#x111;&#x1ED9; d&#xE0;i c&#x1EE7;a target string. T&#x1EA1;i sao ch&#xFA;ng ta mu&#x1ED1;n l&#xE0;m nh&#x1B0; v&#x1EAD;y? B&#x1EA3;n th&#xE2;n string kh&#xF4;ng ph&#x1EA3;i l&#xE0; m&#x1ED9;t ki&#x1EC3;u s&#x1ED1; h&#x1ECD;c n&#xEA;n kh&#xF4;ng th&#x1EC3; so s&#xE1;nh tr&#x1EF1;c ti&#x1EBF;p nh&#x1B0; ki&#x1EC3;u s&#x1ED1;, v&#xE0; th&#x1EDD;i gian x&#x1EA5;p x&#x1EC9; c&#x1EE7;a vi&#x1EC7;c so s&#xE1;nh hai string l&#xE0; ph&#x1EE5; thu&#x1ED9;c v&#xE0;o &#x111;&#x1ED9; d&#xE0;i c&#x1EE7;a strings, v&#xE0; sau &#x111;&#xF3; d&#xF9;ng gi&#x1EA3;i thu&#x1EAD;t nh&#x1B0; l&#xE0; binary search &#x111;&#x1EC3; t&#xEC;m ki&#x1EBF;m, &#x111;&#x1ED9; ph&#x1EE9;c t&#x1EA1;p v&#x1EC1; th&#x1EDD;i gian c&#xF3; th&#x1EC3; cao. C&#xE2;y dictionary c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c xem x&#xE9;t nh&#x1B0;ng l&#xE0; m&#x1ED9;t c&#xE1;ch th&#xF4;ng th&#x1B0;&#x1EDD;ng v&#x1EC1;  s&#x1EF1; thay &#x111;&#x1ED5;i kh&#xF4;ng gian v&#xE0; th&#x1EDD;i gian.</p>
 <p>Nh&#xEC;n chung, c&#xE2;y dictionary th&#xEC; c&#xF3; m&#x1ED9;t b&#x1EA5;t l&#x1EE3;i l&#xE0; m&#x1ED7;i k&#xED; t&#x1EF1; c&#x1EA7;n ph&#x1EA3;i l&#xE0; m&#x1ED9;t node con, n&#xF3; s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n m&#x1ED9;t c&#xE2;y dictionary s&#xE2;u h&#x1A1;n. C&#xE2;y <code>compression</code> c&#x1EE7;a dictionary c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c c&#xE2;n b&#x1EB1;ng gi&#x1EEF;a &#x111;i&#x1EC3;m m&#x1EA1;nh v&#xE0; &#x111;i&#x1EC3;m y&#x1EBF;u c&#x1EE7;a c&#xE2;y dictionary r&#x1EA5;t t&#x1ED1;t. &#x110;&#xE2;y l&#xE0; m&#x1ED9;t lo&#x1EA1;i n&#xE9;n tr&#xEA;n c&#x1EA5;u tr&#xFA;c c&#xE2;y.</p>
 <p><img src="../images/ch5-02-radix.png" alt="X"></p>
@@ -952,32 +934,14 @@ DELETE
 r.PUT(<span class="hljs-string">&quot;/user/installations/:installation_id/repositories/:reposit&quot;</span>, Hello)
 </code></pre>
 <p><code>PUT</code> s&#x1EBD; &#x1EE9;ng v&#x1EDB;i node g&#x1ED1;c &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra. C&#xE2;y c&#xF3; d&#x1EA1;ng:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-02-radix-put.png">
     <br>
     <span align="center">
         <i>M&#x1ED9;t c&#xE2;y t&#x1EEB; &#x111;i&#x1EC3;n n&#xE9;n &#x111;&#x1B0;&#x1EE3;c insert v&#xE0;o route</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-02-radix-put.png" alt=""></p>
-<p><em>H&#xEC;nh 5.3 M&#x1ED9;t c&#xE2;y t&#x1EEB; &#x111;i&#x1EC3;n n&#xE9;n &#x111;&#x1B0;&#x1EE3;c insert v&#xE0;o route</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>Ki&#x1EC3;u c&#x1EE7;a m&#x1ED7;i node trong c&#xE2;y radix l&#xE0; <code>*httprouter.node</code>, &#x111;&#x1EC3; thu&#x1EAD;n ti&#x1EC7;n cho vi&#x1EC7;c gi&#x1EA3;i th&#xED;ch, ch&#xFA;ng ta h&#xE3;y ch&#xFA; &#xFD; t&#x1EDB;i m&#x1ED9;t s&#x1ED1; tr&#x1B0;&#x1EDD;ng:</p>
 <pre><code>path: // &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n &#x1EE9;ng v&#x1EDB;i node hi&#x1EC7;n t&#x1EA1;i
 wildChild: // cho d&#xF9; l&#xE0; n&#xFA;t con tham s&#x1ED1;, ngh&#x129;a l&#xE0; n&#xFA;t c&#xF3; k&#xFD; t&#x1EF1; &#x111;&#x1EA1;i di&#x1EC7;n ho&#x1EB7;c :id
@@ -990,35 +954,16 @@ indices:
 </code></pre><p>D&#x129; nhi&#xEA;n, route c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>PUT</code> ch&#x1EC9; l&#xE0; m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n. Ti&#x1EBF;p theo, ch&#xFA;ng ta th&#xEA;m m&#x1ED9;t s&#x1ED1; &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n GET trong v&#xED; d&#x1EE5; &#x111;&#x1EC3; gi&#x1EA3;i th&#xED;ch v&#x1EC1; quy tr&#xEC;nh ch&#xE8;n v&#xE0;o m&#x1ED9;t node con.</p>
 <h3 id="5232-ch&#xE8;n-node-con">5.2.3.2 Ch&#xE8;n node con</h3>
 <p>Khi ch&#xFA;ng ta ch&#xE8;n <code>GET /marketplace_listing/plans</code>, qu&#xE1; tr&#xEC;nh <code>PUT</code> s&#x1EBD; t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; tr&#x1B0;&#x1EDB;c:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-05-radix-get-1.png">
     <br>
     <span align="center">
         <i>Ch&#xE8;n node &#x111;&#x1EA7;u ti&#xEA;n v&#xE0;o c&#xE2;y compressed dictionary</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-05-radix-get-1.png" alt=""></p>
-<p><em>H&#xEC;nh 5.4: Ch&#xE8;n node &#x111;&#x1EA7;u ti&#xEA;n v&#xE0;o c&#xE2;y compressed dictionary</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>B&#x1EDF;i v&#xEC; &#x111;&#x1B0;&#x1EDD;ng route &#x111;&#x1EA7;u ti&#xEA;n kh&#xF4;ng c&#xF3; tham s&#x1ED1;, &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c l&#x1B0;u trong node g&#x1ED1;c. Do &#x111;&#xF3; c&#xF3; th&#x1EC3; xem l&#xE0; m&#x1ED9;t node.</p>
 <p>Sau &#x111;&#xF3; ch&#xE8;n &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n <code>GET /marketplace_listing/plans/:id/accounts</code> v&#xE0; m&#x1ED9;t nh&#xE1;nh m&#x1EDB;i s&#x1EBD; c&#xF3; ti&#x1EC1;n t&#x1ED1; common, v&#xE0; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c ch&#xE8;n m&#x1ED9;t c&#xE1;ch tr&#x1EF1;c ti&#x1EBF;p &#x111;&#x1EBF;n node l&#xE1;, sau &#x111;&#xF3; k&#x1EBF;t qu&#x1EA3; tr&#x1EA3; v&#x1EC1; r&#x1EA5;t &#x111;&#x1A1;n gi&#x1EA3;n, sau qu&#xE1; tr&#xEC;nh ch&#xE8;n, c&#x1EA5;u tr&#xFA;c c&#xE2;y &#x111;&#x1B0;&#x1EE3;c ho&#xE0;n th&#xE0;nh s&#x1EBD; nh&#x1B0; sau:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-02-radix-get-2.png">
     <br>
@@ -1027,82 +972,28 @@ indices:
     </span>
 </div>
 <br></p>
-<p>=======
-<img src="../images/ch5-02-radix-get-2.png" alt=""></p>
-<p><em>H&#xEC;nh 5.5: Ch&#xE8;n node th&#x1EE9; hai v&#xE0;o c&#xE2;y compressed dictionary</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <p>Do &#x111;&#xF3;, <code>:id</code> trong node l&#xE0; m&#x1ED9;t con c&#x1EE7;a string, v&#xE0; ch&#x1EC9; s&#x1ED1; v&#x1EAB;n ch&#x1B0;a c&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c x&#x1EED; l&#xFD;.</p>
 <p>Tr&#x1B0;&#x1EDD;ng h&#x1EE3;p tr&#xEA;n r&#x1EA5;t &#x111;&#x1A1;n gi&#x1EA3;n, m&#x1ED9;t route m&#x1EDB;i c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c ch&#xE8;n tr&#x1EF1;c ti&#x1EBF;p v&#xE0;o node t&#x1EEB; node g&#x1ED1;c.</p>
 <h3 id="5233-edge-spliting">5.2.3.3 Edge spliting</h3>
 <p>Ti&#x1EBF;p theo ch&#xFA;ng ta ch&#xE8;n <code>GET /search</code>, sau &#x111;&#xF3; s&#x1EBD; sinh ra c&#xE2;y split tree nh&#x1B0; h&#xEC;nh 5.6:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-02-radix-get-3.png">
     <br>
     <span align="center">
         <i>Ch&#xE8;n v&#xE0;o node th&#x1EE9; ba s&#x1EBD; g&#xE2;y ra vi&#x1EC7;c ph&#xE2;n nh&#xE1;nh</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-02-radix-get-3.png" alt=""></p>
-<p><em>H&#xEC;nh 5.6 Ch&#xE8;n v&#xE0;o node th&#x1EE9; ba s&#x1EBD; g&#xE2;y ra vi&#x1EC7;c ph&#xE2;n nh&#xE1;nh</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>&#x110;&#x1B0;&#x1EDD;ng d&#x1EAB;n c&#x169; v&#xE0; &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n m&#x1EDB;i c&#xF3; &#x111;i&#x1EC3;m b&#x1EAF;t &#x111;&#x1EA7;u l&#xE0; <code>/</code> &#x111;&#x1EC3; ph&#xE2;n t&#xE1;ch, chu&#x1ED7;i truy v&#x1EA5;n ph&#x1EA3;i b&#x1EAF;t &#x111;&#x1EA7;u t&#x1EEB; node g&#x1ED1;c ch&#xED;nh, sau &#x111;&#xF3; m&#x1ED9;t route l&#xE0; <code>search</code> &#x111;&#x1B0;&#x1EE3;c ph&#xE2;n nh&#xE1;nh t&#x1EEB; g&#x1ED1;c. L&#xFA;c n&#xE0;y, b&#x1EDF;i v&#xEC; c&#xF3; nhi&#x1EC1;u nodes con. Node g&#x1ED1;c s&#x1EBD; ch&#x1EC9; ra index c&#x1EE7;a node con, v&#xE0; tr&#x1B0;&#x1EDD;ng th&#xF4;ng tin n&#xE0;y c&#x1EA7;n ph&#x1EA3;i come in handy. &quot;ms&quot; bi&#x1EC3;u di&#x1EC5;n s&#x1EF1; b&#x1EAF;t &#x111;&#x1EA7;u c&#x1EE7;a node con v&#xE0; m (marketplace) v&#xE0; s(search).</p>
 <p>Ch&#xFA;ng t&#xF4;i d&#xF9;ng <code>GET /status</code> v&#xE0; <code>GET /support</code> &#x111;&#x1EC3; ch&#xE8;n sum v&#xE0;o c&#xE2;y. L&#xFA;c n&#xE0;y, s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n <code>search split</code> m&#x1ED9;t l&#x1EA7;n n&#x1EEF;a, tr&#xEA;n node, v&#xE0; k&#x1EBF;t qu&#x1EA3; cu&#x1ED1;i c&#xF9;ng &#x111;&#x1B0;&#x1EE3;c nh&#xEC;n th&#x1EA5;y &#x1EDF; h&#xEC;nh <code>5.7</code>:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-02-radix-get-4.png">
     <br>
     <span align="center">
         <i>Sau khi ch&#xE8;n t&#x1EA5;t c&#x1EA3; c&#xE1;c node</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-02-radix-get-4.png" alt=""></p>
-<p><em>H&#xEC;nh 5.7 Sau khi ch&#xE8;n t&#x1EA5;t c&#x1EA3; c&#xE1;c node</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <h3 id="5234-subnode-conflict-handling">5.2.3.4 Subnode conflict handling</h3>
 <p>Trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p b&#x1EA3;n th&#xE2;n c&#xE1;c routes ch&#x1EC9; l&#xE0; string th&#xEC; s&#x1EBD; kh&#xF4;ng c&#xF3; xung &#x111;&#x1ED9;t x&#x1EA3;y ra. Ch&#x1EC9; c&#xF3; th&#x1EC3; d&#x1EAB;n t&#x1EDB;i xung &#x111;&#x1ED9;t n&#x1EBF;u route ch&#x1EE9;a k&#xED; t&#x1EF1; &#x111;&#x1EA1;i di&#x1EC7;n (t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; :id ho&#x1EB7;c catchAll). N&#xF3; &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC1; c&#x1EAD;p t&#x1EEB; tr&#x1B0;&#x1EDB;c.</p>
 <p>Sau &#x111;&#xE2;y l&#xE0; m&#x1ED9;t s&#x1ED1; v&#xED; d&#x1EE5; d&#x1EAB;n t&#x1EDB;i xung &#x111;&#x1ED9;t:</p>
@@ -1155,7 +1046,7 @@ indices:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.2 Routing","level":"1.6.2","depth":2,"next":{"title":"5.3 Middleware","level":"1.6.3","depth":2,"path":"ch5-web/ch5-03-middleware.md","ref":"ch5-web/ch5-03-middleware.md","articles":[]},"previous":{"title":"5.1 Giới thiệu về Web Development","level":"1.6.1","depth":2,"path":"ch5-web/ch5-01-introduction.md","ref":"ch5-web/ch5-01-introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-02-router.md","mtime":"2019-07-31T07:32:25.961Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.2 Routing","level":"1.6.2","depth":2,"next":{"title":"5.3 Middleware","level":"1.6.3","depth":2,"path":"ch5-web/ch5-03-middleware.md","ref":"ch5-web/ch5-03-middleware.md","articles":[]},"previous":{"title":"5.1 Giới thiệu về Web Development","level":"1.6.1","depth":2,"path":"ch5-web/ch5-01-introduction.md","ref":"ch5-web/ch5-01-introduction.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-02-router.md","mtime":"2019-07-31T08:36:17.912Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
