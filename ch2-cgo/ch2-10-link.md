@@ -1,6 +1,6 @@
 # 2.10  Biên dịch và liên kết các tham số
 
-Biên dịch và liên kết các parameters thường là một vấn đề mà các lập trình viên `C/C++` phải đối mặt. Xây dựng một ứng dụng `C/C++` yêu cầu hai bước biên dịch và liên kết cũng như trong `CGO`. Trong phần này, chúng tôi sẽ giới thiệu ngắn các bước biên dịch và link parameters thường được dùng trong `CGO`.
+Biên dịch và liên kết các parameters thường là một vấn đề mà các lập trình viên `C/C++` phải đối mặt. Xây dựng một ứng dụng `C/C++` yêu cầu hai bước gồm biên dịch và liên kết như trong `CGO`. Trong phần này, chúng tôi sẽ giới thiệu ngắn các bước biên dịch và link parameters thường được dùng trong `CGO`.
 
 ## 2.10.1 Biên dịch Parameters : `CFLAGS/CPPFLAGS/CXXFLAGS`
 
@@ -85,7 +85,7 @@ Ví dụ, gói thư viện `github.com/chai2010/webp` hiện thực `zero config
 #include "./internal/libwebp/src/dec/alpha.c"
 ```
 
-Do đó `z_libwebp_src_dec_alpha.c`, một mã nguồn `libweb native` có thể được biên dịch khi file vừa biên dịch xong. Các phụ thuộc là các relative directories, tính nhất quán tối đa có thể được duy trì trong một số nền tảng khác nhau.
+Do đó `z_libwebp_src_dec_alpha.c` là một mã nguồn `libweb native` có thể được biên dịch khi file vừa biên dịch xong. Các phụ thuộc là các relative directories, tính nhất quán tối đa có thể được duy trì trong một số nền tảng khác nhau.
 
 ## 2.10.5 Export các hàm C trong nhiều gói non-main packages
 

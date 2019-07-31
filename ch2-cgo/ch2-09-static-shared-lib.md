@@ -1,12 +1,19 @@
 # 2.9 Thư viện tĩnh và động
 
-Có ba cách để dùng tài nguyên `C/C++` trong `CGO`: dùng trực tiếp mã nguồn, liên kết tĩnh, liên kết động. Cách trực tiếp sử dụng mã nguồn là thêm dòng `import "C"` và phần comment mã nguồn  C phía trên, hoặc bao gộp mã nguồn `C/C++` trong package hiện tại. Cách dùng liên kết tĩnh và động thư viện cũng tương tự, bằng việc đặc tả thư viện liên kết trong cờ `LDFLAGS`. Trong phần này, chúng ta sẽ tập trung vào việc dùng thư viện tĩnh và động trong `CGO` như thế nào.
+Có ba cách để sử dụng mã nguồn `C/C++` trong `CGO`:
+  1. Dùng trực tiếp mã nguồn (thêm dòng `import "C"` và chú thích mã nguồn C phía trên, hoặc bao gộp mã nguồn `C/C++` trong package hiện tại).
+  2. Liên kết tĩnh mã nguồn (khai báo thư viện liên kết trong cờ `LDFLAGS`).
+  3. Liên kết động mã nguồn.
+
+Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đọc có thể xem thêm tại đây: [What-is-the-difference-between-static-and-dynamic-linking](https://www.quora.com/What-is-the-difference-between-static-and-dynamic-linking)
 
 ## 2.9.1 Dùng thư viện C tĩnh
 
-Nếu tài nguyên C/C++ được đưa vào trong CGO có mã nguồn, và kích thước mã nguồn là nhỏ, cách dùng mã nguồn trực tiếp là một ý tưởng phổ biến nhất, nhưng nhiều khi chúng ta không có mã nguồn, hoặc quá trình xây dựng mã nguồn `C/C++` rất phức tạp. Đây là lúc mà việc dùng thư viện C tĩnh là lựa chọn tốt nhất. Bởi vì thư viện tĩnh là liên kết tĩnh, phần chương trình đích sẽ không sinh ra thêm phần phụ thuộc trong khi chạy, hoặc không có một thư viện động cụ thể nào có thể đảm bảo kiểm soát lỗi phát sinh giữa các thành phần liên kết trong quá trình chạy. Tuy nhiên, thư viện tĩnh cũng có một yêu cầu nhất định trong pha liên kết. Thư viện tĩnh thường chứa ba thành phần mã nguồn, nó có một lượng lớn các ký tự. Nếu một ký tự bị xung đột trong quá trình liên kết tĩnh, thì toàn bộ `link` sẽ hỏng.
+Nếu mã nguồn `C/C++` được đưa vào trong `CGO` có kích thước nhỏ thì cách dùng mã nguồn trực tiếp là một ý tưởng phổ biến nhất, nhưng nhiều khi chúng ta không tự xây dựng mã nguồn, hoặc quá trình xây dựng mã nguồn `C/C++` rất phức tạp thì đây là lúc thư viện C tĩnh phát huy thế mạnh của mình. Thế mạnh đó đến từ việc chương trình đích sẽ không sinh ra thêm phần phụ thuộc trong khi chạy và không có một thư viện động nào có thể đảm bảo kiểm soát lỗi phát sinh giữa các thành phần liên kết trong quá trình chạy.
 
-Đầu tiên, chúng ta sẽ xây dựng một thư viện tĩnh đơn giản với ngôn ngữ C thuần. Thư viện tĩnh mà chúng ta xây dựng được gọi là `number`. Chỉ có một hàm `number_add_mod` trong thư viện dùng để lấy modulo của một tổng hai số cho một số thứ ba. Những files của thư viện `number` đặt trong cùng một thư mục.
+Tuy nhiên, thư viện tĩnh cũng có một yêu cầu nhất định trong pha liên kết. Thư viện tĩnh thường chứa ba thành phần mã nguồn, nó có một lượng lớn các ký tự. Nếu một ký tự bị xung đột trong quá trình liên kết tĩnh, thì toàn bộ `link` sẽ hỏng.
+
+Ở ví dụ đầu tiên, chúng ta sẽ xây dựng một thư viện tĩnh đơn giản với ngôn ngữ C thuần. Thư viện tĩnh mà chúng ta xây dựng được gọi là `number`. Chỉ có một hàm `number_add_mod` trong thư viện dùng để lấy modulo của một tổng hai số cho một số thứ ba. Những files của thư viện `number` đặt trong cùng một thư mục.
 
 Trong file `number/number.h` sẽ định nghĩa phần header chứa prototype của hàm:
 
@@ -38,7 +45,6 @@ Sau khi sinh ra thư viện tĩnh mang tên `libnumber.a`, chúng ta dùng nó t
 
 Tạo ra file  main.go như sau:
 
-
 ```go
 package main
 
@@ -54,9 +60,13 @@ func main() {
 }
 ```
 
-Có hai lệnh `#cgo`, nó sẽ biên dịch và liên kết các tham số với nhau. Cờ `CFLAGS -I./number` sẽ thêm vào thư mục chứa các thư viện ứng với file header. Cờ `LDFLAGS` sẽ thể hiện liên kết tới thư viện tĩnh `libnumber.a` bằng cách thêm vào trường `-L${SRCDIR}/number`, nó sẽ đưa thư viện tĩnh `number` được biên dịch xong vào liên kết qua search path `-lnumber`. Nên chú ý rằng, phần search path trong liên kết không thể dùng trong các relative path (được giới hạn bởi mã nguồn `C/C++` linker). Chúng ta phải mở rộng thư mục hiện tại `${SRCDIR}` tương ứng với file mã nguồn đến một absolute path qua biến `cgo-specific` (cũng trên Windows).  Absolute paths trong platform không thể chứa kí tự trống.
+Hai lệnh `#cgo` trên dùng để biên dịch và liên kết các tham số với nhau:
+  * Cờ `CFLAGS -I./number` sẽ thêm vào thư mục chứa các thư viện ứng với file header.
+  * Cờ `LDFLAGS` sẽ thể hiện liên kết tới thư viện tĩnh `libnumber.a` bằng cách thêm vào trường `-L${SRCDIR}/number`, nó sẽ đưa thư viện tĩnh `number` được biên dịch xong vào liên kết qua search path `-lnumber`.
 
-Bởi vì chúng ta đã có tất cả các mã nguồn cho thư viện `number`, chúng ta có thể dùng trình tạo mã để sinh ra thư viện tĩnh, hoặc dùng Makefiles để xây dựng thư viện tĩnh. Do đó, khi chúng ta publishing mã nguồn package CGO, chúng ta sẽ không cần phải biên dịch C static library trước.
+Chú ý rằng, phần search path trong liên kết không thể dùng trong các relative path (được giới hạn bởi mã nguồn `C/C++` linker). Chúng ta phải mở rộng thư mục hiện tại `${SRCDIR}` tương ứng với file mã nguồn đến một absolute path qua biến `cgo-specific` (cũng trên Windows). Absolute paths trong platform không thể chứa kí tự trống.
+
+Bởi vì chúng ta đã có tất cả các mã nguồn cho thư viện `number`, nên có thể dùng trình tạo mã để sinh ra thư viện tĩnh, hoặc dùng `Makefiles` để xây dựng thư viện tĩnh. Do đó, khi chúng ta publishing mã nguồn package CGO, chúng ta sẽ không cần phải biên dịch C static library trước.
 
 Bởi vì sẽ có nhiều hơn một bước biên dịch thư viện tĩnh, Gói Go dùng để custom static library đã chứa tất cả các mã nguồn static library và không có thể cài đặt trực tiếp với `go get`. Tuy nhiên, chúng ta có vẫn có thể tải chúng xuống bằng `go get`, và dùng `go` để sinh ra điểm gọi thư viện tĩnh được xây dựng, và cuối cùng chúng ta sẽ `go install` để hoàn thành việc cài đặt.
 
@@ -68,11 +78,13 @@ Tạo ra file `z_link_number_c.c` như sau:
 #include "./number/number.c"
 ```
 
-Sau đó thực thi lệnh `go get` hoặc `go build`, `CGO` sẽ tự động biên dịch mã nguồn ứng với thư viện `number`. Kĩ thuật này sẽ chuyển đổi thư viện tĩnh thành mã nguồn để references mà không cần thay đổi kết cấu tổ chức của mã nguồn thư viện tĩnh. Gói `CGO` thật hoàn hảo.
+Sau đó thực thi lệnh `go get` hoặc `go build`, `CGO` sẽ tự động biên dịch mã nguồn ứng với thư viện `number`. Kĩ thuật này sẽ chuyển đổi thư viện tĩnh thành mã nguồn để references mà không cần thay đổi kết cấu tổ chức của mã nguồn thư viện tĩnh.
 
 Nếu chúng ta sử dụng thư viện tĩnh từ bên thứ ba, chúng ta cần phải tải chúng và cài đặt thư viện tĩnh đến một nơi phù hợp. Sau đó đặc tả location của header files và libraries qua cờ `CFLAGS` và `LDFLAGS` trong lệnh `#cgo`. Trong các hệ điều hành khác nhau, hoặc các phiên bản khác nhau của cùng hệ điều hành, installation paths của những thư viện có thể khác nhau, do đó làm cách nào để có thể biết được các thay đổi trong mã nguồn?
 
-Trong môi trường Linux, có một lệnh `pkg-config` được dùng để truy vấn các tham số `compile` và `link` khi dùng các thư viện động/tĩnh. Chúng ta có thể dùng lệnh `pkg-config` trực tiếp trong lệnh `#cgo` để generate compilation và linking parameters. Bạn có thể customize lệnh `pkg-config` với biến môi trường `PKG_CONFIG`. Bởi vì các hệ điều hành khác nhau có thể hỗ trợ lệnh `pkg-config` theo cách khác nhau, thật khó để làm tương thích các build parameters cho các hệ điều hành khác nhau. Tuy nhiên, trong hệ điều hành cụ thể là Linux, lệnh `pkg-config` chỉ đơn giản quản lý các build parameters. Chi tiết của việc dùng `pkg-config` không được nói ở đây, do đó bạn có thể thấy chúng trong các tài liệu liên quan khác.
+Trong môi trường Linux, có một lệnh `pkg-config` được dùng để truy vấn các tham số `compile` và `link` khi dùng các thư viện `động/tĩnh`. Chúng ta có thể dùng lệnh `pkg-config` trực tiếp trong lệnh `#cgo` để generate compilation và linking parameters. Bạn có thể customize lệnh `pkg-config` với biến môi trường `PKG_CONFIG`.
+
+Vì các hệ điều hành khác nhau hỗ trợ lệnh `pkg-config` theo cách khác nhau, rất khó để làm các build parameters tương thích với các hệ điều hành khác nhau. Trong hệ điều hành Linux, lệnh `pkg-config` chỉ đơn giản quản lý các build parameters. Chi tiết của việc dùng `pkg-config` không được nói ở đây, do đó bạn có thể thấy chúng trong các tài liệu liên quan khác.
 
 ## 2.9.2 Sử dụng thư viện C động
 
@@ -283,8 +295,6 @@ func goPrintln(s *C.char) {
 }
 
 ```
-
-[>>  mã nguồn](../examples/ch2/ch2.9/5-modular-func/main.go)
 
 Trong đó, chúng ta phải import một số sub-package, có một exported C function `number_add_mod` trong `number sub-package`, và chúng ta cũng phải export hàm `goPrintln` trong main package.
 
