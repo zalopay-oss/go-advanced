@@ -1,4 +1,4 @@
-# 2.9 Thư viện tĩnh và động
+# 2.9. Thư viện tĩnh và động
 
 Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
   1. Dùng trực tiếp mã nguồn (thêm dòng `import "C"` và chú thích mã nguồn C phía trên, hoặc bao gộp mã nguồn `C/C++` trong package hiện tại).
@@ -12,7 +12,7 @@ Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
 
 Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đọc có thể xem thêm tại đây: [What-is-the-difference-between-static-and-dynamic-linking](https://www.quora.com/What-is-the-difference-between-static-and-dynamic-linking)
 
-## 2.9.1 Dùng thư viện C tĩnh
+## 2.9.1. Dùng thư viện C tĩnh
 
 Nếu mã nguồn C/C++ được dùng trong CGO có kích thước nhỏ thì cách đưa trực tiếp chúng vào chương trình là một ý tưởng phổ biến nhất, nhưng nhiều lúc chúng ta không tự xây dựng mã nguồn, hoặc quá trình xây dựng mã nguồn C/C++ rất phức tạp thì đây là lúc thư viện C tĩnh phát huy thế mạnh của mình.
 
@@ -86,7 +86,7 @@ Trong môi trường Linux, có một lệnh `pkg-config` được dùng để t
 
 Vì các hệ điều hành khác nhau hỗ trợ lệnh pkg-config theo cách khác nhau, rất khó để làm các build parameters tương thích với hầu hết các hệ điều hành. Trong hệ điều hành Linux, lệnh pkg-config chỉ đơn giản quản lý các build parameters. Chi tiết của việc dùng pkg-config không được nói ở đây, do đó bạn có thể thấy chúng trong các tài liệu liên quan khác.
 
-## 2.9.2 Sử dụng thư viện C động
+## 2.9.2. Sử dụng thư viện C động
 
 Ý tưởng của thư viện động là share library, các process khác nhau có thể chia sẻ trên cùng một tài nguyên bộ nhớ trên RAM hoặc đĩa cứng. Nhưng hiện nay giá thành đĩa cứng và RAM cũng tương đối rẻ, dường như hai vai trò sẽ trở nên không đáng quan tâm, do đó đâu là giá trị của thư viện động ở đây ?
 
@@ -152,7 +152,7 @@ Một khi `libnumber.a` được sinh ra, có thể  dùng `-lnumber` thông qua
 
 Nên chú ý rằng, tại thời điểm thực thi, thư viện động cần được đặt ở cùng nơi để system có thể thấy. Trên Windows, bạn có thể đặt dynamic library và executable program trong cùng một thư mục, hoặc thêm đường dẫn tuyệt đối của thư mục trong khi dynamic library được đưa vào biến môi trường PATH. Trong MacOS, bạn cần phải thiết lập biến môi trường DYLD_LIBRARY_PATH. Trong hệ thống Linux, bạn cần thiết lập biến LD_LIBRARY_PATH.
 
-## 2.9.3  Exporting C Static Libraries
+## 2.9.3.  Exporting C Static Libraries
 
 CGO không chỉ được dùng trong thư viện C tĩnh, các export functions được hiện thực bởi Go hoặc C static libraries. Chúng ta có thể dùng Go để hiện thực modulo addition function như phần trước như sau
 
@@ -222,7 +222,7 @@ $ ./a.out
 ```
  
 
-## 2.9.4 Exporting C Dynamic Library
+## 2.9.4. Exporting C Dynamic Library
 
 Quá trình exporting một thư viện động bằng CGO sẽ tương tự như một thư viện tĩnh, ngoại trừ build mode sẽ thay đổi c-shared và output file name được đổi thành `number.so`.
 
