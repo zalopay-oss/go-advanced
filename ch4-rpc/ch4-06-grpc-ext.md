@@ -171,6 +171,7 @@ gRPC service thường được dùng trong việc giao tiếp giữa các clust
 
 Nguyên tắc hoạt động bên dưới của grpc-gateway sẽ như sau:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch4-2-grpc-gateway.png">
 	<br/>
@@ -179,6 +180,11 @@ Nguyên tắc hoạt động bên dưới của grpc-gateway sẽ như sau:
 	</span>
 </div>
 <br/>
+=======
+![](../images/ch4-2-grpc-gateway.png)
+
+Hình 4-2: gRPC-Gateway workflow
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Chúng ta có thể **sinh grpc-gateway dựa trên docker** theo [hướng dẫn](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c) hoặc theo cách thông thường như sau:
 

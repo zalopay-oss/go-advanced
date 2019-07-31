@@ -174,6 +174,7 @@ customizedHandler = logger(timeout(ratelimit(helloHandler)))
 
 Ngữ cảnh của chuỗi các hàm trong quá trình thực thi có thể được thể hiện bởi hình 5.8:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch5-03-middleware_flow.png">
 	<br/>
@@ -182,6 +183,10 @@ Ngữ cảnh của chuỗi các hàm trong quá trình thực thi có thể đư
 	</span>
 </div>
 <br/>
+=======
+![](../images/ch5-03-middleware_flow.png)
+*Hình 5-8 Xử lý yêu cầu*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Một cách đơn giản, quá trình này thực hiện đưa vào một hàm và sau đó lấy nó ra khi một request được thực hiện. Có một số luồng thực thi tương tự như gọi đệ quy.
 
@@ -277,6 +282,7 @@ Mỗi web framework sẽ có những thành phần middleware tương ứng. N�
 
 Ví dụ, cộng đồng opensource đóng góp cho fire `gin` framework, nó được thiết kế cho users để đóng góp vào kho middleware.
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch5-03-gin_contrib.png">
 	<br/>
@@ -285,5 +291,9 @@ Ví dụ, cộng đồng opensource đóng góp cho fire `gin` framework, nó đ
 	</span>
 </div>
 <br/>
+=======
+![](../images/ch5-03-gin_contrib.png)
+*Hình 5-9 Gin middleware repository*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Nếu chúng ta đọc mã nguồn của gin, có thể thấy được rằng gin middleware không dùng `http.Handler`, nhưng `gin.HandlerFunc` thì được gọi, và `http.Handler`sẽ khác với những mẫu signature trong phần này.

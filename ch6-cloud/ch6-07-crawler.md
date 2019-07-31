@@ -77,6 +77,7 @@ Hãy tưởng tượng rằng hệ thống phân tích thông tin của bạn đ
 
 Vì vậy, chúng ta cần hệ thống thu thập thông tin phân tán. Về bản chất, các trình thu thập thông tin phân tán là tập hợp của một hệ thống phân phối và thực thi tác vụ. Trong các hệ thống phân phối tác vụ phổ biến, sẽ có sự sai lệch tốc độ giữa `upstream` và `downstream` nên sẽ luôn tồn tại một hàng đợi tin nhắn.
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch6-dist-crawler.png">
 	<br/>
@@ -85,6 +86,11 @@ Vì vậy, chúng ta cần hệ thống thu thập thông tin phân tán. Về b
 	</span>
 </div>
 <br/>
+=======
+![dist-crawler](../images/ch6-dist-crawler.png)
+
+*Hình 6-14 Luồng công việc*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Công việc chính của `upstream` là thu thập thông tin tất cả các "trang" đích từ một điểm bắt đầu được cấu hình sẵn. Nội dung html của trang danh sách sẽ chứa các liên kết đến các trang chi tiết. Số lượng trang chi tiết thường gấp 10 đến 100 lần so với trang danh sách, vì vậy chúng ta xem các trang chi tiết này như "tác vụ" và phân phối chúng thông qua hàng đợi tin nhắn.
 
@@ -100,6 +106,7 @@ Máy chủ của nats là gnatsd. Phương thức giao tiếp giữa máy khách
 
 Gửi tin nhắn đi có chứa chủ đề cho một tác vụ:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch6-09-nats-protocol-pub.png">
 	<br/>
@@ -119,6 +126,17 @@ Theo dõi các tác vụ bằng chủ đề trên hàng đợi của các worker
 	</span>
 </div>
 <br/>
+=======
+![nats-Protocol-pub](../images/ch6-09-nats-protocol-pub.png)
+
+*Hình 6-15 Pub trong giao thức nats*
+
+Theo dõi các tác vụ bằng chủ đề trên hàng đợi của các worker:
+
+![nats-protocol-sub](../images/ch6-09-nats-protocol-sub.png)
+
+*Hình 6-16 Sub trong giao thức nats*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Tham số hàng đợi là tùy chọn. Nếu bạn muốn cân bằng tải các tác vụ ở phía người dùng, thay vì tất cả mọi người nhận cùng một kênh, bạn nên gán một tên hàng đợi cho một người dùng.
 

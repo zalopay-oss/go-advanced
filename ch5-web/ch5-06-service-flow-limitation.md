@@ -108,6 +108,7 @@ Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có m
 - Điều đó nghĩa là token bucket cho phép một mức độ đồng thời nhất định. Ví dụ cùng lúc có 100 yêu cầu người dùng gửi tới, miễn là có 100 token trong bucket thì tất cả 100 yêu cầu sẽ được đưa ra.
 - Token bucket cũng có thể suy biến thành mô hình leaky bucket nếu không có token trong bucket.
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch5-token-bucket.png">
 	<br/>
@@ -116,6 +117,10 @@ Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có m
 	</span>
 </div>
 <br/>
+=======
+![token-bucket](../images/ch5-token-bucket.png)
+*Hình 5-12 Token bucket*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng opensource đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là <github.com/juju/ratelimit> cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
 

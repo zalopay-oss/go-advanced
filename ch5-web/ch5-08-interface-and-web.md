@@ -73,6 +73,7 @@ Trước khi trừu tượng hóa, chúng ta cần phải hiểu rằng, việc 
 
 Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các uniform business processes và  business specifications, sau đó interface-based abstraction make sense. Ví dụ:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch5-interface-impl.uml.png">
 	<br/>
@@ -81,6 +82,11 @@ Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các
 	</span>
 </div>
 <br/>
+=======
+![](../images/ch5-interface-impl.uml.png)
+
+*Hình 5-19 Implementing a public interface*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Flatform cần phải phục vụ nhiều business khác nhau, nhưng dữ liệu được định nghĩa cần phải thống nhất. Về phía platform, chúng ta có thể định nghĩa một tập các interfaces tương tự như trên, và sau đó yêu cầu bên business access chúng phải hiện thực lại. Nếu interface có một số bước không mong muốn, chỉ cần trả về `nil`, hoặc phớt lờ chúng.
 

@@ -6,6 +6,7 @@ Trước khi chèn vào cơ sở dữ liệu, chúng ta cần cung cấp cho cá
 
 Thuật toán snowflake của Twitter là giải pháp điển hình trong ngữ cảnh này. Hãy nhìn vào hình 6-1:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch6-1-snowflake.png">
 	<br/>
@@ -14,6 +15,11 @@ Thuật toán snowflake của Twitter là giải pháp điển hình trong ngữ
 	</span>
 </div>
 <br/>
+=======
+![ch6-1-snowflake](../images/ch6-1-snowflake.png)
+
+*Hình 6-1 Phân phối Bit trong snowflake*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Đầu tiên, ta xác định rằng giá trị là 64 bit, loại int64, được chia thành bốn phần:
 
@@ -58,6 +64,7 @@ Xem xét đến việc có một dịch vụ tạo id bị lỗi trong cluster, 
 
 ### 6.1.2.1 Hiện thực theo snowflake chuẩn
 
+<<<<<<< HEAD
 github.com/bwmarrin/snowflake Đây là một hiện thực Snowflake's Go khá nhẹ. Bạn có thể sử dụng tài liệu định nghĩa của nó, xem dưới đây.
 
 <div align="center">
@@ -68,6 +75,13 @@ github.com/bwmarrin/snowflake Đây là một hiện thực Snowflake's Go khá 
 	</span>
 </div>
 <br/>
+=======
+github.com/bwmarrin/snowflake Đây là một hiện thực Snowflake's Go khá nhẹ. Bạn có thể sử dụng tài liệu định nghĩa của nó, xem Hình 6-2 dưới đây.
+
+![ch6-2-snowflake-easy](../images/ch6-2-snowflake-easy.png)
+
+*Hình 6-2 thư viện snowflake*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng như ví dụ sau:
 
@@ -123,6 +137,7 @@ Dĩ nhiên, thư viện này cũng cho phép chúng ta tùy chỉnh vài thông 
 
 ### 6.1.2.2 Sonyflake
 
+<<<<<<< HEAD
 Sonyflower là một dự án opensource của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác.
 
 <div align="center">
@@ -133,6 +148,13 @@ Sonyflower là một dự án opensource của Sony. Ý tưởng cơ bản tươ
 	</span>
 </div>
 <br/>
+=======
+Sonyflower là một dự án opensource của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác. Xem *Hình 6-3*:
+
+![sonyflake](../images/ch6-snoyflake.png)
+
+*Hình 6-3 sonyflake*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Thời gian ở đây chỉ sử dụng 39 bit, nhưng đơn vị thời gian trở thành 10ms. Về mặt lý thuyết, nó dài hơn thời gian của snowflake chuẩn đến 41 bit (174 năm).
 

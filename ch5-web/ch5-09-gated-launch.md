@@ -15,6 +15,7 @@ Phương pháp đầu tiên được sử dụng nhiều trong các hàm cũ c�
 
 Nếu service được deploy trên 15 instanses (có thể là physical machines hoặc containers), chúng ta chia 15 instances thành nhóm theo thứ tự độ ưu tiên, sẽ có 1-2-4-8 machines, mỗi thời điểm. Khi mở rộng ra, số lượng tăng gấp đôi.
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch5-online-group.png">
 	<br/>
@@ -23,6 +24,11 @@ Nếu service được deploy trên 15 instanses (có thể là physical machine
 	</span>
 </div>
 <br/>
+=======
+![](../images/ch5-online-group.png)
+
+*Hình 5-20 Group deployment*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Tại sao lại gấp đôi? Nó sẽ đảm bảo rằng chúng ta không chia nhỏ group quá nhiều, không quan trọng bao nhiêu machines mà chúng ta có. Cho ví dụ, 1024 machines, trong thực tế, chỉ cần 1-2-4-8-16-32-64-128-256-512 là 10 lần deployment để toàn bộ được deployed.
 
@@ -88,6 +94,7 @@ func isTrue(phone string) bool {
 
 Trường hợp này có thể trả về kết quả `true` hoặc `false` theo tỷ lệ phần trăm được đặc tả trước, và ở trên là sự khác biệt đơn giản theo xác suất mà chúng ta cần người gọi cung cấp một tham số input parameter. Chúng ta sử dụng input parameter như là một thông số để tính toán giá trị hash, sau đó trả về kết quả là một model. Điều này đảm bảo rằng user sẽ trả về cùng một kết quả qua nhiều lần gọi, trong ngữ cảnh sau, thuật toán sẽ phân đoạn được kết quả mong đợi
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch5-set-time-line.png">
 	<br/>
@@ -107,6 +114,17 @@ Nếu bạn dùng chiến lược random, bạn sẽ gặp một vấn đề nh�
 	</span>
 </div>
 <br/>
+=======
+![](../images/ch5-set-time-line.png)
+
+*Hình 5-21 First set and then get immediately*
+
+Nếu bạn dùng chiến lược random, bạn sẽ gặp một vấn đề như hình 5-22
+
+![](../images/ch5-set-time-line_2.png)
+
+*Hình 5-22 First set and then get immediately*
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 ## 5.9.3 Làm thế nào để hiện thực hệ thống Grayscale publishing
 

@@ -2,13 +2,10 @@
 
 Thời gian đầu, CPU chỉ có một lõi duy nhất, các ngôn ngữ khi đó sẽ theo mô hình lập trình tuần tự, điển hình là ngôn ngữ C. Ngày nay, với sự phát triển của công nghệ đa xử lý, để tận dụng tối đa sức mạnh của CPU, mô hình lập trình song song hay [multi-threading](https://en.wikipedia.org/wiki/Multithreading_(computer_architecture)) thường thấy trên các ngôn ngữ lập trình ra đời. Ngôn ngữ Go cũng phát triển mô hình lập trình song song rất hiệu quả với khái niệm Goroutines.
 
-<div align="center">
-	
-Lập trình tuần tự|Lập trình song song
----|---
-![](../images/ch1-5-sequence-programming.png) | ![](../images/ch1-5-parallelprograming.png)
-
-
+<div align="center" width="600">
+<img src="../images/concurency.jpg">
+<br/>
+<span  align="center"><i>Quá trình khởi tạo package</i></span>
 </div>
 <br/>
 

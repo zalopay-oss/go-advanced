@@ -383,12 +383,18 @@ p = (*X)(unsafe.Pointer(q)) // *Y => *X
 
 Sau đây là sơ đồ quá trình chuyển đổi giữa các con trỏ:
 
+<<<<<<< HEAD
 <div align="center">
 <img src="../images/ch2-1-x-ptr-to-y-ptr.uml.png">
 <br/>
 <span align="center"><i>Con trỏ kiểu X thành con trỏ kiểu Y</i></span>
 </div>
 <br/>
+=======
+![x](../images/ch2-1-x-ptr-to-y-ptr.uml.png)
+
+_Hình 2-1 Con trỏ kiểu X thành con trỏ kiểu Y_
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Bất kỳ kiểu con trỏ nào cũng có thể được chuyển sang kiểu con trỏ `unsafe.Pointer` để bỏ đi thông tin kiểu ban đầu, sau đó gán lại một kiểu con trỏ mới để đạt được mục đích chuyển đổi.
 
@@ -400,6 +406,7 @@ Việc chuyển đổi giữa các kiểu con trỏ khác nhau có vẻ phức t
 
 Biểu đồ sau đây trình bày cách hiện thực chuyển đổi lẫn nhau của kiểu `int32` sang kiểu con trỏ `char*` là chuỗi trong ngôn ngữ C:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch2-2-int32-to-char-ptr.uml.png">
 	<br/>
@@ -408,6 +415,11 @@ Biểu đồ sau đây trình bày cách hiện thực chuyển đổi lẫn nha
 	</span>
 </div>
 <br/>
+=======
+![x2](../images/ch2-2-int32-to-char-ptr.uml.png)
+
+_Hình 2-2 Int32 và `char` chuyển đổi con trỏ_
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Việc chuyển đổi được chia thành nhiều giai đoạn và mục tiêu ở mỗi giai đoạn: đầu tiên là kiểu `int32` sang `uintptr`, sau đó là `uintptr` thành kiểu con trỏ `unsafe.Pointr` và cuối cùng là kiểu con trỏ `unsafe.Pointr` thành kiểu `*C.char`.
 
@@ -433,6 +445,7 @@ pHdr.Cap = qHdr.Cap * unsafe.Sizeof(q[0]) / unsafe.Sizeof(p[0])
 
 Sau đây cho thấy luồng cụ thể của thao tác chuyển đổi giữa các slice:
 
+<<<<<<< HEAD
 <div align="center">
 	<img src="../images/ch2-3-x-slice-to-y-slice.uml.png">
 	<br/>
@@ -441,5 +454,10 @@ Sau đây cho thấy luồng cụ thể của thao tác chuyển đổi giữa c
 	</span>
 </div>
 <br/>
+=======
+![slicexy](../images/ch2-3-x-slice-to-y-slice.uml.png)
+
+_Hình 2-3 kiểu cắt X thành slice Y_
+>>>>>>> 039d41a5ffac593cb424dd3bee29b440339ea376
 
 Đối với các tính năng thường được sử dụng trong CGO, tác giả package <github.com/chai2010/cgo>, đã cung cấp các chức năng chuyển đổi cơ bản. Để biết thêm chi tiết hãy tham khảo code hiện thực.
