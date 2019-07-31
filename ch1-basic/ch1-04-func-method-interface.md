@@ -135,6 +135,15 @@ Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài ngu
 
 ### Slice trong Function
 
+<div align="center">
+	<img src="../images/slice_1.png" width="300">
+	<br/>
+	<span align="center">
+		<i>Minh hoạ slice</i>
+	</span>
+</div>
+<br/>
+
 Mọi thứ trong Go đều được truyền theo kiểu pass by value, slice cũng thế. Nhưng vì giá trị của slice là một *header* (chứa con trỏ tới dữ liệu array bên dưới) nên khi truyền slice vào hàm, quá trình copy sẽ bao gồm luôn địa chỉ tới array chứa dữ liệu thực sự.
 
 Ví dụ sau cho thấy ý nghĩa của việc truyền tham số kiểu slice vào hàm thay vì array:
@@ -399,6 +408,14 @@ Ngôn ngữ Go  vì thế cố gắng cung cấp sự cân bằng giữa sự li
 Duck-typing với ý tưởng đơn giản:
 
 > If something looks like a duck, swims like a duck and quacks like a duck then it’s probably a duck.
+
+<div align="center">
+	<img src="../images/duck-typing.png" width="300">
+	<br/>
+	<span align="center">
+	</span>
+</div>
+<br/>
 
 Ví dụ có một interface con vịt, xác định khả năng `Quacks`:
 

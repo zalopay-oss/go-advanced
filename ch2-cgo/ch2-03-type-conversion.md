@@ -1,12 +1,12 @@
 # 2.3 Chuyển đổi kiểu
 
-Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng các hàm trong C (các hàm hiện thực khai báo Golang trong C) để sử dụng lại các tài nguyên của C (vì ngôn ngữ C cũng liên quan đến các hàm callback, dĩ nhiên nó liên quan đến việc gọi các hàm trong Go từ các hàm của C (các hàm thực hiện khai báo ngôn ngữ C trong Go)). Ngày nay, CGO đã phát triển thành cầu nối giao tiếp hai chiều giữa C và Go. Để tận dụng tính năng của CGO, việc hiểu các quy tắc chuyển đổi kiểu dữ liệu giữa hai loại ngôn ngữ là điều quan trọng. Đây là vấn đề sẽ được thảo luận trong phần này.
+Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng các hàm trong C (các hàm hiện thực khai báo Golang trong C) để sử dụng lại các tài nguyên của C. Ngày nay, CGO đã phát triển thành cầu nối giao tiếp hai chiều giữa C và Go. Để tận dụng tính năng của CGO, việc hiểu các quy tắc chuyển đổi kiểu giữa hai loại ngôn ngữ là điều quan trọng.
+
+Đấy là vấn đề sẽ được thảo luận trong phần này.
 
 ## 2.3.1 Các kiểu dữ liệu số học
 
-Khi ta sử dụng các ký hiệu của C trong Golang, thường nó sẽ truy cập thông qua package "C" ảo, chẳng hạn như kiểu `int` tương ứng với `C. int`. Một số kiểu trong C bao gồm nhiều từ khóa, nhưng khi truy cập chúng thông qua package "C" ảo, phần tên không thể có ký tự khoảng trắng, ví dụ `unsigned int` không thể truy cập trực tiếp `C.unsigned int`. Do đó, CGO cung cấp quy tắc chuyển đổi tương ứng cho các kiểu trong C cơ bản, ví dụ như `C.uint` tương ứng trong C là `unsigned int`.
-
-Kiểu dữ liệu số học và kiểu dữ liệu trong C của Golang về cơ bản là tương tự nhau. Bảng 2-1 thể hiện sự tương tự này.
+Khi ta sử dụng các ký hiệu của C trong Golang, thường nó sẽ truy cập thông qua package "C" ảo, chẳng hạn như kiểu `int` tương ứng với `C.int`. Một số kiểu trong C bao gồm nhiều từ khóa, nhưng khi truy cập chúng thông qua package "C" ảo, phần tên không thể có ký tự khoảng trắng, ví dụ `unsigned int` không thể truy cập bằng `C.unsigned int`. Do đó, CGO cung cấp quy tắc chuyển đổi tương ứng cho các kiểu trong C:
 
 | Kiểu trong C           | Kiểu trong CGO | Kiểu trong Go |
 | ---------------------- | -------------- | ------------- |
@@ -25,11 +25,11 @@ Kiểu dữ liệu số học và kiểu dữ liệu trong C của Golang về c
 | double                 | C.double       | float64       |
 | size_t                 | C.size_t       | uint          |
 
-_Bảng 2-1 So sánh kiểu trong các ngôn ngữ Go và C_
+_Bảng so sánh kiểu trong các ngôn ngữ Go và C_
 
-Cần lưu ý rằng mặc dù kích thước của những kiểu không được chỉ rõ kích thước trong C như `int`, `short` v.v., kích thước của chúng đều được xác định trong CGO. Trong CGO, kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
+Mặc dù kích thước của những kiểu không chỉ rõ kích thước (trong C) như `int`, `short` v.v., kích thước của chúng đều được xác định trong CGO: kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
 
-Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với GO thì `int` và `uint` có thể là 4 byte hoặc 8 byte. Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị Go cơ bản sẽ xác định kiểu tương ứng trong C có tiền tố "Go". Ví dụ sau trong hệ thống 64-bit, có file header `_cgo_export.h` được CGO định nghĩa các kiểu giá trị, nơi mà `GoInt` và `GoUint` lần lượt là `GoInt64` và `GoUint64`:
+Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với GO thì `int` và `uint` có thể là 4 byte hoặc 8 byte (tuỳ platform). Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị cơ bản của Go sẽ xác định kiểu tương ứng trong C (kiểu có tiền tố "Go"). Ví dụ sau trong hệ thống 64-bit, file header `_cgo_export.h` định nghĩa các kiểu giá trị:
 
 ```go
 typedef signed char GoInt8;
@@ -46,7 +46,9 @@ typedef float GoFloat32;
 typedef double GoFloat64;
 ```
 
-Bên cạnh `GoInt` và `GoUint`, chúng tôi không khuyên bạn nên sử dụng trực tiếp `GoInt32`, `GoInt64` và các kiểu khác. Cách tiếp cận tốt hơn là khai báo file header <stdint.h> thông qua tiêu chuẩn C99 của C. Để cải thiện tính linh hoạt của C, không chỉ mỗi kiểu số học được xác định kích thước rõ ràng trong file mà chúng còn sử dụng các tên phù hợp với tên kiểu tương ứng trong Golang. So sánh các kiểu tương ứng trong <stdint.h> được trình bày trong Bảng 2-2.
+Trừ `GoInt` và `GoUint`, chúng tôi không khuyến khích bạn sử dụng trực tiếp `GoInt32`, `GoInt64` và các kiểu khác.
+
+Một cách tốt hơn là sử dụng các kiểu có trong khai báo file header <stdint.h> (chuẩn C99):
 
 | Kiểu trong C | Kiểu trong CGO | Kiểu trong Go |
 | ------------ | -------------- | ------------- |
@@ -59,13 +61,13 @@ Bên cạnh `GoInt` và `GoUint`, chúng tôi không khuyên bạn nên sử d�
 | int64_t      | C.int64_t      | int64         |
 | uint64_t     | C.uint64_t     | uint64        |
 
-_Bảng 2-2 So sánh kiểu trong `stdint.h` _
+*Bảng so sánh kiểu trong `stdint.h`*
 
-Như đã đề cập trước đó, nếu kiểu trong C bao gồm nhiều từ khóa, nó không thể được sử dụng trực tiếp thông qua package "C" ảo (ví dụ: `unsigned short` không thể được truy cập trực tiếp `C.unsigned short`). Tuy nhiên, sau khi định nghĩa lại kiểu trong <stdint.h> bằng cách sử dụng `typedef`, chúng ta có thể truy cập tới kiểu gốc. Đối với các kiểu trong C phức tạp hơn thì nên sử dụng `typedef` để đặt lại tên cho nó, thuận tiện hơn cho việc truy cập trong CGO.
+Như đã đề cập trước đó, nếu kiểu trong C bao gồm nhiều từ, nó không thể được sử dụng trực tiếp thông qua package "C" ảo (ví dụ: `unsigned short` không thể được truy cập trực tiếp `C.unsigned short`). Tuy nhiên, sau khi định nghĩa lại kiểu trong <stdint.h> bằng cách sử dụng `typedef`, chúng ta có thể truy cập tới kiểu gốc. Đối với các kiểu trong C phức tạp hơn thì nên sử dụng `typedef` để đặt lại tên cho nó, thuận tiện cho việc truy cập từ CGO.
 
 ## 2.3.2 Go Strings và Slices
 
-Trong file header `_cgo_export.h` được tạo ra bởi CGO, kiểu trong C tương ứng cũng được tạo cho các kiểu của Go như string, slice, dictionary, interface và pipe:
+Trong file header `_cgo_export.h` được tạo ra bởi CGO, kiểu trong C tương ứng cũng được tạo cho Go string, slice, dictionary, interface và pipe:
 
 ```go
 typedef struct { const char *p; GoInt n; } GoString;
@@ -75,9 +77,9 @@ typedef struct { void *t; void *v; } GoInterface;
 typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 ```
 
-Tuy nhiên, cần lưu ý rằng chỉ các string và slice là có giá trị sử dụng trong CGO, vì CGO tạo ra các phiên bản ngôn ngữ C cho một số hàm trong Go, vì vậy cả hai đều có thể gọi các hàm C trong Go, điều này được thực hiện lặp tức và CGO không cung cấp các hàm hỗ trợ liên quan cho các kiểu khác, đồng thời mô hình bộ nhớ dành riêng cho ngôn ngữ Go ngăn chúng ta duy trì các kiểu con trỏ tới bộ nhớ này quản lý bởi Go, vì vậy mà môi trường ngôn ngữ C của các kiểu đó không có giá trị sử dụng.
+Tuy nhiên, cần lưu ý rằng chỉ các string và slice là có giá trị sử dụng trong CGO, vì CGO tạo ra các phiên bản ngôn ngữ C cho một số hàm trong Go, vì vậy cả hai đều có thể gọi các hàm C trong Go, điều này được thực hiện lặp tức và CGO không cung cấp các hàm hỗ trợ liên quan cho các kiểu khác, đồng thời mô hình bộ nhớ dành riêng cho ngôn ngữ Go ngăn chúng ta duy trì các kiểu con trỏ tới các vùng bộ nhớ Go quản lý, vì vậy mà môi trường ngôn ngữ C của các kiểu đó không có giá trị sử dụng.
 
-Trong hàm C đã export, chúng ta có thể trực tiếp sử dụng các string và slice trong Go. Giả sử bạn có hai hàm export sau:
+Trong hàm C đã export, chúng ta có thể trực tiếp sử dụng các string và slice trong Go. Giả sử có hai hàm export sau:
 
 ```go
 //export helloString
@@ -87,24 +89,35 @@ func helloString(s string) {}
 func helloSlice(s []byte) {}
 ```
 
-File header `_cgo_export.h` được tạo bởi CGO sẽ chứa khai báo hàm sau:
+File header `_cgo_export.h` được  CGO tạo ra sẽ chứa khai báo hàm sau:
 
 ```c
 extern void helloString(GoString p0);
 extern void helloSlice(GoSlice p0);
 ```
 
-Nhưng lưu ý rằng nếu bạn sử dụng kiểu `GoString` thì sẽ phụ thuộc vào file header `_cgo_export.h` và tập file này có output động.
+Nhưng lưu ý rằng nếu bạn sử dụng kiểu `GoString` thì sẽ phụ thuộc vào file header `_cgo_export.h` và file này có nội dung hay thay đổi do CGO sinh ra.
 
-Phiên bản Go1.10 thêm một chuỗi kiểu `_GoString_` định nghĩa trước, có thể làm giảm code có rủi ro phụ thuộc file header `_cgo_export.h`. Chúng ta có thể điều chỉnh khai báo ngôn ngữ C của hàm `helloString` thành:
+Phiên bản Go1.10 thêm một chuỗi kiểu `_GoString_`, có thể làm giảm code có rủi ro phụ thuộc file header `_cgo_export.h`. Chúng ta có thể điều chỉnh khai báo ngôn ngữ C của hàm `helloString` thành:
 
 ```c
 extern void helloString(_GoString_ p0);
 ```
 
+Bởi vì `_GoString_` là kiểu định nghĩa trước, ta không thể truy cập rực tiếp các thông tin như length hay pointer của string qua kiểu này. Gó.10  thêm vào 2 hàm sau để bổ sung:
+
+```c
+size_t _GoStringLen(_GoString_ s);
+const char *_GoStringPtr(_GoString_ s);
+```
+
 ## 2.3.3 Struct, Union, Enumerate
 
-Các kiểu struct, Union và Enumerate của ngôn ngữ C không thể được nhúng dưới dạng thành phần ẩn danh vào struct của ngôn ngữ Go. Trong Go, chúng ta có thể truy cập các kiểu struct như `struct xxx` tương ứng là `C.struct_xxx` trong ngôn ngữ C. Bố cục bộ nhớ của struct tuân theo các quy tắc căn chỉnh (alignment) chung của ngôn ngữ C. Trong môi trường ngôn ngữ Go 32 bit, struct của C cũng tuân theo quy tắc căn chỉnh 32 bit và môi trường ngôn ngữ Go 64 bit tuân theo quy tắc căn chỉnh 64 bit. Đối với các struct có quy tắc căn chỉnh đặc biệt được chỉ định, chúng không thể được truy cập trong CGO.
+Các kiểu struct, Union và Enumerate của ngôn ngữ C không thể được thêm vào struct dưới dạng thuộc tính ẩn danh.
+
+### Struct
+
+Trong Go, chúng ta có thể truy cập các kiểu struct như `struct xxx` tương ứng là `C.struct_xxx` trong ngôn ngữ C. Tổ chức bộ nhớ của struct tuân theo các quy tắc alignment: Trong môi trường ngôn ngữ Go 32 bit, struct của C tuân theo quy tắc alignment 32 bit và môi trường ngôn ngữ Go 64 bit tuân theo quy tắc alignment 64 bit. Đối với các struct có quy tắc alignment đặc biệt được chỉ định, chúng không thể được truy cập trong CGO.
 
 Cách sử dụng struct đơn giản như sau:
 
@@ -130,7 +143,8 @@ Nếu tên thành phần của struct tình cờ là một từ khóa trong  Go,
 ```go
 /*
 struct A {
-    int type; // type là một từ khóa trong Golang
+    int type;
+    // type là một từ khóa trong Golang
 };
 */
 import "C"
@@ -138,11 +152,12 @@ import "fmt"
 
 func main() {
     var a C.struct_A
-    fmt.Println(a._type) // _type tương ứng với type
+    fmt.Println(a._type)
+    // _type tương ứng với type
 }
 ```
 
-Nhưng nếu có 2 thành phần: một thành phần được đặt tên theo từ khóa của Go và phần kia là trùng khi thêm vào dấu gạch dưới, thì các thành phần được đặt tên theo từ khóa ngôn ngữ Go sẽ không thể truy cập (bị chặn):
+Nhưng nếu có 2 thành phần: một thành phần được đặt tên theo từ khóa của Go và phần kia là trùng khi thêm vào dấu gạch dưới, thì các thành phần được đặt tên theo từ khóa ngôn ngữ Go sẽ không thể truy cập:
 
 ```go
 /*
@@ -160,15 +175,13 @@ func main() {
 }
 ```
 
-Các thành phần tương ứng với trường bit (biến được định nghĩa với giá trị độ lớn cho sẵn) trong cấu trúc ngôn ngữ C không thể được truy cập bằng ngôn ngữ Go. Nếu bạn cần thao tác với các thành phần này, bạn cần xác định hàm hỗ trợ trong ngôn ngữ C.
-
-Đối với các thành phần của mảng có độ dài bằng 0, các phần tử của mảng không thể truy cập trực tiếp trong Go, nhưng vẫn có thể truy cập phần bù vị trí (offset) của phần tử trong mảng có độ dài bằng 0 thông qua `unsafe.Offsetof(a.arr)`.
+Các thành phần tương ứng với [trường bit](https://www.tutorialspoint.com/cprogramming/c_bit_fields) (thuộc tính được định nghĩa với giá trị độ lớn kèm theo) trong cấu trúc ngôn ngữ C không thể được truy cập bằng ngôn ngữ Go. Nếu bạn cần thao tác với các thành phần này, bạn cần định nghĩa hàm hỗ trợ trong C.
 
 ```go
 /*
 struct A {
     int   size: 10; // Trường bit không thể truy cập
-    float arr[];    // Mạng có độ dài bằng 0 cũng không thể truy cập được
+    float arr[];    // Mảng có độ dài bằng 0 cũng không thể truy cập được
 };
 */
 import "C"
@@ -181,7 +194,9 @@ func main() {
 }
 ```
 
-Trong ngôn ngữ C, chúng ta không thể truy cập trực tiếp vào kiểu struct được xác định bởi ngôn ngữ Go.
+Trong ngôn ngữ C, chúng ta không thể truy cập trực tiếp vào kiểu struct được định nghĩa bởi Go.
+
+### Union
 
 Đối với các kiểu union, chúng ta có thể truy cập các kiểu `union xxx` tương ứng là `C.union_xxx` trong ngôn ngữ C. Tuy nhiên, các kiểu union trong C không được hỗ trợ trong Go và chúng được chuyển đổi thành các mảng byte có kích thước tương ứng.
 
@@ -211,7 +226,13 @@ func main() {
 }
 ```
 
-Nếu bạn cần thao tác biến kiểu lồng nhau trong C (union), thường có ba phương pháp: cách thứ nhất là xác định hàm hỗ trợ trong C, cách thứ hai là giải mã thủ công các thành phần thông qua "encoding/binary" của ngôn ngữ Go (không phải vấn đề big endian), thứ ba là sử dụng package `unsafe` để chuyển sang kiểu tương ứng (đây là cách tốt nhất để thực hiện). Sau đây cho thấy cách truy cập các thành viên kiểu union thông qua package `unsafe`:
+Nếu bạn cần thao tác biến kiểu lồng nhau trong C (union):
+
+- Cách thứ nhất là định nghĩa hàm hỗ trợ trong C,
+- Cách thứ hai là phân giải thủ công các thành phần đó thông qua "encoding/binary" của ngôn ngữ Go (không phải vấn đề big endian),
+- Cách thứ ba là sử dụng package `unsafe` để chuyển sang kiểu tương ứng (đây là cách tốt nhất để thực hiện).
+
+Sau đây cho thấy cách truy cập các thành viên kiểu union thông qua package `unsafe`:
 
 ```go
 /*
@@ -232,7 +253,9 @@ func main() {
 }
 ```
 
-Mặc dù truy cập bằng package `unsafe` là cách dễ nhất và tốt nhất về hiệu suất, nó có thể làm phức tạp vấn đề với các tình huống mà trong đó các kiểu union lồng nhau được xử lý. Đối với các kiểu này ta nên xử lý chúng bằng cách xác định các hàm hỗ trợ trong ngôn ngữ C.
+Mặc dù truy cập bằng package `unsafe` là cách dễ nhất và tốt nhất về hiệu suất, nó có thể làm phức tạp hoá vấn đề với các tình huống mà trong đó các kiểu union lồng nhau được xử lý. Đối với các kiểu này ta nên xử lý chúng bằng cách định nghĩa các hàm hỗ trợ trong C.
+
+### Enumerate
 
 Đối với các kiểu liệt kê (enum), chúng ta có thể truy cập các kiểu `enum xxx` tương ứng là `C.enum_xxx` trong C.
 
@@ -258,7 +281,11 @@ Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá
 
 ## 2.3.4 Array, String và Slice
 
-Trong C, biến mảng thực ra tương ứng với một con trỏ trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, con trỏ này không thể được sửa đổi, khi truyền biến mảng vào một hàm, thực ra là truyền địa chỉ phần tử đầu tiên của mảng. Ở đây ta xem một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
+### Array
+
+Trong C, biến mảng thực ra tương ứng với một con trỏ trỏ tới một phần bộ nhớ có độ dài cụ thể của một kiểu cụ thể, con trỏ này không thể được sửa đổi, khi truyền biến mảng vào một hàm, thực ra là truyền địa chỉ phần tử đầu tiên của mảng.
+
+Ở đây ta xem một độ dài nhất định của bộ nhớ là một mảng. Chuỗi trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
 
 Trong Go, mảng là một kiểu giá trị và độ dài của mảng là một phần của kiểu mảng. Chuỗi trong Go tương ứng với một vùng nhớ "chỉ đọc" có độ dài nhất định. Slice trong Go là phiên bản đơn giản hơn của mảng động (dynamic array).
 
