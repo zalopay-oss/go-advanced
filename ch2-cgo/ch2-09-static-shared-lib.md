@@ -80,9 +80,7 @@ $ go run main.go
 
 Nếu chúng ta sử dụng thư viện tĩnh từ bên thứ ba, chúng ta cần phải tải chúng và cài đặt thư viện tĩnh đến một nơi phù hợp. Sau đó đặc tả location của header files và libraries qua cờ `CFLAGS` và `LDFLAGS` trong lệnh `#cgo`.
 
-Trong các hệ điều hành khác nhau, hoặc các phiên bản khác nhau của cùng hệ điều hành, installation paths của những thư viện có thể khác nhau, do đó làm cách nào để có thể biết được các thay đổi trong mã nguồn?
-
-Trong môi trường Linux, có một lệnh `pkg-config` được dùng để truy vấn các tham số compile và link khi dùng các thư viện động/tĩnh. Chúng ta có thể dùng lệnh pkg-config trực tiếp trong lệnh #cgo để generate compilation và linking parameters. Bạn có thể customize lệnh pkg-config với biến môi trường `PKG_CONFIG`.
+Trong môi trường Linux, có một lệnh [pkg-config](https://linux.die.net/man/1/pkg-config) được dùng để truy vấn các tham số compile và link khi dùng các thư viện động/tĩnh. Chúng ta có thể dùng lệnh pkg-config trực tiếp trong lệnh #cgo để generate compilation và linking parameters. Bạn có thể customize lệnh pkg-config với biến môi trường `PKG_CONFIG`.
 
 Vì các hệ điều hành khác nhau hỗ trợ lệnh pkg-config theo cách khác nhau, rất khó để làm các build parameters tương thích với hầu hết các hệ điều hành. Trong hệ điều hành Linux, lệnh pkg-config chỉ đơn giản quản lý các build parameters. Chi tiết của việc dùng pkg-config không được nói ở đây, do đó bạn có thể thấy chúng trong các tài liệu liên quan khác.
 
