@@ -1,8 +1,8 @@
-# 2.2 CGO Foundation
+# 2.2. CGO Foundation
 
 Để sử dụng tính năng CGO, bạn cần cài đặt compiler C/C++: Trên macOS và Linux là  `GCC` còn trên Windows là `MinGW`. Đồng thời, cần đảm bảo rằng biến môi trường `CGO_ENABLED` được đặt thành 1.
 
-## 2.2.1 Lệnh `import "C"`
+## 2.2.1. Lệnh `import "C"`
 
 Lệnh  `import "C"` xuất hiện trong code nói cho compiler rằng tính năng CGO sẽ được sử dụng. Code trong cặp `/* */` trước lệnh đó là cú pháp để Go nhận ra code của C. Lúc này, ta có thể thêm các file code của C/C++ tương ứng trong thư mục hiện tại.
 
@@ -83,7 +83,7 @@ Câu trả lời là không, bởi vì các tham số của `cgo_helper.PrintCSt
 
 Nói cách khác, nếu một package sử dụng trực tiếp một kiểu thuộc package C ảo (tương tự như `*C.char`)  trong một interface chung thì các package khác sẽ không thể sử dụng trực tiếp các kiểu đó trừ khi package kia cũng cung cấp hàm tạo `*C.chartype`.
 
-## 2.2.2 Lệnh `#cgo`
+## 2.2.2. Lệnh `#cgo`
 
 Trước dòng `import "C"` ta có thể đặt các tham số cho quá trình biên dịch và quá trình liên kết (compile phase và link phase) thông qua các lệnh `#cgo`.
 
@@ -163,7 +163,7 @@ func main() {
 
 Bằng cách này, chúng ta có thể biết được hệ thống mà code đang vận hành, nhờ đó áp dụng các kĩ thuật riêng cho các nền tảng khác nhau.
 
-## 2.2.3 Biên dịch với tag
+## 2.2.3. Biên dịch với tag
 
 Build tag là một comment đặc biệt ở đầu file C/C++ trong môi trường Go hoặc CGO. Biên dịch có điều kiện tương tự như sử dụng macro `#cgo` để xác định các nền tảng khác nhau (ví dụ trên). Code được build sau khi macro của nền tảng tương ứng được xác định.
 

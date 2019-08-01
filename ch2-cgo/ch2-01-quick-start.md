@@ -1,8 +1,8 @@
-# 2.1 Quick Start
+# 2.1. Quick Start
 
 Trong phần này, chúng ta sẽ tìm hiểu cách sử dụng CGO cơ bản  thông qua loạt ví dụ từ đơn giản đến phức tạp.
 
-## 2.1.1 Chương trình CGO đơn giản
+## 2.1.1. Chương trình CGO đơn giản
 
 Đầu tiên là một chương trình CGO đơn giản nhất:
 
@@ -20,7 +20,7 @@ func main() {
 
 Chúng ta import package CGO thông qua câu lệnh `import "C"`. Chương trình trên chưa thực hiện bất kì thao tác nào với CGO, chỉ mới thông báo sẵn sàng cho việc lập trình với CGO. Mặc dù chưa sử dụng gì đến CGO nhưng lệnh `go build` vẫn sẽ gọi trình biên dịch `gcc` trong suốt quá trình biên dịch do đây được là một chương trình CGO hoàn chỉnh.
 
-## 2.1.2 Xuất chuỗi dựa trên thư viện chuẩn của C
+## 2.1.2. Xuất chuỗi dựa trên thư viện chuẩn của C
 
 ***main.go***
 
@@ -39,7 +39,7 @@ func main() {
 
 Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.CString của ngôn ngữ C sẽ dẫn đến rò rỉ bộ nhớ. Nhưng đối với chương trình nhỏ ở trên điều này không đáng lo ngại  vì hệ điều hành sẽ tự động lấy lại các tài nguyên của chương trình sau khi chương trình kết thúc.
 
-## 2.1.3 Sử dụng hàm C tự khai báo
+## 2.1.3. Sử dụng hàm C tự khai báo
 
 Phần trên chúng ta đã sử dụng các hàm đã có trong `stdio`. Bây giờ ta sẽ sử dụng một hàm `SayHello` của ngôn ngữ C. Chức năng hàm này là in ra chuỗi chúng ta truyền vào hàm. Sau đó gọi hàm `SayHello` trong hàm main:
 
@@ -91,7 +91,7 @@ func main() {
 
 `Lưu ý`: thay vì chạy lệnh `go run main.go` hoặc `go build main.go`, chúng ta phải sử dụng `go run "tên/của/package"` hoặc `go build "tên/của/package"`. Nếu đang đứng trong thư mục chứa mã nguồn thì bạn có thể chạy chương trình bằng lệnh `go run .` hoặc `go build .`
 
-## 2.1.4 Module hóa C code
+## 2.1.4. Module hóa C code
 
 Trừu tượng và module hóa là cách để đơn giản hóa các vấn đề trong lập trình:
 
@@ -156,7 +156,7 @@ func main() {
 
 Với việc lập trình C bằng API interface, ta có thể hiện thực module bằng bất kỳ ngôn ngữ nào, miễn là đáp ứng được API: SayHello có thể được viết bằng C, C++, Go hoặc kể cả Assembly.
 
-## 2.1.5 Sử dụng Go để hiện thực hàm trong C
+## 2.1.5. Sử dụng Go để hiện thực hàm trong C
 
 Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn được dùng để export các hàm (viết bằng) ngôn ngữ Go sang các lời gọi hàm của C.
 
@@ -200,7 +200,7 @@ func main() {
 }
 ```
 
-## 2.1.6 Sử dụng Go để lập trình interface cho C
+## 2.1.6. Sử dụng Go để lập trình interface cho C
 
 Để cho đơn giản chúng ta sẽ gộp tất cả thành một file `main.go` duy nhất như ví dụ dưới đây.
 
