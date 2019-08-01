@@ -334,9 +334,9 @@ func C.GoStringN(*C.char, C.int) string
 func C.GoBytes(unsafe.Pointer, C.int) []byte
 ```
 
-Đối với chuỗi Go đầu vào của `C.CString`, nó sẽ được sao chép sang chuỗi định dạng ngôn ngữ C, chuỗi trả về được gán bởi hàm `malloc` của C và cần phải được release bằng `free` (của C) khi không sử dụng. Hàm `C.CBytes` và các hàm tương tự được sử dụng để nhân bản (clone) ra phiên bản C của một mảng byte từ slice byte của ngôn ngữ Go đầu vào. Mảng trả về tương tự cần được release vào thời điểm thích hợp. `C.GoString` được sử dụng để nhân bản ra từ chuỗi kết thúc NULL của ngôn ngữ C. `C.GoBytes` được sử dụng để nhân bản một slice byte của ngôn ngữ Go từ một mảng trong C.
+Khi string và slice của Go được chuyển đổi thành phiên bản trong C, bộ nhớ nhân bản được cấp phát bởi hàm `malloc` của C và cuối cùng có thể được giải phóng bằng `free`. Khi một string hoặc array trong C được chuyển đổi thành Go, bộ nhớ nhân bản được quản lý bởi ngôn ngữ Go.
 
-Các hàm hỗ trợ này được chạy trong chế độ nhân bản. Khi string và slice của Go được chuyển đổi thành phiên bản trong C, bộ nhớ nhân bản được cấp phát bởi hàm `malloc` của C và cuối cùng có thể được giải phóng bằng `free`. Khi một chuỗi hoặc mảng trong C được chuyển đổi thành Go, bộ nhớ nhân bản được quản lý bởi ngôn ngữ Go. Với bộ hàm chuyển đổi này, bộ nhớ trước chuyển đổi và sau chuyển đổi vẫn ở trong vùng nhớ cục bộ tương ứng của chúng. Ưu điểm của chuyển đổi trong chế độ nhân bản là quản lý interface và bộ nhớ rất đơn giản. Nhược điểm là nhân bản cần phân bổ bộ nhớ mới và các hoạt động sao chép của nó sẽ dẫn nhiều đến chi phí phụ.
+Với các hàm chuyển đổi này, bộ nhớ trước chuyển đổi và sau chuyển đổi vẫn ở trong vùng nhớ cục bộ tương ứng của chúng. Ưu điểm của chuyển đổi trong chế độ nhân bản là quản lý interface và bộ nhớ rất đơn giản. Nhược điểm là nhân bản cần phân bổ bộ nhớ mới và các hoạt động sao chép của nó sẽ dẫn nhiều đến chi phí phụ.
 
 Các định nghĩa cho string và slice trong package `reflect`:
 
@@ -402,15 +402,15 @@ typedef struct { const char *p; GoInt n; } GoString;
 typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 ```
 
-Trong C có thể dùng `GoString` và `GoSlice` để truy cập chuỗi và slice trong Go. Nếu là một kiểu mảng trong Go, bạn có thể chuyển đổi mảng thành một slice và sau đó chuyển đổi nó. Nếu không gian bộ nhớ bên dưới tương ứng với một chuỗi hoặc slice được quản lý bởi runtime của Go thì đối tượng bộ nhớ Go có thể được lưu trong một thời gian dài trong ngôn ngữ C.
+Trong C có thể dùng `GoString` và `GoSlice` để truy cập string và slice trong Go. Nếu là một kiểu mảng trong Go, bạn có thể chuyển đổi mảng thành một slice và sau đó chuyển đổi nó. Nếu không gian bộ nhớ bên dưới tương ứng với một string hoặc slice được quản lý bởi runtime của Go thì đối tượng bộ nhớ Go có thể được lưu trong một thời gian dài trong ngôn ngữ C.
 
 Chi tiết về mô hình bộ nhớ CGO sẽ được thảo luận kĩ hơn trong các chương sau.
 
 ## 2.3.5 Chuyển đổi giữa các con trỏ
 
-Trong ngôn ngữ C, các kiểu con trỏ khác nhau có thể được chuyển đổi tường minh hoặc ngầm định. Nếu là ngầm định, nó sẽ chỉ đưa ra một số thông tin cảnh báo tại thời điểm biên dịch. Nhưng ngôn ngữ Go rất nghiêm ngặt đối với các kiểu chuyển đổi khác nhau và mọi thông báo cảnh báo có thể xuất hiện trong ngôn ngữ C có thể sẽ là error trong ngôn ngữ Go. Con trỏ là linh hồn của ngôn ngữ C và việc chuyển đổi tự do giữa các con trỏ cũng là vấn đề quan trọng đầu tiên thường được giải quyết trong code CGO.
+Trong ngôn ngữ C, các kiểu con trỏ khác nhau có thể được chuyển đổi tường minh hoặc ngầm định. Việc chuyển đổi giữa các con trỏ cũng là vấn đề quan trọng đầu tiên cần được giải quyết trong code CGO.
 
-Trong ngôn ngữ Go, hai con trỏ hoàn toàn giống nhau về kiểu và có thể được sử dụng trực tiếp mà không cần chuyển đổi. Nếu một kiểu con trỏ được xây dựng dựa trên một kiểu con trỏ khác, nói cách khác, hai con trỏ bên dưới là các con trỏ có cùng cấu trúc, thì chúng ta có thể chuyển đổi giữa các con trỏ bằng cú pháp cast trực tiếp. Tuy nhiên, CGO thường phải đối phó với việc chuyển đổi giữa hai kiểu con trỏ hoàn toàn khác nhau. Về nguyên tắc, thao tác này bị nghiêm cấm trong code Go thuần.
+Trong ngôn ngữ Go, nếu một kiểu con trỏ được xây dựng dựa trên một kiểu con trỏ khác, nói cách khác, hai con trỏ bên dưới là các con trỏ có cùng cấu trúc, thì chúng ta có thể chuyển đổi giữa các con trỏ bằng cú pháp cast trực tiếp. Tuy nhiên, CGO thường phải đối phó với việc chuyển đổi giữa hai kiểu con trỏ hoàn toàn khác nhau. Về nguyên tắc, thao tác này bị nghiêm cấm trong code Go thuần.
 
 Một trong những mục đích của CGO là phá vỡ sự cấm đoán nói trên và khôi phục các thao tác chuyển đổi con trỏ tự do mà ngôn ngữ C nên có. Đoạn code sau trình bày cách chuyển đổi một con trỏ kiểu X thành một con trỏ kiểu Y:
 
@@ -437,9 +437,9 @@ Bất kỳ kiểu con trỏ nào cũng có thể được chuyển sang kiểu c
 
 ## 2.3.6 Chuyển đổi giá trị và con trỏ
 
-Việc chuyển đổi giữa các kiểu con trỏ khác nhau có vẻ phức tạp, nhưng nó tương đối đơn giản trong CGO. Trong ngôn ngữ C, ta thường gặp trường hợp con trỏ được biểu diễn bởi giá trị thông thường, điều này nghĩa là làm thế nào để hiện thực việc chuyển đổi giá trị và con trỏ cũng là một vấn đề mà CGO cần phải đối mặt.
+Trong ngôn ngữ C, ta thường gặp trường hợp con trỏ được biểu diễn bởi giá trị thông thường, làm thế nào để hiện thực việc chuyển đổi giá trị và con trỏ cũng là một vấn đề mà CGO cần phải đối mặt.
 
-Để kiểm soát chặt chẽ việc sử dụng con trỏ, ngôn ngữ Go cấm chuyển đổi các kiểu số trực tiếp thành các kiểu con trỏ. Tuy nhiên, Go đã đặc biệt định nghĩa một kiểu uintptr cho các kiểu con trỏ `unsafe.Pointer`. Chúng ta có thể sử dụng uintptr làm trung gian để hiện thực các kiểu số thành các kiểu `unsafe.Pointer`. Kết hợp với các phương pháp đã đề cập trước đó, việc chuyển đổi các giá trị và con trỏ giờ đã có thể thực hiện.
+Để kiểm soát chặt chẽ việc sử dụng con trỏ, ngôn ngữ Go không cho phép chuyển đổi các kiểu số trực tiếp thành các kiểu con trỏ. Tuy nhiên, Go đã đặc biệt định nghĩa một kiểu `uintptr` cho các kiểu con trỏ `unsafe.Pointer`. Chúng ta có thể sử dụng `uintptr` làm trung gian để hiện thực các kiểu số thành các kiểu `unsafe.Pointer`.
 
 Biểu đồ sau đây trình bày cách hiện thực chuyển đổi lẫn nhau của kiểu `int32` sang kiểu con trỏ `char*` là chuỗi trong ngôn ngữ C:
 
@@ -452,27 +452,31 @@ Biểu đồ sau đây trình bày cách hiện thực chuyển đổi lẫn nha
 </div>
 <br/>
 
-Việc chuyển đổi được chia thành nhiều giai đoạn và mục tiêu ở mỗi giai đoạn: đầu tiên là kiểu `int32` sang `uintptr`, sau đó là `uintptr` thành kiểu con trỏ `unsafe.Pointr` và cuối cùng là kiểu con trỏ `unsafe.Pointr` thành kiểu `*C.char`.
+Việc chuyển đổi được chia thành nhiều giai đoạn: đầu tiên là kiểu `int32` sang `uintptr`, sau đó là `uintptr` thành kiểu con trỏ `unsafe.Pointr` và cuối cùng là kiểu con trỏ `unsafe.Pointr` thành kiểu `*C.char`.
 
 ## 2.3.7 Chuyển đổi giữa kiểu slice
 
-Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên, trong ngôn ngữ Go, slice tương ứng với một con trỏ tới một mảng (fat pointer), vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
+Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên trong ngôn ngữ Go, slice thực ra là một con trỏ tới một mảng (fat pointer), vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
 
-Tuy nhiên, package `reflection` của ngôn ngữ Go đã cung cấp sẵn cấu trúc cơ bản của kiểu slice nhờ đó chuyển đổi slice có thể được hiện thực và kết hợp với kỹ thuật chuyển đổi con trỏ được thảo luận ở trên giữa các kiểu khác nhau:
+Tuy nhiên, package `reflection` của ngôn ngữ Go đã cung cấp sẵn cấu trúc cơ bản của kiểu slice nhờ đó chuyển đổi slice có thể được hiện thực:
 
 ```go
 var p []X
 var q []Y
 
+// tạo slice trống
 pHdr := (*reflect.SliceHeader)(unsafe.Pointer(&p))
 qHdr := (*reflect.SliceHeader)(unsafe.Pointer(&q))
 
+// chuyển dữ liệu bên trong slice
 pHdr.Data = qHdr.Data
+
+// chuyển các thông tin về len và cap
 pHdr.Len = qHdr.Len * unsafe.Sizeof(q[0]) / unsafe.Sizeof(p[0])
 pHdr.Cap = qHdr.Cap * unsafe.Sizeof(q[0]) / unsafe.Sizeof(p[0])
 ```
 
-Ý tưởng chuyển đổi giữa các kiểu slice khác nhau là trước tiên xây dựng một slice trống, sau đó điền vào slice đó với dữ liệu bên dưới của slice gốc. Nếu kiểu X và Y có kích thước khác nhau, bạn cần đặt lại thuộc tính Len và Cap. Cần lưu ý rằng nếu X hoặc Y là kiểu null, đoạn code trên có thể gây ra lỗi chia cho 0 và code thực tế cần được xử lý khi thích hợp.
+Cần lưu ý rằng nếu X hoặc Y là kiểu null, đoạn code trên có thể gây ra lỗi chia cho 0 và code thực tế cần được xử lý khi thích hợp.
 
 Sau đây cho thấy luồng cụ thể của thao tác chuyển đổi giữa các slice:
 
