@@ -2,7 +2,7 @@
 
 Ngôn ngữ [Go](https://golang.org/) ban đầu được thiết kế và phát triển bởi một nhóm kĩ sư Google bao gồm **Robert Griesemer**, **Ken Thompson** và **Rob Pike** vào năm 2007. Mục đích của việc thiết kế ngôn ngữ mới bắt nguồn từ một số phản hồi về tính chất phức tạp của C++11 và nhu cầu thiết kế lại ngôn ngữ C trong môi trường network và multi-core.
 
-Vào giữa năm 2008, hầu hết các tính năng được thiết kế trong ngôn ngữ được hoàn thành, họ bắt đầu hiện thực trình biên dịch (compiler) và bộ thực thi (runtime) với **Russ Cox** là nhà phát triển chính. Trước năm 2010, ngôn ngữ Go dần dần được hoàn thiện. Vào tháng 9 cùng năm, ngôn ngữ Go chính thức được công bố dưới dạng Open source.
+Vào giữa năm 2008, hầu hết các tính năng được thiết kế trong ngôn ngữ được hoàn thành, họ bắt đầu hiện thực trình biên dịch (compiler) và Go runtime với **Russ Cox** là nhà phát triển chính. Trước năm 2010, ngôn ngữ Go dần dần được hoàn thiện. Vào tháng 9 cùng năm, ngôn ngữ Go chính thức được công bố dưới dạng Open source.
 
 Ngôn ngữ Go thường được mô tả là "Ngôn ngữ tựa C" hoặc là "Ngôn ngữ C của thế kỉ 21". Từ nhiều khía cạnh, ngôn ngữ Go thừa hưởng những ý tưởng từ ngôn ngữ C, như là cú pháp, cấu trúc điều khiển, kiểu dữ liệu cơ bản, thủ tục gọi, trả về, con trỏ, v,v.., hoàn toàn kế thừa và phát triển ngôn ngữ C, hình bên dưới mô tả sự liên quan của ngôn ngữ Go với các ngôn ngữ khác.
 
@@ -33,9 +33,9 @@ Một vài những tính năng khác của ngôn ngữ Go đến từ một số
 
 Tính chất concurrency của Go đến từ học thuyết [Commutative sequential processes (CSP)](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf) được công bố bởi Tony Hoare tại Bell Labs vào năm 1978. Bài báo khoa học về CSP nói rằng chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `channel` cho việc giao tiếp và điều khiển đồng bộ.
 
-Học thuyết CSP của Tony Hoare chỉ là một mô hình lập trình với những khái niệm cơ bản về concurrency (tính đồng thời), nó cũng không hẳn là một ngôn ngữ lập trình. Qua việc thiết kế Go, Rob Pike đã tổng hợp nhiều thập kỉ trong việc ứng dụng học thuyết CSP trong việc xây dựng ngôn ngữ lập trình.
+Học thuyết CSP của Tony Hoare chỉ là một mô hình lập trình với những khái niệm cơ bản về concurrency (tính đồng thời), nó cũng không hẳn là một ngôn ngữ lập trình. Qua việc thiết kế Go, Rob Pike đã tổng hợp nhiều thập kỷ trong việc ứng dụng học thuyết CSP trong việc xây dựng ngôn ngữ lập trình.
 
-Ngôn ngữ [Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) là một hiện thực khác của học thuyết **CSP**.
+Ngôn ngữ **Erlang** là một hiện thực khác của học thuyết **CSP**, bạn có thể tìm kiếm thông tin về ngôn ngữ này trên [trang chủ Erlang](https://www.erlang.org/).
 
 Hình dưới chỉ ra lịch sử phát triển của ngôn ngữ Go qua codebase logs.
 
@@ -59,7 +59,7 @@ Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go đượ
 </div>
 <br/>
 
-Trong vòng những năm gần đây, Go là một ngôn ngữ được ưa chuộng khi viết các chương trình có kiến trúc Micro Services, vì những đặc tính nhỏ gọn, biên dịch nhanh, import thư viện từ github, cú pháp đơn giản nhưng hiện đại.
+Trong vòng những năm gần đây, Go là một ngôn ngữ được ưa chuộng khi viết các chương trình Micro Services, vì những đặc tính nhỏ gọn, biên dịch nhanh, import thư viện từ github, cú pháp đơn giản nhưng hiện đại.
 
 ## 1.1.2. Hello World
 
@@ -77,7 +77,7 @@ import "fmt"
 // main là hàm đầu tiên được chạy
 func main() {
 
-// in ra dòng chữ "Hello World"
+    // in ra dòng chữ "Hello World"
     fmt.Println("Hello World")
 }
 ```

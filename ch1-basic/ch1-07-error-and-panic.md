@@ -2,7 +2,7 @@
 
 Error handling (xử lý lỗi) là một chủ đề quan trọng được đề cập trong mỗi ngôn ngữ lập trình. Go có một cơ chế xử lý lỗi đơn giản khác với `try catch` trên các ngôn ngữ lập trình khác dựa vào giá trị lỗi trả về của hàm. Ngoài ra, package `errors` giúp chúng ta định nghĩa các lỗi.
 
-## 1.7.0. Ngữ cảnh thường gặp
+## 1.7.1. Ngữ cảnh thường gặp
 
 Có một số hàm trong chương trình luôn yêu cầu phải chạy thành công. Ví dụ `strconv.Itoa` chuyển một số nguyên thành string, đọc và ghi phần tử từ array hoặc slice, đọc một phần tử tồn tại trong `map` và tương tự.
 
@@ -45,7 +45,7 @@ func main() {
 
 Bao bọc một mã lỗi không phải là một kết quả cuối cùng. Nếu một ngoại lệ không thể đoán trước được, trực tiếp gây ra một ngoại lệ là một cách tốt nhất để xử lý chúng.
 
-## 1.7.1 Chiến lược xử lý lỗi
+## 1.7.2. Chiến lược xử lý lỗi
 
 Hãy minh họa cho ví dụ về sao chép file: một hàm cần phải mở hai file và sau đó sao chép toàn bộ nội dung của một file nào đó về một file khác.
 
@@ -68,7 +68,9 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 }
 ```
 
-Khi đoạn code trên chạy, sẽ tìm ẩn rủi ro. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file. Mặc dù chúng ta có thể  fix bug bằng việc gọi `src.Close()` trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường khi được mở cũng sẽ được đóng.
+Khi đoạn code trên chạy, sẽ tìm ẩn rủi ro. Nếu đầu tiên `os.Open` gọi thành công, nhưng lệnh gọi thứ hai `os.Create` gọi bị failed, nó sẽ trả về  ngay lặp tức mà không giải phóng tài nguyên file.
+
+Mặc dù chúng ta có thể  fix bug bằng việc gọi `src.Close()` trước lệnh return về mệnh đề return thứ hai; nhưng khi code trở nên phức tạp hơn, những vấn đề tương tự sẽ khó để tìm thấy và giải quyết. Chúng ta có thể sử dụng mệnh đề `defer` để đảm bảo rằng một file bình thường khi được mở cũng sẽ được đóng.
 
 
 ```go
@@ -91,7 +93,7 @@ func CopyFile(dstName, srcName string) (written int64, err error) {
 
 Mệnh đề `defer` được thực thi khi ra khỏi tầm vực của hàm, chúng ta nghĩ về làm cách nào để đóng một file ngay khi mở file đó. Bất kể làm thế nào hàm được trả về, bởi về mệnh đề close có thể luôn luôn được thực thi. Cùng một thời điểm, mệnh đề defer sẽ đảm bảo rằng `io.Copy` file có thể được đóng an toàn nếu một ngoại lệ xảy ra.
 
-Như chúng ta đã đề cập trước đó, hàm exported trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình. Nhưng với những framework Web services, chúng thường cần sự truy cập từ bên thứ ba ở middleware.
+Như chúng ta đã đề cập trước đó, hàm export trong ngôn ngữ Go sẽ thông thường ném ra một ngoại lệ, và một ngoại lệ không được kiểm soát có thể xem là một bug trong một chương trình. Nhưng với những framework Web services, chúng thường cần sự truy cập từ bên thứ ba ở middleware.
 
 Bởi vì thư viện middleware thứ ba có bug, khi mà một ngoại lệ ném một exception, web framework bản thân nó không chắc chắn. Để cải thiện sự bền vững của hệ thống, web framework thường thu hồi chính xác nhất có thể những ngoại lệ trong luồng thực thi của chương trình và sau đó sẽ gây exception về bằng cách return error thông thường.
 
@@ -112,9 +114,9 @@ Gói `json` trong một thư viện chuẩn, nếu chúng gặp phải một err
 
 Ngôn ngữ Go có cách hiện thực thư viện như vậy; mặc dù sử dụng package `panic`, chúng sẽ có thể được chuyển đổi đến một giá trị lỗi cụ thể khi một hàm được export.
 
-## 1.7.2 Getting the wrong context
+## 1.7.3. Trường hợp dẫn đến lỗi sai
 
-Thỉnh thoảng rất đễ cho những user có cấp độ cao được hiểu, bên dưới sự hiện thực sẽ đóng gói lại error như là một loại error mới và trả kết quả về cho user.
+Thỉnh thoảng rất dễ cho những upper user hiểu rằng bên dưới sự hiện thực sẽ đóng gói lại error như là một loại error mới và trả kết quả về cho user.
 
 ```go
 if _, err := html.Parse(resp.Body); err != nil {
@@ -126,7 +128,7 @@ Khi một upper user bắt gặp một lỗi, nó có thể dễ dàng để hi�
 
 Để ghi nhận thông tin về kiểu lỗi, chúng ta thông thường sẽ định nghĩa một hàm `WrapError` chúng bọc lấy lỗi gốc. Để tạo điều kiện cho những vấn đề như vậy, và để ghi nhận lại trạng thái của hàm khi một lỗi xảy ra, chúng ta sẽ muốn lưu trữ toàn bộ thông tin về hàm thực thi khi một lỗi xảy ra. Lúc này, để hỗ trợ transition như là RPC, chúng ta cần phải serialize error thành những dữ liệu tương tự như  định dạng JSON, và sau đó khôi phục lại err từ việc decoding dữ liệu.
 
-Để làm việc đó, chúng ta sẽ phải tự định nghĩa cấu trúc lỗi riêng ví dụ như `github.com/chai2010/errors` với những kiểu cơ bản sau:
+Để làm việc đó, chúng ta sẽ phải tự định nghĩa cấu trúc lỗi riêng ví dụ như [github.com/chai2010/errors](https://github.com/chai2010/errors) với những kiểu cơ bản sau:
 
 ```go
 type Error interface {
@@ -250,7 +252,7 @@ if err != nil {
 
 Cấu trúc code của hầu hết các hàm trong ngôn ngữ Go cũng tương tự, bắt đầu bới một chuỗi khởi tạo việc kiểm tra để ngăn chặn lỗi xảy ra, theo sau bởi những logic thực sự trong function.
 
-## 1.7.3 Incorrect error return
+## 1.7.4. Trả về kết quả sai
 
 Error trong ngôn ngữ Go là một kiểu interface. Thông tin về interface sẽ chứa kiểu dữ liệu nguyên mẫu, và kiểu dữ liệu gốc. Giá trị của interface chỉ tương ứng nếu như cả kiểu interface và giá trị gốc cả hai đều empty `nil`. Thực tế, khi kiểu của interface là empty, kiểu gốc sẽ tương ứng với interface sẽ không cần thiết phải empty.
 
@@ -282,7 +284,7 @@ Do đó, khi đối mặt với giá trị error được return về, giá tr�
 
 Ngôn ngữ Go sẽ có một kiểu dữ liệu mạnh, và cụ thể chuyển đổi sẽ được thực hiện giữa những kiểu khác nhau (và sẽ phải bên dưới cùng kiểu dữ liệu). Tuy nhiên, `interface` là một ngoại lệ của ngôn ngữ Go: non-interface kiểu đến kiểu interface, hoặc chuyển đổi từ interface type là cụ thể. Nó cũng sẽ hỗ trợ ducktype, dĩ nhiên, chúng sẽ thỏa mãn cấp độ 3 về bảo mật.
 
-## 1.7.4 Parsing Exception
+## 1.7.5. Parsing Exception
 
 `Panic` là một hàm dựng sẵn được dùng để dừng luồng thực thi thông thường và bắt đầu `panicking`. Khi hàm `F` gọi `panic`, hàm F sẽ dừng thực thi, bất cứ hàm liên quan tới F sẽ thực thi một cách bình thường, và sau đó lệnh return F sẽ được gọi.
 
