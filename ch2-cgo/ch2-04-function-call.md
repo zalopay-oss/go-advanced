@@ -1,6 +1,6 @@
 # 2.4 Lời gọi hàm
 
-Hàm là cốt lõi của ngôn ngữ lập trình C. Thông qua công cụ CGO, chúng ta không chỉ có thể gọi hàm của ngôn ngữ C bằng Go mà còn có thể export hàm của Go như là hàm ngôn ngữ C.
+Thông qua công cụ CGO, chúng ta không chỉ có thể gọi hàm của ngôn ngữ C bằng Go mà còn có thể export hàm của Go để sử dụng như là hàm ngôn ngữ C.
 
 ## 2.4.1 Go gọi hàm C
 
@@ -91,19 +91,19 @@ Thực thi đoạn code trên sẽ cho output như sau:
 0 invalid argument
 ```
 
-Chúng ta có thể xem hàm `div` như một hàm với các kiểu tham số như sau:
+Chúng ta có thể xem hàm `div` tương ứng với một hàm trong Go như sau:
 
 ```go
-func C.div(a, b C.int) (C.int, [error])
+func C.div(a, b C.int) (C.int, error)
 ```
 
-Tham số thứ hai của interface (giá trị error trả về) có thể bỏ qua, tương ứng bên dưới là kiểu `syscall.Errno`.
+Tham số thứ hai trả về (giá trị error) có thể bỏ qua, được hiện thực bên dưới là kiểu `syscall.Errno`.
 
 ## 2.4.3 Giá trị trả về của hàm void
 
-Trong C cũng có hàm không trả về kiểu giá trị (thay vào đó trả về void). Nói chung, chúng ta không thể nhận được giá trị trả về của hàm kiểu void, bởi vì không có giá trị trả về để nhận. Như đã đề cập trong ví dụ trước, CGO hiện thực một phương pháp đặc biệt cho errno và có thể nhận về  trạng thái lỗi của ngôn ngữ C thông qua giá trị trả về thứ hai. Tính năng này vẫn hợp lệ cho các hàm kiểu void.
+Trong C cũng có hàm không trả về kiểu giá trị (thay vào đó trả về void). Chúng ta không thể nhận được giá trị trả về của hàm kiểu void vì đó thực sự không phải giá trị!?.
 
-Đoạn code sau là để lấy mã trạng thái lỗi của hàm không có giá trị trả về:
+Như đã đề cập trong ví dụ trước, CGO hiện thực một phương pháp đặc biệt cho errno và có thể nhận về  trạng thái lỗi của ngôn ngữ C thông qua giá trị trả về thứ hai. Tính năng này vẫn hợp lệ cho các hàm kiểu void. Đoạn code sau để lấy mã trạng thái lỗi của hàm không có giá trị trả về:
 
 ```go
 //static void noreturn() {}
@@ -114,11 +114,13 @@ func main() {
     _, err := C.noreturn()
     fmt.Println(err)
 }
+
+// kết quả: <nil>
 ```
 
 Lúc này, chúng ta bỏ qua giá trị trả về đầu tiên và chỉ nhận được mã lỗi tương ứng với giá trị trả về thứ hai.
 
-Chúng ta cũng có thể thử lấy giá trị trả về đầu tiên, cũng chính là kiểu tương ứng trong Go với kiểu void trong ngôn ngữ C:
+Chúng ta cũng có thể thử lấy giá trị trả về đầu tiên, cũng chính là kiểu tương ứng với kiểu void trong ngôn ngữ C:
 
 ```go
 //static void noreturn() {}
@@ -131,7 +133,7 @@ func main() {
 }
 ```
 
-Chạy code này sẽ tạo ra đầu ra sau:
+Chạy code này sẽ thu được kết quả:
 
 ```sh
 main._Ctype_void{}
@@ -149,17 +151,15 @@ func main() {
 }
 ```
 
-Chạy code này sẽ tạo ra đầu ra sau:
+Chạy code này sẽ cho ra kết quả sau:
 
 ```sh
 []
 ```
 
-Trong thực tế, trong code được tạo bởi CGO, kiểu `_Ctype_void` tương ứng với kiểu mảng có độ dài 0 `[0]byte`, do đó output `fmt.Println` là một dấu ngoặc vuông biểu thị một giá trị null.
+Trong thực tế, trong code được CGO tạo ra, kiểu `_Ctype_void` tương ứng với kiểu mảng có độ dài 0 (`[0]byte`), do đó output `fmt.Println` là một cặp dấu ngoặc vuông biểu thị một giá trị null.
 
-Mặc dù  hiệu quả của các tính năng ở trên có vẻ nhàm chán, nhưng nhờ đó chúng ta có thể nắm bắt chính xác ranh giới của code CGO thông qua các ví dụ đó và có thể nghĩ về các nguyên do cho các tính năng lạ này từ quan điểm thiết kế sâu hơn.
-
-## 2.4.4 C gọi hàm export của Go
+## 2.4.4 C gọi hàm do Go export
 
 CGO có một tính năng mạnh mẽ là export các hàm Go thành các hàm ngôn ngữ C. Trong trường hợp này, chúng ta có thể xác định interface ngôn ngữ C và sau đó triển khai nó thông qua ngôn ngữ Go. Trong phần đầu tiên của chương này, chúng tôi đã chỉ ra các ví dụ về hàm ngôn ngữ C export vào ngôn ngữ Go.
 
