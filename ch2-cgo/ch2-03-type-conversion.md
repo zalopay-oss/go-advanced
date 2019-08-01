@@ -1,10 +1,10 @@
-# 2.3 Chuyển đổi kiểu
+# 2.3. Chuyển đổi kiểu
 
 Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng các hàm trong C (các hàm hiện thực khai báo Golang trong C) để sử dụng lại các tài nguyên của C. Ngày nay, CGO đã phát triển thành cầu nối giao tiếp hai chiều giữa C và Go. Để tận dụng tính năng của CGO, việc hiểu các quy tắc chuyển đổi kiểu giữa hai loại ngôn ngữ là điều quan trọng.
 
 Đấy là vấn đề sẽ được thảo luận trong phần này.
 
-## 2.3.1 Các kiểu dữ liệu số học
+## 2.3.1. Các kiểu dữ liệu số học
 
 Khi ta sử dụng các ký hiệu của C trong Golang, thường nó sẽ truy cập thông qua package "C" ảo, chẳng hạn như kiểu `int` tương ứng với `C.int`. Một số kiểu trong C bao gồm nhiều từ khóa, nhưng khi truy cập chúng thông qua package "C" ảo, phần tên không thể có ký tự khoảng trắng, ví dụ `unsigned int` không thể truy cập bằng `C.unsigned int`. Do đó, CGO cung cấp quy tắc chuyển đổi tương ứng cho các kiểu trong C:
 
@@ -65,7 +65,7 @@ Một cách tốt hơn là sử dụng các kiểu có trong khai báo file head
 
 Như đã đề cập trước đó, nếu kiểu trong C bao gồm nhiều từ, nó không thể được sử dụng trực tiếp thông qua package "C" ảo (ví dụ: `unsigned short` không thể được truy cập trực tiếp `C.unsigned short`). Tuy nhiên, sau khi định nghĩa lại kiểu trong <stdint.h> bằng cách sử dụng `typedef`, chúng ta có thể truy cập tới kiểu gốc. Đối với các kiểu trong C phức tạp hơn thì nên sử dụng `typedef` để đặt lại tên cho nó, thuận tiện cho việc truy cập từ CGO.
 
-## 2.3.2 Go Strings và Slices
+## 2.3.2. Go Strings và Slices
 
 Trong file header `_cgo_export.h` được tạo ra bởi CGO, kiểu trong C tương ứng cũng được tạo cho Go string, slice, dictionary, interface và pipe:
 
@@ -111,7 +111,7 @@ size_t _GoStringLen(_GoString_ s);
 const char *_GoStringPtr(_GoString_ s);
 ```
 
-## 2.3.3 Struct, Union, Enumerate
+## 2.3.3. Struct, Union, Enumerate
 
 Các kiểu struct, Union và Enumerate của ngôn ngữ C không thể được thêm vào struct dưới dạng thuộc tính ẩn danh.
 
@@ -279,7 +279,7 @@ func main() {
 
 Trong ngôn ngữ C, kiểu `int` bên dưới kiểu liệt kê hỗ trợ giá trị âm. Chúng ta có thể truy cập trực tiếp các giá trị liệt kê được xác định bằng `C.ONE`, `C.TWO`, v.v.
 
-## 2.3.4 Array, String và Slice
+## 2.3.4. Array, String và Slice
 
 Chuỗi (string) trong C là một mảng kiểu char và độ dài của nó phải được xác định theo vị trí của ký tự NULL (đại diện kết thúc mảng). Không có kiểu slice trong ngôn ngữ C.
 
@@ -337,6 +337,8 @@ func C.GoBytes(unsafe.Pointer, C.int) []byte
 Khi string và slice của Go được chuyển đổi thành phiên bản trong C, bộ nhớ nhân bản được cấp phát bởi hàm `malloc` của C và cuối cùng có thể được giải phóng bằng `free`. Khi một string hoặc array trong C được chuyển đổi thành Go, bộ nhớ nhân bản được quản lý bởi ngôn ngữ Go.
 
 Với các hàm chuyển đổi này, bộ nhớ trước chuyển đổi và sau chuyển đổi vẫn ở trong vùng nhớ cục bộ tương ứng của chúng. Ưu điểm của chuyển đổi trong chế độ nhân bản là quản lý interface và bộ nhớ rất đơn giản. Nhược điểm là nhân bản cần phân bổ bộ nhớ mới và các hoạt động sao chép của nó sẽ dẫn nhiều đến chi phí phụ.
+
+### String và Slice
 
 Các định nghĩa cho string và slice trong package `reflect`:
 
@@ -406,7 +408,7 @@ Trong C có thể dùng `GoString` và `GoSlice` để truy cập string và sli
 
 Chi tiết về mô hình bộ nhớ CGO sẽ được thảo luận kĩ hơn trong các chương sau.
 
-## 2.3.5 Chuyển đổi giữa các con trỏ
+## 2.3.5. Chuyển đổi giữa các con trỏ
 
 Trong ngôn ngữ C, các kiểu con trỏ khác nhau có thể được chuyển đổi tường minh hoặc ngầm định. Việc chuyển đổi giữa các con trỏ cũng là vấn đề quan trọng đầu tiên cần được giải quyết trong code CGO.
 
@@ -435,7 +437,7 @@ Sau đây là sơ đồ quá trình chuyển đổi giữa các con trỏ:
 
 Bất kỳ kiểu con trỏ nào cũng có thể được chuyển sang kiểu con trỏ `unsafe.Pointer` để bỏ đi thông tin kiểu ban đầu, sau đó gán lại một kiểu con trỏ mới để đạt được mục đích chuyển đổi.
 
-## 2.3.6 Chuyển đổi giá trị và con trỏ
+## 2.3.6. Chuyển đổi giá trị và con trỏ
 
 Trong ngôn ngữ C, ta thường gặp trường hợp con trỏ được biểu diễn bởi giá trị thông thường, làm thế nào để hiện thực việc chuyển đổi giá trị và con trỏ cũng là một vấn đề mà CGO cần phải đối mặt.
 
@@ -454,7 +456,7 @@ Biểu đồ sau đây trình bày cách hiện thực chuyển đổi lẫn nha
 
 Việc chuyển đổi được chia thành nhiều giai đoạn: đầu tiên là kiểu `int32` sang `uintptr`, sau đó là `uintptr` thành kiểu con trỏ `unsafe.Pointr` và cuối cùng là kiểu con trỏ `unsafe.Pointr` thành kiểu `*C.char`.
 
-## 2.3.7 Chuyển đổi giữa kiểu slice
+## 2.3.7. Chuyển đổi giữa kiểu slice
 
 Mảng cũng là một loại con trỏ trong ngôn ngữ C, vì vậy việc chuyển đổi giữa hai kiểu mảng khác nhau về cơ bản tương tự như chuyển đổi giữa các con trỏ. Tuy nhiên trong ngôn ngữ Go, slice thực ra là một con trỏ tới một mảng (fat pointer), vì vậy chúng ta không thể chuyển đổi trực tiếp giữa các kiểu slice khác nhau.
 

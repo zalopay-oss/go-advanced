@@ -161,9 +161,9 @@ Trong thực tế, trong code được CGO tạo ra, kiểu `_Ctype_void` tươn
 
 ## 2.4.4 C gọi hàm do Go export
 
-CGO có một tính năng mạnh mẽ là export các hàm Go thành các hàm ngôn ngữ C. Trong trường hợp này, chúng ta có thể xác định interface ngôn ngữ C và sau đó triển khai nó thông qua ngôn ngữ Go. Trong phần đầu tiên của chương này, chúng tôi đã chỉ ra các ví dụ về hàm ngôn ngữ C export vào ngôn ngữ Go.
+CGO có một tính năng mạnh mẽ là export các hàm Go thành các hàm ngôn ngữ C. Trong trường hợp này, chúng ta có thể định nghĩa interface bằng C và sau đó triển khai nó thông qua Go. Trong phần đầu tiên của chương này cũng đã có một số ví dụ về hàm ngôn ngữ C gọi hàm do Go export.
 
-Đây là hiện thực lại hàm `add` trong chương đầu:
+Nhắc lại một chút về hàm `add` trong chương đầu:
 
 ```go
 import "C"
@@ -174,7 +174,7 @@ func add(a, b C.int) C.int {
 }
 ```
 
-Tên hàm `add` bắt đầu bằng một chữ cái viết thường và là một hàm riêng trong package cho ngôn ngữ Go. Nhưng theo cái nhìn của ngôn ngữ C thì hàm `add` là hàm ngôn ngữ C có thể được truy cập toàn cục. Nếu có một hàm `add` cùng tên được export dưới dạng hàm ngôn ngữ C trong hai package ngôn ngữ Go khác nhau, vấn đề về trùng tên sẽ xảy ra trong giai đoạn liên kết cuối cùng (link phase).
+Tên hàm `add` bắt đầu bằng một chữ cái viết thường và là một hàm private trong package của Go. Nhưng theo cái nhìn của ngôn ngữ C thì hàm `add` là hàm ngôn ngữ C có thể được truy cập toàn cục. Nếu có một hàm `add` cùng tên được export dưới dạng hàm ngôn ngữ C trong hai package ngôn ngữ Go khác nhau, vấn đề về trùng tên sẽ xảy ra trong link phase.
 
 Chúng ta có thể include file header `_cgo_export.h` để thêm tham chiếu đến các hàm export. Nếu bạn muốn sử dụng ngay lập tức hàm `add` của C được export trong file CGO hiện tại, bạn không thể tham khảo đến file `_cgo_export.h`,  bởi vì việc tạo file `_cgo_export.h`  cần phụ thuộc vào file hiện tại mà trong file hiện tại lại tham khảo tới `_cgo_export.h` (file chưa được tạo) thì sẽ gây ra lỗi.
 
@@ -186,4 +186,4 @@ void foo() {
 }
 ```
 
-Khi export interface của ngôn ngữ C, bạn cần đảm bảo rằng các tham số hàm và kiểu giá trị trả về là kiểu "thân thiện" với C đồng thời giá trị trả về không được trực tiếp hoặc gián tiếp chứa con trỏ vào không gian bộ nhớ ngôn ngữ Go.
+Khi export interface của ngôn ngữ C, ta cần đảm bảo rằng các tham số hàm và kiểu giá trị trả về là kiểu "thân thiện" với C (xem lại [2.3](./ch2-03-type-conversion.md)) đồng thời giá trị trả về không được trực tiếp hoặc gián tiếp chứa con trỏ vào không gian bộ nhớ ngôn ngữ Go.

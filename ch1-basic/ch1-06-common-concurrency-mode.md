@@ -30,7 +30,7 @@ Trên thực tế khi nhiều thread thực thi độc lập chúng hiếm khi c
 
 Mặc dù các vấn đề tương tranh đơn giản như   tham chiếu đến biến đếm có thể được hiện thực bằng  `atomic operations` hoặc `mutex lock`, nhưng việc kiểm soát truy cập thông qua Channel giúp cho code của chúng ta clean và "Golang" hơn.
 
-## 1.6.1 Phiên bản concurrency của *Hello World*
+## 1.6.1. Phiên bản concurrency của *Hello World*
 
 ### Áp dụng Mutex
 
@@ -163,7 +163,7 @@ func main() {
 }
 ```
 
-## 1.6.2 Mô hình Producer Consumer
+## 1.6.2. Mô hình Producer Consumer
 
 <div align="center">
 
@@ -232,7 +232,7 @@ func main() {
 
 Có 2 producer trong ví dụ trên và không có sự kiện đồng bộ nào giữa hai producer mà chúng concurrency. Do đó, thứ tự của chuỗi output ở consumer là không xác định.
 
-## 1.6.3 Mô hình Publish Subscribe
+## 1.6.3. Mô hình Publish Subscribe
 
 Mô hình publish-and-subscribe thường được viết tắt là mô hình pub/sub. Trong mô hình này, producer trở thành publisher và consumer  trở thành subscriber, đồng thời producer:consumer là mối quan hệ M:N.
 
@@ -404,7 +404,7 @@ func main() {
 
 Trong mô hình pub/sub, mỗi thông điệp được gửi tới nhiều subscriber. Publisher thường không biết hoặc không quan tâm subscriber nào nhận được thông điệp. Subscriber và publisher có thể được thêm vào động ở thời điểm thực thi, cho phép các hệ thống phức tạp có thể phát triển theo thời gian. Trong thực tế, những ứng dụng như dự báo thời tiết có thể áp dụng mô hình concurrency này.
 
-## 1.6.4 Kiểm soát số lượng goroutine
+## 1.6.4. Kiểm soát số lượng goroutine
 
 Goroutine là một tính năng mạnh mẽ của Go, mất chi phí rất ít để sử dụng, những tất nhiên nếu dùng với số lượng quá lớn sẽ chiếm gây nhiều lãng phí và cần có một cơ chế để kiểm soát. Một cách thông dụng để đạt được mục đích trên là dùng worker pool.
 
@@ -460,7 +460,7 @@ func main() {
 }
 ```
 
-## 1.6.5 Dọn dẹp Goroutine
+## 1.6.5. Dọn dẹp Goroutine
 
 Sau khi job queue rỗng, ta sẽ phải dừng tất cả worker. Goroutine dù khá nhẹ nhưng vẫn không phải miễn phí, nhất là với các hệ thống lớn, dù chỉ là các chi phí nhỏ nhất cũng có thể trở nên khác biệt lớn nếu thay đổi.
 
@@ -522,7 +522,7 @@ func worker(queue chan int, worknumber int, done, ks chan bool) {
 }
 ```
 
-## 1.6.6 Sàng số nguyên tố
+## 1.6.6. Sàng số nguyên tố
 
 Trong phần ***1.2***, chúng tôi đã trình bày việc triển khai phiên bản concurrency của sàng số nguyên tố để chứng minh tính concurrency của Newsqueak. Nguyên tắc "sàng số nguyên tố" như sau:
 
@@ -589,7 +589,7 @@ func main() {
 }
 ```
 
-## 1.6.7 Kẻ thắng làm vua
+## 1.6.7. Kẻ thắng làm vua
 
 Có nhiều động lực để lập trình concurrency nhưng tiêu biểu là vì lập trình concurrency có thể đơn giản hóa các vấn đề. Lập trình concurrency cũng có thể cải thiện hiệu năng. Mở hai thread trên CPU đa lõi thường nhanh hơn mở một thread.  Trên thực tế về mặt cải thiện hiệu suất, chương trình không chỉ đơn giản là chạy nhanh, mà trong nhiều trường hợp chương trình có thể đáp ứng yêu cầu của người dùng một cách nhanh chóng là điều quan trọng nhất. Khi không có yêu cầu từ người dùng cần xử lý, nên xử lý một số tác vụ nền có độ ưu tiên thấp.
 
@@ -622,7 +622,7 @@ func main() {
 
 Áp dụng ý tưởng trên có thể giúp cải thiện hiệu suất bằng cách chọn lấy kẻ chiến thắng trong cuộc đua thời gian.
 
-## 1.6.8 Context package
+## 1.6.8. Context package
 
 Ở thời điểm phát hành Go1.7, thư viện tiêu chuẩn đã thêm một package context để đơn giản hóa hoạt động của dữ liệu, thời gian chờ và thoát giữa nhiều Goroutines. Package context định nghĩa kiểu Context, chứa deadline, cancelation signal và các giá trị request-scope giữa các API và giữa các process.
 
