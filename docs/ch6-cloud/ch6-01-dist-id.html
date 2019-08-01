@@ -1,0 +1,1131 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>6.1 Distributed id generator · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch6-02-lock.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Các chế độ đồng thời thông dụng
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                    
+                    1.8 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10  Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-best-practice/">
+            
+                <a href="../ch3-best-practice/">
+            
+                    
+                    Chương 3: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-rpc/">
+            
+                <a href="../ch4-rpc/">
+            
+                    
+                    Chương 4: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                <a href="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                    
+                    4.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                <a href="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                    
+                    4.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                <a href="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                    
+                    4.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-rpc/ch4-04-grpc.html">
+            
+                <a href="../ch4-rpc/ch4-04-grpc.html">
+            
+                    
+                    4.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                <a href="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                    
+                    4.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                <a href="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                    
+                    4.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-rpc/ch4-07-pbgo.html">
+            
+                <a href="../ch4-rpc/ch4-07-pbgo.html">
+            
+                    
+                    4.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                <a href="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                    
+                    4.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                <a href="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                    
+                    4.9 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-web/">
+            
+                <a href="../ch5-web/">
+            
+                    
+                    Chương 5: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-web/ch5-01-introduction.html">
+            
+                <a href="../ch5-web/ch5-01-introduction.html">
+            
+                    
+                    5.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-web/ch5-02-router.html">
+            
+                <a href="../ch5-web/ch5-02-router.html">
+            
+                    
+                    5.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-web/ch5-03-middleware.html">
+            
+                <a href="../ch5-web/ch5-03-middleware.html">
+            
+                    
+                    5.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-web/ch5-04-request-verification.html">
+            
+                <a href="../ch5-web/ch5-04-request-verification.html">
+            
+                    
+                    5.4 Kiểm tra yêu cầu validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-web/ch5-05-database.html">
+            
+                <a href="../ch5-web/ch5-05-database.html">
+            
+                    
+                    5.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                <a href="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                    
+                    5.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                <a href="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                    
+                    5.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-web/ch5-08-interface-and-web.html">
+            
+                <a href="../ch5-web/ch5-08-interface-and-web.html">
+            
+                    
+                    5.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../ch5-web/ch5-09-gated-launch.html">
+            
+                <a href="../ch5-web/ch5-09-gated-launch.html">
+            
+                    
+                    5.9 Grayscale Publishing and A/B test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../ch5-web/ch5-10-ext.html">
+            
+                <a href="../ch5-web/ch5-10-ext.html">
+            
+                    
+                    5.10 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 6: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.7.1" data-path="ch6-01-dist-id.html">
+            
+                <a href="ch6-01-dist-id.html">
+            
+                    
+                    6.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="ch6-02-lock.html">
+            
+                <a href="ch6-02-lock.html">
+            
+                    
+                    6.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="ch6-03-delay-job.html">
+            
+                <a href="ch6-03-delay-job.html">
+            
+                    
+                    6.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="Ch6-04-search-engine.html">
+            
+                <a href="Ch6-04-search-engine.html">
+            
+                    
+                    6.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="ch6-05-load-balance.html">
+            
+                <a href="ch6-05-load-balance.html">
+            
+                    
+                    6.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="ch6-06-config.html">
+            
+                <a href="ch6-06-config.html">
+            
+                    
+                    6.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="ch6-07-crawler.html">
+            
+                <a href="ch6-07-crawler.html">
+            
+                    
+                    6.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="ch6-08-ext.html">
+            
+                <a href="ch6-08-ext.html">
+            
+                    
+                    6.8 Phần mở rộng
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >6.1 Distributed id generator</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="61-distributed-id-generator">6.1 Distributed id generator</h1>
+<p>&#x110;&#xF4;i khi ch&#xFA;ng ta c&#x1EA7;n c&#xF3; t&#x1EA1;o ra m&#x1ED9;t id t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; ID t&#x103;ng t&#x1EF1; &#x111;&#x1ED9;ng c&#x1EE7;a MySQL v&#xE0; n&#xF3; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c l&#x1EB7;p l&#x1EA1;i. &#x110;&#x1EC3; h&#x1ED7; tr&#x1EE3; c&#xE1;c ng&#x1EEF; c&#x1EA3;nh &#x111;&#x1ED3;ng th&#x1EDD;i nghi&#xEA;m ng&#x1EB7;c trong kinh doanh. &#x110;i&#x1EC3;n h&#xEC;nh, khi c&#xF3; ch&#x1B0;&#x1A1;ng tr&#xEC;nh khuy&#x1EBF;n m&#xE3;i trong th&#x1B0;&#x1A1;ng m&#x1EA1;i &#x111;i&#x1EC7;n t&#x1EED;, m&#x1ED9;t s&#x1ED1; l&#x1B0;&#x1EE3;ng l&#x1EDB;n &#x111;&#x1A1;n &#x111;&#x1EB7;t h&#xE0;ng s&#x1EBD; tr&#xE0;n v&#xE0;o h&#x1EC7; th&#x1ED1;ng trong m&#x1ED9;t kho&#x1EA3;ng th&#x1EDD;i gian ng&#x1EAF;n, t&#x1EA1;o ra kho&#x1EA3;ng 10w+ m&#x1ED7;i gi&#xE2;y. Ho&#x1EB7;c khi ng&#xF4;i sao &#x111;i&#x1EC7;n &#x1EA3;nh g&#x1EB7;p v&#x1EA5;n &#x111;&#x1EC1;, s&#x1EBD; c&#xF3; r&#x1EA5;t nhi&#x1EC1;u ng&#x1B0;&#x1EDD;i h&#xE2;m m&#x1ED9; nhi&#x1EC7;t t&#xEC;nh g&#x1EED;i microblog &#x111;&#x1EC3; b&#xE0;y t&#x1ECF; &#xFD; ki&#x1EBF;n c&#x1EE7;a h&#x1ECD;, v&#xE0; t&#x1EA1;o ra r&#x1EA5;t nhi&#x1EC1;u tin t&#x1EE9;c trong m&#x1ED9;t th&#x1EDD;i gian ng&#x1EAF;n.</p>
+<p>Tr&#x1B0;&#x1EDB;c khi ch&#xE8;n v&#xE0;o c&#x1A1; s&#x1EDF; d&#x1EEF; li&#x1EC7;u, ch&#xFA;ng ta c&#x1EA7;n cung c&#x1EA5;p cho c&#xE1;c th&#xF4;ng tin &#x111;&#xF3; m&#x1ED9;t ID, sau &#x111;&#xF3; ch&#xE8;n n&#xF3; v&#xE0;o c&#x1A1; s&#x1EDF; d&#x1EEF; li&#x1EC7;u. Y&#xEA;u c&#x1EA7;u &#x111;&#x1ED1;i v&#x1EDB;i ID n&#xE0;y l&#xE0; n&#xF3; c&#xF3; th&#xF4;ng tin v&#x1EC1; th&#x1EDD;i gian. Nh&#x1EDD; v&#x1EAD;y, c&#x1A1; s&#x1EDF; d&#x1EEF; li&#x1EC7;u ph&#x1EE5; c&#x1EE7;a ch&#xFA;ng ta v&#x1EAB;n c&#xF3; th&#x1EC3; s&#x1EAF;p x&#x1EBF;p c&#xE1;c tin nh&#x1EAF;n &#x111;&#xF3; theo th&#x1EE9; t&#x1EF1; th&#x1EDD;i gian.</p>
+<p>Thu&#x1EAD;t to&#xE1;n snowflake c&#x1EE7;a Twitter l&#xE0; gi&#x1EA3;i ph&#xE1;p &#x111;i&#x1EC3;n h&#xEC;nh trong ng&#x1EEF; c&#x1EA3;nh n&#xE0;y. H&#xE3;y nh&#xEC;n v&#xE0;o h&#xEC;nh 6-1:</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<p><div align="center">
+    <img src="../images/ch6-1-snowflake.png">
+    <br>
+    <span align="center">
+        <i>Ph&#xE2;n ph&#x1ED1;i Bit trong snowflake</i>
+    </span>
+</div></p>
+<h1 id=""><br></h1>
+<p><img src="../images/ch6-1-snowflake.png" alt="ch6-1-snowflake"></p>
+<p><em>H&#xEC;nh 6-1 Ph&#xE2;n ph&#x1ED1;i Bit trong snowflake</em></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>&#x110;&#x1EA7;u ti&#xEA;n, ta x&#xE1;c &#x111;&#x1ECB;nh r&#x1EB1;ng gi&#xE1; tr&#x1ECB; l&#xE0; 64 bit, lo&#x1EA1;i int64, &#x111;&#x1B0;&#x1EE3;c chia th&#xE0;nh b&#x1ED1;n ph&#x1EA7;n:</p>
+<ul>
+<li>Kh&#xF4;ng s&#x1EED; d&#x1EE5;ng bit &#x111;&#x1EA7;u ti&#xEA;n v&#xEC; bit n&#xE0;y l&#xE0; bit d&#x1EA5;u.</li>
+<li><code>timestamp</code>: s&#x1EED; d&#x1EE5;ng 41 bit &#x111;&#x1EC3; bi&#x1EC3;u th&#x1ECB; timestamp khi nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c y&#xEA;u c&#x1EA7;u, t&#xED;nh b&#x1EB1;ng mili gi&#xE2;y</li>
+<li><code>datacenter_id</code>: 5 ch&#x1EEF; s&#x1ED1; &#x111;&#x1EC3; bi&#x1EC3;u th&#x1ECB; id c&#x1EE7;a trung t&#xE2;m d&#x1EEF; li&#x1EC7;u</li>
+<li><code>worker_id</code>: 5 ch&#x1EEF; s&#x1ED1; &#x111;&#x1EC3; bi&#x1EC3;u th&#x1ECB; id c&#x1EE7;a m&#xE1;y host</li>
+<li><code>sequence_id</code>: cu&#x1ED1;i c&#xF9;ng l&#xE0; id t&#x103;ng v&#xF2;ng l&#x1EB7;p 12 bit ( t&#x103;ng t&#x1EEB; 0 &#x111;&#x1EBF;n 111111111111 r&#x1ED3;i tr&#x1EDF; v&#x1EC1; 0).</li>
+</ul>
+<p>C&#x1A1; ch&#x1EBF; n&#xE0;y c&#xF3; th&#x1EC3; h&#x1ED7; tr&#x1EE3; ch&#xFA;ng ta t&#x1EA1;o ra <code>2 ^ 12 = 4096</code> tin nh&#x1EAF;n trong c&#xF9;ng m&#x1ED9;t mili gi&#xE2;y tr&#xEA;n c&#xF9;ng m&#x1ED9;t m&#xE1;y. T&#x1ED5;ng c&#x1ED9;ng c&#xF3; 4096 tri&#x1EC7;u tin nh&#x1EAF;n trong m&#x1ED9;t gi&#xE2;y. N&#xF3; l&#xE0; ho&#xE0;n to&#xE0;n &#x111;&#x1EE7; &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng.</p>
+<p>Trung t&#xE2;m d&#x1EEF; li&#x1EC7;u c&#x1ED9;ng v&#x1EDB;i id &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng c&#xF3; t&#x1ED5;ng c&#x1ED9;ng 10 ch&#x1EEF; s&#x1ED1;, h&#x1ED7; tr&#x1EE3; 32 m&#xE1;y cho m&#x1ED7;i trung t&#xE2;m d&#x1EEF; li&#x1EC7;u v&#xE0; 1024 tr&#x1B0;&#x1EDD;ng h&#x1EE3;p trong t&#x1EA5;t c&#x1EA3; c&#xE1;c trung t&#xE2;m d&#x1EEF; li&#x1EC7;u.</p>
+<p><code>timestamp</code> g&#x1ED3;m 41 ch&#x1EEF; s&#x1ED1; n&#xEA;n c&#xF3; th&#x1EC3; h&#x1ED7; tr&#x1EE3; ch&#xFA;ng ta trong 69 n&#x103;m. T&#x1EA5;t nhi&#xEA;n, th&#x1EDD;i gian t&#xED;nh b&#x1EB1;ng mili gi&#xE2;y c&#x1EE7;a ch&#xFA;ng ta c&#xF3; th&#x1EC3; kh&#xF4;ng th&#x1EF1;c s&#x1EF1; b&#x1EAF;t &#x111;&#x1EA7;u t&#x1EEB; n&#x103;m 1970, v&#xEC; n&#x1EBF;u nh&#x1B0; v&#x1EAD;y th&#xEC; h&#x1EC7; th&#x1ED1;ng s&#x1EBD; ch&#x1EC9; ho&#x1EA1;t &#x111;&#x1ED9;ng &#x111;&#x1EBF;n <code>2039/9/7 23:47:35</code> , do &#x111;&#xF3;, ch&#xFA;ng ch&#x1EC9; n&#xEA;n t&#x103;ng so v&#x1EDB;i m&#x1ED9;t m&#x1ED1;c th&#x1EDD;i gian nh&#x1EA5;t &#x111;&#x1ECB;nh. V&#xED; d&#x1EE5;: h&#x1EC7; th&#x1ED1;ng c&#x1EE7;a ch&#xFA;ng ta l&#xE0; b&#x1EAF;t &#x111;&#x1EA7;u ch&#x1EA1;y v&#xE0;o 2018-08-01, th&#xEC; ch&#xFA;ng ta c&#xF3; th&#x1EC3; coi m&#x1ED1;c th&#x1EDD;i gian n&#xE0;y l&#xE0; <code>2018-08-01 00: 00: 00.000</code> v&#xE0; t&#x103;ng l&#xEA;n t&#x1EEB; &#x111;&#xF3;.</p>
+<h2 id="611-ph&#xE2;n-c&#xF4;ng-workerid">6.1.1 Ph&#xE2;n c&#xF4;ng worker_id</h2>
+<p><code>timestamp</code>, <code>datacenter_id</code>, <code>worker_id</code> v&#xE0; <code>sequence_id</code> l&#xE0; b&#x1ED1;n tr&#x1B0;&#x1EDD;ng, ri&#xEA;ng timestamp v&#xE0; sequence_id &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o b&#x1EDF;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh khi ch&#x1EA1;y. C&#xF2;n datacenter_id v&#xE0; worker_id c&#x1EA7;n l&#x1EA5;y trong giai &#x111;o&#x1EA1;n tri&#x1EC3;n khai v&#xE0; khi ch&#x1B0;&#x1A1;ng tr&#xEC;nh &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i &#x111;&#x1ED9;ng, n&#xF3; kh&#xF4;ng th&#x1EC3; thay &#x111;&#x1ED5;i (n&#x1EBF;u b&#x1EA1;n c&#xF3; th&#x1EC3; thay &#x111;&#x1ED5;i n&#xF3; theo &#xFD; mu&#x1ED1;n, v&#xE0; khi v&#xF4; t&#xEC;nh n&#xF3; b&#x1ECB; s&#x1EED;a &#x111;&#x1ED5;i, g&#xE2;y ra xung &#x111;&#x1ED9;t cho gi&#xE1; tr&#x1ECB; id cu&#x1ED1;i c&#xF9;ng).</p>
+<p>Nh&#xEC;n chung, c&#xE1;c m&#xE1;y trong c&#xE1;c trung t&#xE2;m d&#x1EEF; li&#x1EC7;u kh&#xE1;c nhau s&#x1EBD; cung c&#x1EA5;p c&#xE1;c API t&#x1B0;&#x1A1;ng &#x1EE9;ng &#x111;&#x1EC3; l&#x1EA5;y id c&#x1EE7;a trung t&#xE2;m d&#x1EEF; li&#x1EC7;u, v&#xEC; v&#x1EAD;y datacenter_id c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng l&#x1EA5;y trong giai &#x111;o&#x1EA1;n tri&#x1EC3;n khai. C&#xF2;n worker_id l&#xE0; m&#x1ED9;t id m&#xE0; ch&#xFA;ng ta g&#xE1;n m&#x1ED9;t c&#xE1;ch &quot;logically&quot; cho t&#x1EEB;ng m&#xE1;y. Ch&#xFA;ng ta n&#xEA;n x&#x1EED; l&#xFD; th&#x1EBF; n&#xE0;o? &#xDD; t&#x1B0;&#x1EDF;ng &#x111;&#x1A1;n gi&#x1EA3;n &#x111;&#x1B0;&#x1EE3;c h&#x1ED7; tr&#x1EE3; b&#x1EDF;i c&#xE1;c c&#xF4;ng c&#x1EE5; l&#xE0; cung c&#x1EA5;p t&#xED;nh n&#x103;ng id t&#x1EF1; t&#x103;ng, ch&#x1EB3;ng h&#x1EA1;n nh&#x1B0; trong MySQL:</p>
+<p>mysql&gt; insert into a (ip) values(&quot;10.1.2.101&quot;);
+Query OK, 1 row affected (0.00 sec)</p>
+<pre><code class="lang-sh">mysql&gt; select last_insert_id();
++------------------+
+| last_insert_id() |
++------------------+
+|                2 |
++------------------+
+1 row <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)
+</code></pre>
+<p>Khi b&#x1EA1;n &#x111;&#xE3; nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c n&#xF3; t&#x1EEB; MySQL, worker_id s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c duy tr&#xEC; c&#x1EE5;c b&#x1ED9;, tr&#xE1;nh &#x111;&#x1B0;&#x1EE3;c tr&#x1B0;&#x1EDD;ng h&#x1EE3;p l&#xE0;m m&#x1EDB;i m&#x1ED7;i khi b&#x1EA1;n truy c&#x1EAD;p worker_id. &#x110;&#x1EC3; c&#xE1;c worker_id duy nh&#x1EA5;t lu&#xF4;n gi&#x1EEF; nguy&#xEA;n.</p>
+<p>T&#x1EA5;t nhi&#xEA;n, s&#x1EED; d&#x1EE5;ng MySQL &#x111;&#x1ED3;ng ngh&#x129;a v&#x1EDB;i vi&#x1EC7;c th&#xEA;m m&#x1ED9;t ph&#x1EE5; thu&#x1ED9;c b&#xEA;n ngo&#xE0;i v&#xE0;o d&#x1ECB;ch v&#x1EE5; t&#x1EA1;o id. C&#xE0;ng th&#xEA;m nhi&#x1EC1;u ph&#x1EE5; thu&#x1ED9;c, kh&#x1EA3; n&#x103;ng ph&#x1EE5;c v&#x1EE5; c&#x1EE7;a d&#x1ECB;ch v&#x1EE5; c&#xE0;ng t&#x1EC7;.</p>
+<p>Xem x&#xE9;t &#x111;&#x1EBF;n vi&#x1EC7;c c&#xF3; m&#x1ED9;t d&#x1ECB;ch v&#x1EE5; t&#x1EA1;o id b&#x1ECB; l&#x1ED7;i trong cluster, m&#x1ED9;t ph&#x1EA7;n c&#x1EE7;a id b&#x1ECB; m&#x1EA5;t trong m&#x1ED9;t kho&#x1EA3;ng th&#x1EDD;i gian, th&#xEC; ch&#xFA;ng ta c&#x1EA7;n m&#x1ED9;t c&#xE1;ch m&#x1EA1;nh tay l&#xE0; vi&#x1EBF;t tr&#x1EF1;c ti&#x1EBF;p worker_id v&#xE0;o c&#x1EA5;u h&#xEC;nh c&#x1EE7;a worker. Khi h&#x1EC7; th&#x1ED1;ng &#x111;&#xF3; ho&#x1EA1;t &#x111;&#x1ED9;ng l&#x1EA1;i, &#x111;o&#x1EA1;n script tri&#x1EC3;n khai s&#x1EBD; quy &#x111;&#x1ECB;nh gi&#xE1; tr&#x1ECB; worker_id.</p>
+<h2 id="612-c&#xE1;c-opensource">6.1.2 C&#xE1;c opensource</h2>
+<h3 id="6121-hi&#x1EC7;n-th&#x1EF1;c-theo-snowflake-chu&#x1EA9;n">6.1.2.1 Hi&#x1EC7;n th&#x1EF1;c theo snowflake chu&#x1EA9;n</h3>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+github.com/bwmarrin/snowflake &#x110;&#xE2;y l&#xE0; m&#x1ED9;t hi&#x1EC7;n th&#x1EF1;c Snowflake&apos;s Go kh&#xE1; nh&#x1EB9;. B&#x1EA1;n c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng t&#xE0;i li&#x1EC7;u &#x111;&#x1ECB;nh ngh&#x129;a c&#x1EE7;a n&#xF3;, xem d&#x1B0;&#x1EDB;i &#x111;&#xE2;y.</p>
+<p><div align="center">
+    <img src="../images/ch6-2-snowflake-easy.png">
+    <br>
+    <span align="center">
+        <i>Th&#x1B0; vi&#x1EC7;n snowflake</i>
+    </span>
+</div></p>
+<h1 id=""><br></h1>
+<p>github.com/bwmarrin/snowflake &#x110;&#xE2;y l&#xE0; m&#x1ED9;t hi&#x1EC7;n th&#x1EF1;c Snowflake&apos;s Go kh&#xE1; nh&#x1EB9;. B&#x1EA1;n c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng t&#xE0;i li&#x1EC7;u &#x111;&#x1ECB;nh ngh&#x129;a c&#x1EE7;a n&#xF3;, xem H&#xEC;nh 6-2 d&#x1B0;&#x1EDB;i &#x111;&#xE2;y.</p>
+<p><img src="../images/ch6-2-snowflake-easy.png" alt="ch6-2-snowflake-easy"></p>
+<p><em>H&#xEC;nh 6-2 th&#x1B0; vi&#x1EC7;n snowflake</em></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>N&#xF3; gi&#x1ED1;ng ho&#xE0;n to&#xE0;n nh&#x1B0; snowflake ti&#xEA;u chu&#x1EA9;n. V&#xE0; t&#x1B0;&#x1A1;ng &#x111;&#x1ED1;i &#x111;&#x1A1;n gi&#x1EA3;n &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng nh&#x1B0; v&#xED; d&#x1EE5; sau:</p>
+<pre><code class="lang-go">
+<span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;os&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/bwmarrin/snowflake&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> main() {
+    n, err := snowflake.NewNode(<span class="hljs-number">1</span>)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-built_in">println</span>(err)
+        os.Exit(<span class="hljs-number">1</span>)
+    }
+
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++ {
+        id := n.Generate()
+        fmt.Println(<span class="hljs-string">&quot;id&quot;</span>, id)
+        fmt.Println(
+            <span class="hljs-string">&quot;node: &quot;</span>, id.Node(),
+            <span class="hljs-string">&quot;step: &quot;</span>, id.Step(),
+            <span class="hljs-string">&quot;time: &quot;</span>, id.Time(),
+            <span class="hljs-string">&quot;\n&quot;</span>,
+        )
+    }
+}
+</code></pre>
+<p>D&#x129; nhi&#xEA;n, th&#x1B0; vi&#x1EC7;n n&#xE0;y c&#x169;ng cho ph&#xE9;p ch&#xFA;ng ta t&#xF9;y ch&#x1EC9;nh v&#xE0;i th&#xF4;ng s&#x1ED1;, c&#xE1;c tr&#x1B0;&#x1EDD;ng c&#xF3; th&#x1EC3; t&#xF9;y ch&#x1EC9;nh nh&#x1B0;:</p>
+<pre><code class="lang-go">    <span class="hljs-comment">// Epoch is set to the twitter snowflake epoch of Nov 04 2010 01:42:54 UTC</span>
+    <span class="hljs-comment">// You may customize this to set a different epoch for your application.</span>
+    Epoch <span class="hljs-keyword">int64</span> = <span class="hljs-number">1288834974657</span>
+
+    <span class="hljs-comment">// S&#x1ED1; bit &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng cho Node</span>
+    <span class="hljs-comment">// Nh&#x1EDB; r&#x1EB1;ng, b&#x1EA1;n c&#xF3; t&#x1ED5;ng 22 bits chia s&#x1EBB; gi&#x1EEF;a Node/Step</span>
+    NodeBits <span class="hljs-keyword">uint8</span> = <span class="hljs-number">10</span>
+
+    <span class="hljs-comment">// S&#x1ED1; bit &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng cho Step</span>
+    <span class="hljs-comment">// Nh&#x1EDB; r&#x1EB1;ng, b&#x1EA1;n c&#xF3; t&#x1ED5;ng 22 bits chia s&#x1EBB; gi&#x1EEF;a Node/Step</span>
+    StepBits <span class="hljs-keyword">uint8</span> = <span class="hljs-number">12</span>
+</code></pre>
+<p><code>Epoch</code> l&#xE0; th&#x1EDD;i gian b&#x1EAF;t &#x111;&#x1EA7;u, <code>NodeBits</code> d&#xF9;ng &#x111;&#x1EC3; ch&#x1EC9; &#x111;&#x1ED9; d&#xE0;i bit c&#x1EE7;a m&#xE1;y ch&#x1EE7; ho&#x1EA1;t &#x111;&#x1ED9;ng v&#xE0; <code>StepBits</code> &#x111;&#x1EC1; c&#x1EAD;p &#x111;&#x1EBF;n &#x111;&#x1ED9; d&#xE0;i bit c&#x1EE7;a chu&#x1ED7;i t&#x1EF1; t&#x103;ng.</p>
+<h3 id="6122-sonyflake">6.1.2.2 Sonyflake</h3>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Sonyflower l&#xE0; m&#x1ED9;t d&#x1EF1; &#xE1;n opensource c&#x1EE7;a Sony. &#xDD; t&#x1B0;&#x1EDF;ng c&#x1A1; b&#x1EA3;n t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; snowflake, nh&#x1B0;ng ph&#xE2;n b&#x1ED5; bit h&#x1A1;i kh&#xE1;c.</p>
+<p><div align="center">
+    <img src="../images/ch6-snoyflake.png">
+    <br>
+    <span align="center">
+        <i>Sonyflake</i>
+    </span>
+</div></p>
+<h1 id=""><br></h1>
+<p>Sonyflower l&#xE0; m&#x1ED9;t d&#x1EF1; &#xE1;n opensource c&#x1EE7;a Sony. &#xDD; t&#x1B0;&#x1EDF;ng c&#x1A1; b&#x1EA3;n t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; snowflake, nh&#x1B0;ng ph&#xE2;n b&#x1ED5; bit h&#x1A1;i kh&#xE1;c. Xem <em>H&#xEC;nh 6-3</em>:</p>
+<p><img src="../images/ch6-snoyflake.png" alt="sonyflake"></p>
+<p><em>H&#xEC;nh 6-3 sonyflake</em></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Th&#x1EDD;i gian &#x1EDF; &#x111;&#xE2;y ch&#x1EC9; s&#x1EED; d&#x1EE5;ng 39 bit, nh&#x1B0;ng &#x111;&#x1A1;n v&#x1ECB; th&#x1EDD;i gian tr&#x1EDF; th&#xE0;nh 10ms. V&#x1EC1; m&#x1EB7;t l&#xFD; thuy&#x1EBF;t, n&#xF3; d&#xE0;i h&#x1A1;n th&#x1EDD;i gian c&#x1EE7;a snowflake chu&#x1EA9;n &#x111;&#x1EBF;n 41 bit (174 n&#x103;m).</p>
+<p><code>Sequence ID</code> gi&#x1ED1;ng v&#x1EDB;i v&#x1EDB;i &#x111;&#x1ECB;nh ngh&#x129;a tr&#x1B0;&#x1EDB;c &#x111;&#xF3;, <code>Machine ID</code> th&#x1EF1;c s&#x1EF1; l&#xE0; id c&#x1EE7;a Node. S&#x1EF1; kh&#xE1;c bi&#x1EC7;t gi&#x1EEF;a <code>sonyflower</code> l&#xE0; c&#xE1;c tham s&#x1ED1; c&#x1EA5;u h&#xEC;nh trong qu&#xE1; tr&#xEC;nh kh&#x1EDF;i &#x111;&#x1ED9;ng:</p>
+<p>C&#x1EA5;u tr&#xFA;c c&#x1EE7;a <code>Settings</code> nh&#x1B0; sau:</p>
+<pre><code class="lang-go">
+Type Settings <span class="hljs-keyword">struct</span> {
+    StartTime time.Time
+    MachineID <span class="hljs-keyword">func</span>() (<span class="hljs-keyword">uint16</span>, error)
+    CheckMachineID <span class="hljs-keyword">func</span>(<span class="hljs-keyword">uint16</span>) <span class="hljs-keyword">bool</span>
+}
+</code></pre>
+<p>T&#xF9;y ch&#x1ECD;n <code>StartTime</code> t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; <code>Epoch</code> tr&#x1B0;&#x1EDB;c &#x111;&#xE2;y c&#x1EE7;a ch&#xFA;ng ta. N&#x1EBF;u kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EB7;t tr&#x1B0;&#x1EDB;c, m&#x1EB7;c &#x111;&#x1ECB;nh l&#xE0; b&#x1EAF;t &#x111;&#x1EA7;u v&#xE0;o <code>2014-09-01 00:00:00 +0000 UTC</code>.</p>
+<p><code>MachineID</code> c&#xF3; th&#x1EC3; l&#xE0; h&#xE0;m do ng&#x1B0;&#x1EDD;i d&#xF9;ng &#x111;&#x1ECB;nh ngh&#x129;a. N&#x1EBF;u ng&#x1B0;&#x1EDD;i d&#xF9;ng kh&#xF4;ng &#x111;&#x1ECB;nh ngh&#x129;a n&#xF3;, 16 bit cu&#x1ED1;i c&#x1EE7;a IP g&#x1ED1;c s&#x1EBD; m&#x1EB7;c &#x111;&#x1ECB;nh &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng l&#xE0;m <code>machine id</code>.</p>
+<p><code>CheckMachineID</code> l&#xE0; m&#x1ED9;t ch&#x1EE9;c n&#x103;ng &#x111;&#x1B0;&#x1EE3;c cung c&#x1EA5;p b&#x1EDF;i ng&#x1B0;&#x1EDD;i d&#xF9;ng &#x111;&#x1EC3; ki&#x1EC3;m tra xem <code>MachineID</code> c&#xF3; tr&#xF9;ng hay kh&#xF4;ng. &#x110;&#xE2;y l&#xE0; thi&#x1EBF;t k&#x1EBF; kh&#xE1; th&#xF4;ng minh. N&#x1EBF;u c&#xF3; m&#x1ED9;t b&#x1ED9; l&#x1B0;u tr&#x1EEF; t&#x1EAD;p trung v&#xE0; h&#x1ED7; tr&#x1EE3; ki&#x1EC3;m tra s&#x1EF1; tr&#xF9;ng l&#x1EB7;p, th&#xEC; ch&#xFA;ng ta c&#xF3; th&#x1EC3; t&#xF9;y ch&#x1EC9;nh logic &#x111;&#x1EC3; ki&#x1EC3;m tra xem <code>MachineID</code> c&#xF3; tr&#xF9;ng kh&#xF4;ng. N&#x1EBF;u c&#xF4;ng ty c&#xF3; c&#x1EE5;m Redis &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o s&#x1EB5;n, th&#xEC; ch&#xFA;ng d&#x1EC5; d&#xE0;ng ki&#x1EC3;m tra tr&#xF9;ng b&#x1EB1;ng c&#xE1;c lo&#x1EA1;i collection c&#x1EE7;a Redis.</p>
+<pre><code class="lang-shell">Redis 127.0.0.1:6379&gt; SADD base64_encoding_of_last16bits MzI0Mgo=
+(integer) 1
+Redis 127.0.0.1:6379&gt; SADD base64_encoding_of_last16bits MzI0Mgo=
+(integer) 0
+</code></pre>
+<!-- và một số hàm với logic đơn giản bị bỏ qua: -->
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+   <span class="hljs-string">&quot;fmt&quot;</span>
+   <span class="hljs-string">&quot;os&quot;</span>
+   <span class="hljs-string">&quot;time&quot;</span>
+
+   <span class="hljs-string">&quot;github.com/sony/sonyflake&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> getMachineID() (<span class="hljs-keyword">uint16</span>, error) {
+   <span class="hljs-keyword">var</span> machineID <span class="hljs-keyword">uint16</span>
+   <span class="hljs-keyword">var</span> err error
+   machineID = readMachineIDFromLocalFile()
+   <span class="hljs-keyword">if</span> machineID == <span class="hljs-number">0</span> {
+      machineID, err = generateMachineID()
+      If err != <span class="hljs-literal">nil</span> {
+         Return <span class="hljs-number">0</span>, err
+      }
+   }
+
+   Return machineID, <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-keyword">func</span> checkMachineID(machineID <span class="hljs-keyword">uint16</span>) <span class="hljs-keyword">bool</span> {
+   saddResult, err := saddMachineIDToRedisSet()
+   <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> || saddResult == <span class="hljs-number">0</span> {
+      Return <span class="hljs-literal">true</span>
+   }
+
+   err := saveMachineIDToLocalFile(machineID)
+   <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+      Return <span class="hljs-literal">true</span>
+   }
+
+   Return <span class="hljs-literal">false</span>
+}
+
+<span class="hljs-keyword">func</span> main() {
+   t, _ := time.Parse(<span class="hljs-string">&quot;2006-01-02&quot;</span>, <span class="hljs-string">&quot;2018-01-01&quot;</span>)
+   settings := sonyflake.Settings{
+      StartTime: t,
+      MachineID: getMachineID,
+      CheckMachineID: checkMachineID,
+   }
+
+   Sf := sonyflake.NewSonyflake(settings)
+   id, err := sf.NextID()
+   <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+      fmt.Println(err)
+      os.Exit(<span class="hljs-number">1</span>)
+   }
+
+   fmt.Println(id)
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Chương 6: Hệ thống phân tán">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch6-02-lock.html" class="navigation navigation-next " aria-label="Next page: 6.2 Distributed lock">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"6.1 Distributed id generator","level":"1.7.1","depth":2,"next":{"title":"6.2 Distributed lock","level":"1.7.2","depth":2,"path":"ch6-cloud/ch6-02-lock.md","ref":"ch6-cloud/ch6-02-lock.md","articles":[]},"previous":{"title":"Chương 6: Hệ thống phân tán","level":"1.7","depth":1,"path":"ch6-cloud/README.md","ref":"ch6-cloud/README.md","articles":[{"title":"6.1 Distributed id generator","level":"1.7.1","depth":2,"path":"ch6-cloud/ch6-01-dist-id.md","ref":"ch6-cloud/ch6-01-dist-id.md","articles":[]},{"title":"6.2 Distributed lock","level":"1.7.2","depth":2,"path":"ch6-cloud/ch6-02-lock.md","ref":"ch6-cloud/ch6-02-lock.md","articles":[]},{"title":"6.3 Hệ thống tác vụ có trì hoãn","level":"1.7.3","depth":2,"path":"ch6-cloud/ch6-03-delay-job.md","ref":"ch6-cloud/ch6-03-delay-job.md","articles":[]},{"title":"6.4 Công cụ tìm kiếm phân tán","level":"1.7.4","depth":2,"path":"ch6-cloud/Ch6-04-search-engine.md","ref":"ch6-cloud/Ch6-04-search-engine.md","articles":[]},{"title":"6.5 Cân bằng tải","level":"1.7.5","depth":2,"path":"ch6-cloud/ch6-05-load-balance.md","ref":"ch6-cloud/ch6-05-load-balance.md","articles":[]},{"title":"6.6 Quản lý cấu hình trong hệ thống phân tán","level":"1.7.6","depth":2,"path":"ch6-cloud/ch6-06-config.md","ref":"ch6-cloud/ch6-06-config.md","articles":[]},{"title":"6.7 Trình thu thập thông tin phân tán","level":"1.7.7","depth":2,"path":"ch6-cloud/ch6-07-crawler.md","ref":"ch6-cloud/ch6-07-crawler.md","articles":[]},{"title":"6.8 Phần mở rộng","level":"1.7.8","depth":2,"path":"ch6-cloud/ch6-08-ext.md","ref":"ch6-cloud/ch6-08-ext.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch6-cloud/ch6-01-dist-id.md","mtime":"2019-07-31T07:32:25.941Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

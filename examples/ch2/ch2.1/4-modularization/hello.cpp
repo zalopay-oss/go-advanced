@@ -1,13 +1,13 @@
 // hello.cpp
 
-#include <iostream>
+// #include <iostream>
 
-extern "C"
-{
-#include "hello.h"
-}
+// extern "C"
+// {
+// #include "hello.h"
+// }
 
-void SayHello(const char *s)
-{
-  std::cout << s;
-}
+// void SayHello(const char *s)
+// {
+//   std::cout << s;
+// }
