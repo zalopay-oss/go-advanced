@@ -2,16 +2,10 @@
 
 Thời gian đầu, CPU chỉ có một lõi duy nhất, các ngôn ngữ khi đó sẽ theo mô hình lập trình tuần tự, điển hình là ngôn ngữ C. Ngày nay, với sự phát triển của công nghệ đa xử lý, để tận dụng tối đa sức mạnh của CPU, mô hình lập trình song song hay [multi-threading](https://en.wikipedia.org/wiki/Multithreading_(computer_architecture)) thường thấy trên các ngôn ngữ lập trình ra đời. Ngôn ngữ Go cũng phát triển mô hình lập trình song song rất hiệu quả với khái niệm Goroutines.
 
-<div align="center">
-	
+
 Lập trình tuần tự|Lập trình song song
 ---|---
 ![](../images/ch1-5-sequence-programming.png) | ![](../images/ch1-5-parallelprograming.png)
-
-
-</div>
-<br/>
-
 
 ## 1.5.1. Goroutines và system threads
 
@@ -20,15 +14,19 @@ Goroutines là một đơn vị concurrency của ngôn ngữ Go. Việc khởi 
 Đầu tiên, system thread sẽ có một kích thước vùng nhớ stack cố định (thông thường vào khoảng 2MB). Vùng nhớ stack chủ yếu được dùng để lưu trữ những tham số, biến cục bộ và địa chỉ trả về khi chúng ta gọi hàm.
 
 Kích thước cố định của stack sẽ dẫn đến hai vấn đề:
-  * Lãng phí vùng nhớ đối với chương trình đơn giản
-  * StackOverflow với những chương trình gọi hàm phức tạp.
+  * Stack overflow với những chương trình gọi hàm đệ quy sâu.
+  * Lãng phí vùng nhớ đối với chương trình đơn giản.
+
 
 Giải pháp cho vấn đề này chính là cấp phát linh hoạt vùng nhớ stack:
   * Một Goroutines sẽ được bắt đầu bằng một vùng nhớ nhỏ (khoảng 2KB hoặc 4KB).
   * Khi gọi đệ quy sâu (không gian stack hiện tại là không đủ) Goroutines sẽ tự động tăng không gian stack (kích thước tối đa của stack có thể được đạt tới 1GB)
   * Bởi vì chi phí của việc khởi tạo là nhỏ, chúng ta có thể dễ dàng giải phóng hàng ngàn goroutines.
 
-Bộ thực thi (runtime) Go có riêng cơ chế định thời cho Goroutines, nó dùng một số kỹ thuật để ghép M Goroutines trên N thread của hệ thống. Cơ chế định thời Goroutines tương tự với cơ chế định thời của `kernel` nhưng chỉ ở mức chương trình. Biến `runtime.GOMAXPROCS` quy định số lượng system thread hiện thời chạy trên các Goroutines.
+Go runtime có riêng cơ chế định thời cho Goroutines, nó dùng một số kỹ thuật để ghép M Goroutines trên N thread của hệ thống. Cơ chế định thời Goroutines tương tự với cơ chế định thời của `kernel` nhưng chỉ ở mức chương trình. Biến `runtime.GOMAXPROCS` quy định số lượng system thread hiện thời chạy trên các Goroutines.
+
+> https://yourbasic.org/golang/goroutines-explained/
+> https://medium.com/rungo/achieving-concurrency-in-go-3f84cbf870ca
 
 ## 1.5.2. Tác vụ Atomic
 
@@ -198,8 +196,9 @@ func Instance() *singleton {
 }
 ```
 
-* Package `sync/atomic` sẽ hỗ trợ những tác vụ atomic cho những kiểu cơ bản.
-* Cho việc đọc và ghi một đối tượng phức tạp, `atomic.Value` sẽ hỗ trợ hai hàm `Load` và `Store` để load và save dữ liệu, trả về giá trị và tham số là `interface{}` nó có thể được sử dụng trong một vài kiểu đặc biệt.
+Package `sync/atomic` sẽ hỗ trợ những tác vụ atomic cho những kiểu cơ bản.
+
+Cho việc đọc và ghi một đối tượng phức tạp, `atomic.Value` sẽ hỗ trợ hai hàm `Load` và `Store` để load và save dữ liệu, trả về giá trị và tham số là `interface{}` nó có thể được sử dụng trong một vài kiểu đặc biệt.
 
 ```go
 var config atomic.Value
@@ -257,23 +256,7 @@ func main() { // Goroutine (1)
 }
 ```
 
-## 1.5.4 Chuỗi khởi tạo
-
-* Việc khởi tạo và thực thi chương trình Go luôn luôn bắt đầu bằng hàm `main.main`.
-* Tuy nhiên nếu package `main` import các package khác vào, chúng sẽ được import theo thứ tự string của tên file và tên thư mục.
-* Nếu một package được import nhiều lần, thì những lần import sau được bỏ qua.
-* Nếu các package lại import các package khác nữa, chúng sẽ import vào khởi tạo các biến theo chiều sâu như hình bên dưới:
-
-<div align="center" width="600">
-<img src="../images/ch1-12-init.ditaa.png">
-<br/>
-<span  align="center"><i>Quá trình khởi tạo package</i></span>
-</div>
-<br/>
-
-* Nếu hàm `init` giải phóng một Goroutine mới với từ khóa `go`, thì Goroutine và `main.main` sẽ được thực thi một cách tuần tự. Bởi vì tất cả hàm `init` và hàm `main` sẽ được hoàn thành trong cùng một thread, nó cũng sẽ thoả mãn thứ tự về mô hình nhất quán.
-
-## 1.5.5 Khởi tạo một Goroutine
+## 1.5.4. Khởi tạo một Goroutine
 
 Mệnh đề đứng sau từ khóa `go` sẽ tạo ra một Goroutine mới, ví dụ :
 
@@ -292,9 +275,9 @@ func hello() {
 }
 ```
 
-## 1.5.6 Giao tiếp thông qua kênh Channel
+## 1.5.5. Giao tiếp thông qua kênh Channel
 
-* Tác vụ gửi trên một unbufferred Channel luôn luôn xảy ra trước tác vụ nhận, dùng tính chất này cho việc đồng bộ giữa các goroutines.
+Tác vụ gửi trên một unbufferred Channel luôn luôn xảy ra trước tác vụ nhận, dùng tính chất này cho việc đồng bộ giữa các goroutines.
 
 ```go
 // dùng channel done để đồng bộ thứ tự thực thi
@@ -344,7 +327,7 @@ func main() {
 
 Dòng `select{}` cuối cùng là một mệnh đề lựa chọn một empty channel sẽ làm cho main thread bị block, ngăn chặn chương trình kết thúc sớm. Tương tự `for{}` và `<- make(chan int)` nhiều hàm khác sẽ đạt được kết quả tương tự.
 
-## 1.5.7 Tác vụ đồng bộ không tin cậy
+## 1.5.6. Tác vụ đồng bộ không tin cậy
 
 Như chúng ta phân tích trước, đoạn code sau sẽ không đảm bảo thứ tự in ra kết quả bình thường. Việc chạy thực sự bên dưới sẽ có một xác suất lớn kết quả sẽ không bình thường.
 
