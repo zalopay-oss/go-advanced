@@ -6,9 +6,8 @@ Trong phần này, chúng ta sẽ tìm hiểu cách sử dụng CGO cơ bản  t
 
 Đầu tiên là một chương trình CGO đơn giản nhất:
 
-***main.go***
-
 ```go
+//main.go
 package main
 
 import "C"
@@ -22,9 +21,8 @@ Chúng ta import package CGO thông qua câu lệnh `import "C"`. Chương trìn
 
 ## 2.1.2. Xuất chuỗi dựa trên thư viện chuẩn của C
 
-***main.go***
-
 ```go
+//main.go
 package main
 
 //#include <stdio.h>
@@ -43,9 +41,8 @@ Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.C
 
 Phần trên chúng ta đã sử dụng các hàm đã có trong `stdio`. Bây giờ ta sẽ sử dụng một hàm `SayHello` của ngôn ngữ C. Chức năng hàm này là in ra chuỗi chúng ta truyền vào hàm. Sau đó gọi hàm `SayHello` trong hàm main:
 
-***main.go***
-
 ```go
+//main.go
 package main
 
 /*
@@ -64,9 +61,8 @@ func main() {
 
 Hoặc có thể đặt hàm `SayHello` trong file `hello.c` như sau:
 
-***hello.c***
-
 ```C
+//hello.c
 #include <stdio.h>
 
 void SayHello(const char* s) {
@@ -76,9 +72,8 @@ void SayHello(const char* s) {
 
 Sau đó bên file main.go chúng chỉ cần khai báo hàm `SayHello` trong phần CGO như bên dưới.
 
-***main.go***
-
 ```Go
+//main.go
 package main
 
 //void SayHello(const char* s);
@@ -100,17 +95,15 @@ Trừu tượng và module hóa là cách để đơn giản hóa các vấn đ�
 
 Trong ví dụ trước, ta trừu tượng hóa một module tên là `hello` và tất cả các interface của module đó được khai báo trong file header `hello.h`:
 
-***hello.h***
-
 ```c
+//hello.h
 void SayHello(const char* s);
 ```
 
 Và hiện thực hàm `SayHello` trong file `hello.c`:
 
-***hello.c***
-
 ```c
+//hello.c
 #include "hello.h"
 #include <stdio.h>
 
@@ -122,9 +115,8 @@ void SayHello(const char* s) {
 
 Ngoài ra ta có thể hiện thực hàm này bằng C++ cũng được:
 
-***hello.cpp***
-
 ```c
+//hello.cpp
 #include <iostream>
 
 // extern giúp function C++ có được các liên kết (linkage)
@@ -141,9 +133,8 @@ void SayHello(const char* s) {
 
 Trong hàm main của Go ta gọi file header như sau:
 
-***main.go***
-
 ```go
+//main.go
 package main
 
 //#include <hello.h>
@@ -158,19 +149,19 @@ Với việc lập trình C bằng API interface, ta có thể hiện thực mod
 
 ## 2.1.5. Sử dụng Go để hiện thực hàm trong C
 
-Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn được dùng để export các hàm (viết bằng) ngôn ngữ Go sang các lời gọi hàm của C.
+Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn được dùng để export các hàm viết bằng ngôn ngữ Go sang các lời gọi hàm của C.
 
 Trong ví dụ trước, chúng ta đã trừu tượng hóa một module có tên hello và tất cả các chức năng interface của module được xác định trong file header `hello.h`:
 
 ```c
+//hello.h
 void SayHello(const char* s);
 ```
 
 Bây giờ, chúng ta tạo một file `hello.go` và hiện thực lại hàm `SayHello` của interface bằng ngôn ngữ Go:
 
-***hello.go***
-
 ```go
+//hello.go
 package main
 
 import "C"
@@ -205,6 +196,7 @@ func main() {
 Để cho đơn giản chúng ta sẽ gộp tất cả thành một file `main.go` duy nhất như ví dụ dưới đây.
 
 ```go
+//main.go
 package main
 
 //void SayHello(char* s);

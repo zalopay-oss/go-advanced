@@ -1,8 +1,6 @@
-# 2.3. Chuyển đổi kiểu
+# 2.3. Chuyển đổi kiểu dữ liệu
 
 Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng các hàm trong C (các hàm hiện thực khai báo Golang trong C) để sử dụng lại các tài nguyên của C. Ngày nay, CGO đã phát triển thành cầu nối giao tiếp hai chiều giữa C và Go. Để tận dụng tính năng của CGO, việc hiểu các quy tắc chuyển đổi kiểu giữa hai loại ngôn ngữ là điều quan trọng.
-
-Đấy là vấn đề sẽ được thảo luận trong phần này.
 
 ## 2.3.1. Các kiểu dữ liệu số học
 
@@ -25,11 +23,11 @@ Khi ta sử dụng các ký hiệu của C trong Golang, thường nó sẽ truy
 | double                 | C.double       | float64       |
 | size_t                 | C.size_t       | uint          |
 
-_Bảng so sánh kiểu trong các ngôn ngữ Go và C_
+*Bảng so sánh kiểu trong các ngôn ngữ Go và C*
 
-Mặc dù kích thước của những kiểu không chỉ rõ kích thước (trong C) như `int`, `short` v.v., kích thước của chúng đều được xác định trong CGO: kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
+Mặc dù kích thước của những kiểu không chỉ rõ kích thước (trong C) như `int`, `short`, ..., kích thước của chúng đều được xác định trong CGO: kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
 
-Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với GO thì `int` và `uint` có thể là 4 byte hoặc 8 byte (tuỳ platform). Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị cơ bản của Go sẽ xác định kiểu tương ứng trong C (kiểu có tiền tố "Go"). Ví dụ sau trong hệ thống 64-bit, file header `_cgo_export.h` định nghĩa các kiểu giá trị:
+Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với Go thì `int` và `uint` có thể là 4 byte hoặc 8 byte (tuỳ platform). Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị cơ bản của Go sẽ xác định kiểu tương ứng trong C (kiểu có tiền tố "Go"). Ví dụ sau trong hệ thống 64-bit, file header `_cgo_export.h` định nghĩa các kiểu giá trị:
 
 ```go
 typedef signed char GoInt8;
@@ -104,7 +102,7 @@ Phiên bản Go1.10 thêm một chuỗi kiểu `_GoString_`, có thể làm gi�
 extern void helloString(_GoString_ p0);
 ```
 
-Bởi vì `_GoString_` là kiểu định nghĩa trước, ta không thể truy cập rực tiếp các thông tin như length hay pointer của string qua kiểu này. Gó.10  thêm vào 2 hàm sau để bổ sung:
+Bởi vì `_GoString_` là kiểu định nghĩa trước, ta không thể truy cập rực tiếp các thông tin như length hay pointer của string qua kiểu này. Go1.10  thêm vào 2 hàm sau để bổ sung:
 
 ```c
 size_t _GoStringLen(_GoString_ s);
@@ -117,7 +115,7 @@ Các kiểu struct, Union và Enumerate của ngôn ngữ C không thể đượ
 
 ### Struct
 
-Trong Go, chúng ta có thể truy cập các kiểu struct như `struct xxx` tương ứng là `C.struct_xxx` trong ngôn ngữ C. Tổ chức bộ nhớ của struct tuân theo các quy tắc alignment: Trong môi trường ngôn ngữ Go 32 bit, struct của C tuân theo quy tắc alignment 32 bit và môi trường ngôn ngữ Go 64 bit tuân theo quy tắc alignment 64 bit. Đối với các struct có quy tắc alignment đặc biệt được chỉ định, chúng không thể được truy cập trong CGO.
+Trong Go, chúng ta có thể truy cập các kiểu struct như `struct xxx` tương ứng là `C.struct_xxx` trong ngôn ngữ C. Tổ chức bộ nhớ của struct tuân theo các quy tắc alignment. Trong môi trường ngôn ngữ Go 32 bit, struct của C tuân theo quy tắc alignment 32 bit và môi trường ngôn ngữ Go 64 bit tuân theo quy tắc alignment 64 bit. Đối với các struct có quy tắc alignment đặc biệt được chỉ định, chúng không thể được truy cập trong CGO.
 
 Cách sử dụng struct đơn giản như sau:
 
@@ -319,7 +317,7 @@ Package C ảo của CGO cung cấp tập các hàm sau để chuyển đổi ha
 func C.CString(string) *C.char
 
 // Go []byte slice -> C array
-// C array được cấp phát trong C heap using malloc.
+// C array được cấp phát trong C heap sử dụng malloc.
 // Caller có trách nhiệm free nó sau khi sử dụng
 // bằng cách như gọi C.free (nhớ include stdlib.h
 func C.CBytes([]byte) unsafe.Pointer
@@ -334,9 +332,9 @@ func C.GoStringN(*C.char, C.int) string
 func C.GoBytes(unsafe.Pointer, C.int) []byte
 ```
 
-Khi string và slice của Go được chuyển đổi thành phiên bản trong C, bộ nhớ nhân bản được cấp phát bởi hàm `malloc` của C và cuối cùng có thể được giải phóng bằng `free`. Khi một string hoặc array trong C được chuyển đổi thành Go, bộ nhớ nhân bản được quản lý bởi ngôn ngữ Go.
+Khi string và slice của Go được chuyển đổi thành phiên bản trong C, hàm `malloc` của C cấp phát một vùng nhớ mới và cuối cùng có thể được giải phóng bằng `free`. Ngược lại khi một string hoặc array trong C được chuyển đổi thành kiểu tương ứng trong Go, vùng nhớ của dữ liệu được chuyển đổi được quản lý bởi ngôn ngữ Go.
 
-Với các hàm chuyển đổi này, bộ nhớ trước chuyển đổi và sau chuyển đổi vẫn ở trong vùng nhớ cục bộ tương ứng của chúng. Ưu điểm của chuyển đổi trong chế độ nhân bản là quản lý interface và bộ nhớ rất đơn giản. Nhược điểm là nhân bản cần phân bổ bộ nhớ mới và các hoạt động sao chép của nó sẽ dẫn nhiều đến chi phí phụ.
+Với các hàm chuyển đổi này, vùng nhớ trước chuyển đổi và sau chuyển đổi vẫn ở trong vùng nhớ cục vùng tương ứng của chúng. Ưu điểm của việc chuyển đổi này là quản lý interface và vùng nhớ rất đơn giản. Nhược điểm là cần cấp phát vùng nhớ mới và các hoạt động sao chép của nó sẽ dẫn nhiều đến chi phí phụ.
 
 ### String và Slice
 
@@ -355,7 +353,7 @@ type SliceHeader struct {
 }
 ```
 
-Nếu không muốn phân bổ bộ nhớ riêng, bạn có thể truy cập trực tiếp vào không gian bộ nhớ của C bằng Go:
+Nếu không muốn cấp phát vùng nhớ riêng, bạn có thể truy cập trực tiếp vào không gian bộ nhớ của C bằng Go:
 
 ```go
 /*
@@ -374,7 +372,7 @@ func main() {
     // chuyển đổi bằng reflect.SliceHeader
     var arr0 []byte
     var arr0Hdr = (*reflect.SliceHeader)(unsafe.Pointer(&arr0))
-    arr0Hdr.Data = uintptr(unsafe.Pointer(&C.arr[0]))
+    arr0Hdr.Data = uintptr(unsafe.Pointer(&C.arr[0])) 
     arr0Hdr.Len = 10
     arr0Hdr.Cap = 10
 
@@ -392,6 +390,10 @@ func main() {
 
     fmt.Println("arr1: ", arr1)
     fmt.Println("s1: ", s1)
+
+    //kết quả:
+    //arr1:  [0 0 0 0 0 0 0 0 0 0]
+    //s1:  Hello
 }
 ```
 
@@ -491,4 +493,4 @@ Sau đây cho thấy luồng cụ thể của thao tác chuyển đổi giữa c
 </div>
 <br/>
 
-Đối với các tính năng thường được sử dụng trong CGO, tác giả package <github.com/chai2010/cgo>, đã cung cấp các chức năng chuyển đổi cơ bản. Để biết thêm chi tiết hãy tham khảo code hiện thực.
+Đối với các tính năng thường được sử dụng trong CGO, tác giả package [github.com/chai2010/cgo](https://github.com/chai2010/cgo), đã cung cấp các chức năng chuyển đổi cơ bản. Để biết thêm chi tiết hãy tham khảo code hiện thực.

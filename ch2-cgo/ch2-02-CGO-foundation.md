@@ -1,6 +1,6 @@
 # 2.2. CGO Foundation
 
-Để sử dụng tính năng CGO, bạn cần cài đặt compiler C/C++: Trên macOS và Linux là  `GCC` còn trên Windows là `MinGW`. Đồng thời, cần đảm bảo rằng biến môi trường `CGO_ENABLED` được đặt thành 1.
+Để sử dụng tính năng CGO, bạn cần cài đặt compiler C/C++ trên macOS và Linux là  `GCC` còn trên Windows là `MinGW`. Đồng thời, cần đảm bảo rằng biến môi trường `CGO_ENABLED` được đặt thành 1.
 
 ## 2.2.1. Lệnh `import "C"`
 
@@ -120,8 +120,8 @@ Lệnh `#cgo` chủ yếu ảnh hưởng đến một số biến môi trường
 
 Đối với người dùng sử dụng C và C++ trong môi trường CGO, có thể có ba tùy chọn biên dịch khác nhau:
 
-- CFLAGS cho các tùy chọn biên dịch theo ngôn ngữ C,
-- CPPFLAGS cho các tùy chọn biên dịch cụ thể C++,
+- CFLAGS cho các tùy chọn biên dịch theo ngôn ngữ C.
+- CPPFLAGS cho các tùy chọn biên dịch cụ thể C++.
 - CXXFLAGS cho các biên dịch C và C++.
 
 Các lệnh `#cgo` cũng hỗ trợ  tùy chọn biên dịch hoặc liên kết với các hệ điều hành hoặc một kiểu kiến trúc CPU khác nhau:

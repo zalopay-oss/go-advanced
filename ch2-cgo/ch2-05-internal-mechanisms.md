@@ -25,9 +25,10 @@ Kế đó file `_cgo_gotypes.go` được tạo cho toàn bộ package chứa m�
 
 Go gọi các hàm trong  C là  trường hợp ứng dụng phổ biến nhất của CGO. Chúng ta sẽ bắt đầu với ví dụ đơn giản nhất để phân tích chi tiết luồng hoạt động của quá trình này.
 
-Đoạn code cụ thể như sau (main.go):
+Đoạn code cụ thể như sau:
 
 ```go
+//main.go
 package main
 
 //int sum(int a, int b) { return a+b; }
