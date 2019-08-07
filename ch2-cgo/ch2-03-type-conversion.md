@@ -6,25 +6,14 @@ Ban đầu, CGO được tạo ra để thuận lợi cho việc sử dụng cá
 
 Khi ta sử dụng các ký hiệu của C trong Golang, thường nó sẽ truy cập thông qua package "C" ảo, chẳng hạn như kiểu `int` tương ứng với `C.int`. Một số kiểu trong C bao gồm nhiều từ khóa, nhưng khi truy cập chúng thông qua package "C" ảo, phần tên không thể có ký tự khoảng trắng, ví dụ `unsigned int` không thể truy cập bằng `C.unsigned int`. Do đó, CGO cung cấp quy tắc chuyển đổi tương ứng cho các kiểu trong C:
 
-| Kiểu trong C           | Kiểu trong CGO | Kiểu trong Go |
-| ---------------------- | -------------- | ------------- |
-| char                   | C.char         | byte          |
-| singed char            | C.schar        | int8          |
-| unsigned char          | C.uchar        | uint8         |
-| short                  | C.short        | int16         |
-| unsigned short         | C.ushort       | uint16        |
-| int                    | C.int          | int32         |
-| unsigned int           | C.uint         | uint32        |
-| long                   | C.long         | int32         |
-| unsigned long          | C.ulong        | uint32        |
-| long long int          | C.longlong     | int64         |
-| unsigned long long int | C.ulonglong    | uint64        |
-| float                  | C.float        | float32       |
-| double                 | C.double       | float64       |
-| size_t                 | C.size_t       | uint          |
+<div align="center">
 
-*Bảng so sánh kiểu trong các ngôn ngữ Go và C*
+<img src="../images/table-type1.png" width="400">
+<br/>
+<span align="center"><i>Bảng so sánh kiểu trong các ngôn ngữ Go và C</i></span>
+    <br/>
 
+</div>
 Mặc dù kích thước của những kiểu không chỉ rõ kích thước (trong C) như `int`, `short`, ..., kích thước của chúng đều được xác định trong CGO: kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
 
 Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với Go thì `int` và `uint` có thể là 4 byte hoặc 8 byte (tuỳ platform). Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị cơ bản của Go sẽ xác định kiểu tương ứng trong C (kiểu có tiền tố "Go"). Ví dụ sau trong hệ thống 64-bit, file header `_cgo_export.h` định nghĩa các kiểu giá trị:
@@ -48,24 +37,20 @@ Trừ `GoInt` và `GoUint`, chúng tôi không khuyến khích bạn sử dụng
 
 Một cách tốt hơn là sử dụng các kiểu có trong khai báo file header <stdint.h> (chuẩn C99):
 
-| Kiểu trong C | Kiểu trong CGO | Kiểu trong Go |
-| ------------ | -------------- | ------------- |
-| int8_t       | C.int8_t       | int8          |
-| uint8_t      | C.uint8_t      | uint8         |
-| int16_t      | C.int16_t      | int16         |
-| uint16_t     | C.uint16_t     | uint16        |
-| int32_t      | C.int32_t      | int32         |
-| uint32_t     | C.uint32_t     | uint32        |
-| int64_t      | C.int64_t      | int64         |
-| uint64_t     | C.uint64_t     | uint64        |
+<div align="center">
 
-*Bảng so sánh kiểu trong `stdint.h`*
+<img src="../images/table-type2.png" width="350">
+<br/>
+<span align="center"><i>Bảng so sánh kiểu trong `stdint.h`</i></span>
+    <br/>
+
+</div>
 
 Như đã đề cập trước đó, nếu kiểu trong C bao gồm nhiều từ, nó không thể được sử dụng trực tiếp thông qua package "C" ảo (ví dụ: `unsigned short` không thể được truy cập trực tiếp `C.unsigned short`). Tuy nhiên, sau khi định nghĩa lại kiểu trong <stdint.h> bằng cách sử dụng `typedef`, chúng ta có thể truy cập tới kiểu gốc. Đối với các kiểu trong C phức tạp hơn thì nên sử dụng `typedef` để đặt lại tên cho nó, thuận tiện cho việc truy cập từ CGO.
 
 ## 2.3.2. Go Strings và Slices
 
-Trong file header `_cgo_export.h` được tạo ra bởi CGO, kiểu trong C tương ứng cũng được tạo cho Go string, slice, dictionary, interface và pipe:
+Trong file header `_cgo_export.h` được tạo ra bởi CGO, kiểu trong C tương ứng cũng được tạo cho Go string, slice, dictionary, interface và channel:
 
 ```go
 typedef struct { const char *p; GoInt n; } GoString;
@@ -75,7 +60,7 @@ typedef struct { void *t; void *v; } GoInterface;
 typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 ```
 
-Tuy nhiên, cần lưu ý rằng chỉ các string và slice là có giá trị sử dụng trong CGO, vì CGO tạo ra các phiên bản ngôn ngữ C cho một số hàm trong Go, vì vậy cả hai đều có thể gọi các hàm C trong Go, điều này được thực hiện lặp tức và CGO không cung cấp các hàm hỗ trợ liên quan cho các kiểu khác, đồng thời mô hình bộ nhớ dành riêng cho ngôn ngữ Go ngăn chúng ta duy trì các kiểu con trỏ tới các vùng bộ nhớ Go quản lý, vì vậy mà môi trường ngôn ngữ C của các kiểu đó không có giá trị sử dụng.
+Tuy nhiên, cần lưu ý rằng chỉ các string và slice là có giá trị sử dụng trong CGO, vì CGO tạo ra các phiên bản ngôn ngữ C cho một số hàm trong Go, vì vậy cả hai đều có thể gọi các hàm C trong Go, điều này được thực hiện ngay lặp tức và CGO không cung cấp các hàm hỗ trợ liên quan cho các kiểu khác, đồng thời mô hình bộ nhớ dành riêng cho ngôn ngữ Go ngăn chúng ta duy trì các kiểu con trỏ tới các vùng bộ nhớ Go quản lý, vì vậy mà môi trường ngôn ngữ C của các kiểu đó không có giá trị sử dụng.
 
 Trong hàm C đã export, chúng ta có thể trực tiếp sử dụng các string và slice trong Go. Giả sử có hai hàm export sau:
 
@@ -109,9 +94,9 @@ size_t _GoStringLen(_GoString_ s);
 const char *_GoStringPtr(_GoString_ s);
 ```
 
-## 2.3.3. Struct, Union, Enumerate
+## 2.3.3. Struct, Union, Enum
 
-Các kiểu struct, Union và Enumerate của ngôn ngữ C không thể được thêm vào struct dưới dạng thuộc tính ẩn danh.
+Các kiểu struct, Union và Enum của ngôn ngữ C không thể được thêm vào struct dưới dạng thuộc tính ẩn danh.
 
 ### Struct
 
@@ -253,7 +238,7 @@ func main() {
 
 Mặc dù truy cập bằng package `unsafe` là cách dễ nhất và tốt nhất về hiệu suất, nó có thể làm phức tạp hoá vấn đề với các tình huống mà trong đó các kiểu union lồng nhau được xử lý. Đối với các kiểu này ta nên xử lý chúng bằng cách định nghĩa các hàm hỗ trợ trong C.
 
-### Enumerate
+### Enum
 
 Đối với các kiểu liệt kê (enum), chúng ta có thể truy cập các kiểu `enum xxx` tương ứng là `C.enum_xxx` trong C.
 
