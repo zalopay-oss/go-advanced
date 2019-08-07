@@ -12,6 +12,8 @@ Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
 
 Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đọc có thể xem thêm tại đây: [What-is-the-difference-between-static-and-dynamic-linking](https://www.quora.com/What-is-the-difference-between-static-and-dynamic-linking)
 
+Sau đây chúng ta sẽ đi vào cách dùng thư viện tĩnh và thư viện động trong CGO.
+
 ## 2.9.1. Dùng thư viện C tĩnh
 
 Nếu mã nguồn C/C++ được dùng trong CGO có kích thước nhỏ thì cách đưa trực tiếp chúng vào chương trình là một ý tưởng phổ biến nhất, nhưng nhiều lúc chúng ta không tự xây dựng mã nguồn, hoặc quá trình xây dựng mã nguồn C/C++ rất phức tạp thì đây là lúc thư viện C tĩnh phát huy thế mạnh của mình.
@@ -39,8 +41,12 @@ Bởi vì CGO dùng lệnh GCC để biên dịch và liên kết mã nguồn C 
 Thư viện tĩnh `libnumber.a` có thể được sinh ra bằng lệnh sau:
 
 ```sh
+// di chuyển tới thư mục mã nguồn
 $ cd ./number
+// biên dịch ra file object từ file mã nguồn
 $ gcc -c -o number.o number.c
+// lệnh tạo ra thư viện tĩnh libnumber.a từ file object
+// chi tiết về lệnh ar có thể xem tại https://linux.die.net/man/1/ar
 $ ar rcs libnumber.a number.o
 ```
 
@@ -69,7 +75,7 @@ Hai lệnh `#cgo` trên dùng để biên dịch và liên kết mã nguồn v�
 
 Chú ý rằng: đường dẫn trong liên kết không thể dùng [relative path](https://support.dtsearch.com/webhelp/dtsearch/relative_paths.htm) mà phải dùng một [absolute path](http://www.linfo.org/absolute_pathname.html), ngoài ra đường dẫn không được chứa bất kỳ khoảng trắng nào.
 
-Ví dụ : `LDFLAGS: -L/home/lap12448/number -lnumber`
+Ví dụ : `LDFLAGS: -L/home/mypc/number -lnumber`
 
 Kết quả như sau:
 
@@ -86,9 +92,7 @@ Trong môi trường Linux, có một lệnh [pkg-config](https://linux.die.net/
 
 Ý tưởng của thư viện động là shared library, các process khác nhau có thể chia sẻ trên cùng một tài nguyên bộ nhớ trên RAM hoặc đĩa cứng, nhưng hiện nay giá thành đĩa cứng và RAM cũng tương đối rẻ, nên hai vai trò sẽ trở nên không đáng quan tâm, do đó đâu là giá trị của thư viện động ở đây?
 
-Từ góc nhìn của việc phát triển thư viện, thư viện động có thể tách biệt nhau và giảm thiểu rủi ro của việc xung đột trong khi liên kết, với những nền tảng như Windows, thư viện động là một cách khả thi để mở rộng các nền tảng biên dịch như `VC` và `GCC`.
-
-Trong CGO, việc dùng thư viện động và tĩnh là như nhau, bởi vì thư viện động sẽ phải có một static export library nhỏ dùng cho việc liên kết (Linux có thể trực tiếp liên kết các files, nhưng cũng tạo ra file `.dll` hoặc file `.a` dùng cho liên kết). Chúng ta có thể dùng thư viện `number` ở phần trước như là một ví dụ minh họa cho việc dùng thư viện động.
+Từ góc nhìn của việc phát triển thư viện, thư viện động có thể tách biệt nhau và giảm thiểu rủi ro của việc xung đột trong khi liên kết, với những nền tảng như Windows, thư viện động là một cách khả thi để mở rộng các nền tảng biên dịch như `gcc`.
 
 Trong môi trường `gcc` dưới MacOS hoặc Linux, chúng ta có thể sinh ra thư viện động của một số thư viện với những lệnh sau:
 
@@ -116,7 +120,7 @@ func main() {
 
 `CGO` sẽ tự động tìm `libnumber.a` hoặc `libnumber.so` ở bước liên kết trong thời gian biên dịch.
 
-Với nền tảng Windows, chúng ta có thể dùng công cụ `VC` để sinh ra thư viện động (sẽ có một số thư viện Windows phức tạp chỉ có thể được build với `VC`). Đầu tiên, chúng ta phải tạo một file định nghĩa cho `number.dll` để quản lý các kí hiệu dùng để export thư viện động.
+Với nền tảng Windows, chúng ta có thể dùng công cụ [VC](https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B) để sinh ra thư viện động (sẽ có một số thư viện Windows phức tạp chỉ có thể được build với `VC`). Đầu tiên, chúng ta phải tạo một file định nghĩa cho `number.dll` để quản lý các kí hiệu dùng để export thư viện động.
 
 Nội dung của file `number.def` như sau:
 
