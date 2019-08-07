@@ -2,6 +2,17 @@
 
 Trong phần này, chúng ta sẽ tìm hiểu cách sử dụng CGO cơ bản  thông qua loạt ví dụ từ đơn giản đến phức tạp.
 
+## 2.1.0. Cài đặt
+
+***Linux, Mac***
+
+- CGO được tích hợp sẵn, người dùng Linux và Mac chỉ cần cài đặt Go.
+  
+***Windows***
+
+- CGO không tương thích với Cygwin
+- Để dùng được CGO ban5 phải cài đặt MingGW và sử dụng cmd của Windows
+
 ## 2.1.1. Chương trình CGO đơn giản
 
 Đầu tiên là một chương trình CGO đơn giản nhất:
@@ -31,11 +42,14 @@ import "C"
 func main() {
     C.puts(C.CString("Hello World\n"))  
 }
+
+// kết quả:
+// Hello World
 ```
 
-`import package "C"` để thực hiện các chức năng của CGO và include thư viện <stdio.h> của ngôn ngữ C. Tiếp theo, chuỗi string trong `C.CString` của ngôn ngữ Go được chuyển đổi thành chuỗi string trong ngôn ngữ C bằng phương thức `C.puts` của package CGO.
+`import package "C"` để thực hiện các chức năng của CGO và include thư viện <stdio.h> của ngôn ngữ C (trong comment code là cú pháp của CGO, không phải phần comment như thông thường). Tiếp theo, chuỗi string trong `C.CString` của ngôn ngữ Go được chuyển đổi thành chuỗi string trong ngôn ngữ C bằng phương thức `C.puts` của package CGO.
 
-Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.CString của ngôn ngữ C sẽ dẫn đến rò rỉ bộ nhớ. Nhưng đối với chương trình nhỏ ở trên điều này không đáng lo ngại  vì hệ điều hành sẽ tự động lấy lại các tài nguyên của chương trình sau khi chương trình kết thúc.
+Việc lỗi xảy ra khi không giải phóng chuỗi được tạo bằng C.CString của ngôn ngữ C sẽ dẫn đến rò rỉ bộ nhớ (memory leak). Nhưng đối với chương trình nhỏ ở trên điều này không đáng lo ngại  vì hệ điều hành sẽ tự động lấy lại các tài nguyên của chương trình sau khi chương trình kết thúc.
 
 ## 2.1.3. Sử dụng hàm C tự khai báo
 
@@ -82,6 +96,14 @@ import "C"
 func main() {
     C.SayHello(C.CString("Hello World\n"))
 }
+```
+
+Hiện tại thư mục làm việc có cấu trúc như sau:
+
+```sh
+.
+├── hello.c
+└── main.go
 ```
 
 `Lưu ý`: thay vì chạy lệnh `go run main.go` hoặc `go build main.go`, chúng ta phải sử dụng `go run "tên/của/package"` hoặc `go build "tên/của/package"`. Nếu đang đứng trong thư mục chứa mã nguồn thì bạn có thể chạy chương trình bằng lệnh `go run .` hoặc `go build .`
@@ -145,11 +167,11 @@ func main() {
 }
 ```
 
-Với việc lập trình C bằng API interface, ta có thể hiện thực module bằng bất kỳ ngôn ngữ nào, miễn là đáp ứng được API: SayHello có thể được viết bằng C, C++, Go hoặc kể cả Assembly.
+Với việc lập trình C thông qua interface, ta có thể hiện thực module bằng nhiều ngôn ngữ khác nhau, miễn là đáp ứng được interface: SayHello có thể được viết bằng C, C++, Go hoặc kể cả Assembly.
 
 ## 2.1.5. Sử dụng Go để hiện thực hàm trong C
 
-Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn được dùng để export các hàm viết bằng ngôn ngữ Go sang các lời gọi hàm của C.
+Trong thực tế, CGO không chỉ được sử dụng để gọi các hàm của C bằng ngôn ngữ Go mà còn có thể cho phép C gọi các hàm Go trong code của mình.
 
 Trong ví dụ trước, chúng ta đã trừu tượng hóa một module có tên hello và tất cả các chức năng interface của module được xác định trong file header `hello.h`:
 
@@ -189,6 +211,15 @@ import "C"
 func main() {
     C.SayHello(C.CString("Hello World\n"))
 }
+```
+
+Cấu trúc thư mục lúc này:
+
+```sh
+.
+├── hello.go
+├── hello.h
+└── main.go
 ```
 
 ## 2.1.6. Sử dụng Go để lập trình interface cho C

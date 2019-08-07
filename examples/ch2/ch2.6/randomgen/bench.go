@@ -1,12 +1,11 @@
-package main 
+package main
 
 import (
+	"bufio"
 	"fmt"
-    qsort "./qsort"
-    "bufio"
 	"log"
-    "os"
-    "math/rand"
+	"math/rand"
+	"os"
 	"strconv"
 )
 
@@ -46,9 +45,10 @@ func writeLines(lines []int, path string) error {
 }
 
 func main() {
-	arr := make([]int, 100000)
-	for i := 0; i< 100000; i++ {
-		arr[i] = rand.Intn(1000000)
+	//lines1 := []int{1, 2, 3, 4, 5, 6, 6}
+	arr := make([]int, 10000)
+	for i := 0; i< 10000; i++ {
+		arr[i] = rand.Intn(100000)
 	}
 	
 
@@ -56,17 +56,13 @@ func main() {
 		log.Fatalf("writeLines: %s", err)
 	}
 
-	values, err := readLines("foo.out.txt")
-	if err != nil {
-		log.Fatalf("readLines: %s", err)
-	}
+	//lines, err := readLines("foo.out.txt")
+	// if err != nil {
+	// 	log.Fatalf("readLines: %s", err)
+	// }
 	// for i, line := range lines {
 	// 	fmt.Println(i, line)
-    // }
+	// }
 
-    qsort.Slice(values, func(i, j int) bool {
-        return values[i] < values[j]
-    })
-
-    //fmt.Println(values)
+	
 }
