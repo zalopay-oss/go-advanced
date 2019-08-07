@@ -1,6 +1,6 @@
 # 2.6. Tạo ra package `qsort`
 
-Hàm quick sort (`qsort`) là một hàm bậc cao của ngôn ngữ C. Nó sử dụng các hàm so sánh để sắp xếp có thể tùy chỉnh và có thể sắp xếp bất kỳ kiểu mảng nào. Trong phần này, chúng ta sẽ thử tạo một package phiên bản ngôn ngữ Go của hàm `qsort` dựa trên hàm `qsort` của ngôn ngữ C.
+Hàm quick sort (`qsort`) là một hàm bậc cao ([higher-order function](https://en.wikipedia.org/wiki/Higher-order_function)) của ngôn ngữ C. Nó sử dụng các hàm so sánh để sắp xếp có thể tùy chỉnh và có thể sắp xếp bất kỳ kiểu mảng nào. Trong phần này, chúng ta sẽ thử tạo một package phiên bản ngôn ngữ Go của hàm `qsort` dựa trên hàm `qsort` của ngôn ngữ C.
 
 ## 2.6.1. Tìm hiểu về hàm `qsort`
 
@@ -56,7 +56,7 @@ int main() {
 // kết quả 8 23 25 42 97 109
 ```
 
-## 2.6.2. Export hàm `qsort` từ Go package
+## 2.6.2. Hiện thực `qsort` bằng Go
 
 Để tạo điều kiện cho người dùng không phải CGO của ngôn ngữ Go sử dụng hàm `qsort`, chúng ta cần phải bọc hàm `qsort` của ngôn ngữ C dưới dạng hàm Go có thể truy cập được từ bên ngoài.
 

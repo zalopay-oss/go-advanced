@@ -72,7 +72,7 @@ Nhưng tại thời điểm này, hàm ngôn ngữ C không biết rằng vùng 
 
 Trên đây là một hệ quả (có một số khác biệt trong tình huống thực tế), cho thấy việc truy cập từ C vào bộ nhớ Go rất không an toàn!
 
-### Cách 1: tạo ra một vùng nhớ của C
+### Cách 1: Tạo ra một vùng nhớ của C
 
 Một cách để khắc phục vấn đề trên là sử dụng đặc tính bộ nhớ tĩnh của ngôn ngữ C, trước tiên khởi tạo cùng một kích thước vùng nhớ trong không gian ngôn ngữ C, sau đó chuyển dữ liệu từ Go vào vùng nhớ đó của C. Lúc trả về cũng được xử lý như vậy. Ví dụ sau đây là một triển khai cụ thể của ý tưởng này:
 
@@ -105,7 +105,7 @@ func main() {
 
 Mặc dù theo cách trên là an toàn nhưng nó lại cồng kềnh và hiệu suất kém (vì phải cấp phát bộ nhớ nhiều lần và sao chép từng phần tử một).
 
-### Cách 2: không tạo ra vùng nhớ mới
+### Cách 2: Không tạo ra vùng nhớ mới
 
 Để xử lý hiệu quả vấn đề chuyển đổi vùng nhớ này, CGO đã đưa ra quy tắc: trước khi hàm ngôn ngữ C trả về (do CGO gọi), CGO đảm bảo rằng vùng nhớ ngôn ngữ Go không tồn tại trong giai đoạn này. Ngay cả khi có thay đổi địa chỉ, hàm ngôn ngữ C giờ có thể truy cập vùng nhớ ngôn ngữ Go một cách tự tin!
 
@@ -161,7 +161,7 @@ Khi đối tượng `x` thay đổi địa chỉ (sau khi `tmp` lưu địa ch�
 
 Giữ địa chỉ của đối tượng Go trong biến tạm `tmp` không phải con trỏ có tác dụng tương tự như giữ địa chỉ của đối tượng Go trong ngôn ngữ C: nếu địa chỉ vùng nhớ của đối tượng Go ban đầu đã thay đổi, runtime của Go sẽ không thể giải quyết được.
 
-## 2.7.3. C làm thế nào để lưu giữ con trỏ tới đối tượng của Go
+## 2.7.3. Lưu giữ con trỏ tới đối tượng của Go
 
 Một nguyên tắc cơ bản là chúng ta không thể sử dụng bộ nhớ của đối tượng ngôn ngữ Go trực tiếp trong hàm ngôn ngữ C.
 
@@ -279,11 +279,11 @@ func main() {
 }
 ```
 
-Ngay cả khi địa chỉ chuỗi Go thay đổi do quá trình stack scaling gây ra trước lệnh gọi `PrintGoString`, nó vẫn có thể hoạt động bình thường, vì id tương ứng với chuỗi ổn định. Chuỗi thu được bằng cách decode id trong không gian ngôn ngữ Go cũng hợp lệ.
+Ngay cả khi địa chỉ chuỗi Go thay đổi do quá trình stack scaling gây ra trước lệnh gọi `PrintGoString`, nó vẫn có thể hoạt động bình thường, vì id tương ứng với chuỗi tĩnh trong vùng nhớ của C. Chuỗi thu được bằng cách decode id trong không gian ngôn ngữ Go cũng hợp lệ.
 
 ## 2.7.4. Export các hàm C
 
-Golang cấp phát bộ nhớ từ một không gian địa chỉ ảo cố định. Bộ nhớ được cấp phát bởi ngôn ngữ C không thể sử dụng không gian bộ nhớ ảo được dành riêng cho ngôn ngữ Go. Trong môi trường CGO, runtime của Go luôn kiểm tra theo mặc định liệu bộ nhớ được trả về  do lệnh export  có được cấp phát bởi ngôn ngữ Go hay không và nếu có sẽ ném ra runtime exception.
+Golang cấp phát bộ nhớ từ một không gian địa chỉ ảo cố định. Bộ nhớ được cấp phát bởi ngôn ngữ C không thể sử dụng không gian bộ nhớ ảo được dành riêng cho ngôn ngữ Go. Trong môi trường CGO, runtime của Go luôn kiểm tra theo liệu bộ nhớ được trả về  do lệnh export  có được cấp phát bởi ngôn ngữ Go hay không và nếu có sẽ ném ra runtime exception.
 
 Sau đây là một ví dụ về  runtime exception trong CGO:
 
@@ -308,7 +308,7 @@ func getGoPtr() *C.int {
 }
 ```
 
-`GetGoPtr` trả về một con trỏ của kiểu trong C, nhưng bộ nhớ được cấp phát từ hàm Go của ngôn ngữ Go, là bộ nhớ được quản lý bởi runtime của Go. Sau đó, chúng ta gọi hàm `getGoPtr` trong hàm main của C và runtime exception sẽ ném ra theo mặc định:
+`GetGoPtr` trả về một con trỏ của kiểu trong C, nhưng vùng nhớ được cấp phát từ hàm Go, là vùng nhớ được quản lý bởi runtime của Go. Sau đó, chúng ta gọi hàm `getGoPtr` trong hàm main của C và runtime exception sẽ ném ra theo mặc định:
 
 ```sh
 $ go run main.go
@@ -355,6 +355,6 @@ Cần lưu ý rằng việc kiểm tra mặc định của con trỏ đối vớ
 $ GODEBUG=cgocheck=0 go run main.go
 ```
 
-Sau khi tắt `cgocheck` và chạy đoạn code trên, exception  sẽ không được ném ra. Tuy nhiên, cần lưu ý rằng nếu bộ nhớ tương ứng trong ngôn ngữ C được release bởi runtime của Go, nó sẽ gây ra sự cố nghiêm trọng hơn. Giá trị mặc định của `cgocheck` là 1, tương ứng với phiên bản detection đơn giản hoá. Nếu bạn cần hàm detection đầy đủ, bạn có thể đặt `cgocheck` thành 2.
+Sau khi tắt `cgocheck` và chạy đoạn code trên, exception  sẽ xuất hiện. Tuy nhiên, cần lưu ý rằng nếu bộ nhớ tương ứng trong ngôn ngữ C được release bởi runtime của Go, nó sẽ gây ra sự cố nghiêm trọng hơn. Giá trị mặc định của `cgocheck` là 1, tương ứng với phiên bản detection đơn giản hoá. Nếu bạn cần hàm detection đầy đủ, bạn có thể đặt `cgocheck` thành 2.
 
 Để biết mô tả chi tiết về các hàm CGO rumtime pointer detection hãy tham khảo tài liệu chính thức của Golang: [package runtime - GoDoc](https://godoc.org/runtime#hdr-Environment_Variables).
