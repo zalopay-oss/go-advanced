@@ -1,6 +1,6 @@
 # 4.1 Bắt đầu với RPC
 
-[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (viết tắt RPC) là phương pháp gọi hàm từ một máy khác và trả về kết quả. Trong lịch sử phát triển của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu giống như là IPC (inter process communication), RPC thường được sử dụng trong hệ thống phân tán.
+[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (viết tắt RPC) là phương pháp gọi hàm từ một máy từ xa để lấy về kết quả. Trong lịch sử phát triển của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu giống như IPC (inter process communication) ngoài việc chúng dùng để giao tiếp giữa các máy tính chứ không những là giữa các tiến trình, ngoài ra RPC còn hay được sử dụng trong các hệ thống phân tán.
 
 <div align="center">
 	<img src="../images/ch4-1-rpc-arch.png" width="500">
@@ -10,7 +10,7 @@
 	</span>
 </div>
 
-Phần này sẽ giới thiệu việc sử dụng RPC trong Go, cũng như một số best practice để refactor code.
+Phần này sẽ giới thiệu việc sử dụng RPC trong Go, cũng như một số best practice để refactor code và cách gọi RPC trên những ngôn ngữ khác nhau.
 
 ## 4.1.1 Chương trình "Hello, World" bằng RPC
 
