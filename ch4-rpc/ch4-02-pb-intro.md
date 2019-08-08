@@ -1,38 +1,52 @@
-# 4.2 Protobuf
+# 4.2. Protobuf
 
-Protobuf là tên gọi rút gọn của Protocols Buffers, một ngôn ngữ mô tả được phát triển bởi Google và được công bố vào năm 2008. Có thể hình dung Protobuf cũng như XML, JSON hay những ngôn ngữ mô tả khác. Chúng ta có thể sinh ra code từ nó và cung cấp cơ chế để serialization cấu trúc dữ liệu thông qua một số công cụ đi kèm. Nhưng chúng ta thường quan tâm nhiều hơn về Protobuf như là một ngôn ngữ mô tả dữ liệu để đặc tả lớp interface, nó có thể được xem như là một phương tiện cơ bản cho việc thiết kế những lớp interface RPC được bảo mật và an toàn hơn.
+**Protobuf** (tên rút gọn của Protocols Buffer) là một ngôn ngữ language-neutral, platform-neutral của Google. Về cơ bản, nó được sử dụng để sinh ra mã nguồn với chức năng serialize và deserialize các cấu trúc dữ liệu (được định nghĩa trong file `.proto`) dưới dạng binary stream. So với dạng XML hoặc JSON thì dữ liệu đó nhỏ gọn gấp 3-10 lần và được xử lý rất nhanh.
 
-## 4.2.1 Bắt đầu với Protobuf
+<div align="center">
+	<img src="../images/ch4-2-size.png" width="580">
+	<br/>
+    <img src="../images/ch4-2-speed.png" width="580">
+    <br/>
+</div>
 
-Cho những ai chưa từng làm quen với Protobuf, chúng tôi khuyên hãy hiểu cách sử dụng cơ bản chúng từ trang chủ [protobuf](https://developers.google.com/protocol-buffers/). Ở đây chúng ta thử kết hợp protobuf và RPC, và cuối cùng sẽ đảm bảo rằng interface được đặc tả và tính bảo mật của lệnh gọi RPC thông qua protobuf. Đơn vị cơ bản của dữ liệu Protobuf là một `message`, chúng cũng tương tự như cấu trúc của ngôn ngữ Go. Các thành phần của message hoặc những message từ những kiểu dữ liêu bên dưới khác có thể được lồng vào message đó.
+> *Xem thêm: [Benchmarking Protocol Buffers, JSON and XML in Go](https://medium.com/@shijuvar/benchmarking-protocol-buffers-json-and-xml-in-go-57fa89b8525)*.
 
-Đầu tiên chúng ta tạo file `hello.proto` nó sẽ chứa kiểu string được dùng cho HelloService service:
+Bạn đọc có thể cài đặt và làm quen với các ví dụ Protobuf trên [trang chủ](https://developers.google.com/protocol-buffers/docs/gotutorial) trước khi đi vào nội dung chính.
+
+## 4.2.1 Kết hợp Protobuf trong RPC
+
+Đầu tiên chúng ta tạo file `hello.proto` chứa kiểu string được dùng cho HelloService ở phần trước.
+
+***hello.proto:***
 
 ```go
+// có hai phiên bản hiện tại là proto2 và proto3
 syntax = "proto3";
-
+// tên package được sinh ra
 package main;
-
-message String {
+// message là một đơn vị dữ liệu trong protobuf
+message String {trong
+    // chuỗi string được truyền vào hàm RPC
     string value = 1;
 }
 ```
 
-Cú pháp của statement trên bắt đầu bằng việc định nghĩa trường "syntax" là "proto3" - phiên bản ngôn ngữ protobuf thứ ba, và tất cả những thành phần được khởi tạo với giá trị 0 giống như Go (không có hỗ trợ custom), sau đó những thành phần của message sẽ không cần những thuộc tính được yêu cầu. Sau đó package được chỉ thị là "main package" (nó nên đồng nhất với tên package trong Go, đơn giản như code ví dụ). Dĩ nhiên, user cũng có thể tùy chỉnh đường dẫn package tương ứng khác cho những ngôn ngữ khác nhau. Cuối cùng, từ khóa "message" sẽ định nghĩa một kiểu dữ liệu string mới là String, nó sẽ ứng với cấu trúc string ở mã nguồn cuối cùng được sinh ra từ chúng trong Go, và những thành phần sẽ được định nghĩa với một số tên gọi.
+Để sinh ra mã nguồn Go từ file `hello.proto` ở trên, đầu tiên là cài đặt bộ biên dịch `protoc` qua liên kết https://github.com/google/protobuf/releases, sau đó là cài đặt một plugin cho Go thông qua lệnh `go get github.com/golang/protobuf/protoc-gen-go`.
 
-Trong ngôn ngữ mô tả như là XML hay JSON, kiểu dữ liệu tương ứng thông thường sẽ được bao bọc bởi tên các thành viên. Tuy nhiên, Protobuf encoding sẽ kết hợp những dữ liệu bằng một số duy nhất của dữ liệu đó, do đó dung lượng của dữ liệu protobuf được encoded sẽ nhỏ, nhưng nó không dễ dàng để con người có thể đọc được. Chúng ta sẽ không quan tâm đến công nghệ encode dữ liệu của protobuf. Kết quả của cấu trúc Go có thể được encode bằng JSON hay không, do đó chúng ta có thể tạm thời phớt lờ đi việc Protobuf encode dữ liệu trong tài liệu này.
+Chúng ta sẽ sinh ra mã nguồn Go bằng lệnh sau:
 
-Phần lõi của Protobuf được phát triển dựa trên ngôn ngữ C++, và chúng không hỗ trợ ngôn ngữ Go trong bộ biên dịch `protoc`. Để sinh ra mã nguồn Go tương ứng với file hello.go. ở trên, chúng ta sẽ phải cần cài đặt một số plugin khác. Đầu tiên là cài đặt bộ biên dịch `protoc`, chúng có thể được tải về tại https://github.com/google/protobuf/releases. Sau đó là cài đặt một plugin cho Go, chúng ta có thể cài đặt thông qua `go get github.com/golang/protobuf/protoc-gen-go`.
-
-Sau đó chúng ta sẽ sinh ra mã nguồn Go bằng lệnh sau:
-
-```
+```sh
 $ protoc --go_out=. hello.proto
+// Trong đó,
+// protoc: chương trình sinh mã nguồn
+// go_out: chỉ cho protoc tải plugin protoc-gen-go, (cũng có java_out, python_out,..)
+// --go_out=.: sinh ra mã nguồn tại thư mục hiện tại
+// hello.proto: file protobuf
 ```
 
-Tham số `go_out` chỉ ra cho protoc sẽ tải công cụ `protoc-gen-go`, sau đó sinh ra code thông qua công cụ đó và sinh code trong cùng một đường dẫn với file `hello.proto`. Cuối cùng, sau đây là danh sách chuỗi các file protobuf cho tiến trình đó.
+Sẽ có một file `hello.pb.go` được sinh ra, trong đó cấu trúc String được định nghĩa như sau:
 
-Chỉ có một file `hello.pb.go` được sinh ra, cấu trúc String sẽ như sau
+***hello.pb.go:***
 
 ```go
 type String struct {
@@ -54,91 +68,88 @@ func (m *String) GetValue() string {
 }
 ```
 
-Cấu trúc được sinh ra cũng chứa một số hàm với tiền tố `XXX_`, chúng ta có thể ẩn đi những thành phần đó. Cùng một thời điểm, kiểu String cũng có thể được tự động sinh ra một tập hợp các phương thức, trong số đó ProtoMessage chỉ ra rằng đó là một hàm được hiện thực interface proto.Message. Thêm vào đó, Protobuf sẽ sinh ra những phương thức Get cho mỗi thành phần, trong nó sẽ kiểm tra dữ liệu null và trả về chuỗi rỗng.
+Dựa trên kiểu String mới, chúng ta có thể hiện thực lại service HelloService, với sự kết hợp giữa Protobuf trong RPC.
 
-Dựa trên kiểu String mới, chúng ta có thể hiện thực lại service HelloService
+***hello.go:***
 
 ```go
+// RPC struct 
 type HelloService struct{}
-
+// định nghĩa hàm Hello RPC, với tham số là kiểu String vừa định nghĩa trong Protobuf
 func (p *HelloService) Hello(request *String, reply *String) error {
-    reply.Value = "hello:" + request.GetValue()
+    // các hàm như .GetValue() đã được tạo ra trong file hello.pb.go
+    reply.Value = "Hello, " + request.GetValue()
+    // trả về nil khi thành công
     return nil
 }
 ```
 
-Tham số đầu vào và tham số đầu ra của phương thức Hello được thể hiện bởi kiểu String được định nghĩa bởi protobuf. Bởi vì tham số đầu vào mới là một kiểu cấu trúc, kiểu dữ liệu con trỏ được sử dụng như là tham số đầu vào, và một mã nguồn bên trong của hàm sẽ cũng được hiệu chỉnh cho phù hợp.
+Khi hiện thực một RPC service, chúng ta có thể chọn kiểu encoding mặc định hoặc định nghĩa lại với kiểu dữ liệu JSON như ở phần trước, và sau đó sẽ hiện thực lại plugin dựa trên mã nguồn protobuf.
 
-Cho đến đây chúng ta sẽ nhận ra sự kết hợp giữa Protobuf và RPC. Khi chúng ta bắt đầu một RPC service, chúng ta có thể vẫn chọn một kiểu mặc định hoặc định nghĩa lại với JSON, và sau đó sẽ hiện thực lại plugin dựa trên mã nguồn protobuf. Mặc dù chúng ta có thể làm rất nhiều công việc, nó dường như chúng ta không thể đạt được gì đáng kể.
+Cập nhật `hello.proto` file như bên dưới để định nghĩa service RPC HelloService service thông qua protobuf.
 
-Nhìn lại interface RPC bảo mật hơn ở phần 1, chúng tôi đã rất nỗ lực để đảm bảo bảo mật cho service RPC. Kết quả của mã nguồn RPC trên sẽ an toàn hơn và rất là tuyệt vời để  bảo trì thủ công, chúng ta có thể bảo mật hóa những mã nguồn liên quan mà nó chỉ sẵn có ở môi trường ngôn ngữ Go. Do đó đầu vào và đầu ra của tham số được định nghĩa bởi Protobuf được dùng, có thể interface RPC được định nghĩa bởi protobuf. Protobuf thực tế định nghĩa interface cho service RPC độc lập với ngôn ngữ chính là giá trị thực của nó!.
-
-Cập nhật `hello.proto` file bên dưới dễ định nghĩa service RPC HelloService service thông qua protobuf.
+***hello.proto:***
 
 ```go
+// định nghĩa service
 service HelloService {
+    // định nghĩa lời gọi hàm RPC
     rpc Hello (String) returns (String);
 }
 ```
 
-Nhưng khi sinh lại mã nguồn Go, chúng cũng không thay đổi. Đó là bởi vì có hàng triệu hiện thực RPC trên thế giới, và bộ biên dịch `protoc` sẽ không thể biết sinh ra mã nguồn của HelloService như thế nào.
+Nhưng khi sinh lại mã nguồn Go bằng lệnh `protoc` ở ví dụ đầu tiên, nội dung file `hello.pb.proto` cũng không thay đổi, đó là vì bộ biên dịch `protoc` sẽ không biết cách sinh ra mã nguồn RPC như thế nào.
 
-Tuy nhiên `grpc`, một plugin khác đã được tích hợp bên trong `protoc-gen-go` để sinh ra mã nguồn cho gRPC.
+Dùng plugin `grpc` đã được tích hợp bên trong `protoc-gen-go` để sinh ra mã nguồn [gRPC](https://grpc.io/) cho HelloService.
 
-```
+```sh
 $ protoc --go_out=plugins=grpc:. hello.proto
+// Trong đó,
+// --go_out=plugins=grpc: cho biết dùng plugin grpc
 ```
 
-Trong mã nguồn được sinh ra, sẽ có một số kiểu mới như là HelloServiceServer và HelloServiceClient. Những kiểu đó được dùng bởi gRPC và không cần trong phần hiện thực RPC của chúng ta.
+Trong mã nguồn được sinh ra, sẽ có một số kiểu mới là HelloServiceServer, HelloServiceClient, và hàm Hello, nên chúng ta sẽ không cần hiện thực lại.
 
-Tuy nhiên gRPC plugin sẽ cung cấp cho chúng ta những ý tưởng mới. Bên dưới chúng ta sẽ khám phá ra làm thế nào để sinh ra mã nguồn bảo mật trong RPC.
+## 4.2.2 Tùy chỉnh mã nguồn sinh ra plugin
 
-## 4.2.2 Tùy chỉnh mã nguồn được sinh ra bởi plugin
+Bộ biên dịch protoc của Protobuf được hiện thực để sinh ra những ngôn ngữ khác nhau dựa vào plugin. Ví dụ, nếu lệnh protoc có tham số  là `--xyz_out`, thì protoc sẽ gọi plugin được xây dựng dựa trên ngôn ngữ `xyz` (vd: plugin `protoc-gen-go`).
 
-Bộ biên dịch protoc của Protobuf sẽ hiện thực để hỗ trợ những ngôn ngữ khác nhau thông qua cơ chế plugin. Ví dụ, nếu lệnh protoc có tham số  được định dạng `--xxx_out`, thì sau đó proto sẽ yêu cầu plugin được xây dựng dựa trên ngôn ngữ `xxx`. Sau đó plugin sẽ sinh ra mã nguồn, ví dụ `protoc-gen-go` sẽ sinh ra mã nguồn Go bằng tham số `--go_out=plugins=grpc` sẽ sinh ra mã nguồn cho gRPC, nếu không chúng sẽ chỉ sinh ra mã nguồn liên quan đến message đó.
-
-Đề cập đến mã nguồn từ gRPC plugin, chúng ta có thể thấy rằng hàm `generator.RegisterPlugin` sẽ có thể được dùng để đăng kí `plugin` đó. Dưới đây sẽ sinh ra interface plugin.
+Từ [mã nguồn gRPC plugin](https://chromium.googlesource.com/external/github.com/golang/protobuf/+/master/protoc-gen-go/grpc/grpc.go), chúng ta có thể thấy rằng hàm `generator.RegisterPlugin` được dùng để đăng kí `plugin` đó. Interface của một plugin sẽ như sau:
 
 ```go
-// A Plugin provides functionality to add to the output during
-// Go code generation, such as to produce RPC stubs.
 type Plugin interface {
-    // Name identifies the plugin.
+    // Name() trả về tên của plugin.
     Name() string
-    // Init is called once after data structures are built but before
-    // code generation begins.
+    // Init() được gọi sau khi data structures built 
+    // xong và trước khi quá trình sinh code bắt đầu.
     Init(g *Generator)
-    // Generate produces the code generated by the plugin for this file,
-    // except for the imports, by calling the generator's methods P, In,
-    // and Out.
+    // Generate() là hàm sinh ra mã nguồn vào file
     Generate(file *FileDescriptor)
-    // GenerateImports produces the import declarations for this file.
-    // It is called after Generate.
+    // Hàm này được gọi sau khi Generate().
     GenerateImports(file *FileDescriptor)
 }
 ```
 
-Phương thức `Name` sẽ trả về tên của plugin. Đó là một plugin ở hệ thống cho việc hiện thực Protobuf của ngôn ngữ Go. Sẽ không có gì để làm với tên của protoc plugin. Sau đó hàm `Init` sẽ khởi tạo plugin với tham số `g`, nó sẽ chứa toàn bộ thông tin về Proto file. Cuối cùng phương thức Generate và GenerateImports sẽ được dùng để sinh ra phần thân của mã nguồn tương ứng với package được import.
-
-Do đó chúng ta có thể hiện thực lại hàm `netrpcPlugin` để sinh ra mã nguồn cho thư viện RPC chuẩn của Go.
-
+Do đó, chúng ta có thể  xây dựng một plugin mang tên `netrpcPlugin` để sinh ra mã nguồn cho thư viện RPC chuẩn của Go từ file Protobuf.
 
 ```go
 import (
+    // import gói thư viện để sinh ra plugin
     "github.com/golang/protobuf/protoc-gen-go/generator"
 )
-
+// định nghĩa struct netrpcPlugin hiện thực interface Plugin
 type netrpcPlugin struct{ *generator.Generator }
-
+// định nghĩa Name() function
 func (p *netrpcPlugin) Name() string                { return "netrpc" }
+// định nghĩa Init() function
 func (p *netrpcPlugin) Init(g *generator.Generator) { p.Generator = g }
-
+// định nghĩa GenerateImports()
 func (p *netrpcPlugin) GenerateImports(file *generator.FileDescriptor) {
     if len(file.Service) > 0 {
         p.genImportCode(file)
     }
 }
-
+// định nghĩa Generate()
 func (p *netrpcPlugin) Generate(file *generator.FileDescriptor) {
     for _, svc := range file.Service {
         p.genServiceCode(svc)
@@ -146,10 +157,7 @@ func (p *netrpcPlugin) Generate(file *generator.FileDescriptor) {
 }
 ```
 
-Đầu tiên phương thức Name sẽ trả về tên của plugin. `netrpcPlugin` có một hàm dựng sẵn `*generator.Generator`, và được khởi tạo với tham số `g` khi hàm Init được khởi tạo, do đó, plugin sẽ kế thừa tất cả những phương thức được public  từ tham số g này. Phương thức `GenerateImports` sẽ gọi hàm `genImportCode` được định nghĩa để sinh ra mã nguồn import. Và Phương thức `Generate` sẽ gọi phương thức được custom `genServiceCode` để sinh ra mã nguồn cho mỗi service.
-
-Hiện tại, phương thức `genImportCode` và `genServiceCode` chỉ đơn giản là có một dòng comment đơn giản
-
+Hiện tại, phương thức `genImportCode` và `genServiceCode` chỉ như sau:
 ```go
 func (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
     p.P("// TODO: import code")
@@ -160,7 +168,7 @@ func (p *netrpcPlugin) genServiceCode(svc *descriptor.ServiceDescriptorProto) {
 }
 ```
 
-Để sử dụng plugin, chúng ta cần phải đăng kí plugin đó với hàm `generator.RegisterPlugin`, chúng có thể được hoàn tất nhờ vào hàm `init()`.
+Để sử dụng plugin, chúng ta cần phải đăng kí plugin đó với hàm `generator.RegisterPlugin`, chúng có thể được hiện thực nhờ vào hàm `init()`.
 
 ```go
 func init() {
@@ -168,7 +176,7 @@ func init() {
 }
 ```
 
-Bởi vì trong ngôn ngữ Go, package chỉ được import một cách tĩnh, chúng ta không thể thêm plugin mới vào plugin đã có sẵn là `protoc-gen-go`. Chúng ta sẽ `re-clone` lại hàm main để tương ứng với `protoc-gen-go`
+Bởi vì trong ngôn ngữ Go, package chỉ được import tĩnh, chúng ta không thể thêm plugin mới vào plugin đã có sẵn là `protoc-gen-go`. Chúng ta sẽ `re-clone` lại hàm main để build lại `protoc-gen-go`
 
 ```go
 package main
@@ -176,44 +184,48 @@ package main
 import (
     "io/ioutil"
     "os"
-
+    // import các package cần thiết
     "github.com/golang/protobuf/proto"
     "github.com/golang/protobuf/protoc-gen-go/generator"
 )
-
+// bắt đầu hàm main
 func main() {
+    // sinh ra một đối tượng plugin mới
     g := generator.New()
-
+    // đọc lệnh từ console vào biến data
     data, err := ioutil.ReadAll(os.Stdin)
+    // in ra lỗi nếu có
     if err != nil {
         g.Error(err, "reading input")
     }
-
-    if err := proto.Unmarshal(data, g.Request); err != nil {
+    // unmarsal data thành cấu trúc Request
+    if err := proto.Unmarshal(data, g.Request); 
+    // in ra lỗi nếu có
+    err != nil {
         g.Error(err, "parsing input proto")
     }
-
+    // kiểm tra xem tên file có hợp lệ không
     if len(g.Request.FileToGenerate) == 0 {
         g.Fail("no files to generate")
     }
-
+    // đăng ký các tham số
     g.CommandLineParameters(g.Request.GetParameter())
-
-    // Create a wrapped version of the Descriptors and EnumDescriptors that
-    // point to the file that defines them.
     g.WrapTypes()
-
+    // thiết lập tên package
     g.SetPackageNames()
     g.BuildTypeNameMap()
 
+    // sinh ra các file mã nguồn
     g.GenerateAllFiles()
 
-    // Send back the results.
+    // Trả về kết quả
     data, err = proto.Marshal(g.Response)
     if err != nil {
         g.Error(err, "failed to marshal output proto")
     }
+    // ghi kết quả ra màn hình
     _, err = os.Stdout.Write(data)
+    // in ra lỗi nếu có
     if err != nil {
         g.Error(err, "failed to write output proto")
     }
@@ -222,18 +234,17 @@ func main() {
 
 Để tránh việc trùng tên với protoc-gen-go plugin, chúng ta sẽ đặt tên cho chương trình thực thi trên là `protoc-gen-go-netrpc`, điều đó có ý nghĩa là `netrpc` plugin đã được bao gồm. Sau đó chúng ta sẽ biên dịch lại hello.proto file với lệnh sau
 
-```
+```sh
 $ protoc --go-netrpc_out=plugins=netrpc:. hello.proto
 ```
 
-Tham số `--go-netrpc_out` sẽ nói cho bộ biên dịch protoc biết là nó phải tải một plugin với tên gọi là protoc-gen-go-netrpc, với `plugins=netrpc` chỉ ra rằng những plugin nội bộ `netrpcPlugin` được kích hoạt. Chúng ta thêm vào chú thích cho mã nguồn trên, chúng sẽ được included trong file `hello.pb.go` mới sinh ra.
+Tham số `--go-netrpc_out` sẽ nói cho bộ biên dịch protoc biết là nó phải tải một plugin với tên gọi là protoc-gen-go-netrpc.
 
-Tại thời điểm này, plugin được chúng ta tạo ra cuối cùng đã hoạt động.
+## 4.2.3 Sinh ra toàn bộ mã nguồn RPC
 
-## 4.2.3 Tự động sinh ra toàn bộ mã nguồn RPC
+Trong ví dụ trước chúng ta đã xây dựng một plugin nho nhỏ là `netrpcPlugin` và tạo ra một plugin mới là `protoc-gen-go-netrpc` bởi việc sao chép lại chương trình chính của protoc-gen-go.
 
-Trong ví dụ trước chúng ta đã xây dựng một plugin nho nhỏ là `netrpcPlugin` và tạo ra một plugin mới cho `protoc-gen-go-netrpc` bởi việc sao chép lại chương trình chính của protoc-gen-go. Bây giờ tiếp tục phát triển netrpcPlugin plugin với mục tiêu cuối cùng là sinh ra lớp interface RPC bảo mật.
-Đầu tiên chúng ta sẽ phải sinh ra mã nguồn của package được import bằng phương thức đã được định nghĩa genImportCode.
+Bây giờ, tiếp tục phát triển netrpcPlugin plugin với mục tiêu cuối cùng là sinh ra lớp interface RPC. Đầu tiên chúng ta sẽ phải hiện thực genImportCode:
 
 ```go
 func (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
@@ -241,13 +252,13 @@ func (p *netrpcPlugin) genImportCode(file *generator.FileDescriptor) {
 }
 ```
 
-Sau đó sinh ra những mã nguồn liên quan cho mỗi service của phương thức genServiceCode được tạo ra. Chúng ta có thể phân tích thấy rằng thứ quan trọng nhất của mỗi service là tên của service, và sau đó mỗi service sẽ có một tập hợp các phương thức. Việc định nghiã phương thức có thành phần quan trọng nhất là tên của service cũng như là tham số đầu vào và tham số đầu ra.
-
 Chúng ta sẽ định nghĩa kiểu ServiceSpec được mô tả như là thông tin thêm vào của service.
 
 ```go
 type ServiceSpec struct {
+    // Tên của service
     ServiceName string
+    // Danh sách cách Service method
     MethodList  []ServiceMethodSpec
 }
 
@@ -258,50 +269,58 @@ type ServiceMethodSpec struct {
 }
 ```
 
-Chúng ta sẽ tạo ra một phương thức mới là `buildServiceSpec` nó sẽ parse thông tin thêm vào service được định nghĩa trong ServiceSpec cho mỗi service.
+Chúng ta sẽ tạo ra một phương thức `buildServiceSpec`, nó sẽ parse thông tin thêm vào service được định nghĩa trong ServiceSpec cho mỗi service.
 
 ```go
+// phương thức buildServiceSpec
 func (p *netrpcPlugin) buildServiceSpec(
+    // tham số truyền vào thuộc kiểu ServiceDescriptorProto 
+    // mô tả thông tin về service
     svc *descriptor.ServiceDescriptorProto,
 ) *ServiceSpec {
+    // khởi tạo đối tượng
     spec := &ServiceSpec{
+        // svc.GetName(): lấy tên service được định nghĩa ở Protobuf file
+        // sau đó chuyển đổi chúng về style CamelCase
         ServiceName: generator.CamelCase(svc.GetName()),
     }
-
+    // mới mỗi phương thức RPC, ta thêm một cấu trúc tương ứng vào danh sách
     for _, m := range svc.Method {
         spec.MethodList = append(spec.MethodList, ServiceMethodSpec{
+            // m.GetName(): lấy tên phương thức
             MethodName:     generator.CamelCase(m.GetName()),
+            // m.GetInputType(): lấy kiểu dữ liệu tham số đầu vào
             InputTypeName:  p.TypeName(p.ObjectNamed(m.GetInputType())),
             OutputTypeName: p.TypeName(p.ObjectNamed(m.GetOutputType())),
         })
     }
-
+    // trả về cấu trúc trên
     return spec
 }
 ```
-
-Kiểu tham số đầu vào là `*descriptor.ServiceDescriptorProto` nó sẽ hoàn toàn mô tả tất cả những thông tin về service. Sau đó `svc.GetName()` sẽ lấy tên của service được định nghĩa ở protobuf file. Sau khi tên của Protobuf file được chuyển thành tên trong ngôn ngữ Go , `generator.CamelCase` một sự chuyển đổi được yêu cầu trong hàm đó. Tương tự, trong vòng lặp chúng ta sẽ `m.GetName()` để lấy ra tên của phương thức và sau đó thay đổi chúng để ứng với tên trong ngôn ngữ Go. Vơi sự phức tạp của việc phân tích tên tham số đầu vào và đầu ra: đầu tiên chúng ta cần có `m.GetInputType()` để lấy kiểu dữ liệu tham số đầu vào, sau đó là `p.ObjectNamed` để đạt được thông tin về class của đối tượng tương ứng với kiểu đó.
 
 Sau đó chúng ta sẽ sinh ra mã nguồn của service dựa trên thông tin mô tả đó, được xây dựng bởi phương thức `buildServiceSpec` :
 
 ```go
 func (p *netrpcPlugin) genServiceCode(svc *descriptor.ServiceDescriptorProto) {
+    // gọi hàm được định nghĩa ở trên
     spec := p.buildServiceSpec(svc)
-
+    // buf là biến chứa dữ liệu
     var buf bytes.Buffer
+    // dùng tmplService cho việc sinh mã nguồn
     t := template.Must(template.New("").Parse(tmplService))
+    // thực thi việc sinh mã nguồn
     err := t.Execute(&buf, spec)
+    // in ra lỗi nếu có
     if err != nil {
         log.Fatal(err)
     }
-
+    // ghi buf.String() vào file
     p.P(buf.String())
 }
 ```
 
-Để dễ dàng bảo trì, chúng ta sẽ phải sinh ra service code dựa trên template của ngôn ngữ Go, khi đó `tmplService` là template của service.
-
-Bởi việc viết template, hãy nhìn  những gì chúng ta mong đợi vào mã nguồn cuối cùng được sinh ra
+Chúng ta sẽ mong đợi vào mã nguồn cuối cùng được sinh ra như sau:
 
 ```go
 type HelloServiceInterface interface {
@@ -334,9 +353,7 @@ func (p *HelloServiceClient) Hello(in String, out *String) error {
 }
 ```
 
-HelloService là tên của service, bên cạnh mỗi chuỗi những tên service liên quan khác.
-
-Template sau đây sẽ có thể được xây dựng với sự reference tới mã nguồn cuối cùng được sinh ra.
+Để làm được như vậy, template của chúng ta được viết như sau:
 
 ```go
 const tmplService =
@@ -383,4 +400,4 @@ func (p *{{$root.ServiceName}}Client) {{$m.MethodName}}(
 `
 ```
 
-Khi plugin của protobuf được tùy chỉnh hoàn thành, mã nguồn có thể được từ động sinh ra mỗi thời điểm mà RPC service thay đổi trong hello.proto file. Chúng ta có thể điều chỉnh hoặc tăng nội dung của mã nguồn được sinh ra bởi việc cập nhật template được plugin. Sau khi chúng ta đã có thể xây dựng một plugin riêng, chúng ta sẽ hoàn thành toàn bộ công nghệ đó.
+Khi plugin mới của protoc được hoàn thành, mã nguồn có thể được sinh ra mỗi khi RPC service thay đổi trong `hello.proto` file. Chúng ta có thể điều chỉnh hoặc tăng nội dung của mã nguồn được sinh ra bằng việc cập nhật template plugin.

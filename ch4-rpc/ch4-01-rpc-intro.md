@@ -314,7 +314,7 @@ func main() {
 }
 ```
 
-Sau đó, client sẽ hiện thực phiên bản json :
+Mã nguồn bên phía client sẽ thay đổi như sau:
 
 ***Hàm main bên phía client:***
 
