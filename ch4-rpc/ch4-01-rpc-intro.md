@@ -1,6 +1,6 @@
 # 4.1 Bắt đầu với RPC
 
-[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (viết tắt RPC) là phương pháp gọi hàm từ một máy từ xa để lấy về kết quả. Trong lịch sử phát triển của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu giống như IPC (inter process communication) ngoài việc chúng dùng để giao tiếp giữa các máy tính chứ không những là giữa các tiến trình, ngoài ra RPC còn hay được sử dụng trong các hệ thống phân tán.
+[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (viết tắt: RPC) là phương pháp gọi hàm từ một máy tính từ xa để lấy về kết quả. Trong lịch sử phát triển của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu cũng giống như là IPC (inter process communication) ngoài việc chúng dùng để giao tiếp giữa các máy tính chứ không những là giữa các tiến trình, ngoài ra RPC còn hay được sử dụng trong các hệ thống phân tán.
 
 <div align="center">
 	<img src="../images/ch4-1-rpc-arch.png" width="500">
@@ -10,11 +10,9 @@
 	</span>
 </div>
 
-Phần này sẽ giới thiệu việc sử dụng RPC trong Go, cũng như một số best practice để refactor code và cách gọi RPC trên những ngôn ngữ khác nhau.
-
 ## 4.1.1 Chương trình "Hello, World" bằng RPC
 
-Thư viện chuẩn của Go chứa gói `net/rpc` dùng để hiện thực RPC, chương trình RPC đầu tiên của chúng ta như sau:
+Thư viện chuẩn của Go chứa gói [net/rpc](https://golang.org/pkg/net/rpc/) dùng để hiện thực RPC, chương trình RPC đầu tiên của chúng ta :
 
 ***service/hello.go***: định nghĩa service Hello:
 
@@ -31,37 +29,35 @@ type HelloService struct{}
 // 4. Phải trả về kiểu error
 
 func (p *HelloService) Hello(request string, reply *string) error {
-	*reply = "Hello, " + request
-	// trả về error = nil nếu thành công
-	return nil
+    *reply = "Hello, " + request
+    // trả về error = nil nếu thành công
+    return nil
 }
 
 ```
 
-Sau đó chúng ta sẽ phải register đối tượng thuộc kiểu HelloService là một RPC Service.
-
-***server/main.go***
+***server/main.go:*** chương trình phía server
 
 ```go
 package main
 
 import (
-	"log"
-	"net"
-	"net/rpc"
+    "log"
+    "net"
+    "net/rpc"
 
-	// import rpc service
-	"../service"
+    // import rpc service
+    "../service"
 )
 
 func main() {
-	// đăng kí tên service với đối tượng rpc service
-	rpc.RegisterName("HelloService", new(service.HelloService))
-	// chạy rpc server trên port 1234
-	listener, err := net.Listen("tcp", ":1234")
-	// nếu có lỗi xảy ra thì in ra
-	if err != nil {
-		log.Fatal("ListenTCP error:", err)
+    // đăng kí tên service với đối tượng rpc service
+    rpc.RegisterName("HelloService", new(service.HelloService))
+    // chạy rpc server trên port 1234
+    listener, err := net.Listen("tcp", ":1234")
+    // nếu có lỗi xảy ra thì in ra
+    if err != nil {
+    log.Fatal("ListenTCP error:", err)
     }
     // vòng lặp để xử lý nhiều kết nối client
     for {
@@ -78,41 +74,38 @@ func main() {
 }
 ```
 
-Hàm `rpc.Register` sẽ đăng kí những đối tượng thỏa mãn quy tắt RPC như là RPC functions, và tất cả những phương thức bên dưới không gian "HelloService" service. Sau đó chúng ta sẽ tạo ra một liên kết TCP duy nhất và cung cấp service RPC đến các thành phần khác qua liên kết TCP được hỗ trợ bởi hàm `rpc.ServeConn`.
 
-Dưới đây là mã nguồn client để yêu cầu service Hello:
-
-***client/main.go***
+***client/main.go:*** mã nguồn client để gọi service Hello:
 
 ```go
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/rpc"
+    "fmt"
+    "log"
+    "net/rpc"
 )
 
 func main() {
-	// kết nối đến rpc server
-	client, err := rpc.Dial("tcp", "localhost:1234")
-	// in ra lỗi nếu có
-	if err != nil {
-		log.Fatal("dialing:", err)
-	}
-	// biến chứa giá trị trả về sau lời gọi rpc
-	var reply string
-	// gọi rpc với tên service đã register, tham số và biến
-	err = client.Call("HelloService.Hello", "World", &reply)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// in ra kết quả
-	fmt.Println(reply)
+    // kết nối đến rpc server
+    client, err := rpc.Dial("tcp", "localhost:1234")
+    // in ra lỗi nếu có
+    if err != nil {
+        log.Fatal("dialing:", err)
+    }
+    // biến chứa giá trị trả về sau lời gọi rpc
+    var reply string
+    // gọi rpc với tên service đã register, tham số và biến
+    err = client.Call("HelloService.Hello", "World", &reply)
+    if err != nil {
+        log.Fatal(err)
+    }
+    // in ra kết quả
+    fmt.Println(reply)
 }
 ```
 
-Kết quả khi chạy Hello Service như sau:
+Kết quả khi chạy Hello Service :
 
 ```sh
 $ go run server/main.go
@@ -150,7 +143,7 @@ func RegisterHelloService(svc HelloServiceInterface) error {
 }
 ```
 
-Sau khi định nghĩa lớp interface của service RPC, client có thể viết mã nguồn để gọi lệnh RPC như sau:
+Sau khi định nghĩa lớp interface của service RPC, client có thể viết mã nguồn để gọi lệnh RPC :
 
 ***Hàm main phía client:***
 
@@ -174,7 +167,7 @@ func main() {
 }
 ```
 
-Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, để đơn giản chúng ta đưa client vào trong đối tượng RPC như sau:
+Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, để đơn giản chúng ta đưa client vào trong đối tượng RPC :
 
 ***Wrapper lời gọi RPC:***
 
@@ -201,7 +194,7 @@ func (p *HelloServiceClient) Hello(request string, reply *string) error {
 }
 ```
 
-Dựa trên interface client mới, chúng ta sẽ đơn giản hóa mã nguồn bên phía  client như sau:
+Dựa trên interface client mới, chúng ta sẽ đơn giản hóa mã nguồn bên phía  client :
 
 ***Hàm main phía client sau khi refactor:***
 
@@ -274,7 +267,7 @@ May mắn là thư viện `net/rpc` của Go có ít nhất hai thiết kế đ�
    * Một là cho phép chúng ta có thể thay đổi quá trình encoding và decoding gói tin RPC.
    * Hai là interface RPC được xây dựng dựa trên interface `io.ReadWriteClose`, chúng ta có thể  xây dựng RPC trên những protocol giao tiếp khác nhau.
 
-Từ đây chúng ta có thể hiện thực việc cross-language thông qua gói `net/rpc/jsonrpc` như sau:
+Từ đây chúng ta có thể hiện thực việc cross-language thông qua gói `net/rpc/jsonrpc` :
 
 ***Hàm main mới phía server:***
 
@@ -282,47 +275,47 @@ Từ đây chúng ta có thể hiện thực việc cross-language thông qua g�
 package main
 
 import (
-	"log"
-	"net"
-	"net/rpc"
-	"net/rpc/jsonrpc"
+    "log"
+    "net"
+    "net/rpc"
+    "net/rpc/jsonrpc"
 )
 
 // định nghĩa struct register service
 type HelloService struct{}
 
 func (p *HelloService) Hello(request string, reply *string) error {
-	*reply = "Hello, " + request
-	// trả về error = nil nếu thành công
-	return nil
+    *reply = "Hello, " + request
+    // trả về error = nil nếu thành công
+    return nil
 }
 
 func main() {
-	// đăng kí HelloService (dùng cách cũ cho đơn giản)
-	rpc.RegisterName("HelloService", new(HelloService))
-	// lắng nghe connection từ phía client
-	listener, err := net.Listen("tcp", ":1234")
-	// in ra lỗi (vd: trùng port,..) nếu có
-	if err != nil {
-		log.Fatal("ListenTCP error:", err)
-	}
-	// thực hiện vòng lặp phục vụ nhiều RPC client
-	for {
-		// chấp nhận kết nối từ RPC client
-		conn, err := listener.Accept()
-		// in ra lỗi nếu có
-		if err != nil {
-			log.Fatal("Accept error:", err)
-		}
-		// phục vụ client trên một goroutine khác, lúc này:
-		// 1. rpc.ServeConn được thay thế bằng rpc.ServeCodec
-		// 2. dùng jsonrpc.NewServerCodec để bao đối tượng conn
-		go rpc.ServeCodec(jsonrpc.NewServerCodec(conn))
-	}
+    // đăng kí HelloService (dùng cách cũ cho đơn giản)
+    rpc.RegisterName("HelloService", new(HelloService))
+    // lắng nghe connection từ phía client
+    listener, err := net.Listen("tcp", ":1234")
+    // in ra lỗi (vd: trùng port,..) nếu có
+    if err != nil {
+        log.Fatal("ListenTCP error:", err)
+    }
+    // thực hiện vòng lặp phục vụ nhiều RPC client
+    for {
+        // chấp nhận kết nối từ RPC client
+        conn, err := listener.Accept()
+        // in ra lỗi nếu có
+        if err != nil {
+            log.Fatal("Accept error:", err)
+        }
+        // phục vụ client trên một goroutine khác, lúc này:
+        // 1. rpc.ServeConn được thay thế bằng rpc.ServeCodec
+        // 2. dùng jsonrpc.NewServerCodec để bao đối tượng conn
+        go rpc.ServeCodec(jsonrpc.NewServerCodec(conn))
+    }
 }
 ```
 
-Sau đó, client sẽ hiện thực phiên bản json như sau:
+Sau đó, client sẽ hiện thực phiên bản json :
 
 ***Hàm main bên phía client:***
 
@@ -330,32 +323,32 @@ Sau đó, client sẽ hiện thực phiên bản json như sau:
 package main
 
 import (
-	"fmt"
-	"log"
-	"net"
-	"net/rpc"
-	"net/rpc/jsonrpc"
+    "fmt"
+    "log"
+    "net"
+    "net/rpc"
+    "net/rpc/jsonrpc"
 )
 
 func main() {
-	// kết nối đến RPC server
-	conn, err := net.Dial("tcp", "localhost:1234")
-	// in ra lỗi nếu có
-	if err != nil {
-		log.Fatal("net.Dial:", err)
-	}
-	// gọi dịch vụ RPC Server được encoding bằng json Codec
-	client := rpc.NewClientWithCodec(jsonrpc.NewClientCodec(conn))
-	// biến lưu giá trị sau lời gọi hàm rpc
-	var reply string
-	// gọi dịch vụ RPC
-	err = client.Call("HelloService.Hello", "World", &reply)
-	// in ra lỗi nếu có
-	if err != nil {
-		log.Fatal(err)
-	}
-	// in ra kết quả của lệnh gọi RPC
-	fmt.Println(reply)
+    // kết nối đến RPC server
+    conn, err := net.Dial("tcp", "localhost:1234")
+    // in ra lỗi nếu có
+    if err != nil {
+        log.Fatal("net.Dial:", err)
+    }
+    // gọi dịch vụ RPC Server được encoding bằng json Codec
+    client := rpc.NewClientWithCodec(jsonrpc.NewClientCodec(conn))
+    // biến lưu giá trị sau lời gọi hàm rpc
+    var reply string
+    // gọi dịch vụ RPC
+    err = client.Call("HelloService.Hello", "World", &reply)
+    // in ra lỗi nếu có
+    if err != nil {
+        log.Fatal(err)
+    }
+    // in ra kết quả của lệnh gọi RPC
+    fmt.Println(reply)
 }
 ```
 
@@ -370,7 +363,7 @@ $ go run client/main.go
 Hello, World
 ```
 
-Để thấy dữ liệu được client gửi cho server, đầu tiên tắt chương trình server và gọi lệnh [nc](http://www.tutorialspoint.com/unix_commands/nc.htm) như sau:
+Để thấy dữ liệu được client gửi cho server, đầu tiên tắt chương trình server và gọi lệnh [nc](http://www.tutorialspoint.com/unix_commands/nc.htm) :
 
 
 ```sh
@@ -457,14 +450,14 @@ func main() {
 
 ```
 
-Lệnh gọi RPC để gửi chuỗi json đến kết nối đó như sau:
+Lệnh gọi RPC để gửi chuỗi json đến kết nối đó :
 
 ``` 
 $ curl localhost:1234/jsonrpc -X POST \
     --data '{"method":"HelloService.Hello","params":["hello"],"id":0}'
 ```
 
-Kết quả vẫn là một chuỗi json như sau:
+Kết quả vẫn là một chuỗi json :
 
 ```
 {"id":0,"result":"hello:hello","error":null}
