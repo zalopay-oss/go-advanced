@@ -12,9 +12,9 @@
 
 ## 4.1.1 Chương trình "Hello, World" bằng RPC
 
-Thư viện chuẩn của Go chứa gói [net/rpc](https://golang.org/pkg/net/rpc/) dùng để hiện thực RPC, chương trình RPC đầu tiên của chúng ta sẽ in ra chuỗi "Hello, World" được tạo ra và trả về từ máy khác:
+Thư viện chuẩn của Go chứa gói [net/rpc](https://golang.org/pkg/net/rpc/) dùng để hiện thực chương trình RPC, chương trình RPC đầu tiên của chúng ta sẽ in ra chuỗi "Hello, World" được tạo ra và trả về từ máy khác:
 
-***service/hello.go***: định nghĩa service Hello:
+***service/hello.go***: định nghĩa service Hello
 
 ```go
 package service
@@ -75,7 +75,7 @@ func main() {
 ```
 
 
-***client/main.go:*** mã nguồn client để gọi service Hello:
+***client/main.go:*** mã nguồn client để gọi service Hello
 
 ```go
 package main
@@ -122,9 +122,9 @@ Từ ví dụ trên, có thể thấy rằng chúng ta dùng RPC trong Go thật
 
 ## 4.1.2 Tạo interface cho RPC
 
-Ứng dụng gọi RPC sẽ có ít nhất ba thành phần: thứ nhất là chương trình hiện thực phương thức RPC ở bên phía server, thứ hai là chương trình gọi RPC bên phía client, và cuối cùng là thành phần cực kì quan trọng: service đóng vai trò là interface giữa server và client RPC.
+Ứng dụng gọi RPC sẽ có ít nhất ba thành phần: thứ nhất là chương trình hiện thực phương thức RPC ở bên phía server, thứ hai là chương trình gọi RPC bên phía client, và cuối cùng là thành phần cực kì quan trọng: service đóng vai trò là interface giữa server và client.
 
-Trong ví dụ trước, chúng ta đặt tất cả những thành phần trên trong ba thư mục **server**, **client**, **service**, nếu bạn muốn refactor lại service HelloService, bước đầu tiên là tách biệt  tên và inteface của service:
+Trong ví dụ trước, chúng ta đã đặt tất cả những thành phần trên trong ba thư mục **server**, **client**, **service**, nếu bạn muốn refactor lại mã nguồn HelloService, đầu tiên hãy tạo ra một inteface như sau:
 
 ***Interface của RPC service:***
 
@@ -143,7 +143,7 @@ func RegisterHelloService(svc HelloServiceInterface) error {
 }
 ```
 
-Sau khi định nghĩa lớp interface của service RPC, client có thể viết mã nguồn để gọi lệnh RPC :
+Sau khi định nghĩa lớp interface của RPC service, client có thể viết mã nguồn để gọi lệnh RPC :
 
 ***Hàm main phía client:***
 
@@ -167,9 +167,9 @@ func main() {
 }
 ```
 
-Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, để đơn giản chúng ta đưa client vào trong đối tượng RPC :
+Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, để đơn giản chúng ta nên wrapper biến connection vào trong:
 
-***Wrapper lời gọi RPC:***
+***Wrapper các đối tượng:***
 
 ```go
 // struct chứa đối tượng
@@ -194,7 +194,7 @@ func (p *HelloServiceClient) Hello(request string, reply *string) error {
 }
 ```
 
-Dựa trên interface client mới, chúng ta sẽ đơn giản hóa mã nguồn bên phía  client :
+Dựa trên các hàm wrapper trên, chúng ta sẽ viết lại mã nguồn phía client:
 
 ***Hàm main phía client sau khi refactor:***
 
@@ -217,8 +217,7 @@ func main() {
 }
 ```
 
-
-Giờ đây, client không còn phải lo lắng về low-level errors như là tên phương thức RPC hoặc kiểu dữ liệu không trùng khớp. Cuối cùng, mã nguồn server thực sự sẽ được viết dựa trên interface đặc tả RPC:
+Cuối cùng, mã nguồn server thực sự sẽ được viết lại như sau:
 
 ***Chương trình bên phía server:***
 
@@ -255,13 +254,13 @@ func main() {
 }
 ```
 
-Ở phiên bản refactor, chúng ta sử dụng hàm `RegisterHelloService` để đăng ký service, nó tránh việc trực tiếp đặt tên cho mỗi service, và đảm bảo bất cứ đối tượng nào hiện thực các hàm trong interface của RPC service cũng đều có thể phục vụ lời gọi RPC từ phía client.
+Ở phiên bản refactor, chúng ta sử dụng hàm `RegisterHelloService` để đăng ký RPC service, nó tránh việc trực tiếp đặt tên cho service, và đảm bảo bất cứ đối tượng nào hiện thực các hàm trong interface của RPC service cũng đều có thể phục vụ lời gọi RPC từ phía client.
 
 ## 4.1.3 Vấn đề gọi RPC trên các ngôn ngữ khác nhau:
 
-Trong hệ thống Microservice, mỗi dịch vụ có thể viết bằng các ngôn ngữ lập trình khác nhau, do đó để **cross-language** (vượt qua rào cản ngôn ngữ) là điều kiện thiết yếu cho sự tồn tại của RPC trên môi trường internet.
+Trong hệ thống microservice, mỗi dịch vụ có thể viết bằng các ngôn ngữ lập trình khác nhau, do đó để **cross-language** (vượt qua rào cản ngôn ngữ) là điều kiện thiết yếu cho sự tồn tại của RPC trong môi trường internet.
 
-Thư viện chuẩn RPC của Go mặc định đóng gói dữ liệu theo đặc tả của [Go encoding](https://golang.org/pkg/encoding/), do đó sẽ khó hơn nhiều để gọi service RPC từ những ngôn ngữ khác.
+Thư viện chuẩn RPC của Go mặc định đóng gói dữ liệu theo đặc tả của [Go encoding](https://golang.org/pkg/encoding/), do đó sẽ rất khó để gọi RPC service từ những ngôn ngữ khác.
 
 May mắn là thư viện `net/rpc` của Go có ít nhất hai thiết kế đặc biệt:
    * Một là cho phép chúng ta có thể thay đổi quá trình encoding và decoding gói tin RPC.
@@ -379,7 +378,7 @@ $ nc -l 1234
 {"method":"HelloService.Hello","params":["World"],"id":0}
 ```
 
-Ngược lại, nếu muốn thấy thông điệp mà phía server gửi cho client, chạy service RPC phía server: `$ go run server/main.go` và ở một terminal khác chạy lệnh:
+Ngược lại, nếu muốn thấy thông điệp mà phía server gửi cho client, chạy RPC service phía server: `$ go run server/main.go` và ở một terminal khác chạy lệnh:
 
 ```
 $ echo -e '{"method":"HelloService.Hello","params":["World"],"id":1}' | nc localhost 1234
@@ -420,7 +419,7 @@ Ta có thể thấy rằng, chỉ cần theo định dạng json như trên là 
 
 ## 4.1.4 Go RPC qua giao thức HTTP
 
-Trong ví dụ trước, chúng ta đã gọi RPC thông qua lệnh `nc`, bây giờ chúng ta sẽ thử cung cấp service RPC trên giao thức HTTP. RPC Service mới sẽ tuân thủ theo chuẩn [REST](https://restfulapi.net/), chúng sẽ nhận yêu cầu và xử lý chúng như dưới đây:
+Trong ví dụ trước, chúng ta đã gọi RPC thông qua lệnh `nc`, bây giờ chúng ta sẽ thử cung cấp RPC service trên giao thức HTTP. RPC Service mới sẽ tuân thủ theo chuẩn [REST](https://restfulapi.net/), chúng sẽ nhận yêu cầu và xử lý chúng như dưới đây:
 
 ***Chương trình phía server:***
 
@@ -463,4 +462,4 @@ Kết quả vẫn là một chuỗi json :
 {"id":0,"result":"hello:hello","error":null}
 ```
 
-Điều đó làm việc gọi service RPC từ những ngôn ngữ khác dễ dàng hơn.
+Điều đó làm việc gọi RPC service từ những ngôn ngữ khác dễ dàng hơn.
