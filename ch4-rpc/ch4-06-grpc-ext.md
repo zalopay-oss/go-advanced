@@ -1,4 +1,4 @@
-# 4.6 gRPC và Protobuf extensions
+# 4.6. gRPC và Protobuf extensions
 
 Hiện nay, cộng đồng Open-source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn.
 
