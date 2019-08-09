@@ -210,7 +210,7 @@ Ngữ pháp của Alef về cơ bản giống như ngôn ngữ C. Nó có thể 
 
 ## 1.2.5. Limbo - Sean Dorward, Phil Winterbottom, Rob Pike, 1995
 
-Limbo (Hell) là ngôn ngữ lập trình để phát triển các ứng dụng phân tán chạy trên máy tính nhỏ. Nó hỗ trợ lập trình mô-đun, kiểm tra kiểu mạnh vào thời gian biên dịch và thời gian chạy, liên lạc bên trong process thông qua đường ống (pipeline), có bộ thu gom rác tự động. Có các loại dữ liệu trừu tượng đơn giản. Limbo được thiết kế để hoạt động an toàn ngay cả trên các thiết bị nhỏ mà không cần bảo vệ bộ nhớ phần cứng. Ngôn ngữ Limbo chạy chủ yếu trên hệ thống Inferno.
+Limbo (Hell) là ngôn ngữ lập trình để phát triển các ứng dụng phân tán chạy trên máy tính nhỏ. Nó hỗ trợ lập trình mô-đun, kiểm tra kiểu mạnh vào thời gian biên dịch và thời gian chạy, liên lạc bên trong process thông qua channel, có bộ thu gom rác tự động. Có các loại dữ liệu trừu tượng đơn giản. Limbo được thiết kế để hoạt động an toàn ngay cả trên các thiết bị nhỏ mà không cần bảo vệ bộ nhớ phần cứng. Ngôn ngữ Limbo chạy chủ yếu trên hệ thống Inferno.
 
 Phiên bản  Limbo của chương trình "Hello World" như sau:
 

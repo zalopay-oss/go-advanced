@@ -1,4 +1,4 @@
-    // xuất 1 chuỗi số int từ 2 vào pipeline
+    // xuất 1 chuỗi số int từ 2 vào channel
     counter := prog(c:chan of int) {
         i := 2;
         for(;;) {
@@ -6,8 +6,8 @@
         }
     };
     
-    // Đối với chuỗi thu được từ pipeline listen, lọc ra các số là bội số của số nguyên tố
-    // gửi kết quả cho pipeline send
+    // Đối với chuỗi thu được từ channel listen, lọc ra các số là bội số của số nguyên tố
+    // gửi kết quả cho channel send
     filter := prog(prime:int, listen, send:chan of int) {
         i:int;
         for(;;) {
@@ -18,7 +18,7 @@
     };
     
     // chức năng chính
-    // Dòng đầu tiên của mỗi pipeline phải là số nguyên tố
+    // Dòng đầu tiên của mỗi channel phải là số nguyên tố
     // sau đó xây dựng sàng nguyên tố  dựa trên số nguyên tố mới này
     sieve := prog() of chan of int {
         c := mk(chan of int);
