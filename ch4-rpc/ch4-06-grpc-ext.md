@@ -359,6 +359,6 @@ File `hello.swagger.json` sẽ được sinh ra sau đó. Trong trường hợp 
 
 Với những Developer phát triển gRPC Service trên các ngôn ngữ khác Golang có nhu cầu sinh ra grpc gateway cho service của họ, nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, protobuf, các lệnh generate, cách xây dựng.v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker xây dựng grpc-gateway theo [hướng dẫn](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c).
 
-## 4.6.3 Nginx
+## 4.6.4 Nginx
 
 Phiên bản [Nginx](https://www.nginx.com/) hỗ trợ `gRPC`. Bên dưới back-end của nhiều gRPC services có thể được tổng hợp trong một Nginx service thông qua Nginx. Cùng một thời điểm, Nginx sẽ hỗ trợ khả năng register nhiều back-end tới cùng gRPC service, chúng sẽ làm cho việc hỗ trợ load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
