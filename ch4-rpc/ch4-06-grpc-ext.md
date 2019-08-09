@@ -361,4 +361,4 @@ Với những lập trình viên phát triển gRPC Services trên các ngôn ng
 
 ## 4.6.4 Nginx
 
-Phiên bản [Nginx](https://www.nginx.com/) hỗ trợ `gRPC`. Bên dưới back-end của nhiều gRPC services có thể được tổng hợp trong một Nginx service thông qua Nginx. Cùng một thời điểm, Nginx sẽ hỗ trợ khả năng register nhiều back-end tới cùng gRPC service, chúng sẽ làm cho việc hỗ trợ load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
+Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều back-end tới cùng gRPC service giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
