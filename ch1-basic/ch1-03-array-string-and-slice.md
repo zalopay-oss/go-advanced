@@ -125,7 +125,7 @@ var decoder2 = [...]func(io.Reader) (image.Image, error){
 var unknown1 [2]interface{}
 var unknown2 = [...]interface{}{123, "Hello!"}
 
-// Mảng pipe
+// Mảng channel
 var chanList = [2]chan int{}
 ```
 

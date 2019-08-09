@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-    done := make(chan int, 1) // pipeline cache
+    done := make(chan int, 1) // channel buffer
 
     go func(){
         fmt.Println("Hello World")
