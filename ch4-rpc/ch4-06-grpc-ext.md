@@ -1,4 +1,4 @@
-# 4.6 gRPC và Protobuf extensions
+# 4.6. gRPC và Protobuf extensions
 
 Hiện nay, cộng đồng Open-source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn.
 
@@ -357,8 +357,8 @@ File `hello.swagger.json` sẽ được sinh ra sau đó. Trong trường hợp 
 
 ## 4.6.3 Docker grpc-gateway
 
-Với những Developer phát triển gRPC Service trên các ngôn ngữ khác Golang có nhu cầu sinh ra grpc gateway cho service của họ, nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, protobuf, các lệnh generate, cách xây dựng.v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker xây dựng grpc-gateway theo [hướng dẫn](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c).
+Với những lập trình viên phát triển gRPC Services trên các ngôn ngữ không phải Golang như Java,C++,v,v.. có nhu cầu sinh ra grpc gateway cho các services của họ nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, protobuf, các lệnh generate,v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker để xây dựng grpc-gateway theo bài hướng dẫn chi tiết sau [buildingdocker-grpc-gateway](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c), đây cũng được xem là một best practice khi lập trình với gRPC.
 
 ## 4.6.4 Nginx
 
-Phiên bản [Nginx](https://www.nginx.com/) hỗ trợ `gRPC`. Bên dưới back-end của nhiều gRPC services có thể được tổng hợp trong một Nginx service thông qua Nginx. Cùng một thời điểm, Nginx sẽ hỗ trợ khả năng register nhiều back-end tới cùng gRPC service, chúng sẽ làm cho việc hỗ trợ load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
+Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều back-end tới cùng gRPC service giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
