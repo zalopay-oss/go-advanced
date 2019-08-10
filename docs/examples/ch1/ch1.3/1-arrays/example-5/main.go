@@ -31,7 +31,7 @@ func main() {
 	var unknown1 [2]interface{}
 	var unknown2 = [...]interface{}{123, "Hello!"}
 	fmt.Println(unknown1, unknown2)
-	// Mảng pipe
+	// Mảng channel
 	var chanList = [2]chan int{}
 	fmt.Println(chanList)
 }

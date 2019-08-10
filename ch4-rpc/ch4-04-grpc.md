@@ -1,24 +1,33 @@
 # 4.4 Bắt đầu với gRPC
 
-gRPC là một framework RPC opensource đa ngôn ngữ được Google phát triển dựa trên Protobuf. Được thiết kế dựa trên giao thức HTTP/2, gRPC có thể cung cấp nhiều dịch vụ dựa trên liên kết HTTP/2, giúp cho framework này thân thiện hơn với thiết bị di động. Phần này sẽ giới thiệu một số cách sử dụng gRPC đơn giản.
+<div align="center">
+	<img src="../images/grpc.png" width="800">
+	<br/>
+
+</div>
+<br/>
+
+
+gRPC là một framework RPC opensource đa ngôn ngữ được Google phát triển dựa trên Protobuf và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC đơn giản.
 
 ## 4.4.1 Kiến trúc gRPC
 
-Kiến trúc gRPC trong Golang được trình bày trong hình 4-1
+Kiến trúc gRPC trong Golang:
 
 <div align="center">
-	<img src="../images/ch4-1-grpc-go-stack.png">
+	<img src="../images/ch4-1-grpc-go-stack.png" width="450">
 	<br/>
 	<span align="center">
 		<i>gRPC technology stack</i>
 	</span>
 </div>
 <br/>
-Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Trên đấy phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Golang được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
+
+Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đấy là phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Golang được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
 ## 4.4.2 Bắt đầu với gRPC
 
-Từ quan điểm của Protobuf, gRPC không gì khác hơn là một trình tạo code cho interface service. Bây giờ chúng ta sẽ tìm hiểu cách sử dụng gRPC.
+Từ quan điểm của Protobuf, gRPC không gì khác hơn là một trình tạo code cho interface service.
 
 Tạo file *hello.proto* và định nghĩa interface `HelloService`:
 
@@ -73,9 +82,13 @@ Quá trình khởi động của gRPC service  tương tự như quá trình kh�
 
 ```go
 func main() {
+    // khởi tạo một đối tượng gRPC service
     grpcServer := grpc.NewServer()
+
+    // đăng ký service với grpcServer (của gRPC plugin)
     RegisterHelloServiceServer(grpcServer, new(HelloServiceImpl))
 
+    // cung cấp gRPC service trên port `1234`
     lis, err := net.Listen("tcp", ":1234")
     if err != nil {
         log.Fatal(err)
@@ -84,18 +97,18 @@ func main() {
 }
 ```
 
-Dòng đầu tiên để khởi tạo một đối tượng gRPC service, kế đó phần hiện thực của `HelloServiceImpl` service được đăng ký với grpcServer thông qua  hàm `RegisterHelloServiceServer` (của gRPC plugin). Cuối cùng `grpcServer.Serve(lis)` cung cấp gRPC service trên port `1234`.
-
 Tiếp theo bạn đã có thể kết nối tới gRPC service từ client:
 
 ```go
 func main() {
+    // thiết lập kết nối với gRPC service
     conn, err := grpc.Dial("localhost:1234", grpc.WithInsecure())
     if err != nil {
         log.Fatal(err)
     }
     defer conn.Close()
 
+    // xây dựng đối tượng `HelloServiceClient` dựa trên kết nối đã thiết lập
     client := NewHelloServiceClient(conn)
     reply, err := client.Hello(context.Background(), &String{Value: "hello"})
     if err != nil {
@@ -105,9 +118,7 @@ func main() {
 }
 ```
 
-Trong đó `grpc.Dial` chịu trách nhiệm thiết lập kết nối với dịch vụ gRPC và sau đó hàm `NewHelloServiceClient` xây dựng một đối tượng `HelloServiceClient` dựa trên kết nối đã thiết lập. Client được trả về  là một đối tượng thuộc interface `HelloServiceClient`. Phương thức được xác định bởi interface này có thể gọi phương thức được cung cấp bởi dịch vụ gRPC tương ứng ở server.
-
-Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: Framework được tạo bởi gRPC không hỗ trợ các cuộc gọi bất đồng bộ. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 cơ bản một cách an toàn  giữa các gRPC trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
+Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: gRPC không hỗ trợ các gọi asynchronous. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
 
 ## 4.4.3 gRPC flow
 
