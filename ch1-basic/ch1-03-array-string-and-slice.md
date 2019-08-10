@@ -125,7 +125,7 @@ var decoder2 = [...]func(io.Reader) (image.Image, error){
 var unknown1 [2]interface{}
 var unknown2 = [...]interface{}{123, "Hello!"}
 
-// Mảng pipe
+// Mảng channel
 var chanList = [2]chan int{}
 ```
 
@@ -142,16 +142,16 @@ var f = [...]int{}
 
 Một array có chiều dài 0 thì không chiếm không gian lưu trữ.
 
-## 1.3.2 String
+## 1.3.2. String
 
 <div align="center">
-	<img src="../images/1-3-string.jpeg" width="600">
+	<img src="../images/ch1-string.png" width="400">
 </div>
 <br/>
 
 `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string là [immutable](https://en.wikipedia.org/wiki/Immutable_object)
 
-Cấu trúc  `reflect.StringHeader` được định nghĩa với:
+Cấu trúc [reflect.StringHeader](https://golang.org/src/reflect/value.go?s=56526:56578#L1873) được dùng để biểu diễn string :
 
 ```go
 type StringHeader struct {
@@ -197,7 +197,7 @@ s1 := "hello world"[:5]
 s2 := "hello world"[6:]
 ```
 
-Tương tự như array, String cũng có một hàm build-in là `len` dùng để trả về chiều dài của string, ngoài ra bạn có thể  dùng `reflect.StringHeader` để truy xuất chiều dài của string theo cách như sau
+Tương tự như array, String cũng có một hàm built-in là `len` dùng để trả về chiều dài của string, ngoài ra bạn có thể  dùng `reflect.StringHeader` để truy xuất chiều dài của string theo cách như sau
 
 ```go
 fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
