@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.md">
             
-                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -814,65 +814,47 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="210--bi&#xEA;n-d&#x1ECB;ch-v&#xE0;-li&#xEA;n-k&#x1EBF;t-c&#xE1;c-tham-s&#x1ED1;">2.10  Bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t c&#xE1;c tham s&#x1ED1;</h1>
-<p>Bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t c&#xE1;c parameters th&#x1B0;&#x1EDD;ng l&#xE0; m&#x1ED9;t v&#x1EA5;n &#x111;&#x1EC1; m&#xE0; c&#xE1;c l&#x1EAD;p tr&#xEC;nh vi&#xEA;n <code>C/C++</code> ph&#x1EA3;i &#x111;&#x1ED1;i m&#x1EB7;t. X&#xE2;y d&#x1EF1;ng m&#x1ED9;t &#x1EE9;ng d&#x1EE5;ng <code>C/C++</code> y&#xEA;u c&#x1EA7;u hai b&#x1B0;&#x1EDB;c bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t c&#x169;ng nh&#x1B0; trong <code>CGO</code>. Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng t&#xF4;i s&#x1EBD; gi&#x1EDB;i thi&#x1EC7;u ng&#x1EAF;n c&#xE1;c b&#x1B0;&#x1EDB;c bi&#xEA;n d&#x1ECB;ch v&#xE0; link parameters th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng trong <code>CGO</code>.</p>
-<h2 id="2101-bi&#xEA;n-d&#x1ECB;ch-parameters--cflagscppflagscxxflags">2.10.1 Bi&#xEA;n d&#x1ECB;ch Parameters : <code>CFLAGS/CPPFLAGS/CXXFLAGS</code></h2>
-<p><strong>Compilation parameters</strong> ch&#x1EE7; y&#x1EBF;u s&#x1EBD; duy&#x1EC7;t qua &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n ch&#x1EE9;a header file, c&#xE1;c macros, v&#xE0; c&#xE1;c parameters kh&#xE1;c. Theo l&#xFD; thuy&#x1EBF;t, C v&#xE0; C++ ho&#xE0;n to&#xE0;n l&#xE0; hai ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh &#x111;&#x1ED9;c l&#x1EAD;p, v&#xE0; ch&#xFA;ng c&#xF3; c&#xE1;c tham s&#x1ED1; bi&#xEA;n d&#x1ECB;ch ri&#xEA;ng. Nh&#x1B0;ng b&#x1EDF;i v&#xEC; ng&#xF4;n ng&#x1EEF; C++ t&#x1B0;&#x1A1;ng th&#xED;ch r&#x1EA5;t ch&#x1EB7;t &#x111;&#x1ED1;i v&#x1EDB;i ng&#xF4;n ng&#x1EEF; C, C++ c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c hi&#x1EC3;u l&#xE0; m&#x1ED9;t t&#x1EAD;p h&#x1EE3;p cha c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C, do &#x111;&#xF3; C v&#xE0; C++ s&#x1EBD; chia s&#x1EBB; m&#x1ED9;t l&#x1B0;&#x1EE3;ng l&#x1EDB;n c&#xE1;c compilation parameters. Do &#x111;&#xF3;, CGO s&#x1EBD; c&#xF9;ng c&#x1EA5;p ba tham s&#x1ED1; <code>CFLAGS/CPPFLAGS/CXXFLAGS</code>, trong &#x111;&#xF3; <code>CFLAGS</code> s&#x1EBD; &#x1EE9;ng v&#x1EDB;i vi&#x1EC7;c bi&#xEA;n d&#x1ECB;ch ng&#xF4;n ng&#x1EEF; C (<code>.c</code>), <code>CPPFLAGS</code> s&#x1EBD; &#x1EE9;ng v&#x1EDB;i C/C++ (<code>.c</code>, <code>.cc</code>, <code>.cpp</code>, <code>.cxx</code>), v&#xE0; <code>CXXFLAGS</code> &#x1EE9;ng v&#x1EDB;i C++ thu&#x1EA7;n (<code>.cc</code>, <code>.cpp</code>, <code>*.cxx</code>).</p>
-<h2 id="2102-link-parameters-ldflags">2.10.2 Link parameters: <code>LDFLAGS</code></h2>
-<p><strong>Link parameters</strong> s&#x1EBD; ch&#x1EE7; y&#x1EBF;u ch&#x1EE9;a <strong>search directory</strong> c&#x1EE7;a th&#x1B0; vi&#x1EC7;n c&#x1EA7;n li&#xEA;n k&#x1EBF;t v&#xE0; t&#xEA;n c&#x1EE7;a th&#x1B0; vi&#x1EC7;n &#x111;&#x1B0;&#x1EE3;c li&#xEA;n k&#x1EBF;t. Link library s&#x1EBD; kh&#xF4;ng h&#x1ED7; tr&#x1EE3; &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n t&#x1B0;&#x1A1;ng &#x111;&#x1ED1;i, ch&#xFA;ng ta ph&#x1EA3;i &#x111;&#x1EB7;c t&#x1EA3; m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n tuy&#x1EC7;t &#x111;&#x1ED1;i cho link library. <strong>${SRCDIR}</strong> trong <code>cgo</code> l&#xE0; m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n tuy&#x1EC7;t &#x111;&#x1ED1;i trong th&#x1B0; m&#x1EE5;c hi&#x1EC7;n t&#x1EA1;i. C&#xE1;c file &#x111;&#x1ECB;nh d&#x1EA1;ng c&#x1EE7;a &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng C v&#xE0; C++ sau khi &#x111;&#x1B0;&#x1EE3;c bi&#xEA;n d&#x1ECB;ch l&#xE0; nh&#x1B0; nhau, do &#x111;&#xF3; <code>LDFLAGS</code> s&#x1EBD; &#x1EE9;ng v&#x1EDB;i c&#xE1;c <code>C/C++</code> link parameters ph&#x1ED5; bi&#x1EBF;n.</p>
-<h2 id="2103-pkg-config">2.10.3 <code>pkg-config</code></h2>
-<p>B&#x1EB1;ng vi&#x1EC7;c h&#x1ED7; tr&#x1EE3; bi&#xEA;n d&#x1ECB;ch v&#xE0; link parameters cho c&#xE1;c th&#x1B0; vi&#x1EC7;n C/C++ kh&#xE1;c nhau l&#xE0; m&#x1ED9;t c&#xF4;ng vi&#x1EC7;c kinh kh&#x1EE7;ng, do &#x111;&#xF3; <code>cgo</code> &#x111;&#xE3; h&#x1ED7; tr&#x1EE3; c&#xF4;ng c&#x1EE5; <code>pkg-config</code>. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#xF9;ng <code>#cgo pkg-config xxx</code> &#x111;&#x1EC3; sinh ra l&#x1EC7;nh compile v&#xE0; link parameter cho th&#x1B0; vi&#x1EC7;n <code>xxx</code> y&#xEA;u c&#x1EA7;u, b&#x1EB1;ng vi&#x1EC7;c g&#x1ECD;i <code>pkg-config xxx --cflags</code> s&#x1EBD; sinh ra <code>compiler parameters</code>, d&#xF9;ng <code>pkg-config xxx --libs</code> &#x111;&#x1EC3; sinh ra  links parameters. C&#xF3; th&#x1EC3; th&#x1EA5;y  linked parameter &#x111;&#x1B0;&#x1EE3;c sinh ra b&#x1EDF;i c&#xF4;ng c&#x1EE5; <code>pkg-config</code> l&#xE0; r&#x1EA5;t b&#xEC;nh th&#x1B0;&#x1EDD;ng v&#x1EDB;i <code>C/C++</code> v&#xE0; kh&#xF4;ng th&#x1EC3; ph&#xE2;n bi&#x1EC7;t nhi&#x1EC1;u.</p>
-<p>M&#x1EB7;c d&#xF9; c&#xF4;ng c&#x1EE5; <code>pkg-config</code> l&#xE0; r&#x1EA5;t thu&#x1EAD;n ti&#x1EC7;n, v&#x1EAB;n c&#xF3; nh&#x1EEF;ng th&#x1B0; vi&#x1EC7;n <code>C/C++</code> non-standard m&#xE0; ch&#xFA;ng kh&#xF4;ng h&#x1ED7; tr&#x1EE3;. Khi &#x111;&#xF3;, ch&#xFA;ng ta c&#xF3; th&#x1EC3; th&#x1EE7; c&#xF4;ng hi&#x1EC7;n th&#x1EF1;c compilation v&#xE0; link parameter.</p>
-<p>V&#xED; d&#x1EE5;, c&#xF3; m&#x1ED9;t th&#x1B0; vi&#x1EC7;n <code>C/C++</code> g&#x1ECD;i l&#xE0; <code>xxx</code>, ch&#xFA;ng ta c&#xF3; th&#x1EC3; t&#x1EA1;o ra <code>/usr/local/lib/pkgconfig/xxx.bc</code> m&#x1ED9;t c&#xE1;ch th&#x1EE7; c&#xF4;ng.</p>
-<pre><code>Name: xxx
-Cflags:-I/usr/local/include
-Libs:-L/usr/local/lib &#x2013;lxxx2
-</code></pre><p>Trong &#x111;&#xF3; tr&#x1B0;&#x1EDD;ng <code>Name</code> l&#xE0; t&#xEA;n c&#x1EE7;a th&#x1B0; vi&#x1EC7;n, v&#xE0; d&#xF2;ng <code>Cflags</code> v&#xE0; <code>Libs</code> s&#x1EBD; &#x1EE9;ng v&#x1EDB;i compilation v&#xE0; link parameters &#x111;&#x1B0;&#x1EE3;c y&#xEA;u c&#x1EA7;u cho th&#x1B0; vi&#x1EC7;n <code>xxx</code>. N&#x1EBF;u file <code>bc</code> n&#x1EB1;m trong m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n kh&#xE1;c, c&#xF4;ng c&#x1EE5;  search directory <code>pkg-config</code> s&#x1EBD; t&#xEC;m th&#x1EA5;y ch&#xFA;ng th&#xF4;ng qua bi&#x1EBF;n m&#xF4;i tr&#x1B0;&#x1EDD;ng <code>PKG_CONFIG_PATH</code>.</p>
-<p>Trong <code>cgo</code>, ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; vi&#x1EBF;t m&#x1ED9;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh custom  <code>pkg-config</code> qua bi&#x1EBF;n <code>PKG_CONFIG</code>. N&#x1EBF;u b&#x1EA1;n t&#x1EF1; hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh CGO c&#x1EE5; th&#x1EC3; <code>pkg-config</code>, ch&#x1EC9; c&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c hai tham s&#x1ED1; <code>--cflags</code> v&#xE0; <code>--libs</code>.</p>
-<p>Ch&#x1B0;&#x1A1;ng tr&#xEC;nh b&#xEA;n d&#x1B0;&#x1EDB;i s&#x1EBD; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t link parameters &#x111;&#x1EC3; sinh ra <code>Python3</code> d&#x1B0;&#x1EDB;i macos system:</p>
-<pre><code class="lang-go"><span class="hljs-comment">// py3-config.go</span>
-<span class="hljs-keyword">func</span> main() {
-    <span class="hljs-keyword">for</span> _, s := <span class="hljs-keyword">range</span> os.Args {
-        <span class="hljs-keyword">if</span> s == <span class="hljs-string">&quot;--cflags&quot;</span> {
-            out, _ := exec.Command(<span class="hljs-string">&quot;python3-config&quot;</span>, <span class="hljs-string">&quot;--cflags&quot;</span>).CombinedOutput()
-            out = bytes.Replace(out, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">&quot;-arch&quot;</span>), []<span class="hljs-keyword">byte</span>{}, <span class="hljs-number">-1</span>)
-            out = bytes.Replace(out, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">&quot;i386&quot;</span>), []<span class="hljs-keyword">byte</span>{}, <span class="hljs-number">-1</span>)
-            out = bytes.Replace(out, []<span class="hljs-keyword">byte</span>(<span class="hljs-string">&quot;x86_64&quot;</span>), []<span class="hljs-keyword">byte</span>{}, <span class="hljs-number">-1</span>)
-            fmt.Print(<span class="hljs-keyword">string</span>(out))
-            <span class="hljs-keyword">return</span>
-        }
-        <span class="hljs-keyword">if</span> s == <span class="hljs-string">&quot;--libs&quot;</span> {
-            out, _ := exec.Command(<span class="hljs-string">&quot;python3-config&quot;</span>, <span class="hljs-string">&quot;--ldflags&quot;</span>).CombinedOutput()
-            fmt.Print(<span class="hljs-keyword">string</span>(out))
-            <span class="hljs-keyword">return</span>
-        }
-    }
-}
-</code></pre>
-<p>Sau &#x111;&#xF3; build v&#xE0; d&#xF9;ng c&#xF4;ng c&#x1EE5; <code>pkg-config</code> &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c custom v&#x1EDB;i c&#xE1;c l&#x1EC7;nh sau:</p>
-<pre><code>$ go build -o py3-config py3-config.go
-$ PKG_CONFIG=./py3-config go build -buildmode=c-shared -o gopkg.so main.go
-</code></pre><h2 id="2104-go-get-chain">2.10.4 <code>go get chain</code></h2>
-<p>L&#x1EC7;nh <code>go get</code> package s&#x1EBD; li&#xEA;n k&#x1EBF;t c&#xE1;c package ph&#x1EE5; thu&#x1ED9;c li&#xEA;n quan. M&#x1ED9;t chu&#x1ED7;i c&#xE1;c package ph&#x1EE5; thu&#x1ED9;c sau nh&#x1B0; A ph&#x1EE5; thu&#x1ED9;c B, B ph&#x1EE5; thu&#x1ED9;c C, C ph&#x1EE5; thu&#x1ED9;c D <code>pkgA -&gt; pkgB -&gt; pkgC -&gt; pkgD -&gt; ...</code>. Sau khi <code>go get A_package</code>, ch&#xFA;ng s&#x1EBD; get B,C,D package. N&#x1EBF;u vi&#x1EC7;c build h&#x1ECF;ng sau khi get package_B, n&#xF3; s&#x1EBD; d&#x1EAB;n t&#x1EDB;i vi&#x1EC7;c h&#x1ECF;ng to&#xE0;n b&#x1ED9; chu&#x1ED7;i , k&#x1EBF;t qu&#x1EA3; l&#xE0; l&#x1EC7;nh get package_A b&#x1ECB; h&#x1ECF;ng.</p>
+                                <h1 id="210--bi&#xEA;n-d&#x1ECB;ch-v&#xE0;-li&#xEA;n-k&#x1EBF;t-c&#xE1;c-tham-s&#x1ED1;">2.10.  Bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t c&#xE1;c tham s&#x1ED1;</h1>
+<p>Bi&#xEA;n d&#x1ECB;ch v&#xE0; li&#xEA;n k&#x1EBF;t c&#xE1;c parameters l&#xE0; m&#x1ED9;t v&#x1EA5;n &#x111;&#x1EC1; m&#xE0; c&#xE1;c l&#x1EAD;p tr&#xEC;nh vi&#xEA;n C/C++ th&#x1B0;&#x1EDD;ng g&#x1EB7;p ph&#x1EA3;i. Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng t&#xF4;i s&#x1EBD; gi&#x1EDB;i thi&#x1EC7;u ng&#x1EAF;n c&#xE1;c b&#x1B0;&#x1EDB;c bi&#xEA;n d&#x1ECB;ch v&#xE0; link parameters th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng trong CGO.</p>
+<p><div align="center">
+    <img src="../images/compileAndLink.gif" width="400">
+</div>
+<br></p>
+<h2 id="2101-tham-s&#x1ED1;-bi&#xEA;n-d&#x1ECB;ch-">2.10.1. Tham s&#x1ED1; bi&#xEA;n d&#x1ECB;ch :</h2>
+<p>CGO cung c&#x1EA5;p ba tham s&#x1ED1; CFLAGS/CPPFLAGS/CXXFLAGS. Trong &#x111;&#xF3;:</p>
+<ul>
+<li>CFLAGS s&#x1EBD; &#x1EE9;ng v&#x1EDB;i vi&#x1EC7;c bi&#xEA;n d&#x1ECB;ch ng&#xF4;n ng&#x1EEF; C (.c).</li>
+<li>CPPFLAGS s&#x1EBD; &#x1EE9;ng v&#x1EDB;i C/C++ (.c, .cc, .cpp, .cxx).</li>
+<li>CXXFLAGS &#x1EE9;ng v&#x1EDB;i C++ thu&#x1EA7;n (.cc, .cpp, *.cxx).</li>
+</ul>
+<h2 id="2102-tham-s&#x1ED1;-li&#xEA;n-k&#x1EBF;t-">2.10.2. Tham s&#x1ED1; li&#xEA;n k&#x1EBF;t :</h2>
+<p>Trong CGO <code>${SRCDIR}</code> l&#xE0; m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n tuy&#x1EC7;t &#x111;&#x1ED1;i trong th&#x1B0; m&#x1EE5;c hi&#x1EC7;n t&#x1EA1;i, c&#xE1;c file &#x111;&#x1ECB;nh d&#x1EA1;ng c&#x1EE7;a &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng C v&#xE0; C++ sau khi &#x111;&#x1B0;&#x1EE3;c bi&#xEA;n d&#x1ECB;ch l&#xE0; nh&#x1B0; nhau, do &#x111;&#xF3; <code>LDFLAGS</code> s&#x1EBD; &#x1EE9;ng v&#x1EDB;i c&#xE1;c C/C++ link parameters.</p>
+<h2 id="2103-l&#x1EC7;nh-pkg-config">2.10.3. L&#x1EC7;nh pkg-config</h2>
+<p>D&#xF9;ng c&#xF4;ng c&#x1EE5; <a href="https://www.ardanlabs.com/blog/2013/08/using-cgo-with-pkg-config-and-custom.html" target="_blank">pkg-config</a> &#x111;&#x1EC3; thu&#x1EAD;n ti&#x1EC7;n cho vi&#x1EC7;c compile v&#xE0; link parameter:</p>
+<ul>
+<li>L&#x1EC7;nh <code>#cgo pkg-config abc</code> &#x111;&#x1EC3; sinh ra l&#x1EC7;nh compile v&#xE0; link parameter cho th&#x1B0; vi&#x1EC7;n <code>abc</code>.</li>
+<li>L&#x1EC7;nh <code>pkg-config abc --cflags</code> s&#x1EBD; sinh ra <code>compiler parameters</code>.</li>
+<li>L&#x1EC7;nh <code>pkg-config abc --libs</code> &#x111;&#x1EC3; sinh ra  links parameters.</li>
+</ul>
+<p>C&#xF3; m&#x1ED9;t s&#x1ED1; th&#x1B0; vi&#x1EC7;n C/C++ non-standard m&#xE0; pkg-config kh&#xF4;ng h&#x1ED7; tr&#x1EE3;. Khi &#x111;&#xF3;, ch&#xFA;ng ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c th&#x1EE7; c&#xF4;ng compilation v&#xE0; link parameter.</p>
+<h2 id="2104-chu&#x1ED7;i-c&#xE0;i-&#x111;&#x1EB7;t-package">2.10.4. Chu&#x1ED7;i c&#xE0;i &#x111;&#x1EB7;t package</h2>
+<p>L&#x1EC7;nh <code>go get</code> package s&#x1EBD; li&#xEA;n k&#x1EBF;t c&#xE1;c package ph&#x1EE5; thu&#x1ED9;c li&#xEA;n quan. M&#x1ED9;t chu&#x1ED7;i c&#xE1;c package ph&#x1EE5; thu&#x1ED9;c sau nh&#x1B0; pkgA -&gt; pkgB -&gt; pkgC -&gt; pkgD. Sau khi <code>go get A_package</code>, ch&#xFA;ng s&#x1EBD; get B, C, D package. N&#x1EBF;u vi&#x1EC7;c build h&#x1ECF;ng sau khi get package_B, n&#xF3; s&#x1EBD; d&#x1EAB;n t&#x1EDB;i vi&#x1EC7;c h&#x1ECF;ng to&#xE0;n b&#x1ED9; chu&#x1ED7;i , k&#x1EBF;t qu&#x1EA3; l&#xE0; l&#x1EC7;nh get package_A b&#x1ECB; h&#x1ECF;ng.</p>
 <p>S&#x1EBD; c&#xF3; m&#x1ED9;t s&#x1ED1; l&#xFD; do cho vi&#x1EC7;c h&#x1ECF;ng chu&#x1ED7;i get, &#x111;&#xE2;y l&#xE0; m&#x1ED9;t s&#x1ED1; l&#xFD; do ph&#x1ED5; bi&#x1EBF;n:</p>
 <ul>
 <li>M&#x1ED9;t s&#x1ED1; h&#x1EC7; th&#x1ED1;ng kh&#xF4;ng h&#x1ED7; tr&#x1EE3;, vi&#x1EC7;c bi&#xEA;n d&#x1ECB;ch s&#x1EBD; h&#x1ECF;ng.</li>
-<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>cgo</code>, user kh&#xF4;ng c&#xF3; <code>gcc</code> &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t s&#x1EB5;n.</li>
-<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>cgo</code>, nh&#x1EEF;ng th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;c l&#x1EAD;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t.</li>
-<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>pkg-config</code>, kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t tr&#xEA;n windows.</li>
-<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>pkg-config</code>, kh&#xF4;ng c&#xF3; file <code>bc</code> &#x111;&#x1B0;&#x1EE3;c t&#xEC;m th&#x1EA5;y t&#x1B0;&#x1A1;ng &#x1EE9;ng.</li>
-<li>Tin c&#x1EAD;y v&#xE0;o <code>custom pkg-config</code>, y&#xEA;u c&#x1EA7;u m&#x1ED9;t s&#x1ED1; thi&#x1EBF;t l&#x1EAD;p th&#xEA;m.</li>
-<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>swig</code>, user ch&#x1B0;a c&#xE0;i &#x111;&#x1EB7;t <code>swig</code>, ho&#x1EB7;c phi&#xEA;n b&#x1EA3;n kh&#xF4;ng t&#x1B0;&#x1A1;ng th&#xED;ch.</li>
+<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>cgo</code><ul>
+<li>User kh&#xF4;ng c&#xF3; <code>gcc</code> &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t s&#x1EB5;n.</li>
+<li>Nh&#x1EEF;ng th&#x1B0; vi&#x1EC7;n &#x111;&#x1ED9;c l&#x1EAD;p kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t.</li>
 </ul>
-<p>Vi&#x1EC7;c ph&#xE2;n t&#xED;ch k&#x129; c&#xE0;ng s&#x1EBD; cho th&#x1EA5;y v&#x1EA5;n &#x111;&#x1EC1; n&#x1EA3;y sinh v&#x1EDB;i <code>CGO</code> &#x111;a s&#x1ED1; s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n h&#x1B0; h&#x1ECF;ng. &#x110;&#xE2;y kh&#xF4;ng ph&#x1EA3;i l&#xE0; m&#x1ED9;t hi&#x1EC7;n t&#x1B0;&#x1EE3;ng t&#xEC;nh c&#x1EDD;. Vi&#x1EC7;c t&#x1EF1; &#x111;&#x1ED9;ng x&#xE2;y d&#x1EF1;ng m&#xE3; ngu&#x1ED3;n <code>C/C++</code> lu&#xF4;n l&#xE0; v&#x1EA5;n &#x111;&#x1EC1; c&#x1EE7;a th&#x1EBF; gi&#x1EDB;i. Hi&#x1EC7;n nay, kh&#xF4;ng c&#xF3; m&#x1ED9;t chu&#x1EA9;n th&#x1ED1;ng nh&#x1EA5;t vi&#x1EC7;c qu&#x1EA3;n l&#xFD; c&#xF4;ng c&#x1EE5; C/C++ &#x111;&#x1EC3; m&#x1ECD;i ng&#x1B0;&#x1EDD;i c&#xF3; th&#x1EC3; nh&#x1EAD;n di&#x1EC7;n &#x111;&#x1B0;&#x1EE3;c.</p>
-<p>B&#x1EB1;ng vi&#x1EC7;c d&#xF9;ng <code>cgo</code>, <code>gcc</code> v&#xE0; c&#xE1;c c&#xF4;ng c&#x1EE5; build kh&#xE1;c ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t, v&#xE0; c&#x1ED1; g&#x1EAF;ng &#x111;&#x1EC3; h&#x1ED7; tr&#x1EE3; mainstream system.</p>
-<p>N&#x1EBF;u m&#x1ED9;t g&#xF3;i C/C++ &#x111;&#x1ED9;c l&#x1EAD;p l&#xE0; nh&#x1ECF; v&#xE0; m&#xE3; ngu&#x1ED3;n lu&#xF4;n c&#xF3; s&#x1EB5;n, ng&#x1B0;&#x1EDD;i ta th&#x1B0;&#x1EDD;ng th&#xED;ch t&#x1EF1; x&#xE2;y d&#x1EF1;ng h&#x1A1;n.</p>
-<p>V&#xED; d&#x1EE5;, g&#xF3;i th&#x1B0; vi&#x1EC7;n <code>github.com/chai2010/webp</code> hi&#x1EC7;n th&#x1EF1;c <code>zero configuration dependencies</code> b&#x1EB1;ng vi&#x1EC7;c t&#x1EA1;o ra m&#x1ED9;t key files cho m&#x1ED7;i file m&#xE3; ngu&#x1ED3;n C/C++ trong g&#xF3;i hi&#x1EC7;n t&#x1EA1;i.</p>
-<pre><code>// z_libwebp_src_dec_alpha.c
-#include &quot;./internal/libwebp/src/dec/alpha.c&quot;
-</code></pre><p>Do &#x111;&#xF3; <code>z_libwebp_src_dec_alpha.c</code>, m&#x1ED9;t m&#xE3; ngu&#x1ED3;n <code>libweb native</code> c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c bi&#xEA;n d&#x1ECB;ch khi file v&#x1EEB;a bi&#xEA;n d&#x1ECB;ch xong. C&#xE1;c ph&#x1EE5; thu&#x1ED9;c l&#xE0; c&#xE1;c relative directories, t&#xED;nh nh&#x1EA5;t qu&#xE1;n t&#x1ED1;i &#x111;a c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c duy tr&#xEC; trong m&#x1ED9;t s&#x1ED1; n&#x1EC1;n t&#x1EA3;ng kh&#xE1;c nhau.</p>
-<h2 id="2105-export-c&#xE1;c-h&#xE0;m-c-trong-nhi&#x1EC1;u-g&#xF3;i-non-main-packages">2.10.5 Export c&#xE1;c h&#xE0;m C trong nhi&#x1EC1;u g&#xF3;i non-main packages</h2>
-<p>M&#x1ED9;t t&#xE0;i li&#x1EC7;u ch&#xED;nh th&#x1EE9;c &#x111;&#xE3; vi&#x1EBF;t r&#x1EB1;ng, exported Go function n&#xEA;n c&#xF3; m&#x1ED9;t main package, nh&#x1B0;ng s&#x1EF1; th&#x1EAD;t l&#xE0; nh&#x1EEF;ng Go export function c&#x1EE7;a c&#xE1;c packages kh&#xE1;c c&#x169;ng h&#x1EE3;p l&#x1EC7;. B&#x1EDF;i v&#xEC; exported Go function c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng nh&#x1B0; l&#xE0; m&#x1ED9;t h&#xE0;m C, n&#xF3; c&#xF3; th&#x1EC3; h&#x1EE3;p l&#x1EC7;. Nh&#x1B0;ng c&#xE1;c Go functions &#x111;&#x1B0;&#x1EE3;c export b&#x1EDF;i c&#xE1;c packages kh&#xE1;c nhau c&#xF3; th&#x1EC3; c&#xF3; chung m&#x1ED9;t global namespace, do &#x111;&#xF3; ch&#xFA;ng ta c&#x1EA7;n ph&#x1EA3;i c&#x1EA9;n tr&#x1ECD;ng trong vi&#x1EC7;c tr&#xE1;nh tr&#xF9;ng t&#xEA;n. N&#x1EBF;u b&#x1EA1;n export m&#x1ED9;t h&#xE0;m Go t&#x1EEB; c&#xE1;c package kh&#xE1;c nhau v&#xE0;o m&#x1ED9;t kh&#xF4;ng gian C language, sau &#x111;&#xF3; <code>cgo</code> s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng sinh ra file <code>_cgo_export.h</code> v&#xE0; kh&#xF4;ng ch&#x1EE9;a t&#x1EA5;t c&#x1EA3; c&#xE1;c l&#x1EDD;i &#x111;&#x1ECB;nh ngh&#x129;a h&#xE0;m &#x1EDF; m&#x1ECD;i n&#x1A1;i, ch&#xFA;ng ta s&#x1EBD; ph&#x1EA3;i export t&#x1EA5;t c&#x1EA3; c&#xE1;c h&#xE0;m th&#xF4;ng qua c&#xE1;ch t&#x1EF1; vi&#x1EBF;t header file.</p>
+</li>
+<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>pkg-config</code><ul>
+<li>Kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c c&#xE0;i &#x111;&#x1EB7;t tr&#xEA;n windows.</li>
+<li>Kh&#xF4;ng c&#xF3; file <code>bc</code> &#x111;&#x1B0;&#x1EE3;c t&#xEC;m th&#x1EA5;y t&#x1B0;&#x1A1;ng &#x1EE9;ng.</li>
+</ul>
+</li>
+<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>custom pkg-config</code>: y&#xEA;u c&#x1EA7;u m&#x1ED9;t s&#x1ED1; thi&#x1EBF;t l&#x1EAD;p th&#xEA;m.</li>
+<li>Ph&#x1EE5; thu&#x1ED9;c v&#xE0;o <code>swig</code>: user ch&#x1B0;a c&#xE0;i &#x111;&#x1EB7;t <code>swig</code>, ho&#x1EB7;c phi&#xEA;n b&#x1EA3;n kh&#xF4;ng t&#x1B0;&#x1A1;ng th&#xED;ch.</li>
+</ul>
 
                                 
                                 </section>
@@ -916,7 +898,7 @@ $ PKG_CONFIG=./py3-config go build -buildmode=c-shared -o gopkg.so main.go
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.10  Biên dịch và liên kết các tham số","level":"1.3.7","depth":2,"next":{"title":"2.11 Ghi chú bổ sung","level":"1.3.8","depth":2,"path":"ch2-cgo/ch2-11-ext.md","ref":"ch2-cgo/ch2-11-ext.md","articles":[]},"previous":{"title":"2.9 Thư viện tĩnh và động","level":"1.3.6","depth":2,"path":"ch2-cgo/ch2-09-static-shared-lib.md","ref":"ch2-cgo/ch2-09-static-shared-lib.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-10-link.md","mtime":"2019-07-15T10:56:18.478Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.10  Biên dịch và liên kết các tham số","level":"1.3.7","depth":2,"next":{"title":"2.11 Ghi chú bổ sung","level":"1.3.8","depth":2,"path":"ch2-cgo/ch2-11-ext.md","ref":"ch2-cgo/ch2-11-ext.md","articles":[]},"previous":{"title":"2.9 Thư viện tĩnh và động","level":"1.3.6","depth":2,"path":"ch2-cgo/ch2-09-static-shared-lib.md","ref":"ch2-cgo/ch2-09-static-shared-lib.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-10-link.md","mtime":"2019-08-10T03:07:53.909Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:11:57.422Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
