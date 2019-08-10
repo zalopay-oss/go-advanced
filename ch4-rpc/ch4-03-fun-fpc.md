@@ -1,10 +1,10 @@
 # 4.3 RPC trong Golang
 
-Trong những trường hợp khác nhau lại có nhu cầu về RPC khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC. Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn của Go.
+Chúng ta có thể sử dụng RPC cho nhiều mục đích khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC để hỗ trợ cho việc lập trình. Trong phần này, chúng ta sẽ sử dụng một framework RPC tích hợp sẵn trong Go.
 
-## 4.3.1 Nguyên tắc hiện thực của RPC Client
+## 4.3.1 Hiện thực RPC phía Client
 
-Cách dễ nhất để sử dụng thư viện Go là dùng phương thức `Client.Call` để thực hiện lời gọi synchronous blocking. Phần hiện thực của phương thức này như sau:
+Cách dễ nhất để sử dụng thư viện Go là dùng phương thức `Client.Call` để thực hiện lời gọi đồng bộ (synchronous blocking). Phần hiện thực của phương thức này như sau:
 
 ```go
 func (client *Client) Call(
@@ -16,7 +16,7 @@ func (client *Client) Call(
 }
 ```
 
-Chúng  ta cũng có thể dùng `client.Go` gọi tới service trước đó là `HelloService` theo kiểu bất đồng bộ bằng phương pháp sau:
+Chúng  ta cũng có thể dùng `client.Go` gọi tới service trước đó là `HelloService` theo kiểu bất đồng bộ (asynchronous blocking) bằng phương pháp sau:
 
 ```go
 func doClientWork(client *rpc.Client) {
@@ -60,7 +60,7 @@ func (client *Client) Go(
 }
 ```
 
-[net/rpc/client.go](https://golang.org/src/net/rpc/client.go)
+Các bạn có thể tham khảo ở đây [net/rpc/client.go](https://golang.org/src/net/rpc/client.go).
 
 Khi lời gọi hoàn thành hoặc có lỗi xuất hiện, phương thức thông báo `call.done` được gọi để hoàn thành:
 

@@ -1,6 +1,6 @@
 # 4.1. Bắt đầu với RPC
 
-[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (viết tắt: RPC) là phương pháp gọi hàm từ một máy tính từ xa để lấy về kết quả. Trong lịch sử phát triển của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu cũng giống như là IPC (inter process communication) ngoài việc chúng dùng để giao tiếp giữa các máy tính chứ không những là giữa các tiến trình, ngoài ra RPC còn hay được sử dụng trong các hệ thống phân tán.
+[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (viết tắt: RPC) là phương pháp gọi hàm từ một máy tính từ xa để lấy về kết quả. Trong lịch sử phát triển của internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu cũng giống như là IPC (inter process communication) ngoài việc chúng dùng để giao tiếp giữa các máy tính chứ không chỉ là giữa các tiến trình. Ngoài ra RPC còn hay được sử dụng trong các hệ thống phân tán.
 
 <div align="center">
 	<img src="../images/ch4-1-rpc-arch.png" width="500">
@@ -10,9 +10,9 @@
 	</span>
 </div>
 
-## 4.1.1 Chương trình "Hello, World" bằng RPC
+## 4.1.1 Chương trình "Hello World" bằng RPC
 
-Thư viện chuẩn của Go chứa gói [net/rpc](https://golang.org/pkg/net/rpc/) dùng để hiện thực chương trình RPC, chương trình RPC đầu tiên của chúng ta sẽ in ra chuỗi "Hello, World" được tạo ra và trả về từ máy khác:
+Thư viện chuẩn của Go chứa gói [net/rpc](https://golang.org/pkg/net/rpc/) dùng để hiện thực chương trình RPC, chương trình RPC đầu tiên của chúng ta sẽ in ra chuỗi "Hello World" được tạo ra và trả về từ máy khác:
 
 ***service/hello.go***: định nghĩa service Hello
 
@@ -29,7 +29,7 @@ type HelloService struct{}
 // 4. Phải trả về kiểu error
 
 func (p *HelloService) Hello(request string, reply *string) error {
-    *reply = "Hello, " + request
+    *reply = "Hello " + request
     // trả về error = nil nếu thành công
     return nil
 }
@@ -115,14 +115,17 @@ $ go run server/main.go
 
 ```sh
 $ go run client/main.go
-Hello, World
+Hello World
 ```
 
-Từ ví dụ trên, có thể thấy rằng chúng ta dùng RPC trong Go thật sự đơn giản.
+Qua ví dụ trên, có thể thấy rằng việc dùng RPC trong Go thật sự đơn giản.
 
 ## 4.1.2 Tạo interface cho RPC
 
-Ứng dụng gọi RPC sẽ có ít nhất ba thành phần: thứ nhất là chương trình hiện thực phương thức RPC ở bên phía server, thứ hai là chương trình gọi RPC bên phía client, và cuối cùng là thành phần cực kì quan trọng: service đóng vai trò là interface giữa server và client.
+Ứng dụng sử dụng RPC sẽ có ít nhất ba thành phần: 
+- Chương trình hiện thực phương thức RPC ở bên phía server.
+- Chương trình gọi RPC bên phía client.
+- **Service đóng vai trò là interface** giữa server và client.
 
 Trong ví dụ trước, chúng ta đã đặt tất cả những thành phần trên trong ba thư mục **server**, **client**, **service**, nếu bạn muốn refactor lại mã nguồn HelloService, đầu tiên hãy tạo ra một inteface như sau:
 
@@ -143,7 +146,7 @@ func RegisterHelloService(svc HelloServiceInterface) error {
 }
 ```
 
-Sau khi định nghĩa lớp interface của RPC service, client có thể viết mã nguồn để gọi lệnh RPC :
+Sau khi định nghĩa lớp interface của RPC service, client có thể viết mã nguồn để gọi lệnh RPC:
 
 ***Hàm main phía client:***
 
@@ -167,7 +170,7 @@ func main() {
 }
 ```
 
-Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, để đơn giản chúng ta nên wrapper biến connection vào trong:
+Tuy nhiên, gọi phương thức RPC thông qua hàm `client.Call` vẫn rất cồng kềnh, để đơn giản chúng ta nên wrapper biến connection vào trong struct:
 
 ***Wrapper các đối tượng:***
 
@@ -419,7 +422,7 @@ Ta có thể thấy rằng, chỉ cần theo định dạng json như trên là 
 
 ## 4.1.4 Go RPC qua giao thức HTTP
 
-Trong ví dụ trước, chúng ta đã gọi RPC thông qua lệnh `nc`, bây giờ chúng ta sẽ thử cung cấp RPC service trên giao thức HTTP. RPC Service mới sẽ tuân thủ theo chuẩn [REST](https://restfulapi.net/), chúng sẽ nhận yêu cầu và xử lý chúng như dưới đây:
+Trong ví dụ trước, chúng ta đã gọi RPC thông qua lệnh `nc`, bây giờ chúng ta sẽ thử cung cấp RPC service trên giao thức HTTP. RPC Service mới sẽ tuân thủ theo chuẩn [REST](https://restfulapi.net/), sau đây là phần hiện thực:
 
 ***Chương trình phía server:***
 

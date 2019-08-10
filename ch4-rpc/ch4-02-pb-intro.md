@@ -1,6 +1,6 @@
 # 4.2. Protobuf
 
-**Protobuf** (tên rút gọn của Protocols Buffer) là một ngôn ngữ language-neutral, platform-neutral của Google. Về cơ bản, nó được sử dụng để sinh ra mã nguồn với chức năng serialize và deserialize các cấu trúc dữ liệu (được định nghĩa trong file `.proto`) dưới dạng binary stream. So với dạng XML hoặc JSON thì dữ liệu đó nhỏ gọn gấp 3-10 lần và được xử lý rất nhanh.
+[Protobuf](https://developers.google.com/protocol-buffers/)  (Protocols Buffer) là một language-neutral, platform-neutral của Google. Về cơ bản, nó được sử dụng để sinh ra mã nguồn với chức năng serialize và deserialize các cấu trúc dữ liệu (được định nghĩa trong file `.proto`) dưới dạng binary stream. So với dạng XML hoặc JSON thì dữ liệu đó nhỏ gọn gấp 3-10 lần và được xử lý rất nhanh.
 
 <div align="center">
 	<img src="../images/ch4-2-size.png" width="580">
@@ -320,7 +320,7 @@ func (p *netrpcPlugin) genServiceCode(svc *descriptor.ServiceDescriptorProto) {
 }
 ```
 
-Chúng ta sẽ mong đợi vào mã nguồn cuối cùng được sinh ra như sau:
+Chúng ta mong đợi vào mã nguồn cuối cùng được sinh ra như sau:
 
 ```go
 type HelloServiceInterface interface {
@@ -397,7 +397,6 @@ func (p *{{$root.ServiceName}}Client) {{$m.MethodName}}(
     return p.Client.Call("{{$root.ServiceName}}.{{$m.MethodName}}", in, out)
 }
 {{end}}
-`
 ```
 
 Khi plugin mới của protoc được hoàn thành, mã nguồn có thể được sinh ra mỗi khi RPC service thay đổi trong `hello.proto` file. Chúng ta có thể điều chỉnh hoặc thêm nội dung của mã nguồn được sinh ra bằng việc cập nhật template plugin.
