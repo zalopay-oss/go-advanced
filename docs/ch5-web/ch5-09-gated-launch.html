@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.md">
             
-                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -825,32 +825,14 @@
 <p>Ph&#x1B0;&#x1A1;ng ph&#xE1;p &#x111;&#x1EA7;u ti&#xEA;n &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng nhi&#x1EC1;u trong c&#xE1;c h&#xE0;m c&#x169; c&#x1EE7;a h&#x1EC7; th&#x1ED1;ng. Khi m&#xE0; m&#x1ED9;t h&#xE0;m m&#x1EDB;i &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1B0;a v&#xE0;o ho&#x1EA1;t &#x111;&#x1ED9;ng, th&#xEC; ph&#x1B0;&#x1A1;ng ph&#xE1;p th&#x1EE9; hai s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng nhi&#x1EC1;u h&#x1A1;n. D&#x129; nhi&#xEA;n, khi g&#xE2;y ra m&#x1ED9;t s&#x1ED1; thay &#x111;&#x1ED5;i ch&#xED;nh &#x111;&#x1EBF;n nh&#x1EEF;ng h&#xE0;m c&#x169; m&#xE0; ch&#xFA;ng quan tr&#x1ECD;ng, th&#xEC; th&#xF4;ng th&#x1B0;&#x1EDD;ng s&#x1EBD; t&#x1ED1;t h&#x1A1;n n&#x1EBF;u publish ch&#xFA;ng theo business rules, b&#x1EDF;i v&#xEC; &#x111;&#x1ED9; r&#x1EE7;i ro khi m&#x1EDF; t&#x1EA5;t c&#x1EA3; c&#xE1;c h&#xE0;m cho ng&#x1B0;&#x1EDD;i d&#xF9;ng l&#xE0; kh&#xE1; l&#x1EDB;n.</p>
 <h2 id="591-implementing-grayscale-publishing-through-batch-deployment">5.9.1 Implementing grayscale publishing through batch deployment</h2>
 <p>N&#x1EBF;u service &#x111;&#x1B0;&#x1EE3;c deploy tr&#xEA;n 15 instanses (c&#xF3; th&#x1EC3; l&#xE0; physical machines ho&#x1EB7;c containers), ch&#xFA;ng ta chia 15 instances th&#xE0;nh nh&#xF3;m theo th&#x1EE9; t&#x1EF1; &#x111;&#x1ED9; &#x1B0;u ti&#xEA;n, s&#x1EBD; c&#xF3; 1-2-4-8 machines, m&#x1ED7;i th&#x1EDD;i &#x111;i&#x1EC3;m. Khi m&#x1EDF; r&#x1ED9;ng ra, s&#x1ED1; l&#x1B0;&#x1EE3;ng t&#x103;ng g&#x1EA5;p &#x111;&#xF4;i.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-online-group.png">
     <br>
     <span align="center">
         <i>Group deployment</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-online-group.png" alt=""></p>
-<p><em>H&#xEC;nh 5-20 Group deployment</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>T&#x1EA1;i sao l&#x1EA1;i g&#x1EA5;p &#x111;&#xF4;i? N&#xF3; s&#x1EBD; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng ch&#xFA;ng ta kh&#xF4;ng chia nh&#x1ECF; group qu&#xE1; nhi&#x1EC1;u, kh&#xF4;ng quan tr&#x1ECD;ng bao nhi&#xEA;u machines m&#xE0; ch&#xFA;ng ta c&#xF3;. Cho v&#xED; d&#x1EE5;, 1024 machines, trong th&#x1EF1;c t&#x1EBF;, ch&#x1EC9; c&#x1EA7;n 1-2-4-8-16-32-64-128-256-512 l&#xE0; 10 l&#x1EA7;n deployment &#x111;&#x1EC3; to&#xE0;n b&#x1ED9; &#x111;&#x1B0;&#x1EE3;c deployed.</p>
 <p>Theo c&#xE1;ch &#x111;&#xF3;, nh&#x1EEF;ng users &#x111;&#x1EA7;u ti&#xEA;n b&#x1ECB; &#x1EA3;nh h&#x1B0;&#x1EDF;ng b&#x1EDF;i s&#x1EF1; thay &#x111;&#x1ED5;i s&#x1EBD; chi&#x1EBF;m m&#x1ED9;t ph&#x1EA7;n nh&#x1ECF; trong t&#x1ED5;ng s&#x1ED1; users, nh&#x1B0; l&#xE0; service c&#x1EE7;a 1000 machines. N&#x1EBF;u kh&#xF4;ng c&#xF3; v&#x1EA5;n &#x111;&#x1EC1; n&#xE0;o sau khi ch&#xFA;ng ta deployed to&#xE0;n b&#x1ED9; v&#xE0; &#x111;i v&#xE0;o ho&#x1EA1;t &#x111;&#x1ED9;ng, n&#xF3; s&#x1EBD; ch&#x1EC9; &#x1EA3;nh h&#x1B0;&#x1EDF;ng t&#x1EDB;i 1/1000 users. N&#x1EBF;u 10 groups ho&#xE0;n to&#xE0;n &#x111;&#x1B0;&#x1EE3;c chia ra &#x111;&#x1EC1;u nhau, th&#xEC; s&#x1EBD; &#x1EA3;nh h&#x1B0;&#x1EDF;ng t&#x1EDB;i 1/10 users ngay l&#x1EB7;p t&#x1EE9;c, v&#xE0; 1/10 c&#x1EE7;a business problems, n&#xF3; s&#x1EBD; l&#xE0; m&#x1ED9;t tai h&#x1ECD;a kh&#xF4;ng th&#x1EC3; kh&#x1EAF;c ph&#x1EE5;c c&#x1EE7;a c&#xF4;ng ty.</p>
 <p>Khi &#x111;i v&#xE0;o ho&#x1EA1;t &#x111;&#x1ED9;ng, c&#xE1;ch hi&#x1EC7;u qu&#x1EA3; nh&#x1EA5;t &#x111;&#x1EC3; quan s&#xE1;t l&#xE0; nh&#xEC;n v&#xE0;o <code>error log</code> c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh. N&#x1EBF;u kh&#xF4;ng c&#xF3; nhi&#x1EC1;u l&#x1ED7;i logic, th&#xEC; ch&#xFA;ng ta s&#x1EBD; scroll nhanh error log khi xem. Nh&#x1EEF;ng errors c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c b&#xE1;o c&#xE1;o trong h&#x1EC7; th&#x1ED1;ng monitoring c&#x1EE7;a c&#xF4;ng ty nh&#x1B0; l&#xE0; <code>metrics</code>. Do &#x111;&#xF3;, trong su&#x1ED1;t qu&#xE1; tr&#xEC;nh &#x111;i v&#xE0;o ho&#x1EA1;t &#x111;&#x1ED9;ng, c&#xF3; th&#x1EC3; th&#x1EA5;y r&#x1EB1;ng b&#x1EA5;t c&#x1EE9; l&#x1ED7;i b&#x1EA5;t th&#x1B0;&#x1EDD;ng n&#xE0;o x&#x1EA3;y ra s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c monitoring.</p>
@@ -893,7 +875,6 @@
 }
 </code></pre>
 <p>Tr&#x1B0;&#x1EDD;ng h&#x1EE3;p n&#xE0;y c&#xF3; th&#x1EC3; tr&#x1EA3; v&#x1EC1; k&#x1EBF;t qu&#x1EA3; <code>true</code> ho&#x1EB7;c <code>false</code> theo t&#x1EF7; l&#x1EC7; ph&#x1EA7;n tr&#x103;m &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EB7;c t&#x1EA3; tr&#x1B0;&#x1EDB;c, v&#xE0; &#x1EDF; tr&#xEA;n l&#xE0; s&#x1EF1; kh&#xE1;c bi&#x1EC7;t &#x111;&#x1A1;n gi&#x1EA3;n theo x&#xE1;c su&#x1EA5;t m&#xE0; ch&#xFA;ng ta c&#x1EA7;n ng&#x1B0;&#x1EDD;i g&#x1ECD;i cung c&#x1EA5;p m&#x1ED9;t tham s&#x1ED1; input parameter. Ch&#xFA;ng ta s&#x1EED; d&#x1EE5;ng input parameter nh&#x1B0; l&#xE0; m&#x1ED9;t th&#xF4;ng s&#x1ED1; &#x111;&#x1EC3; t&#xED;nh to&#xE1;n gi&#xE1; tr&#x1ECB; hash, sau &#x111;&#xF3; tr&#x1EA3; v&#x1EC1; k&#x1EBF;t qu&#x1EA3; l&#xE0; m&#x1ED9;t model. &#x110;i&#x1EC1;u n&#xE0;y &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng user s&#x1EBD; tr&#x1EA3; v&#x1EC1; c&#xF9;ng m&#x1ED9;t k&#x1EBF;t qu&#x1EA3; qua nhi&#x1EC1;u l&#x1EA7;n g&#x1ECD;i, trong ng&#x1EEF; c&#x1EA3;nh sau, thu&#x1EAD;t to&#xE1;n s&#x1EBD; ph&#xE2;n &#x111;o&#x1EA1;n &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t qu&#x1EA3; mong &#x111;&#x1EE3;i</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-set-time-line.png">
     <br>
@@ -909,28 +890,8 @@
     <span align="center">
         <i>First set and then get immediately</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-set-time-line.png" alt=""></p>
-<p><em>H&#xEC;nh 5-21 First set and then get immediately</em></p>
-<p>N&#x1EBF;u b&#x1EA1;n d&#xF9;ng chi&#x1EBF;n l&#x1B0;&#x1EE3;c random, b&#x1EA1;n s&#x1EBD; g&#x1EB7;p m&#x1ED9;t v&#x1EA5;n &#x111;&#x1EC1; nh&#x1B0; h&#xEC;nh 5-22</p>
-<p><img src="../images/ch5-set-time-line_2.png" alt=""></p>
-<p><em>H&#xEC;nh 5-22 First set and then get immediately</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <h2 id="593-l&#xE0;m-th&#x1EBF;-n&#xE0;o-&#x111;&#x1EC3;-hi&#x1EC7;n-th&#x1EF1;c-h&#x1EC7;-th&#x1ED1;ng-grayscale-publishing">5.9.3 L&#xE0;m th&#x1EBF; n&#xE0;o &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c h&#x1EC7; th&#x1ED1;ng Grayscale publishing</h2>
 <h3 id="5931-business-related-simple-grayscale">5.9.3.1 Business-related simple grayscale</h3>
 <p>C&#xF4;ng ty th&#xF4;ng th&#x1B0;&#x1EDD;ng s&#x1EBD; c&#xF3; m&#x1ED9;t b&#x1EA3;ng &#xE1;nh x&#x1EA1; gi&#x1EEF;a t&#xEA;n c&#x1EE7;a th&#xE0;nh ph&#x1ED1; v&#xE0; <code>ids</code>. N&#x1EBF;u business ch&#x1EC9; trong v&#xF2;ng m&#x1ED9;t qu&#x1ED1;c gia, s&#x1ED1; th&#xE0;nh ph&#x1ED1; s&#x1EBD; kh&#xF4;ng th&#x1EF1;c s&#x1EF1; l&#x1EDB;n, v&#xE0; <code>ids</code> c&#xF3; th&#x1EC3; trong v&#xF2;ng <code>10,000</code>. Ch&#xFA;ng ta ch&#x1EC9; c&#x1EA7;n m&#x1ED9;t m&#x1EA3;ng <code>bool</code> c&#xF3; k&#xED;ch th&#x1B0;&#x1EDB;c kho&#x1EA3;ng <code>10,000</code> &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c nhu c&#x1EA7;u.</p>
@@ -1131,7 +1092,7 @@ ok _/Users/caochunhui/<span class="hljs-built_in">test</span>/go/<span class="hl
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.9 Grayscale Publishing and A/B test","level":"1.6.9","depth":2,"next":{"title":"5.10 Ghi chú bổ sung","level":"1.6.10","depth":2,"path":"ch5-web/ch5-10-ext.md","ref":"ch5-web/ch5-10-ext.md","articles":[]},"previous":{"title":"5.8 Interface và Table Driven Development","level":"1.6.8","depth":2,"path":"ch5-web/ch5-08-interface-and-web.md","ref":"ch5-web/ch5-08-interface-and-web.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-09-gated-launch.md","mtime":"2019-07-31T07:32:25.948Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.9 Grayscale Publishing and A/B test","level":"1.6.9","depth":2,"next":{"title":"5.10 Ghi chú bổ sung","level":"1.6.10","depth":2,"path":"ch5-web/ch5-10-ext.md","ref":"ch5-web/ch5-10-ext.md","articles":[]},"previous":{"title":"5.8 Interface và Table Driven Development","level":"1.6.8","depth":2,"path":"ch5-web/ch5-08-interface-and-web.md","ref":"ch5-web/ch5-08-interface-and-web.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-09-gated-launch.md","mtime":"2019-07-31T08:36:17.914Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:11:57.422Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
