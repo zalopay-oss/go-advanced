@@ -17,9 +17,11 @@ Go hỗ trợ các lời gọi hàm từ C thông qua một công cụ gọi là
 
 Tuy nhiên ta cũng không nên lạm dụng CGO vì vấn đề hiệu suất, ví dụ nếu so sánh với Rust: `rustgo` chỉ chậm hơn gọi hàm Go trực tiếp khoảng 11%, nhưng nó lại nhanh hơn gấp 15 lần `CGO`, một vài con số cụ thể từ [link sau](https://blog.filippo.io/rustgo/):
 
-name|        time/op
---- | ---
-CallOverhead/Inline | 1.67ns ± 2%
-CallOverhead/Go     | 4.49ns ± 3%
-CallOverhead/rustgo | 4.58ns ± 3%
-CallOverhead/cgo    | 69.4ns ± 0%
+<div align="center">
+	<img src="../images/ch2-table-per.png" width="350>
+	<br/>
+	<span align="center">
+		<i></i>
+	</span>
+</div>
+<br/>

@@ -206,7 +206,7 @@ fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
 ## 1.3.3. Slice
 
 <div align="center">
-	<img src="../images/1-3-golang-slices-length-capacity.jpg"width="600">
+	<img src="../images/1-3-golang-slices-length-capacity.jpg"width="500">
 	<br/>
 	<span align="center">
 		<i>Slice</i>
