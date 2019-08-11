@@ -1,12 +1,12 @@
 # 4.5 gRPC Nâng cao
 
-Các framework RPC cơ bản thường gặp phải nhiều vấn đề về bảo mật và khả năng mở rộng. Phần này sẽ mô tả ngắn gọn một số cách xác thực an toàn bằng gRPC. Sau đó giới thiệu tính năng interceptor trên gRPC và cách triển khai cơ chế xác thực Token một cách tốt nhất, theo dõi các lời gọi RPC và bắt các Panic thông qua interceptor. Cuối cùng là cách gRPC service kết hợp với Web service khác như thế nào.
+Các framework RPC cơ bản thường gặp phải nhiều vấn đề về bảo mật và khả năng mở rộng. Phần này sẽ mô tả ngắn gọn một số cách xác thực an toàn bằng gRPC. Sau đó giới thiệu tính năng interceptor trên gRPC và cách triển khai cơ chế xác thực Token một cách tốt nhất, theo dõi các lời gọi RPC và bắt các lỗi panic thông qua interceptor. Cuối cùng là cách gRPC service kết hợp với Web service khác như thế nào.
 
-## 4.5.1 Xác thực qua chứng chỉ
+## 4.5.1 Xác thực bằng chứng chỉ (certificate)
 
 gRPC được xây dựng dựa trên giao thức HTTP/2 và hỗ trợ TLS rất tốt. gRPC service trong chương trước chúng tôi không cung cấp hỗ trợ chứng chỉ, vì vậy client `grpc.WithInsecure()` có thể  thông qua tùy chọn mà bỏ qua việc xác thực chứng chỉ   trong server được kết nối. gRPC service không có chứng chỉ được kích hoạt sẽ phải giao tiếp hoàn toàn bằng plain-text với client và có nguy cơ cao bị giám sát bởi một bên thứ ba khác. Để đảm bảo rằng giao tiếp gRPC không bị giả mạo hoặc giả mạo bởi các bên thứ ba, chúng ta có thể kích hoạt mã hóa TLS trên server.
 
-Bạn có thể tạo private key và certificate (chứng chỉ) cho server và client riêng biệt bằng các lệnh sau:
+Bạn có thể tạo private key và certificate cho server và client riêng biệt bằng các lệnh sau:
 
 ```sh
 $ openssl genrsa -out server.key 2048
@@ -112,7 +112,7 @@ Server cũng sử dụng hàm `credentials.NewTLS` để tạo chứng chỉ, ch
 
 Như vậy chúng ta đã xây dựng được một hệ thống gRPC đáng tin cậy để kết nối giữa Client và Server thông qua xác thực chứng chỉ từ cả 2 chiều.
 
-## 4.5.2 Xác thực token
+## 4.5.2 Xác thực bằng token
 
 Xác thực dựa trên chứng chỉ được mô tả ở trên là dành cho từng kết nối gRPC. Ngoài ra gRPC cũng  hỗ trợ xác thực cho mỗi lệnh gọi   gRPC, để việc quản lý quyền có thể thực hiện trên các kết nối khác nhau dựa trên user token.
 
@@ -351,7 +351,7 @@ func main() {
             if strings.Contains(
                 r.Header.Get("Content-Type"), "application/grpc",
             ) {
-                grpcServer.ServeHTTP(w, r) // gRPC Server
+                grpcServer.ServeHTTP(w, r)
                 return
             }
 

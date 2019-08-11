@@ -1,10 +1,10 @@
 # 4.6. gRPC và Protobuf extensions
 
-Hiện nay, cộng đồng Open-source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn.
+Hiện nay, cộng đồng opensource đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn. Ở phần này sẽ trình bày về một số extensions thông dụng.
 
 ## 4.6.1 Validator
 
-Cho đến nay, chúng tôi đã giới thiệu Protobuf phiên bản thứ ba. Ở phiên bản thứ hai của Protobuf có một thuộc tính `default` ở các trường nhằm định nghĩa giá trị mặc định cho nó là một giá trị thuộc kiểu string hoặc kiểu số.
+Cho đến nay, Protobuf đã có phiên bản thứ ba. Ở phiên bản thứ hai của Protobuf có một thuộc tính `default` ở các trường nhằm định nghĩa giá trị mặc định cho nó là một giá trị thuộc kiểu string hoặc kiểu số.
 
 Chúng ta sẽ tạo ra file proto sử dụng phiên bản Protobuf thứ hai:
 
@@ -51,7 +51,7 @@ message Message {
 }
 ```
 
-Trong dấu đóng mở ngoặc vuông sau mỗi trường trong message là một cú pháp mở rộng. Chúng ta sẽ sinh lại mã nguồn Go dựa trên những thông tin liên quan đến phần mở rộng của options. Phần mã nguồn sinh ra có một số nội dung dựa trên phần mở rộng như sau:
+Trong dấu đóng mở ngoặc vuông sau mỗi trường trong message là một cú pháp mở rộng. Chúng ta sẽ tạo lại mã nguồn Go dựa trên những thông tin liên quan đến phần mở rộng của options. Phần mã nguồn sinh ra có một số nội dung dựa trên phần mở rộng như sau:
 
 ***hello.pb.go:***
 
@@ -75,9 +75,9 @@ var E_DefaultInt = &proto.ExtensionDesc{
 }
 ```
 
-Chúng ta có thể parse out phần mở rộng của option được định nghĩa trong mỗi thành viên của Message tại thời điểm thực thi bởi kiểu `reflection`, và sau đó parse out gía trị mặc định mà chúng ta đã định nghĩa sẵn từ những thông tin liên quan khác cho phần mở rộng.
+Chúng ta có thể parse out phần mở rộng của option được định nghĩa trong mỗi thành viên của Message tại thời điểm thực thi bởi kiểu `reflection`, và sau đó parse out giá trị mặc định mà chúng ta đã định nghĩa sẵn từ những thông tin liên quan khác cho phần mở rộng.
 
-Trong cộng đồng Open-source, thư viện [go-proto-validators](github.com/mwitkow/go-proto-validators) là một extension của protobuf có chức năng validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới:
+Trong cộng đồng opensource, thư viện [go-proto-validators](github.com/mwitkow/go-proto-validators) là một extension của protobuf có chức năng validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới:
 
 ```sh
 $ go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
@@ -185,10 +185,9 @@ func (this *Message) Validate() error {
 Thông qua hàm Validate() được sinh ra, chúng có thể được kết hợp với `gRPC interceptor`, chúng ta có thể dễ dàng validate giá trị của tham số đầu vào và kết quả trả về của mỗi hàm.
 
 ## 4.6.2 REST interface
+Hiện nay RESTful JSON API vẫn là sự lựa chọn hàng đầu cho các ứng dụng web hay mobile. Vì tính tiện lợi và dễ dùng của RESTful API nên chúng ta vẫn sử dụng nó để frondend có thể giao tiếp với hệ thống backend. Nhưng khi chúng ta sử dụng framework gRPC của Google để xây dựng các service. Các service sử dụng gRPC thì dễ dàng trao đổi dữ liệu với nhau dựa trên giao thức HTTP/2 và protobuf, nhưng ở phía frontend lại sử dụng [RESTful API](https://restfulapi.net/) API hoạt động trên giao thức HTTP/1. Vấn đề đặt ra là chúng ta cần phải chuyển đổi các yêu cầu RESTful API thành các yêu cầu gRPC để hệ thống các service gRPC có thể hiểu được.
 
-**gRPC service** thường được dùng trong việc trao đổi message giữa các cluster trong hệ thống. Để cung cấp API ra bên ngoài, thông thường một [REST interface](https://restfulapi.net/) sẽ được sinh ra.
-
-Cộng đồng Open-source đã hiện thực một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
+Cộng đồng opensource đã hiện thực một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
 
 
 <div align="center">
@@ -356,9 +355,7 @@ $ protoc -I. \
 File `hello.swagger.json` sẽ được sinh ra sau đó. Trong trường hợp này, chúng ta có thể dùng `swagger-ui project` để cung cấp tài liệu `REST interface` và testing dưới dạng web pages.
 
 ## 4.6.3 Docker grpc-gateway
-
-Với những lập trình viên phát triển gRPC Services trên các ngôn ngữ không phải Golang như Java,C++,v,v.. có nhu cầu sinh ra grpc gateway cho các services của họ nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, protobuf, các lệnh generate,v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker để xây dựng grpc-gateway theo bài hướng dẫn chi tiết sau [buildingdocker-grpc-gateway](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c), đây cũng được xem là một best practice khi lập trình với gRPC.
+Với những lập trình viên phát triển gRPC Services trên các ngôn ngữ không phải Golang như Java, C++, ... có nhu cầu sinh ra grpc gateway cho các services của họ nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, protobuf, các lệnh generate,v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker để xây dựng grpc-gateway theo bài hướng dẫn chi tiết sau [buildingdocker-grpc-gateway](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c).
 
 ## 4.6.4 Nginx
-
-Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều back-end tới cùng gRPC service giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx's gRPC là một chủ đề lớn, tốt hơn chúng ta nên tham khảo đến những tài liệu liên quan nói về chúng.
+Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều gRPC service instance giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx về gRPC là một chủ đề lớn, ở đây chúng tôi không trinhf bày hết được, các bạn có thể tham khảo các tài liệu trên trang chủ của Nginx như [ở đây](https://www.nginx.com/blog/nginx-1-13-10-grpc/).

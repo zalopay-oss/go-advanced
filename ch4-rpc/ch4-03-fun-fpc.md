@@ -1,6 +1,6 @@
 # 4.3 RPC trong Golang
 
-Chúng ta có thể sử dụng RPC cho nhiều mục đích khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC để hỗ trợ cho việc lập trình. Trong phần này, chúng ta sẽ sử dụng một framework RPC tích hợp sẵn trong Go.
+Chúng ta có thể sử dụng RPC cho nhiều mục đích khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC để hỗ trợ cho việc lập trình. Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn trong Go cho các hiện thực của một số trường hợp.
 
 ## 4.3.1 Hiện thực RPC phía Client
 
@@ -203,11 +203,11 @@ func doClientWork(client *rpc.Client) {
 }
 ```
 
-Server sẽ trả về khóa đã thay đổi thông qua phương thức `Watch`. Bằng cách này chúng ta có thể giám sát việc thay đổi trạng thái của khóa.
+Server sẽ trả về key đã thay đổi thông qua phương thức `Watch`. Bằng cách này chúng ta có thể giám sát việc thay đổi trạng thái của key.
 
 ## 4.3.3 Reverse RPC
 
-RPC bình thường dựa trên cấu trúc client-server. Server của RPC tương ứng với server của mạng và client của RPC cũng tương ứng với client mạng. Tuy nhiên, đối với một số trường hợp đặc biệt, chẳng hạn như khi cung cấp dịch vụ RPC trên mạng nội bộ, nhưng mạng bên ngoài không thể  kết nối với server mạng nội bộ.
+RPC thường được sử dụng trong mô hình client-server. Trong đó server và client cần dùng chung một network. Tuy nhiên, đối với một số trường hợp đặc biệt, chẳng hạn như khi cung cấp dịch vụ RPC trên mạng nội bộ, nhưng mạng bên ngoài không thể kết nối với server mạng nội bộ.
 
 <div align="center">
 
@@ -294,9 +294,9 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 }
 ```
 
-## 4.3.4 RPC theo ngữ cảnh
+## 4.3.4 RPC theo ngữ cảnh (context)
 
-Dựa trên ngữ cảnh (context) chúng ta có thể cung cấp những RPC services thích hợp cho những client khác nhau. Ta có thể hỗ trợ các tính năng theo ngữ cảnh bằng cách cung cấp các RPC service cho từng link kết nối.
+Dựa trên ngữ cảnh chúng ta có thể cung cấp những RPC services thích hợp cho những client khác nhau. Ta có thể hỗ trợ các tính năng theo ngữ cảnh bằng cách cung cấp các RPC service cho từng link kết nối.
 
 Đầu tiên thêm vào thành phần `conn` ở `HelloService` cho link tương ứng:
 
