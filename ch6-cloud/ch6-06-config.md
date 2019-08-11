@@ -4,21 +4,21 @@ Trong hệ thống phân tán, thường có những vấn đề gây phiền ch
 
 Do đó, mục tiêu của chúng ta là tránh áp dụng hoặc bỏ qua phương pháp trực tuyến và thực hiện một số sửa đổi cho chương trình trực tuyến. Một sửa đổi điển hình là mục cấu hình của chương trình.
 
-## 6.6.1 Các ví dụ
+## 6.6.1 Thảo luận các ví dụ
 
-### 6.6.1.1 Hệ thống báo cáo
+### 6.6.1.1 Hệ thống báo cáo (Reporting system)
 
-Trong các hệ thống OLAP hoặc một số nền tảng dữ liệu ngoại tuyến, sau một thời gian dài phát triển, các chức năng của toàn bộ hệ thống đã dần ổn định. Các dữ liệu đã có sẵn và hầu hết các thay đổi để hiển thị chỉ liên quan tới việc thay đổi câu truy vấn SQL. Lúc này, ta nghĩ tới việc có thể cấu hình được các câu truy vấn SQL mà không cần phải sửa đổi code.
+Trong các hệ thống [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processing) hoặc một số nền tảng dữ liệu ngoại tuyến, sau một thời gian dài phát triển, các chức năng của toàn bộ hệ thống đã dần ổn định. Các dữ liệu đã có sẵn và hầu hết các thay đổi để hiển thị chỉ liên quan tới việc thay đổi câu truy vấn SQL. Lúc này, ta nghĩ tới việc có thể cấu hình được các câu truy vấn SQL mà không cần phải sửa đổi code.
 
 Khi doanh nghiệp đưa ra các yêu cầu mới, việc chúng ta cần làm là cấu hình lại câu SQL cho hệ thống. Những thay đổi này có thể được thực hiện trực tiếp mà không cần khởi động lại.
 
 ### 6.6.1.2 Cấu hình mang tính doanh nghiệp
 
-Nền tảng (Platform) của một công ty lớn luôn phục vụ cho nhiều ngành nghề kinh doanh và mỗi ngành nghề kinh doanh được gán một id duy nhất. Nền tảng này được tạo thành từ nhiều module và cần chia sẻ một khái niệm kinh doanh. Khi công ty mở một dây chuyền sản phẩm mới, nó cần phải được thông qua bởi tất cả các hệ thống trong nền tảng. Lúc này, chắc chắn là sẽ tốn rất nhiều thời gian để nó có thể chạy được. Ngoài ra, các loại cấu hình toàn cục cần phải được quản lý theo cách thống nhất, các logic cộng và trừ cũng phải được quản lý theo cách thống nhất. Khi cấu hình này được thay đổi, hệ thống cần phải tự động thông báo cho toàn bộ hệ thống của nền tảng mà không cần sự can thiệp của con người (hoặc chỉ can thiệp rất đơn giản, chẳng hạn như kiểm toán nhấp chuột một phát).
+Nền tảng (Platform) của một công ty lớn luôn phục vụ cho nhiều business khác nhau và mỗi business được gán một ID duy nhất. Nền tảng này được tạo thành từ nhiều module và cùng chia sẻ một business. Khi công ty mở một dây chuyền sản phẩm mới, nó cần phải được thông qua bởi tất cả các hệ thống trong nền tảng. Lúc này, chắc chắn là sẽ tốn rất nhiều thời gian để nó có thể chạy được. Ngoài ra, các loại cấu hình toàn cục cần phải được quản lý theo cách thống nhất, các logic cộng và trừ cũng phải được quản lý theo cách thống nhất. Khi cấu hình này được thay đổi, hệ thống cần phải tự động thông báo cho toàn bộ hệ thống của nền tảng mà không cần sự can thiệp của con người (hoặc chỉ can thiệp rất đơn giản, chẳng hạn như kiểm toán nhấp chuột một phát).
 
-Ngoài quản lý trong lĩnh vực kinh doanh, nhiều công ty Internet còn phải kinh doanh theo quy định của thành phố. Khi doanh nghiệp được mở ở một thành phố, id thành phố mới sẽ tự động được thêm vào danh sách trong hệ thống. Bằng cách này, quá trình kinh doanh có thể chạy tự động.
+Ngoài quản lý trong lĩnh vực kinh doanh, nhiều công ty Internet còn phải kinh doanh theo quy định của thành phố. Khi doanh nghiệp được mở ở một thành phố, ID thành phố mới sẽ tự động được thêm vào danh sách trong hệ thống. Bằng cách này, quá trình kinh doanh có thể chạy tự động.
 
-Một ví dụ khác, có nhiều loại hoạt động trong hệ điều hành của một công ty. Một số hoạt động có thể gặp những sự kiện bất ngờ (như khủng hoảng quan hệ công chúng), và hệ thống cần tắt chức năng liên quan lĩnh vực đó đi. Lúc này, một số công tắc sẽ được sử dụng để tắt nhanh các chức năng tương ứng. Hoặc nhanh chóng xóa id của hoạt động mà bạn muốn khỏi danh sách chứa. Trong chương Web, chúng ta biết rằng đôi khi cần phải có một hệ thống để đo được lưu lượng truy cập vào các chức năng. Chúng ta có thể chủ động lấy thông tin này kết hợp với cấu hình hệ thống để tắt một tính năng trong trường hợp có lưu lượng lớn bất thường.
+Một ví dụ khác, có nhiều loại hoạt động trong hệ điều hành của một công ty. Một số hoạt động có thể gặp những sự kiện bất ngờ (như khủng hoảng quan hệ công chúng), và hệ thống cần tắt chức năng liên quan lĩnh vực đó đi. Lúc này, một số công tắc sẽ được sử dụng để tắt nhanh các chức năng tương ứng. Hoặc nhanh chóng xóa ID của hoạt động mà bạn muốn khỏi danh sách chứa. Trong chương Web, chúng ta biết rằng đôi khi cần phải có một hệ thống để đo được lưu lượng truy cập vào các chức năng. Chúng ta có thể chủ động lấy thông tin này kết hợp với cấu hình hệ thống để tắt một tính năng trong trường hợp có lưu lượng lớn bất thường.
 
 ## 6.6.2 Sử dụng etcd để thực hiện cập nhật cấu hình
 
@@ -41,6 +41,7 @@ etcdctl get /configs/remote_config.json
 ```
 
 ### 6.6.2.2 Tạo ứng dụng khách etcd
+Cấu trúc khởi tạo kết nối bằng package etcd cho người dùng.
 
 ```go
 cfg := client.Config{
@@ -49,8 +50,6 @@ cfg := client.Config{
   HeaderTimeoutPerRequest: time.Second,
 }
 ```
-
-Cấu trúc khởi tạo kết nối bằng package etcd cho người dùng.
 
 ### 6.6.2.3 Lấy cấu hình
 
@@ -64,7 +63,7 @@ if err != nil {
 }
 ```
 
-Dùng phương thức `Get()` của KeysAPI trong etcd tương đối đơn giản.
+Dùng phương thức `Get()` của KeysAPI trong etcd tương đối đơn giản. Các bạn có thể tham khảo thêm các API khác [ở đây](https://godoc.org/github.com/coreos/etcd/client).
 
 ### 6.6.2.4 Đăng ký tự động cập nhật cấu hình
 
@@ -82,7 +81,7 @@ go func() {
 
 Bằng cách theo dõi những thay đổi sự kiện của đường dẫn cấu hình, khi có nội dung thay đổi trong đường dẫn, chúng ta có thể nhận được thông báo thay đổi cùng với giá trị đã thay đổi.
 
-### 6.6.2.5 Tích hợp
+### 6.6.2.5 Chương trình hoàn chỉnh
 
 ```go
 package main
@@ -159,7 +158,7 @@ func getConfig() ConfigStruct {
 }
 
 func main() {
-  // init your app
+  // khởi tạo ứng dụng của bạn
 }
 ```
 
@@ -189,6 +188,6 @@ Sau khi cấu hình của hệ thống kinh doanh được chuyển đến trung
 
 Cụ thể, khi cung cấp SDK đọc cấu hình cho một dịch vụ, tốt nhất là lưu cache cấu hình thu được trên đĩa của máy nghiệp vụ. Khi trung tâm cấu hình không hoạt động, bạn có thể trực tiếp sử dụng nội dung của đĩa cứng. Khi kết nối lại được với trung tâm cấu hình, các nội dung sẽ được cập nhật.
 
-Hãy xem xét kỹ vấn đề thống nhất dữ liệu khi thêm bộ đệm. Các máy kinh doanh có thể không thống nhất về cấu hình do lỗi mạng, chúng tôi cần biết được nó đang diễn ra bằng hệ thống giám sát.
+Hãy xem xét kỹ vấn đề thống nhất dữ liệu khi thêm cache. Các máy kinh doanh có thể không thống nhất về cấu hình do lỗi mạng, chúng ta có thể biết được nó đang diễn ra bằng hệ thống giám sát.
 
-Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng cách đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thua lỗ khi vấn đề xảy ra.
+Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng cách đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thiệt hại quá nhiều khi vấn đề xảy ra.
