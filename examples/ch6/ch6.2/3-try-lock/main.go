@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -44,11 +45,11 @@ func main() {
 			defer wg.Done()
 			if !l.Lock() {
 				// log error
-				println("lock failed")
+				fmt.Println("lock failed")
 				return
 			}
 			counter++
-			println("current counter", counter)
+			fmt.Println("current counter", counter)
 			l.Unlock()
 		}()
 	}
