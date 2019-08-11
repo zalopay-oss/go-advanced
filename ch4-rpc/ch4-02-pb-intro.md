@@ -9,7 +9,7 @@
     <br/>
 </div>
 
-> *Xem thêm: [Benchmarking Protocol Buffers, JSON and XML in Go](https://medium.com/@shijuvar/benchmarking-protocol-buffers-json-and-xml-in-go-57fa89b8525)*.
+*Xem thêm: [Benchmarking Protocol Buffers, JSON and XML in Go](https://medium.com/@shijuvar/benchmarking-protocol-buffers-json-and-xml-in-go-57fa89b8525)*.
 
 Bạn đọc có thể cài đặt và làm quen với các ví dụ Protobuf trên [trang chủ](https://developers.google.com/protocol-buffers/docs/gotutorial) trước khi đi vào nội dung chính.
 
@@ -31,7 +31,7 @@ message String {trong
 }
 ```
 
-Để sinh ra mã nguồn Go từ file `hello.proto` ở trên, đầu tiên là cài đặt bộ biên dịch `protoc` qua liên kết https://github.com/google/protobuf/releases, sau đó là cài đặt một plugin cho Go thông qua lệnh `go get github.com/golang/protobuf/protoc-gen-go`.
+Để sinh ra mã nguồn Go từ file `hello.proto` ở trên, đầu tiên là cài đặt bộ biên dịch `protoc` qua liên kết [ở đây](https://github.com/google/protobuf/releases), sau đó là cài đặt một plugin cho Go thông qua lệnh `go get github.com/golang/protobuf/protoc-gen-go`.
 
 Chúng ta sẽ sinh ra mã nguồn Go bằng lệnh sau:
 

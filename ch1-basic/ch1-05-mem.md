@@ -20,7 +20,7 @@ Kích thước cố định của stack sẽ dẫn đến hai vấn đề:
 
 Giải pháp cho vấn đề này chính là cấp phát linh hoạt vùng nhớ stack:
   * Một Goroutines sẽ được bắt đầu bằng một vùng nhớ nhỏ (khoảng 2KB hoặc 4KB).
-  * Khi gọi đệ quy sâu (không gian stack hiện tại là không đủ) Goroutines sẽ tự động tăng không gian stack (kích thước tối đa của stack có thể được đạt tới 1GB)
+  * Khi gọi đệ quy sâu (không gian stack hiện tại là không đủ) Goroutines sẽ tự động tăng không gian stack (kích thước tối đa của stack có thể được đạt tới 1GB).
   * Bởi vì chi phí của việc khởi tạo là nhỏ, chúng ta có thể dễ dàng giải phóng hàng ngàn goroutines.
 
 Go runtime có riêng cơ chế định thời cho Goroutines, nó dùng một số kỹ thuật để ghép M Goroutines trên N thread của hệ thống. Cơ chế định thời Goroutines tương tự với cơ chế định thời của `kernel` nhưng chỉ ở mức chương trình. Biến `runtime.GOMAXPROCS` quy định số lượng system thread hiện thời chạy trên các Goroutines.
@@ -337,7 +337,7 @@ func main(){
 }
 ```
 
-Với Go, bạn có thể  đảm bảo rằng kết quả sẽ xuất ra bình thường bởi việc thêm vào thời gian sleep như sau
+Với Go, bạn có thể  đảm bảo rằng kết quả sẽ xuất ra bình thường bởi việc thêm vào thời gian sleep như sau:
 
 ```go
 func main(){

@@ -129,7 +129,7 @@ var unknown2 = [...]interface{}{123, "Hello!"}
 var chanList = [2]chan int{}
 ```
 
-Chúng ta cũng có thể định nghĩa một array rỗng
+Chúng ta cũng có thể định nghĩa một array rỗng.
 
 ```go
 // Định nghĩa một array chiều dài 0
@@ -149,7 +149,7 @@ Một array có chiều dài 0 thì không chiếm không gian lưu trữ.
 </div>
 <br/>
 
-`string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string là [immutable](https://en.wikipedia.org/wiki/Immutable_object)
+`string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string là [immutable](https://en.wikipedia.org/wiki/Immutable_object).
 
 Cấu trúc [reflect.StringHeader](https://golang.org/src/reflect/value.go?s=56526:56578#L1873) được dùng để biểu diễn string :
 

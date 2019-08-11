@@ -196,7 +196,7 @@ func main() {
 }
 ```
 
-Ở ví dụ trên, error sẽ được bao bọc trong hai lớp. chúng ta có thể duyệt quy trình đóng gói và bỏ qua
+Ở ví dụ trên, error sẽ được bao bọc trong hai lớp. chúng ta có thể duyệt quy trình đóng gói và bỏ qua.
 
 ```go
 for i, e := range err.(errors.Error).Wraped() {
@@ -212,7 +212,7 @@ for i, x := range err.(errors.Error).Caller() {
 }
 ```
 
-Nếu chúng ta cần truyền một error thông qua network. chúng ta có thể encode `errors.ToJson(err)` như là JSON string
+Nếu chúng ta cần truyền một error thông qua network. chúng ta có thể encode `errors.ToJson(err)` như là JSON string.
 
 ```go
 // Gửi lỗi dưới dạng JSON
@@ -230,7 +230,7 @@ func recvError(ch <-chan string) error {
 }
 ```
 
-Cho web service dựa trên http protocol, chúng ta cũng có thể kết hợp trạng thái http với error
+Cho web service dựa trên http protocol, chúng ta cũng có thể kết hợp trạng thái http với error.
 
 ```go
 err := errors.NewWithCode(404, "http error code")
@@ -288,16 +288,14 @@ Ngôn ngữ Go sẽ có một kiểu dữ liệu mạnh, và cụ thể chuyển
 
 `Panic` là một hàm dựng sẵn được dùng để dừng luồng thực thi thông thường và bắt đầu `panicking`. Khi hàm `F` gọi `panic`, hàm F sẽ dừng thực thi, bất cứ hàm liên quan tới F sẽ thực thi một cách bình thường, và sau đó lệnh return F sẽ được gọi.
 
-`Panic` được hỗ trợ để ném ra một kiểu ngoại lệ tùy ý (không chỉ là kiểu `error`), `recover` sẽ trả về một giá trị của lời gọi hàm và `panic` cũng như thông tin về kiểu tham số của hàm
-
-và những nguyên mẫu của hàm sẽ như sau:
+`Panic` được hỗ trợ để ném ra một kiểu ngoại lệ tùy ý (không chỉ là kiểu `error`), `recover` sẽ trả về một giá trị của lời gọi hàm và `panic` cũng như thông tin về kiểu tham số của hàm và những nguyên mẫu của hàm sẽ như sau:
 
 ```go
 func panic (interface{})
 func recover() interface{}
 ```
 
-Luồng thông thường trong ngôn ngữ Go là kết quả trả về của việc thực thi lệnh return. Đó không phải là một exception trong luồng, do đó luồng thực thi của ngoại lệ `recover` sẽ catch function trong process sẽ luôn luôn trả về  `nil`. Cái khác là ngoại lệ exception. Khi một lời gọi `panic` sẽ ném ra một ngoại lệ, function sẽ kết thúc việc thực thi lệnh con, nhưng vì lời gọi registered `defer` sẽ vấn được thực thi một cách bình thường và sau đó trả về caller. Caller trong hàm hiện tại, bởi vì trạng thái xử lý ngoại lệ chưa được bắt, `panic` sẽ tương tự như hành vi gọi hàm một cách trực tiếp. Khi một ngoại lệ xảy ra, nếu `defer` được thực thi lời gọi `recover`, nó có thể được bắt bằng việc trigger tham số  `panic, và trả về luồng thực thi bình thường.
+Luồng thông thường trong ngôn ngữ Go là kết quả trả về của việc thực thi lệnh return. Đó không phải là một exception trong luồng, do đó luồng thực thi của ngoại lệ `recover` sẽ catch function trong process sẽ luôn luôn trả về  `nil`. Cái khác là ngoại lệ exception. Khi một lời gọi `panic` sẽ ném ra một ngoại lệ, function sẽ kết thúc việc thực thi lệnh con, nhưng vì lời gọi registered `defer` sẽ vấn được thực thi một cách bình thường và sau đó trả về caller. Caller trong hàm hiện tại, bởi vì trạng thái xử lý ngoại lệ chưa được bắt, panic sẽ tương tự như hành vi gọi hàm một cách trực tiếp. Khi một ngoại lệ xảy ra, nếu `defer` được thực thi lời gọi `recover`, nó có thể được bắt bằng việc trigger tham số  panic, và trả về luồng thực thi bình thường.
 
 `defer` sẽ thực hiện lệnh gọi `recover` nó thường gây khó khăn cho những người mới bắt đầu.
 
@@ -375,7 +373,7 @@ func main(){
 }
 ```
 
-Nó sẽ phải tách biệt từ stack frame với một ngoại lệ bởi stack frame, do đó hàm `recover` sẽ có thể ném một ngoại lệ một cách bình thường. Hay nói cách khác, hàm `recover` sẽ bắt ngoại lệ  của mức trên gọi hàm stack frame (chỉ là một layer `defer` function)
+Nó sẽ phải tách biệt từ stack frame với một ngoại lệ bởi stack frame, do đó hàm `recover` sẽ có thể ném một ngoại lệ một cách bình thường. Hay nói cách khác, hàm `recover` sẽ bắt ngoại lệ  của mức trên gọi hàm stack frame (chỉ là một layer `defer` function).
 
 Dĩ nhiên, để tránh việc gọi `recover` không nhận ra được ngoại lệ, chúng ta nên tránh ném ra ngoại lệ `nil` như là một tham số.
 
@@ -389,7 +387,7 @@ func main() {
 }
 ```
 
-Khi chúng ta muốn trả về việc ném ngoại lệ vào error, nếu chúng ta muốn trung thành trả về thông tin gốc, bạn sẽ phải cần sử lý chúng một cách rời rạc cho những kiểu khác nhau
+Khi chúng ta muốn trả về việc ném ngoại lệ vào error, nếu chúng ta muốn trung thành trả về thông tin gốc, bạn sẽ phải cần sử lý chúng một cách rời rạc cho những kiểu khác nhau.
 
 ```go
 func foo() (err error) {

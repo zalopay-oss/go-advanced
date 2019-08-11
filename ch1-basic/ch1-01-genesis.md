@@ -63,7 +63,7 @@ Trong vòng những năm gần đây, Go là một ngôn ngữ được ưa chu�
 
 ## 1.1.2. Hello World
 
-Việc đầu tiên là cài đặt chương trình Go lang theo hướng dẫn trên trang chủ [golang.org](https://golang.org/)
+Việc đầu tiên là cài đặt chương trình Go lang theo hướng dẫn trên trang chủ [golang.org](https://golang.org/).
 
 Để bắt đầu, chương trình đầu tiên thường in ra dòng chữ "Hello World", đoạn code bên dưới là chương trình này.
 

@@ -50,7 +50,7 @@ main()
 }
 ```
 
-Ví dụ này cũng xuất hiện trong bản đầu tiên của **_C Programming Language_** xuất bản năm 1978 bởi Brian W. Kerninghan và Dennis M. Ritchie (K&R)
+Ví dụ này cũng xuất hiện trong bản đầu tiên của **_C Programming Language_** xuất bản năm 1978 bởi Brian W. Kerninghan và Dennis M. Ritchie (K&R).
 
 Năm 1988, 10 năm sau khi giới thiệu hướng dẫn của K&R, phiên bản thứ 2 của **_C Programming Language_** cuối cùng cũng được xuất bản. Thời điểm này, việc chuẩn hóa ngôn ngữ ANSI C đã được hoàn thành sơ bộ, nhưng phiên bản chính thức của document vẫn chưa được công bố.
 
