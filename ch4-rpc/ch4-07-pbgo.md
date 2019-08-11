@@ -230,7 +230,7 @@ func main() {
 }
 ```
 
-Sau đó test REST service bằng lệnh sau
+Sau đó test REST service bằng lệnh sau:
 
 ```sh
 curl localhost:8080/hello/vgo

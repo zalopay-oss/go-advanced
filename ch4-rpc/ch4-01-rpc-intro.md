@@ -14,7 +14,7 @@
 
 Thư viện chuẩn của Go chứa gói [net/rpc](https://golang.org/pkg/net/rpc/) dùng để hiện thực chương trình RPC, chương trình RPC đầu tiên của chúng ta sẽ in ra chuỗi "Hello World" được tạo ra và trả về từ máy khác:
 
-***service/hello.go***: định nghĩa service Hello
+***service/hello.go***: định nghĩa service Hello.
 
 ```go
 package service
@@ -36,7 +36,7 @@ func (p *HelloService) Hello(request string, reply *string) error {
 
 ```
 
-***server/main.go:*** chương trình phía server
+***server/main.go:*** chương trình phía server.
 
 ```go
 package main
@@ -75,7 +75,7 @@ func main() {
 ```
 
 
-***client/main.go:*** mã nguồn client để gọi service Hello
+***client/main.go:*** mã nguồn client để gọi service Hello.
 
 ```go
 package main
@@ -269,7 +269,7 @@ May mắn là thư viện `net/rpc` của Go có ít nhất hai thiết kế đ�
    * Một là cho phép chúng ta có thể thay đổi quá trình encoding và decoding gói tin RPC.
    * Hai là interface RPC được xây dựng dựa trên interface `io.ReadWriteClose`, chúng ta có thể  xây dựng RPC trên những protocol giao tiếp khác nhau.
 
-Từ đây chúng ta có thể hiện thực việc cross-language thông qua gói `net/rpc/jsonrpc` :
+Từ đây chúng ta có thể hiện thực việc cross-language thông qua gói `net/rpc/jsonrpc`:
 
 ***Hàm main mới phía server:***
 

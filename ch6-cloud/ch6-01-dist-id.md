@@ -33,8 +33,10 @@ Cơ chế này có thể hỗ trợ chúng ta tạo ra `2 ^ 12 = 4096` tin nhắ
 
 Nhìn chung, các server trong các trung tâm dữ liệu khác nhau sẽ cung cấp các API tương ứng để lấy id của trung tâm dữ liệu, vì vậy datacenter_id có thể dễ dàng lấy trong giai đoạn triển khai. Còn worker_id là một id mà chúng ta gán một cách "logically" cho từng máy. Chúng ta nên xử lý thế nào? Ý tưởng đơn giản là sử dụng các công cụ cung cấp tính năng ID tự tăng, chẳng hạn như trong MySQL:
 
+```sh
 mysql> insert into a (ip) values("10.1.2.101");
 Query OK, 1 row affected (0.00 sec)
+```
 
 ```sh
 mysql> select last_insert_id();

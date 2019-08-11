@@ -11,13 +11,13 @@
 
 Trong chương Web, chúng ta đã biết MySQL có rất nhiều rủi ro. Nó là hệ thống cơ sở dữ liệu đảm bảo tính thời gian thực và tính nhất quán cao, do đó các chức năng của MySQL được thiết kế để đáp ứng tính nhất quán này. Ví dụ: thiết kế ghi nhật ký trước (write ahead log), index, tổ chức dữ liệu dựa trên [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree) và transaction dựa trên [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control).
 
-Cơ sở dữ liệu quan hệ (Relational database) thường được sử dụng để triển khai các hệ thống OLTP. OLTP là gì? Theo như wikipedia định nghĩa:
+Cơ sở dữ liệu quan hệ ([Relational database](https://en.wikipedia.org/wiki/Relational_database)) thường được sử dụng để triển khai các hệ thống OLTP. OLTP là gì? Theo như wikipedia định nghĩa:
 
 Trong các kịch bản business, sẽ có những kịch bản mà yêu cầu tính thời gian thực không cao (có thể chấp nhận độ trễ vài giây), nhưng lại có độ phức tạp khi truy vấn cao. Ví dụ: trong hệ thống thương mại điện tử [WMS](https://vi.wikipedia.org/wiki/Hệ_thống_quản_lý_kho), các hệ thống [CRM](https://vi.wikipedia.org/wiki/Quản_lý_quan_hệ_khách_hàng) hoặc các dịch vụ khách hàng có kịch bản kinh doanh phức tạp, lúc này ta cần phải tạo ra các hàm truy vấn kết hợp rất nhiều trường khác nhau. Kích thước dữ liệu của hệ thống như vậy cũng rất lớn, chẳng hạn như mô tả hàng hóa trong hệ thống thương mại điện tử WMS, có thể có các trường sau:
 
 > warehouse id, warehousing time, location id, storage shelf id, warehousing operator Id, outbound operator id, stock quantity, expiration time, SKU type, product brand, product category, number of internals
 
-Ngoài các thông tin trên, nếu hàng hóa nằm trong kho. Có thể có id quá trình đang thực hiện, trạng thái hiện tại, v.v.
+Ngoài các thông tin trên, nếu hàng hóa nằm trong kho. Có thể có id quá trình đang thực hiện, trạng thái hiện tại, ....
 
 Hãy tưởng tượng nếu chúng ta đang điều hành một công ty thương mại điện tử lớn với hàng chục triệu đơn hàng mỗi ngày, sẽ rất khó để truy vấn và xây dựng các index thích hợp trong cơ sở dữ liệu này.
 
