@@ -3,10 +3,8 @@
 <div align="center">
 	<img src="../images/grpc.png" width="800">
 	<br/>
-
 </div>
 <br/>
-
 
 [gRPC](https://grpc.io/) là một framework RPC opensource đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
 
@@ -15,7 +13,7 @@
 Kiến trúc gRPC trong Golang:
 
 <div align="center">
-	<img src="../images/ch4-1-grpc-go-stack.png" width="450">
+    <img src="../images/ch4-1-grpc-go-stack.png" width="450">
 	<br/>
 	<span align="center">
 		<i>gRPC technology stack</i>
@@ -120,27 +118,29 @@ func main() {
 
 Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: gRPC không hỗ trợ các gọi asynchronous. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
 
-## 4.4.3 gRPC flow
+## 4.4.3 gRPC streaming
 
-RPC là lời gọi hàm từ xa, vì vậy các tham số hàm và giá trị trả về của mỗi cuộc gọi không thể quá lớn, nếu không thời gian phản hồi của mỗi lời gọi sẽ bị ảnh hưởng nghiêm trọng. Do đó, các lời gọi phương thức RPC truyền thống không phù hợp để tải lên và tải xuống trong trường hợp khối lượng dữ liệu lớn. Đồng thời RPC truyền thống không áp dụng cho các mô hình đăng ký và phát hành không chắc chắn về thời gian. Để khắc phục điểm này, framework gRPC cung cấp các stream cho server và client tương ứng.
+RPC là lời gọi hàm từ xa, vì vậy các tham số hàm và giá trị trả về của mỗi cuộc gọi không thể quá lớn, nếu không thời gian phản hồi của mỗi lời gọi sẽ bị ảnh hưởng nghiêm trọng. Do đó, các lời gọi phương thức RPC truyền thống không phù hợp để tải lên và tải xuống trong trường hợp khối lượng dữ liệu lớn. Để khắc phục điểm này, framework gRPC cung cấp các chức năng stream cho phía server và client tương ứng.
 
-Stream một chiều của server hoặc client là trường hợp đặc biệt của stream hai chiều. Chúng tôi thêm phương thức channel hỗ trợ stream hai chiều trong `HelloService`:
+Ta viết thêm phương thức channel hỗ trợ luồng hai chiều (Bidirect Streaming) trong `HelloService`:
 
 ```protobuf
 service HelloService {
     rpc Hello (String) returns (String);
 
+    // nhận vào tham số một stream và trả về giá trị là một stream.
     rpc Channel (stream String) returns (stream String);
 }
 ```
-
-Từ khóa stream để thông báo chức năng stream được sử dụng, phần tham số là một stream mà nhận vào tham số client và trả về giá trị là một stream.
 
 Tạo lại code để thấy định nghĩa mới được thêm vào phương thức kiểu channel trong interface:
 
 ```go
 type HelloServiceServer interface {
     Hello(context.Context, *String) (*String, error)
+
+    // tham số kiểu HelloService_ChannelServer được sử dụng
+    // để liên lạc hai chiều với client.
     Channel(HelloService_ChannelServer) error
 }
 
@@ -148,15 +148,16 @@ type HelloServiceClient interface {
     Hello(ctx context.Context, in *String, opts ...grpc.CallOption) (
         *String, error,
     )
+
+    // trả về giá trị trả về thuộc kiểu `HelloService_ChannelClient`
+    // có thể được sử dụng để liên lạc hai chiều với server.
     Channel(ctx context.Context, opts ...grpc.CallOption) (
         HelloService_ChannelClient, error,
     )
 }
 ```
 
-Tham số phương thức Channel ở phía server là tham số kiểu `HelloService_ChannelServer` mới có thể được sử dụng để liên lạc hai chiều với client. Phương thức Channel của client trả về giá trị trả về thuộc kiểu `HelloService_ChannelClient`, có thể được sử dụng để liên lạc hai chiều với server.
-
-`HelloService_ChannelServer` và `HelloService_ChannelClient` thuộc kiểu interface:
+`HelloService_ChannelServer` và `HelloService_ChannelClient` thuộc interface:
 
 ```go
 type HelloService_ChannelServer interface {
@@ -179,8 +180,11 @@ Bây giờ ta có thể hiện thực các streaming service:
 ```go
 func (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
     for {
+        // Server nhận dữ liệu được gửi từ client
+        // trong vòng lặp.
         args, err := stream.Recv()
         if err != nil {
+            // Nếu gặp `io.EOF`, client stream sẽ đóng.
             if err == io.EOF {
                 return nil
             }
@@ -189,6 +193,9 @@ func (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
 
         reply := &String{Value: "hello:" + args.GetValue()}
 
+        // Dữ liệu trả về được  gửi đến client
+        // thông qua stream và việc gửi nhận
+        // dữ liệu stream hai chiều là hoàn toàn độc lập
         err = stream.Send(reply)
         if err != nil {
             return err
@@ -196,8 +203,6 @@ func (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
     }
 }
 ```
-
-Server nhận dữ liệu được gửi từ client trong vòng lặp. Nếu gặp `io.EOF`, client stream sẽ đóng. Nếu hàm exit, stream  Server sẽ đóng. Dữ liệu trả về được gửi đến client thông qua stream và việc gửi nhận dữ liệu stream hai chiều là hoàn toàn độc lập. Cần lưu ý rằng thao tác gửi và nhận không cần sự tương ứng một-một và người dùng có thể tổ chức code theo ngữ cảnh thực tế.
 
 Client cần gọi phương thức Channel để lấy đối tượng stream trả về:
 
@@ -236,9 +241,21 @@ for {
 }
 ```
 
+Bạn có thể xem code cụ thể tại [link](../examples/ch4/ch4.4/3-grpc-flow/server/main.go)
+
 ## 4.4.4 Mô hình Publishing - Subscription
 
 Trong phần trước chúng ta đã hiện thực phiên bản đơn giản của phương thức `Watch` dựa trên thư viện RPC dựng sẵn của Go. Ý tưởng đó có thể sử dụng cho hệ thống publish-subscribe, nhưng bởi vì RPC thiếu đi cơ chế streaming nên nó chỉ có thể trả về 1 kết quả trong 1 lần. Trong chế độ publish-subscribe, hành động publish đưa ra bởi *caller* giống với lời gọi hàm thông thường, trong khi subscriber bị động thì giống với *receiver* trong gRPC client stream một chiều. Bây giờ ta có thể thử xây dựng một hệ thống publish - subscribe dựa trên đặc điểm stream của gRPC.
+
+
+<div align="center">
+
+<img src="../images/pubsub.png" width="400">
+<br/>
+<span align="center"><i>Nhắc lại mô hình Pub/Sub</i></span>
+    <br/>
+
+</div>
 
 Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng opensource. Đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
 
@@ -248,8 +265,10 @@ import (
 )
 
 func main() {
+    //  xây dựng một đối tượng để publish
     p := pubsub.NewPublisher(100*time.Millisecond, 10)
 
+    // subscribe các topic "golang"
     golang := p.SubscribeTopic(func(v interface{}) bool {
         if key, ok := v.(string); ok {
             if strings.HasPrefix(key, "golang:") {
@@ -258,6 +277,8 @@ func main() {
         }
         return false
     })
+
+    // subscribe các topic "docker"
     docker := p.SubscribeTopic(func(v interface{}) bool {
         if key, ok := v.(string); ok {
             if strings.HasPrefix(key, "docker:") {
@@ -283,18 +304,19 @@ func main() {
 }
 ```
 
-Trong đó `pubsub.NewPublisher` xây dựng một đối tượng để release, ta có thể subscribe các topic thông qua `p.SubscribeTopic()`.
-
 Giờ  chúng ta thử cung cấp một hệ thống publishing-subscription khác mạng dựa trên gRPC và pubsub package. Đầu tiên định nghĩa một service publish subscription interface bằng protobuf:
 
 ```protobuf
 service PubsubService {
+    //  phương thức RPC thông thường
     rpc Publish (String) returns (String);
+
+    // service server streaming
     rpc Subscribe (String) returns (stream String);
 }
 ```
 
-Với `Publish` là phương thức RPC thông thường và `Subscribe` là một service streaming 1 chiều. gRPC plugin sẽ tạo ra interface tương ứng cho server và client:
+gRPC plugin sẽ tạo ra interface tương ứng cho server và client:
 
 ```go
 type PubsubServiceServer interface {
@@ -389,6 +411,8 @@ func main() {
 }
 ```
 
+Chi tiết: [clientpub](../examples/ch4/ch4.4/4-pubsub/clientpub/main.go).
+
 Sau đó có thể subscribe thông tin đó từ một client khác:
 
 ```go
@@ -420,5 +444,7 @@ func main() {
     }
 }
 ```
+
+Chi tiết: [clientsub](../examples/ch4/ch4.4/4-pubsub/clientsub/main.go).
 
 Cho đến giờ chúng ta đã hiện thực được service publishing và subscription khác mạng dựa trên gRPC. Trong phần kế tiếp chúng ta sẽ xét một số ứng dụng nâng cao hơn của Go trong gRPC.

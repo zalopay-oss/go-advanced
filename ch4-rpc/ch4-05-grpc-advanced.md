@@ -1,12 +1,23 @@
 # 4.5 gRPC Nâng cao
 
-Các framework RPC cơ bản thường gặp phải nhiều vấn đề về bảo mật và khả năng mở rộng. Phần này sẽ mô tả ngắn gọn một số cách xác thực an toàn bằng gRPC. Sau đó giới thiệu tính năng interceptor trên gRPC và cách triển khai cơ chế xác thực Token một cách tốt nhất, theo dõi các lời gọi RPC và bắt các lỗi panic thông qua interceptor. Cuối cùng là cách gRPC service kết hợp với Web service khác như thế nào.
+Các framework RPC cơ bản thường gặp phải nhiều vấn đề về bảo mật và khả năng mở rộng.
 
-## 4.5.1 Xác thực bằng chứng chỉ (certificate)
+Phần này sẽ mô tả ngắn gọn một số cách xác thực an toàn bằng gRPC. Sau đó giới thiệu tính năng interceptor trên gRPC và cách triển khai cơ chế xác thực Token một cách tốt nhất.
 
-gRPC được xây dựng dựa trên giao thức HTTP/2 và hỗ trợ TLS rất tốt. gRPC service trong chương trước chúng tôi không cung cấp hỗ trợ chứng chỉ, vì vậy client `grpc.WithInsecure()` có thể  thông qua tùy chọn mà bỏ qua việc xác thực chứng chỉ   trong server được kết nối. gRPC service không có chứng chỉ được kích hoạt sẽ phải giao tiếp hoàn toàn bằng plain-text với client và có nguy cơ cao bị giám sát bởi một bên thứ ba khác. Để đảm bảo rằng giao tiếp gRPC không bị giả mạo hoặc giả mạo bởi các bên thứ ba, chúng ta có thể kích hoạt mã hóa TLS trên server.
+## 4.5.1 Xác thực qua chứng chỉ (certificate)
 
-Bạn có thể tạo private key và certificate cho server và client riêng biệt bằng các lệnh sau:
+gRPC được xây dựng dựa trên giao thức HTTP/2 và hỗ trợ TLS khá hoàn thiện. gRPC service trong chương trước chúng ta không hỗ trợ xác thực qua chứng chỉ, vì vậy client `grpc.WithInsecure()` có thể  thông qua tùy chọn mà bỏ qua việc xác thực trong server được kết nối.
+
+<div align="center">
+<img src="../images/ssl.png" width="550">
+<br/>
+<span align="center"><i>Xác thực bằng chứng chỉ</i></span>
+    <br/>
+</div>
+
+gRPC service không có xác thực chứng chỉ (certificate) sẽ phải giao tiếp hoàn toàn bằng plain-text với client và có nguy cơ cao bị giám sát bởi một bên thứ ba khác. Để khắc phục yếu điểm này, chúng ta có thể sử dụng mã hóa TLS trên server.
+
+Đầu tiên tạo private key và certificate cho server và client riêng biệt bằng các lệnh sau:
 
 ```sh
 $ openssl genrsa -out server.key 2048
@@ -26,23 +37,26 @@ Với certificate đấy ta có thể truyền nó vào tham số để bắt đ
 
 ```go
 func main() {
+    // khởi tạo đối tượng certificate từ file cho server
     creds, err := credentials.NewServerTLSFromFile("server.crt", "server.key")
     if err != nil {
         log.Fatal(err)
     }
 
+    // truyền certificate dưới dạng tham số
+    // cho hàm khởi tạo một server
     server := grpc.NewServer(grpc.Creds(creds))
 
     ...
 }
 ```
 
-Hàm `credentials.NewServerTLSFromFile` khởi tạo đối tượng certificate từ file cho server, sau đó bọc certificate dưới dạng tùy chọn thông qua hàm `grpc.Creds(creds)` và truyền nó dưới dạng tham số cho hàm `grpc.NewServer`.
-
 Server có thể được xác thực ở client dựa trên chứng chỉ của server và tên của nó:
 
 ```go
 func main() {
+    // client xác thực server bằng cách đưa vào
+    // chứng chỉ CA root và tên của server
     creds, err := credentials.NewClientTLSFromFile(
         "server.crt", "server.grpc.io",
     )
@@ -62,9 +76,9 @@ func main() {
 }
 ```
 
-Trong code client mới, ta không còn phụ thuộc trực tiếp vào các file chứng chỉ phía server. Trong lệnh gọi `credentials.NewTLS`, client xác thực server bằng cách đưa vào chứng chỉ CA root và tên của server. Khi client liên kết với server, trước tiên, nó sẽ yêu cầu chứng chỉ của server, sau đó sử dụng chứng chỉ CA root để xác minh chứng chỉ phía server mà nó nhận được.
+Khi client liên kết với server, trước tiên, nó sẽ yêu cầu chứng chỉ của server, sau đó sử dụng chứng chỉ CA root để xác minh chứng chỉ phía server mà nó nhận được.
 
-Nếu chứng chỉ của client cũng được ký bởi chứng chỉ CA root, server cũng có thể thực hiện xác thực chứng chỉ trên client. Ở đây ta sử dụng chứng chỉ CA root để ký chứng chỉ client:
+Nếu chứng chỉ của client cũng được ký bởi CA root, server cũng có thể thực hiện xác thực chứng chỉ trên client. Ở đây ta sử dụng chứng chỉ CA root để ký chứng chỉ client:
 
 ```sh
 $ openssl req -new \
@@ -97,9 +111,15 @@ func main() {
         log.Fatal("failed to append certs")
     }
 
+    // Server cũng sử dụng hàm `credentials.NewTLS` để tạo chứng chỉ
     creds := credentials.NewTLS(&tls.Config{
         Certificates: []tls.Certificate{certificate},
-        ClientAuth:   tls.RequireAndVerifyClientCert, // NOTE: this is optional!
+
+        // cho phép Client được xác thực
+        ClientAuth:   tls.RequireAndVerifyClientCert,
+
+        // chọn chứng chỉ CA root thông qua ClientCA,
+        // this is optional!
         ClientCAs:    certPool,
     })
 
@@ -107,8 +127,6 @@ func main() {
     ...
 }
 ```
-
-Server cũng sử dụng hàm `credentials.NewTLS` để tạo chứng chỉ, chọn chứng chỉ CA root thông qua ClientCA và cho phép Client được xác thực bằng tùy chọn `ClientAuth`.
 
 Như vậy chúng ta đã xây dựng được một hệ thống gRPC đáng tin cậy để kết nối giữa Client và Server thông qua xác thực chứng chỉ từ cả 2 chiều.
 
@@ -120,27 +138,26 @@ Xác thực dựa trên chứng chỉ được mô tả ở trên là dành cho 
 
 ```go
 type PerRPCCredentials interface {
-    // GetRequestMetadata gets the current request metadata, refreshing
-    // tokens if required. This should be called by the transport layer on
-    // each request, and the data should be populated in headers or other
-    // context. If a status code is returned, it will be used as the status
-    // for the RPC. uri is the URI of the entry point for the request.
-    // When supported by the underlying implementation, ctx can be used for
-    // timeout and cancellation.
-    // TODO(zhaoq): Define the set of the qualified keys instead of leaving
-    // it as an arbitrary string.
+    // GetRequestMetadata get request về metadata hiện tại,
+    // refresh lại token. Hàm này nên được gọi từ transport layer
+    // trên mỗi request và dữ liệu phải được điền vào header
+    // hoặc trong context. Nếu status code được trả về,
+    // nó sẽ được sử dụng làm status cho RPC.
+    // uri là URI entry point của request.
+    // ctx có thể dùng cho timeout và cancellation.
     GetRequestMetadata(ctx context.Context, uri ...string) (
         map[string]string,    error,
     )
-    // RequireTransportSecurity indicates whether the credentials requires
-    // transport security.
+
+    // RequireTransportSecurity thể hiện cho việc credentials
+    // có yêu cầu kết nối bảo mật (TLS) không.
+    // Nên là true  để thông tin xác thực không có nguy cơ
+    // bị xâm phạm và giả mạo.
     RequireTransportSecurity() bool
 }
 ```
 
-Trả về thông tin cần thiết để xác thực trong phương thức `GetRequestMetadata`. Phương thức `RequireTransportSecurity` cho biết kết nối bảo mật ở tầng transport có cần không. Trong thực tế, nên yêu cầu các kết nối có hỗ trợ tầng bảo mật cơ bản này để thông tin xác thực không có nguy cơ bị xâm phạm và giả mạo.
-
-Ta có thể tạo ra kiểu `Authentication` để xác thực username và password:
+Ta có thể tạo ra struct `Authentication` để xác thực username và password:
 
 ```go
 type Authentication struct {
@@ -148,17 +165,19 @@ type Authentication struct {
     Password string
 }
 
+// trả về thông tin xác thực cục bộ gồm cả user và password.
 func (a *Authentication) GetRequestMetadata(context.Context, ...string) (
     map[string]string, error,
 ) {
     return map[string]string{"user":a.User, "password": a.Password}, nil
 }
+
+// để code được đơn giản hơn nên `RequireTransportSecurity` 
+// không cần thiết.
 func (a *Authentication) RequireTransportSecurity() bool {
     return false
 }
 ```
-
-Trong đó phương thức `GetRequestMetadata` trả về thông tin xác thực cục bộ gói cả thông tin đăng nhập và password. Để code được đơn giản hơn nên `RequireTransportSecurity` không cần thiết.
 
 Thông tin token có thể được truyền vào như tham số cho mỗi gRPC service được yêu cầu:
 
@@ -169,6 +188,11 @@ func main() {
         Password: "password",
     }
 
+    // đối tượng `Authentication` được chuyển đổi thành tham số
+    // của `grpc.Dial` bằng hàm `grpc.WithPerRPCCredentials`
+    // Vì secure link không được kích hoạt nên cần phải
+    // truyền vào `grpc.WithInsecure()` để bỏ qua bước
+    // xác thực chứng chỉ bảo mật
     conn, err := grpc.Dial("localhost"+port, grpc.WithInsecure(), grpc.WithPerRPCCredentials(&auth))
     if err != nil {
         log.Fatal(err)
@@ -179,9 +203,7 @@ func main() {
 }
 ```
 
-Đối tượng `Authentication` được chuyển đổi thành tham số của `grpc.Dial` bằng hàm `grpc.WithPerRPCCredentials`. Vì secure link không được kích hoạt nên ta cần phải truyền vào `grpc.WithInsecure()` để bỏ qua bước xác thực chứng chỉ bảo mật.
-
-Kế đó trong mỗi phương thức của gRPC server, danh tính người dùng được xác thực bởi phương thức `Authentication` của `Auth`:
+Kế đó trong mỗi phương thức của gRPC server, danh tính người dùng được xác thực bởi phương thức `Auth` của `Authentication`:
 
 ```go
 type grpcServer struct { auth *Authentication }
@@ -196,7 +218,9 @@ func (p *grpcServer) SomeMethod(
     return &HelloReply{Message: "Hello " + in.Name}, nil
 }
 
+// phương thức thực hiện việc xác thực
 func (a *Authentication) Auth(ctx context.Context) error {
+    // meta information được lấy từ biến ngữ cảnh `ctx`
     md, ok := metadata.FromIncomingContext(ctx)
     if !ok {
         return fmt.Errorf("missing credentials")
@@ -208,6 +232,7 @@ func (a *Authentication) Auth(ctx context.Context) error {
     if val, ok := md["login"]; ok { appid = val[0] }
     if val, ok := md["password"]; ok { appkey = val[0] }
 
+    // Nếu xác thực thất bại sẽ trả về lỗi
     if appid != a.Login || appkey != a.Password {
         return grpc.Errorf(codes.Unauthenticated, "invalid token")
     }
@@ -216,46 +241,58 @@ func (a *Authentication) Auth(ctx context.Context) error {
 }
 ```
 
-Công việc xác thực chi tiết chủ yếu được thực hiện trong phương thức `Authentication.Auth`. Đầu tiên, thông tin mô tả (meta infomation) được lấy từ biến ngữ cảnh  `ctx` thông qua `metadata.FromIncomeContext` và sau đó thông tin xác thực tương ứng được lấy ra để xác thực. Nếu xác thực thất bại, nó sẽ trả về lỗi thuộc kiểu `code.Unauthenticated`.
-
 ## 4.5.3 Interceptor
 
-`Grpc.UnaryInterceptor` và `grpc.StreamInterceptor` trong gRPC cung cấp hỗ trợ interceptor cho các phương thức thông thường và phương thức stream. Ở đây chúng ta hãy tìm hiểu về việc sử dụng  interceptor cho phương thức thông thường.
+`Grpc.UnaryInterceptor` và `grpc.StreamInterceptor` trong gRPC  hỗ trợ interceptor cho các phương thức thông thường và phương thức stream. Ở đây chúng ta hãy tìm hiểu về việc sử dụng  interceptor cho phương thức thông thường.
 
-Để hiện thực một interceptor như vậy, bạn cần phải hiện thực hàm cho tham số của `grpc.UnaryInterceptor`:
-
-```go
-func filter(ctx context.Context,
-    req interface{}, info *grpc.UnaryServerInfo,
-    handler grpc.UnaryHandler,
-) (resp interface{}, err error) {
-    log.Println("fileter:", info)
-    return handler(ctx, req)
-}
-```
-
-Trong đó `ctx` và `req`   là  tham số  của   phương thức RPC bình thường. Tham số `info`  chỉ ra phương thức gRPC tương ứng hiện đang được sử dụng và tham số `handler` tương ứng với hàm phương thức gRPC hiện tại. Dòng đầu của hàm để ghi ra log   tham số `info` sau đó gọi tới phương thức gRPC gắn với `handler`.
-
-Để sử dụng hàm filter interceptor, chỉ cần truyền nó vào lời gọi hàm khi bắt đầu một gRPC service:
+Để sử dụng hàm interceptor `filter`, chỉ cần truyền nó vào lời gọi hàm khi bắt đầu một gRPC service:
 
 ```go
 server := grpc.NewServer(grpc.UnaryInterceptor(filter))
 ```
 
-Sau đó server sẽ ghi ra log trước khi nhận lời gọi gRPC, rồi mới gọi tới phương thức được yêu cầu.
+<div align="center">
+	<img src="../images/interceptor.png" width="400">
+	<br/>
+	<span align="center"><i>Interceptor với hàm filter</i></span>
+	<br/>
+</div>
 
-Nếu hàm interceptor trả về lỗi thì lệnh gọi phương thức gRPC sẽ được coi là failure. Do đó, chúng ta có thể thực hiện một số công việc xác thực đơn giản trên các tham số đầu và cả kết quả trả về của Interceptor. Interceptor là tính năng rất phù hợp cho việc chứng thực Token đã giới thiệu ở phần trước.
+Để hiện thực một interceptor như vậy, ta tạo ra hàm `filter` như sau:
+
+```go
+// ctx và req là tham số của phương thức RPC bình thường.
+// info chỉ ra phương thức gRPC tương ứng
+// hiện đang được sử dụng và tham số handler
+// tương ứng với hàm gRPC hiện tại
+func filter(ctx context.Context,
+    req interface{},
+    info *grpc.UnaryServerInfo,
+    handler grpc.UnaryHandler,
+) (resp interface{}, err error) {
+    // ghi log  tham số info
+    log.Println("filter:", info)
+
+    // gọi tới phương thức gRPC gắn với `handler`
+    return handler(ctx, req)
+}
+```
+
+Nếu hàm interceptor trả về lỗi thì lệnh gọi phương thức gRPC sẽ được coi là failure. Chúng ta lợi dụng điểm này để thực hiện một số xác thực trên các tham số đầu vào và cả kết quả trả về của Interceptor.
 
 Sau đây là một interceptor có chức năng thêm một exception cho phương thức gRPC:
 
 ```go
 func filter(
-    ctx context.Context, req interface{},
+    ctx context.Context,
+    req interface{},
     info *grpc.UnaryServerInfo,
     handler grpc.UnaryHandler,
 ) (resp interface{}, err error) {
-    log.Println("fileter:", info)
+    log.Println("filter:", info)
 
+    // nếu có exception thì throw về trước khi
+    // gọi tới gRPC
     defer func() {
         if r := recover(); r != nil {
             err = fmt.Errorf("panic: %v", r)
@@ -266,9 +303,9 @@ func filter(
 }
 ```
 
-Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong dự án opensource grpc-ecosystem có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
+Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong project opensource [grpc-ecosystem](https://github.com/grpc-ecosystem) có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
 
-Một ví dụ về cách sử dụng chuỗi interceptor trong package go-grpc-middleware:
+Một ví dụ về cách sử dụng một chuỗi interceptor trong package go-grpc-middleware:
 
 ```go
 import "github.com/grpc-ecosystem/go-grpc-middleware"
@@ -289,37 +326,37 @@ Xem chi tiết: [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-m
 
 gRPC được xây dựng bên trên giao thức HTTP/2 nên chúng ta có thể đặt gRPC service vào các port giống  như một web service bình thường.
 
-Với các service không sử dụng giao thức TLS thì cần phải thực hiện một số tùy chỉnh trong chức năng của HTTP/2:
+- Với các service không sử dụng TLS:
 
-```go
-func main() {
-    mux := http.NewServeMux()
+    ```go
+    func main() {
+        mux := http.NewServeMux()
 
-    h2Handler := h2c.NewHandler(mux, &http2.Server{})
-    server = &http.Server{Addr: ":3999", Handler: h2Handler}
-    server.ListenAndServe()
-}
-```
+        h2Handler := h2c.NewHandler(mux, &http2.Server{})
+        server = &http.Server{Addr: ":3999", Handler: h2Handler}
+        server.ListenAndServe()
+    }
+    ```
 
-Cho phép kích hoạt một server https thông thường thì rất đơn giản:
+- Các service sử dụng TLS:
 
-```go
-func main() {
-    mux := http.NewServeMux()
-    mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-        fmt.Fprintln(w, "hello")
-    })
+    ```go
+    func main() {
+        mux := http.NewServeMux()
+        mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+            fmt.Fprintln(w, "hello")
+        })
 
-    http.ListenAndServeTLS(port, "server.crt", "server.key",
-        http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-            mux.ServeHTTP(w, r)
-            return
-        }),
-    )
-}
-```
+        http.ListenAndServeTLS(port, "server.crt", "server.key",
+            http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+                mux.ServeHTTP(w, r)
+                return
+            }),
+        )
+    }
+    ```
 
-Tương tự như vậy kích hoạt một gRPC service với các chứng chỉ riêng cũng rất đơn giản:
+- Kích hoạt một gRPC service với các chứng chỉ riêng (xem phần 4.5.1):
 
 ```go
 func main() {
@@ -334,7 +371,7 @@ func main() {
 }
 ```
 
-Vì gRPC service đã hiện thực phương thức `ServeHTTP` trước đó nên nó có thể được sử dụng  làm đối tượng xử lý định tuyến Web (routing). Nếu  đặt gRPC và Web service lại với nhau, sẽ dẫn đến xung đột giữa đường dẫn gRPC và Web. Chúng ta cần phân biệt giữa hai loại service này khi xử lý.
+Vì gRPC service đã hiện thực phương thức `ServeHTTP` trước đó nên nó có thể được sử dụng  làm đối tượng xử lý định tuyến Web (routing). Nếu  đặt gRPC và Web service lại với nhau, sẽ dẫn đến xung đột link gRPC và link Web. Chúng ta cần phân biệt giữa hai loại service này khi xử lý.
 
 Việc tạo ra các handler xử lý việc routing hỗ trợ cả Web và gRPC có thể thực hiện như sau:
 
@@ -344,10 +381,14 @@ func main() {
 
     http.ListenAndServeTLS(port, "server.crt", "server.key",
         http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+            // đảm bảo nếu không phải là HTTP/2 thì sẽ không hỗ trợ gRPC
             if r.ProtoMajor != 2 {
                 mux.ServeHTTP(w, r)
                 return
             }
+
+            // nếu header có chỉ định grpc thì thực thi
+            // lời gọi tương ứng
             if strings.Contains(
                 r.Header.Get("Content-Type"), "application/grpc",
             ) {
@@ -355,6 +396,7 @@ func main() {
                 return
             }
 
+            // nếu không thì thực thi server HTTP
             mux.ServeHTTP(w, r)
             return
         }),
@@ -362,6 +404,6 @@ func main() {
 }
 ```
 
-Hàm `if` đầu tiên để đảm bảo nếu HTTP không phải là phiên bản  HTTP/2 thì sẽ không hỗ trợ gRPC. Kế tiếp để xét nếu `Content-Type` ở header của request là  *"application/grpc"* thì thực thi lời gọi gRPC tương ứng (ở đây là `ServeHTTP`).
+Bạn đọc có thể xem code chi tiết tại [đây](../examples/ch4/ch4.5/4-with-web-services/main.go).
 
 Theo cách này chúng ta có thể cung cấp cả web serive và gRPC chung port cùng một lúc.
