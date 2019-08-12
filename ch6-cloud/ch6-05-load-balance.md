@@ -1,24 +1,30 @@
 # 6.5 Cân bằng tải (Loadbalancer)
+<div align="center">
+	<img src="../images/ch6-loadbalancer.png" width="400">
+	<br/>
+	<span align="center">
+		<i>Loadbalancer</i>
+	</span>
+</div>
+<br/>
 
 Phần này sẽ thảo luận về các phương pháp phổ biến trong cân bằng tải hệ thống phân tán.
 
-## 6.5.1 Ý tưởng cân bằng tải phổ biến
+## 6.5.1 Ý tưởng cân bằng tải
 
-Khi có n node dịch vụ và chúng ta cần chọn một trong số đó từ quy trình kinh doanh. Có một số ý tưởng:
+Khi có n node cùng cung cấp service và chúng ta cần chọn một trong số đó để thực hiện quy trình business. Có một số ý tưởng:
 
-1. Chọn theo thứ tự: lần gần nhất bạn chọn cái đầu tiên, thì lần này bạn chọn cái thứ hai, rồi cứ thế với cái tiếp theo, nếu bạn đã đạt đến cái cuối cùng, thì cái tiếp theo bắt đầu từ cái đầu tiên. Trong trường hợp này, chúng ta có thể lưu trữ thông tin node dịch vụ trong một mảng. Sau khi mỗi yêu cầu được hoàn thành xuôi dòng, chúng ta di chuyển chỉ mục đi tiếp. Di chuyển trở lại đầu của mảng khi bạn di chuyển đến cuối.
+1. Chọn theo thứ tự: lần gần nhất bạn chọn cái đầu tiên, thì lần này bạn chọn cái thứ hai, rồi cứ thế với cái tiếp theo. Nếu bạn đã đạt đến cái cuối cùng, thì cái tiếp theo bắt đầu từ cái đầu tiên. Trong trường hợp này, chúng ta có thể lưu trữ thông tin node dịch vụ trong một mảng. Sau khi mỗi yêu cầu được hoàn thành xuôi dòng, chúng ta di chuyển chỉ mục đi tiếp. Di chuyển trở lại đầu của mảng khi bạn di chuyển đến cuối.
 
 2. Chọn ngẫu nhiên: Chọn node một cách ngẫu nhiên. Giả sử rằng máy thứ x được chọn, thì x có thể được chọn từ hàm `rand.Intn()%n`.
 
 3. Sắp xếp các node theo một trọng lượng nhất định và chọn một node có trọng lượng lớn nhất hoặc nhỏ nhất.
 
-Nếu yêu cầu không thành công, chúng ta vẫn cần cơ chế để thử lại. Với thuật toán ngẫu nhiên, có khả năng bạn sẽ chọn node lỗi lần nữa.
-
-Hãy xem xét trường hợp cân bằng tải cho doanh nghiệp.
+Nếu yêu cầu không thành công, chúng ta vẫn cần cơ chế để thử lại. Đối với thuật toán ngẫu nhiên, có khả năng bạn sẽ chọn node lỗi lần nữa.
 
 ## 6.5.2 Cân bằng tải dựa trên thuật toán xáo trộn
 
-Giả sử chúng ta cần chọn ngẫu nhiên node gửi yêu cầu và thử lại các node khác khi có lỗi trả về. Vì vậy, chúng ta thiết kế một mảng chỉ mục với kích thước bằng số node. Mỗi lần chúng ta có một yêu cầu mới, chúng ta xáo trộn mảng chỉ mục, sau đó lấy phần tử đầu tiên làm node dịch vụ. Nếu yêu cầu thất bại, ta chọn node tiếp theo. Cứ thử lại và tiếp tục, v.v.
+Giả sử chúng ta cần chọn ngẫu nhiên node gửi yêu cầu và thử lại các node khác khi có lỗi trả về. Vì vậy, chúng ta thiết kế một mảng chỉ mục với kích thước bằng số node. Mỗi lần chúng ta có một yêu cầu mới, chúng ta xáo trộn mảng chỉ mục, sau đó lấy phần tử đầu tiên làm node dịch vụ. Nếu yêu cầu thất bại, ta chọn node tiếp theo. Cứ thử lại và tiếp tục, ...
 
 ```go
 var endpoints = []string {
@@ -31,7 +37,7 @@ var endpoints = []string {
     "100.69.62.101:3232",
 }
 
-//shuffle
+// shuffle hàm xáo trộn chỉ mục
 func shuffle(slice []int) {
     for i := 0; i < len(slice); i++ {
         a := rand.Intn(len(slice))
@@ -44,7 +50,10 @@ func request(params map[string]interface{}) error {
     var indexes = []int {0,1,2,3,4,5,6}
     var err error
 
+    // gọi shuffle để xáo trộn các index
     shuffle(indexes)
+
+    // số lần thử lại là 3
     maxRetryTimes := 3
 
     idx := 0
@@ -65,13 +74,13 @@ func request(params map[string]interface{}) error {
 }
 ```
 
-Chúng ta duyệt qua các chỉ mục và hoán đổi chúng, tương tự như phương pháp xáo trộn mà chúng ta thường sử dụng khi chơi bài. Có vẻ đoạn code trên khá ổn.
+Chúng ta duyệt qua các chỉ mục và hoán đổi chúng, tương tự như phương pháp xáo trộn mà chúng ta thường sử dụng khi chơi bài.
 
 ### 6.5.2.1 Tải không cân bằng gây ra do xáo trộn không chính xác
 
-Thực sự không có vấn đề? Trong thực tế, vẫn còn vấn đề. Có hai cạm bẫy tiềm ẩn trong chương trình ngắn này:
+Thực sự không có vấn đề? Trong thực tế, vẫn còn vấn đề. Có hai cạm bẫy tiềm ẩn trong chương trình trên là:
 
-1. Không có random seed. Khi không có random seed, trình tự của các lần random  `rand.Intn()` là cố định.
+1. Không có random seed. Khi không có `random seed`, trình tự của các lần random  `rand.Intn()` là cố định.
 
 2. Xáo trộn không đều, điều này sẽ khiến node đầu tiên của toàn bộ mảng có xác suất được chọn cao và phân phối tải giữa các node không cân bằng.
 
@@ -81,7 +90,7 @@ Rõ ràng, thuật toán xáo trộn được đưa ra ở đây có xác suất
 
 ### 6.5.2.2 Sửa thuật toán xáo trộn
 
-Thuật toán fishing-yates đã chứng minh tính đúng đắn về mặt toán học. Ý tưởng chính của nó là chọn một giá trị ngẫu nhiên rồi đặt ở cuối mảng, và cứ thế tiếp tục. Ví dụ:
+Thuật toán [fishing-yates](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) đã chứng minh tính đúng đắn về mặt toán học. Ý tưởng chính của nó là chọn một giá trị ngẫu nhiên rồi đặt ở cuối mảng, và cứ thế tiếp tục. Ví dụ:
 
 ```go
 func shuffle(indexes []int) {
@@ -93,7 +102,7 @@ func shuffle(indexes []int) {
 }
 ```
 
-Thuật toán đã được hiện thực trong thư viện chuẩn của Go:
+Thuật toán đã được hiện thực trong thư viện chuẩn [ math/rand](https://golang.org/pkg/math/rand/) của Go:
 
 ```go
 func shuffle(n int) []int {
@@ -120,6 +129,7 @@ Lý do cho những kết luận này là phiên bản trước của thư viện
 
 Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán fisher yates:
 
+***main.go***
 ```go
 package main
 

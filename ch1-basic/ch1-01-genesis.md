@@ -7,7 +7,7 @@ Vào giữa năm 2008, hầu hết các tính năng được thiết kế trong 
 Ngôn ngữ Go thường được mô tả là "Ngôn ngữ tựa C" hoặc là "Ngôn ngữ C của thế kỉ 21". Từ nhiều khía cạnh, ngôn ngữ Go thừa hưởng những ý tưởng từ ngôn ngữ C, như là cú pháp, cấu trúc điều khiển, kiểu dữ liệu cơ bản, thủ tục gọi, trả về, con trỏ, v,v.., hoàn toàn kế thừa và phát triển ngôn ngữ C, hình bên dưới mô tả sự liên quan của ngôn ngữ Go với các ngôn ngữ khác.
 
 <div align="center">
-	<img src="../images/ch1-1-go-family-tree.png" width="600">
+	<img src="../images/ch1-1-go-family-tree.png" width="500">
 	<br/>
 	<span align="center">
 		<i>Cây phả hệ của ngôn ngữ Go</i>
@@ -51,7 +51,7 @@ Hình dưới chỉ ra lịch sử phát triển của ngôn ngữ Go qua codeba
 Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go được dần phát triển từ ngôn ngữ B - được phát minh bởi **Ken Thompson** và ngôn ngữ C được phát triển bởi **Dennis M.Ritchie**. Đó là thế hệ ngôn ngữ C đầu tiên, do đó nhiều người gọi Go là ngôn ngữ lập trình C của thế kỉ 21.
 
 <div align="center">
-	<img src="../images/ch1-3-go-history.png" width="600">
+	<img src="../images/ch1-3-go-history.png" width="500">
 	<br/>
 	<span align="center">
 		<i>Lịch sử phát triển của lập trình concurrency trong Go</i>
@@ -63,7 +63,7 @@ Trong vòng những năm gần đây, Go là một ngôn ngữ được ưa chu�
 
 ## 1.1.2. Hello World
 
-Việc đầu tiên là cài đặt chương trình Go lang theo hướng dẫn trên trang chủ [golang.org](https://golang.org/)
+Việc đầu tiên là cài đặt chương trình Go lang theo hướng dẫn trên trang chủ [golang.org](https://golang.org/).
 
 Để bắt đầu, chương trình đầu tiên thường in ra dòng chữ "Hello World", đoạn code bên dưới là chương trình này.
 

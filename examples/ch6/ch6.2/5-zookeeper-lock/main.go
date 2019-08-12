@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/samuel/go-zookeeper/zk"
@@ -16,11 +17,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	println("lock succ, do your business logic")
+	fmt.Println("lock succ, do your business logic")
 
 	time.Sleep(time.Second * 10)
 
 	// do some thing
 	l.Unlock()
-	println("unlock succ, finish business logic")
+	fmt.Println("unlock succ, finish business logic")
 }

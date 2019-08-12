@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.md">
             
-                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -230,7 +230,7 @@
                 <a href="../ch2-cgo/">
             
                     
-                    Chương 2: lập trình CGO
+                    Chương 2: Lập trình CGO
             
                 </a>
             
@@ -946,32 +946,14 @@
 <pre><code class="lang-go">customizedHandler = logger(timeout(ratelimit(helloHandler)))
 </code></pre>
 <p>Ng&#x1EEF; c&#x1EA3;nh c&#x1EE7;a chu&#x1ED7;i c&#xE1;c h&#xE0;m trong qu&#xE1; tr&#xEC;nh th&#x1EF1;c thi c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c th&#x1EC3; hi&#x1EC7;n b&#x1EDF;i h&#xEC;nh 5.8:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-03-middleware_flow.png">
     <br>
     <span align="center">
         <i>X&#x1EED; l&#xFD; y&#xEA;u c&#x1EA7;u</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-03-middleware_flow.png" alt="">
-<em>H&#xEC;nh 5-8 X&#x1EED; l&#xFD; y&#xEA;u c&#x1EA7;u</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>M&#x1ED9;t c&#xE1;ch &#x111;&#x1A1;n gi&#x1EA3;n, qu&#xE1; tr&#xEC;nh n&#xE0;y th&#x1EF1;c hi&#x1EC7;n &#x111;&#x1B0;a v&#xE0;o m&#x1ED9;t h&#xE0;m v&#xE0; sau &#x111;&#xF3; l&#x1EA5;y n&#xF3; ra khi m&#x1ED9;t request &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n. C&#xF3; m&#x1ED9;t s&#x1ED1; lu&#x1ED3;ng th&#x1EF1;c thi t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; g&#x1ECD;i &#x111;&#x1EC7; quy.</p>
 <pre><code class="lang-go">[exec of logger logic]           Stack: []
 
@@ -1045,32 +1027,14 @@ throttler.go
   =&gt; l&#x1B0;u tr&#x1EEF; m&#xE3; th&#xF4;ng b&#xE1;o qua c&#xE1;c k&#xEA;nh c&#xF3; &#x111;&#x1ED9; d&#xE0;i c&#x1ED1; &#x111;&#x1ECB;nh v&#xE0; gi&#x1EDB;i h&#x1EA1;n giao di&#x1EC7;n th&#xF4;ng qua c&#xE1;c m&#xE3; th&#xF4;ng b&#xE1;o n&#xE0;y.
 </code></pre><p>M&#x1ED7;i web framework s&#x1EBD; c&#xF3; nh&#x1EEF;ng th&#xE0;nh ph&#x1EA7;n middleware t&#x1B0;&#x1A1;ng &#x1EE9;ng. N&#x1EBF;u b&#x1EA1;n quan t&#xE2;m, b&#x1EA1;n c&#xF3; th&#x1EC3;  &#x111;&#xF3;ng g&#xF3;p nh&#x1EEF;ng middleware h&#x1EEF;u &#xED;ch cho d&#x1EF1; &#xE1;n.</p>
 <p>V&#xED; d&#x1EE5;, c&#x1ED9;ng &#x111;&#x1ED3;ng opensource &#x111;&#xF3;ng g&#xF3;p cho fire <code>gin</code> framework, n&#xF3; &#x111;&#x1B0;&#x1EE3;c thi&#x1EBF;t k&#x1EBF; cho users &#x111;&#x1EC3; &#x111;&#xF3;ng g&#xF3;p v&#xE0;o kho middleware.</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-03-gin_contrib.png">
     <br>
     <span align="center">
         <i> Gin middleware repository</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-03-gin_contrib.png" alt="">
-<em>H&#xEC;nh 5-9 Gin middleware repository</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>N&#x1EBF;u ch&#xFA;ng ta &#x111;&#x1ECD;c m&#xE3; ngu&#x1ED3;n c&#x1EE7;a gin, c&#xF3; th&#x1EC3; th&#x1EA5;y &#x111;&#x1B0;&#x1EE3;c r&#x1EB1;ng gin middleware kh&#xF4;ng d&#xF9;ng <code>http.Handler</code>, nh&#x1B0;ng <code>gin.HandlerFunc</code> th&#xEC; &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i, v&#xE0; <code>http.Handler</code>s&#x1EBD; kh&#xE1;c v&#x1EDB;i nh&#x1EEF;ng m&#x1EAB;u signature trong ph&#x1EA7;n n&#xE0;y.</p>
 
                                 
@@ -1115,7 +1079,7 @@ throttler.go
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.3 Middleware","level":"1.6.3","depth":2,"next":{"title":"5.4 Kiểm tra yêu cầu validator","level":"1.6.4","depth":2,"path":"ch5-web/ch5-04-request-verification.md","ref":"ch5-web/ch5-04-request-verification.md","articles":[]},"previous":{"title":"5.2 Routing","level":"1.6.2","depth":2,"path":"ch5-web/ch5-02-router.md","ref":"ch5-web/ch5-02-router.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-03-middleware.md","mtime":"2019-07-31T07:32:25.958Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.3 Middleware","level":"1.6.3","depth":2,"next":{"title":"5.4 Kiểm tra yêu cầu validator","level":"1.6.4","depth":2,"path":"ch5-web/ch5-04-request-verification.md","ref":"ch5-web/ch5-04-request-verification.md","articles":[]},"previous":{"title":"5.2 Routing","level":"1.6.2","depth":2,"path":"ch5-web/ch5-02-router.md","ref":"ch5-web/ch5-02-router.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-03-middleware.md","mtime":"2019-07-31T08:36:17.912Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:26:38.281Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

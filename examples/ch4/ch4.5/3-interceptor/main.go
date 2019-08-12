@@ -16,12 +16,13 @@ type myGrpcServer struct{}
 
 func (s *myGrpcServer) SayHello(ctx context.Context, in *HelloRequest) (*HelloReply, error) {
 	panic("debug")
+	// log.Printf("Intercept here")
 	return &HelloReply{Message: "Hello " + in.Name}, nil
 }
 
 func main() {
 	go startServer()
-	time.Sleep(time.Second)
+	time.Sleep(2*time.Second)
 
 	doClientWork()
 }
@@ -31,7 +32,7 @@ func filter(
 	info *grpc.UnaryServerInfo,
 	handler grpc.UnaryHandler,
 ) (resp interface{}, err error) {
-	log.Println("fileter:", info)
+	log.Println("filter:", info)
 
 	defer func() {
 		if r := recover(); r != nil {
@@ -39,7 +40,8 @@ func filter(
 		}
 	}()
 
-	// valiate req
+	// validate req
+	log.Println("validate req")
 
 	return handler(ctx, req)
 }
@@ -50,7 +52,7 @@ func startServer() {
 
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
-		log.Panicf("could not list on %s: %s", port, err)
+		log.Panicf("could not listen on %s: %s", port, err)
 	}
 
 	if err := server.Serve(lis); err != nil {
@@ -66,7 +68,7 @@ func doClientWork() {
 	defer conn.Close()
 
 	c := NewGreeterClient(conn)
-
+	
 	r, err := c.SayHello(context.Background(), &HelloRequest{Name: "gopher"})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)

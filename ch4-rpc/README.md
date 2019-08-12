@@ -9,6 +9,6 @@
 </div>
 <br/>
 
->*“One of the reasons I enjoy working with Go is that I can mostly hold the spec in my head - and when I do misremember parts it’s a few seconds' work to correct myself. It’s quite possibly the only non-trivial language I’ve worked with where this is the case.” – Eleanor McHugh*
+>*““Go is not meant to innovate programming theory. It’s meant to innovate programming practice.” – Samuel Tesla*
 
-RPC là viết tắt của Remote Procedure Call (lời gọi hàm từ xa), hàm được gọi nằm trong một process khác trên cùng một máy hoặc là một nằm ở một máy tính khác. Chương này sẽ nói về việc sử dụng RPC, thiết kế RPC services của chúng ta như thế nào trong nhiều ngữ cảnh khác nhau, và hệ sinh thái RPC lớn được xây dựng dựa trên nền tảng Protobuf của Google.
+RPC - Remote Procedure Call (lời gọi hàm từ xa), là một kỹ thuật cho phép chúng ta gọi hàm nằm trong một process khác trên cùng một máy hoặc nằm ở một máy tính khác. Mục tiêu chính của phương pháp này là làm cho lời gọi từ xa RPC tương tự như thể lời gọi thủ tục thông thường cục bộ và ẩn đi việc truyền dữ liệu đi về qua mạng. Chương này sẽ trình bày về cách sử dụng RPC, thiết kế RPC service, và hệ sinh thái RPC được xây dựng dựa trên nền tảng Protobuf của Google.

@@ -103,7 +103,7 @@ service HelloService {
 
 Kết quả là danh sách các phương thức có trong service cùng với mô tả các tham số input cũng như giá trị trả về tương ứng của chúng.
 
-## 4.8.4 Lấy thông tin kiểu
+## 4.8.4 Lấy thông tin kiểu dữ liệu
 
 Sau khi có được danh sách các phương thức và kiểu của giá tị trả về, chúng ta có thể tiếp tục xem thông tin chi tiết hơn về kiểu của các biến này. Sau đây là các sử dụng lệnh `describe` để xem thông tin của tham số `HelloService.String`:
 

@@ -1,10 +1,10 @@
 # 4.3 RPC trong Golang
 
-Trong những trường hợp khác nhau lại có nhu cầu về RPC khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC. Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn của Go.
+Chúng ta có thể sử dụng RPC cho nhiều mục đích khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC để hỗ trợ cho việc lập trình. Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn trong Go cho các hiện thực của một số trường hợp.
 
-## 4.3.1 Nguyên tắc hiện thực của RPC Client
+## 4.3.1 Hiện thực RPC phía Client
 
-Cách dễ nhất để sử dụng thư viện Go là dùng phương thức `Client.Call` để thực hiện lời gọi synchronous blocking. Phần hiện thực của phương thức này như sau:
+Cách dễ nhất để sử dụng thư viện Go là dùng phương thức `Client.Call` để thực hiện lời gọi đồng bộ (synchronous blocking). Phần hiện thực của phương thức này như sau:
 
 ```go
 func (client *Client) Call(
@@ -16,7 +16,7 @@ func (client *Client) Call(
 }
 ```
 
-Chúng  ta cũng có thể dùng `client.Go` gọi tới service trước đó là `HelloService` theo kiểu bất đồng bộ bằng phương pháp sau:
+Chúng  ta cũng có thể dùng `client.Go` gọi tới service trước đó là `HelloService` theo kiểu bất đồng bộ (asynchronous blocking) bằng phương pháp sau:
 
 ```go
 func doClientWork(client *rpc.Client) {
@@ -60,7 +60,7 @@ func (client *Client) Go(
 }
 ```
 
-[net/rpc/client.go](https://golang.org/src/net/rpc/client.go)
+Các bạn có thể tham khảo ở đây [net/rpc/client.go](https://golang.org/src/net/rpc/client.go).
 
 Khi lời gọi hoàn thành hoặc có lỗi xuất hiện, phương thức thông báo `call.done` được gọi để hoàn thành:
 
@@ -203,11 +203,11 @@ func doClientWork(client *rpc.Client) {
 }
 ```
 
-Server sẽ trả về khóa đã thay đổi thông qua phương thức `Watch`. Bằng cách này chúng ta có thể giám sát việc thay đổi trạng thái của khóa.
+Server sẽ trả về key đã thay đổi thông qua phương thức `Watch`. Bằng cách này chúng ta có thể giám sát việc thay đổi trạng thái của key.
 
 ## 4.3.3 Reverse RPC
 
-RPC bình thường dựa trên cấu trúc client-server. Server của RPC tương ứng với server của mạng và client của RPC cũng tương ứng với client mạng. Tuy nhiên, đối với một số trường hợp đặc biệt, chẳng hạn như khi cung cấp dịch vụ RPC trên mạng nội bộ, nhưng mạng bên ngoài không thể  kết nối với server mạng nội bộ.
+RPC thường được sử dụng trong mô hình client-server. Trong đó server và client cần dùng chung một network. Tuy nhiên, đối với một số trường hợp đặc biệt, chẳng hạn như khi cung cấp dịch vụ RPC trên mạng nội bộ, nhưng mạng bên ngoài không thể kết nối với server mạng nội bộ.
 
 <div align="center">
 
@@ -294,7 +294,7 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 }
 ```
 
-## 4.3.4 RPC theo ngữ cảnh
+## 4.3.4 RPC theo ngữ cảnh (context)
 
 Dựa trên ngữ cảnh (context) chúng ta có thể cung cấp những RPC services thích hợp cho những client khác nhau. Ta có thể hỗ trợ các tính năng theo ngữ cảnh bằng cách cung cấp các RPC service cho từng link kết nối.
 

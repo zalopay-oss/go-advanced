@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.md">
             
-                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -230,7 +230,7 @@
                 <a href="../ch2-cgo/">
             
                     
-                    Chương 2: lập trình CGO
+                    Chương 2: Lập trình CGO
             
                 </a>
             
@@ -866,32 +866,14 @@
 <p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; ho&#xE0;n to&#xE0;n tr&#x1EEB;u t&#x1B0;&#x1EE3;ng h&#xF3;a b&#x1EB1;ng vi&#x1EC7;c &#x111;&#x1EC1; c&#x1EAD;p t&#x1EDB;i c&#xE1;c b&#x1B0;&#x1EDB;c function signatures &#x111;&#x1B0;&#x1EE3;c vi&#x1EBF;t &#x1EDF; tr&#xEA;n.</p>
 <p>Tr&#x1B0;&#x1EDB;c khi tr&#x1EEB;u t&#x1B0;&#x1EE3;ng h&#xF3;a, ch&#xFA;ng ta c&#x1EA7;n ph&#x1EA3;i hi&#x1EC3;u r&#x1EB1;ng, vi&#x1EC7;c gi&#x1EDB;i thi&#x1EC7;u interfaces s&#x1EBD; c&#xF3; &#xFD; ngh&#x129;a &#x111;&#x1ED1;i v&#x1EDB;i h&#x1EC7; th&#x1ED1;ng, n&#xF3; s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c ph&#xE2;n t&#xED;ch theo ng&#x1EEF; c&#x1EA3;nh. N&#x1EBF;u h&#x1EC7; th&#x1ED1;ng ch&#x1EC9; ph&#x1EE5;c v&#x1EE5; cho m&#x1ED9;t product line, v&#xE0; m&#xE3; ngu&#x1ED3;n b&#xEA;n trong ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c thay &#x111;&#x1ED5;i cho nh&#x1EEF;ng ng&#x1EEF; c&#x1EA3;nh c&#x1EE5; th&#x1EC3;, th&#xEC; vi&#x1EC7;c gi&#x1EDB;i thi&#x1EC7;u interface kh&#xF4;ng th&#x1EF1;c s&#x1EF1; mang l&#x1EA1;i &#xFD; ngh&#x129;a to l&#x1EDB;n. Li&#x1EC7;u r&#x1EB1;ng n&#xF3; c&#xF3; thu&#x1EAD;n ti&#x1EC7;n &#x111;&#x1EC3; test, ch&#xFA;ng ta s&#x1EBD; b&#xE0;n v&#x1EC1; ch&#xFA;ng trong c&#xE1;c ph&#x1EA7;n sau.</p>
 <p>N&#x1EBF;u hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t platform system m&#xE0; n&#xF3; y&#xEA;u c&#x1EA7;u &#x111;&#x1ECB;nh ngh&#x129;a c&#xE1;c uniform business processes v&#xE0;  business specifications, sau &#x111;&#xF3; interface-based abstraction make sense. V&#xED; d&#x1EE5;:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p><div align="center">
     <img src="../images/ch5-interface-impl.uml.png">
     <br>
     <span align="center">
         <i>Implementing a public interface</i>
     </span>
-</div></p>
-<h1 id=""><br></h1>
-<p><img src="../images/ch5-interface-impl.uml.png" alt=""></p>
-<p><em>H&#xEC;nh 5-19 Implementing a public interface</em></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>039d41a5ffac593cb424dd3bee29b440339ea376</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</div>
+<br></p>
 <p>Flatform c&#x1EA7;n ph&#x1EA3;i ph&#x1EE5;c v&#x1EE5; nhi&#x1EC1;u business kh&#xE1;c nhau, nh&#x1B0;ng d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a c&#x1EA7;n ph&#x1EA3;i th&#x1ED1;ng nh&#x1EA5;t. V&#x1EC1; ph&#xED;a platform, ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t t&#x1EAD;p c&#xE1;c interfaces t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; tr&#xEA;n, v&#xE0; sau &#x111;&#xF3; y&#xEA;u c&#x1EA7;u b&#xEA;n business access ch&#xFA;ng ph&#x1EA3;i hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i. N&#x1EBF;u interface c&#xF3; m&#x1ED9;t s&#x1ED1; b&#x1B0;&#x1EDB;c kh&#xF4;ng mong mu&#x1ED1;n, ch&#x1EC9; c&#x1EA7;n tr&#x1EA3; v&#x1EC1; <code>nil</code>, ho&#x1EB7;c ph&#x1EDB;t l&#x1EDD; ch&#xFA;ng.</p>
 <p>Khi business l&#x1EB7;p &#x111;i l&#x1EB7;p l&#x1EA1;i, platform kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c thay &#x111;&#x1ED5;i. Do &#x111;&#xF3;, ch&#xFA;ng ta s&#x1EED; d&#x1EE5;ng c&#xE1;c services nh&#x1B0; l&#xE0; m&#x1ED9;t plugin c&#x1EE7;a platform &#x111;&#xF3;. &#x110;i&#x1EC1;u g&#xEC; x&#x1EA3;y ra n&#x1EBF;u ch&#xFA;ng ta kh&#xF4;ng c&#xF3; m&#x1ED9;t interface?</p>
 <pre><code class="lang-go"><span class="hljs-keyword">import</span> (
@@ -1085,7 +1067,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"5.8 Interface và Table Driven Development","level":"1.6.8","depth":2,"next":{"title":"5.9 Grayscale Publishing and A/B test","level":"1.6.9","depth":2,"path":"ch5-web/ch5-09-gated-launch.md","ref":"ch5-web/ch5-09-gated-launch.md","articles":[]},"previous":{"title":"5.7 Bố cục thông thường của các dự án web lớn","level":"1.6.7","depth":2,"path":"ch5-web/ch5-07-layout-of-web-project.md","ref":"ch5-web/ch5-07-layout-of-web-project.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-08-interface-and-web.md","mtime":"2019-07-31T07:32:25.950Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:10:45.514Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"5.8 Interface và Table Driven Development","level":"1.6.8","depth":2,"next":{"title":"5.9 Grayscale Publishing and A/B test","level":"1.6.9","depth":2,"path":"ch5-web/ch5-09-gated-launch.md","ref":"ch5-web/ch5-09-gated-launch.md","articles":[]},"previous":{"title":"5.7 Bố cục thông thường của các dự án web lớn","level":"1.6.7","depth":2,"path":"ch5-web/ch5-07-layout-of-web-project.md","ref":"ch5-web/ch5-07-layout-of-web-project.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-web/ch5-08-interface-and-web.md","mtime":"2019-07-31T08:36:17.913Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:26:38.281Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
