@@ -296,7 +296,7 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 
 ## 4.3.4 RPC theo ngữ cảnh (context)
 
-Dựa trên ngữ cảnh chúng ta có thể cung cấp những RPC services thích hợp cho những client khác nhau. Ta có thể hỗ trợ các tính năng theo ngữ cảnh bằng cách cung cấp các RPC service cho từng link kết nối.
+Dựa trên ngữ cảnh (context) chúng ta có thể cung cấp những RPC services thích hợp cho những client khác nhau. Ta có thể hỗ trợ các tính năng theo ngữ cảnh bằng cách cung cấp các RPC service cho từng link kết nối.
 
 Đầu tiên thêm vào thành phần `conn` ở `HelloService` cho link tương ứng:
 
