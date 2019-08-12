@@ -1,4 +1,4 @@
-# 5.10 Supplementary explanation
+# 5.10 Lời nói thêm
 
 Ngành công nghiệp phần mềm hiện đại không thể tách khỏi Web. Hơn nữa, Web thậm chí không cần dựa trên giao thức HTTP. Miễn là kiến trúc CS (Client - Server) hay BS (Business - Server), nó có thể được coi là một hệ thống Web.
 
