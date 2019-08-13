@@ -22,7 +22,7 @@ Việc hiện thực các bộ đếm thời gian đã là một vấn đề que
 Time heap là phổ biến nhất và thường được hiện thực bằng min heap. Min heap là một cây nhị phân đặc biệt.
 
 <div align="center">
-	<img src="../images/ch6-binary_tree.png">
+	<img src="../images/ch6-binary_tree.png" width="400">
 	<br/>
 	<span align="center">
 		<i>Cấu trúc heap nhị phân</i>
@@ -37,7 +37,7 @@ Khi ta thấy các phần tử đầu của heap nhỏ hơn thời điểm hiệ
 Bộ đếm thời gian tích hợp sẵn của Go được hiện thực với một time heap, nhưng thay vì sử dụng một heap nhị phân, có một giải pháp tốt hơn được sử dụng. Hãy nhìn vào min heap với bốn cạnh trông như thế nào:
 
 <div align="center">
-	<img src="../images/ch6-four-branch-tree.png" width="400">
+	<img src="../images/ch6-four-branch-tree.png" width="450">
 	<br/>
 	<span align="center">
 		<i>Quad Cross Stack Structure</i>
@@ -52,7 +52,7 @@ Không có sự khác biệt giữa thời gian quá hạn của phần tử và
 ### 5.3.1.2 Time Wheel
 
 <div align="center">
-	<img src="../images/ch6-timewheel.png" width="400">
+	<img src="../images/ch6-timewheel.png" width="450">
 	<br/>
 	<span align="center">
 		<i>Time Wheel</i>
@@ -73,7 +73,7 @@ Thông qua cách hiện thực bộ đếm thời gian cơ bản, nếu chúng t
 Chúng ta cần phân bố các công việc theo "thời gian" hoặc "trì hoãn" công việc (về cơ bản cũng là thời gian). Ý tưởng ở đây là:
 
 <div align="center">
-	<img src="../images/ch6-task-sched.png" width="400">
+	<img src="../images/ch6-task-sched.png" width="500">
 	<br/>
 	<span align="center">
 		<i>Distributed Task Distribution</i>
