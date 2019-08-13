@@ -1,12 +1,12 @@
 # 4.7. Framework dựa trên Protobuf: pbgo
 
-[Pbgo](https://github.com/chai2010/pbgo) là một framework nhỏ gọn dựa trên cú pháp mở rộng của Protobuf để sinh ra mã nguồn `REST` cho `RPC service`. Trong phần này, chúng ta sẽ hiện thực lại `Pbgo` bằng cách tùy chỉnh mã nguồn của plugin [protoc-gen-go](https://github.com/golang/protobuf/tree/master/protoc-gen-go).
+[Pbgo](https://github.com/chai2010/pbgo) là một framework nhỏ gọn dựa trên cú pháp mở rộng của Protobuf để sinh ra mã nguồn `REST` cho RPC service, trong phần này, chúng ta sẽ cùng tìm hiểu Pbgo.
 
 ## 4.7.1. Cú pháp mở rộng của Protobuf
 
-Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án Open-source liên quan. Ở phần trước (phần 4.6) chúng ta đã đề cập về `validator`, nó được dùng để `validate` các tham số dựa trên các rules được định nghĩa trong phần mở rộng của mỗi trường trong một `message`.
+Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án Open-source xung quanh nó. Ở phần trước, chúng ta đã đề cập `validator`, một plugin dùng để `validate` các trường theo các rules được định nghĩa trong phần mở rộng của trường tương ứng.
 
-Trong dự án `grpc-gateway`, việc hỗ trợ REST interface đạt được bằng cách thêm thông tin HTTP vào phần mở rộng cho mỗi hàm RPC của service. Pbgo cũng làm tương tự, các phần cú pháp mở rộng của chúng được định nghĩa như sau:
+Trong dự án [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), việc hỗ trợ REST interface đạt được bằng cách thêm thông tin HTTP vào phần mở rộng cho mỗi hàm RPC của service. Tương tự, các phần cú pháp mở rộng của Pbgo được định nghĩa như sau:
 
 ***[pbgo/pbgo.proto](https://github.com/chai2010/pbgo/blob/master/pbgo.proto) :***
 
@@ -35,7 +35,7 @@ message HttpRule {
 // xem thêm tại: https://github.com/chai2010/pbgo/blob/master/pbgo.proto
 ```
 
-Một khi extension đã được định nghĩa, chúng ta có thể sử dụng pbgo extension từ những file Protobuf khác, ví dụ là file hello.proto như sau:
+Sau khi extension đã được định nghĩa, chúng ta có thể import nó vào những file Protobuf khác, ví dụ là file hello.proto như sau:
 
 ***hello.proto :***
 
@@ -62,10 +62,9 @@ service HelloService {
 }
 ```
 
-
 ## 4.7.2. Đọc thông tin mở rộng của plugin
 
-Trong phần trước của chương này, chúng ta đã định nghĩa plugin Protobuf, bây giờ làm sao sinh ra mã nguồn cho RPC từ plugin. Đầu tiên định nghĩa interface như sau:
+Phần trước, chúng ta đã định nghĩa plugin trong Protobuf, bây giờ để sinh ra mã nguồn cho RPC từ plugin. Đầu tiên, định nghĩa interface như sau:
 
 ***Interface `generator.Plugin` :***
 
@@ -101,8 +100,7 @@ func (p *pbgoPlugin) Generate(file *generator.FileDescriptor) {
 }
 ```
 
-
-Trước khi chúng ta nói về phương thức `getServiceMethodOption`, hãy điểm lại định nghĩa phần extension của phương thức.
+Trước khi chúng ta nói về phương thức `getServiceMethodOption()`, định nghĩa phần extension cho phương thức.
 
 ***Extension :***
 
@@ -276,11 +274,11 @@ func main() {
 
 ```
 
-Sau đó kiểm thử REST Service bằng lệnh sau:
+Sau đó chạy thử REST Service bằng lệnh:
 
 ```sh
 $ curl localhost:8080/hello/vietnam
 {"value":"hello:vietnam"}
 ```
 
-Như vậy việc sử dụng framework `pbgo` được hoàn thành, đọc giả có thể xem thêm các ví dụ tại [đây](https://github.com/chai2010/pbgo/blob/master/README.md).
+Bạn đọc có thể xem thêm các ví dụ tại [đây](https://github.com/chai2010/pbgo/blob/master/README.md).
