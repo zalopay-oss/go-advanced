@@ -4,7 +4,7 @@
 
 ## 4.7.1. Cú pháp mở rộng của Protobuf
 
-Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án Open-source xung quanh nó. Ở phần trước, chúng ta đã đề cập `validator`, một plugin dùng để `validate` các trường theo các rules được định nghĩa trong phần mở rộng của trường tương ứng.
+Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án Open-source xung quanh nó. Ở phần trước, chúng ta đã đề cập [validator](https://github.com/mwitkow/go-proto-validators), một plugin dùng để validate các trường theo các rules được định nghĩa trong phần mở rộng của trường tương ứng.
 
 Trong dự án [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), việc hỗ trợ REST interface đạt được bằng cách thêm thông tin HTTP vào phần mở rộng cho mỗi hàm RPC của service. Tương tự, các phần cú pháp mở rộng của Pbgo được định nghĩa như sau:
 
@@ -66,7 +66,7 @@ service HelloService {
 
 Phần trước, chúng ta đã định nghĩa plugin trong Protobuf, bây giờ để sinh ra mã nguồn cho RPC từ plugin. Đầu tiên, định nghĩa interface như sau:
 
-***Interface `generator.Plugin` :***
+***Interface generator.Plugin :***
 
 ```go
 type Plugin interface {
@@ -100,7 +100,7 @@ func (p *pbgoPlugin) Generate(file *generator.FileDescriptor) {
 }
 ```
 
-Trước khi chúng ta nói về phương thức `getServiceMethodOption()`, định nghĩa phần extension cho phương thức.
+Trước khi chúng ta nói về phương thức getServiceMethodOption(), định nghĩa phần extension cho phương thức.
 
 ***Extension :***
 
@@ -115,7 +115,7 @@ extend google.protobuf.MethodOptions {
 
 
 
-Bên dưới là phần hiện thực phương thức `getServiceMethodOption()`.
+Bên dưới là phần hiện thực phương thức getServiceMethodOption().
 
 ***getServiceMethodOption() :***
 
@@ -140,7 +140,7 @@ Với thông tin về extension trên, chúng ta có thể sinh ra mã nguồn R
 
 ## 4.7.3. Sinh ra mã nguồn REST
 
-Framework `pbgo` cũng hỗ trợ một số plugin cho việc sinh ra mã nguồn REST. Tuy nhiên, mục tiêu của chúng ta là học được quy trình thiết kế framework `pbgo`, do đó đầu tiên chúng ta phải viết mã nguồn REST ứng với phương thức Hello, và sau đó phần mã nguồn được plugin tự động được sinh ra dựa trên một template được định nghĩa sẵn.
+Framework **pbgo** cũng hỗ trợ một số plugin cho việc sinh ra mã nguồn REST. Tuy nhiên, mục tiêu của chúng ta là học được quy trình thiết kế framework pbgo, do đó đầu tiên chúng ta phải viết mã nguồn REST ứng với phương thức Hello, và sau đó phần mã nguồn được plugin tự động được sinh ra dựa trên một template được định nghĩa sẵn.
 
 HelloService chỉ có một phương thức là Hello, phương thức Hello chỉ định nghĩa một REST interface.
 
@@ -274,7 +274,13 @@ func main() {
 
 ```
 
-Sau đó chạy thử REST Service bằng lệnh:
+Sau đó chạy REST Service bằng lệnh:
+
+```sh
+$ go run hello/hello.go
+```
+
+Kiểm tra service với lệnh:
 
 ```sh
 $ curl localhost:8080/hello/vietnam
