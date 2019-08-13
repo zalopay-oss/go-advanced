@@ -6,7 +6,7 @@
 
 Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án Open-source xung quanh nó. Ở phần trước, chúng ta đã đề cập [validator](https://github.com/mwitkow/go-proto-validators), một plugin dùng để validate các trường theo các rules được định nghĩa trong phần mở rộng của trường tương ứng.
 
-Trong dự án [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), việc hỗ trợ REST interface đạt được bằng cách thêm thông tin HTTP vào phần mở rộng cho mỗi hàm RPC của service. Tương tự, các phần cú pháp mở rộng của Pbgo được định nghĩa như sau:
+Trong dự án [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), việc hỗ trợ REST interface đạt được bằng cách thêm thông tin HTTP vào phần mở rộng cho mỗi hàm RPC của service. Tương tự, các phần cú pháp mở rộng của Pbgo được định nghĩa:
 
 ***[pbgo/pbgo.proto](https://github.com/chai2010/pbgo/blob/master/pbgo.proto) :***
 
@@ -35,7 +35,7 @@ message HttpRule {
 // xem thêm tại: https://github.com/chai2010/pbgo/blob/master/pbgo.proto
 ```
 
-Sau khi extension đã được định nghĩa, chúng ta có thể import nó vào những file Protobuf khác, ví dụ là file hello.proto như sau:
+Sau khi extension đã được định nghĩa, chúng ta có thể import nó vào những file Protobuf khác, ví dụ là file hello.proto:
 
 ***hello.proto :***
 
@@ -64,7 +64,7 @@ service HelloService {
 
 ## 4.7.2. Đọc thông tin mở rộng của plugin
 
-Phần trước, chúng ta đã định nghĩa plugin trong Protobuf, bây giờ để sinh ra mã nguồn cho RPC từ plugin. Đầu tiên, định nghĩa interface như sau:
+Phần trước, chúng ta đã định nghĩa plugin trong Protobuf, bây giờ để sinh ra mã nguồn cho RPC từ plugin. Đầu tiên, định nghĩa interface:
 
 ***Interface generator.Plugin :***
 
@@ -216,7 +216,7 @@ Sau khi thiết lập cấu trúc mã nguồn, bạn có thể xây dựng một
 
 Mặc dù quá trình để xây dựng một `pbgo` framework từ ban đầu hơi phức tạp, việc sử dụng `pbgo` để xây dựng một REST service lại cực kì đơn giản.
 
-Đầu tiên định nghĩa file hello.proto như sau:
+Đầu tiên định nghĩa file hello.proto:
 
 ***proto/hello.proto:***
 
