@@ -37,7 +37,7 @@ Khi ta thấy các phần tử đầu của heap nhỏ hơn thời điểm hiệ
 Bộ đếm thời gian tích hợp sẵn của Go được hiện thực với một time heap, nhưng thay vì sử dụng một heap nhị phân, có một giải pháp tốt hơn được sử dụng. Hãy nhìn vào min heap với bốn cạnh trông như thế nào:
 
 <div align="center">
-	<img src="../images/ch6-four-branch-tree.png">
+	<img src="../images/ch6-four-branch-tree.png" width="400">
 	<br/>
 	<span align="center">
 		<i>Quad Cross Stack Structure</i>
@@ -52,7 +52,7 @@ Không có sự khác biệt giữa thời gian quá hạn của phần tử và
 ### 5.3.1.2 Time Wheel
 
 <div align="center">
-	<img src="../images/ch6-timewheel.png">
+	<img src="../images/ch6-timewheel.png" width="400">
 	<br/>
 	<span align="center">
 		<i>Time Wheel</i>
@@ -73,7 +73,7 @@ Thông qua cách hiện thực bộ đếm thời gian cơ bản, nếu chúng t
 Chúng ta cần phân bố các công việc theo "thời gian" hoặc "trì hoãn" công việc (về cơ bản cũng là thời gian). Ý tưởng ở đây là:
 
 <div align="center">
-	<img src="../images/ch6-task-sched.png">
+	<img src="../images/ch6-task-sched.png" width="400">
 	<br/>
 	<span align="center">
 		<i>Distributed Task Distribution</i>
@@ -101,7 +101,7 @@ Khi tác vụ của chúng ta thực hiện lỗi do một máy nào đó trong 
 Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của [Elaticsearch](https://www.elastic.co/), mỗi dữ liệu của tác vụ có nhiều bản sao. Giả sử có hai bản sao như hình sau:
 
 <div align="center">
-	<img src="../images/ch6-task-data-dis.png">
+	<img src="../images/ch6-task-data-dis.png" width="300">
 	<br/>
 	<span align="center">
 		<i>Task Data Distribution</i>
@@ -114,7 +114,7 @@ Mặc dù có hai node cùng sở hữu một dữ liệu, dữ liệu sẽ có 
 Khi có node bị lỗi, ta cần phân phối các dữ liệu của tác vụ trên node này. Ví dụ, node 1 bị treo, chúng ta cùng xem hình sau.
 
 <div align="center">
-	<img src="../images/ch6-task-data-dis1.png">
+	<img src="../images/ch6-task-data-dis1.png" width="300">
 	<br/>
 	<span align="center">
 		<i>Data distribution at fault</i>
