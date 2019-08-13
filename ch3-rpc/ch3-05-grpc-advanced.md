@@ -9,7 +9,7 @@ Phần này sẽ mô tả ngắn gọn một số cách xác thực an toàn b�
 gRPC được xây dựng dựa trên giao thức HTTP/2 và hỗ trợ TLS khá hoàn thiện. gRPC service trong chương trước chúng ta không hỗ trợ xác thực qua chứng chỉ, vì vậy client `grpc.WithInsecure()` có thể  thông qua tùy chọn mà bỏ qua việc xác thực trong server được kết nối.
 
 <div align="center">
-<img src="../images/ssl.png" width="550">
+<img src="../images/ssl.png" width="570">
 <br/>
 <span align="center"><i>Xác thực bằng chứng chỉ</i></span>
     <br/>
