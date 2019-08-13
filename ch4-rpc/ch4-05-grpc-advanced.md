@@ -190,7 +190,7 @@ func main() {
 
     // đối tượng `Authentication` được chuyển đổi thành tham số
     // của `grpc.Dial` bằng hàm `grpc.WithPerRPCCredentials`
-    // Vì secure link không được kích hoạt nên cần phải
+    // vì secure link không được kích hoạt nên cần phải
     // truyền vào `grpc.WithInsecure()` để bỏ qua bước
     // xác thực chứng chỉ bảo mật
     conn, err := grpc.Dial("localhost"+port, grpc.WithInsecure(), grpc.WithPerRPCCredentials(&auth))

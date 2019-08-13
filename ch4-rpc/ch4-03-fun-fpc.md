@@ -22,7 +22,7 @@ Chúng  ta cũng có thể dùng `client.Go` gọi tới service trước đó l
 func doClientWork(client *rpc.Client) {
     helloCall := client.Go("HelloService.Hello", "hello", new(string), nil)
 
-    // do some thing
+    // xử ly logic ở đây
 
     helloCall = <-helloCall.Done
     if err := helloCall.Error; err != nil {
@@ -50,10 +50,11 @@ func (client *Client) Go(
     call.ServiceMethod = serviceMethod
     call.Args = args
     call.Reply = reply
-    call.Done = make(chan *Call, 10) // buffered channel.
+    // buffered channel.
+    call.Done = make(chan *Call, 10) 
 
     // gửi đi tham số call đến RPC framework.
-    // Phương thức `client.send` thread-safe cho nên lệnh gọi có thể
+    // phương thức `client.send` thread-safe cho nên lệnh gọi có thể
     // gửi từ nhiều Goroutine đồng thời tới cùng một đường link RPC.
     client.send(call)
     return call
@@ -69,8 +70,8 @@ select {
 case call.Done <- call:
     // ok
 default:
-    // We don't want to block here. It is the caller's responsibility to make
-    // sure the channel has enough buffer space. See comment in Go().
+    // sử dụng default sẽ không bị block chương trình.
+    // đảm bảo channel có đủ vùng nhớ cho buffer.
 }
 ```
 

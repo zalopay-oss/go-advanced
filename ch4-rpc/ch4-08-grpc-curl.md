@@ -15,7 +15,7 @@ func main() {
     s := grpc.NewServer()
     pb.RegisterYourOwnServer(s, &server{})
 
-    // Register reflection service on gRPC server.
+    // đăng ký reflection service trên gRPC server.
     reflection.Register(s)
 
     s.Serve(lis)

@@ -193,7 +193,7 @@ func (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
 
         reply := &String{Value: "hello:" + args.GetValue()}
 
-        // Dữ liệu trả về được  gửi đến client
+        // dữ liệu trả về được  gửi đến client
         // thông qua stream và việc gửi nhận
         // dữ liệu stream hai chiều là hoàn toàn độc lập
         err = stream.Send(reply)

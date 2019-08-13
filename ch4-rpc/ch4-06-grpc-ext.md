@@ -121,14 +121,14 @@ extend google.protobuf.FieldOptions {
 }
 
 message FieldValidator {
-    // Uses a Golang RE2-syntax regex to match the field contents.
+    // sử dụng Golang RE2-syntax regex để match với nội dung các field
     optional string regex = 1;
-    // Field value of integer strictly greater than this value.
+    // giá trị của biến integer bình thường lớn hơn giá trị này.
     optional int64 int_gt = 2;
-    // Field value of integer strictly smaller than this value.
+    // giá trị của biến integer bình thường nhỏ hơn giá trị này.
     optional int64 int_lt = 3;
 
-    // ... more ...
+    // ...
 }
 ```
 
