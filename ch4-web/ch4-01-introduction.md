@@ -56,7 +56,6 @@ $ curl http://127.0.0.1:8080/ -d '"Hello, World"'
 "Hello, World"
 ```
 
-
 ## 4.1.2 Dùng thư viện bên ngoài
 
 Bởi vì gói thư viện chuẩn [net/http](https://golang.org/pkg/net/http/) của Golang chỉ hỗ trợ những hàm routing và hàm chức năng cơ bản. Cho nên trong cộng đồng Golang có một ý tưởng phổ biến là viết thêm các thư viện hỗ trợ routing khác ngoài `net/http`.
