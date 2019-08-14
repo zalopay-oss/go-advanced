@@ -1,6 +1,6 @@
 # 4.3 Middleware
 
-Chương này sẽ phân tích nguyên tắc của kỹ thuật middleware ngày nay với một framework web phổ biến và chỉ ra làm thế nào để dùng kỹ thuật middleware này để tách biệt mã nguồn business và non-business.
+Phần này sẽ phân tích tình huống dẫn tới việc sử dụng middleware, sau đó trình bày cách hiện thực một middleware đơn giản để tách biệt mã nguồn business và non-business.
 
 ## 4.3.1 Tình huống đặt ra
 

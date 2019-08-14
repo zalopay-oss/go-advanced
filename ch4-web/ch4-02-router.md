@@ -1,6 +1,6 @@
-# 4.2. Định tuyến trong Web
+# 4.2. Routing trong Web
 
-Trong phần trước, chúng ta đã tìm hiểu cách dùng thư viện chuẩn [http/net](https://golang.org/pkg/net/http/) để hiện thực hàm routing đơn giản. Tuy nhiên một framework web sẽ có nhiều thành phần hơn ngoài việc định tuyến như xử lý tham số URI, phương thức, mã lỗi.
+Trong phần trước, chúng ta đã tìm hiểu cách dùng thư viện chuẩn [http/net](https://golang.org/pkg/net/http/) để hiện thực hàm routing đơn giản. Tuy nhiên một framework web sẽ có nhiều thành phần khác ngoài việc định tuyến như xử lý tham số URI, phương thức, mã lỗi.
 
 ## 4.2.1 RESTful API
 
