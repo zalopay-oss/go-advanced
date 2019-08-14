@@ -1,4 +1,4 @@
-# 4.9 Grayscale Publishing and A/B test
+# 4.9 Grayscale Publishing và kiểm định A/B
 
 Những công ty có tầm cỡ trung bình thường cung cấp dịch vụ cho hàng triệu users, trong khi hệ thống của các công ty lớn sẽ phải phục vụ cho chục triệu, thậm chí hàng tỉ users. Đầu vào của những requests từ các hệ thống lớn thường bất tận, và bất cứ thay đổi nào cũng sẽ được cảm nhận từ người dùng cuối. Ví dụ, nếu hệ thống của bạn từ chối một số upstream requests trên đường xử lý, nguyên nhân đến từ hệ thống của bạn và nó không có tính chịu lỗi, sau đó lỗi sẽ được ném ra đến người dùng cuối. Tạo thành một thiệt hại thực sự đến user, loại của thiệt hại này sẽ hiển thị một pops up chứa những thông điệp lạ lẫm trên làm màn hình của user app. Do users không thể biết nó là gì, users có thể quên nó đi, bằng việc refreshing lại trang. Nhưng nó cũng làm users mất đi cơ hội mua một món hàng nào đó vì có hàng chục hoặc hàng ngàn người mua khác cùng một thời điểm, bởi vì những vấn đề nhỏ như vậy trong mã nguồn, làm mất đi lợi thế ban đầu, và mất đi cơ hội mua được món hàng yêu thích mà họ đã chờ đợi trong vài tháng. Mức độ thiệt hại mà users phải gánh chịu sẽ phụ thuộc vào tầm quan trọng của hệ thống của bạn đối với users.
 
@@ -11,7 +11,7 @@ Vào thời điểm này, "Grayscale release" cực kì quan trọng. Grayscale 
 
 Phương pháp đầu tiên được sử dụng nhiều trong các hàm cũ của hệ thống. Khi mà một hàm mới được đưa vào hoạt động, thì phương pháp thứ hai sẽ được dùng nhiều hơn. Dĩ nhiên, khi gây ra một số thay đổi chính đến những hàm cũ mà chúng quan trọng, thì thông thường sẽ tốt hơn nếu publish chúng theo business rules, bởi vì độ rủi ro khi mở tất cả các hàm cho người dùng là khá lớn.
 
-## 4.9.1 Implementing grayscale publishing through batch deployment
+## 4.9.1 Hiện thực grayscale publishing bằng cách deployment theo nhóm
 
 Nếu service được deploy trên 15 instanses (có thể là physical machines hoặc containers), chúng ta chia 15 instances thành nhóm theo thứ tự độ ưu tiên, sẽ có 1-2-4-8 machines, mỗi thời điểm. Khi mở rộng ra, số lượng tăng gấp đôi.
 
@@ -32,7 +32,7 @@ Khi đi vào hoạt động, cách hiệu quả nhất để quan sát là nhìn
 
 Nếu có một trường hợp bất thường, việc làm đầu tiên là roll back.
 
-## 4.9.2 Grayscale publishing through business rules
+## 4.9.2 Grayscale publishing thông qua business rules
 
 Có nhiều chiến lược Grayscale phổ biến. Ví dụ, chiến lược của chúng ta là publish trong hàng ngàn points. Sau đó chúng ta có thể dùng user id, mobile phone number, user device information, v,v để sinh ra một giá trị hash.
 
@@ -48,7 +48,7 @@ func passed() bool {
 }
 ```
 
-## 4.9.2.1 Optional rules
+## 4.9.2.1 Các rules tuỳ chọn
 
 Một số hệ thống Grayscale publishing phổ biến sẽ có một số rules chọn từ:
 
@@ -175,7 +175,7 @@ func isPassed(rate int) bool {
 
 Chú ý tới khởi tạo `seed`.
 
-### 4.9.3.2 Hash algorithm
+### 4.9.3.2 Thuật toán Hash
 
 Có nhiều thuật thoán hash như là `md5`, `crc32`, `sha1`, v,v,.. nhưng mục đích mà chúng ta hướng đến là ánh xạ những data tới key tương ứng, và ta không muốn sử dụng quá nhiều CPU cho việc tính toán hash. Đa số các thuật toán đều `murmurhash`, sau đây là kết quả benchmark cho những thuật toán hash phổ biến đó.
 

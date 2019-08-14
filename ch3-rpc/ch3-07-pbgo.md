@@ -1,4 +1,4 @@
-# 3.7 pbgo : Protobuf-based framework
+# 3.7 Framework dựa trên Protobuf: pbgo
 
 [Pbgo](https://github.com/chai2010/pbgo) là một framework nhỏ gọn dựa trên cú pháp mở rộng của Protobuf để sinh ra mã nguồn `REST` cho RPC service, trong phần này, chúng ta sẽ cùng tìm hiểu Pbgo.
 

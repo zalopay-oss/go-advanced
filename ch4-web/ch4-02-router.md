@@ -104,7 +104,7 @@ r.PanicHandler = func(w http.ResponseWriter, r *http.Request, c interface{}) {
 
 Hiện tại cộng đồng opensource có một web framework được rất nhiều star là [gin](https://github.com/gin-gonic/gin) sử dụng httprouter.
 
-## 4.2.2 Principle
+## 4.2.2 Nguyên lý
 
 Cấu trúc dữ liệu được dùng bởi httprouter và nhiều routers dẫn xuất khác là Radix Tree. Người đọc có thể sẽ liên tưởng đến những cây khác như `compressed dictionary tree` và hoặc đã nghe về dictionary tree (Trie Tree).
 
@@ -239,7 +239,7 @@ Do đó, `:id` trong node là một con của string, và chỉ số vẫn chưa
 
 Trường hợp trên rất đơn giản, một route mới có thể được chèn trực tiếp vào node từ node gốc.
 
-### 4.2.3.3 Edge spliting
+### 4.2.3.3 Tách cạnh
 
 Tiếp theo chúng ta chèn `GET /search`, sau đó sẽ sinh ra cây split tree như hình 5.6:
 
@@ -265,7 +265,7 @@ Chúng tôi dùng `GET /status` và `GET /support` để chèn sum vào cây. L�
 </div>
 <br/>
 
-### 4.2.3.4 Subnode conflict handling
+### 4.2.3.4 Xử lý xung đột ở node con
 
 Trong trường hợp bản thân các routes chỉ là string thì sẽ không có xung đột xảy ra. Chỉ có thể dẫn tới xung đột nếu route chứa kí tự đại diện (tương tự như :id hoặc catchAll). Nó đã được đề cập từ trước.
 

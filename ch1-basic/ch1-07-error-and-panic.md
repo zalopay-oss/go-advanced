@@ -284,7 +284,7 @@ Do đó, khi đối mặt với giá trị error được return về, giá tr�
 
 Ngôn ngữ Go sẽ có một kiểu dữ liệu mạnh, và cụ thể chuyển đổi sẽ được thực hiện giữa những kiểu khác nhau (và sẽ phải bên dưới cùng kiểu dữ liệu). Tuy nhiên, `interface` là một ngoại lệ của ngôn ngữ Go: non-interface kiểu đến kiểu interface, hoặc chuyển đổi từ interface type là cụ thể. Nó cũng sẽ hỗ trợ ducktype, dĩ nhiên, chúng sẽ thỏa mãn cấp độ 3 về bảo mật.
 
-## 1.7.5. Parsing Exception
+## 1.7.5. Phân tích ngoại lệ
 
 `Panic` là một hàm dựng sẵn được dùng để dừng luồng thực thi thông thường và bắt đầu `panicking`. Khi hàm `F` gọi `panic`, hàm F sẽ dừng thực thi, bất cứ hàm liên quan tới F sẽ thực thi một cách bình thường, và sau đó lệnh return F sẽ được gọi.
 

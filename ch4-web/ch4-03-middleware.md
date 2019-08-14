@@ -203,7 +203,7 @@ Một cách đơn giản, quá trình này thực hiện đưa vào một hàm v
 
 Phần hiện thực hàm ở trên có thể khiến chúng ta khó hiểu.
 
-## 4.3.3 More elegant middleware writing
+## 4.3.3 Cách viết middleware thanh lịch hơn
 
 Trong phần trước, sự tách biệt về mã nguồn hàm business và non-business function được giải quyết, nhưng cũng không tốt hơn lắm, Nếu bạn cần phải thay đổi thứ tự của những hàm đó, hoặc thêm, hoặc xóa middleware vẫn còn một số khó khăn, phần này chúng ta sẽ thực hiện việc tối ưu bằng cách viết .
 
