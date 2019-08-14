@@ -1,12 +1,12 @@
 # 4.2. Định tuyến trong Web
 
-Trong phần trước, chúng ta đã tìm hiểu làm cách nào dùng `http/net` là một thư viện chuẩn để hiện thực hàm routing đơn giản. Tuy nhiên một framework web sẽ có nhiều thành phần hơn ngoài việc định tuyến như xử lý tham số URI, phương thức, mã lỗi.
+Trong phần trước, chúng ta đã tìm hiểu cách dùng thư viện chuẩn [http/net](https://golang.org/pkg/net/http/) để hiện thực hàm routing đơn giản. Tuy nhiên một framework web sẽ có nhiều thành phần hơn ngoài việc định tuyến như xử lý tham số URI, phương thức, mã lỗi.
 
 ## 4.2.1 RESTful API
 
-[RESTful](https://restfulapi.net/) là một làn sóng thiết kế API trong ngành công nghiệp Web hiện đại. Ngoài những phương thức GET, POST thì RESTful cũng định nghĩa vài phương thức khác trong giao thức HTTP bao gồm:
+[RESTful](https://restfulapi.net/) là một tiêu chuẩn thiết kế API trong ngành công nghiệp web hiện đại. Ngoài những phương thức GET, POST thì RESTful cũng định nghĩa vài phương thức khác trong giao thức HTTP bao gồm:
 
-***HTTP Method:***
+***Phương thức HTTP:***
 
 ```go
 const (
@@ -24,7 +24,7 @@ const (
 
 Nhìn vào những đường dẫn RESTful API sau:
 
-***Github API:***
+***RESTful API:***
 
 ```sh
 // Mỗi API sẽ có một phương thức tương ứng
@@ -37,11 +37,11 @@ DELETE /user/starred/:owner/:repo
 
 ```
 
-Nếu hệ thống web của chúng ta cần có những API tương tự trên, việc sử dụng thư viện chuẩn `net/http` hiển nhiên là không đủ. Những API chứa parameters như trên của Github có thể được hỗ trợ hiện thực bởi thư viện [HttpRouter](https://github.com/julienschmidt/httprouter).
+Nếu hệ thống web của chúng ta cần có những API tương tự trên, việc sử dụng thư viện chuẩn net/http hiển nhiên là không đủ. Những API chứa parameters như trên của Github có thể được hỗ trợ hiện thực bởi thư viện [HttpRouter](https://github.com/julienschmidt/httprouter).
 
-## 4.2.1 Giới thiệu thư viện HttpRouter
+## 4.2.1 Tìm hiểu thư viện HttpRouter
 
-Nhiều Open-source web framework phổ biến của Go thường được xây dựng dựa trên [HttpRouter](https://github.com/julienschmidt/httprouter) như [Gin](https://github.com/gin-gonic), hoặc hỗ trợ cho routing dựa trên những biến thể của HttpRouter. Khi sử dụng nó, bạn cần phải tránh một số trường hợp mà nó dẫn đến xung đột routing khi thiết kế các API.
+Nhiều Open-source web framework phổ biến của Go thường được xây dựng dựa trên [HttpRouter](https://github.com/julienschmidt/httprouter) như là [Gin](https://github.com/gin-gonic) framework, hoặc hỗ trợ cho routing dựa trên những biến thể của HttpRouter. Khi sử dụng nó, bạn cần phải tránh một số trường hợp mà nó dẫn đến xung đột routing khi thiết kế.
 
 ***Ví dụ:***
 
@@ -111,9 +111,7 @@ Cấu trúc dữ liệu được dùng bởi HttpRouter và nhiều framework ro
 	<br/>
 </div>
 
-Kiểu chuỗi không phải là một kiểu số học nên không thể so sánh trực tiếp như kiểu số, và thời gian xấp xỉ của việc so sánh hai chuỗi là phụ thuộc vào độ dài của chuỗi, và sau đó dùng giải thuật như là binary search để tìm kiếm, độ phức tạp về thời gian có thể cao.
-
-Dùng cây Radix để lưu trữ và truy xuất chuỗi là một cách đảm bảo tối ưu về thời gian, mỗi phần trong đường dẫn được xem là một chuỗi và được lưu trữ trong cây Radix như ví dụ sau:
+Kiểu chuỗi không phải là một kiểu số học nên không thể so sánh trực tiếp như kiểu số, và thời gian xấp xỉ của việc so sánh hai chuỗi là phụ thuộc vào độ dài của chuỗi, và sau đó dùng giải thuật như là binary search để tìm kiếm, độ phức tạp về thời gian có thể cao. Dùng cây Radix để lưu trữ và truy xuất chuỗi là một cách đảm bảo tối ưu về thời gian, mỗi phần trong đường dẫn được xem là một chuỗi và được lưu trữ trong cây Radix như ví dụ sau:
 
 <div align="center">
 	<img src="../images/ch5-02-radix.png" width="500">
@@ -154,19 +152,15 @@ type Router struct {
 }
 ```
 
-Mỗi phương thức sẽ tương ứng với một cây Radix độc lập và không chia sẻ dữ liệu với các cây khác. Đặc biệt đối với route chúng ta dùng ở trên, `PUT` và `GET` là hai cây thay vì một.
-
-Đơn giản mà nói, lần đầu chèn một phương thức vào route, node gốc sẽ tương ứng với một cây từ điển mới được tạo ra. Để làm như vậy, đầu tiên chúng ta dùng `PUT`:
+Mỗi phương thức sẽ tương ứng với một cây Radix độc lập và không chia sẻ dữ liệu với các cây khác. Đặc biệt đối với route chúng ta dùng ở trên, `PUT` và `GET` là hai cây thay vì một. Đầu tiên, chèn route `PUT` vào cây:
 
 ```go
 r := httprouter.New()
 r.PUT("/user/installations/:installation_id/repositories/:reposit", Hello)
 ```
 
-`PUT` sẽ ứng với node gốc được tạo ra, cây có dạng:
-
 <div align="center">
-	<img src="../images/ch5-02-radix-put.png">
+	<img src="../images/ch5-02-radix-put.png" width="800">
 	<br/>
 	<span align="center">
 		<i>Một cây từ điển nén được insert vào route</i>
@@ -187,14 +181,14 @@ nType:    // loại nút có bốn giá trị liệt kê static/root/param/catch
 indices:
 ```
 
-Dĩ nhiên, route của phương thức `PUT` chỉ là một đường dẫn. Tiếp theo, chúng ta thêm một số đường dẫn GET trong ví dụ để giải thích về quy trình chèn vào một node con.
+Tiếp theo, chúng ta chèn các route GET còn lại trong ví dụ để giải thích về quy trình chèn vào một node con.
 
-### 4.2.3.2 Chèn node con
+### 4.2.3.2 Chèn các route khác
 
 Khi chúng ta chèn `GET /marketplace_listing/plans`, quá trình này sẽ tương tự như trước nhưng ở một cây khác:
 
 <div align="center">
-	<img src="../images/ch5-05-radix-get-1.png" width="400">
+	<img src="../images/ch5-05-radix-get-1.png" width="600">
 	<br/>
 	<span align="center">
 		<i>Chèn node đầu tiên vào cây Radix</i>
@@ -206,7 +200,7 @@ Khi chúng ta chèn `GET /marketplace_listing/plans`, quá trình này sẽ tư�
 Sau đó chèn đường dẫn `GET /marketplace_listing/plans/:id/accounts` cấu trúc cây được hoàn thành sẽ như sau:
 
 <div align="center">
-	<img src="../images/ch5-02-radix-get-2.png" width="500">
+	<img src="../images/ch5-02-radix-get-2.png" width="600">
 	<br/>
 	<span align="center">
 		<i>Chèn node thứ hai vào cây Radix</i>
@@ -220,7 +214,7 @@ Sau đó chèn đường dẫn `GET /marketplace_listing/plans/:id/accounts` c�
 Tiếp theo chúng ta chèn `GET /search`, sau đó sẽ sinh ra cây split tree như hình 5.6:
 
 <div align="center">
-	<img src="../images/ch5-02-radix-get-3.png">
+	<img src="../images/ch5-02-radix-get-3.png" width="800">
 	<br/>
 	<span align="center">
 		<i>Chèn vào node thứ ba sẽ gây ra việc phân nhánh</i>
@@ -231,7 +225,7 @@ Tiếp theo chúng ta chèn `GET /search`, sau đó sẽ sinh ra cây split tree
 Node gốc bây giờ sẽ bắt đầu từ ký tự `/`, chuỗi truy vấn phải bắt đầu từ node gốc chính, sau đó một route là `search` được phân nhánh từ gốc. Tiếp theo chèn  `GET /status` và `GET /support` vào cây. Lúc này, sẽ dẫn đến node `search` bị tách một lần nữa, và kết quả cuối cùng được nhìn thấy ở hình dưới:
 
 <div align="center">
-	<img src="../images/ch5-02-radix-get-4.png">
+	<img src="../images/ch5-02-radix-get-4.png" width="800">
 	<br/>
 	<span align="center">
 		<i>Sau khi chèn tất cả các node</i>
