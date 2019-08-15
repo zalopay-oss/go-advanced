@@ -28,13 +28,17 @@ Ngôn ngữ [Golang](https://golang.org/) không còn quá xa lạ trong giới 
 Chúng tôi thực hiện bộ tài liệu nhằm:
 
 - Tạo ra bộ tài liệu về Go cho nội bộ Zalopay sử dụng.
-- Đây là cơ hội để mọi người biết tới teachnical stack của Zalopay.
+- Đây là cơ hội để mọi người biết tới teachnical stack của ZaloPay.
 - Public ra bên ngoài để cộng đồng Golang Việt Nam có bộ tài liệu tiếng Việt do chính người Việt Nam biên soạn. 
 - Đồng thời tạo ra sân chơi mới có cơ hội giao lưu mở rộng mối quan hệ với các bạn có cùng đam mê lập trình.
   
 ## Tài liệu tham khảo
 
-Bộ tài liệu này được chúng tôi biên soạn dựa trên kinh nghiệm và kiến thức tích luỹ trong quá trình làm việc tại Zalopay. Đồng thời chúng tôi có tham khảo các tài liệu bên ngoài như [Advanced Go Programming](https://github.com/chai2010/advanced-go-programming-book), [Khoá học Distributed Systems của Princeton](https://www.cs.princeton.edu/courses/archive/fall18/cos418/schedule.html).
+Bộ tài liệu này được chúng tôi biên soạn dựa trên kinh nghiệm và kiến thức tích luỹ trong quá trình làm việc tại ZaloPay. Đồng thời chúng tôi có tham khảo các tài liệu bên ngoài như 
+
+- [Khoá học Distributed Systems của Princeton](https://www.cs.princeton.edu/courses/archive/fall18/cos418/schedule.html).
+
+- [Advanced Go Programming](https://github.com/chai2010/advanced-go-programming-book),   
 
 ## Mục lục
 
@@ -46,7 +50,7 @@ Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 
 ## Tham gia phát triển
 
-Để phát triển bộ tài liệu Advanced Go Programming hoàn chỉnh hơn trong tương lai, chúng tôi rất vui khi nhận được sự đóng góp từ mọi người.
+Chúng tôi biết tài liệu này còn nhiều hạn chế. Để trở nên hoàn chỉnh hơn trong tương lai, chúng tôi rất vui khi nhận được sự đóng góp từ mọi người.
 
 Các bạn có thể đóng góp bằng cách:
 
