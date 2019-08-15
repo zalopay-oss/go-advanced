@@ -1,4 +1,4 @@
-# 4.8 Interface và Table Driven Development
+# 4.8 Interface và Table Driven Development 
 
 Trong dự án web, bạn sẽ thường bắt gặp sự thay đổi từ môi trường phụ thuộc bên ngoài, như là:
 
@@ -238,7 +238,8 @@ Do đó, interface có thể được xem như là một cách an toàn để ki
 
 ## 4.8.5 Table Driven Development
 
-Nếu trong hàm có sử dụng `if` hoặc `switch` thì sẽ làm phức tạp hơn. Có cách
+Nếu trong hàm có sử dụng `if` hoặc `switch` thì sẽ làm phức tạp hơn. Cách khác:
+
 ```go
 func entry() {
     var bi BusinessInstance
