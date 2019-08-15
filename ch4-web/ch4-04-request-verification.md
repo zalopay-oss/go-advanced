@@ -1,30 +1,36 @@
-# 4.4 Kiểm tra yêu cầu validator
+# 4.4 Validator request check
 
-Một số lập trình viên thích chế giễu cấu trúc của PHP bằng hình sau:
+Có lẽ bạn đã bắt gặp đâu đó tấm hình mà mọi người dùng để  chế giễu cấu trúc của PHP:
 
 <div align="center">
 	<img src="../images/ch5-04-validate.jpg">
 	<br/>
 	<span align="center">
-		<i>Quá trình validator</i>
+		<i>Hadouken if-else</i>
 	</span>
 </div>
 <br/>
 
-Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ. Có nhiều trường hợp mà các trường cần phải xác nhận (validate). Form hoặc JSON submit chỉ là một ví dụ điển hình. Chúng ta sử dụng Go để viết một ví dụ validate giống với ở trên, sau đó sẽ xem xét để cải thiện nó theo từng bước.
+Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ mà chỉ là cách tổ chức code rườm rà khi gặp trường hợp mà nhiều field cần phải validate.
 
-## 4.4.1 Tái cấu trúc hàm request validation
+Trong phần này chúng ta sẽ dùng Go để viết một ví dụ validate và
+
+## 4.4.1 Cải tiến 1: Tái cấu trúc hàm validation
 
 Giả sử dữ liệu được liên kết tới một struct cụ thể thông qua binding bằng một thư viện opensource.
 
 ```go
 type RegisterReq struct {
+    // tag giúp json package encode giá trị của Username
+    // thành giá trị tương ứng với key username trong json obj
     Username       string   `json:"username"`
     PasswordNew    string   `json:"password_new"`
     PasswordRepeat string   `json:"password_repeat"`
     Email          string   `json:"email"`
 }
 
+// register nhận vào obj kiểu RegisterReq và thực hiện validate
+// các trường trong đó.
 func register(req RegisterReq) error{
     if len(req.Username) > 0 {
         if len(req.PasswordNew) > 0 && len(req.PasswordRepeat) > 0 {
@@ -47,9 +53,9 @@ func register(req RegisterReq) error{
 }
 ```
 
-Làm thế nào để tối ưu đoạn code trên?
+Giờ code của chúng ta có vẻ khá giống một *Hadouken* nhắc ở phần đầu rồi, vậy làm thế nào để tối ưu đoạn code trên?
 
-Rất đơn giản, có một giải pháp đã được đưa ra trong [Refactoring: Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html)
+Có một giải pháp đã được đưa ra trong [Refactoring.com - Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html), thử áp dụng cho trường hợp của chúng ta:
 
 ```go
 func register(req RegisterReq) error{
@@ -74,64 +80,74 @@ func register(req RegisterReq) error{
 }
 ```
 
-Thế là đoạn code trở nên "clean" hơn và nhìn bớt kì cục. Mặc dù phương thức tái cấu trúc được sử dụng để làm cho code của quy trình validate trông thanh lịch hơn, chúng ta vẫn phải viết một tập các hàm tương tự như `validate()` cho mỗi yêu cầu `http`. Có cách nào tốt hơn để giúp chúng ta cải thiện hơn không? Câu trả lời là sử dụng validator.
+Nhờ bỏ đi cách viết if-else lông nhau mà code trở nên "clean" hơn. Tuy vậy chúng ta vẫn phải viết khá nhiều hàm validate cho mỗi field trong một kiểu request.
 
-## 4.4.2 Cải tiến với validator
+Có một cách giúp chúng ta giảm khá nhiều code là sử dụng validator.
 
-Từ quan điểm thiết kế, chúng ta chắc chắn sẽ phải khai báo một cấu trúc cho mỗi request. Các trường hợp validate được đề cập trong phần trước đều có thể được thực hiện thông qua validator. Đoạn code sau lấy lại struct trong phần trước làm ví dụ. Để cho gọn chúng ta sẽ bỏ qua thẻ json.
+## 4.4.2 Cải tiến 2: Sử dụng validator
 
-Ở đây ta sử dụng một thư viện validator mới: <https://github.com/go-playground/validator>
+<div align="center">
+	<img src="../images/validator.png" width="200">
+	<br/>
+
+</div>
+
+Thư viện [validator](https://github.com/go-playground/validator) hỗ trợ việc validate bằng cách sử dụng các tag lúc định nghĩa struct. Một ví dụ nhỏ:
 
 ```go
-import "gopkg.in/go-playground/validator.v9"
+import (
+    "gopkg.in/go-playground/validator.v9"
+    "fmt"
+)
 
+// RegisterReq là struct cần được validate
 type RegisterReq struct {
-    // gt = 0 cho biết độ dài chuỗi phải > 0，gt = greater than
-    Username       string   `validate:"gt=0"`
-    // như trên
-    PasswordNew    string   `validate:"gt=0"`
+    // gt = 0 cho biết độ dài chuỗi phải > 0，gt: greater than
+    Username       string   `json:"username" validate:"gt=0"`
+    PasswordNew    string   `json:"password_new" validate:"gt=0"`
+
     // eqfield kiểm tra các trường bằng nhau
-    PasswordRepeat string   `validate:"eqfield=PasswordNew"`
+    PasswordRepeat string   `json:"password_repeat" validate:"eqfield=PasswordNew"`
+
     // kiểm tra định dạng email thích hợp
-    Email          string   `validate:"email"`
+    Email          string   `json:"email" validate:"email"`
 }
 
-validate := validator.New()
+// dùng 1 instance của Validate, cache lại struct info
+var validate *validator.Validate
 
-func validate(req RegisterReq) error {
+// validatefunc để wrap hàm validate.Struct
+func validatefunc(req RegisterReq) error {
     err := validate.Struct(req)
     if err != nil {
-        doSomething()
         return err
     }
-    ...
-}
-```
-
-Điều này loại bỏ sự cần thiết phải viết các hàm `validate()` trùng lặp trước khi mỗi request đi vào logic nghiệp vụ. Trong ví dụ này, chỉ có một vài tính năng của validator này được liệt kê.
-
-Ta thử thực thi chương trình này với tham số đầu vào được set:
-
-```go
-//...
-
-var req = RegisterReq {
-    Username       : "Xargin",
-    PasswordNew    : "ohno",
-    PasswordRepeat : "ohn",
-    Email          : "alex@abc.com",
+    return nil
 }
 
-err := validate(req)
-fmt.Println(err)
+func main() {
+    validate = validator.New()
 
-// Key: 'RegisterReq.PasswordRepeat' Error:Field validation for
-// 'PasswordRepeat' failed on the 'eqfield' tag
+    // khởi tạo obj để test validator
+    a := RegisterReq{
+        Username        : "Alex",
+        PasswordNew     : "",
+        PasswordRepeat  : "z",
+        Email           : "z@z.z",
+    }
+
+    err := validatefunc(a)
+    fmt.Println(err)
+}
+
+// kết quả:
+// Key: 'RegisterReq.PasswordNew' Error:Field validation for 'PasswordNew' failed on the 'gt' tag
+// Key: 'RegisterReq.PasswordRepeat' Error:Field validation for 'PasswordRepeat' failed on the 'eqfield' tag
 ```
 
-Khi trả về error message cho người dùng thì không nên viết trực tiếp bằng tiếng Anh. Thông tin về error có thể được tổ chức theo từng tag và người đọc theo đó tự tìm hiểu.
+Một lưu ý nhỏ là  error message trả về cho người dùng thì không nên viết trực tiếp bằng tiếng Anh mà thông tin về error nên được tổ chức theo từng tag để người dùng theo đó tra cứu.
 
-## 4.4.3 Các nguyên tắc
+## 4.4.3 Cơ chế của validator
 
 Từ quan điểm cấu trúc, mỗi struct có thể được xem như một cây. Giả sử chúng ta có một struct được định nghĩa như sau:
 
@@ -148,7 +164,7 @@ type T struct {
 Sẽ được vẽ thành một cây như bên dưới:
 
 <div align="center">
-	<img src="../images/ch5-04-validate-struct-tree.png">
+	<img src="../images/ch5-04-validate-struct-tree.png" width="300">
 	<br/>
 	<span align="center">
 		<i>Cây validator</i>
@@ -156,7 +172,9 @@ Sẽ được vẽ thành một cây như bên dưới:
 </div>
 <br/>
 
-Việc validate các trường có thể đi qua cây cấu trúc này (bằng cách duyệt chiều sâu hoặc theo chiều rộng). Thử viết một ví dụ duyệt cây theo chiều sâu:
+Việc validate các trường có thể thực hiện khi đi qua cấu trúc cây này (bằng cách duyệt theo chiều sâu hoặc theo chiều rộng). Tiếp theo chúng ta sẽ minh hoạ cơ chế validate trên một cấu trúc như thế, mục đích để hiểu rõ hơn cách mà validator thực hiện.
+
+Đầu tiên xác định 2 struct như hình trên:
 
 ```go
 package main
@@ -170,34 +188,52 @@ import (
 )
 
 type Nested struct {
+    // validate định dạng email
     Email string `validate:"email"`
 }
 type T struct {
+    // chỉ cho phép age = 10
     Age    int `validate:"eq=10"`
     Nested Nested
 }
+```
 
+Định nghĩa hàm validate:
+
+```go
+// validateEmail giúp xử lý các tag email
 func validateEmail(input string) bool {
     if pass, _ := regexp.MatchString(
-        `^([\w\.\_]{2,10})@(\w{1,}).([a-z]{2,4})$`, input,
+        `^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$`, input,
     ); pass {
         return true
     }
     return false
 }
 
+// validate thực hiện công việc validate cho interface bất kỳ
+// ở đây chỉ hiện thực cho kiểu T
 func validate(v interface{}) (bool, string) {
     validateResult := true
     errmsg := "success"
+
+    // xác định type và value của interface input
     vt := reflect.TypeOf(v)
     vv := reflect.ValueOf(v)
+
+    // lần lượt duyệt trên mỗi field của struct
     for i := 0; i < vv.NumField(); i++ {
+        // phân giải tag để áp dụng validate thích hợp
         fieldVal := vv.Field(i)
         tagContent := vt.Field(i).Tag.Get("validate")
         k := fieldVal.Kind()
 
+        // điều kiện xét trên kiểu field của struct cần validate
         switch k {
+
+        // trường hợp field là int
         case reflect.Int:
+            // thực hiện validate cho tag eq=10
             val := fieldVal.Int()
             tagValStr := strings.Split(tagContent, "=")
             tagVal, _ := strconv.ParseInt(tagValStr[1], 10, 64)
@@ -207,10 +243,14 @@ func validate(v interface{}) (bool, string) {
                 )
                 validateResult = false
             }
+
+        // trường hợp field là string
         case reflect.String:
             val := fieldVal.String()
             tagValStr := tagContent
             switch tagValStr {
+
+            // nếu tag là email thì thực hiện validate tương ứng
             case "email":
                 nestedResult := validateEmail(val)
                 if nestedResult == false {
@@ -218,9 +258,10 @@ func validate(v interface{}) (bool, string) {
                     validateResult = false
                 }
             }
+
+        // nếu có struct lồng bên trong thì truyền
+        // xuống đệ quy theo chiều sâu
         case reflect.Struct:
-            // nếu có struct lồng bên trong thì truyền
-            // xuống đệ quy theo chiều sâu
             valInter := fieldVal.Interface()
             nestedResult, msg := validate(valInter)
             if nestedResult == false {
@@ -232,16 +273,21 @@ func validate(v interface{}) (bool, string) {
     return validateResult, errmsg
 }
 
+```
+
+Sau đây là cách sử dụng trong hàm main:
+
+```go
 func main() {
-    var a = T{Age: 10, Nested: Nested{Email: "abc@abc.com"}}
+    // khởi tạo obj để test
+    var a = T{Age: 10, Nested: Nested{Email: "abc@adfgom"}}
 
     validateResult, errmsg := validate(a)
     fmt.Println(validateResult, errmsg)
 }
+
+// kết quả:
+// false validate mail failed, field val is: abc@adfgom
 ```
 
-Ví dụ trên kiểm tra định dạng email theo tag age, bạn có thể thực hiện thay đổi đơn giản trong chương trình để xem kết quả validate cụ thể. Để tinh giản việc xử lý lỗi và các tiến trình phức tạp, ví dụ `reflect.Int8/16/32/64`, `reflect.Ptr`, nếu bạn viết thư viện xác minh cho môi trường doanh nghiệp, hãy đảm bảo cải thiện chức năng và khả năng chịu lỗi.
-
-Component validation opensource được giới thiệu trong phần trước phức tạp hơn về mặt chức năng so với ví dụ ở đây. Nhưng nguyên tắc chung rất đơn giản là duyệt cây của một struct với reflection. Việc ta phải sử dụng một lượng lớn các reflection khi verify struct nhưng vì reflection trong Go không hiệu quả lắm nên đôi khi sẽ ảnh hưởng đến hiệu suất của chương trình. Ngữ cảnh đòi hỏi nhiều verify struct thường xuất hiện trong các web service. Đây không hẳn là vấn đề thắt cổ chai hiệu năng của chương trình. Hiệu quả thực tế là đưa ra phán đoán chính xác hơn từ thư viện `pprof`.
-
-Điều gì xảy ra nếu quá trình verify dựa trên reflection thực sự trở thành thắt cổ chai hiệu năng trong service của bạn? Có một ý tưởng để tránh dùng reflection: sử dụng "Trình phân tích cú pháp tích hợp của Go (Parser)" để quét mã nguồn và sau đó tạo mã xác thực dựa trên định nghĩa của struct. Chúng ta có thể đưa tất cả các struct cần được verify vào trong một package riêng. Vấn đề này được để lại cho người đọc khám phá.
+Thư viện validator được giới thiệu trong phần trước phức tạp hơn về mặt chức năng so với ví dụ ở đây. Nhưng nguyên tắc chung cũng là duyệt cây của một struct với reflection.

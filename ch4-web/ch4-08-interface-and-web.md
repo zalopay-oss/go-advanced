@@ -1,6 +1,6 @@
-# 4.8 Interface và Table Driven Development
+# 4.8 Interface và Table Driven Development 
 
-Trong dự án web, bạn sẽ thường bắt gặp sự thay đổi từ môi trường phụ thuộc bên ngoài, như là:
+Trong các dự án web thực tế chúng ta thường phải thay đổi mã nguồn (thêm, loại bớt) do các yếu tố bên ngoài, như là:
 
 1. Hệ thống cũ dùng để lưu trữ dữ liệu của công ty đã bị hư hỏng trong một thời gian dài và hiện tại không có ai bảo trì nó. Hệ thống mới được xem là không thể chuyển giao trơn tru, những cuối cùng yêu cầu đưa ra là phải chuyển giao trong vòng N ngày.
 2. Hệ thống cũ của platform department bị hư hỏng trong thời gian dài, và bây giờ không có ai bảo trì chúng. Đó là một câu chuyện buồn. Hệ thống mới không tương thích với interface cũ, nhưng cuối cùng nó cũng bị sụp đổ, và yêu cầu phải chuyển giao trong vòng N ngày.
@@ -8,15 +8,13 @@ Trong dự án web, bạn sẽ thường bắt gặp sự thay đổi từ môi 
 
 ## 4.8.1 Quy trình phát triển hệ thống doanh nghiệp
 
-Miễn là công ty Internet tồn tại trong vòng ba năm, vấn đề chính mà những người kỹ sư phải đối mặt là mã nguồn phình to. Sau khi mã nguồn hệ thống bị lớn lên, những phần của hệ thống có thể không liên quan đến business process của chúng ta có thể được tháo rời và không đồng bộ. Đâu là những phần liên quan đến business, như là thống kê, chống gian lận, tiếp thị, tính toán giá, cập nhật trạng thái user, v,v.. Những yêu cầu đó, thường sẽ phụ thuộc vào dữ liệu trong main process nhưng chúng chỉ là một nhánh bên của main process, và chúng khép kín.
+Các công ty Internet tồn tại trong vòng khoảng ba năm thì cácn mã nguồn của hệ thống dần phình to và gây khó khăn cho các kỹ sư lập trình. Sau khi mã nguồn hệ thống bị lớn lên, có một số phần của hệ thống có thể được tách rời thành các service nhỏ hơn. Các service được tách rời giúp chúng ta dễ dàng deploy, phát triển và bảo trì chúng.
 
-Trong thời gian này, chúng ta có thể tháo rời những nhánh bên và deploy, phát triển và bảo trì chúng trong một hệ thống độc lập. Sự trì hoãn của những quá trình xử lý song song này rất nhạy cảm. Ví dụ, nếu user click vào button trên giao diện, kết quả sẽ trả về ngay lặp tức (tính toán giá, thanh toán), sau đó RPC communication trong main process system được yêu cầu, và khi comunication faileds, kết quả có thể được trực tiếp trả về. Về phía user, nếu việc trì hoãn không quá nhạy cảm, như là hệ thống xổ số, và kết quả được công bố sau đó, hoặc hệ thống thống kê không cần phải theo thời gian thực, thì không cần phải hiện thực một tiến trình RPC cho mỗi system trong main process. Chúng ta chỉ cần package dữ liệu cần trong downstream vào trong một message và chuyển nó tới message queue. Những thứ tiếp theo sẽ không có gì để làm trong main process (dĩ nhiên, quá trình theo dõi người dùng vẫn cần phải được thực hiện).
+Mặc dù, một số vấn đề có thể được giải quyết thông qua việc tách rời service, cũng không thể  giải quyết được tất cả. Trong quá trình phát triển business, những service này cũng dần trở nên phức tạp hơn, chúng vẫn là một xu hướng không thể tránh khỏi. Vậy nên cách tốt nhất là chúng ta sẽ sử dụng interface khi lập trình để tách rời sự phụ thuộc giữa các thành phần trong mã nguồn cũng như giúp chúng ta dễ dàng mở rộng chúng.
 
-Mặc dù, một số vấn đề có thể được giải quyết thông qua việc tháo gỡ và không đồng bộ, cũng không thể  giải quyết được tất cả. Trong quá trình phát triển business, những modules trong nguyên lý đơn trách nhiệm sẽ trở nên phức tạp hơn, chúng vẫn là một xu hướng không thể tránh khỏi. Nếu một thứ trở nên phức tạp, sau đó việc gỡ bỏ và không đồng bộ  không hoạt động. Chúng ta vẫn phải làm một số thứ nhất định để đóng gói sự trừu tượng trong bản thân nó.
+## 4.8.2 Đóng gói các business vào functions
 
-## 4.8.2 Gói các quá trình business vào Functions
-
-Trong hầu hết các quá trình package cơ bản, chúng ta đặt một số hành vi tương tự cùng nhau, và sau đó package chúng trong một hàm duy nhất, do đó mã nguồn của chúng ta trong rất bừa bộn như sau
+Trong hầu hết các package cơ bản, chúng ta đặt một số hành vi xử ly logic tương tự cùng nhau, và sau đó đóng gói chúng trong một hàm duy nhất, do đó mã nguồn của chúng ta trong rất bừa bộn như sau:
 
 ```go
 func BusinessProcess(ctx context.Context, params Params) (resp, error){
@@ -46,15 +44,13 @@ func CreateOrder() {
 }
 ```
 
-Khi đọc business process code, chúng ta cần đọc tên function để biết được chúng làm gì trong tiến trình. Nếu bạn cần phải thay đổi một số chi tiết, và sau đó đi đến mỗi bước business để xem một process cụ thể. Một business process code được viết tốt sẽ đẩy tất cả các processes vào một số hàm, trả về hàng trăm hoặc hàng ngàn dòng functions. Kiểu spaghetti-style code này khi đọc hoặc bảo trì rất kinh khủng. Trong development process, một package đơn giản như trên sẽ được thực thi ngay lập tức nếu đó là một điều kiện.
+Khi đọc business process code, chúng ta cần đọc tên function để biết được chức năng xử lý của chúng. Nếu chúng ta cần phải thay đổi một số chi tiết, chúng ta sẽ vào các function đó và thêm/sửa/xoá các dòng code. Kiểu [spaghetti-style code](https://en.wikipedia.org/wiki/Spaghetti_code) này khi đọc hoặc bảo trì rất khó.
 
 ## 4.8.3 Dùng interfaces để trừu tượng hóa
 
-Trong thời gian đầu của quá trình phát triển doanh nghiệp, không phù hợp để đưa interfaces vào. Trong nhiều trường hợp, business process thay đổi rất nhanh. Việc đưa vào các interfaces quá sớm có thể làm tăng độ phức tạp của hệ thống businesses bằng việc thêm vào các phân tầng không cần thiết, kết quả dẫn đến sự phủ định hoàn toàn của mỗi sửa đổi.
+Trong thời gian đầu của quá trình phát triển hệ thống doanh nghiệp, không phù hợp để sử dụng interfaces. Trong nhiều trường hợp, khi business process thay đổi rất nhanh, việc sử dụng các  interfaces quá sớm có thể làm tăng độ phức tạp của hệ thống. Khi hệ thống phát triển tới mức độ nhất định, và có một business ổn định, đây là thời điểm tốt để áp dụng interface vào mã nguồn hệ thống.
 
-Khi hệ thống business phát triển tới mức độ nhất định, và main process đã ổn định, interface có thể được dùng cho việc trừu tượng hóa. Tính ổn định có nghĩa là hầu hết các bước của business trong main process sẽ phải được xác định. Nếu như những sự thay đổi được tạo ra, thì sẽ không có thay đổi theo quy mô lớn, nhưng chỉ một phần nhỏ được sửa lại, hoặc chỉ thêm hoặc xóa một số bước business.
-
-Nếu chúng ta đã packaged các business step tốt trong suốt quá trình phát triển, nó rất dễ để trừu tượng interface tại thời điểm này. Đây là mã giả:
+Nếu chúng ta đã đóng gói các business step tốt trong suốt quá trình phát triển, nó rất dễ để áp dụng  interface tại thời điểm này. Đây là mã giả:
 
 ```go
 type OrderCreator interface {
@@ -67,11 +63,9 @@ type OrderCreator interface {
 }
 ```
 
-Chúng ta có thể hoàn toàn trừu tượng hóa bằng việc đề cập tới các bước function signatures được viết ở trên.
+Trước khi trừu tượng hóa, chúng ta cần phải hiểu rằng, việc áp dụng interfaces sẽ có ý nghĩa đối với hệ thống tuỳ theo ngữ cảnh. Nếu hệ thống xác định có một business cố định và mã nguồn bên trong không có sự thay đổi thường xuyên, thì việc áp dụng  interface không thực sự mang lại ý nghĩa to lớn.
 
-Trước khi trừu tượng hóa, chúng ta cần phải hiểu rằng, việc giới thiệu interfaces sẽ có ý nghĩa đối với hệ thống, nó sẽ được phân tích theo ngữ cảnh. Nếu hệ thống chỉ phục vụ cho một product line, và mã nguồn bên trong chỉ được thay đổi cho những ngữ cảnh cụ thể, thì việc giới thiệu interface không thực sự mang lại ý nghĩa to lớn. Liệu rằng nó có thuận tiện để test, chúng ta sẽ bàn về chúng trong các phần sau.
-
-Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các uniform business processes và  business specifications, sau đó interface-based abstraction make sense. Ví dụ:
+Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các business sau:
 
 <div align="center">
 	<img src="../images/ch5-interface-impl.uml.png">
@@ -82,9 +76,9 @@ Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các
 </div>
 <br/>
 
-Flatform cần phải phục vụ nhiều business khác nhau, nhưng dữ liệu được định nghĩa cần phải thống nhất. Về phía platform, chúng ta có thể định nghĩa một tập các interfaces tương tự như trên, và sau đó yêu cầu bên business access chúng phải hiện thực lại. Nếu interface có một số bước không mong muốn, chỉ cần trả về `nil`, hoặc phớt lờ chúng.
+Flatform cần phải phục vụ nhiều business khác nhau, nhưng dữ liệu được định nghĩa cần phải thống nhất. Về phía platform, chúng ta có thể định nghĩa một tập các interfaces tương tự như trên, sau đó tuỳ theo yêu cầu của các business cụ thể của chúng cần hiện thực lại. Nếu interface có một số bước không mong muốn, chỉ cần trả về `nil`, hoặc có thể bỏ qua chúng.
 
-Khi business lặp đi lặp lại, platform không được thay đổi. Do đó, chúng ta sử dụng các services như là một plugin của platform đó. Điều gì xảy ra nếu chúng ta không có một interface?
+Điều gì xảy ra nếu chúng ta không có một interface?
 
 ```go
 import (
@@ -120,7 +114,7 @@ switch ...
 switch ...
 ```
 
-Đúng vậy, nó kết thúc với  `switch`. Sau khi giới thiệu về interface, chúng tôi dùng `switch` chỉ để cần thực thi một lần trong business portal.
+Chúng ta phải sử dụng   `switch-case` rất nhiều. Sau khi áp dụng interface, chúng ta dùng `switch-case` chỉ để xác định loại business nào cần thực hiện.
 
 ```go
 type BusinessInstance interface {
@@ -156,11 +150,11 @@ func BusinessProcess(bi BusinessInstance) {
 }
 ```
 
-Chương trình Interface-oriented, sẽ không quan tâm về việc hiện thực cụ thể. Nếu những service tương ứng được thay đổi, tất cả các logic sẽ hoàn toàn minh bạch ở phía platform.
+Chương trình trên sẽ dễ mở rộng và minh bạch hơn rất nhiều. Hàm `BusinessProcess` sẽ không quan tâm đầu vào là loại business nào. Các business khácn nhau của chúng ta chỉ cần hiện thực các chức năng trong interface ban đầu.
 
 ## 4.8.4 Điểm mạnh và yếu của interface
 
-Interface design được thường xuyên sử dụng trong ngôn ngữ Go. Modules không cần phải biết đến sự xuất hiện của những modules khác. Module A định nghĩa một interface và module B có thể hiện thực interface đó. Nếu không có kiểu dữ liệu được định nghĩa module A trong interface, thì sau đó module B sẽ không cần phải dùng `import A`. Ví dụ, trong thư viện chuẩn `io.Writer` :
+Thiết kế interface được sử dụng thường xuyên trong ngôn ngữ Go. Ví dụ, trong thư viện chuẩn `io.Writer` :
 
 ```go
 type Writer interface {
@@ -188,7 +182,7 @@ func SetOutput(w io.Writer) {
 }
 ```
 
-Sau đó:
+Sau đó khi sử dụng chúng ta chỉ cần truyền biến có kiểu `MyType`:
 
 ```go
 package my-business
@@ -200,9 +194,9 @@ func init() {
 }
 ```
 
-Trong việc định nghĩa `MyType`, không cần phải `import "io"` để trực tiếp hiện thực `io.Writer` interface, chúng ta có thể kết hợp nhiều hàm để hiện thực các interfaces, trong khi phía interface không có thiết lập import các dependency được sinh ra. Do đó, nhiều người nghĩ rằng orthogonality của Go rất tốt để thiết kế.
+Trong việc định nghĩa `MyType`, không cần phải `import "io"` để trực tiếp hiện thực `io.Writer` interface, chúng ta có thể kết hợp nhiều hàm để hiện thực các interfaces.
 
-Mặc dù sự thuận tiện, lợi ích mang lại bởi interface là hiển nhiên. Đầu tiên, dựa vào inversion, cái ảnh hưởng đến interface trên dự án phần mềm trong hầu hết các ngôn ngữ, trong việc thiết kế Go's orthogonal interface. Hoàn toàn có thể loại bỏ tất cả các dependencies; hai là bộ biên dịch sẽ giúp ta kiểm tra lỗi như "not fully implemented interfaces" tại thời điểm biên dịch, nếu business không hiện thực đủ các method trong Interface, nhưng sử dụng laị sử dụng nó.
+Mặc dù sự thuận tiện, lợi ích mang lại bởi interface là hiển nhiên. Đầu tiên, chúng ta có thể hoàn toàn loại bỏ tất cả các phụ thuộc lẫn nhau trong mã nguồn. Thứ hai là khi biên dịch sẽ giúp ta kiểm tra lỗi như **not fully implemented interfaces** tại thời điểm biên dịch, nếu chúng ta không hiện thực đủ các hàm trong interface, nhưng lại sử dụng nó. Ví dụ như trong trường hợp này:
 
 ```go
 package main
@@ -226,7 +220,7 @@ func main() {
 }
 ```
 
-Những lỗi sau có thể được in ra
+Những lỗi sau có thể được in ra:
 
 ```
 # command-line-arguments
@@ -238,7 +232,8 @@ Do đó, interface có thể được xem như là một cách an toàn để ki
 
 ## 4.8.5 Table Driven Development
 
-Nếu trong hàm có sử dụng `if` hoặc `switch` thì sẽ làm phức tạp hơn. Có cách
+Nếu trong hàm nếu chúng ta có sử dụng `if` hoặc `switch` thì sẽ làm mã nguồn trông phức tạp hơn. Ví dụ:
+
 ```go
 func entry() {
     var bi BusinessInstance
@@ -253,7 +248,7 @@ func entry() {
 }
 ```
 
-Có thể được sửa đổi thành:
+Chúng ta có thể được sửa đổi thành:
 
 ```go
 var businessInstanceMap = map[int]BusinessInstance {

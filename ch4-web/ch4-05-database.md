@@ -193,7 +193,7 @@ Một hệ thống như vậy khi release sẽ sinh ra rủi ro rất lớn.
 
 Đối với các công ty Internet có dịch vụ 24/7, việc đảm bảo dịch vụ luôn vận hành là vấn đề rất quan trọng. Mặc dù kiến trúc công nghệ của tầng lưu trữ đã trải qua nhiều năm phát triển, nó vẫn là phần dễ bị hư hại nhất trong toàn hệ thống. Thời gian chết của hệ thống cũng chính là tổn thất kinh tế trực tiếp cho các công ty cung cấp kiểu này.
 
-Từ góc độ phân ngành, các công ty Internet ngày nay có chức vụ DBA toàn thời gian, hầu hết họ không nhất thiết phải có khả năng code. Từ quan điểm của DBA, chúng tôi vẫn hy vọng sẽ có một cơ chế kiểm toán SQL đặc biệt để có được tất cả nội dung SQL của hệ thống với chi phí thấp, thay vì đọc code SQL Builder do bộ phận bussiness development viết.
+Từ góc độ phân ngành, các công ty Internet ngày nay có chức vụ DBA toàn thời gian, hầu hết họ không nhất thiết phải có khả năng code. Từ quan điểm của DBA, chúng tôi vẫn hy vọng sẽ có một cơ chế kiểm toán SQL đặc biệt để có được tất cả nội dung SQL của hệ thống với chi phí thấp, thay vì đọc code SQL Builder do bộ phận business development viết.
 
 Ngày nay, core online business của các công ty lớn sẽ cung cấp SQL ở vị trí nổi bật trong code để DBA review, ví dụ:
 

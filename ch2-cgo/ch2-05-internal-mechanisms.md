@@ -147,6 +147,10 @@ Toàn bộ biểu đồ luồng hoạt động của cuộc gọi `C.sum` như s
 	</span>
     <br/>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> eadc35f4aef7daa9597dd04328d4212083556610
 
 Trong đó hàm  `runtime.cgocall` là chìa khóa để thực hiện cuộc gọi  vượt ranh giới của hàm ngôn ngữ Go sang hàm ngôn ngữ C. Thông tin chi tiết có thể tham khảo <https://golang.org/src/cmd/cgo/doc.go>.
 
