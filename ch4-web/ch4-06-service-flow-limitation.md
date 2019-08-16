@@ -115,7 +115,7 @@ Không quan trọng service của chúng ta bị bottleneck tại đâu, vấn �
 
 Có nhiều cách để giới hạn lưu lượng. Phổ biến nhất là leaky buckets và token buckets.
 
-1. Leaky bucket có thể hiểu rằng chúng ta có một cái xô chứa đầy nước, và một giọt nước rò rỉ ra sau mỗi khoảng thời gian cố định. Nếu nhận được "giọt nước" thì có thể tiếp tục yêu cầu dịch vụ, ngược lại thì cần phải đợi đến lần nhỏ giọt tiếp theo.
+1. **Leaky bucket** có thể hiểu rằng chúng ta có một cái xô chứa đầy nước, và một giọt nước rò rỉ ra sau mỗi khoảng thời gian cố định. Nếu nhận được "giọt nước" thì có thể tiếp tục yêu cầu dịch vụ, ngược lại thì cần phải đợi đến lần nhỏ giọt tiếp theo.
 
     <div align="center">
         <img src="../images/leaky-bucket.png" width="410">
@@ -126,7 +126,7 @@ Có nhiều cách để giới hạn lưu lượng. Phổ biến nhất là leak
     </div>
     <br/>
 
-2. Token bucket với nguyên tắc token được thêm vào bucket với tốc độ (rate) không đổi. Để có được token từ bucket, số lượng token có thể được điều chỉnh theo số tài nguyên cần sử dụng. Nếu không có token, ta có thể lựa chọn tiếp tục chờ hoặc từ bỏ.
+2. **Token bucket** với nguyên tắc token được thêm vào bucket với tốc độ (rate) không đổi. Để có được token từ bucket, số lượng token có thể được điều chỉnh theo số tài nguyên cần sử dụng. Nếu không có token, ta có thể lựa chọn tiếp tục chờ hoặc từ bỏ.
 Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có một vài điểm khác biệt.
 
     <div align="center">

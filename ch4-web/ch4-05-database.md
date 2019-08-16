@@ -1,6 +1,6 @@
 # 4.5. Database và giao tiếp với Database
 
-Phần này sẽ phân tích các thư viện `database/sql` tiêu chuẩn, giới thiệu một số ORM (Object Relational Mapping) và SQL Builder opensource được sử dụng rộng rãi. Cuối cùng là danh91 giá công nghệ nào phù hợp nhất đứng ở góc độ phát triển ứng dụng doanh nghiệp.
+Phần này sẽ phân tích các thư viện `database/sql` tiêu chuẩn, giới thiệu một số [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping) (Object Relational Mapping) và SQL Builder opensource được sử dụng rộng rãi. Cuối cùng là đánh giá công nghệ nào phù hợp nhất đứng ở góc độ phát triển ứng dụng doanh nghiệp.
 
 ## 4.5.1. Bắt đầu từ database/sql
 

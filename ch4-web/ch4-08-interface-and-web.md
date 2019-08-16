@@ -8,7 +8,7 @@ Trong các dự án web thực tế chúng ta thường phải thay đổi mã n
 
 ## 4.8.1 Quy trình phát triển hệ thống doanh nghiệp
 
-Các công ty Internet tồn tại trong vòng khoảng ba năm thì cácn mã nguồn của hệ thống dần phình to và gây khó khăn cho các kỹ sư lập trình. Sau khi mã nguồn hệ thống bị lớn lên, có một số phần của hệ thống có thể được tách rời thành các service nhỏ hơn. Các service được tách rời giúp chúng ta dễ dàng deploy, phát triển và bảo trì chúng.
+Các công ty Internet tồn tại trong vòng khoảng ba năm thì cách mã nguồn của hệ thống dần phình to và gây khó khăn cho các kỹ sư lập trình. Sau khi mã nguồn hệ thống bị lớn lên, có một số phần của hệ thống có thể được tách rời thành các service nhỏ hơn. Các service được tách rời giúp chúng ta dễ dàng deploy, phát triển và bảo trì chúng.
 
 Mặc dù, một số vấn đề có thể được giải quyết thông qua việc tách rời service, cũng không thể  giải quyết được tất cả. Trong quá trình phát triển business, những service này cũng dần trở nên phức tạp hơn, chúng vẫn là một xu hướng không thể tránh khỏi. Vậy nên cách tốt nhất là chúng ta sẽ sử dụng interface khi lập trình để tách rời sự phụ thuộc giữa các thành phần trong mã nguồn cũng như giúp chúng ta dễ dàng mở rộng chúng.
 
