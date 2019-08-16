@@ -5,7 +5,7 @@
   - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#t%e1%ba%a1i-sao-ch%c3%bang-t%c3%b4i-th%e1%bb%b1c-hi%e1%bb%87n-b%e1%bb%99-t%c3%a0i-li%e1%bb%87u-n%c3%a0y)
   - [Tài liệu tham khảo](#t%c3%a0i-li%e1%bb%87u-tham-kh%e1%ba%a3o)
   - [Mục lục](#m%e1%bb%a5c-l%e1%bb%a5c)
-  - [Xem online](#xem-online)
+  - [Đọc online](#%c4%90%e1%bb%8dc-online)
   - [Tham gia phát triển](#tham-gia-ph%c3%a1t-tri%e1%bb%83n)
   - [Nhóm phát triển](#nh%c3%b3m-ph%c3%a1t-tri%e1%bb%83n)
   - [Liên hệ](#li%c3%aan-h%e1%bb%87)
@@ -34,15 +34,17 @@ Chúng tôi thực hiện bộ tài liệu nhằm:
   
 ## Tài liệu tham khảo
 
-Bộ tài liệu này được chúng tôi biên soạn dựa trên kinh nghiệm và kiến thức tích luỹ trong quá trình làm việc tại Zalopay. Đồng thời chúng tôi có tham khảo các tài liệu bên ngoài như [Advanced Go Programming](https://github.com/chai2010/advanced-go-programming-book), [Khoá học Distributed Systems của Princeton](https://www.cs.princeton.edu/courses/archive/fall18/cos418/schedule.html).
+Bộ tài liệu này được chúng tôi biên soạn dựa trên kinh nghiệm và kiến thức tích luỹ trong quá trình làm việc tại Zalopay. Đồng thời chúng tôi có tham khảo các tài liệu bên ngoài như: 
+ - [Advanced Go Programming](https://github.com/chai2010/advanced-go-programming-book).
+ - [Khoá học Distributed Systems của Princeton](https://www.cs.princeton.edu/courses/archive/fall18/cos418/schedule.html).
 
 ## Mục lục
 
 Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 
-## Xem online
+## Đọc online
 
-- Xem trên [gitbook](https://zalopay-oss.github.io/go-advanced/).
+Xem trên [gitbook](https://zalopay-oss.github.io/go-advanced/).
 
 ## Tham gia phát triển
 
