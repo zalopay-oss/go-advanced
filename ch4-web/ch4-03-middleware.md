@@ -8,6 +8,7 @@ Phần này sẽ phân tích tình huống dẫn tới việc sử dụng middle
     <br/>
 </div>
 
+Middleware thường được dùng trong một số trường hợp chúng ta muốn ghi log hoạt động của hệ thống, báo cáo thời gian thực thi, xác thực,..
 
 ## 4.3.1 Tình huống đặt ra
 

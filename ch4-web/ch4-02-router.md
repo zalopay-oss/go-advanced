@@ -39,7 +39,7 @@ Nếu hệ thống web của chúng ta cần có những API tương tự trên,
 
 ## 4.2.1 Tìm hiểu thư viện HttpRouter
 
-Nhiều Open source web framework phổ biến của Go thường được xây dựng dựa trên [HttpRouter](https://github.com/julienschmidt/httprouter) như là [Gin](https://github.com/gin-gonic) framework, hoặc hỗ trợ cho routing dựa trên những biến thể của HttpRouter. Khi sử dụng các framwork đó, chúng ta cần phải tránh một số trường hợp mà nó dẫn đến xung đột routing khi thiết kế.
+Nhiều Open source web framework phổ biến của Go thường được xây dựng dựa trên [HttpRouter](https://github.com/julienschmidt/httprouter) như là [Gin](https://github.com/gin-gonic) framework, hoặc hỗ trợ cho routing dựa trên những biến thể của HttpRouter. Khi sử dụng các framework đó, chúng ta cần phải tránh một số trường hợp mà nó dẫn đến xung đột routing khi thiết kế.
 
 ***Ví dụ:***
 

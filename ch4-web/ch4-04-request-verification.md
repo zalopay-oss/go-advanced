@@ -80,7 +80,7 @@ func register(req RegisterReq) error{
 }
 ```
 
-Nhờ bỏ đi cách viết if-else lông nhau mà code trở nên "clean" hơn. Tuy vậy chúng ta vẫn phải viết khá nhiều hàm validate cho mỗi field trong một kiểu request.
+Nhờ bỏ đi cách viết if-else lồng nhau mà code trở nên "clean" hơn. Tuy vậy chúng ta vẫn phải viết khá nhiều hàm validate cho mỗi field trong một kiểu request.
 
 Có một cách giúp chúng ta giảm khá nhiều code là sử dụng validator.
 
@@ -291,3 +291,76 @@ func main() {
 ```
 
 Thư viện validator được giới thiệu trong phần trước phức tạp hơn về mặt chức năng so với ví dụ ở đây. Nhưng nguyên tắc chung cũng là duyệt cây của một struct với reflection.
+
+## 4.4.4 Xác thực yêu cầu bằng JWT
+
+Phần trên đã trình bày quá trình validate các thông tin về email và password khi đăng ký một tài khoản. Sau đó, nếu họ đăng nhập vào tài khoản bằng email và password thì trạng thái phiên làm việc của họ sẽ được giữ cho các yêu cầu kế tiếp. Có một số giải pháp để lưu trữ phiên làm việc bằng [session/cookie](https://astaxie.gitbooks.io/build-web-application-with-golang/en/06.1.html), một giải pháp khác là dùng cơ chế cấp token [JWT](https://jwt.io/) sau khi đăng nhập, và dùng token này để xác thực các yêu cầu về sau.
+
+Không chỉ lưu trữ phiên làm việc, token JWT cũng hay đi kèm trong các lệnh gọi API để xác thực phía client khi gọi đến web service. Sau đây là một đoạn chương trình middleware xác thực yêu cầu bằng JWT:
+
+***[auth.go](https://github.com/thoainguyen/go-hackercamp/blob/master/go-contacts/app/auth.go):***
+
+```go
+var JwtAuthentication = func(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        // danh sách các API không cần xác thực bằng token
+        notAuth := []string{"/api/user/new", "/api/user/login"}
+        requestPath := r.URL.Path
+        for _, value := range notAuth {
+            if value == requestPath {
+                next.ServeHTTP(w, r)
+                return
+            }
+        }
+
+        response := make(map[string] interface{})
+        tokenHeader := r.Header.Get("Authorization") 
+        // thiếu jwt token, trả về lỗi
+        if tokenHeader == "" {
+            response = u.Message(false, "Missing auth token")
+            w.WriteHeader(http.StatusForbidden)
+            w.Header().Add("Content-Type", "application/json")
+            u.Respond(w, response)
+            return
+        }
+        // thông thường chuỗi token có định dạng: Bearer {token-body}, nên cần tách phần token ra
+        splitted := strings.Split(tokenHeader, " ")
+        if len(splitted) != 2 {
+            response = u.Message(false, "Invalid/Malformed auth token")
+            w.WriteHeader(http.StatusForbidden)
+            w.Header().Add("Content-Type", "application/json")
+            u.Respond(w, response)
+            return
+        }
+        // chuỗi jwt token trong phần header của request
+        tokenPart := splitted[1]
+        tk := &models.Token{}
+
+        token, err := jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (interface{}, error) {
+            return []byte(os.Getenv("token_password")), nil
+        })
+
+        if err != nil {
+            response = u.Message(false, "Malformed authentication token")
+            w.WriteHeader(http.StatusForbidden)
+            w.Header().Add("Content-Type", "application/json")
+            u.Respond(w, response)
+            return
+        }
+
+        if !token.Valid {
+            response = u.Message(false, "Token is not valid.")
+            w.WriteHeader(http.StatusForbidden)
+            w.Header().Add("Content-Type", "application/json")
+            u.Respond(w, response)
+            return
+        }
+        ctx := context.WithValue(r.Context(), "user", tk.UserId)
+        r = r.WithContext(ctx)
+        // tiếp tục thực hiện request
+        next.ServeHTTP(w, r)
+    });
+}
+
+// github: https://github.com/thoainguyen/go-hackercamp/tree/master/go-contacts
+```
