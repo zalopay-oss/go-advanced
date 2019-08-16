@@ -1,16 +1,24 @@
-# 4.6 Ratelimit Service Flow Limit
+# 4.6 Service Flow Limit
 
-Chương trình máy tính có thể bị thắt cổ chai disk IO theo các kiểu sau:
+Một chương trình máy tính có thể mắc phải một số các vấn đề bottleneck:
 
-- Thắt cổ chai do CPU tính toán.
-- Thắt cổ chai do băng thông mạng.
-- Và đôi khi hệ thống bên ngoài gây ra tình trạng thắt cổ chai trong hệ thống phân tán.
+- bottleneck do CPU tính toán.
+- bottleneck do băng thông mạng.
+- Đôi khi do external system gây ra tình trạng bottleneck trong chính hệ thống phân tán của nó.
 
-Phần quan trọng nhất của hệ thống Web là mạng. Cho dù đó là tiếp nhận, phân tích request của người dùng, truy cập bộ nhớ hay trả về dữ liệu response đều cần phải truy cập trực tuyến. Trước IO multiplexing interface `epoll/kqueue` do hệ thống cung cấp đã từng có một sự cố C10k trong máy tính hiện đại đa lõi. Vấn đề C10k có thể khiến máy tính không thể sử dụng toàn bộ CPU để xử lý nhiều kết nối người dùng. Do đó cần phải chú ý tối ưu hóa chương trình để tăng mức sử dụng CPU.
+Phần quan trọng nhất của một hệ thống Web là mạng. Cho dù đó là tiếp nhận, phân tích request của người dùng, truy cập bộ nhớ hay trả về dữ liệu response đều cần phải truy cập trực tuyến. Trước khi xuất hiện IO multiplexing interface `epoll/kqueue` do hệ thống cung cấp thì  từng có một sự cố [C10k](http://www.kegel.com/c10k.html) trong máy tính đa lõi.
 
-Kể từ khi trên Linux có `epoll`, FreeBSD hiện thực `kqueue`, chúng ta có thể dễ dàng giải quyết vấn đề C10k với API do kernel cung cấp. Điều đó có nghĩa là nếu chương trình của chúng ta chủ yếu xử lý qua mạng, thì thắt cổ chai phải nằm phía người dùng, chứ không nằm ở kernel của hệ điều hành.
+<div align="center">
+	<img src="../images/c10k.png" width="400" >
+	<br/>
+	<span align="center"><i>Vấn đề C10k xảy ra khi số lượng client giữ kết nối vượt 10000</i></span>
+	<br/>
+    <br/>
+</div>
 
-Ngày nay, việc phát triển ở lớp application hầu như không thể thấy trong chương trình. Hầu hết, chúng ta chỉ cần tập trung vào logic nghiệp vụ. Thư viện `net` của Go đóng gói các syscall API khác nhau cho các nền tảng khác nhau. Thư viện `http` được xây dựng trên nền của thư viện `net`, vì vậy trong Golang, chúng ta có thể viết các service `http` hiệu suất cao với sự trợ giúp của thư viện chuẩn. Đây là một service `hello world` đơn giản:
+Kể từ khi trên Linux có `epoll`, FreeBSD hiện thực `kqueue`, chúng ta có thể dễ dàng giải quyết vấn đề C10k với API do kernel cung cấp. Điều đó có nghĩa là nếu chương trình của chúng ta chủ yếu xử lý qua mạng, thì vấn đề bottleneck là do phía người dùng, chứ không nằm ở kernel của hệ điều hành.
+
+Thư viện `net` của Go đóng gói các syscall API khác nhau cho các nền tảng khác nhau. Thư viện `http` được xây dựng trên nền của thư viện `net`, trong Golang chúng ta có thể viết các service `http` hiệu suất cao với sự trợ giúp của thư viện chuẩn. Đây là một service `hello world` đơn giản:
 
 ```go
 package main
@@ -35,7 +43,7 @@ func main() {
 }
 ```
 
-Chúng ta cần đo throughput của Web service này, đồng thời đó cũng là QPS của interface. Sử dụng [wrk](https://github.com/wg/wrk) trên máy tính cá nhân có cấu hình như sau:
+Chúng ta sẽ đo throughput của Web service này: sử dụng [wrk](https://github.com/wg/wrk) trên máy tính cá nhân có cấu hình:
 
 ```sh
 ThinkPad-T470
@@ -43,8 +51,6 @@ ThinkPad-T470
 OS: Ubuntu 18.04.2 LTS x86_64
 Host: 20HES39900 ThinkPad T470
 Kernel: 4.15.0-52-generic
-
-Resolution: 1920x1080, 1920x1080
 
 CPU: Intel i5-7200U (4) @ 3.100GHz
 GPU: Intel HD Graphics 620
@@ -87,55 +93,77 @@ Transfer/sec:      8.55MB
 
 Kết quả của thử nghiệm là khoảng 70.000 QPS và thời gian phản hồi là khoảng 15ms. Đối với một ứng dụng web, đây đã là một kết quả rất tốt. Đây chỉ là một máy tính cá nhân nên với server có cấu hình cao hơn sẽ đạt được kết quả còn tốt hơn nữa.
 
-Một số hệ thống thường bị thắt cổ chai do mạng, chẳng hạn như dịch vụ CDN và dịch vụ Proxy. Một số là do CPU/GPU, như các dịch vụ xác minh đăng nhập và dịch vụ xử lý hình ảnh. Số khác do truy cập vào disk bị tắt nghẽn như hệ thống lưu trữ, cơ sở dữ liệu. Các nút thắt chương trình khác nhau được phản ánh ở những nơi khác nhau và các dịch vụ đơn chức năng được đề cập ở trên tương đối dễ phân tích. Nếu bạn gặp một mô-đun có số lượng logic nghiệp vụ lớn và số lượng code lớn, thì vấn đề thắt cổ chai có thể phải trả qua nhiều lần stress test mới có thể phát hiện ra.
+Chương trình của chúng ta chưa có chứa logic nghiệp vụ nên có thể dễ dàng đánh giá được QPS như thế, trên thực tế khi gặp một mô-đun có số lượng logic nghiệp vụ lớn và số lượng code lớn, thì vấn đề bottleneck có thể phải trả qua nhiều lần stress test mới có thể phát hiện ra.
 
-Đối với trường hợp nút cổ chai IO/Network, throughput ở chỗ NIC/disk IO (NIC - Network Interface Card) sẽ đầy trước CPU. Trong trường hợp này, ngay cả khi CPU được tối ưu hóa, throughput của toàn bộ hệ thống vẫn không thể cải thiện mà chỉ có thể tăng tốc độ đọc ghi của đĩa lên. Kích thước memory lớn có thể làm tăng băng thông của NIC để cải thiện hiệu suất tổng thể. Chương trình thắt cổ chai ở CPU là khi mức sử dụng CPU đạt 100% trước lúc bộ nhớ và NIC đầy. CPU luôn ở tình trạng "busy" với nhiều tác vụ tính toán khác nhau trong khi các thiết bị IO thường tương đối nhàn rỗi (phần lớn thời gian ở trạng thái chờ).
-
-Bất kể là loại service nào, một khi tài nguyên sử dụng đạt đến giới hạn các request sẽ bị dồn lại, khi hết timeout mà không kịp xử lí sẽ dẫn đến treo hệ thống (không phản hồi) và ảnh hưởng trực tiếp tới người dùng cuối. Đối với các Web service phân tán, thắt cổ chai không phải lúc nào cũng nằm trong hệ thống mà nó có thể nằm ở bên ngoài. Các hệ thống không chuyên về tính toán có xu hướng sẽ gặp vấn đề ở cơ sở dữ liệu quan hệ và lúc đó chính bản thân mô-đun Web đã bị thắt cổ chai.
-
-Không quan trọng service của chúng ta bị thắt cổ chai tại đâu, vấn đề cuối cùng vẫn giống nhau đều nằm ở công việc quản lý lưu lượng (traffic).
-
-## 4.6.1 Ý nghĩa của giới hạn lưu lượng
-
-Có nhiều cách để giới hạn lưu lượng. Những cách phổ biến nhất là: leaky buckets và token buckets.
-
-1. Leaky bucket có nghĩa là chúng ta có một cái xô chứa đầy nước, và một giọt nước rò rỉ ra sau mỗi khoảng thời gian cố định. Nếu nhận được "giọt nước" thì có thể tiếp tục yêu cầu dịch vụ, ngược lại thì cần phải đợi đến lần nhỏ giọt tiếp theo.
-2. Token bucket được sử dụng để thêm token vào bucket với tốc độ không đổi. Để có được token từ bucket, số lượng token có thể được điều chỉnh theo số tài nguyên cần sử dụng. Nếu không có token, ta có thể lựa chọn tiếp tục chờ hoặc từ bỏ.
-
-Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có một vài điểm khác biệt.
-
-- Tốc độ mà leaky bucket bị rò rỉ (leak) là cố định còn token trong token bucket có thể được lấy ra chỉ khi có token trong bucket.
-- Điều đó nghĩa là token bucket cho phép một mức độ đồng thời nhất định. Ví dụ cùng lúc có 100 yêu cầu người dùng gửi tới, miễn là có 100 token trong bucket thì tất cả 100 yêu cầu sẽ được đưa ra.
-- Token bucket cũng có thể suy biến thành mô hình leaky bucket nếu không có token trong bucket.
+Một số hệ thống thường bị bottleneck do mạng, chẳng hạn như dịch vụ CDN và dịch vụ Proxy. Một số là do CPU/GPU, như các dịch vụ xác minh đăng nhập và dịch vụ xử lý hình ảnh. Số khác do truy cập vào disk bị tắt nghẽn như hệ thống lưu trữ, cơ sở dữ liệu. Các nút thắt chương trình khác nhau được phản ánh ở những nơi khác nhau và các dịch vụ đơn chức năng được đề cập ở trên tương đối dễ phân tích. Nếu bạn 
 
 <div align="center">
-	<img src="../images/ch5-token-bucket.png">
+	<img src="../images/bottleneck.gif" width="400">
 	<br/>
-	<span align="center">
-		<i>Token bucket</i>
-	</span>
+	<span align="center"><i>3 nơi có khả năng tắt nghẽn: disk, CPU, NIC</i></span>
+	<br/>
+	<br/>
 </div>
-<br/>
 
-Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng opensource đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là <github.com/juju/ratelimit> cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
+Đối với trường hợp nút cổ chai IO/Network, throughput ở chỗ NIC/disk IO (NIC - Network Interface Card) sẽ đầy trước CPU. Trong trường hợp này, ngay cả khi CPU được tối ưu hóa, throughput của toàn bộ hệ thống vẫn không thể cải thiện mà chỉ có thể tăng tốc độ đọc ghi của đĩa lên. Kích thước memory lớn có thể làm tăng băng thông của NIC để cải thiện hiệu suất tổng thể. Chương trình bottleneck ở CPU là khi mức sử dụng CPU đạt 100% trước lúc bộ nhớ và NIC đầy. CPU luôn ở tình trạng "busy" với nhiều tác vụ tính toán khác nhau trong khi các thiết bị IO thường tương đối nhàn rỗi (phần lớn thời gian ở trạng thái chờ).
 
-  ```go
-  func NewBucket(fillInterval time.Duration, capacity int64) *Bucket
-  ```
+Bất kể là loại service nào, một khi tài nguyên sử dụng đạt đến giới hạn các request sẽ bị dồn lại, khi hết timeout mà không kịp xử lí sẽ dẫn đến treo hệ thống (không phản hồi) và ảnh hưởng trực tiếp tới người dùng cuối. Đối với các Web service phân tán, bottleneck không phải lúc nào cũng nằm trong hệ thống mà nó có thể nằm ở bên ngoài. Các hệ thống không chuyên về tính toán có xu hướng sẽ gặp vấn đề ở cơ sở dữ liệu quan hệ và lúc đó chính bản thân mô-đun Web đã bị bottleneck.
 
-- Tham số `fillInterval` với ý nghĩa mỗi token sẽ được đặt trong bucket một khoảng thời gian `time.Duration`, số lượng tối đa là dung lượng `capacity` của bucket, phần vượt quá dung lượng sẽ bị loại bỏ. Các bucket được khởi tạo ban đầu đều ở trạng thái đầy.
+Không quan trọng service của chúng ta bị bottleneck tại đâu, vấn đề cuối cùng vẫn giống nhau đều nằm ở công việc quản lý lưu lượng (traffic).
+
+## 4.6.1 Tầm quan trọng của giới hạn lưu lượng
+
+Có nhiều cách để giới hạn lưu lượng. Phổ biến nhất là leaky buckets và token buckets.
+
+1. Leaky bucket có thể hiểu rằng chúng ta có một cái xô chứa đầy nước, và một giọt nước rò rỉ ra sau mỗi khoảng thời gian cố định. Nếu nhận được "giọt nước" thì có thể tiếp tục yêu cầu dịch vụ, ngược lại thì cần phải đợi đến lần nhỏ giọt tiếp theo.
+
+    <div align="center">
+        <img src="../images/leaky-bucket.png" width="410">
+        <br/>
+        <span align="center">
+            <i>Minh hoạ Leaky bucket</i>
+        </span>
+    </div>
+    <br/>
+
+2. Token bucket với nguyên tắc token được thêm vào bucket với tốc độ (rate) không đổi. Để có được token từ bucket, số lượng token có thể được điều chỉnh theo số tài nguyên cần sử dụng. Nếu không có token, ta có thể lựa chọn tiếp tục chờ hoặc từ bỏ.
+Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có một vài điểm khác biệt.
+
+    <div align="center">
+        <img src="../images/token-bucket.png" width="410">
+        <br/>
+        <span align="center">
+            <i>Minh hoạ Token bucket</i>
+        </span>
+    </div>
+    <br/>
+
+- Tốc độ mà leaky bucket bị rò rỉ (leak) là cố định còn token trong token bucket có thể được lấy ra chỉ khi có token trong bucket.
+- Điều đó nghĩa là token bucket chỉ cho phép một mức độ đồng thời nhất định. Ví dụ cùng lúc có 100 yêu cầu người dùng gửi tới, miễn là có 100 token trong bucket thì tất cả 100 yêu cầu sẽ được đưa ra.
+- Token bucket cũng có thể suy biến thành mô hình leaky bucket nếu không có token trong bucket.
+
+Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng opensource đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là [juju/ratelimit](https://github.com/juju/ratelimit) cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
 
 ```go
+// fillInterval với ý nghĩa mỗi token sẽ được đặt trong bucket
+// một khoảng thời gian time.Duration, số lượng tối đa là
+// capacity của bucket, phần vượt quá capacity sẽ bị loại bỏ.
+// các bucket được khởi tạo ban đầu đều ở trạng thái đầy.
+func NewBucket(fillInterval time.Duration, capacity int64) *Bucket
+
+// khác biệt so với NewBucket() thông thường là cho phép đưa vào
+// một kích thước quantum nhất định - quantum tokens ở mỗi
+// khoảng thời gian fillInterval.
 func NewBucketWithQuantum(fillInterval time.Duration, capacity, quantum int64) *Bucket
-```
 
-- Sự khác biệt so với `NewBucket()` thông thường là cho phép đưa vào một kích thước `quantum` nhất định - quantum tokens ở mỗi  khoảng thời gian `fillInterval`.
-
-```go
+// NewBucketWithRate trả về một bucket token với số token được
+// đưa vào mỗi giây đạt đến công suất tối đa rate.
+// Do độ phân giải hạn chế của clock nên ở tốc độ cao thì tỷ lệ
+// thực tế có thể khác tới 1% so với tỷ lệ được chỉ định.
+// Ví dụ capacity=100, và rate=0.1, sẽ được một bucket có thể
+// thêm vào 10 tokens mỗi giây.
 func NewBucketWithRate(rate float64, capacity int64) *Bucket
 ```
-
-- `NewBucketWithRate` trả về một bucket token với số token được đưa vào mỗi giây đạt đến công suất tối đa `rate`. Do độ phân giải hạn chế của clock nên ở tốc độ cao thì tỷ lệ thực tế có thể khác tới 1% so với tỷ lệ được chỉ định. Ví dụ capacity=100, và rate=0.1, sẽ được một bucket có thể thêm vào 10 tokens mỗi giây.
 
 Việc nhận token từ bucket cũng được cung cấp một số API:
 
@@ -148,9 +176,7 @@ func (tb *Bucket) Wait(count int64) {}
 func (tb *Bucket) WaitMaxDuration(count int64, maxWait time.Duration) bool {}
 ```
 
-Tên và chức năng tương của chúng khá đơn giản nên ta sẽ không đi vào chi tiết ở đây. So với công cụ ratelimiter do thư viện Java của Google cung cấp là Guava nổi tiếng hơn trong cộng đồng opensource, thư viện này không hỗ trợ khởi động token và không thể sửa đổi dung lượng token ban đầu, do đó các yêu cầu trong các trường hợp cực đoan riêng lẻ có thể không được đáp ứng.
-
-Nếu đã hiểu các nguyên tắc cơ bản của token bucket và vẫn không có api nào đáp ứng nhu cầu thì tin rằng bạn cũng có thể sửa đổi các mã nguồn có sẵn để dùng cho trường hợp của mình.
+Tên và chức năng tương của chúng khá đơn giản nên ta sẽ không đi vào chi tiết ở đây. So với công cụ ratelimiter do thư viện Java của Google cung cấp là Guava nổi tiếng hơn trong cộng đồng opensource, thư viện này không hỗ trợ khởi tạo token và không thể sửa đổi dung lượng token ban đầu, do đó có thể không đáp ứng được hết  các yêu cầu trong các trường hợp riêng lẻ.
 
 ## 4.6.2 Nguyên tắc
 
@@ -227,7 +253,7 @@ current token cnt: 100 2019-06-21 13:49:02.012318649 +0700 +07 m=+1.060207734
 current token cnt: 100 2019-06-21 13:49:02.022282122 +0700 +07 m=+1.070171206
 ```
 
-Trong thời gian 1s chương trình đưa ra 100 token. Tuy nhiên có thể thấy  bộ đếm thời gian của Go có lỗi khoảng 0,001 giây, vì vậy nếu kích thước bucket lớn hơn 1000, có thể xảy ra một số lỗi. Mặc dù đối với phần lớn dịch vụ thì lỗi này không đáng kể.
+Trong thời gian 1s chương trình đưa ra 100 token. Tuy nhiên có thể thấy  bộ đếm thời gian của Go có lỗi khoảng 0,001 giây, vì vậy nếu kích thước bucket lớn hơn 1000, có thể xảy ra một số lỗi. Mặc dù đối với phần lớn service thì lỗi này không đáng kể.
 
 Thao tác cấp token của token bucket ở trên cũng dễ hiện thực hơn, để đơn giản hóa vấn đề, ta chỉ lấy một token như sau đây:
 
@@ -252,23 +278,37 @@ func TakeAvailable(block bool) bool{
 }
 ```
 
-Một số lập trình viên tự tạo ra các token luân phiên theo kiểu này nhưng thực tế thì không như thế này.
+Ở đây chú ý một chút, token bucket đưa token vào bucket theo các khoảng thời gian cố định. Giả sử:
 
-Hãy thử nghĩ xem, token bucket đưa token vào bucket theo các khoảng thời gian cố định. Giả sử ghi lại lần cuối token được đưa vào là t1, số token tại thời điểm đó là k1, time interval là ti, mỗi lần đưa x token vào bucket, dung lượng của bucket là giới hạn. Bây giờ nếu ai đó gọi `TakeAvailable` để lấy n token, ta sẽ ghi lại khoảnh khắc này là t2. Vây tại t2 nên có bao nhiêu token trong bucket token? Mã giả như sau:
+- Lần cuối token được đưa vào là t1,
+- Số token tại thời điểm đó là k1,
+- Time interval là ti,
+- Mỗi lần đưa x token vào bucket,
+- Dung lượng của bucket là giới hạn.
+
+Bây giờ nếu ai đó gọi `TakeAvailable` để lấy n token, ta sẽ ghi lại khoảnh khắc này là t2. Vây tại t2 nên có bao nhiêu token trong bucket token? Mã giả như sau:
 
 ```go
 cur = k1 + ((t2 - t1)/ti) * x
 cur = cur > cap ? cap : cur
 ```
 
-Chúng ta sử dụng chênh lệch thời gian giữa t1, t2 kết hợp với các tham số ti, k1 thì có thể biết được số lượng token trong bucket trước khi lấy ra token. Về mặt lý thuyết là không cần thiết sử dụng hoạt động điền token vào channel ở ví dụ trước. Miễn là  mỗi lần ta đều tính số lượng token trong bucket thì có thể nhận được số lượng token chính xác. Sau khi nhận được số lượng token rồi thì chỉ cần thực hiện những thao tác cần thiết như phép trừ số lượng token. Hãy nhớ sử dụng khóa để đảm bảo an toàn với tính đồng thời. Thư viện <github.com/juju/ratelimit> đang thực hiện theo cách này.
+Chúng ta sử dụng chênh lệch thời gian giữa t1, t2 kết hợp với các tham số ti, k1 thì có thể biết được số lượng token trong bucket trước khi lấy ra token. Về mặt lý thuyết là không cần thiết sử dụng hoạt động điền token vào channel ở ví dụ trước. Miễn là  mỗi lần ta đều tính số lượng token trong bucket thì có thể nhận được số lượng token chính xác. Sau khi nhận được số lượng token rồi thì chỉ cần thực hiện những thao tác cần thiết như phép trừ số lượng token. Hãy nhớ sử dụng lock để đảm bảo an toàn với tính concurrency. Thư viện [juju/ratelimit](https://github.com/juju/ratelimit) đang thực hiện theo cách này.
 
 ## 4.6.3 Vấn đề tắt nghẽn Service và QoS
 
-Trước đây chúng ta đã nói rất nhiều về thắt cổ chai ở CPU, IO và một số loại khác, vấn đề hiệu năng này có thể phát hiện tương đối nhanh chóng từ hầu hết các công ty có hệ thống giám sát, nếu hệ thống gặp vấn đề về hiệu suất thì quan sát biểu đồ giám sát response là phương án nhanh nhất.
+Trước đây chúng ta đã nói rất nhiều về bottleneck ở CPU, IO và một số loại khác nữa, vấn đề này có thể phát hiện tương đối nhanh chóng từ hầu hết các công ty có monitoring, nếu hệ thống gặp vấn đề về hiệu suất thì nhờ quan sát biểu đồ monitor về response là phương án nhanh nhất.
+
+<div align="center">
+	<img src="../images/bottleneck.png" width="350">
+	<br/>
+	<span align="center"><i>Biểu đồ để phát hiện bottleneck</i></span>
+	<br/>
+	<br/>
+</div>
 
 Mặc dù các số liệu hiệu suất là quan trọng, QoS (Quality of Service) tổng thể của dịch vụ cũng cần được xem xét khi cung cấp dịch vụ cho người dùng. QoS bao gồm các số liệu như tính sẵn sàng, throughput, độ trễ, mất mát dữ liệu, ...
 
-Nhìn chung, ta có thể cải thiện việc sử dụng CPU của các dịch vụ Web bằng cách tối ưu hóa hệ thống, từ đó tăng throughput của toàn bộ hệ thống. Nhưng khi throughput được cải thiện, trải nghiệm người dùng có thể trở nên tồi tệ hơn. Người dùng rất nhạy cảm với độ trễ. Mặc dù throughput hệ thống của bạn cao, nhưng nếu không thể mở trang trong một thời gian dài sẽ gây ra nhiều khó chịu cho người dùng. Do đó, trong các chỉ số hiệu suất dịch vụ Web của các công ty lớn, ngoài độ trễ phản hồi trung bình, thời gian phản hồi 95% (p95) và 99% (p99) cũng được lấy ra làm tiêu chuẩn hiệu suất. Thời gian phản hồi trung bình thường không ảnh hưởng nhiều đến việc cải thiện hiệu suất sử dụng CPU, quan trọng là thời gian phản hồi 99% so với 95% có thể tăng đáng kể. Từ đó ta có thể xem xét liệu chi phí cải thiện hiệu suất sử dụng CPU này có đáng hay không.
+Nhìn chung, ta có thể cải thiện việc sử dụng CPU của các dịch vụ Web bằng cách tối ưu hóa hệ thống, từ đó tăng throughput của toàn bộ hệ thống.
 
-Các thiết bị trong các hệ thống trực tuyến thường giữ CPU ở một mức sử dụng nhất định.
+Nhưng khi throughput được cải thiện, chưa chắc đã có thể cải thiện trải nghiệm người dùng. Người dùng rất nhạy cảm với độ trễ. Dù throughput của hệ thống cao, nhưng nếu không phản hồi được trong một thời gian dài sẽ làm người dùng rất khó chịu. Do đó, trong các chỉ số hiệu suất dịch vụ Web của các công ty lớn, ngoài độ trễ phản hồi trung bình, thời gian phản hồi 95% (p95) và 99% (p99) cũng được lấy ra làm tiêu chuẩn hiệu suất. Thời gian phản hồi trung bình thường không ảnh hưởng nhiều đến việc cải thiện hiệu suất sử dụng CPU, quan trọng là thời gian phản hồi 99% so với 95% có thể tăng đáng kể. Từ đó ta có thể xem xét liệu chi phí cải thiện hiệu suất sử dụng CPU này có đáng hay không.
