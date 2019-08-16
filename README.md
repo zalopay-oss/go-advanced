@@ -13,7 +13,7 @@
 ## Giới thiệu
 
 <div align="center">
-	<img src="./images/background-book/ver1.2.0.png">
+	<img src="./images/background-book/ver1.3.0.png">
 	<br/>
 	<span align="center">
 		<i></i>
