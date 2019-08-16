@@ -820,7 +820,7 @@
     <br></div></p>
 <p>&lt;/div&gt;
 <br></p>
-<p>gRPC l&#xE0; m&#x1ED9;t framework RPC opensource &#x111;a ng&#xF4;n ng&#x1EEF; &#x111;&#x1B0;&#x1EE3;c Google ph&#xE1;t tri&#x1EC3;n d&#x1EF1;a tr&#xEA;n Protobuf v&#xE0; giao th&#x1EE9;c HTTP/2. Ph&#x1EA7;n n&#xE0;y s&#x1EBD; gi&#x1EDB;i thi&#x1EC7;u m&#x1ED9;t s&#x1ED1; c&#xE1;ch s&#x1EED; d&#x1EE5;ng gRPC &#x111;&#x1A1;n gi&#x1EA3;n.</p>
+<p>gRPC l&#xE0; m&#x1ED9;t framework RPC Open source &#x111;a ng&#xF4;n ng&#x1EEF; &#x111;&#x1B0;&#x1EE3;c Google ph&#xE1;t tri&#x1EC3;n d&#x1EF1;a tr&#xEA;n Protobuf v&#xE0; giao th&#x1EE9;c HTTP/2. Ph&#x1EA7;n n&#xE0;y s&#x1EBD; gi&#x1EDB;i thi&#x1EC7;u m&#x1ED9;t s&#x1ED1; c&#xE1;ch s&#x1EED; d&#x1EE5;ng gRPC &#x111;&#x1A1;n gi&#x1EA3;n.</p>
 <h2 id="441-ki&#x1EBF;n-tr&#xFA;c-grpc">4.4.1 Ki&#x1EBF;n tr&#xFA;c gRPC</h2>
 <p>Ki&#x1EBF;n tr&#xFA;c gRPC trong Golang:</p>
 <p><div align="center">
@@ -996,7 +996,7 @@
 </code></pre>
 <h2 id="444-m&#xF4;-h&#xEC;nh-publishing---subscription">4.4.4 M&#xF4; h&#xEC;nh Publishing - Subscription</h2>
 <p>Trong ph&#x1EA7;n tr&#x1B0;&#x1EDB;c ch&#xFA;ng ta &#x111;&#xE3; hi&#x1EC7;n th&#x1EF1;c phi&#xEA;n b&#x1EA3;n &#x111;&#x1A1;n gi&#x1EA3;n c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Watch</code> d&#x1EF1;a tr&#xEA;n th&#x1B0; vi&#x1EC7;n RPC d&#x1EF1;ng s&#x1EB5;n c&#x1EE7;a Go. &#xDD; t&#x1B0;&#x1EDF;ng &#x111;&#xF3; c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng cho h&#x1EC7; th&#x1ED1;ng publish-subscribe, nh&#x1B0;ng b&#x1EDF;i v&#xEC; RPC thi&#x1EBF;u &#x111;i c&#x1A1; ch&#x1EBF; streaming n&#xEA;n n&#xF3; ch&#x1EC9; c&#xF3; th&#x1EC3; tr&#x1EA3; v&#x1EC1; 1 k&#x1EBF;t qu&#x1EA3; trong 1 l&#x1EA7;n. Trong ch&#x1EBF; &#x111;&#x1ED9; publish-subscribe, h&#xE0;nh &#x111;&#x1ED9;ng publish &#x111;&#x1B0;a ra b&#x1EDF;i <em>caller</em> gi&#x1ED1;ng v&#x1EDB;i l&#x1EDD;i g&#x1ECD;i h&#xE0;m th&#xF4;ng th&#x1B0;&#x1EDD;ng, trong khi subscriber b&#x1ECB; &#x111;&#x1ED9;ng th&#xEC; gi&#x1ED1;ng v&#x1EDB;i <em>receiver</em> trong gRPC client flow m&#x1ED9;t chi&#x1EC1;u. B&#xE2;y gi&#x1EDD; ta c&#xF3; th&#x1EC3; th&#x1EED; x&#xE2;y d&#x1EF1;ng m&#x1ED9;t h&#x1EC7; th&#x1ED1;ng publish - subscribe d&#x1EF1;a tr&#xEA;n &#x111;&#x1EB7;c &#x111;i&#x1EC3;m stream c&#x1EE7;a gRPC.</p>
-<p>Publishing - Subscription l&#xE0; m&#x1ED9;t m&#x1EAB;u thi&#x1EBF;t k&#x1EBF; th&#xF4;ng d&#x1EE5;ng v&#xE0; &#x111;&#xE3; c&#xF3; nhi&#x1EC1;u hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a m&#x1EAB;u thi&#x1EBF;t k&#x1EBF; n&#xE0;y trong c&#x1ED9;ng &#x111;&#x1ED3;ng opensource. Docker project cung c&#x1EA5;p hi&#x1EC7;n th&#x1EF1;c t&#x1ED1;i gi&#x1EA3;n c&#x1EE7;a pubsub nh&#x1B0; &#x111;o&#x1EA1;n code sau &#x111;&#xE2;y hi&#x1EC7;n th&#x1EF1;c c&#x1A1; ch&#x1EBF; publish - subscription d&#x1EF1;a tr&#xEA;n package pubsub:</p>
+<p>Publishing - Subscription l&#xE0; m&#x1ED9;t m&#x1EAB;u thi&#x1EBF;t k&#x1EBF; th&#xF4;ng d&#x1EE5;ng v&#xE0; &#x111;&#xE3; c&#xF3; nhi&#x1EC1;u hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a m&#x1EAB;u thi&#x1EBF;t k&#x1EBF; n&#xE0;y trong c&#x1ED9;ng &#x111;&#x1ED3;ng Open source. Docker project cung c&#x1EA5;p hi&#x1EC7;n th&#x1EF1;c t&#x1ED1;i gi&#x1EA3;n c&#x1EE7;a pubsub nh&#x1B0; &#x111;o&#x1EA1;n code sau &#x111;&#xE2;y hi&#x1EC7;n th&#x1EF1;c c&#x1A1; ch&#x1EBF; publish - subscription d&#x1EF1;a tr&#xEA;n package pubsub:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;github.com/moby/moby/pkg/pubsub&quot;</span>
 )

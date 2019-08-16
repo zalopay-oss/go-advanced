@@ -815,7 +815,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="46-grpc-v&#xE0;-protobuf-extensions">4.6. gRPC v&#xE0; Protobuf extensions</h1>
-<p>Hi&#x1EC7;n nay, c&#x1ED9;ng &#x111;&#x1ED3;ng opensource &#x111;&#xE3; ph&#xE1;t tri&#x1EC3;n r&#x1EA5;t nhi&#x1EC1;u extensions xung quanh Protobuf v&#xE0; gRPC, t&#x1EA1;o th&#xE0;nh m&#x1ED9;t h&#x1EC7; sinh th&#xE1;i to l&#x1EDB;n.</p>
+<p>Hi&#x1EC7;n nay, c&#x1ED9;ng &#x111;&#x1ED3;ng Open source &#x111;&#xE3; ph&#xE1;t tri&#x1EC3;n r&#x1EA5;t nhi&#x1EC1;u extensions xung quanh Protobuf v&#xE0; gRPC, t&#x1EA1;o th&#xE0;nh m&#x1ED9;t h&#x1EC7; sinh th&#xE1;i to l&#x1EDB;n.</p>
 <h2 id="461-validator">4.6.1 Validator</h2>
 <p>Cho &#x111;&#x1EBF;n nay, ch&#xFA;ng t&#xF4;i &#x111;&#xE3; gi&#x1EDB;i thi&#x1EC7;u Protobuf phi&#xEA;n b&#x1EA3;n th&#x1EE9; ba. &#x1EDE; phi&#xEA;n b&#x1EA3;n th&#x1EE9; hai c&#x1EE7;a Protobuf c&#xF3; m&#x1ED9;t thu&#x1ED9;c t&#xED;nh <code>default</code> &#x1EDF; c&#xE1;c tr&#x1B0;&#x1EDD;ng nh&#x1EB1;m &#x111;&#x1ECB;nh ngh&#x129;a gi&#xE1; tr&#x1ECB; m&#x1EB7;c &#x111;&#x1ECB;nh cho n&#xF3; l&#xE0; m&#x1ED9;t gi&#xE1; tr&#x1ECB; thu&#x1ED9;c ki&#x1EC3;u string ho&#x1EB7;c ki&#x1EC3;u s&#x1ED1;.</p>
 <p>Ch&#xFA;ng ta s&#x1EBD; t&#x1EA1;o ra file proto s&#x1EED; d&#x1EE5;ng phi&#xEA;n b&#x1EA3;n Protobuf th&#x1EE9; hai:</p>
@@ -875,7 +875,7 @@ message Message {
 }
 </code></pre>
 <p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; parse out ph&#x1EA7;n m&#x1EDF; r&#x1ED9;ng c&#x1EE7;a option &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a trong m&#x1ED7;i th&#xE0;nh vi&#xEA;n c&#x1EE7;a Message t&#x1EA1;i th&#x1EDD;i &#x111;i&#x1EC3;m th&#x1EF1;c thi b&#x1EDF;i ki&#x1EC3;u <code>reflection</code>, v&#xE0; sau &#x111;&#xF3; parse out g&#xED;a tr&#x1ECB; m&#x1EB7;c &#x111;&#x1ECB;nh m&#xE0; ch&#xFA;ng ta &#x111;&#xE3; &#x111;&#x1ECB;nh ngh&#x129;a s&#x1EB5;n t&#x1EEB; nh&#x1EEF;ng th&#xF4;ng tin li&#xEA;n quan kh&#xE1;c cho ph&#x1EA7;n m&#x1EDF; r&#x1ED9;ng.</p>
-<p>Trong c&#x1ED9;ng &#x111;&#x1ED3;ng opensource, th&#x1B0; vi&#x1EC7;n <a href="github.com/mwitkow/go-proto-validators">go-proto-validators</a> l&#xE0; m&#x1ED9;t extension c&#x1EE7;a protobuf c&#xF3; ch&#x1EE9;c n&#x103;ng validator r&#x1EA5;t m&#x1EA1;nh m&#x1EBD; d&#x1EF1;a tr&#xEA;n ph&#x1EA7;n m&#x1EDF; r&#x1ED9;ng t&#x1EF1; nhi&#xEA;n c&#x1EE7;a Protobuf. &#x110;&#x1EC3; s&#x1EED; d&#x1EE5;ng validator &#x111;&#x1EA7;u ti&#xEA;n ta c&#x1EA7;n ph&#x1EA3;i t&#x1EA3;i plugin sinh m&#xE3; ngu&#x1ED3;n b&#xEA;n d&#x1B0;&#x1EDB;i:</p>
+<p>Trong c&#x1ED9;ng &#x111;&#x1ED3;ng Open source, th&#x1B0; vi&#x1EC7;n <a href="github.com/mwitkow/go-proto-validators">go-proto-validators</a> l&#xE0; m&#x1ED9;t extension c&#x1EE7;a protobuf c&#xF3; ch&#x1EE9;c n&#x103;ng validator r&#x1EA5;t m&#x1EA1;nh m&#x1EBD; d&#x1EF1;a tr&#xEA;n ph&#x1EA7;n m&#x1EDF; r&#x1ED9;ng t&#x1EF1; nhi&#xEA;n c&#x1EE7;a Protobuf. &#x110;&#x1EC3; s&#x1EED; d&#x1EE5;ng validator &#x111;&#x1EA7;u ti&#xEA;n ta c&#x1EA7;n ph&#x1EA3;i t&#x1EA3;i plugin sinh m&#xE3; ngu&#x1ED3;n b&#xEA;n d&#x1B0;&#x1EDB;i:</p>
 <pre><code class="lang-sh">$ go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
 </code></pre>
 <p>Sau &#x111;&#xF3; th&#xEA;m ph&#x1EA7;n <code>validation rules</code> v&#xE0;o c&#xE1;c th&#xE0;nh vi&#xEA;n c&#x1EE7;a Message d&#x1EF1;a tr&#xEA;n rules c&#x1EE7;a go-proto-validators validator.</p>
@@ -966,7 +966,7 @@ message FieldValidator {
 <p>Th&#xF4;ng qua h&#xE0;m Validate() &#x111;&#x1B0;&#x1EE3;c sinh ra, ch&#xFA;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t h&#x1EE3;p v&#x1EDB;i <code>gRPC interceptor</code>, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng validate gi&#xE1; tr&#x1ECB; c&#x1EE7;a tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o v&#xE0; k&#x1EBF;t qu&#x1EA3; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a m&#x1ED7;i h&#xE0;m.</p>
 <h2 id="462-rest-interface">4.6.2 REST interface</h2>
 <p><strong>gRPC service</strong> th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng trong vi&#x1EC7;c trao &#x111;&#x1ED5;i message gi&#x1EEF;a c&#xE1;c cluster trong h&#x1EC7; th&#x1ED1;ng. &#x110;&#x1EC3; cung c&#x1EA5;p API ra b&#xEA;n ngo&#xE0;i, th&#xF4;ng th&#x1B0;&#x1EDD;ng m&#x1ED9;t <a href="https://restfulapi.net/" target="_blank">REST interface</a> s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c sinh ra.</p>
-<p>C&#x1ED9;ng &#x111;&#x1ED3;ng opensource &#x111;&#xE3; hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t project v&#x1EDB;i t&#xEA;n g&#x1ECD;i l&#xE0; <a href="https://github.com/grpc-ecosystem/grpc-gateway" target="_blank">grpc-gateway</a>, n&#xF3; s&#x1EBD; sinh ra m&#x1ED9;t proxy c&#xF3; vai tr&#xF2; chuy&#x1EC3;n c&#xE1;c y&#xEA;u c&#x1EA7;u REST HTTP th&#xE0;nh c&#xE1;c y&#xEA;u c&#x1EA7;u gRPC HTTP2.</p>
+<p>C&#x1ED9;ng &#x111;&#x1ED3;ng Open source &#x111;&#xE3; hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t project v&#x1EDB;i t&#xEA;n g&#x1ECD;i l&#xE0; <a href="https://github.com/grpc-ecosystem/grpc-gateway" target="_blank">grpc-gateway</a>, n&#xF3; s&#x1EBD; sinh ra m&#x1ED9;t proxy c&#xF3; vai tr&#xF2; chuy&#x1EC3;n c&#xE1;c y&#xEA;u c&#x1EA7;u REST HTTP th&#xE0;nh c&#xE1;c y&#xEA;u c&#x1EA7;u gRPC HTTP2.</p>
 <p><div align="center">
     <img src="../images/ch4-2-grpc-gateway.png">
     <br>

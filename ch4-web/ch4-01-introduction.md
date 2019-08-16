@@ -1,6 +1,6 @@
 # 4.1. Giới thiệu về Web Development
 
-Phần này sẽ đề cập về cách xây dựng một chương trình web đơn giản bằng thư viện chuẩn của Go, sau đó giới thiệu các framework web trong cộng đồng opensource.
+Phần này sẽ đề cập về cách xây dựng một chương trình web đơn giản bằng thư viện chuẩn của Go, sau đó giới thiệu các framework web trong cộng đồng Open source.
 
 ## 4.1.1 Dùng thư viện chuẩn net/http
 
@@ -70,7 +70,7 @@ GET     /card/:id/name
 GET     /card/:id/relations
 ```
 
-Có thể thấy rằng, cùng là đường dẫn có chứa `/card/:id`, nhưng có phương thức khác nhau hoặc nhánh con khác nhau sẽ dẫn đến logic xử lý khác nhau, cách xử lý những đường dẫn trùng tên như vậy thường sẽ phức tạp. Khi đó chúng ta có thể nghĩ đến việc sử dụng một số framework routing bên ngoài từ cộng đồng opensource.
+Có thể thấy rằng, cùng là đường dẫn có chứa `/card/:id`, nhưng có phương thức khác nhau hoặc nhánh con khác nhau sẽ dẫn đến logic xử lý khác nhau, cách xử lý những đường dẫn trùng tên như vậy thường sẽ phức tạp. Khi đó chúng ta có thể nghĩ đến việc sử dụng một số framework routing bên ngoài từ cộng đồng Open source.
 
 Framework web của Go có thể được chia thành hai loại sau:
 

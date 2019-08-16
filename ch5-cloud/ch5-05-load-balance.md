@@ -123,7 +123,7 @@ Tuy nhiên, trong một số trường hợp đặc biệt, chẳng hạn như k
 rand.Seed(time.Now().UnixNano())
 ```
 
-Lý do cho những kết luận này là phiên bản trước của thư viện opensource ZooKeeper được sử dụng rộng rãi đã mắc phải những lỗi trên và mãi đến đầu năm 2016, vấn đề mới được khắc phục.
+Lý do cho những kết luận này là phiên bản trước của thư viện Open source ZooKeeper được sử dụng rộng rãi đã mắc phải những lỗi trên và mãi đến đầu năm 2016, vấn đề mới được khắc phục.
 
 ## 5.5.4 Kiểm tra lại ảnh hưởng của thuật toán cân bằng tải
 

@@ -17,7 +17,7 @@ Trong phần này chúng ta sẽ dùng Go để viết một ví dụ validate v
 
 ## 4.4.1 Cải tiến 1: Tái cấu trúc hàm validation
 
-Giả sử dữ liệu được liên kết tới một struct cụ thể thông qua binding bằng một thư viện opensource.
+Giả sử dữ liệu được liên kết tới một struct cụ thể thông qua binding bằng một thư viện Open source.
 
 ```go
 type RegisterReq struct {

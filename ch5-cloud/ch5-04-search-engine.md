@@ -27,7 +27,7 @@ Lúc này, chúng ta cần một công cụ tìm kiếm có thể xử lý tốt
 
 ## 5.4.1 Công cụ tìm kiếm
 
-[Elaticsearch](https://www.elastic.co/) là công cụ dẫn đầu trong các công cụ tìm kiếm phân tán opensource. Elaticsearch dựa trên việc triển khai [apache Lucene](https://lucene.apache.org) và kết hợp cùng nhiều tối ưu hóa trong quá trình triển khai, vận hành và bảo trì. Xây dựng một công cụ tìm kiếm phân tán ngày nay dễ dàng hơn nhiều so với thời đại trước. Đơn giản chỉ cần cấu hình IP máy khách và cổng.
+[Elaticsearch](https://www.elastic.co/) là công cụ dẫn đầu trong các công cụ tìm kiếm phân tán Open source. Elaticsearch dựa trên việc triển khai [apache Lucene](https://lucene.apache.org) và kết hợp cùng nhiều tối ưu hóa trong quá trình triển khai, vận hành và bảo trì. Xây dựng một công cụ tìm kiếm phân tán ngày nay dễ dàng hơn nhiều so với thời đại trước. Đơn giản chỉ cần cấu hình IP máy khách và cổng.
 
 ### 5.4.2 Inverted index
 
@@ -403,7 +403,7 @@ Sau khi tăng khoảng thời gian lên 11 phút thì mọi thứ đã ổn hơn
 </div>
 <br/>
 
-[Canal](https://github.com/alibaba/canal) là opensource của **Alibaba** và nó được dùng để phân tích cú pháp `binlog` và đồng bộ hóa bởi nhiều công ty. Canal sẽ hoạt động như một thư viện phụ thuộc MySQL, nó sẽ phân tích cú pháp `bincode` của từng dòng và gửi nó đến hàng đợi tin nhắn theo định dạng dễ hiểu hơn (chẳng hạn như json).
+[Canal](https://github.com/alibaba/canal) là Open source của **Alibaba** và nó được dùng để phân tích cú pháp `binlog` và đồng bộ hóa bởi nhiều công ty. Canal sẽ hoạt động như một thư viện phụ thuộc MySQL, nó sẽ phân tích cú pháp `bincode` của từng dòng và gửi nó đến hàng đợi tin nhắn theo định dạng dễ hiểu hơn (chẳng hạn như json).
 
 [Downstream Kafka consumer](https://kafka.apache.org/20/documentation.html) chịu trách nhiệm ghi khóa chính tự tăng của bảng dữ liệu upstream dưới dạng ID của Elaticsearch. Mỗi khi nhận được binlog, dữ liệu có ID tương ứng sẽ được cập nhật mới nhất. Binlog của một row trong MySQL sẽ cung cấp tất cả các trường của record cho downstream. Vì vậy, trên thực tế, khi đồng bộ hóa dữ liệu, bạn không cần xem xét dữ liệu được chèn hay cập nhật, miễn là bạn có chèn ID.
 

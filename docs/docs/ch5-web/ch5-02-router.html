@@ -839,7 +839,7 @@ DELETE /user/starred/:owner/:repo
 </code></pre><p>B&#x1EA1;n c&#xF3; th&#x1EC3; &#x111;o&#xE1;n r&#x1EB1;ng &#x111;&#xF3; l&#xE0; m&#x1ED9;t v&#xE0;i API &#x111;&#x1B0;&#x1EE3;c ch&#x1ECD;n ra t&#x1EEB; t&#xE0;i li&#x1EC7;u c&#x1EE7;a trang ch&#x1EE7; Github. Ki&#x1EC3;u RESTful API ph&#x1EE5; thu&#x1ED9;c r&#x1EA5;t nhi&#x1EC1;u v&#xE0;o request path. Nhi&#x1EC1;u tham s&#x1ED1; &#x111;&#x1B0;&#x1EE3;c thay th&#x1EBF; trong request URI. Th&#xEA;m v&#xE0;o &#x111;&#xF3;, r&#x1EA5;t &#xED;t nh&#x1EEF;ng HTTP status chung &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng, nh&#x1B0;ng ph&#x1EA7;n n&#xE0;y ch&#x1EC9; t&#x1EAD;p trung b&#xE0;n v&#x1EC1; routing, do &#x111;&#xF3; l&#x1B0;&#x1EE3;t b&#x1ECF; nh&#x1EEF;ng &#x111;i&#x1EC1;u kh&#xE1;c.</p>
 <p>N&#x1EBF;u h&#x1EC7; th&#x1ED1;ng c&#x1EE7;a ch&#xFA;ng ta c&#x1EA7;n c&#xF3; nh&#x1EEF;ng API t&#x1B0;&#x1A1;ng t&#x1EF1; v&#x1EAD;y, vi&#x1EC7;c s&#x1EED; d&#x1EE5;ng th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n <code>mux</code> hi&#x1EC3;n nhi&#xEA;n l&#xE0; kh&#xF4;ng &#x111;&#x1EE7;.</p>
 <h2 id="521-httprouter">5.2.1 httpRouter</h2>
-<p>Nhi&#x1EC1;u opensource Web ph&#x1ED5; bi&#x1EBF;n c&#x1EE7;a Go th&#x1B0;&#x1EDD;ng s&#x1EED; d&#x1EE5;ng <code>httpRouter</code>, ho&#x1EB7;c h&#x1ED7; tr&#x1EE3; cho routing d&#x1EF1;a tr&#xEA;n nh&#x1EEF;ng bi&#x1EBF;n th&#x1EC3; c&#x1EE7;a httpRouter. Nh&#x1EEF;ng API ch&#x1EE9;a parameters nh&#x1B0; c&#x1EE7;a Github &#x1EDF; tr&#xEA;n c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c h&#x1ED7; tr&#x1EE3; b&#x1EDF;i httpRouter.</p>
+<p>Nhi&#x1EC1;u Open source Web ph&#x1ED5; bi&#x1EBF;n c&#x1EE7;a Go th&#x1B0;&#x1EDD;ng s&#x1EED; d&#x1EE5;ng <code>httpRouter</code>, ho&#x1EB7;c h&#x1ED7; tr&#x1EE3; cho routing d&#x1EF1;a tr&#xEA;n nh&#x1EEF;ng bi&#x1EBF;n th&#x1EC3; c&#x1EE7;a httpRouter. Nh&#x1EEF;ng API ch&#x1EE9;a parameters nh&#x1B0; c&#x1EE7;a Github &#x1EDF; tr&#xEA;n c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c h&#x1ED7; tr&#x1EE3; b&#x1EDF;i httpRouter.</p>
 <p>B&#x1EDF;i v&#xEC; khi s&#x1EED; d&#x1EE5;ng httpRouter, b&#x1EA1;n c&#x1EA7;n ph&#x1EA3;i tr&#xE1;nh m&#x1ED9;t s&#x1ED1; ng&#x1EEF; c&#x1EA3;nh m&#xE0; n&#xF3; d&#x1EAB;n &#x111;&#x1EBF;n xung &#x111;&#x1ED9;t routing khi thi&#x1EBF;t k&#x1EBF; c&#xE1;c routes, v&#xED; d&#x1EE5;:</p>
 <pre><code>conflict:
 GET /user/info/:name
@@ -883,7 +883,7 @@ r.NotFound = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     w.Write([]<span class="hljs-keyword">byte</span>(c.(error).Error()))
 }
 </code></pre>
-<p>Hi&#x1EC7;n t&#x1EA1;i c&#x1ED9;ng &#x111;&#x1ED3;ng opensource c&#xF3; m&#x1ED9;t web framework &#x111;&#x1B0;&#x1EE3;c r&#x1EA5;t nhi&#x1EC1;u star l&#xE0; <a href="https://github.com/gin-gonic/gin" target="_blank">gin</a> s&#x1EED; d&#x1EE5;ng httprouter.</p>
+<p>Hi&#x1EC7;n t&#x1EA1;i c&#x1ED9;ng &#x111;&#x1ED3;ng Open source c&#xF3; m&#x1ED9;t web framework &#x111;&#x1B0;&#x1EE3;c r&#x1EA5;t nhi&#x1EC1;u star l&#xE0; <a href="https://github.com/gin-gonic/gin" target="_blank">gin</a> s&#x1EED; d&#x1EE5;ng httprouter.</p>
 <h2 id="522-principle">5.2.2 Principle</h2>
 <p>C&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng b&#x1EDF;i httprouter v&#xE0; nhi&#x1EC1;u routers d&#x1EAB;n xu&#x1EA5;t kh&#xE1;c l&#xE0; Radix Tree. Ng&#x1B0;&#x1EDD;i &#x111;&#x1ECD;c c&#xF3; th&#x1EC3; s&#x1EBD; li&#xEA;n t&#x1B0;&#x1EDF;ng &#x111;&#x1EBF;n nh&#x1EEF;ng c&#xE2;y kh&#xE1;c nh&#x1B0; <code>compressed dictionary tree</code> v&#xE0; ho&#x1EB7;c &#x111;&#xE3; nghe v&#x1EC1; dictionary tree (Trie Tree).</p>
 <p><div align="center">

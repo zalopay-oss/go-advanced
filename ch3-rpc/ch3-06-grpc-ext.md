@@ -1,6 +1,6 @@
 # 3.6. gRPC và Protobuf extensions
 
-Hiện nay, cộng đồng opensource đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn. Ở phần này sẽ trình bày về một số extensions thông dụng.
+Hiện nay, cộng đồng Open source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn. Ở phần này sẽ trình bày về một số extensions thông dụng.
 
 ## 3.6.1 Validator
 
@@ -77,7 +77,7 @@ var E_DefaultInt = &proto.ExtensionDesc{
 
 Chúng ta có thể parse out phần mở rộng của option được định nghĩa trong mỗi thành viên của Message tại thời điểm thực thi bởi kiểu `reflection`, và sau đó parse out giá trị mặc định mà chúng ta đã định nghĩa sẵn từ những thông tin liên quan khác cho phần mở rộng.
 
-Trong cộng đồng opensource, thư viện [go-proto-validators](github.com/mwitkow/go-proto-validators) là một extension của protobuf có chức năng validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới:
+Trong cộng đồng Open source, thư viện [go-proto-validators](github.com/mwitkow/go-proto-validators) là một extension của protobuf có chức năng validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới:
 
 ```sh
 $ go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
@@ -188,7 +188,7 @@ Thông qua hàm Validate() được sinh ra, chúng có thể được kết h�
 
 Hiện nay RESTful JSON API vẫn là sự lựa chọn hàng đầu cho các ứng dụng web hay mobile. Vì tính tiện lợi và dễ dùng của RESTful API nên chúng ta vẫn sử dụng nó để frondend có thể giao tiếp với hệ thống backend. Nhưng khi chúng ta sử dụng framework gRPC của Google để xây dựng các service. Các service sử dụng gRPC thì dễ dàng trao đổi dữ liệu với nhau dựa trên giao thức HTTP/2 và protobuf, nhưng ở phía frontend lại sử dụng [RESTful API](https://restfulapi.net/) API hoạt động trên giao thức HTTP/1. Vấn đề đặt ra là chúng ta cần phải chuyển đổi các yêu cầu RESTful API thành các yêu cầu gRPC để hệ thống các service gRPC có thể hiểu được.
 
-Cộng đồng opensource đã hiện thực một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
+Cộng đồng Open source đã hiện thực một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
 
 
 <div align="center">
