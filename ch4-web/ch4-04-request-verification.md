@@ -6,14 +6,14 @@ Có lẽ bạn đã bắt gặp đâu đó tấm hình mà mọi người dùng 
 	<img src="../images/ch5-04-validate.jpg">
 	<br/>
 	<span align="center">
-		<i>Hadouken if-else</i>
+		<i>'Hadouken' if-else</i>
 	</span>
 </div>
 <br/>
 
 Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ mà chỉ là cách tổ chức code rườm rà khi gặp trường hợp mà nhiều field cần phải validate.
 
-Trong phần này chúng ta sẽ dùng Go để viết một ví dụ validate và
+Trong phần này chúng ta sẽ dùng Go để viết một ví dụ validate và xem xét cải tiến nó theo 2 bước. Cuối cùng là phân tích cơ chế để hiểu rõ hơn cách một validator hoạt động.
 
 ## 4.4.1 Cải tiến 1: Tái cấu trúc hàm validation
 
@@ -53,7 +53,7 @@ func register(req RegisterReq) error{
 }
 ```
 
-Giờ code của chúng ta có vẻ khá giống một *Hadouken* nhắc ở phần đầu rồi, vậy làm thế nào để tối ưu đoạn code trên?
+Giờ code của chúng ta có vẻ khá giống một *"Hadouken"* nhắc ở phần đầu rồi, vậy làm thế nào để tối ưu đoạn code trên?
 
 Có một giải pháp đã được đưa ra trong [Refactoring.com - Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html), thử áp dụng cho trường hợp của chúng ta:
 
@@ -87,7 +87,7 @@ Có một cách giúp chúng ta giảm khá nhiều code là sử dụng validat
 ## 4.4.2 Cải tiến 2: Sử dụng validator
 
 <div align="center">
-	<img src="../images/validator.png" width="200">
+	<img src="../images/validator.png" width="100">
 	<br/>
 
 </div>
