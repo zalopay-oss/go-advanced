@@ -54,7 +54,7 @@ Tất nhiên, sử dụng MySQL đồng nghĩa với việc thêm một phụ th
 
 Xem xét đến việc có một service tạo ID bị lỗi trong cluster, một phần của ID bị mất trong một khoảng thời gian, thì chúng ta cần gắn trực tiếp worker_id vào cấu hình của worker. Khi hệ thống đó hoạt động lại, đoạn script triển khai sẽ quy định giá trị worker_id.
 
-## 5.1.2 Các opensource hiện có
+## 5.1.2 Các Open source hiện có
 
 ### 5.1.2.1 Hiện thực theo snowflake chuẩn
 
@@ -133,7 +133,7 @@ Dĩ nhiên, thư viện này cũng cho phép chúng ta tùy chỉnh vài thông 
 
 ### 5.1.2.2 Sonyflake
 
-[Sonyflake](https://github.com/sony/sonyflake) là một dự án opensource của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác.
+[Sonyflake](https://github.com/sony/sonyflake) là một dự án Open source của Sony. Ý tưởng cơ bản tương tự như snowflake, nhưng phân bổ bit hơi khác.
 
 <div align="center">
 	<img src="../images/ch6-snoyflake.png">

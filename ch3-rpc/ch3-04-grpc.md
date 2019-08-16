@@ -6,7 +6,7 @@
 </div>
 <br/>
 
-[gRPC](https://grpc.io/) là một framework RPC opensource đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
+[gRPC](https://grpc.io/) là một framework RPC Open source đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
 
 ## 3.4.1 Kiến trúc gRPC
 
@@ -256,7 +256,7 @@ Trong phần trước chúng ta đã hiện thực phiên bản đơn giản c�
 
 </div>
 
-Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng opensource. Đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
+Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng Open source. Đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
 
 ```go
 import (

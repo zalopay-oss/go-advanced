@@ -1,6 +1,6 @@
 # 3.3 RPC trong Golang
 
-Chúng ta có thể sử dụng RPC cho nhiều mục đích khác nhau, vì vậy cộng đồng opensource đã tạo ra khá nhiều framework RPC để hỗ trợ cho việc lập trình. Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn trong Go cho các hiện thực của một số trường hợp.
+Chúng ta có thể sử dụng RPC cho nhiều mục đích khác nhau, vì vậy cộng đồng Open source đã tạo ra khá nhiều framework RPC để hỗ trợ cho việc lập trình. Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn trong Go cho các hiện thực của một số trường hợp.
 
 ## 3.3.1 Hiện thực RPC phía Client
 

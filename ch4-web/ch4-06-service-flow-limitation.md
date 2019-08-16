@@ -1,9 +1,9 @@
 # 4.6 Service Flow Limit
 
-Một chương trình máy tính có thể mắc phải một số các vấn đề bottleneck:
+Một chương trình máy tính có thể mắc phải một số các vấn đề bottleneck (tắt nghẽn):
 
-- bottleneck do CPU tính toán.
-- bottleneck do băng thông mạng.
+- Bottleneck do CPU tính toán.
+- Bottleneck do băng thông mạng.
 - Đôi khi do external system gây ra tình trạng bottleneck trong chính hệ thống phân tán của nó.
 
 Phần quan trọng nhất của một hệ thống Web là mạng. Cho dù đó là tiếp nhận, phân tích request của người dùng, truy cập bộ nhớ hay trả về dữ liệu response đều cần phải truy cập trực tuyến. Trước khi xuất hiện IO multiplexing interface `epoll/kqueue` do hệ thống cung cấp thì  từng có một sự cố [C10k](http://www.kegel.com/c10k.html) trong máy tính đa lõi.
@@ -16,7 +16,7 @@ Phần quan trọng nhất của một hệ thống Web là mạng. Cho dù đó
     <br/>
 </div>
 
-Kể từ khi trên Linux có `epoll`, FreeBSD hiện thực `kqueue`, chúng ta có thể dễ dàng giải quyết vấn đề C10k với API do kernel cung cấp. Điều đó có nghĩa là nếu chương trình của chúng ta chủ yếu xử lý qua mạng, thì vấn đề bottleneck là do phía người dùng, chứ không nằm ở kernel của hệ điều hành.
+Kể từ khi trên Linux có `epoll`, FreeBSD hiện thực `kqueue`, chúng ta có thể dễ dàng giải quyết vấn đề C10k với API do kernel cung cấp.
 
 Thư viện `net` của Go đóng gói các syscall API khác nhau cho các nền tảng khác nhau. Thư viện `http` được xây dựng trên nền của thư viện `net`, trong Golang chúng ta có thể viết các service `http` hiệu suất cao với sự trợ giúp của thư viện chuẩn. Đây là một service `hello world` đơn giản:
 
@@ -142,7 +142,7 @@ Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có m
 - Điều đó nghĩa là token bucket chỉ cho phép một mức độ đồng thời nhất định. Ví dụ cùng lúc có 100 yêu cầu người dùng gửi tới, miễn là có 100 token trong bucket thì tất cả 100 yêu cầu sẽ được đưa ra.
 - Token bucket cũng có thể suy biến thành mô hình leaky bucket nếu không có token trong bucket.
 
-Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng opensource đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là [juju/ratelimit](https://github.com/juju/ratelimit) cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
+Trong các ứng dụng thực tế, token bucket được sử dụng rộng rãi và hầu hết các limiter phổ biến hiện nay trong cộng đồng Open source đều dựa trên token bucket. Trên cơ sở này, có một phiên bản limiter là [juju/ratelimit](https://github.com/juju/ratelimit) cung cấp một số phương thức thêm vào token với các đặc điểm khác nhau như sau:
 
 ```go
 // fillInterval với ý nghĩa mỗi token sẽ được đặt trong bucket
@@ -176,7 +176,7 @@ func (tb *Bucket) Wait(count int64) {}
 func (tb *Bucket) WaitMaxDuration(count int64, maxWait time.Duration) bool {}
 ```
 
-Tên và chức năng tương của chúng khá đơn giản nên ta sẽ không đi vào chi tiết ở đây. So với công cụ ratelimiter do thư viện Java của Google cung cấp là Guava nổi tiếng hơn trong cộng đồng opensource, thư viện này không hỗ trợ khởi tạo token và không thể sửa đổi dung lượng token ban đầu, do đó có thể không đáp ứng được hết  các yêu cầu trong các trường hợp riêng lẻ.
+Tên và chức năng tương của chúng khá đơn giản nên ta sẽ không đi vào chi tiết ở đây. So với công cụ ratelimiter do thư viện Java của Google cung cấp là Guava nổi tiếng hơn trong cộng đồng Open source, thư viện này không hỗ trợ khởi tạo token và không thể sửa đổi dung lượng token ban đầu, do đó có thể không đáp ứng được hết  các yêu cầu trong các trường hợp riêng lẻ.
 
 ## 4.6.2 Nguyên tắc
 
@@ -295,9 +295,9 @@ cur = cur > cap ? cap : cur
 
 Chúng ta sử dụng chênh lệch thời gian giữa t1, t2 kết hợp với các tham số ti, k1 thì có thể biết được số lượng token trong bucket trước khi lấy ra token. Về mặt lý thuyết là không cần thiết sử dụng hoạt động điền token vào channel ở ví dụ trước. Miễn là  mỗi lần ta đều tính số lượng token trong bucket thì có thể nhận được số lượng token chính xác. Sau khi nhận được số lượng token rồi thì chỉ cần thực hiện những thao tác cần thiết như phép trừ số lượng token. Hãy nhớ sử dụng lock để đảm bảo an toàn với tính concurrency. Thư viện [juju/ratelimit](https://github.com/juju/ratelimit) đang thực hiện theo cách này.
 
-## 4.6.3 Vấn đề tắt nghẽn Service và QoS
+## 4.6.3 Vấn đề tắt nghẽn Service và Quality of Service
 
-Trước đây chúng ta đã nói rất nhiều về bottleneck ở CPU, IO và một số loại khác nữa, vấn đề này có thể phát hiện tương đối nhanh chóng từ hầu hết các công ty có monitoring, nếu hệ thống gặp vấn đề về hiệu suất thì nhờ quan sát biểu đồ monitor về response là phương án nhanh nhất.
+Trước đây chúng ta đã nói nhiều về việc bottleneck ở CPU, IO và một số loại khác nữa, vấn đề này có thể phát hiện tương đối nhanh chóng từ hầu hết các công ty có monitoring, nếu hệ thống gặp vấn đề về hiệu suất thì quan sát biểu đồ monitor về response là phương án nhanh nhất để phát hiện nguyên nhân.
 
 <div align="center">
 	<img src="../images/bottleneck.png" width="350">
@@ -307,8 +307,8 @@ Trước đây chúng ta đã nói rất nhiều về bottleneck ở CPU, IO và
 	<br/>
 </div>
 
-Mặc dù các số liệu hiệu suất là quan trọng, QoS (Quality of Service) tổng thể của dịch vụ cũng cần được xem xét khi cung cấp dịch vụ cho người dùng. QoS bao gồm các số liệu như tính sẵn sàng, throughput, độ trễ, mất mát dữ liệu, ...
+Mặc dù các số liệu hiệu suất là quan trọng, QoS (Quality of Service) tổng thể của dịch vụ cũng cần được xem xét khi cung cấp dịch vụ cho người dùng. QoS bao gồm các số liệu như tính sẵn sàng (availability), thông lượng (throughput), độ trễ (latency, delay variation), mất mát dữ liệu, ...
 
 Nhìn chung, ta có thể cải thiện việc sử dụng CPU của các dịch vụ Web bằng cách tối ưu hóa hệ thống, từ đó tăng throughput của toàn bộ hệ thống.
 
-Nhưng khi throughput được cải thiện, chưa chắc đã có thể cải thiện trải nghiệm người dùng. Người dùng rất nhạy cảm với độ trễ. Dù throughput của hệ thống cao, nhưng nếu không phản hồi được trong một thời gian dài sẽ làm người dùng rất khó chịu. Do đó, trong các chỉ số hiệu suất dịch vụ Web của các công ty lớn, ngoài độ trễ phản hồi trung bình, thời gian phản hồi 95% (p95) và 99% (p99) cũng được lấy ra làm tiêu chuẩn hiệu suất. Thời gian phản hồi trung bình thường không ảnh hưởng nhiều đến việc cải thiện hiệu suất sử dụng CPU, quan trọng là thời gian phản hồi 99% so với 95% có thể tăng đáng kể. Từ đó ta có thể xem xét liệu chi phí cải thiện hiệu suất sử dụng CPU này có đáng hay không.
+Nhưng khi throughput được cải thiện, chưa chắc đã có thể cải thiện trải nghiệm người dùng. Người dùng rất nhạy cảm với độ trễ. Dù throughput của hệ thống cao, nhưng nếu không phản hồi được trong một thời gian dài sẽ làm người dùng rất khó chịu. Do đó, trong các chỉ số hiệu suất dịch vụ Web của các công ty lớn, ngoài độ trễ phản hồi trung bình, thời gian phản hồi [95% (p95) và 99% (p99)](https://stackoverflow.com/questions/12808934/what-is-p99-latency) cũng được lấy ra làm tiêu chuẩn hiệu suất. Thời gian phản hồi trung bình thường không ảnh hưởng nhiều đến việc cải thiện hiệu suất sử dụng CPU, quan trọng là thời gian phản hồi 99% so với 95% có thể tăng đáng kể. Từ đó ta có thể xem xét liệu chi phí cải thiện hiệu suất sử dụng CPU này có đáng hay không.
