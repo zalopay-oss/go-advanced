@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="ch1-08-supplementary-notes.md">
             
-                <a href="ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -914,7 +914,7 @@ fmt.Println(b[<span class="hljs-number">0</span>], b[<span class="hljs-number">1
 <span class="hljs-keyword">var</span> unknown1 [<span class="hljs-number">2</span>]<span class="hljs-keyword">interface</span>{}
 <span class="hljs-keyword">var</span> unknown2 = [...]<span class="hljs-keyword">interface</span>{}{<span class="hljs-number">123</span>, <span class="hljs-string">&quot;Hello!&quot;</span>}
 
-<span class="hljs-comment">// M&#x1EA3;ng pipe</span>
+<span class="hljs-comment">// M&#x1EA3;ng channel</span>
 <span class="hljs-keyword">var</span> chanList = [<span class="hljs-number">2</span>]<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>{}
 </code></pre>
 <p>Ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t array r&#x1ED7;ng</p>
@@ -926,13 +926,13 @@ fmt.Println(b[<span class="hljs-number">0</span>], b[<span class="hljs-number">1
 <span class="hljs-keyword">var</span> f = [...]<span class="hljs-keyword">int</span>{}
 </code></pre>
 <p>M&#x1ED9;t array c&#xF3; chi&#x1EC1;u d&#xE0;i 0 th&#xEC; kh&#xF4;ng chi&#x1EBF;m kh&#xF4;ng gian l&#x1B0;u tr&#x1EEF;.</p>
-<h2 id="132-string">1.3.2 String</h2>
+<h2 id="132-string">1.3.2. String</h2>
 <p><div align="center">
-    <img src="../images/1-3-string.jpeg" width="600">
+    <img src="../images/ch1-string.png" width="400">
 </div>
 <br></p>
 <p><code>string</code> c&#x169;ng l&#xE0; m&#x1ED9;t array c&#x1EE7;a c&#xE1;c <code>byte</code> d&#x1EEF; li&#x1EC7;u, nh&#x1B0;ng kh&#xE1;c v&#x1EDB;i array nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; c&#x1EE7;a string l&#xE0; <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank">immutable</a></p>
-<p>C&#x1EA5;u tr&#xFA;c  <code>reflect.StringHeader</code> &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a v&#x1EDB;i:</p>
+<p>C&#x1EA5;u tr&#xFA;c <a href="https://golang.org/src/reflect/value.go?s=56526:56578#L1873" target="_blank">reflect.StringHeader</a> &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; bi&#x1EC3;u di&#x1EC5;n string :</p>
 <pre><code class="lang-go"><span class="hljs-keyword">type</span> StringHeader <span class="hljs-keyword">struct</span> {
     <span class="hljs-comment">// con tr&#x1ECF; &#x111;&#x1ECB;a ch&#x1EC9; v&#xF9;ng nh&#x1EDB; string</span>
     Data <span class="hljs-keyword">uintptr</span>
@@ -966,7 +966,7 @@ world := s[<span class="hljs-number">6</span>:]
 s1 := <span class="hljs-string">&quot;hello world&quot;</span>[:<span class="hljs-number">5</span>]
 s2 := <span class="hljs-string">&quot;hello world&quot;</span>[<span class="hljs-number">6</span>:]
 </code></pre>
-<p>T&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; array, String c&#x169;ng c&#xF3; m&#x1ED9;t h&#xE0;m build-in l&#xE0; <code>len</code> d&#xF9;ng &#x111;&#x1EC3; tr&#x1EA3; v&#x1EC1; chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string, ngo&#xE0;i ra b&#x1EA1;n c&#xF3; th&#x1EC3;  d&#xF9;ng <code>reflect.StringHeader</code> &#x111;&#x1EC3; truy xu&#x1EA5;t chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string theo c&#xE1;ch nh&#x1B0; sau</p>
+<p>T&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; array, String c&#x169;ng c&#xF3; m&#x1ED9;t h&#xE0;m built-in l&#xE0; <code>len</code> d&#xF9;ng &#x111;&#x1EC3; tr&#x1EA3; v&#x1EC1; chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string, ngo&#xE0;i ra b&#x1EA1;n c&#xF3; th&#x1EC3;  d&#xF9;ng <code>reflect.StringHeader</code> &#x111;&#x1EC3; truy xu&#x1EA5;t chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string theo c&#xE1;ch nh&#x1B0; sau</p>
 <pre><code class="lang-go">fmt.Println(<span class="hljs-string">&quot;len(s): &quot;</span>, (*reflect.StringHeader)(unsafe.Pointer(&amp;s)).Len)
 </code></pre>
 <h2 id="133-slice">1.3.3. Slice</h2>
@@ -1224,7 +1224,7 @@ a = a[:<span class="hljs-built_in">len</span>(a)<span class="hljs-number">-1</sp
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.3 Array, strings và slices","level":"1.2.3","depth":2,"next":{"title":"1.4 Functions, Methods và Interfaces","level":"1.2.4","depth":2,"path":"ch1-basic/ch1-04-func-method-interface.md","ref":"ch1-basic/ch1-04-func-method-interface.md","articles":[]},"previous":{"title":"1.2 Sự tiến hóa của chương trình \"Hello World\"","level":"1.2.2","depth":2,"path":"ch1-basic/ch1-02-hello-revolution.md","ref":"ch1-basic/ch1-02-hello-revolution.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-03-array-string-and-slice.md","mtime":"2019-07-31T07:36:41.838Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.3 Array, strings và slices","level":"1.2.3","depth":2,"next":{"title":"1.4 Functions, Methods và Interfaces","level":"1.2.4","depth":2,"path":"ch1-basic/ch1-04-func-method-interface.md","ref":"ch1-basic/ch1-04-func-method-interface.md","articles":[]},"previous":{"title":"1.2 Sự tiến hóa của chương trình \"Hello World\"","level":"1.2.2","depth":2,"path":"ch1-basic/ch1-02-hello-revolution.md","ref":"ch1-basic/ch1-02-hello-revolution.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-03-array-string-and-slice.md","mtime":"2019-08-10T03:07:53.898Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:11:57.422Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

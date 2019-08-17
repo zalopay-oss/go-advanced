@@ -1,0 +1,970 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3.8 grpcurl tool · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch3-09-supplementary-notes.html" />
+    
+    
+    <link rel="prev" href="ch3-07-pbgo.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Concurrent-oriented memory model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Concurrency Mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10 Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 3: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="ch3-01-rpc-intro.html">
+            
+                <a href="ch3-01-rpc-intro.html">
+            
+                    
+                    3.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ch3-02-pb-intro.html">
+            
+                <a href="ch3-02-pb-intro.html">
+            
+                    
+                    3.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="ch3-03-fun-fpc.html">
+            
+                <a href="ch3-03-fun-fpc.html">
+            
+                    
+                    3.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="ch3-04-grpc.html">
+            
+                <a href="ch3-04-grpc.html">
+            
+                    
+                    3.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="ch3-05-grpc-advanced.html">
+            
+                <a href="ch3-05-grpc-advanced.html">
+            
+                    
+                    3.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="ch3-06-grpc-ext.html">
+            
+                <a href="ch3-06-grpc-ext.html">
+            
+                    
+                    3.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="ch3-07-pbgo.html">
+            
+                <a href="ch3-07-pbgo.html">
+            
+                    
+                    3.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.8" data-path="ch3-08-grpc-curl.html">
+            
+                <a href="ch3-08-grpc-curl.html">
+            
+                    
+                    3.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="ch3-09-supplementary-notes.html">
+            
+                <a href="ch3-09-supplementary-notes.html">
+            
+                    
+                    3.9 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-web/">
+            
+                <a href="../ch4-web/">
+            
+                    
+                    Chương 4: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-web/ch4-01-introduction.html">
+            
+                <a href="../ch4-web/ch4-01-introduction.html">
+            
+                    
+                    4.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-web/ch4-02-router.html">
+            
+                <a href="../ch4-web/ch4-02-router.html">
+            
+                    
+                    4.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-web/ch4-03-middleware.html">
+            
+                <a href="../ch4-web/ch4-03-middleware.html">
+            
+                    
+                    4.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-web/ch4-04-request-verification.html">
+            
+                <a href="../ch4-web/ch4-04-request-verification.html">
+            
+                    
+                    4.4 Validator request check
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-web/ch4-05-database.html">
+            
+                <a href="../ch4-web/ch4-05-database.html">
+            
+                    
+                    4.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                <a href="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                    
+                    4.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                <a href="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                    
+                    4.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-web/ch4-08-interface-and-web.html">
+            
+                <a href="../ch4-web/ch4-08-interface-and-web.html">
+            
+                    
+                    4.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-web/ch4-09-ext.html">
+            
+                <a href="../ch4-web/ch4-09-ext.html">
+            
+                    
+                    4.9 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-cloud/">
+            
+                <a href="../ch5-cloud/">
+            
+                    
+                    Chương 5: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-cloud/ch5-01-dist-id.html">
+            
+                <a href="../ch5-cloud/ch5-01-dist-id.html">
+            
+                    
+                    5.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-cloud/ch5-02-lock.html">
+            
+                <a href="../ch5-cloud/ch5-02-lock.html">
+            
+                    
+                    5.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-cloud/ch5-03-delay-job.html">
+            
+                <a href="../ch5-cloud/ch5-03-delay-job.html">
+            
+                    
+                    5.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-cloud/Ch5-04-search-engine.html">
+            
+                <a href="../ch5-cloud/Ch5-04-search-engine.html">
+            
+                    
+                    5.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-cloud/ch5-05-load-balance.html">
+            
+                <a href="../ch5-cloud/ch5-05-load-balance.html">
+            
+                    
+                    5.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-cloud/ch5-06-config.html">
+            
+                <a href="../ch5-cloud/ch5-06-config.html">
+            
+                    
+                    5.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-cloud/ch5-07-crawler.html">
+            
+                <a href="../ch5-cloud/ch5-07-crawler.html">
+            
+                    
+                    5.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-cloud/ch5-08-ext.html">
+            
+                <a href="../ch5-cloud/ch5-08-ext.html">
+            
+                    
+                    5.8 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-best-practice/README.md">
+            
+                <span>
+            
+                    
+                    Chương 6: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >3.8 grpcurl tool</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="38-c&#xF4;ng-c&#x1EE5;-grpcurl">3.8 C&#xF4;ng c&#x1EE5; grpcurl</h1>
+<p>B&#x1EA3;n th&#xE2;n Protobuf &#x111;&#xE3; c&#xF3; ch&#x1EE9;c n&#x103;ng ph&#x1EA3;n chi&#x1EBF;u (reflection) l&#x1EA1;i file Proto c&#x1EE7;a &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng khi th&#x1EF1;c thi. gRPC c&#x169;ng cung c&#x1EA5;p m&#x1ED9;t package reflection &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n c&#xE1;c truy v&#x1EA5;n cho  gRPC service. M&#x1EB7;c d&#xF9; gRPC c&#xF3; m&#x1ED9;t hi&#x1EC7;n th&#x1EF1;c b&#x1EB1;ng C++ c&#x1EE7;a c&#xF4;ng c&#x1EE5; <code>grpc_cli</code>, c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; truy v&#x1EA5;n danh s&#xE1;ch gRPC ho&#x1EB7;c g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c gRPC, nh&#x1B0;ng b&#x1EDF;i v&#xEC; phi&#xEA;n b&#x1EA3;n &#x111;&#xF3; c&#xE0;i &#x111;&#x1EB7;t kh&#xE1;  ph&#x1EE9;c t&#x1EA1;p n&#xEA;n &#x1EDF; &#x111;&#xE2;y ch&#xFA;ng ta s&#x1EBD; d&#xF9;ng c&#xF4;ng c&#x1EE5; <code>grpcurl</code> &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c thu&#x1EA7;n b&#x1EB1;ng Golang. Ph&#x1EA7;n n&#xE0;y ta s&#x1EBD; c&#xF9;ng t&#xEC;m hi&#x1EC3;u c&#xE1;ch s&#x1EED; d&#x1EE5;ng c&#xF4;ng c&#x1EE5; n&#xE0;y.</p>
+<h2 id="381-kh&#x1EDF;i-&#x111;&#x1ED9;ng-m&#x1ED9;t-reflection-service">3.8.1 Kh&#x1EDF;i &#x111;&#x1ED9;ng m&#x1ED9;t reflection service</h2>
+<p>Ch&#x1EC9; c&#xF3; duy nh&#x1EA5;t h&#xE0;m <code>Register</code> trong package reflection, h&#xE0;m n&#xE0;y d&#xF9;ng &#x111;&#x1EC3; &#x111;&#x103;ng k&#xFD; <code>grpc.Server</code> v&#x1EDB;i reflection service. Trong document c&#x1EE7;a package c&#xF3; h&#x1B0;&#x1EDB;ng d&#x1EAB;n nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;google.golang.org/grpc/reflection&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> main() {
+    s := grpc.NewServer()
+    pb.RegisterYourOwnServer(s, &amp;server{})
+
+    <span class="hljs-comment">// &#x111;&#x103;ng k&#xFD; reflection service tr&#xEA;n gRPC server.</span>
+    reflection.Register(s)
+
+    s.Serve(lis)
+}
+</code></pre>
+<p>N&#x1EBF;u gRPC reflection service &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i ch&#x1EA1;y th&#xEC; c&#xE1;c gRPC service   c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy v&#x1EA5;n ho&#x1EB7;c g&#x1ECD;i ra b&#x1EB1;ng reflection service do package reflection cung c&#x1EA5;p.</p>
+<h2 id="382-xem-danh-s&#xE1;ch-service">3.8.2 Xem danh s&#xE1;ch service</h2>
+<p>Grpcurl l&#xE0; c&#xF4;ng c&#x1EE5; &#x111;&#x1B0;&#x1EE3;c c&#x1ED9;ng &#x111;&#x1ED3;ng Open source c&#x1EE7;a Golang ph&#xE1;t tri&#x1EC3;n, qu&#xE1; tr&#xEC;nh c&#xE0;i &#x111;&#x1EB7;t nh&#x1B0; sau:</p>
+<pre><code class="lang-sh">$ go get github.com/fullstorydev/grpcurl
+$ go install github.com/fullstorydev/grpcurl/cmd/grpcurl
+</code></pre>
+<p>S&#x1EED; d&#x1EE5;ng ph&#x1ED5; bi&#x1EBF;n nh&#x1EA5;t trong grpcurl l&#xE0; l&#x1EC7;nh list, &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; l&#x1EA5;y danh s&#xE1;ch c&#xE1;c service ho&#x1EB7;c c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c trong service. V&#xED; d&#x1EE5;, <code>grpcurl localhost:1234 list</code> l&#xE0; l&#x1EC7;nh s&#x1EBD; nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c m&#x1ED9;t danh s&#xE1;ch c&#xE1;c service gRPC tr&#xEA;n port 1234 &#x1EDF; localhost.</p>
+<p>Khi s&#x1EED; d&#x1EE5;ng grpcurl v&#x1EDB;i giao th&#x1EE9;c TLS ta c&#x1EA7;n ch&#x1EC9; &#x111;&#x1ECB;nh c&#xE1;c &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n t&#x1EDB;i public key <code>-cert</code> v&#xE0; private key <code>-key</code>. &#x110;&#x1ED1;i v&#x1EDB;i  gRPC service kh&#xF4;ng c&#xF3; giao th&#x1EE9;c TLS, quy tr&#xEC;nh x&#xE1;c minh ch&#x1EE9;ng ch&#x1EC9; TLS c&#xF3; th&#x1EC3; b&#x1ECF; qua b&#x1EB1;ng   tham s&#x1ED1; <code>-plaintext</code>. N&#x1EBF;u &#x111;&#xF3; l&#xE0; giao th&#x1EE9;c Unix Socket, c&#x1EA7;n ch&#x1EC9; &#x111;&#x1ECB;nh tham s&#x1ED1; <code>-unix</code>.</p>
+<p>N&#x1EBF;u c&#xE1;c file public v&#xE0; private key ch&#x1B0;a &#x111;&#x1B0;&#x1EE3;c c&#x1EA5;u h&#xEC;nh v&#xE0; qu&#xE1; tr&#xEC;nh x&#xE1;c minh ch&#x1EE9;ng ch&#x1EC9; b&#x1ECB; b&#x1ECF; qua, ta c&#xF3; th&#x1EC3; s&#x1EBD; g&#x1EB7;p l&#x1ED7;i nh&#x1B0; sau:</p>
+<pre><code class="lang-sh">$ grpcurl localhost:1234 list
+Failed to dial target host <span class="hljs-string">&quot;localhost:1234&quot;</span>: tls: first record does not \
+look like a TLS handshake
+</code></pre>
+<p>N&#x1EBF;u gRPC service b&#xEC;nh th&#x1B0;&#x1EDD;ng nh&#x1B0;ng &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i &#x111;&#x1ED9;ng reflection service th&#xEC;  s&#x1EBD;  c&#xF3; th&#xF4;ng b&#xE1;o l&#x1ED7;i:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext localhost:1234 list
+Failed to list services: server does not support the reflection API
+</code></pre>
+<p>Gi&#x1EA3; &#x111;&#x1ECB;nh r&#x1EB1;ng gRPC sercie &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c k&#xED;ch ho&#x1EA1;t reflection service, file Protobuf c&#x1EE7;a service nh&#x1B0; sau:</p>
+<pre><code class="lang-protobuf">syntax = <span class="hljs-string">&quot;proto3&quot;</span>;
+
+<span class="hljs-keyword">package</span> HelloService;
+
+<span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">String</span> </span>{
+    <span class="hljs-built_in">string</span> value = <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-class"><span class="hljs-keyword">service</span> <span class="hljs-title">HelloService</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Hello (String) <span class="hljs-keyword">returns</span> (String)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">rpc</span> Channel (stream String) <span class="hljs-keyword">returns</span> (stream String)</span>;
+}
+</code></pre>
+<p>K&#x1EBF;t qu&#x1EA3; v&#x1EDB;i l&#x1EC7;nh <code>list</code>:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext localhost:1234 list
+HelloService.HelloService
+grpc.reflection.v1alpha.ServerReflection
+</code></pre>
+<p>Trong &#x111;&#xF3; <code>HelloService.HelloService</code> l&#xE0; service &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a trong file protobuf. <code>ServerReflection</code> l&#xE0; reflection service &#x111;&#x1B0;&#x1EE3;c package reflection &#x111;&#x103;ng k&#xFD;. Th&#xF4;ng qua service n&#xE0;y ch&#xFA;ng ta c&#xF3; th&#x1EC3; truy v&#x1EA5;n th&#xF4;ng tin c&#x1EE7;a t&#x1EA5;t c&#x1EA3; c&#xE1;c gRPC service bao g&#x1ED3;m ch&#xED;nh n&#xF3;.</p>
+<h2 id="383-danh-s&#xE1;ch-c&#xE1;c-ph&#x1B0;&#x1A1;ng-th&#x1EE9;c-c&#x1EE7;a-service">3.8.3 Danh s&#xE1;ch c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c c&#x1EE7;a service</h2>
+<p>N&#x1EBF;u ti&#x1EBF;p t&#x1EE5;c s&#x1EED; d&#x1EE5;ng l&#x1EC7;nh <code>list</code> ta c&#xF3; th&#x1EC3; xem &#x111;&#x1B0;&#x1EE3;c c&#x1EA3; danh s&#xE1;ch c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c trong <code>HelloService</code>:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext localhost:1234 list HelloService.HelloService
+Channel
+Hello
+</code></pre>
+<p>T&#x1EEB; k&#x1EBF;t qu&#x1EA3; cho th&#x1EA5;y service n&#xE0;y cung c&#x1EA5;p 2 ph&#x1B0;&#x1A1;ng th&#x1EE9;c l&#xE0; <code>Channel</code> v&#xE0; <code>Hello</code>, t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i c&#xE1;c &#x111;&#x1ECB;nh ngh&#x129;a trong file Protobuf.</p>
+<p>N&#x1EBF;u mu&#x1ED1;n bi&#x1EBF;t chi ti&#x1EBF;t c&#x1EE7;a t&#x1EEB;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c, ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng c&#xE2;u l&#x1EC7;nh <code>describe</code>:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext localhost:1234 describe HelloService.HelloService
+HelloService.HelloService is a service:
+service HelloService {
+  rpc Channel ( stream .HelloService.String ) returns ( stream .HelloService.String );
+  rpc Hello ( .HelloService.String ) returns ( .HelloService.String );
+</code></pre>
+<p>K&#x1EBF;t qu&#x1EA3; l&#xE0; danh s&#xE1;ch c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c c&#xF3; trong service c&#xF9;ng v&#x1EDB;i m&#xF4; t&#x1EA3; c&#xE1;c tham s&#x1ED1; input c&#x169;ng nh&#x1B0; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; t&#x1B0;&#x1A1;ng &#x1EE9;ng c&#x1EE7;a ch&#xFA;ng.</p>
+<h2 id="384-l&#x1EA5;y-th&#xF4;ng-tin-ki&#x1EC3;u-d&#x1EEF;-li&#x1EC7;u">3.8.4 L&#x1EA5;y th&#xF4;ng tin ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u</h2>
+<p>Sau khi c&#xF3; &#x111;&#x1B0;&#x1EE3;c danh s&#xE1;ch c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c v&#xE0; ki&#x1EC3;u c&#x1EE7;a gi&#xE1; t&#x1ECB; tr&#x1EA3; v&#x1EC1;, ch&#xFA;ng ta c&#xF3; th&#x1EC3; ti&#x1EBF;p t&#x1EE5;c xem th&#xF4;ng tin chi ti&#x1EBF;t h&#x1A1;n v&#x1EC1; ki&#x1EC3;u c&#x1EE7;a c&#xE1;c bi&#x1EBF;n n&#xE0;y. Sau &#x111;&#xE2;y l&#xE0; c&#xE1;c s&#x1EED; d&#x1EE5;ng l&#x1EC7;nh <code>describe</code> &#x111;&#x1EC3; xem th&#xF4;ng tin c&#x1EE7;a tham s&#x1ED1; <code>HelloService.String</code>:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext localhost:1234 describe HelloService.String
+HelloService.String is a message:
+message String {
+  string value = 1;
+}
+</code></pre>
+<p>K&#x1EBF;t qu&#x1EA3; tr&#x1EA3; v&#x1EC1; &#x111;&#xFA;ng v&#x1EDB;i m&#xF4; t&#x1EA3; trong file protobuf c&#x1EE7;a service.</p>
+<h2 id="385-l&#x1EC7;nh-g&#x1ECD;i-ph&#x1B0;&#x1A1;ng-th&#x1EE9;c">3.8.5 L&#x1EC7;nh g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c</h2>
+<p>Ta c&#xF3; th&#x1EC3; g&#x1ECD;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c gRPC b&#x1EB1;ng c&#xE1;ch truy&#x1EC1;n th&#xEA;m tham s&#x1ED1; <code>-d</code> v&#xE0; m&#x1ED9;t chu&#x1ED7;i json nh&#x1B0; input c&#x1EE7;a h&#xE0;m v&#xE0; g&#x1ECD;i t&#x1EDB;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Hello</code> trong <code>HelloService</code>, chi ti&#x1EBF;t nh&#x1B0; sau:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext <span class="hljs-_">-d</span> <span class="hljs-string">&apos;{&quot;value&quot;: &quot;gopher&quot;}&apos;</span> localhost:1234 HelloService.HelloService/Hello
+
+{
+  <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;hello:gopher&quot;</span>
+}
+</code></pre>
+<p>N&#x1EBF;u c&#xF3; tham s&#x1ED1; <code>-d</code>, <code>@</code> ngh&#x129;a l&#xE0; &#x111;&#x1ECD;c v&#xE0;o tham s&#x1ED1; d&#x1EA1;ng json t&#x1EEB; input chu&#x1EA9;n (stdin), c&#xE1;ch n&#xE0;y th&#x1B0;&#x1EDD;ng d&#xF9;ng &#x111;&#x1EC3; test c&#xE1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c stream.</p>
+<p>V&#xED; d&#x1EE5; sau &#x111;&#xE2;y k&#x1EBF;t n&#x1ED1;i t&#x1EDB;i ph&#x1B0;&#x1A1;ng th&#x1EE9;c stream t&#xEA;n <code>Channel</code> v&#xE0; &#x111;&#x1ECD;c tham s&#x1ED1; input stream t&#x1EEB; input chu&#x1EA9;n:</p>
+<pre><code class="lang-sh">$ grpcurl -plaintext <span class="hljs-_">-d</span> @ localhost:1234 HelloService.HelloService/Channel
+{<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;gopher-vn&quot;</span>}
+{
+  <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;hello:gopher-vn&quot;</span>
+}
+
+{<span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;vietnamese-vng&quot;</span>}
+{
+  <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;hello:vietnamese-vng&quot;</span>
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch3-07-pbgo.html" class="navigation navigation-prev " aria-label="Previous page: 3.7 pbgo : Protobuf-based framework">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch3-09-supplementary-notes.html" class="navigation navigation-next " aria-label="Next page: 3.9 Lời nói thêm">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3.8 grpcurl tool","level":"1.4.8","depth":2,"next":{"title":"3.9 Lời nói thêm","level":"1.4.9","depth":2,"path":"ch3-rpc/ch3-09-supplementary-notes.md","ref":"ch3-rpc/ch3-09-supplementary-notes.md","articles":[]},"previous":{"title":"3.7 pbgo : Protobuf-based framework","level":"1.4.7","depth":2,"path":"ch3-rpc/ch3-07-pbgo.md","ref":"ch3-rpc/ch3-07-pbgo.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch3-rpc/ch3-08-grpc-curl.md","mtime":"2019-08-17T05:09:40.887Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-17T08:21:21.536Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
