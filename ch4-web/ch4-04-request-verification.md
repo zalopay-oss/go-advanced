@@ -8,8 +8,9 @@ Có lẽ bạn đã bắt gặp đâu đó tấm hình mà mọi người dùng 
 	<span align="center">
 		<i>'Hadouken' if-else</i>
 	</span>
+    <br/>
 </div>
-<br/>
+
 
 Thực tế đây là một trường hợp không liên quan gì tới ngôn ngữ mà chỉ là cách tổ chức code rườm rà khi gặp trường hợp mà nhiều field cần phải validate.
 

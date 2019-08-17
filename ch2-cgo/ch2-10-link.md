@@ -10,9 +10,9 @@ Biên dịch và liên kết các parameters là một vấn đề mà các lậ
 ## 2.10.1. Tham số biên dịch : 
 
 CGO cung cấp ba tham số CFLAGS/CPPFLAGS/CXXFLAGS. Trong đó:
-  * CFLAGS sẽ ứng với việc biên dịch ngôn ngữ C (.c).
-  * CPPFLAGS sẽ ứng với C/C++ (.c, .cc, .cpp, .cxx).
-  * CXXFLAGS ứng với C++ thuần (.cc, .cpp, *.cxx).
+  * **CFLAGS** sẽ ứng với việc biên dịch ngôn ngữ C (.c).
+  * **CPPFLAGS** sẽ ứng với C/C++ (.c, .cc, .cpp, .cxx).
+  * **CXXFLAGS** ứng với C++ thuần (.cc, .cpp, *.cxx).
 
 ## 2.10.2. Tham số liên kết :
 
