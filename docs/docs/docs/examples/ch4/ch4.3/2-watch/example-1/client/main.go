@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net"
 	"net/rpc"
 	"time"
 )
@@ -19,34 +18,26 @@ func doClientWork(client *rpc.Client) {
 	}()
 
 	err := client.Call(
-		"KVStoreService.Set", [2]string{"abc", "abc-value"},
+		"KVStoreService.Set", [2]string{"abc", "value 1"},
 		new(struct{}),
 	)
+	err = client.Call(
+		"KVStoreService.Set", [2]string{"abc", "another value"},
+		new(struct{}),
+	)
+
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	time.Sleep(time.Second * 3)
+	`clientChan`.
+	time.Sleep(time.Second * 5)
 }
 
 func main() {
-	listener, err := net.Listen("tcp", ":1234")
+	client, err := rpc.Dial("tcp", "localhost:1234")
 	if err != nil {
-		log.Fatal("ListenTCP error:", err)
+		log.Fatal("dialing:", err)
 	}
 
-	clientChan := make(chan *rpc.Client)
-
-	go func() {
-		for {
-			conn, err := listener.Accept()
-			if err != nil {
-				log.Fatal("Accept error:", err)
-			}
-
-			clientChan <- rpc.NewClient(conn)
-		}
-	}()
-
-	doClientWork(<-clientChan)
+	doClientWork(client)
 }

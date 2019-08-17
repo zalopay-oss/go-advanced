@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.md">
             
-                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -814,12 +814,22 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="21-quick-start">2.1 Quick Start</h1>
+                                <h1 id="21-quick-start">2.1. Quick Start</h1>
 <p>Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng ta s&#x1EBD; t&#xEC;m hi&#x1EC3;u c&#xE1;ch s&#x1EED; d&#x1EE5;ng CGO c&#x1A1; b&#x1EA3;n  th&#xF4;ng qua lo&#x1EA1;t v&#xED; d&#x1EE5; t&#x1EEB; &#x111;&#x1A1;n gi&#x1EA3;n &#x111;&#x1EBF;n ph&#x1EE9;c t&#x1EA1;p.</p>
-<h2 id="211-ch&#x1B0;&#x1A1;ng-tr&#xEC;nh-cgo-&#x111;&#x1A1;n-gi&#x1EA3;n">2.1.1 Ch&#x1B0;&#x1A1;ng tr&#xEC;nh CGO &#x111;&#x1A1;n gi&#x1EA3;n</h2>
+<h2 id="210-c&#xE0;i-&#x111;&#x1EB7;t">2.1.0. C&#xE0;i &#x111;&#x1EB7;t</h2>
+<p><strong><em>Linux, Mac</em></strong></p>
+<ul>
+<li>CGO &#x111;&#x1B0;&#x1EE3;c t&#xED;ch h&#x1EE3;p s&#x1EB5;n, ng&#x1B0;&#x1EDD;i d&#xF9;ng Linux v&#xE0; Mac ch&#x1EC9; c&#x1EA7;n c&#xE0;i &#x111;&#x1EB7;t Go.</li>
+</ul>
+<p><strong><em>Windows</em></strong></p>
+<ul>
+<li>CGO kh&#xF4;ng t&#x1B0;&#x1A1;ng th&#xED;ch v&#x1EDB;i Cygwin</li>
+<li>&#x110;&#x1EC3; d&#xF9;ng &#x111;&#x1B0;&#x1EE3;c CGO ban5 ph&#x1EA3;i c&#xE0;i &#x111;&#x1EB7;t MingGW v&#xE0; s&#x1EED; d&#x1EE5;ng cmd c&#x1EE7;a Windows</li>
+</ul>
+<h2 id="211-ch&#x1B0;&#x1A1;ng-tr&#xEC;nh-cgo-&#x111;&#x1A1;n-gi&#x1EA3;n">2.1.1. Ch&#x1B0;&#x1A1;ng tr&#xEC;nh CGO &#x111;&#x1A1;n gi&#x1EA3;n</h2>
 <p>&#x110;&#x1EA7;u ti&#xEA;n l&#xE0; m&#x1ED9;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh CGO &#x111;&#x1A1;n gi&#x1EA3;n nh&#x1EA5;t:</p>
-<p><strong><em>main.go</em></strong></p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<pre><code class="lang-go"><span class="hljs-comment">//main.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
 
@@ -828,9 +838,9 @@
 }
 </code></pre>
 <p>Ch&#xFA;ng ta import package CGO th&#xF4;ng qua c&#xE2;u l&#x1EC7;nh <code>import &quot;C&quot;</code>. Ch&#x1B0;&#x1A1;ng tr&#xEC;nh tr&#xEA;n ch&#x1B0;a th&#x1EF1;c hi&#x1EC7;n b&#x1EA5;t k&#xEC; thao t&#xE1;c n&#xE0;o v&#x1EDB;i CGO, ch&#x1EC9; m&#x1EDB;i th&#xF4;ng b&#xE1;o s&#x1EB5;n s&#xE0;ng cho vi&#x1EC7;c l&#x1EAD;p tr&#xEC;nh v&#x1EDB;i CGO. M&#x1EB7;c d&#xF9; ch&#x1B0;a s&#x1EED; d&#x1EE5;ng g&#xEC; &#x111;&#x1EBF;n CGO nh&#x1B0;ng l&#x1EC7;nh <code>go build</code> v&#x1EAB;n s&#x1EBD; g&#x1ECD;i tr&#xEC;nh bi&#xEA;n d&#x1ECB;ch <code>gcc</code> trong su&#x1ED1;t qu&#xE1; tr&#xEC;nh bi&#xEA;n d&#x1ECB;ch do &#x111;&#xE2;y &#x111;&#x1B0;&#x1EE3;c l&#xE0; m&#x1ED9;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh CGO ho&#xE0;n ch&#x1EC9;nh.</p>
-<h2 id="212-xu&#x1EA5;t-chu&#x1ED7;i-d&#x1EF1;a-tr&#xEA;n-th&#x1B0;-vi&#x1EC7;n-chu&#x1EA9;n-c&#x1EE7;a-c">2.1.2 Xu&#x1EA5;t chu&#x1ED7;i d&#x1EF1;a tr&#xEA;n th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n c&#x1EE7;a C</h2>
-<p><strong><em>main.go</em></strong></p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<h2 id="212-xu&#x1EA5;t-chu&#x1ED7;i-d&#x1EF1;a-tr&#xEA;n-th&#x1B0;-vi&#x1EC7;n-chu&#x1EA9;n-c&#x1EE7;a-c">2.1.2. Xu&#x1EA5;t chu&#x1ED7;i d&#x1EF1;a tr&#xEA;n th&#x1B0; vi&#x1EC7;n chu&#x1EA9;n c&#x1EE7;a C</h2>
+<pre><code class="lang-go"><span class="hljs-comment">//main.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-comment">//#include &lt;stdio.h&gt;</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
@@ -838,13 +848,16 @@
 <span class="hljs-keyword">func</span> main() {
     C.puts(C.CString(<span class="hljs-string">&quot;Hello World\n&quot;</span>))  
 }
+
+<span class="hljs-comment">// k&#x1EBF;t qu&#x1EA3;:</span>
+<span class="hljs-comment">// Hello World</span>
 </code></pre>
-<p><code>import package &quot;C&quot;</code> &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n c&#xE1;c ch&#x1EE9;c n&#x103;ng c&#x1EE7;a CGO v&#xE0; include th&#x1B0; vi&#x1EC7;n <stdio.h> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C. Ti&#x1EBF;p theo, chu&#x1ED7;i string trong <code>C.CString</code> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i th&#xE0;nh chu&#x1ED7;i string trong ng&#xF4;n ng&#x1EEF; C b&#x1EB1;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>C.puts</code> c&#x1EE7;a package CGO.</stdio.h></p>
-<p>Vi&#x1EC7;c l&#x1ED7;i x&#x1EA3;y ra khi kh&#xF4;ng gi&#x1EA3;i ph&#xF3;ng chu&#x1ED7;i &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o b&#x1EB1;ng C.CString c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n r&#xF2; r&#x1EC9; b&#x1ED9; nh&#x1EDB;. Nh&#x1B0;ng &#x111;&#x1ED1;i v&#x1EDB;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh nh&#x1ECF; &#x1EDF; tr&#xEA;n &#x111;i&#x1EC1;u n&#xE0;y kh&#xF4;ng &#x111;&#xE1;ng lo ng&#x1EA1;i  v&#xEC; h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y l&#x1EA1;i c&#xE1;c t&#xE0;i nguy&#xEA;n c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh sau khi ch&#x1B0;&#x1A1;ng tr&#xEC;nh k&#x1EBF;t th&#xFA;c.</p>
-<h2 id="213-s&#x1EED;-d&#x1EE5;ng-h&#xE0;m-c-t&#x1EF1;-khai-b&#xE1;o">2.1.3 S&#x1EED; d&#x1EE5;ng h&#xE0;m C t&#x1EF1; khai b&#xE1;o</h2>
+<p><code>import package &quot;C&quot;</code> &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n c&#xE1;c ch&#x1EE9;c n&#x103;ng c&#x1EE7;a CGO v&#xE0; include th&#x1B0; vi&#x1EC7;n <stdio.h> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C (trong comment code l&#xE0; c&#xFA; ph&#xE1;p c&#x1EE7;a CGO, kh&#xF4;ng ph&#x1EA3;i ph&#x1EA7;n comment nh&#x1B0; th&#xF4;ng th&#x1B0;&#x1EDD;ng). Ti&#x1EBF;p theo, chu&#x1ED7;i string trong <code>C.CString</code> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i th&#xE0;nh chu&#x1ED7;i string trong ng&#xF4;n ng&#x1EEF; C b&#x1EB1;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>C.puts</code> c&#x1EE7;a package CGO.</stdio.h></p>
+<p>Vi&#x1EC7;c l&#x1ED7;i x&#x1EA3;y ra khi kh&#xF4;ng gi&#x1EA3;i ph&#xF3;ng chu&#x1ED7;i &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o b&#x1EB1;ng C.CString c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C s&#x1EBD; d&#x1EAB;n &#x111;&#x1EBF;n r&#xF2; r&#x1EC9; b&#x1ED9; nh&#x1EDB; (memory leak). Nh&#x1B0;ng &#x111;&#x1ED1;i v&#x1EDB;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh nh&#x1ECF; &#x1EDF; tr&#xEA;n &#x111;i&#x1EC1;u n&#xE0;y kh&#xF4;ng &#x111;&#xE1;ng lo ng&#x1EA1;i  v&#xEC; h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y l&#x1EA1;i c&#xE1;c t&#xE0;i nguy&#xEA;n c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh sau khi ch&#x1B0;&#x1A1;ng tr&#xEC;nh k&#x1EBF;t th&#xFA;c.</p>
+<h2 id="213-s&#x1EED;-d&#x1EE5;ng-h&#xE0;m-c-t&#x1EF1;-khai-b&#xE1;o">2.1.3. S&#x1EED; d&#x1EE5;ng h&#xE0;m C t&#x1EF1; khai b&#xE1;o</h2>
 <p>Ph&#x1EA7;n tr&#xEA;n ch&#xFA;ng ta &#x111;&#xE3; s&#x1EED; d&#x1EE5;ng c&#xE1;c h&#xE0;m &#x111;&#xE3; c&#xF3; trong <code>stdio</code>. B&#xE2;y gi&#x1EDD; ta s&#x1EBD; s&#x1EED; d&#x1EE5;ng m&#x1ED9;t h&#xE0;m <code>SayHello</code> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C. Ch&#x1EE9;c n&#x103;ng h&#xE0;m n&#xE0;y l&#xE0; in ra chu&#x1ED7;i ch&#xFA;ng ta truy&#x1EC1;n v&#xE0;o h&#xE0;m. Sau &#x111;&#xF3; g&#x1ECD;i h&#xE0;m <code>SayHello</code> trong h&#xE0;m main:</p>
-<p><strong><em>main.go</em></strong></p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<pre><code class="lang-go"><span class="hljs-comment">//main.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-comment">/*
 #include &lt;stdio.h&gt;
@@ -860,16 +873,16 @@ static void SayHello(const char* s) {
 }
 </code></pre>
 <p>Ho&#x1EB7;c c&#xF3; th&#x1EC3; &#x111;&#x1EB7;t h&#xE0;m <code>SayHello</code> trong file <code>hello.c</code> nh&#x1B0; sau:</p>
-<p><strong><em>hello.c</em></strong></p>
-<pre><code class="lang-C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<pre><code class="lang-C"><span class="hljs-comment">//hello.c</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SayHello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* s)</span> </span>{
     <span class="hljs-built_in">puts</span>(s);
 }
 </code></pre>
 <p>Sau &#x111;&#xF3; b&#xEA;n file main.go ch&#xFA;ng ch&#x1EC9; c&#x1EA7;n khai b&#xE1;o h&#xE0;m <code>SayHello</code> trong ph&#x1EA7;n CGO nh&#x1B0; b&#xEA;n d&#x1B0;&#x1EDB;i.</p>
-<p><strong><em>main.go</em></strong></p>
-<pre><code class="lang-Go"><span class="hljs-keyword">package</span> main
+<pre><code class="lang-Go"><span class="hljs-comment">//main.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-comment">//void SayHello(const char* s);</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
@@ -878,20 +891,25 @@ static void SayHello(const char* s) {
     C.SayHello(C.CString(<span class="hljs-string">&quot;Hello World\n&quot;</span>))
 }
 </code></pre>
+<p>Hi&#x1EC7;n t&#x1EA1;i th&#x1B0; m&#x1EE5;c l&#xE0;m vi&#x1EC7;c c&#xF3; c&#x1EA5;u tr&#xFA;c nh&#x1B0; sau:</p>
+<pre><code class="lang-sh">.
+&#x251C;&#x2500;&#x2500; hello.c
+&#x2514;&#x2500;&#x2500; main.go
+</code></pre>
 <p><code>L&#x1B0;u &#xFD;</code>: thay v&#xEC; ch&#x1EA1;y l&#x1EC7;nh <code>go run main.go</code> ho&#x1EB7;c <code>go build main.go</code>, ch&#xFA;ng ta ph&#x1EA3;i s&#x1EED; d&#x1EE5;ng <code>go run &quot;t&#xEA;n/c&#x1EE7;a/package&quot;</code> ho&#x1EB7;c <code>go build &quot;t&#xEA;n/c&#x1EE7;a/package&quot;</code>. N&#x1EBF;u &#x111;ang &#x111;&#x1EE9;ng trong th&#x1B0; m&#x1EE5;c ch&#x1EE9;a m&#xE3; ngu&#x1ED3;n th&#xEC; b&#x1EA1;n c&#xF3; th&#x1EC3; ch&#x1EA1;y ch&#x1B0;&#x1A1;ng tr&#xEC;nh b&#x1EB1;ng l&#x1EC7;nh <code>go run .</code> ho&#x1EB7;c <code>go build .</code></p>
-<h2 id="214-module-h&#xF3;a-c-code">2.1.4 Module h&#xF3;a C code</h2>
+<h2 id="214-module-h&#xF3;a-c-code">2.1.4. Module h&#xF3;a C code</h2>
 <p>Tr&#x1EEB;u t&#x1B0;&#x1EE3;ng v&#xE0; module h&#xF3;a l&#xE0; c&#xE1;ch &#x111;&#x1EC3; &#x111;&#x1A1;n gi&#x1EA3;n h&#xF3;a c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; trong l&#x1EAD;p tr&#xEC;nh:</p>
 <ul>
 <li>Khi code qu&#xE1; d&#xE0;i, ta c&#xF3; th&#x1EC3; &#x111;&#x1B0;a c&#xE1;c l&#x1EC7;nh t&#x1B0;&#x1A1;ng t&#x1EF1; nhau v&#xE0;o chung m&#x1ED9;t h&#xE0;m.</li>
 <li>Khi c&#xF3; nhi&#x1EC1;u h&#xE0;m h&#x1A1;n, ta chia ch&#xFA;ng v&#xE0;o c&#xE1;c file ho&#x1EB7;c module.</li>
 </ul>
 <p>Trong v&#xED; d&#x1EE5; tr&#x1B0;&#x1EDB;c, ta tr&#x1EEB;u t&#x1B0;&#x1EE3;ng h&#xF3;a m&#x1ED9;t module t&#xEA;n l&#xE0; <code>hello</code> v&#xE0; t&#x1EA5;t c&#x1EA3; c&#xE1;c interface c&#x1EE7;a module &#x111;&#xF3; &#x111;&#x1B0;&#x1EE3;c khai b&#xE1;o trong file header <code>hello.h</code>:</p>
-<p><strong><em>hello.h</em></strong></p>
-<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SayHello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* s)</span></span>;
+<pre><code class="lang-c"><span class="hljs-comment">//hello.h</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SayHello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* s)</span></span>;
 </code></pre>
 <p>V&#xE0; hi&#x1EC7;n th&#x1EF1;c h&#xE0;m <code>SayHello</code> trong file <code>hello.c</code>:</p>
-<p><strong><em>hello.c</em></strong></p>
-<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;hello.h&quot;</span></span>
+<pre><code class="lang-c"><span class="hljs-comment">//hello.c</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;hello.h&quot;</span></span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 
 <span class="hljs-comment">// &#x110;&#x1EA3;m b&#x1EA3;o vi&#x1EC7;c hi&#x1EC7;n th&#x1EF1;c h&#xE0;m th&#x1ECF;a m&#xE3;n interface c&#x1EE7;a module.</span>
@@ -900,8 +918,8 @@ static void SayHello(const char* s) {
 }
 </code></pre>
 <p>Ngo&#xE0;i ra ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c h&#xE0;m n&#xE0;y b&#x1EB1;ng C++ c&#x169;ng &#x111;&#x1B0;&#x1EE3;c:</p>
-<p><strong><em>hello.cpp</em></strong></p>
-<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<pre><code class="lang-c"><span class="hljs-comment">//hello.cpp</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
 
 <span class="hljs-comment">// extern gi&#xFA;p function C++ c&#xF3; &#x111;&#x1B0;&#x1EE3;c c&#xE1;c li&#xEA;n k&#x1EBF;t (linkage)</span>
 <span class="hljs-comment">// c&#x1EE7;a C. Ch&#x1EC9; ra r&#x1EB1;ng li&#xEA;n h&#x1EC7; gi&#x1EEF;a hello.cpp v&#xE0; hello.h</span>
@@ -915,8 +933,8 @@ static void SayHello(const char* s) {
 }
 </code></pre>
 <p>Trong h&#xE0;m main c&#x1EE7;a Go ta g&#x1ECD;i file header nh&#x1B0; sau:</p>
-<p><strong><em>main.go</em></strong></p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<pre><code class="lang-go"><span class="hljs-comment">//main.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-comment">//#include &lt;hello.h&gt;</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
@@ -925,15 +943,16 @@ static void SayHello(const char* s) {
     C.SayHello(C.CString(<span class="hljs-string">&quot;Hello World&quot;</span>))
 }
 </code></pre>
-<p>V&#x1EDB;i vi&#x1EC7;c l&#x1EAD;p tr&#xEC;nh C b&#x1EB1;ng API interface, ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c module b&#x1EB1;ng b&#x1EA5;t k&#x1EF3; ng&#xF4;n ng&#x1EEF; n&#xE0;o, mi&#x1EC5;n l&#xE0; &#x111;&#xE1;p &#x1EE9;ng &#x111;&#x1B0;&#x1EE3;c API: SayHello c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c vi&#x1EBF;t b&#x1EB1;ng C, C++, Go ho&#x1EB7;c k&#x1EC3; c&#x1EA3; Assembly.</p>
-<h2 id="215-s&#x1EED;-d&#x1EE5;ng-go-&#x111;&#x1EC3;-hi&#x1EC7;n-th&#x1EF1;c-h&#xE0;m-trong-c">2.1.5 S&#x1EED; d&#x1EE5;ng Go &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c h&#xE0;m trong C</h2>
-<p>Trong th&#x1EF1;c t&#x1EBF;, CGO kh&#xF4;ng ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; g&#x1ECD;i c&#xE1;c h&#xE0;m c&#x1EE7;a C b&#x1EB1;ng ng&#xF4;n ng&#x1EEF; Go m&#xE0; c&#xF2;n &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; export c&#xE1;c h&#xE0;m (vi&#x1EBF;t b&#x1EB1;ng) ng&#xF4;n ng&#x1EEF; Go sang c&#xE1;c l&#x1EDD;i g&#x1ECD;i h&#xE0;m c&#x1EE7;a C.</p>
+<p>V&#x1EDB;i vi&#x1EC7;c l&#x1EAD;p tr&#xEC;nh C th&#xF4;ng qua interface, ta c&#xF3; th&#x1EC3; hi&#x1EC7;n th&#x1EF1;c module b&#x1EB1;ng nhi&#x1EC1;u ng&#xF4;n ng&#x1EEF; kh&#xE1;c nhau, mi&#x1EC5;n l&#xE0; &#x111;&#xE1;p &#x1EE9;ng &#x111;&#x1B0;&#x1EE3;c interface: SayHello c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c vi&#x1EBF;t b&#x1EB1;ng C, C++, Go ho&#x1EB7;c k&#x1EC3; c&#x1EA3; Assembly.</p>
+<h2 id="215-s&#x1EED;-d&#x1EE5;ng-go-&#x111;&#x1EC3;-hi&#x1EC7;n-th&#x1EF1;c-h&#xE0;m-trong-c">2.1.5. S&#x1EED; d&#x1EE5;ng Go &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c h&#xE0;m trong C</h2>
+<p>Trong th&#x1EF1;c t&#x1EBF;, CGO kh&#xF4;ng ch&#x1EC9; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; g&#x1ECD;i c&#xE1;c h&#xE0;m c&#x1EE7;a C b&#x1EB1;ng ng&#xF4;n ng&#x1EEF; Go m&#xE0; c&#xF2;n c&#xF3; th&#x1EC3; cho ph&#xE9;p C g&#x1ECD;i c&#xE1;c h&#xE0;m Go trong code c&#x1EE7;a m&#xEC;nh.</p>
 <p>Trong v&#xED; d&#x1EE5; tr&#x1B0;&#x1EDB;c, ch&#xFA;ng ta &#x111;&#xE3; tr&#x1EEB;u t&#x1B0;&#x1EE3;ng h&#xF3;a m&#x1ED9;t module c&#xF3; t&#xEA;n hello v&#xE0; t&#x1EA5;t c&#x1EA3; c&#xE1;c ch&#x1EE9;c n&#x103;ng interface c&#x1EE7;a module &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh trong file header <code>hello.h</code>:</p>
-<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SayHello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* s)</span></span>;
+<pre><code class="lang-c"><span class="hljs-comment">//hello.h</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SayHello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* s)</span></span>;
 </code></pre>
 <p>B&#xE2;y gi&#x1EDD;, ch&#xFA;ng ta t&#x1EA1;o m&#x1ED9;t file <code>hello.go</code> v&#xE0; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i h&#xE0;m <code>SayHello</code> c&#x1EE7;a interface b&#x1EB1;ng ng&#xF4;n ng&#x1EEF; Go:</p>
-<p><strong><em>hello.go</em></strong></p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<pre><code class="lang-go"><span class="hljs-comment">//hello.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
 
@@ -956,9 +975,16 @@ static void SayHello(const char* s) {
     C.SayHello(C.CString(<span class="hljs-string">&quot;Hello World\n&quot;</span>))
 }
 </code></pre>
-<h2 id="216-s&#x1EED;-d&#x1EE5;ng-go-&#x111;&#x1EC3;-l&#x1EAD;p-tr&#xEC;nh-interface-cho-c">2.1.6 S&#x1EED; d&#x1EE5;ng Go &#x111;&#x1EC3; l&#x1EAD;p tr&#xEC;nh interface cho C</h2>
+<p>C&#x1EA5;u tr&#xFA;c th&#x1B0; m&#x1EE5;c l&#xFA;c n&#xE0;y:</p>
+<pre><code class="lang-sh">.
+&#x251C;&#x2500;&#x2500; hello.go
+&#x251C;&#x2500;&#x2500; hello.h
+&#x2514;&#x2500;&#x2500; main.go
+</code></pre>
+<h2 id="216-s&#x1EED;-d&#x1EE5;ng-go-&#x111;&#x1EC3;-l&#x1EAD;p-tr&#xEC;nh-interface-cho-c">2.1.6. S&#x1EED; d&#x1EE5;ng Go &#x111;&#x1EC3; l&#x1EAD;p tr&#xEC;nh interface cho C</h2>
 <p>&#x110;&#x1EC3; cho &#x111;&#x1A1;n gi&#x1EA3;n ch&#xFA;ng ta s&#x1EBD; g&#x1ED9;p t&#x1EA5;t c&#x1EA3; th&#xE0;nh m&#x1ED9;t file <code>main.go</code> duy nh&#x1EA5;t nh&#x1B0; v&#xED; d&#x1EE5; d&#x1B0;&#x1EDB;i &#x111;&#xE2;y.</p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+<pre><code class="lang-go"><span class="hljs-comment">//main.go</span>
+<span class="hljs-keyword">package</span> main
 
 <span class="hljs-comment">//void SayHello(char* s);</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
@@ -1041,7 +1067,7 @@ static void SayHello(const char* s) {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.1 Quick Start","level":"1.3.1","depth":2,"next":{"title":"2.2 CGO Foundation","level":"1.3.2","depth":2,"path":"ch2-cgo/ch2-02-CGO-foundation.md","ref":"ch2-cgo/ch2-02-CGO-foundation.md","articles":[]},"previous":{"title":"Chương 2: lập trình CGO","level":"1.3","depth":1,"path":"ch2-cgo/README.md","ref":"ch2-cgo/README.md","articles":[{"title":"2.1 Quick Start","level":"1.3.1","depth":2,"path":"ch2-cgo/ch2-01-quick-start.md","ref":"ch2-cgo/ch2-01-quick-start.md","articles":[]},{"title":"2.2 CGO Foundation","level":"1.3.2","depth":2,"path":"ch2-cgo/ch2-02-CGO-foundation.md","ref":"ch2-cgo/ch2-02-CGO-foundation.md","articles":[]},{"title":"2.3 Chuyển đổi kiểu","level":"1.3.3","depth":2,"path":"ch2-cgo/ch2-03-type-conversion.md","ref":"ch2-cgo/ch2-03-type-conversion.md","articles":[]},{"title":"2.4 Lời gọi hàm","level":"1.3.4","depth":2,"path":"ch2-cgo/ch2-04-function-call.md","ref":"ch2-cgo/ch2-04-function-call.md","articles":[]},{"title":"2.5 Cơ chế bên trong CGO","level":"1.3.5","depth":2,"path":"ch2-cgo/ch2-05-internal-mechanisms.md","ref":"ch2-cgo/ch2-05-internal-mechanisms.md","articles":[]},{"title":"2.9 Thư viện tĩnh và động","level":"1.3.6","depth":2,"path":"ch2-cgo/ch2-09-static-shared-lib.md","ref":"ch2-cgo/ch2-09-static-shared-lib.md","articles":[]},{"title":"2.10  Biên dịch và liên kết các tham số","level":"1.3.7","depth":2,"path":"ch2-cgo/ch2-10-link.md","ref":"ch2-cgo/ch2-10-link.md","articles":[]},{"title":"2.11 Ghi chú bổ sung","level":"1.3.8","depth":2,"path":"ch2-cgo/ch2-11-ext.md","ref":"ch2-cgo/ch2-11-ext.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-01-quick-start.md","mtime":"2019-07-31T08:36:17.908Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.1 Quick Start","level":"1.3.1","depth":2,"next":{"title":"2.2 CGO Foundation","level":"1.3.2","depth":2,"path":"ch2-cgo/ch2-02-CGO-foundation.md","ref":"ch2-cgo/ch2-02-CGO-foundation.md","articles":[]},"previous":{"title":"Chương 2: lập trình CGO","level":"1.3","depth":1,"path":"ch2-cgo/README.md","ref":"ch2-cgo/README.md","articles":[{"title":"2.1 Quick Start","level":"1.3.1","depth":2,"path":"ch2-cgo/ch2-01-quick-start.md","ref":"ch2-cgo/ch2-01-quick-start.md","articles":[]},{"title":"2.2 CGO Foundation","level":"1.3.2","depth":2,"path":"ch2-cgo/ch2-02-CGO-foundation.md","ref":"ch2-cgo/ch2-02-CGO-foundation.md","articles":[]},{"title":"2.3 Chuyển đổi kiểu","level":"1.3.3","depth":2,"path":"ch2-cgo/ch2-03-type-conversion.md","ref":"ch2-cgo/ch2-03-type-conversion.md","articles":[]},{"title":"2.4 Lời gọi hàm","level":"1.3.4","depth":2,"path":"ch2-cgo/ch2-04-function-call.md","ref":"ch2-cgo/ch2-04-function-call.md","articles":[]},{"title":"2.5 Cơ chế bên trong CGO","level":"1.3.5","depth":2,"path":"ch2-cgo/ch2-05-internal-mechanisms.md","ref":"ch2-cgo/ch2-05-internal-mechanisms.md","articles":[]},{"title":"2.9 Thư viện tĩnh và động","level":"1.3.6","depth":2,"path":"ch2-cgo/ch2-09-static-shared-lib.md","ref":"ch2-cgo/ch2-09-static-shared-lib.md","articles":[]},{"title":"2.10  Biên dịch và liên kết các tham số","level":"1.3.7","depth":2,"path":"ch2-cgo/ch2-10-link.md","ref":"ch2-cgo/ch2-10-link.md","articles":[]},{"title":"2.11 Ghi chú bổ sung","level":"1.3.8","depth":2,"path":"ch2-cgo/ch2-11-ext.md","ref":"ch2-cgo/ch2-11-ext.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-01-quick-start.md","mtime":"2019-08-10T03:07:53.904Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:11:57.422Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

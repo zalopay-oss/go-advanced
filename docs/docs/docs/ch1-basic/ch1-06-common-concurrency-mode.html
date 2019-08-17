@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="ch1-08-supplementary-notes.md">
             
-                <a href="ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -815,7 +815,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="16-concurrency-mode">1.6. Concurrency Mode</h1>
-<p>M&#x1ED9;t &#x111;i&#x1EC3;m m&#x1EA1;nh c&#x1EE7;a Golang l&#xE0; t&#xED;ch h&#x1EE3;p s&#x1EB5;n c&#x1A1; ch&#x1EBF; x&#x1EED; l&#xFD; &#x111;&#x1ED3;ng th&#x1EDD;i (concurrency). L&#xFD; thuy&#x1EBF;t v&#x1EC1; h&#x1EC7; th&#x1ED1;ng t&#x1B0;&#x1A1;ng tranh c&#x1EE7;a Go l&#xE0; CSP (Communicating Sequential Process) &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC1; xu&#x1EA5;t b&#x1EDF;i CAR Hoare v&#xE0;o n&#x103;m 1978. CSP  &#x111;&#x1B0;&#x1EE3;c &#xE1;p d&#x1EE5;ng l&#x1EA7;n &#x111;&#x1EA7;u cho m&#xE1;y t&#xED;nh &#x111;a d&#x1EE5;ng T9000 m&#xE0; Hoare c&#xF3; tham gia. T&#x1EEB; NewSqueak, Alef, Limbo &#x111;&#x1EBF;n Golang hi&#x1EC7;n t&#x1EA1;i, Rob Pike, ng&#x1B0;&#x1EDD;i c&#xF3; h&#x1A1;n 20 n&#x103;m kinh nghi&#x1EC7;m th&#x1EF1;c t&#x1EBF; v&#x1EDB;i CSP, r&#x1EA5;t quan t&#xE2;m  &#x111;&#x1EBF;n ti&#x1EC1;m n&#x103;ng &#xE1;p d&#x1EE5;ng CSP v&#xE0;o ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh &#x111;a d&#x1EE5;ng. Kh&#xE1;i ni&#x1EC7;m c&#x1ED1;t l&#xF5;i c&#x1EE7;a l&#xFD; thuy&#x1EBF;t CSP c&#x169;ng l&#xE0;  c&#x1EE7;a l&#x1EAD;p tr&#xEC;nh concurrency trong Go: giao ti&#x1EBF;p &#x111;&#x1ED3;ng b&#x1ED9; (synchronous communication). Ch&#x1EE7; &#x111;&#x1EC1; v&#x1EC1; giao ti&#x1EBF;p &#x111;&#x1ED3;ng b&#x1ED9; &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC1; c&#x1EAD;p trong ph&#x1EA7;n tr&#x1B0;&#x1EDB;c. Trong ph&#x1EA7;n n&#xE0;y ch&#xFA;ng ta s&#x1EBD; t&#xEC;m hi&#x1EC3;u s&#x1A1; l&#x1B0;&#x1EE3;c v&#x1EC1; c&#xE1;c m&#x1EAB;u concurrency ph&#x1ED5; bi&#x1EBF;n trong Golang.</p>
+<p>M&#x1ED9;t &#x111;i&#x1EC3;m m&#x1EA1;nh c&#x1EE7;a Golang l&#xE0; t&#xED;ch h&#x1EE3;p s&#x1EB5;n c&#x1A1; ch&#x1EBF; x&#x1EED; l&#xFD; &#x111;&#x1ED3;ng th&#x1EDD;i (concurrency). L&#xFD; thuy&#x1EBF;t v&#x1EC1; h&#x1EC7; th&#x1ED1;ng t&#x1B0;&#x1A1;ng tranh c&#x1EE7;a Go l&#xE0; CSP (Communicating Sequential Process) &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC1; xu&#x1EA5;t b&#x1EDF;i Hoare v&#xE0;o n&#x103;m 1978. CSP  &#x111;&#x1B0;&#x1EE3;c &#xE1;p d&#x1EE5;ng l&#x1EA7;n &#x111;&#x1EA7;u cho m&#xE1;y t&#xED;nh &#x111;a d&#x1EE5;ng T9000 m&#xE0; Hoare c&#xF3; tham gia. T&#x1EEB; NewSqueak, Alef, Limbo &#x111;&#x1EBF;n Golang hi&#x1EC7;n t&#x1EA1;i, Rob Pike, ng&#x1B0;&#x1EDD;i c&#xF3; h&#x1A1;n 20 n&#x103;m kinh nghi&#x1EC7;m th&#x1EF1;c t&#x1EBF; v&#x1EDB;i CSP, r&#x1EA5;t quan t&#xE2;m  &#x111;&#x1EBF;n ti&#x1EC1;m n&#x103;ng &#xE1;p d&#x1EE5;ng CSP v&#xE0;o ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh &#x111;a d&#x1EE5;ng. Kh&#xE1;i ni&#x1EC7;m c&#x1ED1;t l&#xF5;i c&#x1EE7;a l&#xFD; thuy&#x1EBF;t CSP c&#x169;ng l&#xE0;  c&#x1EE7;a l&#x1EAD;p tr&#xEC;nh concurrency trong Go: giao ti&#x1EBF;p &#x111;&#x1ED3;ng b&#x1ED9; (synchronous communication). Ch&#x1EE7; &#x111;&#x1EC1; v&#x1EC1; giao ti&#x1EBF;p &#x111;&#x1ED3;ng b&#x1ED9; &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC1; c&#x1EAD;p trong ph&#x1EA7;n tr&#x1B0;&#x1EDB;c. Trong ph&#x1EA7;n n&#xE0;y ch&#xFA;ng ta s&#x1EBD; t&#xEC;m hi&#x1EC3;u s&#x1A1; l&#x1B0;&#x1EE3;c v&#x1EC1; c&#xE1;c m&#x1EAB;u concurrency ph&#x1ED5; bi&#x1EBF;n trong Golang.</p>
 <div align="center">
 
 <img src="../images/gophercomplex5.jpg" width="800">
@@ -841,7 +841,8 @@
 <p>Do not communicate through shared memory, but share memory through communication.</p>
 </blockquote>
 <p>M&#x1EB7;c d&#xF9; c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; t&#x1B0;&#x1A1;ng tranh &#x111;&#x1A1;n gi&#x1EA3;n nh&#x1B0;   tham chi&#x1EBF;u &#x111;&#x1EBF;n bi&#x1EBF;n &#x111;&#x1EBF;m c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c b&#x1EB1;ng  <code>atomic operations</code> ho&#x1EB7;c <code>mutex lock</code>, nh&#x1B0;ng vi&#x1EC7;c ki&#x1EC3;m so&#xE1;t truy c&#x1EAD;p th&#xF4;ng qua Channel gi&#xFA;p cho code c&#x1EE7;a ch&#xFA;ng ta clean v&#xE0; &quot;Golang&quot; h&#x1A1;n.</p>
-<h2 id="161-phi&#xEA;n-b&#x1EA3;n-concurrency-c&#x1EE7;a-hello-world">1.6.1 Phi&#xEA;n b&#x1EA3;n concurrency c&#x1EE7;a <em>Hello World</em></h2>
+<h2 id="161-phi&#xEA;n-b&#x1EA3;n-concurrency-c&#x1EE7;a-hello-world">1.6.1. Phi&#xEA;n b&#x1EA3;n concurrency c&#x1EE7;a <em>Hello World</em></h2>
+<h3 id="&#xE1;p-d&#x1EE5;ng-mutex">&#xC1;p d&#x1EE5;ng Mutex</h3>
 <p>Xem x&#xE9;t &#x111;o&#x1EA1;n code sau:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
     <span class="hljs-keyword">var</span> mu sync.Mutex
@@ -858,8 +859,8 @@
     mu.Unlock()
 }
 </code></pre>
-<p>&#x1EDE; &#x111;&#xE2;y, <code>mu.Lock()</code> v&#xE0; <code>mu.Unlock()</code> kh&#xF4;ng &#x1EDF; trong c&#xF9;ng m&#x1ED9;t Goroutine, v&#xEC; v&#x1EAD;y n&#xF3; kh&#xF4;ng &#x111;&#xE1;p &#x1EE9;ng &#x111;&#x1B0;&#x1EE3;c m&#xF4; h&#xEC;nh b&#x1ED9; nh&#x1EDB; nh&#x1EA5;t qu&#xE1;n tu&#x1EA7;n t&#x1EF1;.</p>
-<p>Sau &#x111;&#xE2;y l&#xE0; &#x111;o&#x1EA1;n code &#x111;&#xE3; s&#x1EED;a:  </p>
+<p>&#x1EDE; &#x111;&#xE2;y, <code>mu.Lock()</code> v&#xE0; <code>mu.Unlock()</code> kh&#xF4;ng &#x1EDF; trong c&#xF9;ng m&#x1ED9;t Goroutine, v&#xEC; v&#x1EAD;y n&#xF3; kh&#xF4;ng &#x111;&#xE1;p &#x1EE9;ng &#x111;&#x1B0;&#x1EE3;c m&#xF4; h&#xEC;nh b&#x1ED9; nh&#x1EDB; nh&#x1EA5;t qu&#xE1;n tu&#x1EA7;n t&#x1EF1; (sequential consistency memory model).</p>
+<p>S&#x1EED;a l&#x1EA1;i &#x111;o&#x1EA1;n code tr&#xEA;n nh&#x1B0; sau:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
     <span class="hljs-keyword">var</span> mu sync.Mutex
 
@@ -876,6 +877,7 @@
     mu.Lock()
 }
 </code></pre>
+<h3 id="&#xE1;p-d&#x1EE5;ng-channel">&#xC1;p d&#x1EE5;ng Channel</h3>
 <p>&#x110;&#x1ED3;ng b&#x1ED9; h&#xF3;a v&#x1EDB;i mutex l&#xE0; m&#x1ED9;t c&#xE1;ch ti&#x1EBF;p c&#x1EAD;n &#x1EDF; m&#x1EE9;c &#x111;&#x1ED9; t&#x1B0;&#x1A1;ng &#x111;&#x1ED1;i &#x111;&#x1A1;n gi&#x1EA3;n. B&#xE2;y gi&#x1EDD; ta s&#x1EBD; s&#x1EED; d&#x1EE5;ng m&#x1ED9;t unbuffered channel &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a:  </p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
     done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
@@ -892,7 +894,7 @@
     done &lt;- <span class="hljs-number">1</span>
 }
 </code></pre>
-<p>C&#xE1;ch n&#xE0;y g&#x1EB7;p b&#x1EA5;t c&#x1EAD;p v&#x1EDB;i channel c&#xF3; buffer v&#xEC; l&#xFA;c &#x111;&#xF3; kh&#xF4;ng c&#xF3; g&#xEC; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng goroutine s&#x1EBD; in ra tr&#x1B0;&#x1EDB;c khi tho&#xE1;t <code>main</code>. C&#xE1;ch ti&#x1EBF;p c&#x1EAD;n t&#x1ED1;t h&#x1A1;n l&#xE0; ho&#xE1;n &#x111;&#x1ED5;i h&#x1B0;&#x1EDB;ng g&#x1EED;i v&#xE0; nh&#x1EAD;n c&#x1EE7;a channel &#x111;&#x1EC3; tr&#xE1;nh c&#xE1;c s&#x1EF1; ki&#x1EC7;n &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a b&#x1ECB; &#x1EA3;nh h&#x1B0;&#x1EDF;ng b&#x1EDF;i k&#xED;ch th&#x1B0;&#x1EDB;c buffer c&#x1EE7;a n&#xF3;:  </p>
+<p>C&#xE1;ch n&#xE0;y g&#x1EB7;p b&#x1EA5;t c&#x1EAD;p v&#x1EDB;i buffered channel  v&#xEC; l&#xFA;c &#x111;&#xF3; kh&#xF4;ng c&#xF3; g&#xEC; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng goroutine s&#x1EBD; in ra tr&#x1B0;&#x1EDB;c khi tho&#xE1;t <code>main</code>. C&#xE1;ch ti&#x1EBF;p c&#x1EAD;n t&#x1ED1;t h&#x1A1;n l&#xE0; ho&#xE1;n &#x111;&#x1ED5;i h&#x1B0;&#x1EDB;ng g&#x1EED;i v&#xE0; nh&#x1EAD;n c&#x1EE7;a channel &#x111;&#x1EC3; tr&#xE1;nh c&#xE1;c s&#x1EF1; ki&#x1EC7;n &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a b&#x1ECB; &#x1EA3;nh h&#x1B0;&#x1EDF;ng b&#x1EDF;i k&#xED;ch th&#x1B0;&#x1EDB;c buffer c&#x1EE7;a n&#xF3;:  </p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
     done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, <span class="hljs-number">1</span>)
 
@@ -926,6 +928,7 @@
     }
 }
 </code></pre>
+<h3 id="s&#x1EED;-d&#x1EE5;ng-syncwaitgroup-thay-cho-channel">S&#x1EED; d&#x1EE5;ng sync.WaitGroup thay cho Channel</h3>
 <p>M&#x1ED9;t c&#xE1;ch &#x111;&#x1A1;n gi&#x1EA3;n h&#x1A1;n l&#xE0; s&#x1EED; d&#x1EE5;ng <code>sync.WaitGroup</code> &#x111;&#x1EC3; ch&#x1EDD; m&#x1ED9;t t&#x1EAD;p c&#xE1;c s&#x1EF1; ki&#x1EC7;n:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
     <span class="hljs-keyword">var</span> wg sync.WaitGroup
@@ -948,7 +951,7 @@
     wg.Wait()
 }
 </code></pre>
-<h2 id="162-m&#xF4;-h&#xEC;nh-producer-consumer">1.6.2 M&#xF4; h&#xEC;nh Producer Consumer</h2>
+<h2 id="162-m&#xF4;-h&#xEC;nh-producer-consumer">1.6.2. M&#xF4; h&#xEC;nh Producer Consumer</h2>
 <div align="center">
 
 <img src="../images/producer-consumer.png" width="800">
@@ -1007,7 +1010,7 @@
 }
 </code></pre>
 <p>C&#xF3; 2 producer trong v&#xED; d&#x1EE5; tr&#xEA;n v&#xE0; kh&#xF4;ng c&#xF3; s&#x1EF1; ki&#x1EC7;n &#x111;&#x1ED3;ng b&#x1ED9; n&#xE0;o gi&#x1EEF;a hai producer m&#xE0; ch&#xFA;ng concurrency. Do &#x111;&#xF3;, th&#x1EE9; t&#x1EF1; c&#x1EE7;a chu&#x1ED7;i output &#x1EDF; consumer l&#xE0; kh&#xF4;ng x&#xE1;c &#x111;&#x1ECB;nh.</p>
-<h2 id="163-m&#xF4;-h&#xEC;nh-publish-subscribe">1.6.3 M&#xF4; h&#xEC;nh Publish Subscribe</h2>
+<h2 id="163-m&#xF4;-h&#xEC;nh-publish-subscribe">1.6.3. M&#xF4; h&#xEC;nh Publish Subscribe</h2>
 <p>M&#xF4; h&#xEC;nh publish-and-subscribe th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c vi&#x1EBF;t t&#x1EAF;t l&#xE0; m&#xF4; h&#xEC;nh pub/sub. Trong m&#xF4; h&#xEC;nh n&#xE0;y, producer tr&#x1EDF; th&#xE0;nh publisher v&#xE0; consumer  tr&#x1EDF; th&#xE0;nh subscriber, &#x111;&#x1ED3;ng th&#x1EDD;i producer:consumer l&#xE0; m&#x1ED1;i quan h&#x1EC7; M:N.</p>
 <div align="center">
 
@@ -1169,7 +1172,7 @@
 }
 </code></pre>
 <p>Trong m&#xF4; h&#xEC;nh pub/sub, m&#x1ED7;i th&#xF4;ng &#x111;i&#x1EC7;p &#x111;&#x1B0;&#x1EE3;c g&#x1EED;i t&#x1EDB;i nhi&#x1EC1;u subscriber. Publisher th&#x1B0;&#x1EDD;ng kh&#xF4;ng bi&#x1EBF;t ho&#x1EB7;c kh&#xF4;ng quan t&#xE2;m subscriber n&#xE0;o nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng &#x111;i&#x1EC7;p. Subscriber v&#xE0; publisher c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c th&#xEA;m v&#xE0;o &#x111;&#x1ED9;ng &#x1EDF; th&#x1EDD;i &#x111;i&#x1EC3;m th&#x1EF1;c thi, cho ph&#xE9;p c&#xE1;c h&#x1EC7; th&#x1ED1;ng ph&#x1EE9;c t&#x1EA1;p c&#xF3; th&#x1EC3; ph&#xE1;t tri&#x1EC3;n theo th&#x1EDD;i gian. Trong th&#x1EF1;c t&#x1EBF;, nh&#x1EEF;ng &#x1EE9;ng d&#x1EE5;ng nh&#x1B0; d&#x1EF1; b&#xE1;o th&#x1EDD;i ti&#x1EBF;t c&#xF3; th&#x1EC3; &#xE1;p d&#x1EE5;ng m&#xF4; h&#xEC;nh concurrency n&#xE0;y.</p>
-<h2 id="164-ki&#x1EC3;m-so&#xE1;t-s&#x1ED1;-l&#x1B0;&#x1EE3;ng-goroutine">1.6.4 Ki&#x1EC3;m so&#xE1;t s&#x1ED1; l&#x1B0;&#x1EE3;ng goroutine</h2>
+<h2 id="164-ki&#x1EC3;m-so&#xE1;t-s&#x1ED1;-l&#x1B0;&#x1EE3;ng-goroutine">1.6.4. Ki&#x1EC3;m so&#xE1;t s&#x1ED1; l&#x1B0;&#x1EE3;ng goroutine</h2>
 <p>Goroutine l&#xE0; m&#x1ED9;t t&#xED;nh n&#x103;ng m&#x1EA1;nh m&#x1EBD; c&#x1EE7;a Go, m&#x1EA5;t chi ph&#xED; r&#x1EA5;t &#xED;t &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng, nh&#x1EEF;ng t&#x1EA5;t nhi&#xEA;n n&#x1EBF;u d&#xF9;ng v&#x1EDB;i s&#x1ED1; l&#x1B0;&#x1EE3;ng qu&#xE1; l&#x1EDB;n s&#x1EBD; chi&#x1EBF;m g&#xE2;y nhi&#x1EC1;u l&#xE3;ng ph&#xED; v&#xE0; c&#x1EA7;n c&#xF3; m&#x1ED9;t c&#x1A1; ch&#x1EBF; &#x111;&#x1EC3; ki&#x1EC3;m so&#xE1;t. M&#x1ED9;t c&#xE1;ch th&#xF4;ng d&#x1EE5;ng &#x111;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c m&#x1EE5;c &#x111;&#xED;ch tr&#xEA;n l&#xE0; d&#xF9;ng worker pool.</p>
 <div align="center">
 
@@ -1217,7 +1220,7 @@
     }
 }
 </code></pre>
-<h2 id="165-d&#x1ECD;n-d&#x1EB9;p-goroutine">1.6.5 D&#x1ECD;n d&#x1EB9;p Goroutine</h2>
+<h2 id="165-d&#x1ECD;n-d&#x1EB9;p-goroutine">1.6.5. D&#x1ECD;n d&#x1EB9;p Goroutine</h2>
 <p>Sau khi job queue r&#x1ED7;ng, ta s&#x1EBD; ph&#x1EA3;i d&#x1EEB;ng t&#x1EA5;t c&#x1EA3; worker. Goroutine d&#xF9; kh&#xE1; nh&#x1EB9; nh&#x1B0;ng v&#x1EAB;n kh&#xF4;ng ph&#x1EA3;i mi&#x1EC5;n ph&#xED;, nh&#x1EA5;t l&#xE0; v&#x1EDB;i c&#xE1;c h&#x1EC7; th&#x1ED1;ng l&#x1EDB;n, d&#xF9; ch&#x1EC9; l&#xE0; c&#xE1;c chi ph&#xED; nh&#x1ECF; nh&#x1EA5;t c&#x169;ng c&#xF3; th&#x1EC3; tr&#x1EDF; n&#xEA;n kh&#xE1;c bi&#x1EC7;t l&#x1EDB;n n&#x1EBF;u thay &#x111;&#x1ED5;i.</p>
 <p>C&#xE1;ch &#x111;&#x1A1;n gi&#x1EA3;n l&#xE0; d&#xF9;ng kill channel &#x111;&#x1EC3; ph&#xE1;t ra t&#xED;n hi&#x1EC7;u ng&#x1EEB;ng cho goroutine.</p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
@@ -1271,7 +1274,7 @@
     }
 }
 </code></pre>
-<h2 id="166-s&#xE0;ng-s&#x1ED1;-nguy&#xEA;n-t&#x1ED1;">1.6.6 S&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;</h2>
+<h2 id="166-s&#xE0;ng-s&#x1ED1;-nguy&#xEA;n-t&#x1ED1;">1.6.6. S&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;</h2>
 <p>Trong ph&#x1EA7;n <strong><em>1.2</em></strong>, ch&#xFA;ng t&#xF4;i &#x111;&#xE3; tr&#xEC;nh b&#xE0;y vi&#x1EC7;c tri&#x1EC3;n khai phi&#xEA;n b&#x1EA3;n concurrency c&#x1EE7;a s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1; &#x111;&#x1EC3; ch&#x1EE9;ng minh t&#xED;nh concurrency c&#x1EE7;a Newsqueak. Nguy&#xEA;n t&#x1EAF;c &quot;s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;&quot; nh&#x1B0; sau:</p>
 <div align="center">
 
@@ -1327,7 +1330,7 @@
     }
 }
 </code></pre>
-<h2 id="167-k&#x1EBB;-th&#x1EAF;ng-l&#xE0;m-vua">1.6.7 K&#x1EBB; th&#x1EAF;ng l&#xE0;m vua</h2>
+<h2 id="167-k&#x1EBB;-th&#x1EAF;ng-l&#xE0;m-vua">1.6.7. K&#x1EBB; th&#x1EAF;ng l&#xE0;m vua</h2>
 <p>C&#xF3; nhi&#x1EC1;u &#x111;&#x1ED9;ng l&#x1EF1;c &#x111;&#x1EC3; l&#x1EAD;p tr&#xEC;nh concurrency nh&#x1B0;ng ti&#xEA;u bi&#x1EC3;u l&#xE0; v&#xEC; l&#x1EAD;p tr&#xEC;nh concurrency c&#xF3; th&#x1EC3; &#x111;&#x1A1;n gi&#x1EA3;n h&#xF3;a c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1;. L&#x1EAD;p tr&#xEC;nh concurrency c&#x169;ng c&#xF3; th&#x1EC3; c&#x1EA3;i thi&#x1EC7;n hi&#x1EC7;u n&#x103;ng. M&#x1EDF; hai thread tr&#xEA;n CPU &#x111;a l&#xF5;i th&#x1B0;&#x1EDD;ng nhanh h&#x1A1;n m&#x1EDF; m&#x1ED9;t thread.  Tr&#xEA;n th&#x1EF1;c t&#x1EBF; v&#x1EC1; m&#x1EB7;t c&#x1EA3;i thi&#x1EC7;n hi&#x1EC7;u su&#x1EA5;t, ch&#x1B0;&#x1A1;ng tr&#xEC;nh kh&#xF4;ng ch&#x1EC9; &#x111;&#x1A1;n gi&#x1EA3;n l&#xE0; ch&#x1EA1;y nhanh, m&#xE0; trong nhi&#x1EC1;u tr&#x1B0;&#x1EDD;ng h&#x1EE3;p ch&#x1B0;&#x1A1;ng tr&#xEC;nh c&#xF3; th&#x1EC3; &#x111;&#xE1;p &#x1EE9;ng y&#xEA;u c&#x1EA7;u c&#x1EE7;a ng&#x1B0;&#x1EDD;i d&#xF9;ng m&#x1ED9;t c&#xE1;ch nhanh ch&#xF3;ng l&#xE0; &#x111;i&#x1EC1;u quan tr&#x1ECD;ng nh&#x1EA5;t. Khi kh&#xF4;ng c&#xF3; y&#xEA;u c&#x1EA7;u t&#x1EEB; ng&#x1B0;&#x1EDD;i d&#xF9;ng c&#x1EA7;n x&#x1EED; l&#xFD;, n&#xEA;n x&#x1EED; l&#xFD; m&#x1ED9;t s&#x1ED1; t&#xE1;c v&#x1EE5; n&#x1EC1;n c&#xF3; &#x111;&#x1ED9; &#x1B0;u ti&#xEA;n th&#x1EA5;p.</p>
 <p>Gi&#x1EA3; s&#x1EED; ch&#xFA;ng ta mu&#x1ED1;n nhanh ch&#xF3;ng t&#xEC;m ki&#x1EBF;m c&#xE1;c ch&#x1EE7; &#x111;&#x1EC1; li&#xEA;n quan &#x111;&#x1EBF;n &quot;golang&quot;, c&#xF3; th&#x1EC3; m&#x1EDF; nhi&#x1EC1;u c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m nh&#x1B0; Bing, Google ho&#x1EB7;c Yahoo. Khi t&#xEC;m ki&#x1EBF;m tr&#x1EA3; v&#x1EC1; k&#x1EBF;t qu&#x1EA3; tr&#x1B0;&#x1EDB;c, ta c&#xF3; th&#x1EC3; &#x111;&#xF3;ng c&#xE1;c trang t&#xEC;m ki&#x1EBF;m kh&#xE1;c. Do &#x1EA3;nh h&#x1B0;&#x1EDF;ng c&#x1EE7;a m&#xF4;i tr&#x1B0;&#x1EDD;ng m&#x1EA1;ng v&#xE0; thu&#x1EAD;t to&#xE1;n c&#x1EE7;a c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m m&#xE0; m&#x1ED9;t s&#x1ED1; c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m c&#xF3; th&#x1EC3; tr&#x1EA3; v&#x1EC1; k&#x1EBF;t qu&#x1EA3; t&#xEC;m ki&#x1EBF;m nhanh h&#x1A1;n. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng m&#x1ED9;t chi&#x1EBF;n l&#x1B0;&#x1EE3;c t&#x1B0;&#x1A1;ng t&#x1EF1; &#x111;&#x1EC3; vi&#x1EBF;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh n&#xE0;y:  </p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
@@ -1354,7 +1357,7 @@
 }
 </code></pre>
 <p>&#xC1;p d&#x1EE5;ng &#xFD; t&#x1B0;&#x1EDF;ng tr&#xEA;n c&#xF3; th&#x1EC3; gi&#xFA;p c&#x1EA3;i thi&#x1EC7;n hi&#x1EC7;u su&#x1EA5;t b&#x1EB1;ng c&#xE1;ch ch&#x1ECD;n l&#x1EA5;y k&#x1EBB; chi&#x1EBF;n th&#x1EAF;ng trong cu&#x1ED9;c &#x111;ua th&#x1EDD;i gian.</p>
-<h2 id="168-context-package">1.6.8 Context package</h2>
+<h2 id="168-context-package">1.6.8. Context package</h2>
 <p>&#x1EDE; th&#x1EDD;i &#x111;i&#x1EC3;m ph&#xE1;t h&#xE0;nh Go1.7, th&#x1B0; vi&#x1EC7;n ti&#xEA;u chu&#x1EA9;n &#x111;&#xE3; th&#xEA;m m&#x1ED9;t package context &#x111;&#x1EC3; &#x111;&#x1A1;n gi&#x1EA3;n h&#xF3;a ho&#x1EA1;t &#x111;&#x1ED9;ng c&#x1EE7;a d&#x1EEF; li&#x1EC7;u, th&#x1EDD;i gian ch&#x1EDD; v&#xE0; tho&#xE1;t gi&#x1EEF;a nhi&#x1EC1;u Goroutines. Package context &#x111;&#x1ECB;nh ngh&#x129;a ki&#x1EC3;u Context, ch&#x1EE9;a deadline, cancelation signal v&#xE0; c&#xE1;c gi&#xE1; tr&#x1ECB; request-scope gi&#x1EEF;a c&#xE1;c API v&#xE0; gi&#x1EEF;a c&#xE1;c process.</p>
 <p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng package context &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i c&#x1A1; ch&#x1EBF; ki&#x1EC3;m so&#xE1;t timeout:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> worker(ctx context.Context, wg *sync.WaitGroup) error {
@@ -1486,7 +1489,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1.6 Các chế độ đồng thời thông dụng","level":"1.2.6","depth":2,"next":{"title":"1.7 Error và Exceptions","level":"1.2.7","depth":2,"path":"ch1-basic/ch1-07-error-and-panic.md","ref":"ch1-basic/ch1-07-error-and-panic.md","articles":[]},"previous":{"title":"1.5 Điều khiển tuần tự cấu trúc vùng nhớ","level":"1.2.5","depth":2,"path":"ch1-basic/ch1-05-mem.md","ref":"ch1-basic/ch1-05-mem.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-06-common-concurrency-mode.md","mtime":"2019-07-31T07:39:45.573Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.6 Các chế độ đồng thời thông dụng","level":"1.2.6","depth":2,"next":{"title":"1.7 Error và Exceptions","level":"1.2.7","depth":2,"path":"ch1-basic/ch1-07-error-and-panic.md","ref":"ch1-basic/ch1-07-error-and-panic.md","articles":[]},"previous":{"title":"1.5 Điều khiển tuần tự cấu trúc vùng nhớ","level":"1.2.5","depth":2,"path":"ch1-basic/ch1-05-mem.md","ref":"ch1-basic/ch1-05-mem.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-06-common-concurrency-mode.md","mtime":"2019-08-10T03:07:53.902Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:11:57.422Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
