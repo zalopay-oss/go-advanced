@@ -3,8 +3,8 @@
 <div align="center">
 	<img src="../images/grpc.png" width="800">
 	<br/>
+    <br/>
 </div>
-<br/>
 
 [gRPC](https://grpc.io/) là một framework RPC Open source đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
 
@@ -18,8 +18,9 @@ Kiến trúc gRPC trong Golang:
 	<span align="center">
 		<i>gRPC technology stack</i>
 	</span>
+    <br/>
 </div>
-<br/>
+
 
 Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đấy là phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Golang được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
@@ -253,7 +254,6 @@ Trong phần trước chúng ta đã hiện thực phiên bản đơn giản c�
 <br/>
 <span align="center"><i>Nhắc lại mô hình Pub/Sub</i></span>
     <br/>
-
 </div>
 
 Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng Open source. Đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
