@@ -89,7 +89,6 @@ Có một cách giúp chúng ta giảm khá nhiều code là sử dụng validat
 <div align="center">
 	<img src="../images/validator.png" width="100">
 	<br/>
-
 </div>
 
 Thư viện [validator](https://github.com/go-playground/validator) hỗ trợ việc validate bằng cách sử dụng các tag lúc định nghĩa struct. Một ví dụ nhỏ:
