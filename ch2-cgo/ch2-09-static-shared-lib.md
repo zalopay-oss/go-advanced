@@ -10,7 +10,7 @@ Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
 </div>
 <br/>
 
-Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đọc có thể xem thêm tại đây: [What-is-the-difference-between-static-and-dynamic-linking](https://www.quora.com/What-is-the-difference-between-static-and-dynamic-linking)
+Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đọc có thể xem thêm tại đây: [What-is-the-difference-between-static-and-dynamic-linking](https://www.quora.com/What-is-the-difference-between-static-and-dynamic-linking).
 
 Sau đây chúng ta sẽ đi vào cách dùng thư viện tĩnh và thư viện động trong CGO.
 
@@ -133,7 +133,7 @@ number_add_mod
 
 Dòng đầu tiên `LIBRARY` sẽ chỉ ra tên của file và tên của thư viện động, và sau đó là mệnh đề  `EXPORTS` theo sau bởi một danh sách các tên dùng để export.
 
-Giờ đây, chúng ta có thể dùng những lệnh sau để tạo ra thư viện động (cần dùng `VC` tools)
+Giờ đây, chúng ta có thể dùng những lệnh sau để tạo ra thư viện động (cần dùng `VC` tools).
 
 ```
 $ cl /c number.c
@@ -154,7 +154,7 @@ Nên chú ý rằng, tại thời điểm thực thi, thư viện động cần 
 
 ## 2.9.3.  Exporting C Static Libraries
 
-CGO không chỉ được dùng trong thư viện C tĩnh, các export functions được hiện thực bởi Go hoặc C static libraries. Chúng ta có thể dùng Go để hiện thực modulo addition function như phần trước như sau
+CGO không chỉ được dùng trong thư viện C tĩnh, các export functions được hiện thực bởi Go hoặc C static libraries. Chúng ta có thể dùng Go để hiện thực modulo addition function như phần trước ở ví dụ như sau đây.
 
 Tạo `number.go` với nội dung như sau:
 
@@ -177,7 +177,7 @@ Theo như mô tả của tài liệu CGO, chúng ta cần export C function tron
 $ go build -buildmode=c-archive -o number.a
 ```
 
-Khi sinh ra thư viện tĩnh `number.a`, cgo cũng sẽ sinh ra file `number.h`
+Khi sinh ra thư viện tĩnh `number.a`, cgo cũng sẽ sinh ra file `number.h`.
 
 Nội dung của `number.h` sẽ như sau:
 
@@ -195,7 +195,7 @@ extern int number_add_mod(int p0, int p1, int p2);
 
 Phần ngữ pháp `extern "C"` được thêm vào để  dùng đồng thời trên cả ngôn ngữ C và C++. Nội dung của phần lõi sẽ định nghĩa hàm number_add_mod để được export.
 
-Sau đó chúng ta tạo ra file _test_main.c để kiểm tra việc sinh ra C static library (bên dưới là phần prefix dùng cho việc xây dựng C static library để bỏ qua file đó)
+Sau đó chúng ta tạo ra file _test_main.c để kiểm tra việc sinh ra C static library (bên dưới là phần prefix dùng cho việc xây dựng C static library để bỏ qua file đó).
 
 ```c
 #include "number.h"

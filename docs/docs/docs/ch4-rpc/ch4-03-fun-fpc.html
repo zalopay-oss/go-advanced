@@ -815,7 +815,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="43-rpc-trong-golang">4.3 RPC trong Golang</h1>
-<p>Trong nh&#x1EEF;ng tr&#x1B0;&#x1EDD;ng h&#x1EE3;p kh&#xE1;c nhau l&#x1EA1;i c&#xF3; nhu c&#x1EA7;u v&#x1EC1; RPC kh&#xE1;c nhau, v&#xEC; v&#x1EAD;y c&#x1ED9;ng &#x111;&#x1ED3;ng opensource &#x111;&#xE3; t&#x1EA1;o ra kh&#xE1; nhi&#x1EC1;u framework RPC. Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng t&#xF4;i s&#x1EBD; s&#x1EED; d&#x1EE5;ng framework RPC t&#xED;ch h&#x1EE3;p s&#x1EB5;n trong m&#x1ED9;t s&#x1ED1;  t&#xEC;nh hu&#x1ED1;ng &#x111;&#x1EB7;c bi&#x1EC7;t.</p>
+<p>Trong nh&#x1EEF;ng tr&#x1B0;&#x1EDD;ng h&#x1EE3;p kh&#xE1;c nhau l&#x1EA1;i c&#xF3; nhu c&#x1EA7;u v&#x1EC1; RPC kh&#xE1;c nhau, v&#xEC; v&#x1EAD;y c&#x1ED9;ng &#x111;&#x1ED3;ng Open source &#x111;&#xE3; t&#x1EA1;o ra kh&#xE1; nhi&#x1EC1;u framework RPC. Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng t&#xF4;i s&#x1EBD; s&#x1EED; d&#x1EE5;ng framework RPC t&#xED;ch h&#x1EE3;p s&#x1EB5;n trong m&#x1ED9;t s&#x1ED1;  t&#xEC;nh hu&#x1ED1;ng &#x111;&#x1EB7;c bi&#x1EC7;t.</p>
 <h2 id="431-nguy&#xEA;n-t&#x1EAF;c-hi&#x1EC7;n-th&#x1EF1;c-c&#x1EE7;a-rpc-client">4.3.1 Nguy&#xEA;n t&#x1EAF;c hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a RPC Client</h2>
 <p>C&#xE1;ch d&#x1EC5; nh&#x1EA5;t &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng th&#x1B0; vi&#x1EC7;n Go l&#xE0; d&#xF9;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Client.Call</code> &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n l&#x1EDD;i g&#x1ECD;i synchronous blocking. Ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c n&#xE0;y nh&#x1B0; sau:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">func</span> (client *Client) Call(

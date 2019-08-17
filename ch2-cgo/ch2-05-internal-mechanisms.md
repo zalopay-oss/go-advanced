@@ -14,9 +14,9 @@ Trong file nguồn Go, nếu một lệnh `import "C"` thực thi thì lệnh cg
 	<span align="center">
 		<i>Các file trung gian được CGO tạo ra</i>
 	</span>
+    <br/>
 </div>
-<br/>
-
+  
 Có 4 file Go trong package, trong đó các file nocgo chứa `import "C"` và hai file còn lại chứa code cgo. Lệnh cgo tạo ra hai file trung gian cho mỗi file chứa mã cgo. Ví dụ: main.go tạo ra hai file trung gian là `main.cgo1.go` và `main.cgo2.c`.
 
 Kế đó file `_cgo_gotypes.go` được tạo cho toàn bộ package chứa một phần code hỗ trợ của Go. Đồng thời quá trình này cũng  tạo ra các file  `_cgo_export.h`  và `_cgo_export.c`, để export các kiểu và hàm trong Go tới kiểu và hàm tương ứng trong C.
@@ -145,8 +145,12 @@ Toàn bộ biểu đồ luồng hoạt động của cuộc gọi `C.sum` như s
 	<span align="center">
 		<i>Gọi hàm C</i>
 	</span>
+    <br/>
 </div>
-<br/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> eadc35f4aef7daa9597dd04328d4212083556610
 
 Trong đó hàm  `runtime.cgocall` là chìa khóa để thực hiện cuộc gọi  vượt ranh giới của hàm ngôn ngữ Go sang hàm ngôn ngữ C. Thông tin chi tiết có thể tham khảo <https://golang.org/src/cmd/cgo/doc.go>.
 
