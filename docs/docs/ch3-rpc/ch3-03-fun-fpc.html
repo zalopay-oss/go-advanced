@@ -1,0 +1,1178 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3.3 RPC trong Golang · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch3-04-grpc.html" />
+    
+    
+    <link rel="prev" href="ch3-02-pb-intro.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Concurrent-oriented memory model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Concurrency Mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10 Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 3: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="ch3-01-rpc-intro.html">
+            
+                <a href="ch3-01-rpc-intro.html">
+            
+                    
+                    3.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ch3-02-pb-intro.html">
+            
+                <a href="ch3-02-pb-intro.html">
+            
+                    
+                    3.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3" data-path="ch3-03-fun-fpc.html">
+            
+                <a href="ch3-03-fun-fpc.html">
+            
+                    
+                    3.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="ch3-04-grpc.html">
+            
+                <a href="ch3-04-grpc.html">
+            
+                    
+                    3.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="ch3-05-grpc-advanced.html">
+            
+                <a href="ch3-05-grpc-advanced.html">
+            
+                    
+                    3.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="ch3-06-grpc-ext.html">
+            
+                <a href="ch3-06-grpc-ext.html">
+            
+                    
+                    3.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="ch3-07-pbgo.html">
+            
+                <a href="ch3-07-pbgo.html">
+            
+                    
+                    3.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="ch3-08-grpc-curl.html">
+            
+                <a href="ch3-08-grpc-curl.html">
+            
+                    
+                    3.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="ch3-09-supplementary-notes.html">
+            
+                <a href="ch3-09-supplementary-notes.html">
+            
+                    
+                    3.9 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-web/">
+            
+                <a href="../ch4-web/">
+            
+                    
+                    Chương 4: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-web/ch4-01-introduction.html">
+            
+                <a href="../ch4-web/ch4-01-introduction.html">
+            
+                    
+                    4.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-web/ch4-02-router.html">
+            
+                <a href="../ch4-web/ch4-02-router.html">
+            
+                    
+                    4.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-web/ch4-03-middleware.html">
+            
+                <a href="../ch4-web/ch4-03-middleware.html">
+            
+                    
+                    4.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-web/ch4-04-request-verification.html">
+            
+                <a href="../ch4-web/ch4-04-request-verification.html">
+            
+                    
+                    4.4 Validator request check
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-web/ch4-05-database.html">
+            
+                <a href="../ch4-web/ch4-05-database.html">
+            
+                    
+                    4.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                <a href="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                    
+                    4.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                <a href="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                    
+                    4.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-web/ch4-08-interface-and-web.html">
+            
+                <a href="../ch4-web/ch4-08-interface-and-web.html">
+            
+                    
+                    4.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-web/ch4-09-ext.html">
+            
+                <a href="../ch4-web/ch4-09-ext.html">
+            
+                    
+                    4.9 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-cloud/">
+            
+                <a href="../ch5-cloud/">
+            
+                    
+                    Chương 5: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-cloud/ch5-01-dist-id.html">
+            
+                <a href="../ch5-cloud/ch5-01-dist-id.html">
+            
+                    
+                    5.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-cloud/ch5-02-lock.html">
+            
+                <a href="../ch5-cloud/ch5-02-lock.html">
+            
+                    
+                    5.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-cloud/ch5-03-delay-job.html">
+            
+                <a href="../ch5-cloud/ch5-03-delay-job.html">
+            
+                    
+                    5.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-cloud/Ch5-04-search-engine.html">
+            
+                <a href="../ch5-cloud/Ch5-04-search-engine.html">
+            
+                    
+                    5.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-cloud/ch5-05-load-balance.html">
+            
+                <a href="../ch5-cloud/ch5-05-load-balance.html">
+            
+                    
+                    5.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-cloud/ch5-06-config.html">
+            
+                <a href="../ch5-cloud/ch5-06-config.html">
+            
+                    
+                    5.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-cloud/ch5-07-crawler.html">
+            
+                <a href="../ch5-cloud/ch5-07-crawler.html">
+            
+                    
+                    5.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-cloud/ch5-08-ext.html">
+            
+                <a href="../ch5-cloud/ch5-08-ext.html">
+            
+                    
+                    5.8 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-best-practice/README.md">
+            
+                <span>
+            
+                    
+                    Chương 6: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >3.3 RPC trong Golang</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="33-rpc-trong-golang">3.3 RPC trong Golang</h1>
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng RPC cho nhi&#x1EC1;u m&#x1EE5;c &#x111;&#xED;ch kh&#xE1;c nhau, v&#xEC; v&#x1EAD;y c&#x1ED9;ng &#x111;&#x1ED3;ng Open source &#x111;&#xE3; t&#x1EA1;o ra kh&#xE1; nhi&#x1EC1;u framework RPC &#x111;&#x1EC3; h&#x1ED7; tr&#x1EE3; cho vi&#x1EC7;c l&#x1EAD;p tr&#xEC;nh. Trong ph&#x1EA7;n n&#xE0;y, ch&#xFA;ng ta s&#x1EBD; s&#x1EED; d&#x1EE5;ng framework RPC t&#xED;ch h&#x1EE3;p s&#x1EB5;n trong Go cho c&#xE1;c hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a m&#x1ED9;t s&#x1ED1; tr&#x1B0;&#x1EDD;ng h&#x1EE3;p.</p>
+<h2 id="331-hi&#x1EC7;n-th&#x1EF1;c-rpc-ph&#xED;a-client">3.3.1 Hi&#x1EC7;n th&#x1EF1;c RPC ph&#xED;a Client</h2>
+<p>C&#xE1;ch d&#x1EC5; nh&#x1EA5;t &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng th&#x1B0; vi&#x1EC7;n Go l&#xE0; d&#xF9;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Client.Call</code> &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n l&#x1EDD;i g&#x1ECD;i &#x111;&#x1ED3;ng b&#x1ED9; (synchronous blocking). Ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c n&#xE0;y nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (client *Client) Call(
+    serviceMethod <span class="hljs-keyword">string</span>, args <span class="hljs-keyword">interface</span>{},
+    reply <span class="hljs-keyword">interface</span>{},
+) error {
+    call := &lt;-client.Go(serviceMethod, args, reply, <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> *Call, <span class="hljs-number">1</span>)).Done
+    <span class="hljs-keyword">return</span> call.Error
+}
+</code></pre>
+<p>Ch&#xFA;ng  ta c&#x169;ng c&#xF3; th&#x1EC3; d&#xF9;ng <code>client.Go</code> g&#x1ECD;i t&#x1EDB;i service tr&#x1B0;&#x1EDB;c &#x111;&#xF3; l&#xE0; <code>HelloService</code> theo ki&#x1EC3;u b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9; (asynchronous blocking) b&#x1EB1;ng ph&#x1B0;&#x1A1;ng ph&#xE1;p sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> doClientWork(client *rpc.Client) {
+    helloCall := client.Go(<span class="hljs-string">&quot;HelloService.Hello&quot;</span>, <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-built_in">new</span>(<span class="hljs-keyword">string</span>), <span class="hljs-literal">nil</span>)
+
+    <span class="hljs-comment">// x&#x1EED; ly logic &#x1EDF; &#x111;&#xE2;y</span>
+
+    helloCall = &lt;-helloCall.Done
+    <span class="hljs-keyword">if</span> err := helloCall.Error; err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+
+    args := helloCall.Args.(<span class="hljs-keyword">string</span>)
+    reply := helloCall.Reply.(<span class="hljs-keyword">string</span>)
+    fmt.Println(args, reply)
+}
+</code></pre>
+<p>Sau khi l&#x1EC7;nh g&#x1ECD;i b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n, c&#xE1;c t&#xE1;c v&#x1EE5; kh&#xE1;c s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c thi, sau &#x111;&#xF3; c&#xE1;c tham s&#x1ED1; &#x111;&#x1EA7;u v&#xE0;o v&#xE0; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a l&#x1EDD;i g&#x1ECD;i b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9; c&#xF3; th&#x1EC3;  l&#x1EA5;y ra t&#x1EEB; bi&#x1EBF;n <code>Call</code> tr&#x1EA3; v&#x1EC1;.</p>
+<p>Ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Client.Go</code> th&#x1EF1;c thi m&#x1ED9;t l&#x1EDD;i g&#x1ECD;i b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9; &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (client *Client) Go(
+    serviceMethod <span class="hljs-keyword">string</span>, args <span class="hljs-keyword">interface</span>{},
+    reply <span class="hljs-keyword">interface</span>{},
+    done <span class="hljs-keyword">chan</span> *Call,
+) *Call {
+    <span class="hljs-comment">// kh&#x1EDF;i t&#x1EA1;o m&#x1ED9;t bi&#x1EBF;n l&#x1EDD;i g&#x1ECD;i &#x111;&#x1EA1;i di&#x1EC7;n cho cu&#x1ED9;c g&#x1ECD;i hi&#x1EC7;n th&#x1EDD;i</span>
+    call := <span class="hljs-built_in">new</span>(Call)
+    call.ServiceMethod = serviceMethod
+    call.Args = args
+    call.Reply = reply
+    <span class="hljs-comment">// buffered channel.</span>
+    call.Done = <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> *Call, <span class="hljs-number">10</span>) 
+
+    <span class="hljs-comment">// g&#x1EED;i &#x111;i tham s&#x1ED1; call &#x111;&#x1EBF;n RPC framework.</span>
+    <span class="hljs-comment">// ph&#x1B0;&#x1A1;ng th&#x1EE9;c `client.send` thread-safe cho n&#xEA;n l&#x1EC7;nh g&#x1ECD;i c&#xF3; th&#x1EC3;</span>
+    <span class="hljs-comment">// g&#x1EED;i t&#x1EEB; nhi&#x1EC1;u Goroutine &#x111;&#x1ED3;ng th&#x1EDD;i t&#x1EDB;i c&#xF9;ng m&#x1ED9;t &#x111;&#x1B0;&#x1EDD;ng link RPC.</span>
+    client.send(call)
+    <span class="hljs-keyword">return</span> call
+}
+</code></pre>
+<p>C&#xE1;c b&#x1EA1;n c&#xF3; th&#x1EC3; tham kh&#x1EA3;o &#x1EDF; &#x111;&#xE2;y <a href="https://golang.org/src/net/rpc/client.go" target="_blank">net/rpc/client.go</a>.</p>
+<p>Khi l&#x1EDD;i g&#x1ECD;i ho&#xE0;n th&#xE0;nh ho&#x1EB7;c c&#xF3; l&#x1ED7;i xu&#x1EA5;t hi&#x1EC7;n, ph&#x1B0;&#x1A1;ng th&#x1EE9;c th&#xF4;ng b&#xE1;o <code>call.done</code> &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i &#x111;&#x1EC3; ho&#xE0;n th&#xE0;nh:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">select</span> {
+<span class="hljs-keyword">case</span> call.Done &lt;- call:
+    <span class="hljs-comment">// ok</span>
+<span class="hljs-keyword">default</span>:
+    <span class="hljs-comment">// s&#x1EED; d&#x1EE5;ng default s&#x1EBD; kh&#xF4;ng b&#x1ECB; block ch&#x1B0;&#x1A1;ng tr&#xEC;nh.</span>
+    <span class="hljs-comment">// &#x111;&#x1EA3;m b&#x1EA3;o channel c&#xF3; &#x111;&#x1EE7; v&#xF9;ng nh&#x1EDB; cho buffer.</span>
+}
+</code></pre>
+<p>T&#x1EEB; ph&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c c&#x1EE7;a ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Call.done</code>, c&#xF3; th&#x1EC3; th&#x1EA5;y r&#x1EB1;ng channel <code>call.Done</code> s&#x1EBD; tr&#x1EA3; v&#x1EC1; l&#x1EDD;i g&#x1ECD;i &#x111;&#xE3; x&#x1EED; l&#xFD;.</p>
+<h2 id="332-hi&#x1EC7;n-th&#x1EF1;c-h&#xE0;m-gi&#xE1;m-s&#xE1;t-b&#x1EB1;ng-rpc">3.3.2 Hi&#x1EC7;n th&#x1EF1;c h&#xE0;m gi&#xE1;m s&#xE1;t b&#x1EB1;ng RPC</h2>
+<p>Ta mong mu&#x1ED1;n khi h&#x1EC7; th&#x1ED1;ng g&#x1EB7;p ph&#x1EA3;i nh&#x1EEF;ng &#x111;i&#x1EC1;u ki&#x1EC7;n nh&#x1EA5;t &#x111;&#x1ECB;nh th&#xEC; c&#xF3; th&#x1EC3; nh&#x1EAD;n v&#x1EC1; k&#x1EBF;t qu&#x1EA3; th&#xF4;ng b&#xE1;o. Trong ph&#x1EA7;n n&#xE0;y ta s&#x1EBD; hi&#x1EC7;n th&#x1EF1;c ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Watch</code> &#x111;&#x1EC3; l&#xE0;m &#x111;i&#x1EC1;u &#x111;&#xF3;.</p>
+<p>&#xDD; t&#x1B0;&#x1EDF;ng l&#xE0; gi&#x1EA3; l&#x1EAD;p m&#x1ED9;t key-value store &#x111;&#x1A1;n gi&#x1EA3;n, m&#x1ED7;i khi c&#xF3; s&#x1EF1; thay &#x111;&#x1ED5;i v&#x1EC1; value th&#xEC; s&#x1EBD; g&#x1EED;i v&#x1EC1; th&#xF4;ng b&#xE1;o cho client.</p>
+<p>Tr&#x1B0;&#x1EDB;c ti&#xEA;n x&#xE2;y d&#x1EF1;ng c&#x1A1; s&#x1EDF; d&#x1EEF; li&#x1EC7;u Key-Value &#x111;&#x1A1;n gi&#x1EA3;n th&#xF4;ng qua RPC. X&#xE1;c &#x111;&#x1ECB;nh service nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> KVStoreService <span class="hljs-keyword">struct</span> {
+    <span class="hljs-comment">// map l&#x1B0;u tr&#x1EEF; d&#x1EEF; li&#x1EC7;u key value</span>
+    m      <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>
+
+    <span class="hljs-comment">// map ch&#x1EE9;a danh s&#xE1;ch c&#xE1;c h&#xE0;m filter</span>
+    <span class="hljs-comment">// &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh trong m&#x1ED7;i l&#x1EDD;i g&#x1ECD;i</span>
+    filter <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">func</span>(key <span class="hljs-keyword">string</span>)
+
+    <span class="hljs-comment">// b&#x1EA3;o v&#x1EC7; c&#xE1;c th&#xE0;nh ph&#x1EA7;n kh&#xE1;c khi &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p</span>
+    <span class="hljs-comment">// v&#xE0; s&#x1EED;a &#x111;&#x1ED5;i t&#x1EEB; nhi&#x1EC1;u Goroutine c&#xF9;ng l&#xFA;c</span>
+    mu     sync.Mutex
+}
+
+<span class="hljs-keyword">func</span> NewKVStoreService() *KVStoreService {
+    <span class="hljs-keyword">return</span> &amp;KVStoreService{
+        m:      <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>),
+        filter: <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">func</span>(key <span class="hljs-keyword">string</span>)),
+    }
+}
+</code></pre>
+<p>Ti&#x1EBF;p theo l&#xE0; ph&#x1B0;&#x1A1;ng th&#x1EE9;c Get v&#xE0; Set:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *KVStoreService) Get(key <span class="hljs-keyword">string</span>, value *<span class="hljs-keyword">string</span>) error {
+    p.mu.Lock()
+    <span class="hljs-keyword">defer</span> p.mu.Unlock()
+
+    <span class="hljs-keyword">if</span> v, ok := p.m[key]; ok {
+        *value = v
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+    }
+
+    <span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;not found&quot;</span>)
+}
+
+<span class="hljs-keyword">func</span> (p *KVStoreService) Set(kv [<span class="hljs-number">2</span>]<span class="hljs-keyword">string</span>, reply *<span class="hljs-keyword">struct</span>{}) error {
+    p.mu.Lock()
+    <span class="hljs-keyword">defer</span> p.mu.Unlock()
+
+    key, value := kv[<span class="hljs-number">0</span>], kv[<span class="hljs-number">1</span>]
+
+    <span class="hljs-keyword">if</span> oldValue := p.m[key]; oldValue != value {
+        <span class="hljs-comment">// h&#xE0;m filter &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i khi value t&#x1B0;&#x1A1;ng &#x1EE9;ng</span>
+        <span class="hljs-comment">// v&#x1EDB;i key b&#x1ECB; s&#x1EED;a &#x111;&#x1ED5;i</span>
+        <span class="hljs-keyword">for</span> _, fn := <span class="hljs-keyword">range</span> p.filter {
+            fn(key)
+        }
+    }
+
+    p.m[key] = value
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>C&#xE1;c filter s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c cung c&#x1EA5;p trong ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Watch</code>:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// Watch tr&#x1EA3; v&#x1EC1; key m&#x1ED7;i khi nh&#x1EAD;n th&#x1EA5;y c&#xF3; thay &#x111;&#x1ED5;i</span>
+<span class="hljs-keyword">func</span> (p *KVStoreService) Watch(timeoutSecond <span class="hljs-keyword">int</span>, keyChanged *<span class="hljs-keyword">string</span>) error {
+    <span class="hljs-comment">// id l&#xE0; m&#x1ED9;t string ghi l&#x1EA1;i th&#x1EDD;i gian hi&#x1EC7;n t&#x1EA1;i</span>
+    id := fmt.Sprintf(<span class="hljs-string">&quot;watch-%s-%03d&quot;</span>, time.Now(), rand.Int())
+
+    <span class="hljs-comment">// buffered channel ch&#x1EE9;a key</span>
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">string</span>, <span class="hljs-number">10</span>)
+
+    <span class="hljs-comment">// filter &#x111;&#x1EC3; theo d&#xF5;i key thay &#x111;&#x1ED5;i</span>
+    p.mu.Lock()
+    p.filter[id] = <span class="hljs-keyword">func</span>(key <span class="hljs-keyword">string</span>) { ch &lt;- key }
+    p.mu.Unlock()
+
+    <span class="hljs-keyword">select</span> {
+    <span class="hljs-comment">// tr&#x1EA3; v&#x1EC1; timeout sau m&#x1ED9;t kho&#x1EA3;ng th&#x1EDD;i gian</span>
+    <span class="hljs-keyword">case</span> &lt;-time.After(time.Duration(timeoutSecond) * time.Second):
+        <span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;timeout&quot;</span>)
+    <span class="hljs-keyword">case</span> key := &lt;-ch:
+        *keyChanged = key
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>Qu&#xE1; tr&#xEC;nh &#x111;&#x103;ng k&#xFD; v&#xE0; kh&#x1EDF;i &#x111;&#x1ED9;ng service <code>KVStoreService</code> b&#x1EA1;n c&#xF3; th&#x1EC3; xem l&#x1EA1;i ph&#x1EA7;n tr&#x1B0;&#x1EDB;c. H&#xE3;y xem c&#xE1;ch s&#x1EED; d&#x1EE5;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Watch</code> t&#x1EEB; client:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> doClientWork(client *rpc.Client) {
+    <span class="hljs-comment">// kh&#x1EDF;i ch&#x1EA1;y m&#x1ED9;t Goroutine ri&#xEA;ng bi&#x1EC7;t &#x111;&#x1EC3; gi&#xE1;m s&#xE1;t kh&#xF3;a thay &#x111;&#x1ED5;i</span>
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">var</span> keyChanged <span class="hljs-keyword">string</span>
+        <span class="hljs-comment">// l&#x1EDD;i g&#x1ECD;i `watch` synchronous s&#x1EBD; block cho &#x111;&#x1EBF;n khi</span>
+        <span class="hljs-comment">// c&#xF3; kh&#xF3;a thay &#x111;&#x1ED5;i ho&#x1EB7;c timeout</span>
+        err := client.Call(<span class="hljs-string">&quot;KVStoreService.Watch&quot;</span>, <span class="hljs-number">30</span>, &amp;keyChanged)
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+            log.Fatal(err)
+        }
+        fmt.Println(<span class="hljs-string">&quot;watch:&quot;</span>, keyChanged)
+    } ()
+
+    err := client.Call(
+        <span class="hljs-comment">//  gi&#xE1; tr&#x1ECB; KV &#x111;&#x1B0;&#x1EE3;c thay &#x111;&#x1ED5;i b&#x1EB1;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c `Set`</span>
+        <span class="hljs-string">&quot;KVStoreService.Set&quot;</span>, [<span class="hljs-number">2</span>]<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;abc-value&quot;</span>},
+        <span class="hljs-built_in">new</span>(<span class="hljs-keyword">struct</span>{}),
+    )
+    <span class="hljs-comment">//  set l&#x1EA1;i l&#x1EA7;n n&#x1EEF;a &#x111;&#x1EC3; gi&#xE1; tr&#x1ECB; value c&#x1EE7;a key &apos;abc&apos; thay &#x111;&#x1ED5;i</span>
+    err = client.Call(
+        <span class="hljs-string">&quot;KVStoreService.Set&quot;</span>, [<span class="hljs-number">2</span>]<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;another-value&quot;</span>},
+        <span class="hljs-built_in">new</span>(<span class="hljs-keyword">struct</span>{}),
+    )
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+
+    time.Sleep(time.Second*<span class="hljs-number">3</span>)
+}
+</code></pre>
+<p>Server s&#x1EBD; tr&#x1EA3; v&#x1EC1; key &#x111;&#xE3; thay &#x111;&#x1ED5;i th&#xF4;ng qua ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Watch</code>. B&#x1EB1;ng c&#xE1;ch n&#xE0;y ch&#xFA;ng ta c&#xF3; th&#x1EC3; gi&#xE1;m s&#xE1;t vi&#x1EC7;c thay &#x111;&#x1ED5;i tr&#x1EA1;ng th&#xE1;i c&#x1EE7;a key.</p>
+<h2 id="333-reverse-rpc">3.3.3 Reverse RPC</h2>
+<p>RPC th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng trong m&#xF4; h&#xEC;nh client-server. Trong &#x111;&#xF3; server v&#xE0; client c&#x1EA7;n d&#xF9;ng chung m&#x1ED9;t network. Tuy nhi&#xEA;n, &#x111;&#x1ED1;i v&#x1EDB;i m&#x1ED9;t s&#x1ED1; tr&#x1B0;&#x1EDD;ng h&#x1EE3;p &#x111;&#x1EB7;c bi&#x1EC7;t, ch&#x1EB3;ng h&#x1EA1;n nh&#x1B0; khi cung c&#x1EA5;p d&#x1ECB;ch v&#x1EE5; RPC tr&#xEA;n m&#x1EA1;ng n&#x1ED9;i b&#x1ED9;, nh&#x1B0;ng m&#x1EA1;ng b&#xEA;n ngo&#xE0;i kh&#xF4;ng th&#x1EC3; k&#x1EBF;t n&#x1ED1;i v&#x1EDB;i server m&#x1EA1;ng n&#x1ED9;i b&#x1ED9;.</p>
+<div align="center">
+
+<img src="../images/reverse-rpc.png" width="500">
+<br>
+<span align="center"><i>Reverse RPC</i></span>
+    <br>
+
+</div>
+
+<p>Trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p n&#xE0;y, c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng c&#xF4;ng ngh&#x1EC7; t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; reverse proxy. Tr&#x1B0;&#x1EDB;c ti&#xEA;n ch&#x1EE7; &#x111;&#x1ED9;ng k&#x1EBF;t n&#x1ED1;i v&#x1EDB;i server TCP c&#x1EE7;a m&#x1EA1;ng b&#xEA;n ngo&#xE0;i t&#x1EEB; m&#x1EA1;ng n&#x1ED9;i b&#x1ED9;, sau &#x111;&#xF3; cung c&#x1EA5;p d&#x1ECB;ch v&#x1EE5; RPC cho m&#x1EA1;ng b&#xEA;n ngo&#xE0;i d&#x1EF1;a tr&#xEA;n k&#x1EBF;t n&#x1ED1;i TCP &#x111;&#xF3;.</p>
+<p>Sau &#x111;&#xE2;y l&#xE0; m&#xE3; ngu&#x1ED3;n &#x111;&#x1EC3; kh&#x1EDF;i &#x111;&#x1ED9;ng m&#x1ED9;t reverse RPC service:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    rpc.Register(<span class="hljs-built_in">new</span>(HelloService))
+
+    <span class="hljs-keyword">for</span> {
+        conn, _ := net.Dial(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;localhost:1234&quot;</span>)
+        <span class="hljs-keyword">if</span> conn == <span class="hljs-literal">nil</span> {
+            time.Sleep(time.Second)
+            <span class="hljs-keyword">continue</span>
+        }
+
+        rpc.ServeConn(conn)
+        conn.Close()
+    }
+}
+</code></pre>
+<p>Reverse RPC service s&#x1EBD; kh&#xF4;ng c&#xF2;n  cung c&#x1EA5;p service l&#x1EAF;ng nghe TCP, thay v&#xE0;o &#x111;&#xF3; n&#xF3;  s&#x1EBD; ch&#x1EE7; &#x111;&#x1ED9;ng k&#x1EBF;t n&#x1ED1;i v&#x1EDB;i server TCP c&#x1EE7;a client (c&#xF3; th&#x1EC3; coi l&#xE0; &#x111;&#x1EA3;o ng&#x1B0;&#x1EE3;c vai tr&#xF2; c&#x1EE7;a client - server). RPC service sau &#x111;&#xF3; &#x111;&#x1B0;&#x1EE3;c cung c&#x1EA5;p d&#x1EF1;a tr&#xEA;n m&#x1ED7;i li&#xEA;n k&#x1EBF;t TCP &#x111;&#x1B0;&#x1EE3;c thi&#x1EBF;t l&#x1EAD;p.</p>
+<p>RPC client  c&#x1EA7;n cung c&#x1EA5;p m&#x1ED9;t service TCP c&#xF3; &#x111;&#x1ECB;a ch&#x1EC9; c&#xF4;ng khai &#x111;&#x1EC3; ch&#x1EA5;p nh&#x1EAD;n request t&#x1EEB; RPC server:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    listener, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;:1234&quot;</span>)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(<span class="hljs-string">&quot;ListenTCP error:&quot;</span>, err)
+    }
+
+    clientChan := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> *rpc.Client)
+
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span> {
+            conn, err := listener.Accept()
+            <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+                log.Fatal(<span class="hljs-string">&quot;Accept error:&quot;</span>, err)
+            }
+
+            <span class="hljs-comment">// khi m&#x1ED7;i &#x111;&#x1B0;&#x1EDD;ng link &#x111;&#x1B0;&#x1EE3;c thi&#x1EBF;t l&#x1EAD;p, &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng</span>
+            <span class="hljs-comment">// RPC client &#x111;&#x1B0;&#x1EE3;c kh&#x1EDF;i t&#x1EA1;o d&#x1EF1;a tr&#xEA;n link &#x111;&#xF3; v&#xE0;</span>
+            <span class="hljs-comment">// g&#x1EED;i t&#x1EDB;i client channel</span>
+            clientChan &lt;- rpc.NewClient(conn)
+        }
+    }()
+
+    doClientWork(clientChan)
+}
+</code></pre>
+<p>Client th&#x1EF1;c hi&#x1EC7;n l&#x1EDD;i g&#x1ECD;i RPC trong h&#xE0;m <code>doClientWork</code>:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> doClientWork(clientChan &lt;-<span class="hljs-keyword">chan</span> *rpc.Client) {
+    <span class="hljs-comment">//  nh&#x1EAD;n v&#xE0;o &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng RPC client t&#x1EEB; channel</span>
+    client := &lt;-clientChan
+
+    <span class="hljs-comment">// &#x111;&#xF3;ng k&#x1EBF;t n&#x1ED1;i v&#x1EDB;i client tr&#x1B0;&#x1EDB;c khi h&#xE0;m exit</span>
+    <span class="hljs-keyword">defer</span> client.Close()
+
+    <span class="hljs-keyword">var</span> reply <span class="hljs-keyword">string</span>
+
+    <span class="hljs-comment">// th&#x1EF1;c hi&#x1EC7;n l&#x1EDD;i g&#x1ECD;i rpc b&#xEC;nh th&#x1B0;&#x1EDD;ng</span>
+    err := client.Call(<span class="hljs-string">&quot;HelloService.Hello&quot;</span>, <span class="hljs-string">&quot;hello&quot;</span>, &amp;reply)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+
+    fmt.Println(reply)
+}
+</code></pre>
+<h2 id="334-rpc-theo-ng&#x1EEF;-c&#x1EA3;nh-context">3.3.4 RPC theo ng&#x1EEF; c&#x1EA3;nh (context)</h2>
+<p>D&#x1EF1;a tr&#xEA;n ng&#x1EEF; c&#x1EA3;nh (context) ch&#xFA;ng ta c&#xF3; th&#x1EC3; cung c&#x1EA5;p nh&#x1EEF;ng RPC services th&#xED;ch h&#x1EE3;p cho nh&#x1EEF;ng client kh&#xE1;c nhau. Ta c&#xF3; th&#x1EC3; h&#x1ED7; tr&#x1EE3; c&#xE1;c t&#xED;nh n&#x103;ng theo ng&#x1EEF; c&#x1EA3;nh b&#x1EB1;ng c&#xE1;ch cung c&#x1EA5;p c&#xE1;c RPC service cho t&#x1EEB;ng link k&#x1EBF;t n&#x1ED1;i.</p>
+<p>&#x110;&#x1EA7;u ti&#xEA;n th&#xEA;m v&#xE0;o th&#xE0;nh ph&#x1EA7;n <code>conn</code> &#x1EDF; <code>HelloService</code> cho link t&#x1B0;&#x1A1;ng &#x1EE9;ng:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloService <span class="hljs-keyword">struct</span> {
+    conn net.Conn
+}
+</code></pre>
+<p>Sau &#x111;&#xF3; b&#x1EAF;t &#x111;&#x1EA7;u m&#x1ED9;t RPC service ri&#xEA;ng cho t&#x1EEB;ng link:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    listener, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, <span class="hljs-string">&quot;:1234&quot;</span>)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(<span class="hljs-string">&quot;ListenTCP error:&quot;</span>, err)
+    }
+
+    <span class="hljs-keyword">for</span> {
+        conn, err := listener.Accept()
+        <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+            log.Fatal(<span class="hljs-string">&quot;Accept error:&quot;</span>, err)
+        }
+
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+            <span class="hljs-keyword">defer</span> conn.Close()
+
+            p := rpc.NewServer()
+            p.Register(&amp;HelloService{conn: conn})
+            p.ServeConn(conn)
+        } ()
+    }
+}
+</code></pre>
+<p>Trong ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Hello</code>, b&#x1EA1;n c&#xF3; th&#x1EC3; x&#xE1;c &#x111;&#x1ECB;nh l&#x1EDD;i g&#x1ECD;i RPC cho c&#xE1;c link kh&#xE1;c nhau d&#x1EF1;a tr&#xEA;n bi&#x1EBF;n <code>conn</code>:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> (p *HelloService) Hello(request <span class="hljs-keyword">string</span>, reply *<span class="hljs-keyword">string</span>) error {
+    *reply = <span class="hljs-string">&quot;hello:&quot;</span> + request + <span class="hljs-string">&quot;, from&quot;</span> + p.conn.RemoteAddr().String()
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>D&#x1EF1;a v&#xE0;o th&#xF4;ng tin ng&#x1EEF; c&#x1EA3;nh m&#xE0;  ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng th&#xEA;m v&#xE0;o m&#x1ED9;t c&#x1A1; ch&#x1EBF; x&#xE1;c minh tr&#x1EA1;ng th&#xE1;i &#x111;&#x103;ng nh&#x1EAD;p &#x111;&#x1A1;n gi&#x1EA3;n cho RPC service:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> HelloService <span class="hljs-keyword">struct</span> {
+    conn    net.Conn
+    isLogin <span class="hljs-keyword">bool</span>
+}
+
+<span class="hljs-keyword">func</span> (p *HelloService) Login(request <span class="hljs-keyword">string</span>, reply *<span class="hljs-keyword">string</span>) error {
+    <span class="hljs-keyword">if</span> request != <span class="hljs-string">&quot;user:password&quot;</span> {
+        <span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;auth failed&quot;</span>)
+    }
+    log.Println(<span class="hljs-string">&quot;login ok&quot;</span>)
+    p.isLogin = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+
+<span class="hljs-keyword">func</span> (p *HelloService) Hello(request <span class="hljs-keyword">string</span>, reply *<span class="hljs-keyword">string</span>) error {
+    <span class="hljs-keyword">if</span> !p.isLogin {
+        <span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;please login&quot;</span>)
+    }
+    *reply = <span class="hljs-string">&quot;hello:&quot;</span> + request + <span class="hljs-string">&quot;, from&quot;</span> + p.conn.RemoteAddr().String()
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+}
+</code></pre>
+<p>Theo c&#xE1;ch n&#xE0;y, khi client k&#x1EBF;t n&#x1ED1;i t&#x1EDB;i RPC service, ch&#x1EE9;c n&#x103;ng login s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n tr&#x1B0;&#x1EDB;c, v&#xE0; c&#xE1;c service kh&#xE1;c c&#xF3; th&#x1EC3; th&#x1EF1;c thi b&#xEC;nh th&#x1B0;&#x1EDD;ng sau khi login th&#xE0;nh c&#xF4;ng.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch3-02-pb-intro.html" class="navigation navigation-prev " aria-label="Previous page: 3.2 Protobuf">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch3-04-grpc.html" class="navigation navigation-next " aria-label="Next page: 3.4 Bắt đầu với gRPC">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3.3 RPC trong Golang","level":"1.4.3","depth":2,"next":{"title":"3.4 Bắt đầu với gRPC","level":"1.4.4","depth":2,"path":"ch3-rpc/ch3-04-grpc.md","ref":"ch3-rpc/ch3-04-grpc.md","articles":[]},"previous":{"title":"3.2 Protobuf","level":"1.4.2","depth":2,"path":"ch3-rpc/ch3-02-pb-intro.md","ref":"ch3-rpc/ch3-02-pb-intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch3-rpc/ch3-03-fun-fpc.md","mtime":"2019-08-17T05:09:40.880Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-17T08:21:21.536Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
