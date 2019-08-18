@@ -3,6 +3,7 @@
 - [Go Language Advanced Programming](#go-language-advanced-programming)
   - [Giới thiệu](#giới-thiệu)
   - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#tại-sao-chúng-tôi-thực-hiện-bộ-tài-liệu-này-)
+  - [Đối tượng sử dụng](#đối-tượng-sử-dụng)
   - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
   - [Mục lục](#mục-lục)
   - [Đọc online](#đọc-online)
@@ -31,7 +32,11 @@ Chúng tôi thực hiện bộ tài liệu nhằm:
 - Đây là cơ hội để mọi người biết tới technical stack của ZaloPay.
 - Public ra bên ngoài để cộng đồng Golang Việt Nam có bộ tài liệu tiếng Việt do chính người Việt Nam biên soạn. 
 - Đồng thời tạo ra sân chơi mới có cơ hội giao lưu mở rộng mối quan hệ với các bạn có cùng đam mê lập trình.
-  
+
+## Đối tượng sử dụng
+
+Tất cả các bạn có đam mê lập trình Golang và đã nắm được cơ bản về lập trình Golang. Ngoài ra, trong bộ tài liệu này chúng tôi cũng có nhắc lại vài điểm cơ bản trong lập trình Golang.
+
 ## Tài liệu tham khảo
 
 Bộ tài liệu này được chúng tôi biên soạn dựa trên kinh nghiệm và kiến thức tích luỹ trong quá trình làm việc tại ZaloPay. Đồng thời chúng tôi có tham khảo các tài liệu bên ngoài như: 
