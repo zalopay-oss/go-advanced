@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.md">
             
-                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+                <span>
             
                     
                     1.8 Ghi chú bổ sung
@@ -815,7 +815,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="24-l&#x1EDD;i-g&#x1ECD;i-h&#xE0;m">2.4 L&#x1EDD;i g&#x1ECD;i h&#xE0;m</h1>
-<p>H&#xE0;m l&#xE0; c&#x1ED1;t l&#xF5;i c&#x1EE7;a ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh C. Th&#xF4;ng qua c&#xF4;ng c&#x1EE5; CGO, ch&#xFA;ng ta kh&#xF4;ng ch&#x1EC9; c&#xF3; th&#x1EC3; g&#x1ECD;i h&#xE0;m c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C b&#x1EB1;ng Go m&#xE0; c&#xF2;n c&#xF3; th&#x1EC3; export h&#xE0;m c&#x1EE7;a Go nh&#x1B0; l&#xE0; h&#xE0;m ng&#xF4;n ng&#x1EEF; C.</p>
+<p>Th&#xF4;ng qua c&#xF4;ng c&#x1EE5; CGO, ch&#xFA;ng ta kh&#xF4;ng ch&#x1EC9; c&#xF3; th&#x1EC3; g&#x1ECD;i h&#xE0;m c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C b&#x1EB1;ng Go m&#xE0; c&#xF2;n c&#xF3; th&#x1EC3; export h&#xE0;m c&#x1EE7;a Go &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng nh&#x1B0; l&#xE0; h&#xE0;m ng&#xF4;n ng&#x1EEF; C.</p>
 <h2 id="241-go-g&#x1ECD;i-h&#xE0;m-c">2.4.1 Go g&#x1ECD;i h&#xE0;m C</h2>
 <p>&#x110;&#x1ED1;i v&#x1EDB;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh k&#xED;ch ho&#x1EA1;t c&#xE1;c t&#xED;nh n&#x103;ng CGO, CGO x&#xE2;y d&#x1EF1;ng m&#x1ED9;t package C &#x1EA3;o. H&#xE0;m ng&#xF4;n ng&#x1EEF; C c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c g&#x1ECD;i qua package C &#x1EA3;o n&#xE0;y.</p>
 <pre><code class="lang-go"><span class="hljs-comment">/*
@@ -885,13 +885,13 @@ static int div(int a, int b) {
 <pre><code class="lang-sh">2 &lt;nil&gt;
 0 invalid argument
 </code></pre>
-<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; xem h&#xE0;m <code>div</code> nh&#x1B0; m&#x1ED9;t h&#xE0;m v&#x1EDB;i c&#xE1;c ki&#x1EC3;u tham s&#x1ED1; nh&#x1B0; sau:</p>
-<pre><code class="lang-go"><span class="hljs-keyword">func</span> C.div(a, b C.<span class="hljs-keyword">int</span>) (C.<span class="hljs-keyword">int</span>, [error])
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; xem h&#xE0;m <code>div</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i m&#x1ED9;t h&#xE0;m trong Go nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> C.div(a, b C.<span class="hljs-keyword">int</span>) (C.<span class="hljs-keyword">int</span>, error)
 </code></pre>
-<p>Tham s&#x1ED1; th&#x1EE9; hai c&#x1EE7;a interface (gi&#xE1; tr&#x1ECB; error tr&#x1EA3; v&#x1EC1;) c&#xF3; th&#x1EC3; b&#x1ECF; qua, t&#x1B0;&#x1A1;ng &#x1EE9;ng b&#xEA;n d&#x1B0;&#x1EDB;i l&#xE0; ki&#x1EC3;u <code>syscall.Errno</code>.</p>
+<p>Tham s&#x1ED1; th&#x1EE9; hai tr&#x1EA3; v&#x1EC1; (gi&#xE1; tr&#x1ECB; error) c&#xF3; th&#x1EC3; b&#x1ECF; qua, &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c b&#xEA;n d&#x1B0;&#x1EDB;i l&#xE0; ki&#x1EC3;u <code>syscall.Errno</code>.</p>
 <h2 id="243-gi&#xE1;-tr&#x1ECB;-tr&#x1EA3;-v&#x1EC1;-c&#x1EE7;a-h&#xE0;m-void">2.4.3 Gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a h&#xE0;m void</h2>
-<p>Trong C c&#x169;ng c&#xF3; h&#xE0;m kh&#xF4;ng tr&#x1EA3; v&#x1EC1; ki&#x1EC3;u gi&#xE1; tr&#x1ECB; (thay v&#xE0;o &#x111;&#xF3; tr&#x1EA3; v&#x1EC1; void). N&#xF3;i chung, ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a h&#xE0;m ki&#x1EC3;u void, b&#x1EDF;i v&#xEC; kh&#xF4;ng c&#xF3; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; &#x111;&#x1EC3; nh&#x1EAD;n. Nh&#x1B0; &#x111;&#xE3; &#x111;&#x1EC1; c&#x1EAD;p trong v&#xED; d&#x1EE5; tr&#x1B0;&#x1EDB;c, CGO hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t ph&#x1B0;&#x1A1;ng ph&#xE1;p &#x111;&#x1EB7;c bi&#x1EC7;t cho errno v&#xE0; c&#xF3; th&#x1EC3; nh&#x1EAD;n v&#x1EC1;  tr&#x1EA1;ng th&#xE1;i l&#x1ED7;i c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C th&#xF4;ng qua gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; th&#x1EE9; hai. T&#xED;nh n&#x103;ng n&#xE0;y v&#x1EAB;n h&#x1EE3;p l&#x1EC7; cho c&#xE1;c h&#xE0;m ki&#x1EC3;u void.</p>
-<p>&#x110;o&#x1EA1;n code sau l&#xE0; &#x111;&#x1EC3; l&#x1EA5;y m&#xE3; tr&#x1EA1;ng th&#xE1;i l&#x1ED7;i c&#x1EE7;a h&#xE0;m kh&#xF4;ng c&#xF3; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1;:</p>
+<p>Trong C c&#x169;ng c&#xF3; h&#xE0;m kh&#xF4;ng tr&#x1EA3; v&#x1EC1; ki&#x1EC3;u gi&#xE1; tr&#x1ECB; (thay v&#xE0;o &#x111;&#xF3; tr&#x1EA3; v&#x1EC1; void). Ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a h&#xE0;m ki&#x1EC3;u void v&#xEC; &#x111;&#xF3; th&#x1EF1;c s&#x1EF1; kh&#xF4;ng ph&#x1EA3;i gi&#xE1; tr&#x1ECB;!?.</p>
+<p>Nh&#x1B0; &#x111;&#xE3; &#x111;&#x1EC1; c&#x1EAD;p trong v&#xED; d&#x1EE5; tr&#x1B0;&#x1EDB;c, CGO hi&#x1EC7;n th&#x1EF1;c m&#x1ED9;t ph&#x1B0;&#x1A1;ng ph&#xE1;p &#x111;&#x1EB7;c bi&#x1EC7;t cho errno v&#xE0; c&#xF3; th&#x1EC3; nh&#x1EAD;n v&#x1EC1;  tr&#x1EA1;ng th&#xE1;i l&#x1ED7;i c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C th&#xF4;ng qua gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; th&#x1EE9; hai. T&#xED;nh n&#x103;ng n&#xE0;y v&#x1EAB;n h&#x1EE3;p l&#x1EC7; cho c&#xE1;c h&#xE0;m ki&#x1EC3;u void. &#x110;o&#x1EA1;n code sau &#x111;&#x1EC3; l&#x1EA5;y m&#xE3; tr&#x1EA1;ng th&#xE1;i l&#x1ED7;i c&#x1EE7;a h&#xE0;m kh&#xF4;ng c&#xF3; gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1;:</p>
 <pre><code class="lang-go"><span class="hljs-comment">//static void noreturn() {}</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
@@ -900,9 +900,11 @@ static int div(int a, int b) {
     _, err := C.noreturn()
     fmt.Println(err)
 }
+
+<span class="hljs-comment">// k&#x1EBF;t qu&#x1EA3;: &lt;nil&gt;</span>
 </code></pre>
 <p>L&#xFA;c n&#xE0;y, ch&#xFA;ng ta b&#x1ECF; qua gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; &#x111;&#x1EA7;u ti&#xEA;n v&#xE0; ch&#x1EC9; nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c m&#xE3; l&#x1ED7;i t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; th&#x1EE9; hai.</p>
-<p>Ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; th&#x1EED; l&#x1EA5;y gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; &#x111;&#x1EA7;u ti&#xEA;n, c&#x169;ng ch&#xED;nh l&#xE0; ki&#x1EC3;u t&#x1B0;&#x1A1;ng &#x1EE9;ng trong Go v&#x1EDB;i ki&#x1EC3;u void trong ng&#xF4;n ng&#x1EEF; C:</p>
+<p>Ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; th&#x1EED; l&#x1EA5;y gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; &#x111;&#x1EA7;u ti&#xEA;n, c&#x169;ng ch&#xED;nh l&#xE0; ki&#x1EC3;u t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i ki&#x1EC3;u void trong ng&#xF4;n ng&#x1EEF; C:</p>
 <pre><code class="lang-go"><span class="hljs-comment">//static void noreturn() {}</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
@@ -912,7 +914,7 @@ static int div(int a, int b) {
     fmt.Printf(<span class="hljs-string">&quot;%#v&quot;</span>, v)
 }
 </code></pre>
-<p>Ch&#x1EA1;y code n&#xE0;y s&#x1EBD; t&#x1EA1;o ra &#x111;&#x1EA7;u ra sau:</p>
+<p>Ch&#x1EA1;y code n&#xE0;y s&#x1EBD; thu &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t qu&#x1EA3;:</p>
 <pre><code class="lang-sh">main._C<span class="hljs-built_in">type</span>_void{}
 </code></pre>
 <p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; th&#x1EA5;y r&#x1EB1;ng ki&#x1EC3;u void c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i ki&#x1EC3;u trong package main  <code>_Ctype_void</code>. Trong th&#x1EF1;c t&#x1EBF;, h&#xE0;m <code>noreturn</code> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C c&#x169;ng &#x111;&#x1B0;&#x1EE3;c coi l&#xE0; m&#x1ED9;t h&#xE0;m v&#x1EDB;i ki&#x1EC3;u tr&#x1EA3; v&#x1EC1; <code>_Ctype_void</code>, do &#x111;&#xF3; b&#x1EA1;n c&#xF3; th&#x1EC3; tr&#x1EF1;c ti&#x1EBF;p nh&#x1EAD;n gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; c&#x1EE7;a h&#xE0;m ki&#x1EC3;u void:</p>
@@ -924,14 +926,13 @@ static int div(int a, int b) {
     fmt.Println(C.noreturn())
 }
 </code></pre>
-<p>Ch&#x1EA1;y code n&#xE0;y s&#x1EBD; t&#x1EA1;o ra &#x111;&#x1EA7;u ra sau:</p>
+<p>Ch&#x1EA1;y code n&#xE0;y s&#x1EBD; cho ra k&#x1EBF;t qu&#x1EA3; sau:</p>
 <pre><code class="lang-sh">[]
 </code></pre>
-<p>Trong th&#x1EF1;c t&#x1EBF;, trong code &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o b&#x1EDF;i CGO, ki&#x1EC3;u <code>_Ctype_void</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i ki&#x1EC3;u m&#x1EA3;ng c&#xF3; &#x111;&#x1ED9; d&#xE0;i 0 <code>[0]byte</code>, do &#x111;&#xF3; output <code>fmt.Println</code> l&#xE0; m&#x1ED9;t d&#x1EA5;u ngo&#x1EB7;c vu&#xF4;ng bi&#x1EC3;u th&#x1ECB; m&#x1ED9;t gi&#xE1; tr&#x1ECB; null.</p>
-<p>M&#x1EB7;c d&#xF9;  hi&#x1EC7;u qu&#x1EA3; c&#x1EE7;a c&#xE1;c t&#xED;nh n&#x103;ng &#x1EDF; tr&#xEA;n c&#xF3; v&#x1EBB; nh&#xE0;m ch&#xE1;n, nh&#x1B0;ng nh&#x1EDD; &#x111;&#xF3; ch&#xFA;ng ta c&#xF3; th&#x1EC3; n&#x1EAF;m b&#x1EAF;t ch&#xED;nh x&#xE1;c ranh gi&#x1EDB;i c&#x1EE7;a code CGO th&#xF4;ng qua c&#xE1;c v&#xED; d&#x1EE5; &#x111;&#xF3; v&#xE0; c&#xF3; th&#x1EC3; ngh&#x129; v&#x1EC1; c&#xE1;c nguy&#xEA;n do cho c&#xE1;c t&#xED;nh n&#x103;ng l&#x1EA1; n&#xE0;y t&#x1EEB; quan &#x111;i&#x1EC3;m thi&#x1EBF;t k&#x1EBF; s&#xE2;u h&#x1A1;n.</p>
-<h2 id="244-c-g&#x1ECD;i-h&#xE0;m-export-c&#x1EE7;a-go">2.4.4 C g&#x1ECD;i h&#xE0;m export c&#x1EE7;a Go</h2>
-<p>CGO c&#xF3; m&#x1ED9;t t&#xED;nh n&#x103;ng m&#x1EA1;nh m&#x1EBD; l&#xE0; export c&#xE1;c h&#xE0;m Go th&#xE0;nh c&#xE1;c h&#xE0;m ng&#xF4;n ng&#x1EEF; C. Trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p n&#xE0;y, ch&#xFA;ng ta c&#xF3; th&#x1EC3; x&#xE1;c &#x111;&#x1ECB;nh interface ng&#xF4;n ng&#x1EEF; C v&#xE0; sau &#x111;&#xF3; tri&#x1EC3;n khai n&#xF3; th&#xF4;ng qua ng&#xF4;n ng&#x1EEF; Go. Trong ph&#x1EA7;n &#x111;&#x1EA7;u ti&#xEA;n c&#x1EE7;a ch&#x1B0;&#x1A1;ng n&#xE0;y, ch&#xFA;ng t&#xF4;i &#x111;&#xE3; ch&#x1EC9; ra c&#xE1;c v&#xED; d&#x1EE5; v&#x1EC1; h&#xE0;m ng&#xF4;n ng&#x1EEF; C export v&#xE0;o ng&#xF4;n ng&#x1EEF; Go.</p>
-<p>&#x110;&#xE2;y l&#xE0; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i h&#xE0;m <code>add</code> trong ch&#x1B0;&#x1A1;ng &#x111;&#x1EA7;u:</p>
+<p>Trong th&#x1EF1;c t&#x1EBF;, trong code &#x111;&#x1B0;&#x1EE3;c CGO t&#x1EA1;o ra, ki&#x1EC3;u <code>_Ctype_void</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i ki&#x1EC3;u m&#x1EA3;ng c&#xF3; &#x111;&#x1ED9; d&#xE0;i 0 (<code>[0]byte</code>), do &#x111;&#xF3; output <code>fmt.Println</code> l&#xE0; m&#x1ED9;t c&#x1EB7;p d&#x1EA5;u ngo&#x1EB7;c vu&#xF4;ng bi&#x1EC3;u th&#x1ECB; m&#x1ED9;t gi&#xE1; tr&#x1ECB; null.</p>
+<h2 id="244-c-g&#x1ECD;i-h&#xE0;m-do-go-export">2.4.4 C g&#x1ECD;i h&#xE0;m do Go export</h2>
+<p>CGO c&#xF3; m&#x1ED9;t t&#xED;nh n&#x103;ng m&#x1EA1;nh m&#x1EBD; l&#xE0; export c&#xE1;c h&#xE0;m Go th&#xE0;nh c&#xE1;c h&#xE0;m ng&#xF4;n ng&#x1EEF; C. Trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p n&#xE0;y, ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x111;&#x1ECB;nh ngh&#x129;a interface b&#x1EB1;ng C v&#xE0; sau &#x111;&#xF3; tri&#x1EC3;n khai n&#xF3; th&#xF4;ng qua Go. Trong ph&#x1EA7;n &#x111;&#x1EA7;u ti&#xEA;n c&#x1EE7;a ch&#x1B0;&#x1A1;ng n&#xE0;y c&#x169;ng &#x111;&#xE3; c&#xF3; m&#x1ED9;t s&#x1ED1; v&#xED; d&#x1EE5; v&#x1EC1; h&#xE0;m ng&#xF4;n ng&#x1EEF; C g&#x1ECD;i h&#xE0;m do Go export.</p>
+<p>Nh&#x1EAF;c l&#x1EA1;i m&#x1ED9;t ch&#xFA;t v&#x1EC1; h&#xE0;m <code>add</code> trong ch&#x1B0;&#x1A1;ng &#x111;&#x1EA7;u:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
 
 <span class="hljs-comment">//export add</span>
@@ -939,7 +940,7 @@ static int div(int a, int b) {
     <span class="hljs-keyword">return</span> a+b
 }
 </code></pre>
-<p>T&#xEA;n h&#xE0;m <code>add</code> b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng m&#x1ED9;t ch&#x1EEF; c&#xE1;i vi&#x1EBF;t th&#x1B0;&#x1EDD;ng v&#xE0; l&#xE0; m&#x1ED9;t h&#xE0;m ri&#xEA;ng trong package cho ng&#xF4;n ng&#x1EEF; Go. Nh&#x1B0;ng theo c&#xE1;i nh&#xEC;n c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C th&#xEC; h&#xE0;m <code>add</code> l&#xE0; h&#xE0;m ng&#xF4;n ng&#x1EEF; C c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p to&#xE0;n c&#x1EE5;c. N&#x1EBF;u c&#xF3; m&#x1ED9;t h&#xE0;m <code>add</code> c&#xF9;ng t&#xEA;n &#x111;&#x1B0;&#x1EE3;c export d&#x1B0;&#x1EDB;i d&#x1EA1;ng h&#xE0;m ng&#xF4;n ng&#x1EEF; C trong hai package ng&#xF4;n ng&#x1EEF; Go kh&#xE1;c nhau, v&#x1EA5;n &#x111;&#x1EC1; v&#x1EC1; tr&#xF9;ng t&#xEA;n s&#x1EBD; x&#x1EA3;y ra trong giai &#x111;o&#x1EA1;n li&#xEA;n k&#x1EBF;t cu&#x1ED1;i c&#xF9;ng (link phase).</p>
+<p>T&#xEA;n h&#xE0;m <code>add</code> b&#x1EAF;t &#x111;&#x1EA7;u b&#x1EB1;ng m&#x1ED9;t ch&#x1EEF; c&#xE1;i vi&#x1EBF;t th&#x1B0;&#x1EDD;ng v&#xE0; l&#xE0; m&#x1ED9;t h&#xE0;m private trong package c&#x1EE7;a Go. Nh&#x1B0;ng theo c&#xE1;i nh&#xEC;n c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C th&#xEC; h&#xE0;m <code>add</code> l&#xE0; h&#xE0;m ng&#xF4;n ng&#x1EEF; C c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p to&#xE0;n c&#x1EE5;c. N&#x1EBF;u c&#xF3; m&#x1ED9;t h&#xE0;m <code>add</code> c&#xF9;ng t&#xEA;n &#x111;&#x1B0;&#x1EE3;c export d&#x1B0;&#x1EDB;i d&#x1EA1;ng h&#xE0;m ng&#xF4;n ng&#x1EEF; C trong hai package ng&#xF4;n ng&#x1EEF; Go kh&#xE1;c nhau, v&#x1EA5;n &#x111;&#x1EC1; v&#x1EC1; tr&#xF9;ng t&#xEA;n s&#x1EBD; x&#x1EA3;y ra trong link phase.</p>
 <p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; include file header <code>_cgo_export.h</code> &#x111;&#x1EC3; th&#xEA;m tham chi&#x1EBF;u &#x111;&#x1EBF;n c&#xE1;c h&#xE0;m export. N&#x1EBF;u b&#x1EA1;n mu&#x1ED1;n s&#x1EED; d&#x1EE5;ng ngay l&#x1EAD;p t&#x1EE9;c h&#xE0;m <code>add</code> c&#x1EE7;a C &#x111;&#x1B0;&#x1EE3;c export trong file CGO hi&#x1EC7;n t&#x1EA1;i, b&#x1EA1;n kh&#xF4;ng th&#x1EC3; tham kh&#x1EA3;o &#x111;&#x1EBF;n file <code>_cgo_export.h</code>,  b&#x1EDF;i v&#xEC; vi&#x1EC7;c t&#x1EA1;o file <code>_cgo_export.h</code>  c&#x1EA7;n ph&#x1EE5; thu&#x1ED9;c v&#xE0;o file hi&#x1EC7;n t&#x1EA1;i m&#xE0; trong file hi&#x1EC7;n t&#x1EA1;i l&#x1EA1;i tham kh&#x1EA3;o t&#x1EDB;i <code>_cgo_export.h</code> (file ch&#x1B0;a &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o) th&#xEC; s&#x1EBD; g&#xE2;y ra l&#x1ED7;i.</p>
 <pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-string">&quot;_cgo_export.h&quot;</span></span>
 
@@ -947,7 +948,7 @@ static int div(int a, int b) {
     add(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
 }
 </code></pre>
-<p>Khi export interface c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C, b&#x1EA1;n c&#x1EA7;n &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng c&#xE1;c tham s&#x1ED1; h&#xE0;m v&#xE0; ki&#x1EC3;u gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; l&#xE0; ki&#x1EC3;u &quot;th&#xE2;n thi&#x1EC7;n&quot; v&#x1EDB;i C &#x111;&#x1ED3;ng th&#x1EDD;i gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c tr&#x1EF1;c ti&#x1EBF;p ho&#x1EB7;c gi&#xE1;n ti&#x1EBF;p ch&#x1EE9;a con tr&#x1ECF; v&#xE0;o kh&#xF4;ng gian b&#x1ED9; nh&#x1EDB; ng&#xF4;n ng&#x1EEF; Go.</p>
+<p>Khi export interface c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C, ta c&#x1EA7;n &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng c&#xE1;c tham s&#x1ED1; h&#xE0;m v&#xE0; ki&#x1EC3;u gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; l&#xE0; ki&#x1EC3;u &quot;th&#xE2;n thi&#x1EC7;n&quot; v&#x1EDB;i C (xem l&#x1EA1;i <a href="ch2-03-type-conversion.html">2.3</a>) &#x111;&#x1ED3;ng th&#x1EDD;i gi&#xE1; tr&#x1ECB; tr&#x1EA3; v&#x1EC1; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c tr&#x1EF1;c ti&#x1EBF;p ho&#x1EB7;c gi&#xE1;n ti&#x1EBF;p ch&#x1EE9;a con tr&#x1ECF; v&#xE0;o kh&#xF4;ng gian b&#x1ED9; nh&#x1EDB; ng&#xF4;n ng&#x1EEF; Go.</p>
 
                                 
                                 </section>
@@ -991,7 +992,7 @@ static int div(int a, int b) {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2.4 Lời gọi hàm","level":"1.3.4","depth":2,"next":{"title":"2.5 Cơ chế bên trong CGO","level":"1.3.5","depth":2,"path":"ch2-cgo/ch2-05-internal-mechanisms.md","ref":"ch2-cgo/ch2-05-internal-mechanisms.md","articles":[]},"previous":{"title":"2.3 Chuyển đổi kiểu","level":"1.3.3","depth":2,"path":"ch2-cgo/ch2-03-type-conversion.md","ref":"ch2-cgo/ch2-03-type-conversion.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-04-function-call.md","mtime":"2019-07-15T10:56:18.471Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.4 Lời gọi hàm","level":"1.3.4","depth":2,"next":{"title":"2.5 Cơ chế bên trong CGO","level":"1.3.5","depth":2,"path":"ch2-cgo/ch2-05-internal-mechanisms.md","ref":"ch2-cgo/ch2-05-internal-mechanisms.md","articles":[]},"previous":{"title":"2.3 Chuyển đổi kiểu","level":"1.3.3","depth":2,"path":"ch2-cgo/ch2-03-type-conversion.md","ref":"ch2-cgo/ch2-03-type-conversion.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-04-function-call.md","mtime":"2019-08-10T03:07:53.906Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-10T03:11:57.422Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
