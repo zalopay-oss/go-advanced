@@ -13,8 +13,6 @@
 		<i>Array</i>
 	</span>
 </div>
-<br/>
-
 
 Trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được xử lý toàn bộ, có thể hiểu là khi đó chúng được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó (khác với kiểu truyền tham khảo).
 
@@ -42,7 +40,6 @@ Cấu trúc vùng nhớ của array thì rất đơn giản. Ví dụ cho một 
 		<i>Array layout</i>
 	</span>
 </div>
-<br/>
 
 Khi biến array được gán hoặc truyền, thì toàn bộ array sẽ được sao chép. Nếu kích thước của array lớn, thì phép gán array sẽ chịu tổn phí lớn. Để tránh việc `overhead` (tổn phí) trong việc sao chép array, bạn có thể truyền con trỏ của array.
 
@@ -173,7 +170,6 @@ Cấu trúc vùng nhớ tương ứng với string "Hello World" là:
 		<i>String layout</i>
 	</span>
 </div>
-<br/>
 
 Có thể thấy rằng bên dưới string "Hello World" là một array như sau:
 
@@ -209,10 +205,9 @@ fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
 	<img src="../images/1-3-golang-slices-length-capacity.jpg"width="500">
 	<br/>
 	<span align="center">
-		<i>Slice</i>
+		<i>Cấu trúc Slice</i>
 	</span>
 </div>
-<br/>
 
 `Slices` thì phức tạp hơn, cấu trúc của chúng cũng như `string`, tuy nhiên việc giới hạn chỉ-đọc như string được lược bỏ.
 
@@ -236,7 +231,6 @@ Hình bên dưới sẽ miêu tả slice `x := []int{2,3,5,7,11}` và slice `y :
 		<i>Slice layout</i>
 	</span>
 </div>
-<br/>
 
 Các cách định nghĩa slice:
 

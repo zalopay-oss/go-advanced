@@ -97,7 +97,6 @@ Gửi tin nhắn đi có chứa chủ đề cho một tác vụ:
     <i>Pub trong giao thức nats</i>
   </span>
 </div>
-<br/>
 
 Theo dõi các tác vụ bằng chủ đề trên hàng đợi của các worker:
 
@@ -108,7 +107,6 @@ Theo dõi các tác vụ bằng chủ đề trên hàng đợi của các worker
     <i>Sub trong giao thức nats</i>
   </span>
 </div>
-<br/>
 
 Tham số hàng đợi là tùy chọn. Nếu bạn muốn cân bằng tải các tác vụ ở phía người dùng, thay vì tất cả mọi người nhận cùng một kênh, bạn nên gán một tên hàng đợi cho một người dùng.
 

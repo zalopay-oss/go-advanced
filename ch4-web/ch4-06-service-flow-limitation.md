@@ -117,26 +117,24 @@ Có nhiều cách để giới hạn lưu lượng. Phổ biến nhất là leak
 
 1. **Leaky bucket** có thể hiểu rằng chúng ta có một cái xô chứa đầy nước, và một giọt nước rò rỉ ra sau mỗi khoảng thời gian cố định. Nếu nhận được "giọt nước" thì có thể tiếp tục yêu cầu dịch vụ, ngược lại thì cần phải đợi đến lần nhỏ giọt tiếp theo.
 
-    <div align="center">
-        <img src="../images/leaky-bucket.png" width="410">
-        <br/>
-        <span align="center">
-            <i>Minh hoạ Leaky bucket</i>
-        </span>
-    </div>
+<div align="center">
+    <img src="../images/leaky-bucket.png" width="410">
     <br/>
+    <span align="center">
+        <i>Minh hoạ Leaky bucket</i>
+    </span>
+</div>
 
 2. **Token bucket** với nguyên tắc token được thêm vào bucket với tốc độ (rate) không đổi. Để có được token từ bucket, số lượng token có thể được điều chỉnh theo số tài nguyên cần sử dụng. Nếu không có token, ta có thể lựa chọn tiếp tục chờ hoặc từ bỏ.
 Hai phương pháp này nhìn thì tương tự nhau, nhưng thực ra là có một vài điểm khác biệt.
 
-    <div align="center">
-        <img src="../images/token-bucket.png" width="410">
-        <br/>
-        <span align="center">
-            <i>Minh hoạ Token bucket</i>
-        </span>
-    </div>
+<div align="center">
+    <img src="../images/token-bucket.png" width="410">
     <br/>
+    <span align="center">
+        <i>Minh hoạ Token bucket</i>
+    </span>
+</div>
 
 - Tốc độ mà leaky bucket bị rò rỉ (leak) là cố định còn token trong token bucket có thể được lấy ra chỉ khi có token trong bucket.
 - Điều đó nghĩa là token bucket chỉ cho phép một mức độ đồng thời nhất định. Ví dụ cùng lúc có 100 yêu cầu người dùng gửi tới, miễn là có 100 token trong bucket thì tất cả 100 yêu cầu sẽ được đưa ra.

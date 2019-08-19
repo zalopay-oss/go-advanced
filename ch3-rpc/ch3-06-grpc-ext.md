@@ -198,7 +198,6 @@ Cộng đồng Open source đã hiện thực một project với tên gọi là
 		<i>gRPC-Gateway workflow</i>
 	</span>
 </div>
-<br/>
 
 Trong file Protobuf (chỉ có ở proto3), chúng ta sẽ thêm thông tin phần routing ứng với các hàm trong gRPC service, để dựa vào đó grpc-gateway sẽ sinh ra mã nguồn proxy tương ứng.
 
