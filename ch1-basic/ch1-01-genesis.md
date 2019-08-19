@@ -13,7 +13,6 @@ Ngôn ngữ Go thường được mô tả là "Ngôn ngữ tựa C" hoặc là 
 		<i>Cây phả hệ của ngôn ngữ Go</i>
 	</span>
 </div>
-<br/>
 
 Phía bên trái sơ đồ thể hiện tính chất **concurrency** của ngôn ngữ **Go** được phát triển từ học thuyết [CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes) công bố bởi **Tony Hoare** vào năm 1978. Học thuyết **CSP** dần dần được tinh chế và được ứng dụng thực tế trong một số ngôn ngữ lập trình như là **Squeak/NewSqueak** và **Alef**, cuối cùng là **Go**.
 
@@ -46,7 +45,7 @@ Hình dưới chỉ ra lịch sử phát triển của ngôn ngữ Go qua codeba
 		<i>Go language development log</i>
 	</span>
 </div>
-<br/>
+
 
 Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go được dần phát triển từ ngôn ngữ B - được phát minh bởi **Ken Thompson** và ngôn ngữ C được phát triển bởi **Dennis M.Ritchie**. Đó là thế hệ ngôn ngữ C đầu tiên, do đó nhiều người gọi Go là ngôn ngữ lập trình C của thế kỉ 21.
 
@@ -57,7 +56,7 @@ Có thể nhìn thấy từ những submission log rằng ngôn ngữ Go đượ
 		<i>Lịch sử phát triển của lập trình concurrency trong Go</i>
 	</span>
 </div>
-<br/>
+
 
 Trong vòng những năm gần đây, Go là một ngôn ngữ được ưa chuộng khi viết các chương trình Micro Services, vì những đặc tính nhỏ gọn, biên dịch nhanh, import thư viện từ github, cú pháp đơn giản nhưng hiện đại.
 

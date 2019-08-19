@@ -204,7 +204,6 @@ Sau đó chèn đường dẫn `GET /marketplace_listing/plans/:id/accounts` c�
 		<i>Chèn node thứ hai vào Radix tree</i>
 	</span>
 </div>
-<br/>
 
 
 ### 4.2.3.3 Phân nhánh

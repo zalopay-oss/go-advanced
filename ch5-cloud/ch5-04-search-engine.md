@@ -7,7 +7,6 @@
 		<i>Distributed search engine</i>
 	</span>
 </div>
-<br/>
 
 Trong chương Web, chúng ta đã biết MySQL có rất nhiều rủi ro. Nó là hệ thống cơ sở dữ liệu đảm bảo tính thời gian thực và tính nhất quán cao, do đó các chức năng của MySQL được thiết kế để đáp ứng tính nhất quán này. Ví dụ: thiết kế ghi nhật ký trước (write ahead log), index, tổ chức dữ liệu dựa trên [B+ tree](https://en.wikipedia.org/wiki/B%2B_tree) và transaction dựa trên [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control).
 
@@ -353,7 +352,6 @@ Câu trả lời là chắc chắn được. Bây giờ, chúng ta thử so sán
 		<i>Sự tương ứng giữa AST và DSL</i>
 	</span>
 </div>
-<br/>
 
 Ta thấy cấu trúc chúng khá giống nhau nên chúng ta có thể chuyển đổi logic của chúng cho nhau. Trước tiên, chúng ta duyệt cây AST theo chiều rộng, sau đó chuyển đổi biểu thức nhị phân thành chuỗi json và tổng hợp nó lại.
 
@@ -374,7 +372,7 @@ Có hai chương trình đồng bộ hóa phổ biến:
 		<i>Dựa trên timestamp để đồng bộ hóa dữ liệu</i>
 	</span>
 </div>
-<br/>
+
 
 Phương thức đồng bộ hóa này cần phải phù hợp với nhu cầu của business. Ví dụ, đối với đơn hàng trong hệ thống WMS, chúng ta không cần tính `realtime` cao và việc xử lý chậm có thể chấp nhận được. Vì vậy, chúng tôi có thể xử lý đơn hàng cứ mỗi 10 phút, logic cụ thể giống câu SQL sau:
 
@@ -401,7 +399,6 @@ Sau khi tăng khoảng thời gian lên 11 phút thì mọi thứ đã ổn hơn
 		<i>Đồng bộ hóa dữ liệu dựa trên binlog</i>
 	</span>
 </div>
-<br/>
 
 [Canal](https://github.com/alibaba/canal) là Open source của **Alibaba** và nó được dùng để phân tích cú pháp `binlog` và đồng bộ hóa bởi nhiều công ty. Canal sẽ hoạt động như một thư viện phụ thuộc MySQL, nó sẽ phân tích cú pháp `bincode` của từng dòng và gửi nó đến hàng đợi tin nhắn theo định dạng dễ hiểu hơn (chẳng hạn như json).
 

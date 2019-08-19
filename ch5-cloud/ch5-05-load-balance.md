@@ -6,7 +6,6 @@
 		<i>Loadbalancer</i>
 	</span>
 </div>
-<br/>
 
 Phần này sẽ thảo luận về các phương pháp phổ biến trong cân bằng tải hệ thống phân tán.
 

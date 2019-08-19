@@ -8,7 +8,6 @@ Một điểm mạnh của Golang là tích hợp sẵn cơ chế xử lý đồ
 <br/>
 <span align="center"><i>Go concurrency</i></span>
     <br/>
-
 </div>
 
 Trong hầu hết các ngôn ngữ hiện đại, vấn đề chia sẻ tài nguyên được giải quyết bằng cơ chế đồng bộ hóa như khóa (lock) nhưng Golang có cách tiếp cận riêng là chia sẻ giá trị (Value) thông qua channel.
