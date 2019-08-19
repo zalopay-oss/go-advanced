@@ -1,0 +1,1044 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>6.6 Quản lý cấu hình trong hệ thống phân tán · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch6-07-crawler.html" />
+    
+    
+    <link rel="prev" href="ch6-05-load-balance.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-mem.html">
+            
+                <a href="../ch1-basic/ch1-05-mem.html">
+            
+                    
+                    1.5 Điều khiển tuần tự cấu trúc vùng nhớ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Các chế độ đồng thời thông dụng
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                <a href="../ch1-basic/ch1-08-supplementary-notes.html">
+            
+                    
+                    1.8 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10  Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-best-practice/">
+            
+                <a href="../ch3-best-practice/">
+            
+                    
+                    Chương 3: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-rpc/">
+            
+                <a href="../ch4-rpc/">
+            
+                    
+                    Chương 4: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                <a href="../ch4-rpc/ch4-01-rpc-intro.html">
+            
+                    
+                    4.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                <a href="../ch4-rpc/ch4-02-pb-intro.html">
+            
+                    
+                    4.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                <a href="../ch4-rpc/ch4-03-fun-fpc.html">
+            
+                    
+                    4.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-rpc/ch4-04-grpc.html">
+            
+                <a href="../ch4-rpc/ch4-04-grpc.html">
+            
+                    
+                    4.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                <a href="../ch4-rpc/ch4-05-grpc-advanced.html">
+            
+                    
+                    4.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                <a href="../ch4-rpc/ch4-06-grpc-ext.html">
+            
+                    
+                    4.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-rpc/ch4-07-pbgo.html">
+            
+                <a href="../ch4-rpc/ch4-07-pbgo.html">
+            
+                    
+                    4.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                <a href="../ch4-rpc/ch4-08-grpc-curl.html">
+            
+                    
+                    4.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                <a href="../ch4-rpc/ch4-09-supplementary-notes.html">
+            
+                    
+                    4.9 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-web/">
+            
+                <a href="../ch5-web/">
+            
+                    
+                    Chương 5: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-web/ch5-01-introduction.html">
+            
+                <a href="../ch5-web/ch5-01-introduction.html">
+            
+                    
+                    5.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-web/ch5-02-router.html">
+            
+                <a href="../ch5-web/ch5-02-router.html">
+            
+                    
+                    5.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-web/ch5-03-middleware.html">
+            
+                <a href="../ch5-web/ch5-03-middleware.html">
+            
+                    
+                    5.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-web/ch5-04-request-verification.html">
+            
+                <a href="../ch5-web/ch5-04-request-verification.html">
+            
+                    
+                    5.4 Kiểm tra yêu cầu validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-web/ch5-05-database.html">
+            
+                <a href="../ch5-web/ch5-05-database.html">
+            
+                    
+                    5.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                <a href="../ch5-web/ch5-06-service-flow-limitation.html">
+            
+                    
+                    5.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                <a href="../ch5-web/ch5-07-layout-of-web-project.html">
+            
+                    
+                    5.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-web/ch5-08-interface-and-web.html">
+            
+                <a href="../ch5-web/ch5-08-interface-and-web.html">
+            
+                    
+                    5.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="../ch5-web/ch5-09-gated-launch.html">
+            
+                <a href="../ch5-web/ch5-09-gated-launch.html">
+            
+                    
+                    5.9 Grayscale Publishing and A/B test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="../ch5-web/ch5-10-ext.html">
+            
+                <a href="../ch5-web/ch5-10-ext.html">
+            
+                    
+                    5.10 Ghi chú bổ sung
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 6: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="ch6-01-dist-id.html">
+            
+                <a href="ch6-01-dist-id.html">
+            
+                    
+                    6.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="ch6-02-lock.html">
+            
+                <a href="ch6-02-lock.html">
+            
+                    
+                    6.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="ch6-03-delay-job.html">
+            
+                <a href="ch6-03-delay-job.html">
+            
+                    
+                    6.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="Ch6-04-search-engine.html">
+            
+                <a href="Ch6-04-search-engine.html">
+            
+                    
+                    6.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="ch6-05-load-balance.html">
+            
+                <a href="ch6-05-load-balance.html">
+            
+                    
+                    6.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.6" data-path="ch6-06-config.html">
+            
+                <a href="ch6-06-config.html">
+            
+                    
+                    6.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="ch6-07-crawler.html">
+            
+                <a href="ch6-07-crawler.html">
+            
+                    
+                    6.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="ch6-08-ext.html">
+            
+                <a href="ch6-08-ext.html">
+            
+                    
+                    6.8 Phần mở rộng
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >6.6 Quản lý cấu hình trong hệ thống phân tán</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="66-qu&#x1EA3;n-l&#xFD;-c&#x1EA5;u-h&#xEC;nh-trong-h&#x1EC7;-th&#x1ED1;ng-ph&#xE2;n-t&#xE1;n">6.6 Qu&#x1EA3;n l&#xFD; c&#x1EA5;u h&#xEC;nh trong h&#x1EC7; th&#x1ED1;ng ph&#xE2;n t&#xE1;n</h1>
+<p>Trong h&#x1EC7; th&#x1ED1;ng ph&#xE2;n t&#xE1;n, th&#x1B0;&#x1EDD;ng c&#xF3; nh&#x1EEF;ng v&#x1EA5;n &#x111;&#x1EC1; g&#xE2;y phi&#x1EC1;n cho ch&#xFA;ng ta. M&#x1EB7;c d&#xF9;, hi&#x1EC7;n t&#x1EA1;i c&#xF3; m&#x1ED9;t s&#x1ED1; c&#xE1;ch &#x111;&#x1EC3; thay &#x111;&#x1ED5;i c&#x1EA5;u h&#xEC;nh nh&#x1B0;ng v&#x1EAB;n b&#x1ECB; h&#x1EA1;n ch&#x1EBF; b&#x1EDF;i c&#xE1;ch ho&#x1EA1;t &#x111;&#x1ED9;ng n&#x1ED9;i b&#x1ED9; c&#x1EE7;a h&#x1EC7; th&#x1ED1;ng v&#xE0; l&#xFA;c n&#xE0;y s&#x1EBD; kh&#xF4;ng c&#xF3; c&#xE1;ch n&#xE0;o &#x111;&#x1EC3; thay &#x111;&#x1ED5;i c&#x1EA5;u h&#xEC;nh m&#x1ED9;t c&#xE1;ch thu&#x1EAD;n ti&#x1EC7;n nh&#x1EA5;t. V&#xED; d&#x1EE5;: &#x111;&#x1EC3; gi&#x1EDB;i h&#x1EA1;n d&#xF2;ng ch&#x1EA3;y xu&#x1ED1;ng <code>downstream</code>, ch&#xFA;ng ta c&#xF3; th&#x1EC3; t&#xED;ch lu&#x1EF9; d&#x1EEF; li&#x1EC7;u l&#x1EA1;i v&#xE0; sau khi l&#x1B0;&#x1EE3;ng t&#xED;ch lu&#x1EF9; &#x111;&#x1EBF;n m&#x1ED9;t ng&#x1B0;&#x1EE1;ng th&#x1EDD;i gian hay t&#x1ED5;ng s&#x1ED1; ti&#x1EC1;n th&#xEC; ta b&#x1EAF;t &#x111;&#x1EA7;u g&#x1EED;i &#x111;i, &#x111;i&#x1EC1;u n&#xE0;y tr&#xE1;nh &#x111;&#x1B0;&#x1EE3;c vi&#x1EC7;c g&#x1EED;i qu&#xE1; nhi&#x1EC1;u cho <code>downstream</code>. Trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p n&#xE0;y, ta l&#x1EA1;i r&#x1EA5;t kh&#xF3; &#x111;&#x1EC3; thay &#x111;&#x1ED5;i c&#x1EA5;u h&#xEC;nh.</p>
+<p>Do &#x111;&#xF3;, m&#x1EE5;c ti&#xEA;u c&#x1EE7;a ch&#xFA;ng ta l&#xE0; tr&#xE1;nh &#xE1;p d&#x1EE5;ng ho&#x1EB7;c b&#x1ECF; qua ph&#x1B0;&#x1A1;ng ph&#xE1;p tr&#x1EF1;c tuy&#x1EBF;n v&#xE0; th&#x1EF1;c hi&#x1EC7;n m&#x1ED9;t s&#x1ED1; s&#x1EED;a &#x111;&#x1ED5;i cho ch&#x1B0;&#x1A1;ng tr&#xEC;nh tr&#x1EF1;c tuy&#x1EBF;n. M&#x1ED9;t s&#x1EED;a &#x111;&#x1ED5;i &#x111;i&#x1EC3;n h&#xEC;nh l&#xE0; m&#x1EE5;c c&#x1EA5;u h&#xEC;nh c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh.</p>
+<h2 id="661-c&#xE1;c-v&#xED;-d&#x1EE5;">6.6.1 C&#xE1;c v&#xED; d&#x1EE5;</h2>
+<h3 id="6611-h&#x1EC7;-th&#x1ED1;ng-b&#xE1;o-c&#xE1;o">6.6.1.1 H&#x1EC7; th&#x1ED1;ng b&#xE1;o c&#xE1;o</h3>
+<p>Trong c&#xE1;c h&#x1EC7; th&#x1ED1;ng OLAP ho&#x1EB7;c m&#x1ED9;t s&#x1ED1; n&#x1EC1;n t&#x1EA3;ng d&#x1EEF; li&#x1EC7;u ngo&#x1EA1;i tuy&#x1EBF;n, sau m&#x1ED9;t th&#x1EDD;i gian d&#xE0;i ph&#xE1;t tri&#x1EC3;n, c&#xE1;c ch&#x1EE9;c n&#x103;ng c&#x1EE7;a to&#xE0;n b&#x1ED9; h&#x1EC7; th&#x1ED1;ng &#x111;&#xE3; d&#x1EA7;n &#x1ED5;n &#x111;&#x1ECB;nh. C&#xE1;c d&#x1EEF; li&#x1EC7;u &#x111;&#xE3; c&#xF3; s&#x1EB5;n v&#xE0; h&#x1EA7;u h&#x1EBF;t c&#xE1;c thay &#x111;&#x1ED5;i &#x111;&#x1EC3; hi&#x1EC3;n th&#x1ECB; ch&#x1EC9; li&#xEA;n quan t&#x1EDB;i vi&#x1EC7;c thay &#x111;&#x1ED5;i c&#xE2;u truy v&#x1EA5;n SQL. L&#xFA;c n&#xE0;y, ta ngh&#x129; t&#x1EDB;i vi&#x1EC7;c c&#xF3; th&#x1EC3; c&#x1EA5;u h&#xEC;nh &#x111;&#x1B0;&#x1EE3;c c&#xE1;c c&#xE2;u truy v&#x1EA5;n SQL m&#xE0; kh&#xF4;ng c&#x1EA7;n ph&#x1EA3;i s&#x1EED;a &#x111;&#x1ED5;i code.</p>
+<p>Khi doanh nghi&#x1EC7;p &#x111;&#x1B0;a ra c&#xE1;c y&#xEA;u c&#x1EA7;u m&#x1EDB;i, vi&#x1EC7;c ch&#xFA;ng ta c&#x1EA7;n l&#xE0;m l&#xE0; c&#x1EA5;u h&#xEC;nh l&#x1EA1;i c&#xE2;u SQL cho h&#x1EC7; th&#x1ED1;ng. Nh&#x1EEF;ng thay &#x111;&#x1ED5;i n&#xE0;y c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n tr&#x1EF1;c ti&#x1EBF;p m&#xE0; kh&#xF4;ng c&#x1EA7;n kh&#x1EDF;i &#x111;&#x1ED9;ng l&#x1EA1;i.</p>
+<h3 id="6612-c&#x1EA5;u-h&#xEC;nh-mang-t&#xED;nh-doanh-nghi&#x1EC7;p">6.6.1.2 C&#x1EA5;u h&#xEC;nh mang t&#xED;nh doanh nghi&#x1EC7;p</h3>
+<p>N&#x1EC1;n t&#x1EA3;ng (Platform) c&#x1EE7;a m&#x1ED9;t c&#xF4;ng ty l&#x1EDB;n lu&#xF4;n ph&#x1EE5;c v&#x1EE5; cho nhi&#x1EC1;u ng&#xE0;nh ngh&#x1EC1; kinh doanh v&#xE0; m&#x1ED7;i ng&#xE0;nh ngh&#x1EC1; kinh doanh &#x111;&#x1B0;&#x1EE3;c g&#xE1;n m&#x1ED9;t id duy nh&#x1EA5;t. N&#x1EC1;n t&#x1EA3;ng n&#xE0;y &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o th&#xE0;nh t&#x1EEB; nhi&#x1EC1;u module v&#xE0; c&#x1EA7;n chia s&#x1EBB; m&#x1ED9;t kh&#xE1;i ni&#x1EC7;m kinh doanh. Khi c&#xF4;ng ty m&#x1EDF; m&#x1ED9;t d&#xE2;y chuy&#x1EC1;n s&#x1EA3;n ph&#x1EA9;m m&#x1EDB;i, n&#xF3; c&#x1EA7;n ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng qua b&#x1EDF;i t&#x1EA5;t c&#x1EA3; c&#xE1;c h&#x1EC7; th&#x1ED1;ng trong n&#x1EC1;n t&#x1EA3;ng. L&#xFA;c n&#xE0;y, ch&#x1EAF;c ch&#x1EAF;n l&#xE0; s&#x1EBD; t&#x1ED1;n r&#x1EA5;t nhi&#x1EC1;u th&#x1EDD;i gian &#x111;&#x1EC3; n&#xF3; c&#xF3; th&#x1EC3; ch&#x1EA1;y &#x111;&#x1B0;&#x1EE3;c. Ngo&#xE0;i ra, c&#xE1;c lo&#x1EA1;i c&#x1EA5;u h&#xEC;nh to&#xE0;n c&#x1EE5;c c&#x1EA7;n ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c qu&#x1EA3;n l&#xFD; theo c&#xE1;ch th&#x1ED1;ng nh&#x1EA5;t, c&#xE1;c logic c&#x1ED9;ng v&#xE0; tr&#x1EEB; c&#x169;ng ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c qu&#x1EA3;n l&#xFD; theo c&#xE1;ch th&#x1ED1;ng nh&#x1EA5;t. Khi c&#x1EA5;u h&#xEC;nh n&#xE0;y &#x111;&#x1B0;&#x1EE3;c thay &#x111;&#x1ED5;i, h&#x1EC7; th&#x1ED1;ng c&#x1EA7;n ph&#x1EA3;i t&#x1EF1; &#x111;&#x1ED9;ng th&#xF4;ng b&#xE1;o cho to&#xE0;n b&#x1ED9; h&#x1EC7; th&#x1ED1;ng c&#x1EE7;a n&#x1EC1;n t&#x1EA3;ng m&#xE0; kh&#xF4;ng c&#x1EA7;n s&#x1EF1; can thi&#x1EC7;p c&#x1EE7;a con ng&#x1B0;&#x1EDD;i (ho&#x1EB7;c ch&#x1EC9; can thi&#x1EC7;p r&#x1EA5;t &#x111;&#x1A1;n gi&#x1EA3;n, ch&#x1EB3;ng h&#x1EA1;n nh&#x1B0; ki&#x1EC3;m to&#xE1;n nh&#x1EA5;p chu&#x1ED9;t m&#x1ED9;t ph&#xE1;t).</p>
+<p>Ngo&#xE0;i qu&#x1EA3;n l&#xFD; trong l&#x129;nh v&#x1EF1;c kinh doanh, nhi&#x1EC1;u c&#xF4;ng ty Internet c&#xF2;n ph&#x1EA3;i kinh doanh theo quy &#x111;&#x1ECB;nh c&#x1EE7;a th&#xE0;nh ph&#x1ED1;. Khi doanh nghi&#x1EC7;p &#x111;&#x1B0;&#x1EE3;c m&#x1EDF; &#x1EDF; m&#x1ED9;t th&#xE0;nh ph&#x1ED1;, id th&#xE0;nh ph&#x1ED1; m&#x1EDB;i s&#x1EBD; t&#x1EF1; &#x111;&#x1ED9;ng &#x111;&#x1B0;&#x1EE3;c th&#xEA;m v&#xE0;o danh s&#xE1;ch trong h&#x1EC7; th&#x1ED1;ng. B&#x1EB1;ng c&#xE1;ch n&#xE0;y, qu&#xE1; tr&#xEC;nh kinh doanh c&#xF3; th&#x1EC3; ch&#x1EA1;y t&#x1EF1; &#x111;&#x1ED9;ng.</p>
+<p>M&#x1ED9;t v&#xED; d&#x1EE5; kh&#xE1;c, c&#xF3; nhi&#x1EC1;u lo&#x1EA1;i ho&#x1EA1;t &#x111;&#x1ED9;ng trong h&#x1EC7; &#x111;i&#x1EC1;u h&#xE0;nh c&#x1EE7;a m&#x1ED9;t c&#xF4;ng ty. M&#x1ED9;t s&#x1ED1; ho&#x1EA1;t &#x111;&#x1ED9;ng c&#xF3; th&#x1EC3; g&#x1EB7;p nh&#x1EEF;ng s&#x1EF1; ki&#x1EC7;n b&#x1EA5;t ng&#x1EDD; (nh&#x1B0; kh&#x1EE7;ng ho&#x1EA3;ng quan h&#x1EC7; c&#xF4;ng ch&#xFA;ng), v&#xE0; h&#x1EC7; th&#x1ED1;ng c&#x1EA7;n t&#x1EAF;t ch&#x1EE9;c n&#x103;ng li&#xEA;n quan l&#x129;nh v&#x1EF1;c &#x111;&#xF3; &#x111;i. L&#xFA;c n&#xE0;y, m&#x1ED9;t s&#x1ED1; c&#xF4;ng t&#x1EAF;c s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng &#x111;&#x1EC3; t&#x1EAF;t nhanh c&#xE1;c ch&#x1EE9;c n&#x103;ng t&#x1B0;&#x1A1;ng &#x1EE9;ng. Ho&#x1EB7;c nhanh ch&#xF3;ng x&#xF3;a id c&#x1EE7;a ho&#x1EA1;t &#x111;&#x1ED9;ng m&#xE0; b&#x1EA1;n mu&#x1ED1;n kh&#x1ECF;i danh s&#xE1;ch ch&#x1EE9;a. Trong ch&#x1B0;&#x1A1;ng Web, ch&#xFA;ng ta bi&#x1EBF;t r&#x1EB1;ng &#x111;&#xF4;i khi c&#x1EA7;n ph&#x1EA3;i c&#xF3; m&#x1ED9;t h&#x1EC7; th&#x1ED1;ng &#x111;&#x1EC3; &#x111;o &#x111;&#x1B0;&#x1EE3;c l&#x1B0;u l&#x1B0;&#x1EE3;ng truy c&#x1EAD;p v&#xE0;o c&#xE1;c ch&#x1EE9;c n&#x103;ng. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; ch&#x1EE7; &#x111;&#x1ED9;ng l&#x1EA5;y th&#xF4;ng tin n&#xE0;y k&#x1EBF;t h&#x1EE3;p v&#x1EDB;i c&#x1EA5;u h&#xEC;nh h&#x1EC7; th&#x1ED1;ng &#x111;&#x1EC3; t&#x1EAF;t m&#x1ED9;t t&#xED;nh n&#x103;ng trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p c&#xF3; l&#x1B0;u l&#x1B0;&#x1EE3;ng l&#x1EDB;n b&#x1EA5;t th&#x1B0;&#x1EDD;ng.</p>
+<h2 id="662-s&#x1EED;-d&#x1EE5;ng-etcd-&#x111;&#x1EC3;-th&#x1EF1;c-hi&#x1EC7;n-c&#x1EAD;p-nh&#x1EAD;t-c&#x1EA5;u-h&#xEC;nh">6.6.2 S&#x1EED; d&#x1EE5;ng etcd &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh</h2>
+<p>Ch&#xFA;ng ta s&#x1EBD; s&#x1EED; d&#x1EE5;ng etcd &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n &#x111;&#x1ECD;c c&#x1EA5;u h&#xEC;nh v&#xE0; c&#x1EAD;p nh&#x1EAD;t t&#x1EF1; &#x111;&#x1ED9;ng &#x111;&#x1EC3; hi&#x1EC3;u v&#x1EC1; m&#x1ED9;t quy tr&#xEC;nh c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh tr&#x1EF1;c tuy&#x1EBF;n.</p>
+<h3 id="6621-&#x111;&#x1ECB;nh-ngh&#x129;a-c&#x1EA5;u-h&#xEC;nh">6.6.2.1 &#x110;&#x1ECB;nh ngh&#x129;a c&#x1EA5;u h&#xEC;nh</h3>
+<p>C&#x1EA5;u h&#xEC;nh &#x111;&#x1A1;n gi&#x1EA3;n, b&#x1EA1;n c&#xF3; th&#x1EC3; l&#x1B0;u tr&#x1EEF; n&#x1ED9;i dung ho&#xE0;n to&#xE0;n trong etcd. V&#xED; d&#x1EE5;:</p>
+<pre><code class="lang-shell">etcdctl get /configs/remote_config.json
+{
+  &quot;addr&quot; : &quot;127.0.0.1:1080&quot;,
+  &quot;aes_key&quot; : &quot;01B345B7A9ABC00F0123456789ABCDAF&quot;,
+  &quot;https&quot; : false,
+  &quot;secret&quot; : &quot;&quot;,
+  &quot;private_key_path&quot; : &quot;&quot;,
+  &quot;cert_file_path&quot; : &quot;&quot;
+}
+</code></pre>
+<h3 id="6622-t&#x1EA1;o-&#x1EE9;ng-d&#x1EE5;ng-kh&#xE1;ch-etcd">6.6.2.2 T&#x1EA1;o &#x1EE9;ng d&#x1EE5;ng kh&#xE1;ch etcd</h3>
+<pre><code class="lang-go">cfg := client.Config{
+  Endpoints:               []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;http://127.0.0.1:2379&quot;</span>},
+  Transport:               client.DefaultTransport,
+  HeaderTimeoutPerRequest: time.Second,
+}
+</code></pre>
+<p>C&#x1EA5;u tr&#xFA;c kh&#x1EDF;i t&#x1EA1;o k&#x1EBF;t n&#x1ED1;i b&#x1EB1;ng package etcd cho ng&#x1B0;&#x1EDD;i d&#xF9;ng.</p>
+<h3 id="6623-l&#x1EA5;y-c&#x1EA5;u-h&#xEC;nh">6.6.2.3 L&#x1EA5;y c&#x1EA5;u h&#xEC;nh</h3>
+<pre><code class="lang-go">resp, err = kapi.Get(context.Background(), <span class="hljs-string">&quot;/path/to/your/config&quot;</span>, <span class="hljs-literal">nil</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+  log.Fatal(err)
+} <span class="hljs-keyword">else</span> {
+  log.Printf(<span class="hljs-string">&quot;Get is done. Metadata is %q\n&quot;</span>, resp)
+  log.Printf(<span class="hljs-string">&quot;%q key has %q value\n&quot;</span>, resp.Node.Key, resp.Node.Value)
+}
+</code></pre>
+<p>D&#xF9;ng ph&#x1B0;&#x1A1;ng th&#x1EE9;c <code>Get()</code> c&#x1EE7;a KeysAPI trong etcd t&#x1B0;&#x1A1;ng &#x111;&#x1ED1;i &#x111;&#x1A1;n gi&#x1EA3;n.</p>
+<h3 id="6624-&#x111;&#x103;ng-k&#xFD;-t&#x1EF1;-&#x111;&#x1ED9;ng-c&#x1EAD;p-nh&#x1EAD;t-c&#x1EA5;u-h&#xEC;nh">6.6.2.4 &#x110;&#x103;ng k&#xFD; t&#x1EF1; &#x111;&#x1ED9;ng c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh</h3>
+<pre><code class="lang-go">kapi := client.NewKeysAPI(c)
+w := kapi.Watcher(<span class="hljs-string">&quot;/path/to/your/config&quot;</span>, <span class="hljs-literal">nil</span>)
+<span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+  <span class="hljs-keyword">for</span> {
+    resp, err := w.Next(context.Background())
+    log.Println(resp, err)
+    log.Println(<span class="hljs-string">&quot;new values is &quot;</span>, resp.Node.Value)
+  }
+}()
+</code></pre>
+<p>B&#x1EB1;ng c&#xE1;ch theo d&#xF5;i nh&#x1EEF;ng thay &#x111;&#x1ED5;i s&#x1EF1; ki&#x1EC7;n c&#x1EE7;a &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n c&#x1EA5;u h&#xEC;nh, khi c&#xF3; n&#x1ED9;i dung thay &#x111;&#x1ED5;i trong &#x111;&#x1B0;&#x1EDD;ng d&#x1EAB;n, ch&#xFA;ng ta c&#xF3; th&#x1EC3; nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng b&#xE1;o thay &#x111;&#x1ED5;i c&#xF9;ng v&#x1EDB;i gi&#xE1; tr&#x1ECB; &#x111;&#xE3; thay &#x111;&#x1ED5;i.</p>
+<h3 id="6625-t&#xED;ch-h&#x1EE3;p">6.6.2.5 T&#xED;ch h&#x1EE3;p</h3>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+  <span class="hljs-string">&quot;log&quot;</span>
+  <span class="hljs-string">&quot;time&quot;</span>
+
+  <span class="hljs-string">&quot;golang.org/x/net/context&quot;</span>
+  <span class="hljs-string">&quot;github.com/coreos/etcd/client&quot;</span>
+)
+
+<span class="hljs-keyword">var</span> configPath =  <span class="hljs-string">`/configs/remote_config.json`</span>
+<span class="hljs-keyword">var</span> kapi client.KeysAPI
+
+<span class="hljs-keyword">type</span> ConfigStruct <span class="hljs-keyword">struct</span> {
+  Addr           <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;addr&quot;`</span>
+  AesKey         <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;aes_key&quot;`</span>
+  HTTPS          <span class="hljs-keyword">bool</span>   <span class="hljs-string">`json:&quot;https&quot;`</span>
+  Secret         <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;secret&quot;`</span>
+  PrivateKeyPath <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;private_key_path&quot;`</span>
+  CertFilePath   <span class="hljs-keyword">string</span> <span class="hljs-string">`json:&quot;cert_file_path&quot;`</span>
+}
+
+<span class="hljs-keyword">var</span> appConfig ConfigStruct
+
+<span class="hljs-keyword">func</span> init() {
+  cfg := client.Config{
+    Endpoints:               []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;http://127.0.0.1:2379&quot;</span>},
+    Transport:               client.DefaultTransport,
+    HeaderTimeoutPerRequest: time.Second,
+  }
+
+  c, err := client.New(cfg)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+  }
+  kapi = client.NewKeysAPI(c)
+  initConfig()
+}
+
+<span class="hljs-keyword">func</span> watchAndUpdate() {
+  w := kapi.Watcher(configPath, <span class="hljs-literal">nil</span>)
+  <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+    <span class="hljs-keyword">for</span> {
+      resp, err := w.Next(context.Background())
+      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+      }
+      log.Println(<span class="hljs-string">&quot;new values is &quot;</span>, resp.Node.Value)
+
+      err = json.Unmarshal([]<span class="hljs-keyword">byte</span>(resp.Node.Value), &amp;appConfig)
+      <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+      }
+    }
+  }()
+}
+
+<span class="hljs-keyword">func</span> initConfig() {
+  resp, err = kapi.Get(context.Background(), configPath, <span class="hljs-literal">nil</span>)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+  }
+
+  err := json.Unmarshal(resp.Node.Value, &amp;appConfig)
+  <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+  }
+}
+
+<span class="hljs-keyword">func</span> getConfig() ConfigStruct {
+  <span class="hljs-keyword">return</span> appConfig
+}
+
+<span class="hljs-keyword">func</span> main() {
+  <span class="hljs-comment">// init your app</span>
+}
+</code></pre>
+<p>N&#x1EBF;u l&#xE0; doanh nghi&#x1EC7;p nh&#x1ECF;, c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng lu&#xF4;n v&#xED; d&#x1EE5; tr&#xEA;n &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c ch&#x1EE9;c n&#x103;ng m&#xE0; b&#x1EA1;n c&#x1EA7;n.</p>
+<p>C&#xF3; m&#x1ED9;t v&#xE0;i l&#x1B0;u &#xFD; &#x1EDF; &#x111;&#xE2;y, ch&#xFA;ng ta s&#x1EBD; l&#xE0;m r&#x1EA5;t nhi&#x1EC1;u th&#x1EE9; khi c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh: ph&#x1EA3;n h&#x1ED3;i watch, ph&#xE2;n t&#xED;ch json, v&#xE0; c&#xE1;c ho&#x1EA1;t &#x111;&#x1ED9;ng n&#xE0;y kh&#xF4;ng ph&#x1EA3;i l&#xE0; <code>atomic</code>. Khi c&#x1EA5;u h&#xEC;nh b&#x1ECB; thay &#x111;&#x1ED5;i nhi&#x1EC1;u l&#x1EA7;n trong m&#x1ED9;t quy tr&#xEC;nh d&#x1ECB;ch v&#x1EE5;, c&#xF3; th&#x1EC3; xu&#x1EA5;t hi&#x1EC7;n s&#x1EF1; kh&#xF4;ng th&#x1ED1;ng nh&#x1EA5;t logic gi&#x1EEF;a c&#xE1;c y&#xEA;u c&#x1EA7;u x&#x1EA3;y ra tr&#x1B0;&#x1EDB;c v&#xE0; sau khi c&#x1EA5;u h&#xEC;nh thay &#x111;&#x1ED5;i. Do &#x111;&#xF3;, khi b&#x1EA1;n s&#x1EED; d&#x1EE5;ng c&#xE1;ch ti&#x1EBF;p c&#x1EAD;n tr&#xEA;n &#x111;&#x1EC3; c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh c&#x1EE7;a m&#xEC;nh, b&#x1EA1;n c&#x1EA7;n s&#x1EED; d&#x1EE5;ng c&#xF9;ng m&#x1ED9;t c&#x1EA5;u h&#xEC;nh trong su&#x1ED1;t v&#xF2;ng &#x111;&#x1EDD;i c&#x1EE7;a m&#x1ED9;t y&#xEA;u c&#x1EA7;u. C&#xE1;ch th&#x1EE9;c th&#x1EF1;c hi&#x1EC7;n c&#x1EE5; th&#x1EC3; n&#xEA;n l&#x1EA5;y c&#x1EA5;u h&#xEC;nh m&#x1ED9;t l&#x1EA7;n khi y&#xEA;u c&#x1EA7;u b&#x1EAF;t &#x111;&#x1EA7;u, v&#xE0; sau &#x111;&#xF3; &#x111;&#x1B0;&#x1EE3;c truy&#x1EC1;n ti&#x1EBF;p &#x111;i cho &#x111;&#x1EBF;n h&#x1EBF;t v&#xF2;ng &#x111;&#x1EDD;i c&#x1EE7;a y&#xEA;u c&#x1EA7;u.</p>
+<h2 id="663-s&#x1EF1;-ph&#xEC;nh-to-c&#x1EE7;a-c&#x1EA5;u-h&#xEC;nh">6.6.3 S&#x1EF1; ph&#xEC;nh to c&#x1EE7;a c&#x1EA5;u h&#xEC;nh</h2>
+<p>Khi doanh nghi&#x1EC7;p ph&#xE1;t tri&#x1EC3;n, &#xE1;p l&#x1EF1;c l&#xEA;n h&#x1EC7; th&#x1ED1;ng c&#x1EA5;u h&#xEC;nh c&#xF3; th&#x1EC3; ng&#xE0;y c&#xE0;ng l&#x1EDB;n h&#x1A1;n v&#xE0; s&#x1ED1; l&#x1B0;&#x1EE3;ng t&#x1EC7;p c&#x1EA5;u h&#xEC;nh c&#xF3; th&#x1EC3; l&#xE0; h&#xE0;ng ch&#x1EE5;c ngh&#xEC;n. M&#xE1;y kh&#xE1;ch c&#x169;ng c&#xF3; h&#xE0;ng ch&#x1EE5;c ngh&#xEC;n v&#xE0; vi&#x1EC7;c l&#x1B0;u tr&#x1EEF; n&#x1ED9;i dung c&#x1EA5;u h&#xEC;nh b&#xEA;n trong etcd kh&#xF4;ng c&#xF2;n ph&#xF9; h&#x1EE3;p n&#x1EEF;a. Khi s&#x1ED1; l&#x1B0;&#x1EE3;ng t&#x1EC7;p c&#x1EA5;u h&#xEC;nh m&#x1EDF; r&#x1ED9;ng, ngo&#xE0;i c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; v&#x1EC1; th&#xF4;ng l&#x1B0;&#x1EE3;ng c&#x1EE7;a h&#x1EC7; th&#x1ED1;ng l&#x1B0;u tr&#x1EEF;, c&#xF2;n c&#xF3; c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; v&#x1EC1; qu&#x1EA3;n l&#xFD; &#x111;&#x1ED1;i v&#x1EDB;i th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh. Ch&#xFA;ng ta c&#x1EA7;n qu&#x1EA3;n l&#xFD; c&#xE1;c quy&#x1EC1;n c&#x1EE7;a c&#x1EA5;u h&#xEC;nh t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#xE0; ch&#xFA;ng ta c&#x1EA7;n c&#x1EA5;u h&#xEC;nh c&#x1EE5;m l&#x1B0;u tr&#x1EEF; theo l&#x1B0;u l&#x1B0;&#x1EE3;ng truy c&#x1EAD;p. N&#x1EBF;u c&#xF3; qu&#xE1; nhi&#x1EC1;u m&#xE1;y kh&#xE1;ch, khi&#x1EBF;n h&#x1EC7; th&#x1ED1;ng l&#x1B0;u tr&#x1EEF; c&#x1EA5;u h&#xEC;nh kh&#xF4;ng th&#x1EC3; ch&#x1ECB;u &#x111;&#x1B0;&#x1EE3;c l&#x1B0;&#x1EE3;ng l&#x1EDB;n QPS, th&#xEC; c&#xF3; th&#x1EC3; c&#x1EA7;n ph&#x1EA3;i th&#x1EF1;c hi&#x1EC7;n t&#x1ED1;i &#x1B0;u h&#xF3;a cache &#x1EDF; ph&#xED;a m&#xE1;y kh&#xE1;ch, v.v.</p>
+<p>&#x110;&#xF3; l&#xE0; l&#xFD; do t&#x1EA1;i sao c&#xE1;c c&#xF4;ng ty l&#x1EDB;n lu&#xF4;n ph&#x1EA3;i ph&#xE1;t tri&#x1EC3;n m&#x1ED9;t h&#x1EC7; th&#x1ED1;ng c&#x1EA5;u h&#xEC;nh ph&#x1EE9;c t&#x1EA1;p cho doanh nghi&#x1EC7;p c&#x1EE7;a h&#x1ECD;.</p>
+<h2 id="664-qu&#x1EA3;n-l&#xFD;-phi&#xEA;n-b&#x1EA3;n-c&#x1EE7;a-c&#x1EA5;u-h&#xEC;nh">6.6.4 Qu&#x1EA3;n l&#xFD; phi&#xEA;n b&#x1EA3;n c&#x1EE7;a c&#x1EA5;u h&#xEC;nh</h2>
+<p>Trong quy tr&#xEC;nh qu&#x1EA3;n l&#xFD; c&#x1EA5;u h&#xEC;nh, kh&#xF4;ng th&#x1EC3; tr&#xE1;nh kh&#x1ECF;i vi&#x1EC7;c ng&#x1B0;&#x1EDD;i &#x111;i&#x1EC1;u h&#xE0;nh th&#x1EF1;c hi&#x1EC7;n sai. V&#xED; d&#x1EE5;: khi c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh, m&#x1ED9;t c&#x1EA5;u h&#xEC;nh kh&#xF4;ng th&#x1EC3; &#x111;&#x1ECD;c &#x111;&#x1B0;&#x1EE3;c. L&#xFA;c n&#xE0;y, ch&#xFA;ng ta gi&#x1EA3;i quy&#x1EBF;t b&#x1EB1;ng c&#xE1;ch ki&#x1EC3;m tra to&#xE0;n b&#x1ED9;.</p>
+<p>&#x110;&#xF4;i khi vi&#x1EC7;c sai c&#x1EA5;u h&#xEC;nh c&#xF3; th&#x1EC3; kh&#xF4;ng ph&#x1EA3;i l&#xE0; do v&#x1EA5;n &#x111;&#x1EC1; v&#x1EDB;i &#x111;&#x1ECB;nh d&#x1EA1;ng, m&#xE0; l&#xE0; v&#x1EA5;n &#x111;&#x1EC1; logic. V&#xED; d&#x1EE5;: khi ch&#xFA;ng ta vi&#x1EBF;t SQL, ch&#xFA;ng ta ch&#x1ECD;n &#xED;t tr&#x1B0;&#x1EDD;ng h&#x1A1;n. Khi ch&#xFA;ng ta c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh, ch&#xFA;ng ta v&#xF4; t&#xEC;nh l&#xE0;m m&#x1EA5;t m&#x1ED9;t tr&#x1B0;&#x1EDD;ng trong chu&#x1ED7;i json v&#xE0; khi&#x1EBF;n ch&#x1B0;&#x1A1;ng tr&#xEC;nh hi&#x1EC3;u c&#x1EA5;u h&#xEC;nh m&#x1EDB;i v&#xE0; th&#x1EF1;c hi&#x1EC7;n m&#x1ED9;t logic m&#x1EDB;i. C&#xE1;ch nhanh nh&#x1EA5;t v&#xE0; hi&#x1EC7;u qu&#x1EA3; nh&#x1EA5;t &#x111;&#x1EC3; ng&#x103;n ch&#x1EB7;n nh&#x1EEF;ng l&#x1ED7;i l&#x1EA7;m n&#xE0;y nhanh ch&#xF3;ng l&#xE0; qu&#x1EA3;n l&#xFD; phi&#xEA;n b&#x1EA3;n v&#xE0; h&#x1ED7; tr&#x1EE3; kh&#xF4;i ph&#x1EE5;c theo phi&#xEA;n b&#x1EA3;n.</p>
+<p>Khi c&#x1EA5;u h&#xEC;nh &#x111;&#x1B0;&#x1EE3;c c&#x1EAD;p nh&#x1EAD;t, ch&#xFA;ng ta s&#x1EBD; ch&#x1EC9; &#x111;&#x1ECB;nh s&#x1ED1; phi&#xEA;n b&#x1EA3;n cho t&#x1EEB;ng n&#x1ED9;i dung c&#x1EE7;a c&#x1EA5;u h&#xEC;nh, v&#xE0; lu&#xF4;n ghi l&#x1EA1;i n&#x1ED9;i dung v&#xE0; s&#x1ED1; phi&#xEA;n b&#x1EA3;n tr&#x1B0;&#x1EDB;c m&#x1ED7;i l&#x1EA7;n thay &#x111;&#x1ED5;i, th&#x1EF1;c hi&#x1EC7;n quay ng&#x1B0;&#x1EE3;c b&#x1EA3;n tr&#x1B0;&#x1EDB;c khi ph&#xE1;t hi&#x1EC7;n s&#x1EF1; c&#x1ED1; v&#x1EDB;i c&#x1EA5;u h&#xEC;nh m&#x1EDB;i.</p>
+<p>M&#x1ED9;t c&#xE1;ch ph&#x1ED5; bi&#x1EBF;n trong th&#x1EF1;c t&#x1EBF; l&#xE0; s&#x1EED; d&#x1EE5;ng MySQL &#x111;&#x1EC3; l&#x1B0;u tr&#x1EEF; c&#xE1;c phi&#xEA;n b&#x1EA3;n kh&#xE1;c nhau c&#x1EE7;a t&#x1EC7;p c&#x1EA5;u h&#xEC;nh ho&#x1EB7;c chu&#x1ED7;i c&#x1EA5;u h&#xEC;nh. Khi b&#x1EA1;n c&#x1EA7;n quay l&#x1EA1;i, ch&#x1EC9; c&#x1EA7;n th&#x1EF1;c hi&#x1EC7;n m&#x1ED9;t truy v&#x1EA5;n &#x111;&#x1A1;n gi&#x1EA3;n.</p>
+<h2 id="665-kh&#x1EA3;-n&#x103;ng-ch&#x1ECB;u-l&#x1ED7;i-&#x1EDF;-m&#xE1;y-kh&#xE1;ch">6.6.5 Kh&#x1EA3; n&#x103;ng ch&#x1ECB;u l&#x1ED7;i &#x1EDF; m&#xE1;y kh&#xE1;ch</h2>
+<p>Sau khi c&#x1EA5;u h&#xEC;nh c&#x1EE7;a h&#x1EC7; th&#x1ED1;ng kinh doanh &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1EBF;n trung t&#xE2;m c&#x1EA5;u h&#xEC;nh, &#x111;i&#x1EC1;u &#x111;&#xF3; kh&#xF4;ng c&#xF3; ngh&#x129;a l&#xE0; h&#x1EC7; th&#x1ED1;ng c&#x1EE7;a ch&#xFA;ng ta &#x111;&#xE3; ho&#xE0;n th&#xE0;nh nhi&#x1EC7;m v&#x1EE5;. Khi trung t&#xE2;m c&#x1EA5;u h&#xEC;nh ng&#x1EEB;ng ho&#x1EA1;t &#x111;&#x1ED9;ng, ch&#xFA;ng ta c&#x169;ng c&#x1EA7;n m&#x1ED9;t v&#xE0;i c&#x1A1; ch&#x1EBF; ch&#x1ECB;u l&#x1ED7;i, &#xED;t nh&#x1EA5;t l&#xE0; &#x111;&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng doanh nghi&#x1EC7;p v&#x1EAB;n c&#xF3; th&#x1EC3; ho&#x1EA1;t &#x111;&#x1ED9;ng trong th&#x1EDD;i gian n&#xE0;y. &#x110;i&#x1EC1;u n&#xE0;y &#x111;&#xF2;i h&#x1ECF;i h&#x1EC7; th&#x1ED1;ng ph&#x1EA3;i l&#x1EA5;y &#x111;&#x1EE7; th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh c&#x1EA7;n thi&#x1EBF;t tr&#x1B0;&#x1EDB;c khi trung t&#xE2;m c&#x1EA5;u h&#xEC;nh ng&#x1EEB;ng ho&#x1EA1;t &#x111;&#x1ED9;ng. Ngay c&#x1EA3; khi th&#xF4;ng tin n&#xE0;y kh&#xF4;ng &#x111;&#x1EE7; m&#x1EDB;i.</p>
+<p>C&#x1EE5; th&#x1EC3;, khi cung c&#x1EA5;p SDK &#x111;&#x1ECD;c c&#x1EA5;u h&#xEC;nh cho m&#x1ED9;t d&#x1ECB;ch v&#x1EE5;, t&#x1ED1;t nh&#x1EA5;t l&#xE0; l&#x1B0;u cache c&#x1EA5;u h&#xEC;nh thu &#x111;&#x1B0;&#x1EE3;c tr&#xEA;n &#x111;&#x129;a c&#x1EE7;a m&#xE1;y nghi&#x1EC7;p v&#x1EE5;. Khi trung t&#xE2;m c&#x1EA5;u h&#xEC;nh kh&#xF4;ng ho&#x1EA1;t &#x111;&#x1ED9;ng, b&#x1EA1;n c&#xF3; th&#x1EC3; tr&#x1EF1;c ti&#x1EBF;p s&#x1EED; d&#x1EE5;ng n&#x1ED9;i dung c&#x1EE7;a &#x111;&#x129;a c&#x1EE9;ng. Khi k&#x1EBF;t n&#x1ED1;i l&#x1EA1;i &#x111;&#x1B0;&#x1EE3;c v&#x1EDB;i trung t&#xE2;m c&#x1EA5;u h&#xEC;nh, c&#xE1;c n&#x1ED9;i dung s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c c&#x1EAD;p nh&#x1EAD;t.</p>
+<p>H&#xE3;y xem x&#xE9;t k&#x1EF9; v&#x1EA5;n &#x111;&#x1EC1; th&#x1ED1;ng nh&#x1EA5;t d&#x1EEF; li&#x1EC7;u khi th&#xEA;m b&#x1ED9; &#x111;&#x1EC7;m. C&#xE1;c m&#xE1;y kinh doanh c&#xF3; th&#x1EC3; kh&#xF4;ng th&#x1ED1;ng nh&#x1EA5;t v&#x1EC1; c&#x1EA5;u h&#xEC;nh do l&#x1ED7;i m&#x1EA1;ng, ch&#xFA;ng t&#xF4;i c&#x1EA7;n bi&#x1EBF;t &#x111;&#x1B0;&#x1EE3;c n&#xF3; &#x111;ang di&#x1EC5;n ra b&#x1EB1;ng h&#x1EC7; th&#x1ED1;ng gi&#xE1;m s&#xE1;t.</p>
+<p>Ch&#xFA;ng ta s&#x1EED; d&#x1EE5;ng m&#x1ED9;t c&#xE1;ch &#x111;&#x1EC3; gi&#x1EA3;i quy&#x1EBF;t c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; c&#x1EE7;a vi&#x1EC7;c c&#x1EAD;p nh&#x1EAD;t c&#x1EA5;u h&#xEC;nh, nh&#x1B0;ng &#x111;&#x1ED3;ng th&#x1EDD;i ch&#xFA;ng ta l&#x1EA1;i mang &#x111;&#x1EBF;n nh&#x1EEF;ng v&#x1EA5;n &#x111;&#x1EC1; m&#x1EDB;i b&#x1EB1;ng vi&#x1EC7;c s&#x1EED; d&#x1EE5;ng c&#xE1;ch &#x111;&#xF3;. Trong th&#x1EF1;c t&#x1EBF;, ch&#xFA;ng ta ph&#x1EA3;i suy ngh&#x129; r&#x1EA5;t nhi&#x1EC1;u v&#x1EC1; t&#x1EEB;ng quy&#x1EBF;t &#x111;&#x1ECB;nh &#x111;&#x1EC3; ch&#xFA;ng ta kh&#xF4;ng b&#x1ECB; thua l&#x1ED7; khi v&#x1EA5;n &#x111;&#x1EC1; x&#x1EA3;y ra.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch6-05-load-balance.html" class="navigation navigation-prev " aria-label="Previous page: 6.5 Cân bằng tải">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch6-07-crawler.html" class="navigation navigation-next " aria-label="Next page: 6.7 Trình thu thập thông tin phân tán">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"6.6 Quản lý cấu hình trong hệ thống phân tán","level":"1.7.6","depth":2,"next":{"title":"6.7 Trình thu thập thông tin phân tán","level":"1.7.7","depth":2,"path":"ch6-cloud/ch6-07-crawler.md","ref":"ch6-cloud/ch6-07-crawler.md","articles":[]},"previous":{"title":"6.5 Cân bằng tải","level":"1.7.5","depth":2,"path":"ch6-cloud/ch6-05-load-balance.md","ref":"ch6-cloud/ch6-05-load-balance.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch6-cloud/ch6-06-config.md","mtime":"2019-07-15T10:56:18.503Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-31T08:36:39.868Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
