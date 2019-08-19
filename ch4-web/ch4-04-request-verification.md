@@ -170,7 +170,6 @@ Sẽ được vẽ thành một cây như bên dưới:
 		<i>Cây validator</i>
 	</span>
 </div>
-<br/>
 
 Việc validate các trường có thể thực hiện khi đi qua cấu trúc cây này (bằng cách duyệt theo chiều sâu hoặc theo chiều rộng). Tiếp theo chúng ta sẽ minh hoạ cơ chế validate trên một cấu trúc như thế, mục đích để hiểu rõ hơn cách mà validator thực hiện.
 

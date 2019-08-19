@@ -142,7 +142,6 @@ Ta thường sử dụng `defer` cho việc đóng hoặc giải phóng tài ngu
 		<i>Minh hoạ slice</i>
 	</span>
 </div>
-<br/>
 
 Mọi thứ trong Go đều được truyền theo kiểu pass by value, slice cũng thế. Nhưng vì giá trị của slice là một *header* (chứa con trỏ tới dữ liệu array bên dưới) nên khi truyền slice vào hàm, quá trình copy sẽ bao gồm luôn địa chỉ tới array chứa dữ liệu thực sự.
 
@@ -561,6 +560,5 @@ Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ h�
 <br/>
 <span align="center"><i>Tiến trình khởi tạo package</i></span>
 </div>
-<br/>
 
 Cần lưu ý rằng trước khi hàm nào khác được thực thi thì tất cả code đều chạy trong cùng một Goroutine `main.main`, đây là thread chính của chương trình. Do đó, nếu một Goroutine khởi chạy trong hàm `main.main` thì nó chỉ có thể được thực thi sau khi vào chương trình đã thực thi xong `init`.

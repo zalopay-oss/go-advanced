@@ -28,7 +28,6 @@ Time heap là phổ biến nhất và thường được hiện thực bằng mi
 		<i>Cấu trúc heap nhị phân</i>
 	</span>
 </div>
-<br/>
 
 Những lợi ích của min heap là gì? Trong thực tế, đối với bộ đếm thời gian, nếu phần tử trên cùng lớn hơn thời gian hiện tại, thì tất cả các phần tử trong heap đều lớn hơn thời gian hiện tại. Hơn nữa, chúng ta không cần quan tâm gì về time heap. Độ phức tạp thời gian của việc kiểm tra này là `O(1)`.
 
@@ -43,7 +42,6 @@ Bộ đếm thời gian tích hợp sẵn của Go được hiện thực với 
 		<i>Quad Cross Stack Structure</i>
 	</span>
 </div>
-<br/>
 
 Bản chất của min heap, node cha nhỏ hơn bốn node con của nó, không có mối quan hệ kích thước đặc biệt giữa các node con.
 
@@ -58,7 +56,6 @@ Không có sự khác biệt giữa thời gian quá hạn của phần tử và
 		<i>Time Wheel</i>
 	</span>
 </div>
-<br/>
 
 Khi sử dụng time wheel để hiện thực bộ đếm thời gian, chúng ta cần xác định `tỷ lệ` của mỗi ô. Bánh xe thời gian có thể được tưởng tượng như một chiếc đồng hồ và trung tâm có kim giây theo chiều kim đồng hồ. Mỗi lần chúng ta chuyển sang một ô, chúng ta cần xem danh sách nhiệm vụ được gắn trên ô đó có nhiệm vụ đã đến hạn hay không.
 
@@ -79,7 +76,6 @@ Chúng ta cần phân bố các công việc theo "thời gian" hoặc "trì ho�
 		<i>Distributed Task Distribution</i>
 	</span>
 </div>
-<br/>
 
 Mỗi giờ, mỗi instance sẽ vào cơ sở dữ liệu để truy xuất các tác vụ được định thời trước để xử lý trong giờ tiếp theo. Chỉ cần chọn các tác vụ đó với **task_id % shard_count = shard_id**.
 
@@ -107,7 +103,6 @@ Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của [Ela
 		<i>Task Data Distribution</i>
 	</span>
 </div>
-<br/>
 
 Mặc dù có hai node cùng sở hữu một dữ liệu, dữ liệu sẽ có sự phân biệt: `bản chính` hay `bản phụ`. Bản chính là ô vuông có tô đậm viền trong hình và bản phụ có viền bình thường. Một tác vụ sẽ chỉ được thực hiện trên node có bản chính.
 
@@ -120,7 +115,6 @@ Khi có node bị lỗi, ta cần phân phối các dữ liệu của tác vụ 
 		<i>Data distribution at fault</i>
 	</span>
 </div>
-<br/>
 
 Dữ liệu của node 1 sẽ được di chuyển đến node 2 và node 3.
 

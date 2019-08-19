@@ -13,7 +13,6 @@ Thuật toán [snowflake](https://developer.twitter.com/en/docs/basics/twitter-i
 		<i>Phân phối Bit trong snowflake</i>
 	</span>
 </div>
-<br/>
 
 Đầu tiên, ta xác định rằng giá trị là 64 bit, kiểu dữ liệu tương ứng bên Go là int64, chúng được chia thành bốn phần:
 
@@ -67,7 +66,6 @@ Xem xét đến việc có một service tạo ID bị lỗi trong cluster, mộ
 		<i>Thư viện snowflake</i>
 	</span>
 </div>
-<br/>
 
 Nó giống hoàn toàn như snowflake tiêu chuẩn. Và tương đối đơn giản để sử dụng như ví dụ sau:
 
@@ -142,7 +140,6 @@ Dĩ nhiên, thư viện này cũng cho phép chúng ta tùy chỉnh vài thông 
 		<i>Sonyflake</i>
 	</span>
 </div>
-<br/>
 
 Thời gian ở đây chỉ sử dụng 39 bit, nhưng đơn vị thời gian trở thành 10ms. Về mặt lý thuyết, nó dài hơn thời gian của snowflake chuẩn đến 41 bit (174 năm).
 
