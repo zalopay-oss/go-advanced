@@ -9,7 +9,7 @@ Trong phần trước, chúng ta đã cùng tìm hiểu sơ lược về các ng
 		<i>Lịch sử tiến hóa của ngôn ngữ Go</i>
 	</span>
 </div>
-<br/>
+
 
 ## 1.2.1. Ngôn ngữ B - Ken Thompson, 1972
 
@@ -100,7 +100,7 @@ Bởi vì các tính năng liên quan đến ngôn ngữ Newsqueak và ngôn ng�
 		<i>Sàng số nguyên tố</i>
 	</span>
 </div>
-<br/>
+
 
 Chương trình "sàng số nguyên tố" cho phiên bản concurrency của ngôn ngữ Newsqueak như sau:
 
@@ -170,7 +170,7 @@ Hình sau đây là trạng thái concurrency của Alef:
 		<i>Mô hình concurrency trong Alef</i>
 	</span>
 </div>
-<br/>
+
 
 Chương trình "Hello World" cho phiên bản concurrency của ngôn ngữ Alef:
 

@@ -7,7 +7,6 @@
 		<i>Distributed lock</i>
 	</span>
 </div>
-<br/>
 
 Trước khi đi vào nội dung chính là `Distributed lock` chúng ta cùng xem xét bài toán sau. Khi một chương trình chạy đồng thời hoặc song song sửa đổi biến toàn cục, hành vi sửa đổi này cần phải được `lock` để tránh trường hợp [race conditions](https://en.wikipedia.org/wiki/Race_condition). Tại sao bạn cần phải lock ? Hãy xem điều gì xảy ra khi trong bài toán đếm số một cách đồng thời mà không lock dưới đây.
 

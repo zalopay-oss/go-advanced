@@ -18,8 +18,8 @@ Trải qua quá trình phát triển, phần back-end của chương trình ngà
 	<span align="center">
 		<i>Kiến trúc một dự án web</i>
 	</span>
+	<br/>
 </div>
-<br/>
 
 **Vue** và **React** trong hình là hai frameworks front-end phổ biến trên thế giới, bởi vì chúng ta không tập trung nói về nó, do đó cấu trúc front-end của dự án không được nhấn mạnh trên lưu đồ. Thực tế trong vài dự án đơn giản, ngành công nghiệp không hoàn toàn tuân theo mô hình MVC, đặc biệt là phần M và C. Có nhiều công ty mà dự án của họ có rất nhiều phần logic bên trong lớp Controller, và chỉ quản lý phần lưu trữ dữ liệu ở lớp Model.
 
@@ -41,8 +41,9 @@ Mỗi lớp sẽ thực thi công việc của nó, sau đó xây dựng lên c�
 	<span align="center">
 		<i>Flow xử lý request</i>
 	</span>
+	<br/>
 </div>
-<br/>
+
 
 Sau khi chia ra ba lớp CLD (Controller-Logic-DAO), chúng ta cần phải hỗ trợ nhiều giao thức trong lớp Controller như Thrift, gRPC hoặc HTTP đóng vai trò như là một interface. Quá trình xử lý request có thể như sơ đồ sau:
 

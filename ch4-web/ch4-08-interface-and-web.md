@@ -74,7 +74,6 @@ Nếu hiện thực một platform system mà nó yêu cầu định nghĩa các
 		<i>Implementing a public interface</i>
 	</span>
 </div>
-<br/>
 
 Flatform cần phải phục vụ nhiều business khác nhau, nhưng dữ liệu được định nghĩa cần phải thống nhất. Về phía platform, chúng ta có thể định nghĩa một tập các interfaces tương tự như trên, sau đó tuỳ theo yêu cầu của các business cụ thể của chúng cần hiện thực lại. Nếu interface có một số bước không mong muốn, chỉ cần trả về `nil`, hoặc có thể bỏ qua chúng.
 

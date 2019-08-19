@@ -8,7 +8,6 @@ Có ba cách để sử dụng mã nguồn C/C++ trong **CGO**:
 <div align="center">
 	<img src="../images/ch2-9-static-dynamic-lib.gif" width="400">
 </div>
-<br/>
 
 Chi tiết về sự khác biệt giữa thư viện tĩnh và động bạn đọc có thể xem thêm tại đây: [What-is-the-difference-between-static-and-dynamic-linking](https://www.quora.com/What-is-the-difference-between-static-and-dynamic-linking).
 
