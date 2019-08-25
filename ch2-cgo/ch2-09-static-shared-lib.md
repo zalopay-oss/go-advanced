@@ -151,7 +151,7 @@ Một khi `libnumber.a` được sinh ra, có thể  dùng `-lnumber` thông qua
 
 Nên chú ý rằng, tại thời điểm thực thi, thư viện động cần được đặt ở cùng nơi để system có thể thấy. Trên Windows, bạn có thể đặt dynamic library và executable program trong cùng một thư mục, hoặc thêm đường dẫn tuyệt đối của thư mục trong khi dynamic library được đưa vào biến môi trường PATH. Trong MacOS, bạn cần phải thiết lập biến môi trường DYLD_LIBRARY_PATH. Trong hệ thống Linux, bạn cần thiết lập biến LD_LIBRARY_PATH.
 
-## 2.9.3.  Exporting C Static Libraries
+## 2.9.3.  Exporting thư việc C tĩnh
 
 CGO không chỉ được dùng trong thư viện C tĩnh, các export functions được hiện thực bởi Go hoặc C static libraries. Chúng ta có thể dùng Go để hiện thực modulo addition function như phần trước ở ví dụ như sau đây.
 
@@ -221,7 +221,7 @@ $ ./a.out
 ```
  
 
-## 2.9.4. Exporting C Dynamic Library
+## 2.9.4. Exporting thư viện C động
 
 Quá trình exporting một thư viện động bằng CGO sẽ tương tự như một thư viện tĩnh, ngoại trừ build mode sẽ thay đổi c-shared và output file name được đổi thành `number.so`.
 
