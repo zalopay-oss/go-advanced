@@ -413,7 +413,6 @@ Duck-typing với ý tưởng đơn giản:
 	<span align="center">
 	</span>
 </div>
-<br/>
 
 Ví dụ có một interface con vịt, xác định khả năng `Quacks`:
 
