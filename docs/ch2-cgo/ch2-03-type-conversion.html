@@ -1,0 +1,1245 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>2.3 Chuyển đổi kiểu · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch2-04-function-call.html" />
+    
+    
+    <link rel="prev" href="ch2-02-CGO-foundation.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-concurrency-parallelism.html">
+            
+                <a href="../ch1-basic/ch1-05-concurrency-parallelism.html">
+            
+                    
+                    1.5 Khái niệm xử lý đồng thời và song song
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Mô hình thực thi đồng thời
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="ch2-01-quick-start.html">
+            
+                <a href="ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="ch2-02-CGO-foundation.html">
+            
+                <a href="ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="ch2-03-type-conversion.html">
+            
+                <a href="ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="ch2-04-function-call.html">
+            
+                <a href="ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="ch2-05-internal-mechanisms.html">
+            
+                <a href="ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="ch2-09-static-shared-lib.html">
+            
+                <a href="ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="ch2-10-link.html">
+            
+                <a href="ch2-10-link.html">
+            
+                    
+                    2.10 Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="ch2-11-ext.html">
+            
+                <a href="ch2-11-ext.html">
+            
+                    
+                    2.11 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-rpc/">
+            
+                <a href="../ch3-rpc/">
+            
+                    
+                    Chương 3: RPC và Protobuf
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../ch3-rpc/ch3-01-rpc-intro.html">
+            
+                <a href="../ch3-rpc/ch3-01-rpc-intro.html">
+            
+                    
+                    3.1 Bắt đầu với RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../ch3-rpc/ch3-02-pb-intro.html">
+            
+                <a href="../ch3-rpc/ch3-02-pb-intro.html">
+            
+                    
+                    3.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../ch3-rpc/ch3-03-fun-fpc.html">
+            
+                <a href="../ch3-rpc/ch3-03-fun-fpc.html">
+            
+                    
+                    3.3 RPC trong Golang
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../ch3-rpc/ch3-04-grpc.html">
+            
+                <a href="../ch3-rpc/ch3-04-grpc.html">
+            
+                    
+                    3.4 Bắt đầu với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../ch3-rpc/ch3-05-grpc-advanced.html">
+            
+                <a href="../ch3-rpc/ch3-05-grpc-advanced.html">
+            
+                    
+                    3.5 gRPC Nâng cao
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../ch3-rpc/ch3-06-grpc-ext.html">
+            
+                <a href="../ch3-rpc/ch3-06-grpc-ext.html">
+            
+                    
+                    3.6 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../ch3-rpc/ch3-07-pbgo.html">
+            
+                <a href="../ch3-rpc/ch3-07-pbgo.html">
+            
+                    
+                    3.7 pbgo : Protobuf-based framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../ch3-rpc/ch3-08-grpc-curl.html">
+            
+                <a href="../ch3-rpc/ch3-08-grpc-curl.html">
+            
+                    
+                    3.8 grpcurl tool
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../ch3-rpc/ch3-09-supplementary-notes.html">
+            
+                <a href="../ch3-rpc/ch3-09-supplementary-notes.html">
+            
+                    
+                    3.9 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-web/">
+            
+                <a href="../ch4-web/">
+            
+                    
+                    Chương 4: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-web/ch4-01-introduction.html">
+            
+                <a href="../ch4-web/ch4-01-introduction.html">
+            
+                    
+                    4.1 Giới thiệu về Web Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-web/ch4-02-router.html">
+            
+                <a href="../ch4-web/ch4-02-router.html">
+            
+                    
+                    4.2 Routing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-web/ch4-03-middleware.html">
+            
+                <a href="../ch4-web/ch4-03-middleware.html">
+            
+                    
+                    4.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-web/ch4-04-request-verification.html">
+            
+                <a href="../ch4-web/ch4-04-request-verification.html">
+            
+                    
+                    4.4 Validator request check
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-web/ch4-05-database.html">
+            
+                <a href="../ch4-web/ch4-05-database.html">
+            
+                    
+                    4.5 Database và giao tiếp với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                <a href="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                    
+                    4.6 Ratelimit Service Flow Limit
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                <a href="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                    
+                    4.7 Bố cục thông thường của các dự án web lớn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-web/ch4-08-interface-and-web.html">
+            
+                <a href="../ch4-web/ch4-08-interface-and-web.html">
+            
+                    
+                    4.8 Interface và Table Driven Development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../ch4-web/ch4-09-ext.html">
+            
+                <a href="../ch4-web/ch4-09-ext.html">
+            
+                    
+                    4.9 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-cloud/">
+            
+                <a href="../ch5-cloud/">
+            
+                    
+                    Chương 5: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-cloud/ch5-01-dist-id.html">
+            
+                <a href="../ch5-cloud/ch5-01-dist-id.html">
+            
+                    
+                    5.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-cloud/ch5-02-lock.html">
+            
+                <a href="../ch5-cloud/ch5-02-lock.html">
+            
+                    
+                    5.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-cloud/ch5-03-delay-job.html">
+            
+                <a href="../ch5-cloud/ch5-03-delay-job.html">
+            
+                    
+                    5.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-cloud/Ch5-04-search-engine.html">
+            
+                <a href="../ch5-cloud/Ch5-04-search-engine.html">
+            
+                    
+                    5.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-cloud/ch5-05-load-balance.html">
+            
+                <a href="../ch5-cloud/ch5-05-load-balance.html">
+            
+                    
+                    5.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-cloud/ch5-06-config.html">
+            
+                <a href="../ch5-cloud/ch5-06-config.html">
+            
+                    
+                    5.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-cloud/ch5-07-crawler.html">
+            
+                <a href="../ch5-cloud/ch5-07-crawler.html">
+            
+                    
+                    5.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-cloud/ch5-08-ext.html">
+            
+                <a href="../ch5-cloud/ch5-08-ext.html">
+            
+                    
+                    5.8 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-best-practice/README.md">
+            
+                <span>
+            
+                    
+                    Chương 6: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >2.3 Chuyển đổi kiểu</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="23-chuy&#x1EC3;n-&#x111;&#x1ED5;i-ki&#x1EC3;u-d&#x1EEF;-li&#x1EC7;u">2.3. Chuy&#x1EC3;n &#x111;&#x1ED5;i ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u</h1>
+<p>Ban &#x111;&#x1EA7;u, CGO &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra &#x111;&#x1EC3; thu&#x1EAD;n l&#x1EE3;i cho vi&#x1EC7;c s&#x1EED; d&#x1EE5;ng c&#xE1;c h&#xE0;m trong C (c&#xE1;c h&#xE0;m hi&#x1EC7;n th&#x1EF1;c khai b&#xE1;o Golang trong C) &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng l&#x1EA1;i c&#xE1;c t&#xE0;i nguy&#xEA;n c&#x1EE7;a C. Ng&#xE0;y nay, CGO &#x111;&#xE3; ph&#xE1;t tri&#x1EC3;n th&#xE0;nh c&#x1EA7;u n&#x1ED1;i giao ti&#x1EBF;p hai chi&#x1EC1;u gi&#x1EEF;a C v&#xE0; Go. &#x110;&#x1EC3; t&#x1EAD;n d&#x1EE5;ng t&#xED;nh n&#x103;ng c&#x1EE7;a CGO, vi&#x1EC7;c hi&#x1EC3;u c&#xE1;c quy t&#x1EAF;c chuy&#x1EC3;n &#x111;&#x1ED5;i ki&#x1EC3;u gi&#x1EEF;a hai lo&#x1EA1;i ng&#xF4;n ng&#x1EEF; l&#xE0; &#x111;i&#x1EC1;u quan tr&#x1ECD;ng.</p>
+<h2 id="231-c&#xE1;c-ki&#x1EC3;u-d&#x1EEF;-li&#x1EC7;u-s&#x1ED1;-h&#x1ECD;c">2.3.1. C&#xE1;c ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u s&#x1ED1; h&#x1ECD;c</h2>
+<p>Khi ta s&#x1EED; d&#x1EE5;ng c&#xE1;c k&#xFD; hi&#x1EC7;u c&#x1EE7;a C trong Golang, th&#x1B0;&#x1EDD;ng n&#xF3; s&#x1EBD; truy c&#x1EAD;p th&#xF4;ng qua package &quot;C&quot; &#x1EA3;o, ch&#x1EB3;ng h&#x1EA1;n nh&#x1B0; ki&#x1EC3;u <code>int</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i <code>C.int</code>. M&#x1ED9;t s&#x1ED1; ki&#x1EC3;u trong C bao g&#x1ED3;m nhi&#x1EC1;u t&#x1EEB; kh&#xF3;a, nh&#x1B0;ng khi truy c&#x1EAD;p ch&#xFA;ng th&#xF4;ng qua package &quot;C&quot; &#x1EA3;o, ph&#x1EA7;n t&#xEA;n kh&#xF4;ng th&#x1EC3; c&#xF3; k&#xFD; t&#x1EF1; kho&#x1EA3;ng tr&#x1EAF;ng, v&#xED; d&#x1EE5; <code>unsigned int</code> kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p b&#x1EB1;ng <code>C.unsigned int</code>. Do &#x111;&#xF3;, CGO cung c&#x1EA5;p quy t&#x1EAF;c chuy&#x1EC3;n &#x111;&#x1ED5;i t&#x1B0;&#x1A1;ng &#x1EE9;ng cho c&#xE1;c ki&#x1EC3;u trong C:</p>
+<div align="center">
+
+<img src="../images/table-type1.png" width="400">
+<br>
+<span align="center"><i>B&#x1EA3;ng so s&#xE1;nh ki&#x1EC3;u trong c&#xE1;c ng&#xF4;n ng&#x1EEF; Go v&#xE0; C</i></span>
+    <br>
+</div>
+
+<p>M&#x1EB7;c d&#xF9; k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a nh&#x1EEF;ng ki&#x1EC3;u kh&#xF4;ng ch&#x1EC9; r&#xF5; k&#xED;ch th&#x1B0;&#x1EDB;c (trong C) nh&#x1B0; <code>int</code>, <code>short</code>, ..., k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a ch&#xFA;ng &#x111;&#x1EC1;u &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh trong CGO: ki&#x1EC3;u <code>int</code> v&#xE0; <code>uint</code> c&#x1EE7;a C &#x111;&#x1EC1;u c&#xF3; k&#xED;ch th&#x1B0;&#x1EDB;c 4 byte, ki&#x1EC3;u <code>size_t</code> c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c coi l&#xE0; ki&#x1EC3;u s&#x1ED1; nguy&#xEA;n kh&#xF4;ng d&#x1EA5;u <code>uint</code> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go .</p>
+<p>M&#x1EB7;c d&#xF9; ki&#x1EC3;u <code>int</code> v&#xE0; <code>uint</code> c&#x1EE7;a C &#x111;&#x1EC1;u c&#xF3; k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1ED1; &#x111;&#x1ECB;nh, nh&#x1B0;ng v&#x1EDB;i Go th&#xEC; <code>int</code> v&#xE0; <code>uint</code> c&#xF3; th&#x1EC3; l&#xE0; 4 byte ho&#x1EB7;c 8 byte (tu&#x1EF3; platform). N&#x1EBF;u c&#x1EA7;n s&#x1EED; d&#x1EE5;ng &#x111;&#xFA;ng ki&#x1EC3;u <code>int</code> c&#x1EE7;a C trong Go, b&#x1EA1;n c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng ki&#x1EC3;u <code>GoInt</code> &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh trong file header <code>_cgo_export.h</code> &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra b&#x1EDF;i c&#xF4;ng c&#x1EE5; CGO. Trong file header n&#xE0;y, m&#x1ED7;i ki&#x1EC3;u gi&#xE1; tr&#x1ECB; c&#x1A1; b&#x1EA3;n c&#x1EE7;a Go s&#x1EBD; x&#xE1;c &#x111;&#x1ECB;nh ki&#x1EC3;u t&#x1B0;&#x1A1;ng &#x1EE9;ng trong C (ki&#x1EC3;u c&#xF3; ti&#x1EC1;n t&#x1ED1; &quot;Go&quot;). V&#xED; d&#x1EE5; sau trong h&#x1EC7; th&#x1ED1;ng 64-bit, file header <code>_cgo_export.h</code> &#x111;&#x1ECB;nh ngh&#x129;a c&#xE1;c ki&#x1EC3;u gi&#xE1; tr&#x1ECB;:</p>
+<pre><code class="lang-go">typedef signed char GoInt8;
+typedef unsigned char GoUint8;
+typedef short GoInt16;
+typedef unsigned short GoUint16;
+typedef <span class="hljs-keyword">int</span> GoInt32;
+typedef unsigned <span class="hljs-keyword">int</span> GoUint32;
+typedef long long GoInt64;
+typedef unsigned long long GoUint64;
+typedef GoInt64 GoInt;
+typedef GoUint64 GoUint;
+typedef float GoFloat32;
+typedef double GoFloat64;
+</code></pre>
+<p>Tr&#x1EEB; <code>GoInt</code> v&#xE0; <code>GoUint</code>, ch&#xFA;ng t&#xF4;i kh&#xF4;ng khuy&#x1EBF;n kh&#xED;ch b&#x1EA1;n s&#x1EED; d&#x1EE5;ng tr&#x1EF1;c ti&#x1EBF;p <code>GoInt32</code>, <code>GoInt64</code> v&#xE0; c&#xE1;c ki&#x1EC3;u kh&#xE1;c.</p>
+<p>M&#x1ED9;t c&#xE1;ch t&#x1ED1;t h&#x1A1;n l&#xE0; s&#x1EED; d&#x1EE5;ng c&#xE1;c ki&#x1EC3;u c&#xF3; trong khai b&#xE1;o file header <stdint.h> (chu&#x1EA9;n C99):</stdint.h></p>
+<div align="center">
+
+<img src="../images/table-type2.png" width="350">
+<br>
+<span align="center"><i>B&#x1EA3;ng so s&#xE1;nh ki&#x1EC3;u trong `stdint.h`</i></span>
+    <br>
+</div>
+
+<p>Nh&#x1B0; &#x111;&#xE3; &#x111;&#x1EC1; c&#x1EAD;p tr&#x1B0;&#x1EDB;c &#x111;&#xF3;, n&#x1EBF;u ki&#x1EC3;u trong C bao g&#x1ED3;m nhi&#x1EC1;u t&#x1EEB;, n&#xF3; kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng tr&#x1EF1;c ti&#x1EBF;p th&#xF4;ng qua package &quot;C&quot; &#x1EA3;o (v&#xED; d&#x1EE5;: <code>unsigned short</code> kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p tr&#x1EF1;c ti&#x1EBF;p <code>C.unsigned short</code>). Tuy nhi&#xEA;n, sau khi &#x111;&#x1ECB;nh ngh&#x129;a l&#x1EA1;i ki&#x1EC3;u trong <stdint.h> b&#x1EB1;ng c&#xE1;ch s&#x1EED; d&#x1EE5;ng <code>typedef</code>, ch&#xFA;ng ta c&#xF3; th&#x1EC3; truy c&#x1EAD;p t&#x1EDB;i ki&#x1EC3;u g&#x1ED1;c. &#x110;&#x1ED1;i v&#x1EDB;i c&#xE1;c ki&#x1EC3;u trong C ph&#x1EE9;c t&#x1EA1;p h&#x1A1;n th&#xEC; n&#xEA;n s&#x1EED; d&#x1EE5;ng <code>typedef</code> &#x111;&#x1EC3; &#x111;&#x1EB7;t l&#x1EA1;i t&#xEA;n cho n&#xF3;, thu&#x1EAD;n ti&#x1EC7;n cho vi&#x1EC7;c truy c&#x1EAD;p t&#x1EEB; CGO.</stdint.h></p>
+<h2 id="232-go-strings-v&#xE0;-slices">2.3.2. Go Strings v&#xE0; Slices</h2>
+<p>Trong file header <code>_cgo_export.h</code> &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o ra b&#x1EDF;i CGO, ki&#x1EC3;u trong C t&#x1B0;&#x1A1;ng &#x1EE9;ng c&#x169;ng &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o cho Go string, slice, dictionary, interface v&#xE0; channel:</p>
+<pre><code class="lang-go">typedef <span class="hljs-keyword">struct</span> { <span class="hljs-keyword">const</span> char *p; GoInt n; } GoString;
+typedef void *GoMap;
+typedef void *GoChan;
+typedef <span class="hljs-keyword">struct</span> { void *t; void *v; } GoInterface;
+typedef <span class="hljs-keyword">struct</span> { void *data; GoInt <span class="hljs-built_in">len</span>; GoInt <span class="hljs-built_in">cap</span>; } GoSlice;
+</code></pre>
+<p>Tuy nhi&#xEA;n, c&#x1EA7;n l&#x1B0;u &#xFD; r&#x1EB1;ng ch&#x1EC9; c&#xE1;c string v&#xE0; slice l&#xE0; c&#xF3; gi&#xE1; tr&#x1ECB; s&#x1EED; d&#x1EE5;ng trong CGO, v&#xEC; CGO t&#x1EA1;o ra c&#xE1;c phi&#xEA;n b&#x1EA3;n ng&#xF4;n ng&#x1EEF; C cho m&#x1ED9;t s&#x1ED1; h&#xE0;m trong Go, v&#xEC; v&#x1EAD;y c&#x1EA3; hai &#x111;&#x1EC1;u c&#xF3; th&#x1EC3; g&#x1ECD;i c&#xE1;c h&#xE0;m C trong Go, &#x111;i&#x1EC1;u n&#xE0;y &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n ngay l&#x1EB7;p t&#x1EE9;c v&#xE0; CGO kh&#xF4;ng cung c&#x1EA5;p c&#xE1;c h&#xE0;m h&#x1ED7; tr&#x1EE3; li&#xEA;n quan cho c&#xE1;c ki&#x1EC3;u kh&#xE1;c, &#x111;&#x1ED3;ng th&#x1EDD;i m&#xF4; h&#xEC;nh b&#x1ED9; nh&#x1EDB; d&#xE0;nh ri&#xEA;ng cho ng&#xF4;n ng&#x1EEF; Go ng&#x103;n ch&#xFA;ng ta duy tr&#xEC; c&#xE1;c ki&#x1EC3;u con tr&#x1ECF; t&#x1EDB;i c&#xE1;c v&#xF9;ng b&#x1ED9; nh&#x1EDB; Go qu&#x1EA3;n l&#xFD;, v&#xEC; v&#x1EAD;y m&#xE0; m&#xF4;i tr&#x1B0;&#x1EDD;ng ng&#xF4;n ng&#x1EEF; C c&#x1EE7;a c&#xE1;c ki&#x1EC3;u &#x111;&#xF3; kh&#xF4;ng c&#xF3; gi&#xE1; tr&#x1ECB; s&#x1EED; d&#x1EE5;ng.</p>
+<p>Trong h&#xE0;m C &#x111;&#xE3; export, ch&#xFA;ng ta c&#xF3; th&#x1EC3; tr&#x1EF1;c ti&#x1EBF;p s&#x1EED; d&#x1EE5;ng c&#xE1;c string v&#xE0; slice trong Go. Gi&#x1EA3; s&#x1EED; c&#xF3; hai h&#xE0;m export sau:</p>
+<pre><code class="lang-go"><span class="hljs-comment">//export helloString</span>
+<span class="hljs-keyword">func</span> helloString(s <span class="hljs-keyword">string</span>) {}
+
+<span class="hljs-comment">//export helloSlice</span>
+<span class="hljs-keyword">func</span> helloSlice(s []<span class="hljs-keyword">byte</span>) {}
+</code></pre>
+<p>File header <code>_cgo_export.h</code> &#x111;&#x1B0;&#x1EE3;c  CGO t&#x1EA1;o ra s&#x1EBD; ch&#x1EE9;a khai b&#xE1;o h&#xE0;m sau:</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">helloString</span><span class="hljs-params">(GoString p0)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">helloSlice</span><span class="hljs-params">(GoSlice p0)</span></span>;
+</code></pre>
+<p>Nh&#x1B0;ng l&#x1B0;u &#xFD; r&#x1EB1;ng n&#x1EBF;u b&#x1EA1;n s&#x1EED; d&#x1EE5;ng ki&#x1EC3;u <code>GoString</code> th&#xEC; s&#x1EBD; ph&#x1EE5; thu&#x1ED9;c v&#xE0;o file header <code>_cgo_export.h</code> v&#xE0; file n&#xE0;y c&#xF3; n&#x1ED9;i dung hay thay &#x111;&#x1ED5;i do CGO sinh ra.</p>
+<p>Phi&#xEA;n b&#x1EA3;n Go1.10 th&#xEA;m m&#x1ED9;t chu&#x1ED7;i ki&#x1EC3;u <code>_GoString_</code>, c&#xF3; th&#x1EC3; l&#xE0;m gi&#x1EA3;m code c&#xF3; r&#x1EE7;i ro ph&#x1EE5; thu&#x1ED9;c file header <code>_cgo_export.h</code>. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x111;i&#x1EC1;u ch&#x1EC9;nh khai b&#xE1;o ng&#xF4;n ng&#x1EEF; C c&#x1EE7;a h&#xE0;m <code>helloString</code> th&#xE0;nh:</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">helloString</span><span class="hljs-params">(_GoString_ p0)</span></span>;
+</code></pre>
+<p>B&#x1EDF;i v&#xEC; <code>_GoString_</code> l&#xE0; ki&#x1EC3;u &#x111;&#x1ECB;nh ngh&#x129;a tr&#x1B0;&#x1EDB;c, ta kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p r&#x1EF1;c ti&#x1EBF;p c&#xE1;c th&#xF4;ng tin nh&#x1B0; length hay pointer c&#x1EE7;a string qua ki&#x1EC3;u n&#xE0;y. Go1.10  th&#xEA;m v&#xE0;o 2 h&#xE0;m sau &#x111;&#x1EC3; b&#x1ED5; sung:</p>
+<pre><code class="lang-c"><span class="hljs-keyword">size_t</span> _GoStringLen(_GoString_ s);
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *_GoStringPtr(_GoString_ s);
+</code></pre>
+<h2 id="233-struct-union-enum">2.3.3. Struct, Union, Enum</h2>
+<p>C&#xE1;c ki&#x1EC3;u struct, Union v&#xE0; Enum c&#x1EE7;a ng&#xF4;n ng&#x1EEF; C kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c th&#xEA;m v&#xE0;o struct d&#x1B0;&#x1EDB;i d&#x1EA1;ng thu&#x1ED9;c t&#xED;nh &#x1EA9;n danh.</p>
+<h3 id="struct">Struct</h3>
+<p>Trong Go, ch&#xFA;ng ta c&#xF3; th&#x1EC3; truy c&#x1EAD;p c&#xE1;c ki&#x1EC3;u struct nh&#x1B0; <code>struct xxx</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng l&#xE0; <code>C.struct_xxx</code> trong ng&#xF4;n ng&#x1EEF; C. T&#x1ED5; ch&#x1EE9;c b&#x1ED9; nh&#x1EDB; c&#x1EE7;a struct tu&#xE2;n theo c&#xE1;c quy t&#x1EAF;c alignment. Trong m&#xF4;i tr&#x1B0;&#x1EDD;ng ng&#xF4;n ng&#x1EEF; Go 32 bit, struct c&#x1EE7;a C tu&#xE2;n theo quy t&#x1EAF;c alignment 32 bit v&#xE0; m&#xF4;i tr&#x1B0;&#x1EDD;ng ng&#xF4;n ng&#x1EEF; Go 64 bit tu&#xE2;n theo quy t&#x1EAF;c alignment 64 bit. &#x110;&#x1ED1;i v&#x1EDB;i c&#xE1;c struct c&#xF3; quy t&#x1EAF;c alignment &#x111;&#x1EB7;c bi&#x1EC7;t &#x111;&#x1B0;&#x1EE3;c ch&#x1EC9; &#x111;&#x1ECB;nh, ch&#xFA;ng kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p trong CGO.</p>
+<p>C&#xE1;ch s&#x1EED; d&#x1EE5;ng struct &#x111;&#x1A1;n gi&#x1EA3;n nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+struct A {
+    int i;
+    float f;
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> a C.struct_A
+    fmt.Println(a.i)
+    fmt.Println(a.f)
+}
+</code></pre>
+<p>N&#x1EBF;u t&#xEA;n th&#xE0;nh ph&#x1EA7;n c&#x1EE7;a struct t&#xEC;nh c&#x1EDD; l&#xE0; m&#x1ED9;t t&#x1EEB; kh&#xF3;a trong  Go, b&#x1EA1;n c&#xF3; th&#x1EC3; truy c&#x1EAD;p n&#xF3; b&#x1EB1;ng c&#xE1;ch th&#xEA;m m&#x1ED9;t d&#x1EA5;u g&#x1EA1;ch d&#x1B0;&#x1EDB;i &#x1EDF; &#x111;&#x1EA7;u t&#xEA;n th&#xE0;nh vi&#xEA;n:</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+struct A {
+    int type;
+    // type l&#xE0; m&#x1ED9;t t&#x1EEB; kh&#xF3;a trong Golang
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> a C.struct_A
+    fmt.Println(a._type)
+    <span class="hljs-comment">// _type t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i type</span>
+}
+</code></pre>
+<p>Nh&#x1B0;ng n&#x1EBF;u c&#xF3; 2 th&#xE0;nh ph&#x1EA7;n: m&#x1ED9;t th&#xE0;nh ph&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EB7;t t&#xEA;n theo t&#x1EEB; kh&#xF3;a c&#x1EE7;a Go v&#xE0; ph&#x1EA7;n kia l&#xE0; tr&#xF9;ng khi th&#xEA;m v&#xE0;o d&#x1EA5;u g&#x1EA1;ch d&#x1B0;&#x1EDB;i, th&#xEC; c&#xE1;c th&#xE0;nh ph&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EB7;t t&#xEA;n theo t&#x1EEB; kh&#xF3;a ng&#xF4;n ng&#x1EEF; Go s&#x1EBD; kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p:</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+struct A {
+    int   type;  // type l&#xE0; m&#x1ED9;t t&#x1EEB; kh&#xF3;a trong Go
+    float _type; // ch&#x1EB7;n CGO truy c&#x1EAD;p type tr&#xEA;n kia
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> a C.struct_A
+    fmt.Println(a._type) <span class="hljs-comment">// _type t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i _type</span>
+}
+</code></pre>
+<p>C&#xE1;c th&#xE0;nh ph&#x1EA7;n t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i <a href="https://www.tutorialspoint.com/cprogramming/c_bit_fields" target="_blank">tr&#x1B0;&#x1EDD;ng bit</a> (thu&#x1ED9;c t&#xED;nh &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a v&#x1EDB;i gi&#xE1; tr&#x1ECB; &#x111;&#x1ED9; l&#x1EDB;n k&#xE8;m theo) trong c&#x1EA5;u tr&#xFA;c ng&#xF4;n ng&#x1EEF; C kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p b&#x1EB1;ng ng&#xF4;n ng&#x1EEF; Go. N&#x1EBF;u b&#x1EA1;n c&#x1EA7;n thao t&#xE1;c v&#x1EDB;i c&#xE1;c th&#xE0;nh ph&#x1EA7;n n&#xE0;y, b&#x1EA1;n c&#x1EA7;n &#x111;&#x1ECB;nh ngh&#x129;a h&#xE0;m h&#x1ED7; tr&#x1EE3; trong C.</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+struct A {
+    int   size: 10; // Tr&#x1B0;&#x1EDD;ng bit kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p
+    float arr[];    // M&#x1EA3;ng c&#xF3; &#x111;&#x1ED9; d&#xE0;i b&#x1EB1;ng 0 c&#x169;ng kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p &#x111;&#x1B0;&#x1EE3;c
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> a C.struct_A
+    fmt.Println(a.size) <span class="hljs-comment">// L&#x1ED7;i kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p tr&#x1B0;&#x1EDD;ng bit</span>
+    fmt.Println(a.arr)  <span class="hljs-comment">// L&#x1ED7;i m&#x1EA3;ng c&#xF3; &#x111;&#x1ED9; d&#xE0;i b&#x1EB1;ng 0</span>
+}
+</code></pre>
+<p>Trong ng&#xF4;n ng&#x1EEF; C, ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; truy c&#x1EAD;p tr&#x1EF1;c ti&#x1EBF;p v&#xE0;o ki&#x1EC3;u struct &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1ECB;nh ngh&#x129;a b&#x1EDF;i Go.</p>
+<h3 id="union">Union</h3>
+<p>&#x110;&#x1ED1;i v&#x1EDB;i c&#xE1;c ki&#x1EC3;u union, ch&#xFA;ng ta c&#xF3; th&#x1EC3; truy c&#x1EAD;p c&#xE1;c ki&#x1EC3;u <code>union xxx</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng l&#xE0; <code>C.union_xxx</code> trong ng&#xF4;n ng&#x1EEF; C. Tuy nhi&#xEA;n, c&#xE1;c ki&#x1EC3;u union trong C kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c h&#x1ED7; tr&#x1EE3; trong Go v&#xE0; ch&#xFA;ng &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i th&#xE0;nh c&#xE1;c m&#x1EA3;ng byte c&#xF3; k&#xED;ch th&#x1B0;&#x1EDB;c t&#x1B0;&#x1A1;ng &#x1EE9;ng.</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+#include &lt;stdint.h&gt;
+
+union B1 {
+    int i;
+    float f;
+};
+
+union B2 {
+    int8_t i8;
+    int64_t i64;
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> b1 C.union_B1;
+    fmt.Printf(<span class="hljs-string">&quot;%T\n&quot;</span>, b1) <span class="hljs-comment">// [4]uint8</span>
+
+    <span class="hljs-keyword">var</span> b2 C.union_B2;
+    fmt.Printf(<span class="hljs-string">&quot;%T\n&quot;</span>, b2) <span class="hljs-comment">// [8]uint8</span>
+}
+</code></pre>
+<p>N&#x1EBF;u b&#x1EA1;n c&#x1EA7;n thao t&#xE1;c bi&#x1EBF;n ki&#x1EC3;u l&#x1ED3;ng nhau trong C (union):</p>
+<ul>
+<li>C&#xE1;ch th&#x1EE9; nh&#x1EA5;t l&#xE0; &#x111;&#x1ECB;nh ngh&#x129;a h&#xE0;m h&#x1ED7; tr&#x1EE3; trong C,</li>
+<li>C&#xE1;ch th&#x1EE9; hai l&#xE0; ph&#xE2;n gi&#x1EA3;i th&#x1EE7; c&#xF4;ng c&#xE1;c th&#xE0;nh ph&#x1EA7;n &#x111;&#xF3; th&#xF4;ng qua &quot;encoding/binary&quot; c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go (kh&#xF4;ng ph&#x1EA3;i v&#x1EA5;n &#x111;&#x1EC1; big endian),</li>
+<li>C&#xE1;ch th&#x1EE9; ba l&#xE0; s&#x1EED; d&#x1EE5;ng package <code>unsafe</code> &#x111;&#x1EC3; chuy&#x1EC3;n sang ki&#x1EC3;u t&#x1B0;&#x1A1;ng &#x1EE9;ng (&#x111;&#xE2;y l&#xE0; c&#xE1;ch t&#x1ED1;t nh&#x1EA5;t &#x111;&#x1EC3; th&#x1EF1;c hi&#x1EC7;n).</li>
+</ul>
+<p>Sau &#x111;&#xE2;y cho th&#x1EA5;y c&#xE1;ch truy c&#x1EAD;p c&#xE1;c th&#xE0;nh vi&#xEA;n ki&#x1EC3;u union th&#xF4;ng qua package <code>unsafe</code>:</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+#include &lt;stdint.h&gt;
+
+union B {
+    int i;
+    float f;
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> b C.union_B;
+    fmt.Println(<span class="hljs-string">&quot;b.i:&quot;</span>, *(*C.<span class="hljs-keyword">int</span>)(unsafe.Pointer(&amp;b)))
+    fmt.Println(<span class="hljs-string">&quot;b.f:&quot;</span>, *(*C.float)(unsafe.Pointer(&amp;b)))
+}
+</code></pre>
+<p>M&#x1EB7;c d&#xF9; truy c&#x1EAD;p b&#x1EB1;ng package <code>unsafe</code> l&#xE0; c&#xE1;ch d&#x1EC5; nh&#x1EA5;t v&#xE0; t&#x1ED1;t nh&#x1EA5;t v&#x1EC1; hi&#x1EC7;u su&#x1EA5;t, n&#xF3; c&#xF3; th&#x1EC3; l&#xE0;m ph&#x1EE9;c t&#x1EA1;p ho&#xE1; v&#x1EA5;n &#x111;&#x1EC1; v&#x1EDB;i c&#xE1;c t&#xEC;nh hu&#x1ED1;ng m&#xE0; trong &#x111;&#xF3; c&#xE1;c ki&#x1EC3;u union l&#x1ED3;ng nhau &#x111;&#x1B0;&#x1EE3;c x&#x1EED; l&#xFD;. &#x110;&#x1ED1;i v&#x1EDB;i c&#xE1;c ki&#x1EC3;u n&#xE0;y ta n&#xEA;n x&#x1EED; l&#xFD; ch&#xFA;ng b&#x1EB1;ng c&#xE1;ch &#x111;&#x1ECB;nh ngh&#x129;a c&#xE1;c h&#xE0;m h&#x1ED7; tr&#x1EE3; trong C.</p>
+<h3 id="enum">Enum</h3>
+<p>&#x110;&#x1ED1;i v&#x1EDB;i c&#xE1;c ki&#x1EC3;u li&#x1EC7;t k&#xEA; (enum), ch&#xFA;ng ta c&#xF3; th&#x1EC3; truy c&#x1EAD;p c&#xE1;c ki&#x1EC3;u <code>enum xxx</code> t&#x1B0;&#x1A1;ng &#x1EE9;ng l&#xE0; <code>C.enum_xxx</code> trong C.</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+enum C {
+    ONE,
+    TWO,
+};
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> c C.enum_C = C.TWO
+    fmt.Println(c)
+    fmt.Println(C.ONE)
+    fmt.Println(C.TWO)
+}
+</code></pre>
+<p>Trong ng&#xF4;n ng&#x1EEF; C, ki&#x1EC3;u <code>int</code> b&#xEA;n d&#x1B0;&#x1EDB;i ki&#x1EC3;u li&#x1EC7;t k&#xEA; h&#x1ED7; tr&#x1EE3; gi&#xE1; tr&#x1ECB; &#xE2;m. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; truy c&#x1EAD;p tr&#x1EF1;c ti&#x1EBF;p c&#xE1;c gi&#xE1; tr&#x1ECB; li&#x1EC7;t k&#xEA; &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh b&#x1EB1;ng <code>C.ONE</code>, <code>C.TWO</code>, ....</p>
+<h2 id="234-array-string-v&#xE0;-slice">2.3.4. Array, String v&#xE0; Slice</h2>
+<p>Chu&#x1ED7;i (string) trong C l&#xE0; m&#x1ED9;t m&#x1EA3;ng ki&#x1EC3;u char v&#xE0; &#x111;&#x1ED9; d&#xE0;i c&#x1EE7;a n&#xF3; ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c x&#xE1;c &#x111;&#x1ECB;nh theo v&#x1ECB; tr&#xED; c&#x1EE7;a k&#xFD; t&#x1EF1; NULL (&#x111;&#x1EA1;i di&#x1EC7;n k&#x1EBF;t th&#xFA;c m&#x1EA3;ng). Kh&#xF4;ng c&#xF3; ki&#x1EC3;u slice trong ng&#xF4;n ng&#x1EEF; C.</p>
+<h3 id="array">Array</h3>
+<p>Trong C, bi&#x1EBF;n m&#x1EA3;ng th&#x1EF1;c ra t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i m&#x1ED9;t con tr&#x1ECF; tr&#x1ECF; t&#x1EDB;i m&#x1ED9;t ph&#x1EA7;n b&#x1ED9; nh&#x1EDB; c&#xF3; &#x111;&#x1ED9; d&#xE0;i c&#x1EE5; th&#x1EC3; c&#x1EE7;a m&#x1ED9;t ki&#x1EC3;u c&#x1EE5; th&#x1EC3;, con tr&#x1ECF; n&#xE0;y kh&#xF4;ng th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c s&#x1EED;a &#x111;&#x1ED5;i, khi truy&#x1EC1;n bi&#x1EBF;n m&#x1EA3;ng v&#xE0;o m&#x1ED9;t h&#xE0;m, th&#x1EF1;c ra l&#xE0; truy&#x1EC1;n &#x111;&#x1ECB;a ch&#x1EC9; ph&#x1EA7;n t&#x1EED; &#x111;&#x1EA7;u ti&#xEA;n c&#x1EE7;a m&#x1EA3;ng.</p>
+<div align="center">
+
+<img src="../images/array-c.png" width="450">
+<br>
+<span align="center"><i>Array trong C</i></span>
+    <br>
+
+</div>
+
+<p>Trong Go, m&#x1EA3;ng l&#xE0; m&#x1ED9;t ki&#x1EC3;u gi&#xE1; tr&#x1ECB; v&#xE0; &#x111;&#x1ED9; d&#xE0;i c&#x1EE7;a m&#x1EA3;ng l&#xE0; m&#x1ED9;t ph&#x1EA7;n c&#x1EE7;a ki&#x1EC3;u m&#x1EA3;ng. Chu&#x1ED7;i trong Go t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i m&#x1ED9;t v&#xF9;ng nh&#x1EDB; &quot;ch&#x1EC9; &#x111;&#x1ECD;c&quot; c&#xF3; &#x111;&#x1ED9; d&#xE0;i nh&#x1EA5;t &#x111;&#x1ECB;nh. Slice trong Go l&#xE0; phi&#xEA;n b&#x1EA3;n &#x111;&#x1A1;n gi&#x1EA3;n h&#x1A1;n c&#x1EE7;a m&#x1EA3;ng &#x111;&#x1ED9;ng (dynamic array).</p>
+<div align="center">
+    <img src="../images/ch1-1-array-and-array-index-representation.png" width="600">
+    <br>
+    <span align="center">
+        <i>Array trong Go</i>
+    </span>
+</div>
+
+
+<p>Chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a Go v&#xE0; C v&#x1EDB;i c&#xE1;c ki&#x1EC3;u array, string v&#xE0; slice c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1A1;n gi&#x1EA3;n h&#xF3;a th&#xE0;nh chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a Go slice v&#xE0; C pointer tr&#x1ECF; t&#x1EDB;i v&#xF9;ng nh&#x1EDB; c&#xF3; &#x111;&#x1ED9; d&#xE0;i nh&#x1EA5;t &#x111;&#x1ECB;nh.</p>
+<p>Package C &#x1EA3;o c&#x1EE7;a CGO cung c&#x1EA5;p t&#x1EAD;p c&#xE1;c h&#xE0;m sau &#x111;&#x1EC3; chuy&#x1EC3;n &#x111;&#x1ED5;i hai chi&#x1EC1;u array v&#xE0; string gi&#x1EEF;a Go v&#xE0; C:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// Go string -&gt; C string</span>
+<span class="hljs-comment">// C string &#x111;&#x1B0;&#x1EE3;c c&#x1EA5;p ph&#xE1;t trong C heap s&#x1EED; d&#x1EE5;ng malloc.</span>
+<span class="hljs-comment">// Caller c&#xF3; tr&#xE1;ch nhi&#x1EC7;m free n&#xF3; sau khi s&#x1EED; d&#x1EE5;ng</span>
+<span class="hljs-comment">// b&#x1EB1;ng c&#xE1;ch nh&#x1B0; g&#x1ECD;i C.free (nh&#x1EDB; include stdlib.h</span>
+<span class="hljs-keyword">func</span> C.CString(<span class="hljs-keyword">string</span>) *C.char
+
+<span class="hljs-comment">// Go []byte slice -&gt; C array</span>
+<span class="hljs-comment">// C array &#x111;&#x1B0;&#x1EE3;c c&#x1EA5;p ph&#xE1;t trong C heap s&#x1EED; d&#x1EE5;ng malloc.</span>
+<span class="hljs-comment">// Caller c&#xF3; tr&#xE1;ch nhi&#x1EC7;m free n&#xF3; sau khi s&#x1EED; d&#x1EE5;ng</span>
+<span class="hljs-comment">// b&#x1EB1;ng c&#xE1;ch nh&#x1B0; g&#x1ECD;i C.free (nh&#x1EDB; include stdlib.h</span>
+<span class="hljs-keyword">func</span> C.CBytes([]<span class="hljs-keyword">byte</span>) unsafe.Pointer
+
+<span class="hljs-comment">// C string -&gt; Go string</span>
+<span class="hljs-keyword">func</span> C.GoString(*C.char) <span class="hljs-keyword">string</span>
+
+<span class="hljs-comment">// C data v&#x1EDB;i length &#x111;&#x1B0;&#x1EE3;c ch&#x1EC9; &#x111;&#x1ECB;nh -&gt; Go string</span>
+<span class="hljs-keyword">func</span> C.GoStringN(*C.char, C.<span class="hljs-keyword">int</span>) <span class="hljs-keyword">string</span>
+
+<span class="hljs-comment">// C data v&#x1EDB;i length &#x111;&#x1B0;&#x1EE3;c ch&#x1EC9; &#x111;&#x1ECB;nh -&gt; Go []byte</span>
+<span class="hljs-keyword">func</span> C.GoBytes(unsafe.Pointer, C.<span class="hljs-keyword">int</span>) []<span class="hljs-keyword">byte</span>
+</code></pre>
+<p>Khi string v&#xE0; slice c&#x1EE7;a Go &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i th&#xE0;nh phi&#xEA;n b&#x1EA3;n trong C, h&#xE0;m <code>malloc</code> c&#x1EE7;a C c&#x1EA5;p ph&#xE1;t m&#x1ED9;t v&#xF9;ng nh&#x1EDB; m&#x1EDB;i v&#xE0; cu&#x1ED1;i c&#xF9;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c gi&#x1EA3;i ph&#xF3;ng b&#x1EB1;ng <code>free</code>. Ng&#x1B0;&#x1EE3;c l&#x1EA1;i khi m&#x1ED9;t string ho&#x1EB7;c array trong C &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i th&#xE0;nh ki&#x1EC3;u t&#x1B0;&#x1A1;ng &#x1EE9;ng trong Go, v&#xF9;ng nh&#x1EDB; c&#x1EE7;a d&#x1EEF; li&#x1EC7;u &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i &#x111;&#x1B0;&#x1EE3;c qu&#x1EA3;n l&#xFD; b&#x1EDF;i ng&#xF4;n ng&#x1EEF; Go.</p>
+<p>V&#x1EDB;i c&#xE1;c h&#xE0;m chuy&#x1EC3;n &#x111;&#x1ED5;i n&#xE0;y, v&#xF9;ng nh&#x1EDB; tr&#x1B0;&#x1EDB;c chuy&#x1EC3;n &#x111;&#x1ED5;i v&#xE0; sau chuy&#x1EC3;n &#x111;&#x1ED5;i v&#x1EAB;n &#x1EDF; trong v&#xF9;ng nh&#x1EDB; c&#x1EE5;c v&#xF9;ng t&#x1B0;&#x1A1;ng &#x1EE9;ng c&#x1EE7;a ch&#xFA;ng. &#x1AF;u &#x111;i&#x1EC3;m c&#x1EE7;a vi&#x1EC7;c chuy&#x1EC3;n &#x111;&#x1ED5;i n&#xE0;y l&#xE0; qu&#x1EA3;n l&#xFD; interface v&#xE0; v&#xF9;ng nh&#x1EDB; r&#x1EA5;t &#x111;&#x1A1;n gi&#x1EA3;n. Nh&#x1B0;&#x1EE3;c &#x111;i&#x1EC3;m l&#xE0; c&#x1EA7;n c&#x1EA5;p ph&#xE1;t v&#xF9;ng nh&#x1EDB; m&#x1EDB;i v&#xE0; c&#xE1;c ho&#x1EA1;t &#x111;&#x1ED9;ng sao ch&#xE9;p c&#x1EE7;a n&#xF3; s&#x1EBD; d&#x1EAB;n nhi&#x1EC1;u &#x111;&#x1EBF;n chi ph&#xED; ph&#x1EE5;.</p>
+<h3 id="string-v&#xE0;-slice">String v&#xE0; Slice</h3>
+<p>C&#xE1;c &#x111;&#x1ECB;nh ngh&#x129;a cho string v&#xE0; slice trong package <code>reflect</code>:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> StringHeader <span class="hljs-keyword">struct</span> {
+    Data <span class="hljs-keyword">uintptr</span>
+    Len  <span class="hljs-keyword">int</span>
+}
+
+<span class="hljs-keyword">type</span> SliceHeader <span class="hljs-keyword">struct</span> {
+    Data <span class="hljs-keyword">uintptr</span>
+    Len  <span class="hljs-keyword">int</span>
+    Cap  <span class="hljs-keyword">int</span>
+}
+</code></pre>
+<p>N&#x1EBF;u kh&#xF4;ng mu&#x1ED1;n c&#x1EA5;p ph&#xE1;t v&#xF9;ng nh&#x1EDB; ri&#xEA;ng, b&#x1EA1;n c&#xF3; th&#x1EC3; truy c&#x1EAD;p tr&#x1EF1;c ti&#x1EBF;p v&#xE0;o kh&#xF4;ng gian b&#x1ED9; nh&#x1EDB; c&#x1EE7;a C b&#x1EB1;ng Go:</p>
+<pre><code class="lang-go"><span class="hljs-comment">/*
+#include &lt;string.h&gt;
+char arr[10];
+char *s = &quot;Hello&quot;;
+*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;reflect&quot;</span>
+    <span class="hljs-string">&quot;unsafe&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// chuy&#x1EC3;n &#x111;&#x1ED5;i b&#x1EB1;ng reflect.SliceHeader</span>
+    <span class="hljs-keyword">var</span> arr0 []<span class="hljs-keyword">byte</span>
+    <span class="hljs-keyword">var</span> arr0Hdr = (*reflect.SliceHeader)(unsafe.Pointer(&amp;arr0))
+    arr0Hdr.Data = <span class="hljs-keyword">uintptr</span>(unsafe.Pointer(&amp;C.arr[<span class="hljs-number">0</span>])) 
+    arr0Hdr.Len = <span class="hljs-number">10</span>
+    arr0Hdr.Cap = <span class="hljs-number">10</span>
+
+    <span class="hljs-comment">// chuy&#x1EC3;n &#x111;&#x1ED5;i slice</span>
+    arr1 := (*[<span class="hljs-number">31</span>]<span class="hljs-keyword">byte</span>)(unsafe.Pointer(&amp;C.arr[<span class="hljs-number">0</span>]))[:<span class="hljs-number">10</span>:<span class="hljs-number">10</span>]
+
+
+    <span class="hljs-keyword">var</span> s0 <span class="hljs-keyword">string</span>
+    <span class="hljs-keyword">var</span> s0Hdr = (*reflect.StringHeader)(unsafe.Pointer(&amp;s0))
+    s0Hdr.Data = <span class="hljs-keyword">uintptr</span>(unsafe.Pointer(C.s))
+    s0Hdr.Len = <span class="hljs-keyword">int</span>(C.strlen(C.s))
+
+    sLen := <span class="hljs-keyword">int</span>(C.strlen(C.s))
+    s1 := <span class="hljs-keyword">string</span>((*[<span class="hljs-number">31</span>]<span class="hljs-keyword">byte</span>)(unsafe.Pointer(C.s))[:sLen:sLen])
+
+    fmt.Println(<span class="hljs-string">&quot;arr1: &quot;</span>, arr1)
+    fmt.Println(<span class="hljs-string">&quot;s1: &quot;</span>, s1)
+
+    <span class="hljs-comment">//k&#x1EBF;t qu&#x1EA3;:</span>
+    <span class="hljs-comment">//arr1:  [0 0 0 0 0 0 0 0 0 0]</span>
+    <span class="hljs-comment">//s1:  Hello</span>
+}
+</code></pre>
+<p>V&#xEC; chu&#x1ED7;i trong Go l&#xE0; chu&#x1ED7;i ch&#x1EC9; &#x111;&#x1ECD;c, ng&#x1B0;&#x1EDD;i d&#xF9;ng c&#x1EA7;n &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng n&#x1ED9;i dung c&#x1EE7;a chu&#x1ED7;i C b&#xEA;n d&#x1B0;&#x1EDB;i s&#x1EBD; kh&#xF4;ng thay &#x111;&#x1ED5;i trong qu&#xE1; tr&#xEC;nh s&#x1EED; d&#x1EE5;ng chu&#x1ED7;i &#x111;&#xF3; trong Go v&#xE0; b&#x1ED9; nh&#x1EDB; s&#x1EBD; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c gi&#x1EA3;i ph&#xF3;ng tr&#x1B0;&#x1EDB;c.</p>
+<p>Trong CGO, phi&#xEA;n b&#x1EA3;n ng&#xF4;n ng&#x1EEF; C c&#x1EE7;a struct t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i struct string v&#xE0; slice tr&#xEA;n:</p>
+<pre><code class="lang-go">typedef <span class="hljs-keyword">struct</span> { <span class="hljs-keyword">const</span> char *p; GoInt n; } GoString;
+typedef <span class="hljs-keyword">struct</span> { void *data; GoInt <span class="hljs-built_in">len</span>; GoInt <span class="hljs-built_in">cap</span>; } GoSlice;
+</code></pre>
+<p>Trong C c&#xF3; th&#x1EC3; d&#xF9;ng <code>GoString</code> v&#xE0; <code>GoSlice</code> &#x111;&#x1EC3; truy c&#x1EAD;p string v&#xE0; slice trong Go. N&#x1EBF;u l&#xE0; m&#x1ED9;t ki&#x1EC3;u m&#x1EA3;ng trong Go, b&#x1EA1;n c&#xF3; th&#x1EC3; chuy&#x1EC3;n &#x111;&#x1ED5;i m&#x1EA3;ng th&#xE0;nh m&#x1ED9;t slice v&#xE0; sau &#x111;&#xF3; chuy&#x1EC3;n &#x111;&#x1ED5;i n&#xF3;. N&#x1EBF;u kh&#xF4;ng gian b&#x1ED9; nh&#x1EDB; b&#xEA;n d&#x1B0;&#x1EDB;i t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i m&#x1ED9;t string ho&#x1EB7;c slice &#x111;&#x1B0;&#x1EE3;c qu&#x1EA3;n l&#xFD; b&#x1EDF;i runtime c&#x1EE7;a Go th&#xEC; &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng b&#x1ED9; nh&#x1EDB; Go c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c l&#x1B0;u trong m&#x1ED9;t th&#x1EDD;i gian d&#xE0;i trong ng&#xF4;n ng&#x1EEF; C.</p>
+<p>Chi ti&#x1EBF;t v&#x1EC1; m&#xF4; h&#xEC;nh b&#x1ED9; nh&#x1EDB; CGO s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c th&#x1EA3;o lu&#x1EAD;n k&#x129; h&#x1A1;n trong c&#xE1;c ch&#x1B0;&#x1A1;ng sau.</p>
+<h2 id="235-chuy&#x1EC3;n-&#x111;&#x1ED5;i-gi&#x1EEF;a-c&#xE1;c-con-tr&#x1ECF;">2.3.5. Chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c con tr&#x1ECF;</h2>
+<p>Trong ng&#xF4;n ng&#x1EEF; C, c&#xE1;c ki&#x1EC3;u con tr&#x1ECF; kh&#xE1;c nhau c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n &#x111;&#x1ED5;i t&#x1B0;&#x1EDD;ng minh ho&#x1EB7;c ng&#x1EA7;m &#x111;&#x1ECB;nh. Vi&#x1EC7;c chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c con tr&#x1ECF; c&#x169;ng l&#xE0; v&#x1EA5;n &#x111;&#x1EC1; quan tr&#x1ECD;ng &#x111;&#x1EA7;u ti&#xEA;n c&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c gi&#x1EA3;i quy&#x1EBF;t trong code CGO.</p>
+<p>Trong ng&#xF4;n ng&#x1EEF; Go, n&#x1EBF;u m&#x1ED9;t ki&#x1EC3;u con tr&#x1ECF; &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng d&#x1EF1;a tr&#xEA;n m&#x1ED9;t ki&#x1EC3;u con tr&#x1ECF; kh&#xE1;c, n&#xF3;i c&#xE1;ch kh&#xE1;c, hai con tr&#x1ECF; b&#xEA;n d&#x1B0;&#x1EDB;i l&#xE0; c&#xE1;c con tr&#x1ECF; c&#xF3; c&#xF9;ng c&#x1EA5;u tr&#xFA;c, th&#xEC; ch&#xFA;ng ta c&#xF3; th&#x1EC3; chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c con tr&#x1ECF; b&#x1EB1;ng c&#xFA; ph&#xE1;p cast tr&#x1EF1;c ti&#x1EBF;p. Tuy nhi&#xEA;n, CGO th&#x1B0;&#x1EDD;ng ph&#x1EA3;i &#x111;&#x1ED1;i ph&#xF3; v&#x1EDB;i vi&#x1EC7;c chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a hai ki&#x1EC3;u con tr&#x1ECF; ho&#xE0;n to&#xE0;n kh&#xE1;c nhau. V&#x1EC1; nguy&#xEA;n t&#x1EAF;c, thao t&#xE1;c n&#xE0;y b&#x1ECB; nghi&#xEA;m c&#x1EA5;m trong code Go thu&#x1EA7;n.</p>
+<p>M&#x1ED9;t trong nh&#x1EEF;ng m&#x1EE5;c &#x111;&#xED;ch c&#x1EE7;a CGO l&#xE0; ph&#xE1; v&#x1EE1; s&#x1EF1; c&#x1EA5;m &#x111;o&#xE1;n n&#xF3;i tr&#xEA;n v&#xE0; kh&#xF4;i ph&#x1EE5;c c&#xE1;c thao t&#xE1;c chuy&#x1EC3;n &#x111;&#x1ED5;i con tr&#x1ECF; t&#x1EF1; do m&#xE0; ng&#xF4;n ng&#x1EEF; C n&#xEA;n c&#xF3;. &#x110;o&#x1EA1;n code sau tr&#xEC;nh b&#xE0;y c&#xE1;ch chuy&#x1EC3;n &#x111;&#x1ED5;i m&#x1ED9;t con tr&#x1ECF; ki&#x1EC3;u X th&#xE0;nh m&#x1ED9;t con tr&#x1ECF; ki&#x1EC3;u Y:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> p *X
+<span class="hljs-keyword">var</span> q *Y
+
+q = (*Y)(unsafe.Pointer(p)) <span class="hljs-comment">// *X =&gt; *Y</span>
+p = (*X)(unsafe.Pointer(q)) <span class="hljs-comment">// *Y =&gt; *X</span>
+</code></pre>
+<p>&#x110;&#x1EC3; chuy&#x1EC3;n &#x111;&#x1ED5;i con tr&#x1ECF; ki&#x1EC3;u X th&#xE0;nh con tr&#x1ECF; ki&#x1EC3;u Y, ch&#xFA;ng ta c&#x1EA7;n hi&#x1EC7;n th&#x1EF1;c h&#xE0;m <code>unsafe.Pointer</code> chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c ki&#x1EC3;u con tr&#x1ECF; kh&#xE1;c nhau nh&#x1B0; m&#x1ED9;t ki&#x1EC3;u c&#x1EA7;u n&#x1ED1;i trung gian. Ki&#x1EC3;u con tr&#x1ECF; <code>unsafe.Pointer</code> t&#x1B0;&#x1A1;ng t&#x1EF1; v&#x1EDB;i ng&#xF4;n ng&#x1EEF; C v&#x1EDB;i con tr&#x1ECF; <code>void*</code>.</p>
+<p>Sau &#x111;&#xE2;y l&#xE0; s&#x1A1; &#x111;&#x1ED3; qu&#xE1; tr&#xEC;nh chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c con tr&#x1ECF;:</p>
+<div align="center">
+    <img src="../images/ch2-1-x-ptr-to-y-ptr.uml.png">
+    <br>
+    <span align="center"><i>Con tr&#x1ECF; ki&#x1EC3;u X th&#xE0;nh con tr&#x1ECF; ki&#x1EC3;u Y</i></span>
+</div>
+
+
+<p>B&#x1EA5;t k&#x1EF3; ki&#x1EC3;u con tr&#x1ECF; n&#xE0;o c&#x169;ng c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c chuy&#x1EC3;n sang ki&#x1EC3;u con tr&#x1ECF; <code>unsafe.Pointer</code> &#x111;&#x1EC3; b&#x1ECF; &#x111;i th&#xF4;ng tin ki&#x1EC3;u ban &#x111;&#x1EA7;u, sau &#x111;&#xF3; g&#xE1;n l&#x1EA1;i m&#x1ED9;t ki&#x1EC3;u con tr&#x1ECF; m&#x1EDB;i &#x111;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c m&#x1EE5;c &#x111;&#xED;ch chuy&#x1EC3;n &#x111;&#x1ED5;i.</p>
+<h2 id="236-chuy&#x1EC3;n-&#x111;&#x1ED5;i-gi&#xE1;-tr&#x1ECB;-v&#xE0;-con-tr&#x1ECF;">2.3.6. Chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#xE1; tr&#x1ECB; v&#xE0; con tr&#x1ECF;</h2>
+<p>Trong ng&#xF4;n ng&#x1EEF; C, ta th&#x1B0;&#x1EDD;ng g&#x1EB7;p tr&#x1B0;&#x1EDD;ng h&#x1EE3;p con tr&#x1ECF; &#x111;&#x1B0;&#x1EE3;c bi&#x1EC3;u di&#x1EC5;n b&#x1EDF;i gi&#xE1; tr&#x1ECB; th&#xF4;ng th&#x1B0;&#x1EDD;ng, l&#xE0;m th&#x1EBF; n&#xE0;o &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c vi&#x1EC7;c chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#xE1; tr&#x1ECB; v&#xE0; con tr&#x1ECF; c&#x169;ng l&#xE0; m&#x1ED9;t v&#x1EA5;n &#x111;&#x1EC1; m&#xE0; CGO c&#x1EA7;n ph&#x1EA3;i &#x111;&#x1ED1;i m&#x1EB7;t.</p>
+<p>&#x110;&#x1EC3; ki&#x1EC3;m so&#xE1;t ch&#x1EB7;t ch&#x1EBD; vi&#x1EC7;c s&#x1EED; d&#x1EE5;ng con tr&#x1ECF;, ng&#xF4;n ng&#x1EEF; Go kh&#xF4;ng cho ph&#xE9;p chuy&#x1EC3;n &#x111;&#x1ED5;i c&#xE1;c ki&#x1EC3;u s&#x1ED1; tr&#x1EF1;c ti&#x1EBF;p th&#xE0;nh c&#xE1;c ki&#x1EC3;u con tr&#x1ECF;. Tuy nhi&#xEA;n, Go &#x111;&#xE3; &#x111;&#x1EB7;c bi&#x1EC7;t &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t ki&#x1EC3;u <code>uintptr</code> cho c&#xE1;c ki&#x1EC3;u con tr&#x1ECF; <code>unsafe.Pointer</code>. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng <code>uintptr</code> l&#xE0;m trung gian &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c c&#xE1;c ki&#x1EC3;u s&#x1ED1; th&#xE0;nh c&#xE1;c ki&#x1EC3;u <code>unsafe.Pointer</code>.</p>
+<p>Bi&#x1EC3;u &#x111;&#x1ED3; sau &#x111;&#xE2;y tr&#xEC;nh b&#xE0;y c&#xE1;ch hi&#x1EC7;n th&#x1EF1;c chuy&#x1EC3;n &#x111;&#x1ED5;i l&#x1EAB;n nhau c&#x1EE7;a ki&#x1EC3;u <code>int32</code> sang ki&#x1EC3;u con tr&#x1ECF; <code>char*</code> l&#xE0; chu&#x1ED7;i trong ng&#xF4;n ng&#x1EEF; C:</p>
+<div align="center">
+    <img src="../images/ch2-2-int32-to-char-ptr.uml.png">
+    <br>
+    <span align="center">
+        <i>Int32 v&#xE0; char chuy&#x1EC3;n &#x111;&#x1ED5;i con tr&#x1ECF;</i>
+    </span>
+</div>
+
+
+<p>Vi&#x1EC7;c chuy&#x1EC3;n &#x111;&#x1ED5;i &#x111;&#x1B0;&#x1EE3;c chia th&#xE0;nh nhi&#x1EC1;u giai &#x111;o&#x1EA1;n: &#x111;&#x1EA7;u ti&#xEA;n l&#xE0; ki&#x1EC3;u <code>int32</code> sang <code>uintptr</code>, sau &#x111;&#xF3; l&#xE0; <code>uintptr</code> th&#xE0;nh ki&#x1EC3;u con tr&#x1ECF; <code>unsafe.Pointr</code> v&#xE0; cu&#x1ED1;i c&#xF9;ng l&#xE0; ki&#x1EC3;u con tr&#x1ECF; <code>unsafe.Pointr</code> th&#xE0;nh ki&#x1EC3;u <code>*C.char</code>.</p>
+<h2 id="237-chuy&#x1EC3;n-&#x111;&#x1ED5;i-gi&#x1EEF;a-ki&#x1EC3;u-slice">2.3.7. Chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a ki&#x1EC3;u slice</h2>
+<p>M&#x1EA3;ng c&#x169;ng l&#xE0; m&#x1ED9;t lo&#x1EA1;i con tr&#x1ECF; trong ng&#xF4;n ng&#x1EEF; C, v&#xEC; v&#x1EAD;y vi&#x1EC7;c chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a hai ki&#x1EC3;u m&#x1EA3;ng kh&#xE1;c nhau v&#x1EC1; c&#x1A1; b&#x1EA3;n t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c con tr&#x1ECF;. Tuy nhi&#xEA;n trong ng&#xF4;n ng&#x1EEF; Go, slice th&#x1EF1;c ra l&#xE0; m&#x1ED9;t con tr&#x1ECF; t&#x1EDB;i m&#x1ED9;t m&#x1EA3;ng (fat pointer), v&#xEC; v&#x1EAD;y ch&#xFA;ng ta kh&#xF4;ng th&#x1EC3; chuy&#x1EC3;n &#x111;&#x1ED5;i tr&#x1EF1;c ti&#x1EBF;p gi&#x1EEF;a c&#xE1;c ki&#x1EC3;u slice kh&#xE1;c nhau.</p>
+<p>Tuy nhi&#xEA;n, package <code>reflection</code> c&#x1EE7;a ng&#xF4;n ng&#x1EEF; Go &#x111;&#xE3; cung c&#x1EA5;p s&#x1EB5;n c&#x1EA5;u tr&#xFA;c c&#x1A1; b&#x1EA3;n c&#x1EE7;a ki&#x1EC3;u slice nh&#x1EDD; &#x111;&#xF3; chuy&#x1EC3;n &#x111;&#x1ED5;i slice c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> p []X
+<span class="hljs-keyword">var</span> q []Y
+
+<span class="hljs-comment">// t&#x1EA1;o slice tr&#x1ED1;ng</span>
+pHdr := (*reflect.SliceHeader)(unsafe.Pointer(&amp;p))
+qHdr := (*reflect.SliceHeader)(unsafe.Pointer(&amp;q))
+
+<span class="hljs-comment">// chuy&#x1EC3;n d&#x1EEF; li&#x1EC7;u b&#xEA;n trong slice</span>
+pHdr.Data = qHdr.Data
+
+<span class="hljs-comment">// chuy&#x1EC3;n c&#xE1;c th&#xF4;ng tin v&#x1EC1; len v&#xE0; cap</span>
+pHdr.Len = qHdr.Len * unsafe.Sizeof(q[<span class="hljs-number">0</span>]) / unsafe.Sizeof(p[<span class="hljs-number">0</span>])
+pHdr.Cap = qHdr.Cap * unsafe.Sizeof(q[<span class="hljs-number">0</span>]) / unsafe.Sizeof(p[<span class="hljs-number">0</span>])
+</code></pre>
+<p>C&#x1EA7;n l&#x1B0;u &#xFD; r&#x1EB1;ng n&#x1EBF;u X ho&#x1EB7;c Y l&#xE0; ki&#x1EC3;u null, &#x111;o&#x1EA1;n code tr&#xEA;n c&#xF3; th&#x1EC3; g&#xE2;y ra l&#x1ED7;i chia cho 0 v&#xE0; code th&#x1EF1;c t&#x1EBF; c&#x1EA7;n &#x111;&#x1B0;&#x1EE3;c x&#x1EED; l&#xFD; khi th&#xED;ch h&#x1EE3;p.</p>
+<p>Sau &#x111;&#xE2;y cho th&#x1EA5;y lu&#x1ED3;ng c&#x1EE5; th&#x1EC3; c&#x1EE7;a thao t&#xE1;c chuy&#x1EC3;n &#x111;&#x1ED5;i gi&#x1EEF;a c&#xE1;c slice:</p>
+<div align="center">
+    <img src="../images/ch2-3-x-slice-to-y-slice.uml.png">
+    <br>
+    <span align="center">
+        <i>ki&#x1EC3;u c&#x1EAF;t X th&#xE0;nh slice Y</i>
+    </span>
+</div>
+
+<p>&#x110;&#x1ED1;i v&#x1EDB;i c&#xE1;c t&#xED;nh n&#x103;ng th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng trong CGO, t&#xE1;c gi&#x1EA3; package <a href="https://github.com/chai2010/cgo" target="_blank">github.com/chai2010/cgo</a>, &#x111;&#xE3; cung c&#x1EA5;p c&#xE1;c ch&#x1EE9;c n&#x103;ng chuy&#x1EC3;n &#x111;&#x1ED5;i c&#x1A1; b&#x1EA3;n. &#x110;&#x1EC3; bi&#x1EBF;t th&#xEA;m chi ti&#x1EBF;t h&#xE3;y tham kh&#x1EA3;o code hi&#x1EC7;n th&#x1EF1;c.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch2-02-CGO-foundation.html" class="navigation navigation-prev " aria-label="Previous page: 2.2 CGO Foundation">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch2-04-function-call.html" class="navigation navigation-next " aria-label="Next page: 2.4 Lời gọi hàm">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2.3 Chuyển đổi kiểu","level":"1.3.3","depth":2,"next":{"title":"2.4 Lời gọi hàm","level":"1.3.4","depth":2,"path":"ch2-cgo/ch2-04-function-call.md","ref":"ch2-cgo/ch2-04-function-call.md","articles":[]},"previous":{"title":"2.2 CGO Foundation","level":"1.3.2","depth":2,"path":"ch2-cgo/ch2-02-CGO-foundation.md","ref":"ch2-cgo/ch2-02-CGO-foundation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch2-cgo/ch2-03-type-conversion.md","mtime":"2019-08-25T04:59:28.293Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-25T05:05:59.503Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
