@@ -400,3 +400,5 @@ func (p *{{$root.ServiceName}}Client) {{$m.MethodName}}(
 ```
 
 Khi plugin mới của protoc được hoàn thành, mã nguồn có thể được sinh ra mỗi khi RPC service thay đổi trong `hello.proto` file. Chúng ta có thể điều chỉnh hoặc thêm nội dung của mã nguồn được sinh ra bằng việc cập nhật template plugin.
+
+[Tiếp theo](ch3-03-fun-fpc.md)

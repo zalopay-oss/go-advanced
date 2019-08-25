@@ -296,3 +296,5 @@ import (
 - Có thể `cache prepared statement` và sử dụng lại sau này.
 
 Các bạn có thể xem chi tiết hơn bài [blog](https://medium.com/zalopay-engineering/hi%E1%BB%83u-s%C3%A2u-v%E1%BB%81-prepared-statement-trong-sql-bc79d85f9b98) này.
+
+[Tiếp theo](ch4-06-service-flow-limitation.md)

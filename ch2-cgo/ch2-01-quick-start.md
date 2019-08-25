@@ -272,3 +272,5 @@ func SayHello(s string) {
 ```
 
 Có vẻ như tất cả đều được viết bằng Go, nhưng việc triển khai từ hàm `main()` của ngôn ngữ Go đến phiên bản ngôn ngữ C đã tự động tạo ra hàm `SayHello`, rồi cuối cùng trở lại môi trường ngôn ngữ Go.
+
+[Tiếp theo](ch2-01-quick-start.md)

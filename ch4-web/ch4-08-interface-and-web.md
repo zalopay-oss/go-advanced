@@ -263,3 +263,5 @@ func entry() {
 Ở `Table-driven design`, nhiều thiết kế liên quan không dùng nó như một design pattern, nhưng chúng tôi nghĩ nó vẫn có ý nghĩa quan trọng để giúp chúng ta đơn giản mã nguồn.
 
 Dĩ nhiên, `table-driven` không phải là một lựa chọn hoàn hảo, bởi vì bạn cần tính hash từ `key`. Trong trường hợp hiệu suất là quan trọng ta cần phải cân nhắc kĩ lưỡng khi sử dụng.
+
+[Tiếp theo](ch4-09-ext.md)

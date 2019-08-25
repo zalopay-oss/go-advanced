@@ -199,3 +199,5 @@ func (r *Router) Add(route string, h http.Handler) {
     r.mux[route] = mergedHandler
 }
 ```
+
+[Tiếp theo](ch4-04-request-verification.md)
