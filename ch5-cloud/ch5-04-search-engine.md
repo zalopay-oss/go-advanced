@@ -405,3 +405,5 @@ Sau khi tăng khoảng thời gian lên 11 phút thì mọi thứ đã ổn hơn
 [Downstream Kafka consumer](https://kafka.apache.org/20/documentation.html) chịu trách nhiệm ghi khóa chính tự tăng của bảng dữ liệu upstream dưới dạng ID của Elaticsearch. Mỗi khi nhận được binlog, dữ liệu có ID tương ứng sẽ được cập nhật mới nhất. Binlog của một row trong MySQL sẽ cung cấp tất cả các trường của record cho downstream. Vì vậy, trên thực tế, khi đồng bộ hóa dữ liệu, bạn không cần xem xét dữ liệu được chèn hay cập nhật, miễn là bạn có chèn ID.
 
 Mô hình này cũng yêu cầu business tuân thủ một điều kiện của bảng dữ liệu, bảng phải có ID khóa chính là `duy nhất` để đảm bảo rằng dữ liệu chúng ta nhập vào Elaticsearch sẽ không bị trùng lặp. Khi điều kiện này không được tuân theo, nó sẽ dẫn đến sự trùng lặp dữ liệu khi đồng bộ hóa.
+
+[Tiếp theo](ch5-05-load-balance.md)

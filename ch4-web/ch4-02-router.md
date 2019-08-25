@@ -229,3 +229,5 @@ Node gốc bây giờ sẽ bắt đầu từ ký tự `/`, chuỗi truy vấn ph
 	</span>
 	<br/>
 </div>
+
+[Tiếp theo](ch4-03-middleware.md)

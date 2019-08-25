@@ -431,3 +431,5 @@ func main {
 ```
 
 Nhưng làm như vậy sẽ đi ngược lại với triết lý lập trình đơn giản và dễ hiểu của Go.
+
+[Tiếp theo](../ch2-cgo/ch2-01-quick-start.md)
