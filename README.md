@@ -9,7 +9,9 @@
   - [Đọc online](#đọc-online)
   - [Tham gia phát triển](#tham-gia-phát-triển)
   - [Nhóm phát triển](#nhóm-phát-triển)
+  - [Cơ hội nghề nghiệp tại ZaloPay](#cơ-hội-nghề-nghiệp-tại-zalopay)
   - [Liên hệ](#liên-hệ)
+  
   
 ## Giới thiệu
 
@@ -70,11 +72,24 @@ Dự án này được phát triển bởi các thành viên sau đây.
 | [<img src="https://avatars1.githubusercontent.com/u/38773351?s=460&v=4" width="100px;"/><br /><sub><b>phamtai97</b></sub>](https://github.com/phamtai97) | [<img src="https://avatars1.githubusercontent.com/u/26034284?s=460&v=4" width="100px;"/><br /><sub><b>thinhdang</b></sub>](https://github.com/thinhdanggroup) | [<img src="https://avatars2.githubusercontent.com/u/23535926?s=460&v=4" width="100px;"/><br /><sub><b>quocanh1897</b></sub>](https://github.com/quocanh1897) | [<img src="https://avatars2.githubusercontent.com/u/32214488?s=400&v=4" width="100px;"/><br /><sub><b>thoainguyen</b></sub>](https://github.com/thoainguyen) | [<img src="https://avatars1.githubusercontent.com/u/3270746?s=460&v=4" width="100px;"/><br /><sub><b>anhldbk</b></sub>](https://github.com/anhldbk) |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 
+## Cơ hội nghề nghiệp tại ZaloPay
+
+<div align="center">
+	<img src="./images/qc-zalopay.png" width="600">
+	<br/>
+	<span align="center">
+		<i></i>
+	</span>
+</div>
+<br/>
+
+[ZaloPay](https://zalopay.vn/) là một trong những ví điện tử được ưa chuộng hiện nay với nhiều tính năng và tiện ích hấp dẫn, giúp chúng ta giao dịch tài chính nhanh chóng hơn thông qua ứng dụng ZaloPay. Chúng tôi luôn mong muốn có thêm các thành viên mới gia nhập đội ngũ engineering, cùng giải quyết các bài toán hóc búa về high performance, fault tolerant và distributed transaction. `Java`, `Golang` và `Rust` là ngôn ngữ chính của chúng tôi.
+
 ## Liên hệ
 
 - Github: [ZaloPay Open Source](https://github.com/zalopay-oss)
   
-- Facebook: [Zalopay Engineering](https://www.facebook.com/zalopay.engineering/)
+- Facebook: [ZaloPay Engineering](https://www.facebook.com/zalopay.engineering/)
 
 - Blog: [Medium ZaloPay Engineering](https://medium.com/zalopay-engineering)
 
