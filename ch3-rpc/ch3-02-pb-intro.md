@@ -25,7 +25,7 @@ syntax = "proto3";
 // tên package được sinh ra
 package main;
 // message là một đơn vị dữ liệu trong protobuf
-message String {trong
+message String {
     // chuỗi string được truyền vào hàm RPC
     string value = 1;
 }
@@ -37,7 +37,7 @@ Chúng ta sẽ sinh ra mã nguồn Go bằng lệnh sau:
 
 ```sh
 $ protoc --go_out=. hello.proto
-// Trong đó,
+// trong đó,
 // protoc: chương trình sinh mã nguồn
 // go_out: chỉ cho protoc tải plugin protoc-gen-go, (cũng có java_out, python_out,..)
 // --go_out=.: sinh ra mã nguồn tại thư mục hiện tại

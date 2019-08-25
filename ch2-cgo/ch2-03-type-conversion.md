@@ -12,8 +12,8 @@ Khi ta sử dụng các ký hiệu của C trong Golang, thường nó sẽ truy
 <br/>
 <span align="center"><i>Bảng so sánh kiểu trong các ngôn ngữ Go và C</i></span>
     <br/>
-
 </div>
+
 Mặc dù kích thước của những kiểu không chỉ rõ kích thước (trong C) như `int`, `short`, ..., kích thước của chúng đều được xác định trong CGO: kiểu `int` và `uint` của C đều có kích thước 4 byte, kiểu `size_t` có thể được coi là kiểu số nguyên không dấu `uint` của ngôn ngữ Go .
 
 Mặc dù kiểu `int` và `uint` của C đều có kích thước cố định, nhưng với Go thì `int` và `uint` có thể là 4 byte hoặc 8 byte (tuỳ platform). Nếu cần sử dụng đúng kiểu `int` của C trong Go, bạn có thể sử dụng kiểu `GoInt` được xác định trong file header `_cgo_export.h` được tạo ra bởi công cụ CGO. Trong file header này, mỗi kiểu giá trị cơ bản của Go sẽ xác định kiểu tương ứng trong C (kiểu có tiền tố "Go"). Ví dụ sau trong hệ thống 64-bit, file header `_cgo_export.h` định nghĩa các kiểu giá trị:
@@ -43,7 +43,6 @@ Một cách tốt hơn là sử dụng các kiểu có trong khai báo file head
 <br/>
 <span align="center"><i>Bảng so sánh kiểu trong `stdint.h`</i></span>
     <br/>
-
 </div>
 
 Như đã đề cập trước đó, nếu kiểu trong C bao gồm nhiều từ, nó không thể được sử dụng trực tiếp thông qua package "C" ảo (ví dụ: `unsigned short` không thể được truy cập trực tiếp `C.unsigned short`). Tuy nhiên, sau khi định nghĩa lại kiểu trong <stdint.h> bằng cách sử dụng `typedef`, chúng ta có thể truy cập tới kiểu gốc. Đối với các kiểu trong C phức tạp hơn thì nên sử dụng `typedef` để đặt lại tên cho nó, thuận tiện cho việc truy cập từ CGO.
