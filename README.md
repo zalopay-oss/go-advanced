@@ -62,7 +62,7 @@ Chúng tôi biết tài liệu này còn nhiều hạn chế. Để trở nên h
 
 Các bạn có thể đóng góp bằng cách:
 
-- [Liên hệ](#li%C3%AAn-h%E1%BB%87) với chúng tôi.
+- [Liên hệ](#liên-hệ) với chúng tôi.
 - Trả lời các câu hỏi trong [issues](https://github.com/zalopay-oss/go-advanced/issues).
 - Tạo các issues gặp phải trên [issues](https://github.com/zalopay-oss/go-advanced/issues).
 - Tạo pull request trên repository của chúng tôi.
