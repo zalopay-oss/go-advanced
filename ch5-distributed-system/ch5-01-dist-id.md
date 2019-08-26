@@ -148,7 +148,7 @@ Thời gian ở đây chỉ sử dụng 39 bit, nhưng đơn vị thời gian tr
 Cấu trúc của `Settings` như sau:
 
 ```go
-Type Settings struct {
+type Settings struct {
    // tương tự như Epoch
    // mặc định bắt đầu vào ngày 2014-09-01 00:00:00 +0000 UTC
    StartTime time.Time
