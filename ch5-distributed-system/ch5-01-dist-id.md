@@ -244,3 +244,5 @@ func main() {
 // output:
 // ID: 84989976554504193
 ```
+
+[Tiếp theo](ch5-02-lock.md)

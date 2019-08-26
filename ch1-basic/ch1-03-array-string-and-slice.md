@@ -476,3 +476,5 @@ a[len(a)-1] = nil
 // xóa phần tử cuối cùng ra khỏi slice
 a = a[:len(a)-1]
 ```
+
+[Tiếp theo](ch1-04-func-method-interface.md)

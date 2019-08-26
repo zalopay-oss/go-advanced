@@ -1,4 +1,4 @@
-# Chapter 6 Hệ thống phân tán
+# Chapter 5 Hệ thống phân tán
 
 <div align="center">
 	<img src="../images/ch6.png">

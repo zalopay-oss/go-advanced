@@ -407,3 +407,5 @@ func main() {
 Bạn đọc có thể xem code chi tiết tại [đây](../examples/ch3/ch3.5/4-with-web-services/main.go).
 
 Theo cách này chúng ta có thể cung cấp cả web serive và gRPC chung port cùng một lúc.
+
+[Tiếp theo](ch3-06-grpc-ext.md)

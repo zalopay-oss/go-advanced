@@ -145,3 +145,5 @@ $ grpcurl -plaintext -d @ localhost:1234 HelloService.HelloService/Channel
   "value": "hello:vietnamese-vng"
 }
 ```
+
+[Tiếp theo](ch3-09-supplementary-notes.md)

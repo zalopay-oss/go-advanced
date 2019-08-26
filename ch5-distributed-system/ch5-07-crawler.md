@@ -312,3 +312,5 @@ func main() {
 Về cơ bản, khi lập trình thì các `producer` và `consumer` là giống nhau. Nếu chúng ta muốn có tính linh hoạt trong việc tăng và giảm số các trang web để thu thập thông tin trong tương lai, chúng ta nên suy nghĩ về các tham số và chiến lược cấu hình cho trình thu thập thông tin càng nhiều càng tốt.
 
 Việc sử dụng hệ thống cấu hình đã được đề cập trong phần [cấu hình phân tán](./ch5-06-config.md) nên các bạn có thể tự mình dùng thử nó.
+
+[Tiếp theo](ch5-08-ext.md)
