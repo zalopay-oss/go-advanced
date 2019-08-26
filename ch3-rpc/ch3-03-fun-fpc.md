@@ -369,3 +369,5 @@ func (p *HelloService) Hello(request string, reply *string) error {
 ```
 
 Theo cách này, khi client kết nối tới RPC service, chức năng login sẽ được thực hiện trước, và các service khác có thể thực thi bình thường sau khi login thành công.
+
+[Tiếp theo](ch3-04-grpc.md)

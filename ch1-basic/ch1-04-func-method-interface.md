@@ -561,3 +561,5 @@ Việc khởi tạo và thực thi chương trình Go luôn bắt đầu từ h�
 </div>
 
 Cần lưu ý rằng trước khi hàm nào khác được thực thi thì tất cả code đều chạy trong cùng một Goroutine `main.main`, đây là thread chính của chương trình. Do đó, nếu một Goroutine khởi chạy trong hàm `main.main` thì nó chỉ có thể được thực thi sau khi vào chương trình đã thực thi xong `init`.
+
+[Tiếp theo](ch1-05-concurrency-parallelism.md)

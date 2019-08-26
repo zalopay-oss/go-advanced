@@ -363,3 +363,5 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 
 // github: https://github.com/thoainguyen/go-hackercamp/tree/master/go-contacts
 ```
+
+[Tiếp theo](ch4-05-database.md)

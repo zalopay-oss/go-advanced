@@ -466,3 +466,5 @@ Kết quả vẫn là một chuỗi json :
 ```
 
 Điều đó làm việc gọi RPC service từ những ngôn ngữ khác dễ dàng hơn.
+
+[Tiếp theo](ch3-02-pb-intro.md)

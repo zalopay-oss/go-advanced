@@ -79,3 +79,5 @@ Framework web của Go có thể được chia thành hai loại sau:
 2. MVC class framework ([Revel](https://github.com/revel/revel), [Beego](https://github.com/astaxie/beego), [Iris](https://github.com/kataras/iris),...)
 
 Chúng ta có thể xem thống kê các framwork web phổ biến được dùng trong cộng đồng Golang [ở đây](https://github.com/mingrammer/go-web-framework-stars/blob/master/README.md).
+
+[Tiếp theo](ch4-02-router.md)

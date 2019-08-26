@@ -161,3 +161,5 @@ func main() {
 ```
 
 Ở phần tiếp theo chúng ta sẽ đi tới những ví dụ phức tạp hơn như cách xử lý race-condition trong Golang, sử dụng channel để chặn các goroutine,...
+
+[Tiếp theo](ch1-06-common-concurrency-mode.md)
