@@ -235,3 +235,5 @@ Nội dung của file _test_main.c sẽ không thay đổi, sau đó biên dịc
 $ gcc -o a.out _test_main.c number.so
 $ ./a.out
 ```
+
+[Tiếp theo](ch2-10-link.md)

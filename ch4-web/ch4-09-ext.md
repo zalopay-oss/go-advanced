@@ -6,3 +6,5 @@ Bởi vì web là một lĩnh vực khá rộng, trong chương này chúng tôi
 
 - [Building Web Apps with Go - codegansta](https://legacy.gitbook.com/book/codegangsta/building-web-apps-with-go/details)
 - [Build web application with Golang - astaxie](https://astaxie.gitbooks.io/build-web-application-with-golang)
+
+[Tiếp theo](../ch5-distributed-system/ch5-01-dist-id.md)

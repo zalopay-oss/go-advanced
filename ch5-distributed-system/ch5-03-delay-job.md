@@ -121,3 +121,5 @@ Dữ liệu của node 1 sẽ được di chuyển đến node 2 và node 3.
 Tất nhiên, bạn cũng có thể sử dụng một ý tưởng phức tạp hơn một chút, chẳng hạn như phân chia vai trò của các node trong cụm và node điều phối sẽ phân phối lại các tác vụ trong trường hợp có lỗi. Xem xét tính `high availability`, node điều phối cũng cần 1 đến 2 Node dự phòng để ngăn ngừa tai nạn.
 
 Như đã đề cập, chúng ta sẽ sử dụng hàng đợi tin nhắn để thông báo cho người dùng. Khi sử dụng hàng đợi tin nhắn, nhiều hàng đợi không hỗ trợ [exactly once](https://streaml.io/blog/exactly-once). Trong trường hợp này, chúng ta cần để người dùng tự xử lý việc nhận tin nhắn 2 lần hoặc thiếu tin nhắn (xử lý tạm thời).
+
+[Tiếp theo](ch5-04-search-engine.md)

@@ -519,3 +519,5 @@ int main() {
 Bằng cách này, chúng ta có thể xây dựng một đối tượng `Int` bằng cách buộc con trỏ kiểu int thành con trỏ kiểu `Int` thay vì hàm tạo mặc định (default constructor). Bên trong hàm `Twice`, bằng cách chuyển con trỏ `this` trở lại con trỏ int trong thao tác ngược lại, giá trị kiểu int ban đầu đã có thể được parse. Tại thời điểm này, kiểu `Int` chỉ là một lớp vỏ trong thời gian biên dịch và không chiếm thêm bộ nhớ khi chạy.
 
 Do đó, phương thức C++ cũng có thể được sử dụng cho các kiểu không phải class. C++ cho các hàm thành phần thông thường cũng có thể được liên kết với các kiểu. Chỉ có các phương thức ảo thuần túy được ràng buộc với đối tượng và đó là interface.
+
+[Tiếp theo](ch2-09-static-shared-lib.md)
