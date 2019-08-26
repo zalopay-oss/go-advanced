@@ -91,3 +91,4 @@ $ go build
 $ ./hello
 Hello World
 ```
+[Tiếp theo](ch1-02-hello-revolution.md)

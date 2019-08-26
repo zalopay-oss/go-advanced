@@ -43,3 +43,5 @@ Sẽ có một số lý do cho việc hỏng chuỗi get, đây là một số l
   * Không có file `bc` được tìm thấy tương ứng.
 * Phụ thuộc vào `custom pkg-config`: yêu cầu một số thiết lập thêm.
 * Phụ thuộc vào `swig`: user chưa cài đặt `swig`, hoặc phiên bản không tương thích.
+
+[Tiếp theo](ch2-11-ext.md)

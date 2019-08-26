@@ -288,3 +288,5 @@ $ curl localhost:8080/hello/vietnam
 ```
 
 Bạn đọc có thể xem thêm các ví dụ tại [đây](https://github.com/chai2010/pbgo/blob/master/README.md).
+
+[Tiếp theo](ch3-08-grpc-curl.md)
