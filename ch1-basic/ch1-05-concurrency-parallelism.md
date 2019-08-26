@@ -64,7 +64,7 @@ Trong thực tế, trên mỗi nhân của CPU vẫn xảy ra quá trình xử l
  Trước khi tìm hiểu về cách Golang xử lý đồng thời như thế nào, chúng ta cùng nhắc lại một số khái niệm về tiến trình (process) và luồng (thread) trong hệ điều hành.
 
 ### Process 
-Tiến trình có thể hiểu đơn giản là một chương trình đang chạy trong máy tính. Khi chúng ta đang mở trình duyệt web để đọc [Advanced Go book](https://zalopay-oss.github.io/go-advanced/) thì đây được xem là một tiến trình. Khi chúng viết 1 chương trình máy tính bằng ngôn ngữ lập trình như C, Java, hay Go, sau khi chúng ta tiến hành biên dịch và chạy chương trình thì hệ điều hành sẽ cấp cho chương trình một không gian bộ nhớ nhất định, PID (process ID),... Mội tiến trình có ít nhất một luồng chính (main thread) để chạy chương trình, nó như là xương sống của chương trình vậy. Khi luồng chính này ngừng hoạt động tương ứng với việc chương trình bị tắt.
+Tiến trình có thể hiểu đơn giản là một chương trình đang chạy trong máy tính. Khi chúng ta mở trình duyệt web để đọc [Advanced Go book](https://zalopay-oss.github.io/go-advanced/) thì đây được xem là một tiến trình. Khi chúng ta viết 1 chương trình máy tính bằng ngôn ngữ lập trình như C, Java, hay Go, sau khi tiến hành biên dịch và chạy chương trình thì hệ điều hành sẽ cấp cho chương trình một không gian bộ nhớ nhất định, PID (process ID),... Mỗi tiến trình có ít nhất một luồng chính (main thread) để chạy chương trình, nó như là xương sống của chương trình vậy. Khi luồng chính này ngừng hoạt động tương ứng với việc chương trình bị tắt.
 
 
 ### Thread
