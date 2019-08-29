@@ -1,16 +1,16 @@
 # Go Language Advanced Programming
 
 - [Go Language Advanced Programming](#go-language-advanced-programming)
-  - [Giới thiệu](#giới-thiệu)
-  - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#tại-sao-chúng-tôi-thực-hiện-bộ-tài-liệu-này-)
-  - [Đối tượng sử dụng](#đối-tượng-sử-dụng)
-  - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
-  - [Mục lục](#mục-lục)
-  - [Phương thức đọc](#phương-thức-đọc)
-  - [Tham gia phát triển](#tham-gia-phát-triển)
-  - [Nhóm phát triển](#nhóm-phát-triển)
-  - [Cơ hội nghề nghiệp tại ZaloPay](#cơ-hội-nghề-nghiệp-tại-zalopay)
-  - [Liên hệ](#liên-hệ)
+  - [Giới thiệu](#gi%e1%bb%9bi-thi%e1%bb%87u)
+  - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#t%e1%ba%a1i-sao-ch%c3%bang-t%c3%b4i-th%e1%bb%b1c-hi%e1%bb%87n-b%e1%bb%99-t%c3%a0i-li%e1%bb%87u-n%c3%a0y)
+  - [Đối tượng sử dụng](#%c4%90%e1%bb%91i-t%c6%b0%e1%bb%a3ng-s%e1%bb%ad-d%e1%bb%a5ng)
+  - [Tài liệu tham khảo](#t%c3%a0i-li%e1%bb%87u-tham-kh%e1%ba%a3o)
+  - [Mục lục](#m%e1%bb%a5c-l%e1%bb%a5c)
+  - [Phương thức đọc](#ph%c6%b0%c6%a1ng-th%e1%bb%a9c-%c4%91%e1%bb%8dc)
+  - [Tham gia phát triển](#tham-gia-ph%c3%a1t-tri%e1%bb%83n)
+  - [Nhóm phát triển](#nh%c3%b3m-ph%c3%a1t-tri%e1%bb%83n)
+  - [Cơ hội nghề nghiệp tại ZaloPay](#c%c6%a1-h%e1%bb%99i-ngh%e1%bb%81-nghi%e1%bb%87p-t%e1%ba%a1i-zalopay)
+  - [Liên hệ](#li%c3%aan-h%e1%bb%87)
   
   
 ## Giới thiệu
@@ -52,9 +52,9 @@ Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 ## Phương thức đọc
 
 - Đọc online: [GitBook](https://zalopay-oss.github.io/go-advanced/)
-- Tải file pdf: [pdf](./pdf/advanced-go-book.pdf)
-- Tải file epub: [epub](./epub/advanced-go-book.epub)
-- Tải file mobi: [mobi](./mobi/advanced-go-book.mobi)
+- Tải file pdf: [pdf](./resource/advanced-go-book.pdf)
+- Tải file epub: [epub](./resource/advanced-go-book.epub)
+- Tải file mobi: [mobi](./resource/advanced-go-book.mobi)
 
 ## Tham gia phát triển
 
