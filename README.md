@@ -1,5 +1,13 @@
 # Go Language Advanced Programming
 
+[![version](https://img.shields.io/badge/repo%20status-active-brightgreen)](https://github.com/zalopay-oss/go-advanced)
+[![version](https://img.shields.io/badge/version-1.3.0--beta-blue)](https://github.com/zalopay-oss/go-advanced/tree/v1.3.0-beta)
+[![version](https://img.shields.io/badge/contributors-5-blueviolet)](#tham-gia-phát-triển)
+[![version](https://img.shields.io/badge/last%20change-03%2F09%2F2018-yellowgreen)]()
+[![version](https://img.shields.io/badge/open%20issues-1-red)](https://github.com/zalopay-oss/go-advanced/issues)
+
+
+
 - [Go Language Advanced Programming](#go-language-advanced-programming)
   - [Giới thiệu](#giới-thiệu)
   - [Tại sao chúng tôi thực hiện bộ tài liệu này ?](#tại-sao-chúng-tôi-thực-hiện-bộ-tài-liệu-này-)
