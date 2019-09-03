@@ -16,3 +16,5 @@ Ngành công nghiệp phần mềm hiện đại không thể tách khỏi Web. 
 Chương này sẽ giải thích vị trí hiện tại của Go trong lĩnh vực lập trình Web, và điểm qua một số Open source web frameworks, cũng như đưa ra các ví dụ thực thi minh họa.
 
 Đồng thời, chúng tôi sẽ giới thiệu một số vấn đề gặp phải của các doanh nghiệp hiện đại phải đối mặt và cách giải quyết chúng bằng ngôn ngữ Go.
+
+(Chúng tôi đang update chapter này, sẽ sớm có bản cập cho các bạn)
