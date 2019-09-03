@@ -1,0 +1,1379 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1.6 Mô hình thực thi đồng thời · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch1-07-error-and-panic.html" />
+    
+    
+    <link rel="prev" href="ch1-05-concurrency-parallelism.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="ch1-01-genesis.html">
+            
+                <a href="ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="ch1-02-hello-revolution.html">
+            
+                <a href="ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="ch1-03-array-string-and-slice.html">
+            
+                <a href="ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="ch1-04-func-method-interface.html">
+            
+                <a href="ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="ch1-05-concurrency-parallelism.html">
+            
+                <a href="ch1-05-concurrency-parallelism.html">
+            
+                    
+                    1.5 Khái niệm xử lý đồng thời và song song
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.6" data-path="ch1-06-common-concurrency-mode.html">
+            
+                <a href="ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Mô hình thực thi đồng thời
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="ch1-07-error-and-panic.html">
+            
+                <a href="ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10 Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-rpc/">
+            
+                <a href="../ch3-rpc/">
+            
+                    
+                    Chương 3: RPC và Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-web/">
+            
+                <a href="../ch4-web/">
+            
+                    
+                    Chương 4: Go và Web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-distributed-system/">
+            
+                <a href="../ch5-distributed-system/">
+            
+                    
+                    Chương 5: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-distributed-system/ch5-01-dist-id.html">
+            
+                <a href="../ch5-distributed-system/ch5-01-dist-id.html">
+            
+                    
+                    5.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-distributed-system/ch5-02-lock.html">
+            
+                <a href="../ch5-distributed-system/ch5-02-lock.html">
+            
+                    
+                    5.2 Distributed lock
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-distributed-system/ch5-03-delay-job.html">
+            
+                <a href="../ch5-distributed-system/ch5-03-delay-job.html">
+            
+                    
+                    5.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-distributed-system/Ch5-04-search-engine.html">
+            
+                <a href="../ch5-distributed-system/Ch5-04-search-engine.html">
+            
+                    
+                    5.4 Công cụ tìm kiếm phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-distributed-system/ch5-05-load-balance.html">
+            
+                <a href="../ch5-distributed-system/ch5-05-load-balance.html">
+            
+                    
+                    5.5 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-distributed-system/ch5-06-config.html">
+            
+                <a href="../ch5-distributed-system/ch5-06-config.html">
+            
+                    
+                    5.6 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-distributed-system/ch5-07-crawler.html">
+            
+                <a href="../ch5-distributed-system/ch5-07-crawler.html">
+            
+                    
+                    5.7 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="../ch5-distributed-system/ch5-08-ext.html">
+            
+                <a href="../ch5-distributed-system/ch5-08-ext.html">
+            
+                    
+                    5.8 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-best-practice/README.md">
+            
+                <span>
+            
+                    
+                    Chương 6: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >1.6 Mô hình thực thi đồng thời</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="16-m&#xF4;-h&#xEC;nh-th&#x1EF1;c-thi-&#x111;&#x1ED3;ng-th&#x1EDD;i">1.6. M&#xF4; h&#xEC;nh th&#x1EF1;c thi &#x111;&#x1ED3;ng th&#x1EDD;i</h1>
+<p>M&#x1ED9;t &#x111;i&#x1EC3;m m&#x1EA1;nh c&#x1EE7;a Golang l&#xE0; t&#xED;ch h&#x1EE3;p s&#x1EB5;n c&#x1A1; ch&#x1EBF; x&#x1EED; l&#xFD; &#x111;&#x1ED3;ng th&#x1EDD;i (concurrency). L&#xFD; thuy&#x1EBF;t v&#x1EC1; h&#x1EC7; th&#x1ED1;ng t&#x1B0;&#x1A1;ng tranh c&#x1EE7;a Go l&#xE0; CSP (Communicating Sequential Process) &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EC1; xu&#x1EA5;t b&#x1EDF;i Hoare v&#xE0;o n&#x103;m 1978. CSP  &#x111;&#x1B0;&#x1EE3;c &#xE1;p d&#x1EE5;ng l&#x1EA7;n &#x111;&#x1EA7;u cho m&#xE1;y t&#xED;nh &#x111;a d&#x1EE5;ng T9000 m&#xE0; Hoare c&#xF3; tham gia. T&#x1EEB; NewSqueak, Alef, Limbo &#x111;&#x1EBF;n Golang hi&#x1EC7;n t&#x1EA1;i, Rob Pike, ng&#x1B0;&#x1EDD;i c&#xF3; h&#x1A1;n 20 n&#x103;m kinh nghi&#x1EC7;m th&#x1EF1;c t&#x1EBF; v&#x1EDB;i CSP, r&#x1EA5;t quan t&#xE2;m  &#x111;&#x1EBF;n ti&#x1EC1;m n&#x103;ng &#xE1;p d&#x1EE5;ng CSP v&#xE0;o ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh &#x111;a d&#x1EE5;ng. Kh&#xE1;i ni&#x1EC7;m c&#x1ED1;t l&#xF5;i c&#x1EE7;a l&#xFD; thuy&#x1EBF;t CSP c&#x169;ng &#x111;&#x1B0;&#x1EE3;c &#xE1;p d&#x1EE5;ng v&#xE0;o l&#x1EAD;p tr&#xEC;nh concurrency trong Go.</p>
+<div align="center">
+
+<img src="../images/gophercomplex5.jpg" width="800">
+<br>
+<span align="center"><i>Go concurrency</i></span>
+    <br>
+
+</div>
+
+<p>&#x1EDE; ph&#x1EA7;n n&#xE0;y ch&#xFA;ng ta c&#xF9;ng xem qua c&#xE1;c c&#xE1;ch d&#xF9;ng goroutine c&#x169;ng nh&#x1B0; c&#xE1;c c&#xE1;ch x&#x1EED; l&#xFD; goroutine m&#xE0; ch&#xFA;ng ta th&#x1B0;&#x1EDD;ng g&#x1EB7;p trong l&#xFA;c l&#x1EAD;p tr&#xEC;nh.</p>
+<h2 id="161-phi&#xEA;n-b&#x1EA3;n-concurrency-v&#x1EDB;i-hello-world">1.6.1. Phi&#xEA;n b&#x1EA3;n concurrency v&#x1EDB;i Hello World</h2>
+<p>Trong h&#x1EA7;u h&#x1EBF;t c&#xE1;c ng&#xF4;n ng&#x1EEF; hi&#x1EC7;n &#x111;&#x1EA1;i, v&#x1EA5;n &#x111;&#x1EC1; chia s&#x1EBB; t&#xE0;i nguy&#xEA;n &#x111;&#x1B0;&#x1EE3;c gi&#x1EA3;i quy&#x1EBF;t b&#x1EB1;ng c&#x1A1; ch&#x1EBF; &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a nh&#x1B0; kh&#xF3;a (lock) nh&#x1B0;ng Golang c&#xF3; c&#xE1;ch ti&#x1EBF;p c&#x1EAD;n ri&#xEA;ng l&#xE0; chia s&#x1EBB; gi&#xE1; tr&#x1ECB; th&#xF4;ng qua channel.</p>
+<div align="center">
+<img src="../images/channel.jpg" width="400">
+    <br>
+    <span align="center"><i>Goroutine trao &#x111;&#x1ED5;i gi&#xE1; tr&#x1ECB; qua channel</i></span>
+    <br>
+
+</div>
+
+<p>Tr&#xEA;n th&#x1EF1;c t&#x1EBF; khi nhi&#x1EC1;u thread th&#x1EF1;c thi &#x111;&#x1ED9;c l&#x1EAD;p ch&#xFA;ng hi&#x1EBF;m khi ch&#x1EE7; &#x111;&#x1ED9;ng chia s&#x1EBB; t&#xE0;i nguy&#xEA;n. T&#x1EA1;i b&#x1EA5;t k&#x1EF3; th&#x1EDD;i &#x111;i&#x1EC3;m n&#xE0;o, t&#x1ED1;t nh&#x1EA5;t l&#xE0; ch&#x1EC9; Goroutine s&#x1EDF; h&#x1EEF;u t&#xE0;i nguy&#xEA;n c&#x1EE7;a ch&#xED;nh m&#xEC;nh. Golang c&#xF3; m&#x1ED9;t tri&#x1EBF;t l&#xFD; &#x111;&#x1B0;&#x1EE3;c th&#x1EC3; hi&#x1EC7;n b&#x1EB1;ng slogan:</p>
+<blockquote>
+<p><em>Do not communicate by sharing memory; instead, share memory by communicating.</em></p>
+<p><em>Do not communicate through shared memory, but share memory through communication.</em></p>
+</blockquote>
+<p>M&#x1EB7;c d&#xF9; c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; t&#x1B0;&#x1A1;ng tranh &#x111;&#x1A1;n gi&#x1EA3;n nh&#x1B0;   tham chi&#x1EBF;u &#x111;&#x1EBF;n bi&#x1EBF;n &#x111;&#x1EBF;m c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c hi&#x1EC7;n th&#x1EF1;c b&#x1EB1;ng  <code>atomic operations</code> ho&#x1EB7;c <code>mutex lock</code>, nh&#x1B0;ng vi&#x1EC7;c ki&#x1EC3;m so&#xE1;t truy c&#x1EAD;p th&#xF4;ng qua Channel gi&#xFA;p cho code c&#x1EE7;a ch&#xFA;ng ta clean v&#xE0; &quot;Golang&quot; h&#x1A1;n.</p>
+<h3 id="&#xE1;p-d&#x1EE5;ng-mutex">&#xC1;p d&#x1EE5;ng Mutex</h3>
+<p>Xem x&#xE9;t &#x111;o&#x1EA1;n code sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> mu sync.Mutex
+
+    <span class="hljs-comment">// kh&#x1EDF;i ch&#x1EA1;y m&#x1ED9;t goroutine ch&#x1EA1;y &#x111;&#x1ED3;ng th&#x1EDD;i v&#x1EDB;i main</span>
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+        fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)
+
+        <span class="hljs-comment">// kh&#xF4;ng th&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o h&#xE0;m n&#xE0;y s&#x1EBD; ch&#x1EA1;y tr&#x1B0;&#x1EDB;c `mu.Unlock()` ph&#xED;a d&#x1B0;&#x1EDB;i</span>
+        mu.Lock()
+    }()
+
+    <span class="hljs-comment">// x&#x1EA3;y ra l&#x1ED7;i v&#xEC; `mu` &#x111;ang &#x1EDF; tr&#x1EA1;ng th&#xE1;i unlocked</span>
+    mu.Unlock()
+}
+</code></pre>
+<p>&#x1EDE; &#x111;&#xE2;y, <code>mu.Lock()</code> v&#xE0; <code>mu.Unlock()</code> kh&#xF4;ng &#x1EDF; trong c&#xF9;ng m&#x1ED9;t Goroutine, v&#xEC; v&#x1EAD;y n&#xF3; kh&#xF4;ng &#x111;&#xE1;p &#x1EE9;ng &#x111;&#x1B0;&#x1EE3;c m&#xF4; h&#xEC;nh b&#x1ED9; nh&#x1EDB; nh&#x1EA5;t qu&#xE1;n tu&#x1EA7;n t&#x1EF1; (sequential consistency memory model).</p>
+<p>S&#x1EED;a l&#x1EA1;i &#x111;o&#x1EA1;n code tr&#xEA;n nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> mu sync.Mutex
+
+    <span class="hljs-comment">// l&#x1EC7;nh n&#xE0;y khi&#x1EBF;n main thread b&#x1ECB; block</span>
+    mu.Lock()
+
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+        fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)
+
+        <span class="hljs-comment">// l&#x1EC7;nh n&#xE0;y Unlock cho main thread</span>
+        mu.Unlock()
+    }()
+
+    mu.Lock()
+}
+</code></pre>
+<h3 id="&#xE1;p-d&#x1EE5;ng-channel">&#xC1;p d&#x1EE5;ng Channel</h3>
+<p>&#x110;&#x1ED3;ng b&#x1ED9; h&#xF3;a v&#x1EDB;i mutex l&#xE0; m&#x1ED9;t c&#xE1;ch ti&#x1EBF;p c&#x1EAD;n &#x1EDF; m&#x1EE9;c &#x111;&#x1ED9; t&#x1B0;&#x1A1;ng &#x111;&#x1ED1;i &#x111;&#x1A1;n gi&#x1EA3;n. B&#xE2;y gi&#x1EDD; ta s&#x1EBD; s&#x1EED; d&#x1EE5;ng m&#x1ED9;t unbuffered channel &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a:  </p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+        fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)
+
+        <span class="hljs-comment">// ch&#x1EC9; sau khi goroutine n&#xE0;y ho&#xE0;n th&#xE0;nh thao t&#xE1;c nh&#x1EAD;n</span>
+        <span class="hljs-comment">// th&#xEC; thao t&#xE1;c g&#x1EED;i &#x1EDF; main thread m&#x1EDB;i &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t th&#xFA;c</span>
+        &lt;-done
+    }()
+
+    <span class="hljs-comment">// thao t&#xE1;c g&#x1EED;i qua channel `done`</span>
+    done &lt;- <span class="hljs-number">1</span>
+}
+</code></pre>
+<p>C&#xE1;ch n&#xE0;y g&#x1EB7;p b&#x1EA5;t c&#x1EAD;p v&#x1EDB;i buffered channel  v&#xEC; l&#xFA;c &#x111;&#xF3; kh&#xF4;ng c&#xF3; g&#xEC; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng goroutine s&#x1EBD; in ra tr&#x1B0;&#x1EDB;c khi tho&#xE1;t <code>main</code>. C&#xE1;ch ti&#x1EBF;p c&#x1EAD;n t&#x1ED1;t h&#x1A1;n l&#xE0; ho&#xE1;n &#x111;&#x1ED5;i h&#x1B0;&#x1EDB;ng g&#x1EED;i v&#xE0; nh&#x1EAD;n c&#x1EE7;a channel &#x111;&#x1EC3; tr&#xE1;nh c&#xE1;c s&#x1EF1; ki&#x1EC7;n &#x111;&#x1ED3;ng b&#x1ED9; h&#xF3;a b&#x1ECB; &#x1EA3;nh h&#x1B0;&#x1EDF;ng b&#x1EDF;i k&#xED;ch th&#x1B0;&#x1EDB;c buffer c&#x1EE7;a n&#xF3;:  </p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, <span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+        fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)
+
+        <span class="hljs-comment">// g&#x1EED;i 1 gi&#xE1; tr&#x1ECB; v&#xE0;o channel th&#xF4;ng b&#xE1;o k&#x1EBF;t th&#xFA;c goroutine n&#xE0;y</span>
+        done &lt;- <span class="hljs-number">1</span>
+    }()
+
+    <span class="hljs-comment">// main thread nh&#x1EAD;n gi&#xE1; tr&#x1ECB; t&#x1EEB; channel v&#xE0; tho&#xE1;t kh&#x1ECF;i</span>
+    <span class="hljs-comment">// tr&#x1EA1;ng th&#xE1;i block</span>
+    &lt;-done
+}
+</code></pre>
+<p>D&#x1EF1;a tr&#xEA;n buffered channel, ch&#xFA;ng ta c&#xF3; th&#x1EC3; d&#x1EC5; d&#xE0;ng m&#x1EDF; r&#x1ED9;ng thread print &#x111;&#x1EBF;n N. V&#xED; d&#x1EE5; sau l&#xE0; m&#x1EDF; 10 goroutine &#x111;&#x1EC3; in ri&#xEA;ng bi&#x1EC7;t:  </p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, <span class="hljs-number">10</span>)
+
+    <span class="hljs-comment">// m&#x1EDF; ra N goroutine</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">cap</span>(done); i++ {
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(){
+            fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)
+            done &lt;- <span class="hljs-number">1</span>
+        }()
+    }
+
+    <span class="hljs-comment">// &#x111;&#x1EE3;i c&#x1EA3; 10 goroutine ho&#xE0;n th&#xE0;nh</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">cap</span>(done); i++ {
+        &lt;-done
+    }
+}
+</code></pre>
+<h3 id="s&#x1EED;-d&#x1EE5;ng-syncwaitgroup-thay-cho-channel">S&#x1EED; d&#x1EE5;ng sync.WaitGroup thay cho Channel</h3>
+<p>M&#x1ED9;t c&#xE1;ch &#x111;&#x1A1;n gi&#x1EA3;n h&#x1A1;n l&#xE0; s&#x1EED; d&#x1EE5;ng <code>sync.WaitGroup</code> &#x111;&#x1EC3; ch&#x1EDD; m&#x1ED9;t t&#x1EAD;p c&#xE1;c s&#x1EF1; ki&#x1EC7;n:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+
+    <span class="hljs-comment">// m&#x1EDF; N goroutine</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+        <span class="hljs-comment">// t&#x103;ng s&#x1ED1; l&#x1B0;&#x1EE3;ng s&#x1EF1; ki&#x1EC7;n ch&#x1EDD;, h&#xE0;m n&#xE0;y ph&#x1EA3;i &#x111;&#x1B0;&#x1EE3;c</span>
+        <span class="hljs-comment">// &#x111;&#x1EA3;m b&#x1EA3;o th&#x1EF1;c thi tr&#x1B0;&#x1EDB;c khi b&#x1EAF;t &#x111;&#x1EA7;u 1 goroutine ch&#x1EA1;y n&#x1EC1;n</span>
+        wg.Add(<span class="hljs-number">1</span>)
+
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+            fmt.Println(<span class="hljs-string">&quot;Hello World&quot;</span>)
+
+            <span class="hljs-comment">// cho bi&#x1EBF;t ho&#xE0;n th&#xE0;nh m&#x1ED9;t s&#x1EF1; ki&#x1EC7;n</span>
+            wg.Done()
+        }()
+    }
+
+    <span class="hljs-comment">// &#x111;&#x1EE3;i N goroutine ho&#xE0;n th&#xE0;nh</span>
+    wg.Wait()
+}
+</code></pre>
+<h2 id="162-t&#xE1;c-v&#x1EE5;-atomic">1.6.2. T&#xE1;c v&#x1EE5; Atomic</h2>
+<p><a href="https://preshing.com/20130618/atomic-vs-non-atomic-operations/" target="_blank">T&#xE1;c v&#x1EE5; atomic</a> tr&#xEA;n m&#x1ED9;t v&#xF9;ng nh&#x1EDB; chia s&#x1EBB; th&#xEC; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng v&#xF9;ng nh&#x1EDB; &#x111;&#xF3; ch&#x1EC9; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p b&#x1EDF;i m&#x1ED9;t Goroutine t&#x1EA1;i m&#x1ED9;t th&#x1EDD;i &#x111;i&#x1EC3;m. &#x110;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c &#x111;i&#x1EC1;u n&#xE0;y ta c&#xF3; th&#x1EC3; d&#xF9;ng <a href="https://golang.org/pkg/sync/#Mutex" target="_blank">sync.Mutex</a>.</p>
+<h3 id="s&#x1EED;-d&#x1EE5;ng-syncmutex">S&#x1EED; d&#x1EE5;ng sync.Mutex</h3>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+<span class="hljs-comment">// package c&#x1EA7;n d&#xF9;ng</span>
+    <span class="hljs-string">&quot;sync&quot;</span>
+)
+
+<span class="hljs-comment">// total l&#xE0; m&#x1ED9;t atomic struct</span>
+<span class="hljs-keyword">var</span> total <span class="hljs-keyword">struct</span> {
+    sync.Mutex
+    value <span class="hljs-keyword">int</span>
+}
+
+<span class="hljs-keyword">func</span> worker(wg *sync.WaitGroup) {
+    <span class="hljs-comment">// th&#xF4;ng b&#xE1;o ho&#xE0;n th&#xE0;nh khi ra kh&#x1ECF;i h&#xE0;m</span>
+    <span class="hljs-keyword">defer</span> wg.Done()
+
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++ {
+        <span class="hljs-comment">// ch&#x1EB7;n c&#xE1;c Goroutines kh&#xE1;c v&#xE0;o</span>
+        total.Lock()
+        <span class="hljs-comment">// b&#xE2;y gi&#x1EDD;, l&#x1EC7;nh total.value += i &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o l&#xE0; atomic (&#x111;&#x1A1;n nguy&#xEA;n)</span>
+        total.value += i
+        <span class="hljs-comment">// b&#x1ECF; ch&#x1EB7;n</span>
+        total.Unlock()
+    }
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// khai b&#xE1;o wg &#x111;&#x1EC3; main Goroutine d&#x1EEB;ng ch&#x1EDD; c&#xE1;c Goroutines kh&#xE1;c tr&#x1B0;&#x1EDB;c khi k&#x1EBF;t th&#xFA;c ch&#x1B0;&#x1A1;ng tr&#xEC;nh</span>
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+    <span class="hljs-comment">// wg c&#x1EA7;n ch&#x1EDD; 2 Goroutines kh&#xE1;c</span>
+    wg.Add(<span class="hljs-number">2</span>)
+    <span class="hljs-comment">// th&#x1EF1;c thi Goroutines th&#x1EE9; nh&#x1EA5;t</span>
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    <span class="hljs-comment">// th&#x1EF1;c thi Goroutines th&#x1EE9; hai</span>
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    <span class="hljs-comment">// wg b&#x1EAF;t &#x111;&#x1EA7;u &#x111;&#x1EE3;i &#x111;&#x1EC3; 2 Goroutines kia xong</span>
+    wg.Wait()
+    <span class="hljs-comment">// in ra k&#x1EBF;t qu&#x1EA3; th&#x1EF1;c thi</span>
+    fmt.Println(total.value)
+}
+</code></pre>
+<p>Trong m&#x1ED9;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i, ta c&#x1EA7;n c&#xF3; c&#x1A1; ch&#x1EBF; &#x111;&#x1EC3; <code>lock</code> v&#xE0; <code>unlock</code> tr&#x1B0;&#x1EDB;c v&#xE0; sau khi truy c&#x1EAD;p v&#xE0;o v&#xF9;ng <a href="https://en.wikipedia.org/wiki/Critical_section" target="_blank">critical section</a>. N&#x1EBF;u kh&#xF4;ng c&#xF3; s&#x1EF1; b&#x1EA3;o v&#x1EC7; bi&#x1EBF;n <code>total</code> , k&#x1EBF;t qu&#x1EA3; cu&#x1ED1;i c&#xF9;ng c&#xF3; th&#x1EC3; b&#x1ECB; sai kh&#xE1;c do s&#x1EF1; truy c&#x1EAD;p &#x111;&#x1ED3;ng th&#x1EDD;i c&#x1EE7;a nhi&#x1EC1;u thread.</p>
+<h3 id="s&#x1EED;-d&#x1EE5;ng-syncatomic">S&#x1EED; d&#x1EE5;ng sync/atomic</h3>
+<p>Thay v&#xEC; d&#xF9;ng mutex, ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; d&#xF9;ng package <a href="https://golang.org/pkg/sync/atomic/" target="_blank">sync/atomic</a>, &#x111;&#xE2;y l&#xE0; gi&#x1EA3;i ph&#xE1;p hi&#x1EC7;u qu&#x1EA3; h&#x1A1;n &#x111;&#x1ED1;i v&#x1EDB;i m&#x1ED9;t bi&#x1EBF;n s&#x1ED1; h&#x1ECD;c.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;sync&quot;</span>
+    <span class="hljs-comment">// khai b&#xE1;o bi&#x1EBF;n g&#xF3;i sync/atomic</span>
+    <span class="hljs-string">&quot;sync/atomic&quot;</span>
+)
+
+<span class="hljs-comment">// bi&#x1EBF;n total &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p &#x111;&#x1ED3;ng th&#x1EDD;i</span>
+<span class="hljs-keyword">var</span> total <span class="hljs-keyword">uint64</span>
+
+<span class="hljs-keyword">func</span> worker(wg *sync.WaitGroup) {
+    <span class="hljs-comment">// wg th&#xF4;ng b&#xE1;o ho&#xE0;n th&#xE0;nh khi ra kh&#x1ECF;i h&#xE0;m</span>
+    <span class="hljs-keyword">defer</span> wg.Done()
+
+    <span class="hljs-keyword">var</span> i <span class="hljs-keyword">uint64</span>
+    <span class="hljs-keyword">for</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++ {
+        <span class="hljs-comment">// l&#x1EC7;nh c&#x1ED9;ng atomic.AddUint64 total &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o l&#xE0; atomic (&#x111;&#x1A1;n nguy&#xEA;n)</span>
+        atomic.AddUint64(&amp;total, i)
+    }
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// wg &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; d&#x1EEB;ng h&#xE0;m main &#x111;&#x1EE3;i c&#xE1;c Goroutines kh&#xE1;c</span>
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+    <span class="hljs-comment">// wg c&#x1EA7;n &#x111;&#x1EE3;i hai Goroutines g&#x1ECD;i l&#x1EC7;nh Done() m&#x1EDB;i th&#x1EF1;c thi ti&#x1EBF;p</span>
+    wg.Add(<span class="hljs-number">2</span>)
+    <span class="hljs-comment">// t&#x1EA1;o Goroutines th&#x1EE9; nh&#x1EA5;t</span>
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    <span class="hljs-comment">// t&#x1EA1;o Goroutines th&#x1EE9; hai</span>
+    <span class="hljs-keyword">go</span> worker(&amp;wg)
+    <span class="hljs-comment">// b&#x1EAF;t &#x111;&#x1EA7;u vi&#x1EC7;c &#x111;&#x1EE3;i</span>
+    wg.Wait()
+    <span class="hljs-comment">// in ra k&#x1EBF;t qu&#x1EA3;</span>
+    fmt.Println(total)
+}
+</code></pre>
+<p>&#x110;&#x1EC3; ghi v&#xE0; &#x111;&#x1ECD;c atomic tr&#xEA;n nh&#x1EEF;ng &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng ph&#x1EE9;c t&#x1EA1;p h&#x1A1;n th&#xEC; ta d&#xF9;ng ki&#x1EC3;u <a href="https://golang.org/pkg/sync/atomic/#Value" target="_blank">atomic.Value</a>, v&#xED; d&#x1EE5;:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;sync/atomic&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
+)
+
+<span class="hljs-keyword">func</span> loadConfig() <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>)
+}
+
+<span class="hljs-keyword">func</span> requests() <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// n&#x1EAF;m gi&#x1EEF; th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh c&#x1EE7;a server</span>
+    <span class="hljs-keyword">var</span> config atomic.Value
+    <span class="hljs-comment">// kh&#x1EDF;i t&#x1EA1;o gi&#xE1; tr&#x1ECB; ban &#x111;&#x1EA7;u</span>
+    config.Store(loadConfig())
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+    <span class="hljs-comment">// c&#x1EAD;p nh&#x1EAD;t th&#xF4;ng tin sau m&#x1ED7;i 10 gi&#xE2;y</span>
+        <span class="hljs-keyword">for</span> {
+            time.Sleep(<span class="hljs-number">10</span> * time.Second)
+            config.Store(loadConfig())
+        }
+    }()
+    <span class="hljs-comment">// t&#x1EA1;o nhi&#x1EC1;u worker s&#x1EED; l&#xFD; request</span>
+    <span class="hljs-comment">// d&#xF9;ng th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh g&#x1EA7;n nh&#x1EA5;t</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+            <span class="hljs-keyword">for</span> r := <span class="hljs-keyword">range</span> requests() {
+                c := config.Load()
+                <span class="hljs-comment">// x&#x1EED; l&#xFD; request v&#x1EDB;i c&#x1EA5;u h&#xEC;nh c</span>
+                _, _ = r, c
+            }
+        }()
+    }
+}
+</code></pre>
+<h2 id="163-m&#xF4;-h&#xEC;nh-producer-consumer">1.6.3. M&#xF4; h&#xEC;nh Producer Consumer</h2>
+<div align="center">
+
+<img src="../images/producer-consumer.png" width="800">
+<br>
+<span align="center"><i>M&#xF4; h&#xEC;nh Producer - Consumer</i></span>
+    <br>
+
+</div>
+
+<p>V&#xED; d&#x1EE5; ph&#x1ED5; bi&#x1EBF;n nh&#x1EA5;t v&#x1EC1; l&#x1EAD;p tr&#xEC;nh concurrency l&#xE0; m&#xF4; h&#xEC;nh Producer Consumer, gi&#xFA;p t&#x103;ng t&#x1ED1;c &#x111;&#x1ED9; x&#x1EED; l&#xFD; chung c&#x1EE7;a ch&#x1B0;&#x1A1;ng tr&#xEC;nh b&#x1EB1;ng c&#xE1;ch c&#xE2;n b&#x1EB1;ng s&#x1EE9;c m&#x1EA1;nh c&#x1EE7;a c&#xE1;c thread &quot;s&#x1EA3;n xu&#x1EA5;t&quot; (produce) v&#xE0; &quot;ti&#xEA;u th&#x1EE5;&quot; (consume).</p>
+<p>Producer t&#x1EA1;o ra m&#x1ED9;t s&#x1ED1; d&#x1EEF; li&#x1EC7;u v&#xE0; sau &#x111;&#xF3; &#x111;&#x1B0;a n&#xF3; v&#xE0;o h&#xE0;ng &#x111;&#x1EE3;i, c&#xF9;ng l&#xFA;c &#x111;&#xF3; consumer c&#x169;ng l&#x1EA5;y d&#x1EEF; li&#x1EC7;u t&#x1EEB; h&#xE0;ng &#x111;&#x1EE3;i n&#xE0;y ra &#x111;&#x1EC3; x&#x1EED; l&#xFD;. &#x110;i&#x1EC1;u n&#xE0;y l&#xE0;m cho produce v&#xE0; consume tr&#x1EDF; th&#xE0;nh hai qu&#xE1; tr&#xEC;nh b&#x1EA5;t &#x111;&#x1ED3;ng b&#x1ED9;. Khi kh&#xF4;ng c&#xF3; d&#x1EEF; li&#x1EC7;u trong h&#xE0;ng &#x111;&#x1EE3;i k&#x1EBF;t qu&#x1EA3;, consumer s&#x1EBD; ch&#x1EDD; &#x111;&#x1EE3;i &#x1EDF; tr&#x1EA1;ng th&#xE1;i &quot;&#x111;&#xF3;i&quot;, c&#xF2;n khi d&#x1EEF; li&#x1EC7;u trong h&#xE0;ng &#x111;&#x1EE3;i b&#x1ECB; &#x111;&#x1EA7;y, producer ph&#x1EA3;i &#x111;&#x1ED1;i m&#x1EB7;t v&#x1EDB;i v&#x1EA5;n &#x111;&#x1EC1; m&#x1EA5;t m&#xE1;t d&#x1EEF; li&#x1EC7;u khi CPU ph&#x1EA3;i lo&#x1EA1;i b&#x1ECF; b&#x1EDB;t d&#x1EEF; li&#x1EC7;u trong &#x111;&#xF3; &#x111;&#x1EC3; n&#x1EA1;p th&#xEA;m.</p>
+<p>Golang hi&#x1EC7;n th&#x1EF1;c c&#x1A1; ch&#x1EBF; n&#xE0;y kh&#xE1; &#x111;&#x1A1;n gi&#x1EA3;n:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// producer: li&#xEA;n t&#x1EE5;c t&#x1EA1;o ra m&#x1ED9;t chu&#x1ED7;i s&#x1ED1; nguy&#xEA;n d&#x1EF1;a tr&#xEA;n b&#x1ED9;i s&#x1ED1; factor v&#xE0; &#x111;&#x1B0;a v&#xE0;o channel</span>
+<span class="hljs-keyword">func</span> Producer(factor <span class="hljs-keyword">int</span>, out <span class="hljs-keyword">chan</span>&lt;- <span class="hljs-keyword">int</span>) {
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; ; i++ {
+        out &lt;- i*factor
+    }
+}
+
+<span class="hljs-comment">// consumer: li&#xEA;n t&#x1EE5;c l&#x1EA5;y c&#xE1;c s&#x1ED1; t&#x1EEB; channel ra &#x111;&#x1EC3; print</span>
+<span class="hljs-keyword">func</span> Consumer(in &lt;-<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>) {
+    <span class="hljs-keyword">for</span> v := <span class="hljs-keyword">range</span> in {
+        fmt.Println(v)
+    }
+}
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// h&#xE0;ng &#x111;&#x1EE3;i</span>
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, <span class="hljs-number">64</span>)
+
+    <span class="hljs-comment">// t&#x1EA1;o m&#x1ED9;t chu&#x1ED7;i s&#x1ED1; v&#x1EDB;i b&#x1ED9;i s&#x1ED1; 3</span>
+    <span class="hljs-keyword">go</span> Producer(<span class="hljs-number">3</span>, ch)
+
+    <span class="hljs-comment">// t&#x1EA1;o m&#x1ED9;t chu&#x1ED7;i s&#x1ED1; v&#x1EDB;i b&#x1ED9;i s&#x1ED1; 5</span>
+    <span class="hljs-keyword">go</span> Producer(<span class="hljs-number">5</span>, ch)
+
+    <span class="hljs-comment">// t&#x1EA1;o consumer</span>
+    <span class="hljs-keyword">go</span> Consumer(ch)
+
+    <span class="hljs-comment">// tho&#xE1;t ra sau khi ch&#x1EA1;y trong m&#x1ED9;t kho&#x1EA3;ng th&#x1EDD;i gian nh&#x1EA5;t &#x111;&#x1ECB;nh</span>
+    time.Sleep(<span class="hljs-number">5</span> * time.Second)
+}
+</code></pre>
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; &#x111;&#x1EC3; h&#xE0;m <code>main</code> gi&#x1EEF; tr&#x1EA1;ng th&#xE1;i block m&#xE0; kh&#xF4;ng tho&#xE1;t v&#xE0; ch&#x1EC9;  tho&#xE1;t kh&#x1ECF;i ch&#x1B0;&#x1A1;ng tr&#xEC;nh khi ng&#x1B0;&#x1EDD;i d&#xF9;ng g&#xF5; <code>Ctrl-C</code>:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// h&#xE0;ng &#x111;&#x1EE3;i</span>
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, <span class="hljs-number">64</span>)
+
+    <span class="hljs-keyword">go</span> Producer(<span class="hljs-number">3</span>, ch)
+    <span class="hljs-keyword">go</span> Producer(<span class="hljs-number">5</span>, ch)
+    <span class="hljs-keyword">go</span> Consumer(ch)
+
+    <span class="hljs-comment">// Ctrl+C &#x111;&#x1EC3; tho&#xE1;t</span>
+    sig := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> os.Signal, <span class="hljs-number">1</span>)
+    signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
+    fmt.Printf(<span class="hljs-string">&quot;quit (%v)\n&quot;</span>, &lt;-sig)
+}
+</code></pre>
+<p>C&#xF3; 2 producer trong v&#xED; d&#x1EE5; tr&#xEA;n v&#xE0; kh&#xF4;ng c&#xF3; s&#x1EF1; ki&#x1EC7;n &#x111;&#x1ED3;ng b&#x1ED9; n&#xE0;o gi&#x1EEF;a hai producer m&#xE0; ch&#xFA;ng concurrency. Do &#x111;&#xF3;, th&#x1EE9; t&#x1EF1; c&#x1EE7;a chu&#x1ED7;i output &#x1EDF; consumer l&#xE0; kh&#xF4;ng x&#xE1;c &#x111;&#x1ECB;nh.</p>
+<h2 id="164-m&#xF4;-h&#xEC;nh-publish-subscribe">1.6.4. M&#xF4; h&#xEC;nh Publish Subscribe</h2>
+<p>M&#xF4; h&#xEC;nh publish-and-subscribe th&#x1B0;&#x1EDD;ng &#x111;&#x1B0;&#x1EE3;c vi&#x1EBF;t t&#x1EAF;t l&#xE0; m&#xF4; h&#xEC;nh pub/sub. Trong m&#xF4; h&#xEC;nh n&#xE0;y, producer tr&#x1EDF; th&#xE0;nh publisher v&#xE0; consumer  tr&#x1EDF; th&#xE0;nh subscriber, &#x111;&#x1ED3;ng th&#x1EDD;i producer:consumer l&#xE0; m&#x1ED1;i quan h&#x1EC7; M:N.</p>
+<div align="center">
+
+<img src="../images/pubsub.png" width="800">
+<br>
+<span align="center"><i>M&#xF4; h&#xEC;nh Publish - Subscribe</i></span>
+    <br>
+
+</div>
+
+<p>Trong m&#xF4; h&#xEC;nh producer-consumer truy&#x1EC1;n th&#x1ED1;ng, th&#xF4;ng &#x111;i&#x1EC7;p &#x111;&#x1B0;&#x1EE3;c g&#x1EED;i &#x111;&#x1EBF;n h&#xE0;ng &#x111;&#x1EE3;i v&#xE0; m&#xF4; h&#xEC;nh publish-subscription s&#x1EBD; publish th&#xF4;ng &#x111;i&#x1EC7;p &#x111;&#x1EBF;n m&#x1ED9;t topic.</p>
+<p>&#x110;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c m&#xF4; h&#xEC;nh n&#xE0;y ta implement package <code>pubsub</code>:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// package pubsub implements a simple multi-topic pub-sub library.</span>
+<span class="hljs-keyword">package</span> pubsub
+
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;sync&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
+)
+
+<span class="hljs-keyword">type</span> (
+    <span class="hljs-comment">// subscriber thu&#x1ED9;c ki&#x1EC3;u channel</span>
+    subscriber <span class="hljs-keyword">chan</span> <span class="hljs-keyword">interface</span>{}
+
+    <span class="hljs-comment">// topic l&#xE0; m&#x1ED9;t filter</span>
+    topicFunc <span class="hljs-keyword">func</span>(v <span class="hljs-keyword">interface</span>{}) <span class="hljs-keyword">bool</span>
+)
+
+<span class="hljs-keyword">type</span> Publisher <span class="hljs-keyword">struct</span> {
+    <span class="hljs-comment">// Read/Write Mutex</span>
+    m sync.RWMutex
+
+    <span class="hljs-comment">// k&#xED;ch th&#x1B0;&#x1EDB;c  h&#xE0;ng &#x111;&#x1EE3;i</span>
+    buffer <span class="hljs-keyword">int</span>
+
+    <span class="hljs-comment">// timeout cho vi&#x1EC7;c publishing</span>
+    timeout time.Duration
+
+    <span class="hljs-comment">// subscriber &#x111;&#xE3; subscribe v&#xE0;o topic n&#xE0;o</span>
+    subscribers <span class="hljs-keyword">map</span>[subscriber]topicFunc
+}
+
+<span class="hljs-comment">// constructor v&#x1EDB;i timeout v&#xE0; &#x111;&#x1ED9; d&#xE0;i h&#xE0;ng &#x111;&#x1EE3;i</span>
+<span class="hljs-keyword">func</span> NewPublisher(publishTimeout time.Duration, buffer <span class="hljs-keyword">int</span>) *Publisher {
+    <span class="hljs-keyword">return</span> &amp;Publisher{
+        buffer:      buffer,
+        timeout:     publishTimeout,
+        subscribers: <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[subscriber]topicFunc),
+    }
+}
+
+<span class="hljs-comment">// th&#xEA;m subscriber m&#x1EDB;i, &#x111;&#x103;ng k&#xFD; h&#x1EBF;t t&#x1EA5;t c&#x1EA3; topic</span>
+<span class="hljs-keyword">func</span> (p *Publisher) Subscribe() <span class="hljs-keyword">chan</span> <span class="hljs-keyword">interface</span>{} {
+    <span class="hljs-keyword">return</span> p.SubscribeTopic(<span class="hljs-literal">nil</span>)
+}
+
+<span class="hljs-comment">// th&#xEA;m subscriber m&#x1EDB;i, subscribe c&#xE1;c topic &#x111;&#xE3; &#x111;&#x1B0;&#x1EE3;c filter l&#x1ECD;c</span>
+<span class="hljs-keyword">func</span> (p *Publisher) SubscribeTopic(topic topicFunc) <span class="hljs-keyword">chan</span> <span class="hljs-keyword">interface</span>{} {
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">interface</span>{}, p.buffer)
+    p.m.Lock()
+    p.subscribers[ch] = topic
+    p.m.Unlock()
+    <span class="hljs-keyword">return</span> ch
+}
+
+<span class="hljs-comment">// h&#x1EE7;y subscribe</span>
+<span class="hljs-keyword">func</span> (p *Publisher) Evict(sub <span class="hljs-keyword">chan</span> <span class="hljs-keyword">interface</span>{}) {
+    p.m.Lock()
+    <span class="hljs-keyword">defer</span> p.m.Unlock()
+
+    <span class="hljs-built_in">delete</span>(p.subscribers, sub)
+    <span class="hljs-built_in">close</span>(sub)
+}
+
+<span class="hljs-comment">// publish ra 1 topic</span>
+<span class="hljs-keyword">func</span> (p *Publisher) Publish(v <span class="hljs-keyword">interface</span>{}) {
+    p.m.RLock()
+    <span class="hljs-keyword">defer</span> p.m.RUnlock()
+
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+    <span class="hljs-keyword">for</span> sub, topic := <span class="hljs-keyword">range</span> p.subscribers {
+        wg.Add(<span class="hljs-number">1</span>)
+        <span class="hljs-keyword">go</span> p.sendTopic(sub, topic, v, &amp;wg)
+    }
+    wg.Wait()
+}
+
+<span class="hljs-comment">// &#x111;&#xF3;ng 1 &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng publisher v&#xE0; &#x111;&#xF3;ng t&#x1EA5;t c&#x1EA3; c&#xE1;c subscriber</span>
+<span class="hljs-keyword">func</span> (p *Publisher) Close() {
+    p.m.Lock()
+    <span class="hljs-keyword">defer</span> p.m.Unlock()
+
+    <span class="hljs-keyword">for</span> sub := <span class="hljs-keyword">range</span> p.subscribers {
+        <span class="hljs-built_in">delete</span>(p.subscribers, sub)
+        <span class="hljs-built_in">close</span>(sub)
+    }
+}
+
+<span class="hljs-comment">// g&#x1EED;i 1 topic c&#xF3; th&#x1EC3; duy tr&#xEC; trong th&#x1EDD;i gian ch&#x1EDD; wg</span>
+<span class="hljs-keyword">func</span> (p *Publisher) sendTopic(
+    sub subscriber, topic topicFunc, v <span class="hljs-keyword">interface</span>{}, wg *sync.WaitGroup,
+) {
+    <span class="hljs-keyword">defer</span> wg.Done()
+    <span class="hljs-keyword">if</span> topic != <span class="hljs-literal">nil</span> &amp;&amp; !topic(v) {
+        <span class="hljs-keyword">return</span>
+    }
+
+    <span class="hljs-keyword">select</span> {
+    <span class="hljs-keyword">case</span> sub &lt;- v:
+    <span class="hljs-keyword">case</span> &lt;-time.After(p.timeout):
+    }
+}
+</code></pre>
+<p>Trong v&#xED; d&#x1EE5; sau &#x111;&#xE2;y, 2 subscriber &#x111;&#x103;ng k&#xFD; h&#x1EBF;t t&#x1EA5;t c&#x1EA3; c&#xE1;c topic v&#x1EDB;i &quot;golang&quot;:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;./pubsub&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
+    <span class="hljs-string">&quot;strings&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+)
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// kh&#x1EDF;i t&#x1EA1;o 1 publisher</span>
+    p := pubsub.NewPublisher(<span class="hljs-number">100</span>*time.Millisecond, <span class="hljs-number">10</span>)
+
+    <span class="hljs-comment">// &#x111;&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o p &#x111;&#x1B0;&#x1EE3;c &#x111;&#xF3;ng tr&#x1B0;&#x1EDB;c khi exit</span>
+    <span class="hljs-keyword">defer</span> p.Close()
+
+    <span class="hljs-comment">// `all` subscribe h&#x1EBF;t t&#x1EA5;t c&#x1EA3; topic</span>
+    all := p.Subscribe()
+
+    <span class="hljs-comment">// subscribe c&#xE1;c topic c&#xF3; &quot;golang&quot;</span>
+    golang := p.SubscribeTopic(<span class="hljs-keyword">func</span>(v <span class="hljs-keyword">interface</span>{}) <span class="hljs-keyword">bool</span> {
+        <span class="hljs-keyword">if</span> s, ok := v.(<span class="hljs-keyword">string</span>); ok {
+            <span class="hljs-keyword">return</span> strings.Contains(s, <span class="hljs-string">&quot;golang&quot;</span>)
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    })
+
+    <span class="hljs-comment">// publish ra 2 topic</span>
+    p.Publish(<span class="hljs-string">&quot;hello,  world!&quot;</span>)
+    p.Publish(<span class="hljs-string">&quot;hello, golang!&quot;</span>)
+
+    <span class="hljs-comment">// print nh&#x1EEF;ng g&#xEC; subscriber `all` nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c</span>
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span>  msg := <span class="hljs-keyword">range</span> all {
+            fmt.Println(<span class="hljs-string">&quot;all:&quot;</span>, msg)
+        }
+    } ()
+
+    <span class="hljs-comment">// print nh&#x1EEF;ng g&#xEC; subscriber `golang` nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c</span>
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span>  msg := <span class="hljs-keyword">range</span> golang {
+            fmt.Println(<span class="hljs-string">&quot;golang:&quot;</span>, msg)
+        }
+    } ()
+
+    <span class="hljs-comment">// tho&#xE1;t ra sau khi ch&#x1EA1;y 3 gi&#xE2;y</span>
+    time.Sleep(<span class="hljs-number">3</span> * time.Second)
+}
+</code></pre>
+<p>Trong m&#xF4; h&#xEC;nh pub/sub, m&#x1ED7;i th&#xF4;ng &#x111;i&#x1EC7;p &#x111;&#x1B0;&#x1EE3;c g&#x1EED;i t&#x1EDB;i nhi&#x1EC1;u subscriber. Publisher th&#x1B0;&#x1EDD;ng kh&#xF4;ng bi&#x1EBF;t ho&#x1EB7;c kh&#xF4;ng quan t&#xE2;m subscriber n&#xE0;o nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng &#x111;i&#x1EC7;p. Subscriber v&#xE0; publisher c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c th&#xEA;m v&#xE0;o &#x111;&#x1ED9;ng &#x1EDF; th&#x1EDD;i &#x111;i&#x1EC3;m th&#x1EF1;c thi, cho ph&#xE9;p c&#xE1;c h&#x1EC7; th&#x1ED1;ng ph&#x1EE9;c t&#x1EA1;p c&#xF3; th&#x1EC3; ph&#xE1;t tri&#x1EC3;n theo th&#x1EDD;i gian. Trong th&#x1EF1;c t&#x1EBF;, nh&#x1EEF;ng &#x1EE9;ng d&#x1EE5;ng nh&#x1B0; d&#x1EF1; b&#xE1;o th&#x1EDD;i ti&#x1EBF;t c&#xF3; th&#x1EC3; &#xE1;p d&#x1EE5;ng m&#xF4; h&#xEC;nh concurrency n&#xE0;y.</p>
+<h2 id="165-ki&#x1EC3;m-so&#xE1;t-s&#x1ED1;-l&#x1B0;&#x1EE3;ng-goroutine">1.6.5. Ki&#x1EC3;m so&#xE1;t s&#x1ED1; l&#x1B0;&#x1EE3;ng goroutine</h2>
+<p>Goroutine l&#xE0; m&#x1ED9;t t&#xED;nh n&#x103;ng m&#x1EA1;nh m&#x1EBD; c&#x1EE7;a Go, m&#x1EA5;t chi ph&#xED; r&#x1EA5;t &#xED;t &#x111;&#x1EC3; s&#x1EED; d&#x1EE5;ng, nh&#x1EEF;ng t&#x1EA5;t nhi&#xEA;n n&#x1EBF;u d&#xF9;ng v&#x1EDB;i s&#x1ED1; l&#x1B0;&#x1EE3;ng qu&#xE1; l&#x1EDB;n s&#x1EBD; chi&#x1EBF;m g&#xE2;y nhi&#x1EC1;u l&#xE3;ng ph&#xED; v&#xE0; c&#x1EA7;n c&#xF3; m&#x1ED9;t c&#x1A1; ch&#x1EBF; &#x111;&#x1EC3; ki&#x1EC3;m so&#xE1;t. M&#x1ED9;t c&#xE1;ch th&#xF4;ng d&#x1EE5;ng &#x111;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c m&#x1EE5;c &#x111;&#xED;ch tr&#xEA;n l&#xE0; d&#xF9;ng worker pool.</p>
+<div align="center">
+
+<img src="../images/worker-pool.png" width="500">
+<br>
+<span align="center"><i>M&#xF4; h&#xEC;nh Worker pool</i></span>
+    <br>
+
+</div>
+
+<p>&#x110;&#x1EA7;u ti&#xEA;n t&#x1EA1;o ra c&#xE1;c worker:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> worker(queue <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, worknumber <span class="hljs-keyword">int</span>, done <span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>) {
+    <span class="hljs-keyword">for</span> j := <span class="hljs-keyword">range</span> queue {
+        fmt.Println(<span class="hljs-string">&quot;worker&quot;</span>, worknumber, <span class="hljs-string">&quot;finished job&quot;</span>, j)
+        done &lt;- <span class="hljs-literal">true</span>
+    }
+}
+</code></pre>
+<p>Sau &#x111;&#xF3; c&#xF3; th&#x1EC3; &#xE1;p d&#x1EE5;ng nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+
+    <span class="hljs-comment">// queue of jobs</span>
+    q := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+
+    <span class="hljs-comment">// done channel l&#x1EA5;y ra k&#x1EBF;t qu&#x1EA3; c&#x1EE7;a jobs</span>
+    done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
+
+    <span class="hljs-comment">// s&#x1ED1; l&#x1B0;&#x1EE3;ng worker trong pool</span>
+    numberOfWorkers := <span class="hljs-number">4</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; numberOfWorkers; i++ {
+        <span class="hljs-keyword">go</span> worker(q, i, done)
+    }
+
+    <span class="hljs-comment">// &#x111;&#x1B0;a job v&#xE0;o queue</span>
+    numberOfJobs := <span class="hljs-number">17</span>
+    <span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; numberOfJobs; j++ {
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(j <span class="hljs-keyword">int</span>) {
+            q &lt;- j
+        }(j)
+    }
+
+    <span class="hljs-comment">// ch&#x1EDD; nh&#x1EAD;n &#x111;&#x1EE7; k&#x1EBF;t qu&#x1EA3;</span>
+    <span class="hljs-keyword">for</span> c := <span class="hljs-number">0</span>; c &lt; numberOfJobs; c++ {
+        &lt;-done
+    }
+}
+</code></pre>
+<h2 id="166-d&#x1ECD;n-d&#x1EB9;p-goroutine">1.6.6. D&#x1ECD;n d&#x1EB9;p Goroutine</h2>
+<p>Sau khi job queue r&#x1ED7;ng, ta s&#x1EBD; ph&#x1EA3;i d&#x1EEB;ng t&#x1EA5;t c&#x1EA3; worker. Goroutine d&#xF9; kh&#xE1; nh&#x1EB9; nh&#x1B0;ng v&#x1EAB;n kh&#xF4;ng ph&#x1EA3;i mi&#x1EC5;n ph&#xED;, nh&#x1EA5;t l&#xE0; v&#x1EDB;i c&#xE1;c h&#x1EC7; th&#x1ED1;ng l&#x1EDB;n, d&#xF9; ch&#x1EC9; l&#xE0; c&#xE1;c chi ph&#xED; nh&#x1ECF; nh&#x1EA5;t c&#x169;ng c&#xF3; th&#x1EC3; tr&#x1EDF; n&#xEA;n kh&#xE1;c bi&#x1EC7;t l&#x1EDB;n n&#x1EBF;u thay &#x111;&#x1ED5;i.</p>
+<p>C&#xE1;ch &#x111;&#x1A1;n gi&#x1EA3;n l&#xE0; d&#xF9;ng kill channel &#x111;&#x1EC3; ph&#xE1;t ra t&#xED;n hi&#x1EC7;u ng&#x1EEB;ng cho goroutine.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// channel &#x111;&#x1EC3; terminate c&#xE1;c worker</span>
+    killsignal := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
+
+    <span class="hljs-comment">// queue c&#xE1;c jobs</span>
+    q := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+    <span class="hljs-comment">// done channel nh&#x1EAD;n v&#xE0;o k&#x1EBF;t qu&#x1EA3; c&#x1EE7;a c&#xE1;c job</span>
+    done := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>)
+
+    <span class="hljs-comment">// s&#x1ED1; l&#x1B0;&#x1EE3;ng worker trong pool</span>
+    numberOfWorkers := <span class="hljs-number">4</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; numberOfWorkers; i++ {
+        <span class="hljs-keyword">go</span> worker(q, i, done, killsignal)
+    }
+
+    <span class="hljs-comment">// &#x111;&#x1B0;a job v&#xE0;o queue</span>
+    numberOfJobs := <span class="hljs-number">17</span>
+    <span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; numberOfJobs; j++ {
+        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>(j <span class="hljs-keyword">int</span>) {
+            q &lt;- j
+        }(j)
+    }
+
+    <span class="hljs-comment">// ch&#x1EDD; &#x111;&#x1EC3; nh&#x1EAD;n &#x111;&#x1EE7; k&#x1EBF;t qu&#x1EA3;</span>
+    <span class="hljs-keyword">for</span> c := <span class="hljs-number">0</span>; c &lt; numberOfJobs; c++ {
+        &lt;-done
+    }
+
+    <span class="hljs-comment">// d&#x1ECD;n d&#x1EB9;p c&#xE1;c worker</span>
+    <span class="hljs-built_in">close</span>(killsignal)
+    time.Sleep(<span class="hljs-number">2</span> * time.Second)
+}
+</code></pre>
+<p>Trong &#x111;&#xF3; c&#xE1;c worker &#x111;&#x1B0;&#x1EE3;c thi&#x1EBF;t k&#x1EBF; nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> worker(queue <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, worknumber <span class="hljs-keyword">int</span>, done, ks <span class="hljs-keyword">chan</span> <span class="hljs-keyword">bool</span>) {
+    <span class="hljs-keyword">for</span> <span class="hljs-literal">true</span> {
+        <span class="hljs-comment">// d&#xF9;ng select &#x111;&#x1EC3; ch&#x1EDD; c&#xF9;ng l&#xFA;c tr&#xEA;n c&#x1EA3; 2 channel</span>
+        <span class="hljs-keyword">select</span> {
+        <span class="hljs-comment">// x&#x1EED; l&#xFD; job trong channel queue</span>
+        <span class="hljs-keyword">case</span> k := &lt;-queue:
+            fmt.Println(<span class="hljs-string">&quot;doing work!&quot;</span>, k, <span class="hljs-string">&quot;worknumber&quot;</span>, worknumber)
+            done &lt;- <span class="hljs-literal">true</span>
+
+        <span class="hljs-comment">// n&#x1EBF;u nh&#x1EAD;n &#x111;&#x1B0;&#x1EE3;c kill signal th&#xEC; return</span>
+        <span class="hljs-keyword">case</span> &lt;-ks:
+            fmt.Println(<span class="hljs-string">&quot;worker halted, number&quot;</span>, worknumber)
+            <span class="hljs-keyword">return</span>
+        }
+    }
+}
+</code></pre>
+<h2 id="167-s&#xE0;ng-s&#x1ED1;-nguy&#xEA;n-t&#x1ED1;">1.6.7. S&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;</h2>
+<p>Trong ph&#x1EA7;n <strong><em>1.2</em></strong>, ch&#xFA;ng t&#xF4;i &#x111;&#xE3; tr&#xEC;nh b&#xE0;y vi&#x1EC7;c tri&#x1EC3;n khai phi&#xEA;n b&#x1EA3;n concurrency c&#x1EE7;a s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1; &#x111;&#x1EC3; ch&#x1EE9;ng minh t&#xED;nh concurrency c&#x1EE7;a Newsqueak. Nguy&#xEA;n t&#x1EAF;c &quot;s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;&quot; nh&#x1B0; sau:</p>
+<div align="center">
+
+<img src="../images/ch1-13-prime-sieve.png">
+<br>
+<span align="center"><i>S&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;</i></span>
+    <br>
+
+</div>
+
+<p>Ch&#xFA;ng ta c&#x1EA7;n kh&#x1EDF;i t&#x1EA1;o m&#x1ED9;t chu&#x1ED7;i c&#xE1;c s&#x1ED1; t&#x1EF1; nhi&#xEA;n <code>2, 3, 4, ...</code> (kh&#xF4;ng bao g&#x1ED3;m 0, 1):</p>
+<pre><code class="lang-go"><span class="hljs-comment">// tr&#x1EA3; v&#x1EC1; channel t&#x1EA1;o ra chu&#x1ED7;i s&#x1ED1;: 2, 3, 4, ...</span>
+<span class="hljs-keyword">func</span> GenerateNatural() <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> {
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span> i := <span class="hljs-number">2</span>; ; i++ {
+            ch &lt;- i
+        }
+    }()
+    <span class="hljs-keyword">return</span> ch
+}
+</code></pre>
+<p>Ti&#x1EBF;p theo x&#xE2;y d&#x1EF1;ng m&#x1ED9;t s&#xE0;ng cho m&#x1ED7;i s&#x1ED1; nguy&#xEA;n t&#x1ED1;: &#x111;&#x1EC1; xu&#x1EA5;t m&#x1ED9;t s&#x1ED1; l&#xE0; b&#x1ED9;i s&#x1ED1; c&#x1EE7;a s&#x1ED1; nguy&#xEA;n t&#x1ED1; trong chu&#x1ED7;i &#x111;&#x1EA7;u v&#xE0;o v&#xE0; tr&#x1EA3; v&#x1EC1; m&#x1ED9;t chu&#x1ED7;i m&#x1EDB;i, &#x111;&#xF3; l&#xE0; m&#x1ED9;t channel m&#x1EDB;i.</p>
+<pre><code class="lang-go"><span class="hljs-comment">// b&#x1ED9; l&#x1ECD;c: x&#xF3;a c&#xE1;c s&#x1ED1; c&#xF3; th&#x1EC3; chia h&#x1EBF;t cho s&#x1ED1; nguy&#xEA;n t&#x1ED1;</span>
+<span class="hljs-keyword">func</span> PrimeFilter(in &lt;-<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, prime <span class="hljs-keyword">int</span>) <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> {
+    out := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span> {
+            <span class="hljs-keyword">if</span> i := &lt;-in; i%prime != <span class="hljs-number">0</span> {
+                out &lt;- i
+            }
+        }
+    }()
+    <span class="hljs-keyword">return</span> out
+}
+</code></pre>
+<p>B&#xE2;y gi&#x1EDD; ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng b&#x1ED9; l&#x1ECD;c n&#xE0;y trong h&#xE0;m <code>main</code>:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// chu&#x1ED7;i s&#x1ED1;: 2, 3, 4, ...</span>
+    ch := GenerateNatural()
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++ {
+        <span class="hljs-comment">// s&#x1ED1; nguy&#xEA;n t&#x1ED1; m&#x1EDB;i</span>
+        prime := &lt;-ch
+
+        <span class="hljs-comment">// B&#x1ED9; l&#x1ECD;c d&#x1EF1;a tr&#xEA;n s&#x1ED1; nguy&#xEA;n t&#x1ED1; m&#x1EDB;i</span>
+        fmt.Printf(<span class="hljs-string">&quot;%v: %v\n&quot;</span>, i+<span class="hljs-number">1</span>, prime)
+        ch = PrimeFilter(ch, prime)
+
+        <span class="hljs-comment">// d&#x1EF1;a tr&#xEA;n chu&#x1ED7;i s&#x1ED1; c&#xF2;n l&#x1EA1;i trong channel &#x111;&#x1EC3; l&#x1ECD;c</span>
+        <span class="hljs-comment">// c&#xE1;c s&#x1ED1; nguy&#xEA;n t&#x1ED1; ti&#x1EBF;p theo v&#x1EDB;i c&#xE1;c s&#x1ED1; &#x111;&#x1B0;&#x1EE3;c</span>
+        <span class="hljs-comment">// tr&#xED;ch xu&#x1EA5;t d&#x1B0;&#x1EDB;i d&#x1EA1;ng filter. C&#xE1;c channel t&#x1B0;&#x1A1;ng &#x1EE9;ng</span>
+        <span class="hljs-comment">// v&#x1EDB;i c&#xE1;c s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1; kh&#xE1;c nhau &#x111;&#x1B0;&#x1EE3;c k&#x1EBF;t n&#x1ED1;i li&#xEA;n ti&#x1EBF;p nhau.</span>
+    }
+}
+</code></pre>
+<h2 id="168-k&#x1EBB;-th&#x1EAF;ng-l&#xE0;m-vua">1.6.8. K&#x1EBB; th&#x1EAF;ng l&#xE0;m vua</h2>
+<p>C&#xF3; nhi&#x1EC1;u &#x111;&#x1ED9;ng l&#x1EF1;c &#x111;&#x1EC3; l&#x1EAD;p tr&#xEC;nh concurrency nh&#x1B0;ng ti&#xEA;u bi&#x1EC3;u l&#xE0; v&#xEC; l&#x1EAD;p tr&#xEC;nh concurrency c&#xF3; th&#x1EC3; &#x111;&#x1A1;n gi&#x1EA3;n h&#xF3;a c&#xE1;c v&#x1EA5;n &#x111;&#x1EC1;. L&#x1EAD;p tr&#xEC;nh concurrency c&#x169;ng c&#xF3; th&#x1EC3; c&#x1EA3;i thi&#x1EC7;n hi&#x1EC7;u n&#x103;ng. M&#x1EDF; hai thread tr&#xEA;n CPU &#x111;a l&#xF5;i th&#x1B0;&#x1EDD;ng nhanh h&#x1A1;n m&#x1EDF; m&#x1ED9;t thread.  Tr&#xEA;n th&#x1EF1;c t&#x1EBF; v&#x1EC1; m&#x1EB7;t c&#x1EA3;i thi&#x1EC7;n hi&#x1EC7;u su&#x1EA5;t, ch&#x1B0;&#x1A1;ng tr&#xEC;nh kh&#xF4;ng ch&#x1EC9; &#x111;&#x1A1;n gi&#x1EA3;n l&#xE0; ch&#x1EA1;y nhanh, m&#xE0; trong nhi&#x1EC1;u tr&#x1B0;&#x1EDD;ng h&#x1EE3;p ch&#x1B0;&#x1A1;ng tr&#xEC;nh c&#xF3; th&#x1EC3; &#x111;&#xE1;p &#x1EE9;ng y&#xEA;u c&#x1EA7;u c&#x1EE7;a ng&#x1B0;&#x1EDD;i d&#xF9;ng m&#x1ED9;t c&#xE1;ch nhanh ch&#xF3;ng l&#xE0; &#x111;i&#x1EC1;u quan tr&#x1ECD;ng nh&#x1EA5;t. Khi kh&#xF4;ng c&#xF3; y&#xEA;u c&#x1EA7;u t&#x1EEB; ng&#x1B0;&#x1EDD;i d&#xF9;ng c&#x1EA7;n x&#x1EED; l&#xFD;, n&#xEA;n x&#x1EED; l&#xFD; m&#x1ED9;t s&#x1ED1; t&#xE1;c v&#x1EE5; n&#x1EC1;n c&#xF3; &#x111;&#x1ED9; &#x1B0;u ti&#xEA;n th&#x1EA5;p.</p>
+<p>Gi&#x1EA3; s&#x1EED; ch&#xFA;ng ta mu&#x1ED1;n nhanh ch&#xF3;ng t&#xEC;m ki&#x1EBF;m c&#xE1;c ch&#x1EE7; &#x111;&#x1EC1; li&#xEA;n quan &#x111;&#x1EBF;n &quot;golang&quot;, c&#xF3; th&#x1EC3; m&#x1EDF; nhi&#x1EC1;u c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m nh&#x1B0; Bing, Google ho&#x1EB7;c Yahoo. Khi t&#xEC;m ki&#x1EBF;m tr&#x1EA3; v&#x1EC1; k&#x1EBF;t qu&#x1EA3; tr&#x1B0;&#x1EDB;c, ta c&#xF3; th&#x1EC3; &#x111;&#xF3;ng c&#xE1;c trang t&#xEC;m ki&#x1EBF;m kh&#xE1;c. Do &#x1EA3;nh h&#x1B0;&#x1EDF;ng c&#x1EE7;a m&#xF4;i tr&#x1B0;&#x1EDD;ng m&#x1EA1;ng v&#xE0; thu&#x1EAD;t to&#xE1;n c&#x1EE7;a c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m m&#xE0; m&#x1ED9;t s&#x1ED1; c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m c&#xF3; th&#x1EC3; tr&#x1EA3; v&#x1EC1; k&#x1EBF;t qu&#x1EA3; t&#xEC;m ki&#x1EBF;m nhanh h&#x1A1;n. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng m&#x1ED9;t chi&#x1EBF;n l&#x1B0;&#x1EE3;c t&#x1B0;&#x1A1;ng t&#x1EF1; &#x111;&#x1EC3; vi&#x1EBF;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh n&#xE0;y:  </p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// t&#x1EA1;o ra m&#x1ED9;t channel v&#x1EDB;i buffer &#x111;&#x1EE7; l&#x1EDB;n &#x111;&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o</span>
+    <span class="hljs-comment">// kh&#xF4;ng b&#x1ECB; block do k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a buffer.</span>
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">string</span>, <span class="hljs-number">32</span>)
+
+    <span class="hljs-comment">// ch&#x1EA1;y nhi&#x1EC1;u goroutine d&#x1B0;&#x1EDB;i n&#x1EC1;n v&#xE0; g&#x1EED;i y&#xEA;u c&#x1EA7;u</span>
+    <span class="hljs-comment">// t&#xEC;m ki&#x1EBF;m &#x111;&#x1EBF;n c&#xE1;c c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m kh&#xE1;c nhau</span>
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        ch &lt;- searchByBing(<span class="hljs-string">&quot;golang&quot;</span>)
+    }()
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        ch &lt;- searchByGoogle(<span class="hljs-string">&quot;golang&quot;</span>)
+    }()
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        ch &lt;- searchByBaidu(<span class="hljs-string">&quot;golang&quot;</span>)
+    }()
+
+    <span class="hljs-comment">// khi b&#x1EA5;t k&#x1EF3; c&#xF4;ng c&#x1EE5; t&#xEC;m ki&#x1EBF;m n&#xE0;o c&#xF3; k&#x1EBF;t qu&#x1EA3;</span>
+    <span class="hljs-comment">// n&#xF3; s&#x1EBD; ngay l&#x1EAD;p t&#x1EE9;c g&#x1EED;i k&#x1EBF;t qu&#x1EA3; &#x111;&#x1EBF;n channel</span>
+    <span class="hljs-comment">// ta ch&#x1EC9; l&#x1EA5;y k&#x1EBF;t qu&#x1EA3; &#x111;&#x1EA7;u ti&#xEA;n t&#x1EEB; channel</span>
+    fmt.Println(&lt;-ch)
+}
+</code></pre>
+<p>&#xC1;p d&#x1EE5;ng &#xFD; t&#x1B0;&#x1EDF;ng tr&#xEA;n c&#xF3; th&#x1EC3; gi&#xFA;p c&#x1EA3;i thi&#x1EC7;n hi&#x1EC7;u su&#x1EA5;t b&#x1EB1;ng c&#xE1;ch ch&#x1ECD;n l&#x1EA5;y k&#x1EBB; chi&#x1EBF;n th&#x1EAF;ng trong cu&#x1ED9;c &#x111;ua th&#x1EDD;i gian.</p>
+<h2 id="169-context-package">1.6.9. Context package</h2>
+<p>&#x1EDE; th&#x1EDD;i &#x111;i&#x1EC3;m ph&#xE1;t h&#xE0;nh Go1.7, th&#x1B0; vi&#x1EC7;n ti&#xEA;u chu&#x1EA9;n &#x111;&#xE3; th&#xEA;m m&#x1ED9;t package context &#x111;&#x1EC3; &#x111;&#x1A1;n gi&#x1EA3;n h&#xF3;a ho&#x1EA1;t &#x111;&#x1ED9;ng c&#x1EE7;a d&#x1EEF; li&#x1EC7;u, th&#x1EDD;i gian ch&#x1EDD; v&#xE0; tho&#xE1;t gi&#x1EEF;a nhi&#x1EC1;u Goroutines. Package context &#x111;&#x1ECB;nh ngh&#x129;a ki&#x1EC3;u Context, ch&#x1EE9;a deadline, cancelation signal v&#xE0; c&#xE1;c gi&#xE1; tr&#x1ECB; request-scope gi&#x1EEF;a c&#xE1;c API v&#xE0; gi&#x1EEF;a c&#xE1;c process.</p>
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng package context &#x111;&#x1EC3; hi&#x1EC7;n th&#x1EF1;c l&#x1EA1;i c&#x1A1; ch&#x1EBF; ki&#x1EC3;m so&#xE1;t timeout:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> worker(ctx context.Context, wg *sync.WaitGroup) error {
+    <span class="hljs-keyword">defer</span> wg.Done()
+
+    <span class="hljs-keyword">for</span> {
+        <span class="hljs-keyword">select</span> {
+        <span class="hljs-keyword">default</span>:
+            fmt.Println(<span class="hljs-string">&quot;hello&quot;</span>)
+        <span class="hljs-keyword">case</span> &lt;-ctx.Done():
+            <span class="hljs-keyword">return</span> ctx.Err()
+        }
+    }
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// nh&#x1EAD;n v&#xE0;o context parent (Background) v&#xE0; tr&#x1EA3; v&#x1EC1; context child (ctx) v&#xE0; h&#xE0;m cancel</span>
+    <span class="hljs-comment">// deadline 10 secs</span>
+    ctx, cancel := context.WithTimeout(context.Background(), <span class="hljs-number">10</span>*time.Second)
+
+    <span class="hljs-keyword">var</span> wg sync.WaitGroup
+
+    <span class="hljs-comment">// &#x111;&#x1A1;n gi&#x1EA3;n ho&#xE1; worker pool cho ng&#x1EAF;n g&#x1ECD;n</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
+        wg.Add(<span class="hljs-number">1</span>)
+        <span class="hljs-keyword">go</span> worker(ctx, &amp;wg)
+    }
+
+    time.Sleep(time.Second)
+
+    <span class="hljs-comment">// m&#x1EB7;c d&#xF9; ctx s&#x1EBD; expire theo timeout &#x111;&#xE3; set tr&#x1B0;&#x1EDB;c &#x111;&#xF3;</span>
+    <span class="hljs-comment">// ta v&#x1EAB;n g&#x1ECD;i cancel &#x111;&#x1EC3; &#x111;&#xF3;ng context child v&#xE0; c&#xE1;c children c&#x1EE7;a n&#xF3;</span>
+    <span class="hljs-comment">// &#x111;&#x1EC3; tr&#xE1;nh gi&#x1EEF; ch&#xFA;ng t&#x1ED3;n t&#x1EA1;i kh&#xF4;ng c&#x1EA7;n thi&#x1EBF;t</span>
+    cancel()
+
+    <span class="hljs-comment">// s&#x1EED; d&#x1EE5;ng waitGroup thay cho done channel</span>
+    wg.Wait()
+}
+</code></pre>
+<p>Golang t&#x1EF1; &#x111;&#x1ED9;ng l&#x1EA5;y l&#x1EA1;i   b&#x1ED9; nh&#x1EDB;, do &#x111;&#xF3; b&#x1ED9; nh&#x1EDB; th&#x1B0;&#x1EDD;ng kh&#xF4;ng b&#x1ECB; r&#xF2; r&#x1EC9; (memory leak). Trong v&#xED; d&#x1EE5; tr&#x1B0;&#x1EDB;c v&#x1EC1; s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1;, m&#x1ED9;t Goroutine m&#x1EDB;i  &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1B0;a v&#xE0;o b&#xEA;n trong h&#xE0;m <code>GenerateNatural</code> v&#xE0; Goroutine n&#x1EC1;n <code>PrimeFilter</code> c&#xF3; nguy c&#x1A1; b&#x1ECB; leak khi h&#xE0;m <code>main</code> kh&#xF4;ng c&#xF2;n s&#x1EED; d&#x1EE5;ng channel. Ch&#xFA;ng ta c&#xF3; th&#x1EC3; tr&#xE1;nh v&#x1EA5;n &#x111;&#x1EC1; n&#xE0;y v&#x1EDB;i package context. D&#x1B0;&#x1EDB;i &#x111;&#xE2;y l&#xE0; ph&#x1EA7;n tri&#x1EC3;n khai s&#xE0;ng s&#x1ED1; nguy&#xEA;n t&#x1ED1; &#x111;&#x1B0;&#x1EE3;c c&#x1EA3;i thi&#x1EC7;n:  </p>
+<pre><code class="lang-go"><span class="hljs-comment">// tr&#x1EA3; v&#x1EC1; channel c&#xF3; chu&#x1ED7;i s&#x1ED1;: 2, 3, 4, ...</span>
+<span class="hljs-keyword">func</span> GenerateNatural(ctx context.Context) <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> {
+    ch := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span> i := <span class="hljs-number">2</span>; ; i++ {
+            <span class="hljs-keyword">select</span> {
+            <span class="hljs-keyword">case</span> &lt;- ctx.Done():
+                <span class="hljs-keyword">return</span>
+            <span class="hljs-keyword">case</span> ch &lt;- i:
+            }
+        }
+    }()
+    <span class="hljs-keyword">return</span> ch
+}
+
+<span class="hljs-comment">// b&#x1ED9; l&#x1ECD;c: x&#xF3;a c&#xE1;c s&#x1ED1; c&#xF3; th&#x1EC3; chia h&#x1EBF;t cho s&#x1ED1; nguy&#xEA;n t&#x1ED1;</span>
+<span class="hljs-keyword">func</span> PrimeFilter(ctx context.Context, in &lt;-<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>, prime <span class="hljs-keyword">int</span>) <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> {
+    out := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
+    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
+        <span class="hljs-keyword">for</span> {
+            <span class="hljs-keyword">if</span> i := &lt;-in; i%prime != <span class="hljs-number">0</span> {
+                <span class="hljs-keyword">select</span> {
+                <span class="hljs-keyword">case</span> &lt;- ctx.Done():
+                    <span class="hljs-keyword">return</span>
+                <span class="hljs-keyword">case</span> out &lt;- i:
+                }
+            }
+        }
+    }()
+    <span class="hljs-keyword">return</span> out
+}
+
+<span class="hljs-keyword">func</span> main() {
+    <span class="hljs-comment">// ki&#x1EC3;m so&#xE1;t tr&#x1EA1;ng th&#xE1;i Goroutine n&#x1EC1;n th&#xF4;ng qua context</span>
+    ctx, cancel := context.WithCancel(context.Background())
+
+    ch := GenerateNatural(ctx) <span class="hljs-comment">// chu&#x1ED7;i s&#x1ED1;: 2, 3, 4, ...</span>
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++ {
+        prime := &lt;-ch <span class="hljs-comment">// s&#x1ED1; nguy&#xEA;n t&#x1ED1; m&#x1EDB;i</span>
+        fmt.Printf(<span class="hljs-string">&quot;%v: %v\n&quot;</span>, i+<span class="hljs-number">1</span>, prime)
+        ch = PrimeFilter(ctx, ch, prime) <span class="hljs-comment">// B&#x1ED9; l&#x1ECD;c d&#x1EF1;a tr&#xEA;n s&#x1ED1; nguy&#xEA;n t&#x1ED1; m&#x1EDB;i</span>
+    }
+
+    cancel()
+}
+</code></pre>
+<p>Khi h&#xE0;m <code>main</code> k&#x1EBF;t th&#xFA;c ho&#x1EA1;t &#x111;&#x1ED9;ng, n&#xF3; &#x111;&#x1B0;&#x1EE3;c th&#xF4;ng b&#xE1;o b&#x1EB1;ng l&#x1EC7;nh <code>cancel()</code> g&#x1ECD;i &#x111;&#x1EBF;n Goroutine n&#x1EC1;n &#x111;&#x1EC3; tho&#xE1;t, do &#x111;&#xF3; tr&#xE1;nh kh&#x1ECF;i vi&#x1EC7;c leak Goroutine.</p>
+<p>Concurrency l&#xE0; m&#x1ED9;t ch&#x1EE7; &#x111;&#x1EC1; r&#x1EA5;t l&#x1EDB;n, v&#xE0; &#x1EDF; &#x111;&#xE2;y ch&#xFA;ng t&#xF4;i ch&#x1EC9; &#x111;&#x1B0;a ra m&#x1ED9;t v&#xE0;i v&#xED; d&#x1EE5; v&#x1EC1; l&#x1EAD;p tr&#xEC;nh concurrency r&#x1EA5;t c&#x1A1; b&#x1EA3;n. T&#xE0;i li&#x1EC7;u ch&#xED;nh th&#x1EE9;c c&#x169;ng c&#xF3; r&#x1EA5;t nhi&#x1EC1;u cu&#x1ED9;c th&#x1EA3;o lu&#x1EAD;n v&#x1EC1; l&#x1EAD;p tr&#xEC;nh concurrency, c&#xF3; kh&#xE1; nhi&#x1EC1;u  cu&#x1ED1;n s&#xE1;ch  th&#x1EA3;o lu&#x1EAD;n c&#x1EE5; th&#x1EC3; v&#x1EC1; l&#x1EAD;p tr&#xEC;nh concurrency trong Golang. &#x110;&#x1ED9;c gi&#x1EA3; c&#xF3; th&#x1EC3; tham kh&#x1EA3;o c&#xE1;c t&#xE0;i li&#x1EC7;u li&#xEA;n quan theo nhu c&#x1EA7;u c&#x1EE7;a m&#xEC;nh.</p>
+<p><a href="ch1-07-error-and-panic.html">Ti&#x1EBF;p theo</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch1-05-concurrency-parallelism.html" class="navigation navigation-prev " aria-label="Previous page: 1.5 Khái niệm xử lý đồng thời và song song">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch1-07-error-and-panic.html" class="navigation navigation-next " aria-label="Next page: 1.7 Error và Exceptions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1.6 Mô hình thực thi đồng thời","level":"1.2.6","depth":2,"next":{"title":"1.7 Error và Exceptions","level":"1.2.7","depth":2,"path":"ch1-basic/ch1-07-error-and-panic.md","ref":"ch1-basic/ch1-07-error-and-panic.md","articles":[]},"previous":{"title":"1.5 Khái niệm xử lý đồng thời và song song","level":"1.2.5","depth":2,"path":"ch1-basic/ch1-05-concurrency-parallelism.md","ref":"ch1-basic/ch1-05-concurrency-parallelism.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-06-common-concurrency-mode.md","mtime":"2019-08-26T10:16:00.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-03T08:56:27.870Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
