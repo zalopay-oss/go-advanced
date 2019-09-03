@@ -6,7 +6,7 @@
   - [Đối tượng sử dụng](#đối-tượng-sử-dụng)
   - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
   - [Mục lục](#mục-lục)
-  - [Đọc online](#đọc-online)
+  - [Phương thức đọc](#phương-thức-đọc)
   - [Tham gia phát triển](#tham-gia-phát-triển)
   - [Nhóm phát triển](#nhóm-phát-triển)
   - [Cơ hội nghề nghiệp tại ZaloPay](#cơ-hội-nghề-nghiệp-tại-zalopay)
@@ -49,9 +49,12 @@ Bộ tài liệu này được chúng tôi biên soạn dựa trên kinh nghiệ
 
 Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 
-## Đọc online
+## Phương thức đọc
 
-Xem trên [gitbook](https://zalopay-oss.github.io/go-advanced/).
+- Đọc online: [GitBook](https://zalopay-oss.github.io/go-advanced/)
+- Tải file pdf: [pdf](./resource/advanced-go-book.pdf)
+- Tải file epub: [epub](./resource/advanced-go-book.epub)
+- Tải file mobi: [mobi](./resource/advanced-go-book.mobi)
 
 ## Tham gia phát triển
 
@@ -59,7 +62,7 @@ Chúng tôi biết tài liệu này còn nhiều hạn chế. Để trở nên h
 
 Các bạn có thể đóng góp bằng cách:
 
-- [Liên hệ](#li%C3%AAn-h%E1%BB%87) với chúng tôi.
+- [Liên hệ](#liên-hệ) với chúng tôi.
 - Trả lời các câu hỏi trong [issues](https://github.com/zalopay-oss/go-advanced/issues).
 - Tạo các issues gặp phải trên [issues](https://github.com/zalopay-oss/go-advanced/issues).
 - Tạo pull request trên repository của chúng tôi.
