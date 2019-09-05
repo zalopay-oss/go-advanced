@@ -358,3 +358,5 @@ $ GODEBUG=cgocheck=0 go run main.go
 Sau khi tắt `cgocheck` và chạy đoạn code trên, exception  sẽ xuất hiện. Tuy nhiên, cần lưu ý rằng nếu bộ nhớ tương ứng trong ngôn ngữ C được release bởi runtime của Go, nó sẽ gây ra sự cố nghiêm trọng hơn. Giá trị mặc định của `cgocheck` là 1, tương ứng với phiên bản detection đơn giản hoá. Nếu bạn cần hàm detection đầy đủ, bạn có thể đặt `cgocheck` thành 2.
 
 Để biết mô tả chi tiết về các hàm CGO rumtime pointer detection hãy tham khảo tài liệu chính thức của Golang: [package runtime - GoDoc](https://godoc.org/runtime#hdr-Environment_Variables).
+
+[Tiếp theo](ch2-08-c-class.md)
