@@ -29,7 +29,7 @@ func doClientWork(client *rpc.Client) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	`clientChan`.
+
 	time.Sleep(time.Second * 5)
 }
 

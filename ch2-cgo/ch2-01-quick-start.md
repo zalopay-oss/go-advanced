@@ -11,7 +11,7 @@ Trong phần này, chúng ta sẽ tìm hiểu cách sử dụng CGO cơ bản  t
 ***Windows***
 
 - CGO không tương thích với Cygwin
-- Để dùng được CGO ban5 phải cài đặt MingGW và sử dụng cmd của Windows
+- Để dùng được CGO bạn phải cài đặt MingGW và sử dụng cmd của Windows
 
 ## 2.1.1. Chương trình CGO đơn giản
 
