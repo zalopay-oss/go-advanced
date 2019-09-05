@@ -355,3 +355,5 @@ func main() {
 ```
 
 Để tránh thông tin ngữ cảnh của mảng được sắp xếp là `go_qsort_compare_info` bị sửa đổi trong quá trình sắp xếp, chúng tôi đã thực hiện lock global. Do đó, phiên bản hiện tại của hàm `qsort.Slice` không thể được thực thi đồng thời. Bạn đọc có thể thử cải tiến giới hạn này.
+
+[Tiếp theo](ch2-07-cgo-mem.md)

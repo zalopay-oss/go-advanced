@@ -193,3 +193,5 @@ Ví dụ các build flag sau chỉ ra rằng việc build chỉ được thực 
 ```
 
 Trong đó, dấu phẩy (`,`) nghĩa là **và**. Khoảng trắng (`  `) nghĩa là **hoặc**.
+
+[Tiếp theo](ch2-03-type-conversion.md)

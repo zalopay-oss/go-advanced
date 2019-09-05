@@ -173,3 +173,5 @@ void foo() {
 ```
 
 Khi export interface của ngôn ngữ C, ta cần đảm bảo rằng các tham số hàm và kiểu giá trị trả về là kiểu "thân thiện" với C (xem lại [2.3](./ch2-03-type-conversion.md)) đồng thời giá trị trả về không được trực tiếp hoặc gián tiếp chứa con trỏ vào không gian bộ nhớ ngôn ngữ Go.
+
+[Tiếp theo](ch2-05-internal-mechanisms.md)
