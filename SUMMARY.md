@@ -19,7 +19,7 @@
   * [2.9 Thư viện tĩnh và động](ch2-cgo/ch2-09-static-shared-lib.md)
   * [2.10 Biên dịch và liên kết các tham số](ch2-cgo/ch2-10-link.md)
   * [2.11 Ghi chú bổ sung](ch2-cgo/ch2-11-ext.md)
-* [Chương 3: RPC và Protobuf](ch3-rpc/README.md)
+* [Chương 3: Remote Procedure Call](ch3-rpc/README.md)
   * [3.1 Bắt đầu với RPC](ch3-rpc/ch3-01-rpc-intro.md)
   * [3.2 Protobuf](ch3-rpc/ch3-02-pb-intro.md)
   * [3.3 RPC trong Golang](ch3-rpc/ch3-03-fun-fpc.md)
