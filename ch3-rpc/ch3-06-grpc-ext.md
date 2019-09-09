@@ -24,7 +24,7 @@ message Message {
 }
 ```
 
-Cú pháp này sẽ được hiện thực thông qua phần mở rộng tính năng của Protobuf. Giá trị mặc định không còn được hỗ trợ trong Protobuf phiên bản thứ ba, nhưng chúng ta có thể mô phỏng giá trị mặc định của chúng bởi một phần mở rộng của option.
+Cú pháp này sẽ được xây dựng thông qua phần mở rộng tính năng của Protobuf. Giá trị mặc định không còn được hỗ trợ trong Protobuf phiên bản thứ ba, nhưng chúng ta có thể mô phỏng giá trị mặc định của chúng bởi một phần mở rộng của option.
 
 Sau đây là phần viết lại của file proto trên với phần mở rộng thuộc cú pháp proto3:
 
@@ -188,7 +188,7 @@ Thông qua hàm Validate() được sinh ra, chúng có thể được kết h�
 
 Hiện nay RESTful JSON API vẫn là sự lựa chọn hàng đầu cho các ứng dụng web hay mobile. Vì tính tiện lợi và dễ dùng của RESTful API nên chúng ta vẫn sử dụng nó để frondend có thể giao tiếp với hệ thống backend. Nhưng khi chúng ta sử dụng framework gRPC của Google để xây dựng các service. Các service sử dụng gRPC thì dễ dàng trao đổi dữ liệu với nhau dựa trên giao thức HTTP/2 và protobuf, nhưng ở phía frontend lại sử dụng [RESTful API](https://restfulapi.net/) API hoạt động trên giao thức HTTP/1. Vấn đề đặt ra là chúng ta cần phải chuyển đổi các yêu cầu RESTful API thành các yêu cầu gRPC để hệ thống các service gRPC có thể hiểu được.
 
-Cộng đồng opensource đã hiện thực một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
+Cộng đồng opensource đã xây dựng một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
 
 
 <div align="center">
@@ -303,13 +303,13 @@ Tiếp theo ta sẽ chạy gRPC service:
 ***restservice/main.go:***
 
 ```go
-// khai báo struct hiện thực RestService
+// khai báo struct xây dựng RestService
 type RestServiceImpl struct{}
-// hàm Get RPC được hiện thực như sau
+// hàm Get RPC được xây dựng như sau
 func (r *RestServiceImpl) Get(ctx context.Context, message *StringMessage) (*StringMessage, error) {
     return &StringMessage{Value: "Get hi:" + message.Value + "#"}, nil
 }
-// tương tự với hàm Post RPC được hiện thực với
+// tương tự với hàm Post RPC được xây dựng với
 func (r *RestServiceImpl) Post(ctx context.Context, message *StringMessage) (*StringMessage, error) {
     return &StringMessage{Value: "Post hi:" + message.Value + "@"}, nil
 }
@@ -317,7 +317,7 @@ func (r *RestServiceImpl) Post(ctx context.Context, message *StringMessage) (*St
 func main() {
     // khởi tạo một grpc Server mới
     grpcServer := grpc.NewServer()
-    // register grpc Server với đối tượng hiện thực các hàm RPC
+    // register grpc Server với đối tượng xây dựng các hàm RPC
     RegisterRestServiceServer(grpcServer, new(RestServiceImpl))
     // listen gRPC Service trên port 5000, bỏ qua lỗi trả về nếu có
     lis, _ := net.Listen("tcp", ":5000")
