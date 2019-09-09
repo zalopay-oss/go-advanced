@@ -82,7 +82,7 @@ type Plugin interface {
 }
 ```
 
-***Hiện thực hàm Generate() :***
+***xây dựng hàm Generate() :***
 
 ```go
 // pbgoPlugin là đối tượng chính của framework pbgo
@@ -115,7 +115,7 @@ extend google.protobuf.MethodOptions {
 
 
 
-Bên dưới là phần hiện thực phương thức getServiceMethodOption().
+Bên dưới là phần xây dựng phương thức getServiceMethodOption().
 
 ***getServiceMethodOption() :***
 
@@ -176,7 +176,7 @@ func HelloServiceHandler(svc HelloServiceInterface) http.Handler {
 }
 ```
 
-Mã nguồn chọn một opensource [httprouter](https://github.com/julienschmidt/httprouter) nổi tiếng để hiện thực. Hàm `_handle_HelloService_Hello_get` được dùng để register hàm `Hello` cho `route handler`.
+Mã nguồn chọn một opensource [httprouter](https://github.com/julienschmidt/httprouter) nổi tiếng để xây dựng. Hàm `_handle_HelloService_Hello_get` được dùng để register hàm `Hello` cho `route handler`.
 
 ***Mã nguồn Route handler (2):***
 

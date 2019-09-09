@@ -1,4 +1,4 @@
-# 3.5 gRPC Nâng cao
+# 3.5 Một số vấn đề khác của gRPC
 
 Các framework RPC cơ bản thường gặp phải nhiều vấn đề về bảo mật và khả năng mở rộng.
 
@@ -322,7 +322,7 @@ myServer := grpc.NewServer(
 
 Xem chi tiết: [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-middleware)
 
-## 3.5.4 gRPC kết hợp với Web service
+## 3.5.4 gRPC kết hợp với Web service dùng chung port
 
 gRPC được xây dựng bên trên giao thức HTTP/2 nên chúng ta có thể đặt gRPC service vào các port giống  như một web service bình thường.
 
