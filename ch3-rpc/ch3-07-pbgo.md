@@ -4,7 +4,7 @@
 
 ## 3.7.1 Cú pháp mở rộng của Protobuf
 
-Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án opensource xung quanh nó. Ở phần trước, chúng ta đã đề cập [validator](https://github.com/mwitkow/go-proto-validators), một plugin dùng để validate các trường theo các rules được định nghĩa trong phần mở rộng của trường tương ứng.
+Cú pháp mở rộng của Protobuf được dùng trong rất nhiều dự án Open source xung quanh nó. Ở phần trước, chúng ta đã đề cập [validator](https://github.com/mwitkow/go-proto-validators), một plugin dùng để validate các trường theo các rules được định nghĩa trong phần mở rộng của trường tương ứng.
 
 Trong dự án [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), việc hỗ trợ REST interface đạt được bằng cách thêm thông tin HTTP vào phần mở rộng cho mỗi hàm RPC của service. Tương tự, các phần cú pháp mở rộng của Pbgo được định nghĩa:
 
@@ -176,7 +176,7 @@ func HelloServiceHandler(svc HelloServiceInterface) http.Handler {
 }
 ```
 
-Mã nguồn chọn một opensource [httprouter](https://github.com/julienschmidt/httprouter) nổi tiếng để xây dựng. Hàm `_handle_HelloService_Hello_get` được dùng để register hàm `Hello` cho `route handler`.
+Mã nguồn chọn một Open source [httprouter](https://github.com/julienschmidt/httprouter) nổi tiếng để xây dựng. Hàm `_handle_HelloService_Hello_get` được dùng để register hàm `Hello` cho `route handler`.
 
 ***Mã nguồn Route handler (2):***
 
