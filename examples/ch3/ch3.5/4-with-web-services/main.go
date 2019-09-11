@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	fmt "fmt"
 	"log"
 	"net/http"
@@ -17,7 +18,7 @@ var port = ":5000"
 type myGrpcServer struct{}
 
 func (s *myGrpcServer) SayHello(ctx context.Context, in *HelloRequest) (*HelloReply, error) {
-	return &HelloReply{Message: "Hello " + in.Name}, nil
+	return &HelloReply{Message: "[rpc] Hello " + in.Name}, nil
 }
 
 func main() {
@@ -25,6 +26,7 @@ func main() {
 	time.Sleep(time.Second)
 
 	doClientWork()
+	doClient2()
 }
 
 func startServer() {
@@ -50,6 +52,37 @@ func startServer() {
 	}))
 }
 
+func doClient2() {
+	log.SetFlags(log.Lshortfile)
+	cert, err := tls.LoadX509KeyPair("tls-config/server.crt", "server.grpc.io")
+
+	conf := &tls.Config{
+		Certificates: []tls.Certificate{cert},
+	}
+
+	conn, err := tls.Dial("tcp", "localhost:5000", conf)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	defer conn.Close()
+
+	n, err := conn.Write([]byte("hello\n"))
+	if err != nil {
+		log.Println(n, err)
+		return
+	}
+
+	buf := make([]byte, 100)
+	n, err = conn.Read(buf)
+	if err != nil {
+		log.Println(n, err)
+		return
+	}
+
+	println(string(buf[:n]))
+}
+
 func doClientWork() {
 	creds, err := credentials.NewClientTLSFromFile("tls-config/server.crt", "server.grpc.io")
 	if err != nil {
@@ -68,5 +101,5 @@ func doClientWork() {
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("doClientWork: %s", r.Message)
+	log.Printf("[client]: %s", r.Message)
 }
