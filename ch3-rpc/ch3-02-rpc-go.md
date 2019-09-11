@@ -1,24 +1,22 @@
 # 3.2 Một số ví dụ dùng RPC
 
-Trong phần này, chúng ta sẽ sử dụng framework RPC tích hợp sẵn trong Go để hiện thực một số ứng dụng.
+Trong phần này, chúng ta sẽ sử dụng [package RPC](https://golang.org/pkg/net/rpc/) tích hợp sẵn trong Go để xây dựng một số ứng dụng.
 
 ## 3.2.1 Hàm giám sát bằng RPC
 
-Ta mong muốn khi hệ thống gặp phải những điều kiện nhất định thì có thể nhận về kết quả thông báo. Ví dụ sau sẽ hiện thực phương thức `Watch` để làm điều đó.
+Ta mong muốn khi hệ thống gặp phải những điều kiện nhất định thì có thể nhận về kết quả thông báo. Ví dụ sau sẽ xây dựng phương thức `Watch` để làm điều đó.
 
 Ý tưởng là giả lập một key-value store đơn giản, mỗi khi có sự thay đổi về value thì sẽ gửi về thông báo cho client.
 
 <div align="center">
-
 <img src="../images/watch.png" width="500">
 <br/>
 <span align="center"><i>Mô hình sử dụng hàm Watch</i></span>
 <br/>
 <br/>
-
 </div>
 
-Trước tiên xây dựng cơ sở dữ liệu Key-Value đơn giản thông qua RPC. Xác định service như sau:
+Trước tiên xây dựng cơ sở dữ liệu Key-Value đơn giản thông qua RPC, xây dựng service như sau:
 
 ```go
 type KVStoreService struct {
@@ -245,7 +243,7 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 
 ## 3.2.4 RPC theo ngữ cảnh
 
-Dựa trên ngữ cảnh chúng ta có thể cung cấp những RPC service thích hợp cho những client khác nhau. Trong ví dụ sau ta chỉ cung cấp service Hello cho những user đã Login xong. Quá trình hiện thực như sau.
+Dựa trên ngữ cảnh chúng ta có thể cung cấp những RPC service thích hợp cho những client khác nhau. Trong ví dụ sau ta chỉ cung cấp service Hello cho những user đã Login xong. Quá trình xây dựng như sau.
 
 Đầu tiên thêm vào thành phần `conn` ở `HelloService` cho connection tương ứng:
 

@@ -6,7 +6,7 @@
 </div>
 <br/>
 
-[gRPC](https://grpc.io/) là một framework RPC opensource đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
+[gRPC](https://grpc.io/) là một framework RPC Open source đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
 
 ## 3.4.1 Kiến trúc gRPC
 
@@ -23,7 +23,7 @@ Kiến trúc gRPC trong Go:
 
 Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đấy là phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Go được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
-## 3.4.2 Bắt đầu với gRPC
+## 3.4.2 Làm quen với gRPC
 
 Từ quan điểm của Protobuf, gRPC không gì khác hơn là một trình tạo code cho interface service.
 
@@ -175,7 +175,7 @@ type HelloService_ChannelClient interface {
 
 Có thể thấy các interface hỗ trợ server và client stream đều có định nghĩa phương thức `Send` và `Recv` cho giao tiếp hai chiều của dữ liệu streaming.
 
-Bây giờ ta có thể hiện thực các streaming service:
+Bây giờ ta có thể xây dựng các streaming service:
 
 ```go
 func (p *HelloServiceImpl) Channel(stream HelloService_ChannelServer) error {
@@ -241,11 +241,11 @@ for {
 }
 ```
 
-Bạn có thể xem code cụ thể tại [link](../examples/ch3/ch3.4/3-grpc-flow/server/main.go)
+Bạn có thể xem code cụ thể tại [đây](../examples/ch3/ch3.4/3-grpc-flow/server/main.go)
 
 ## 3.4.4 Mô hình Publishing - Subscription
 
-Trong phần trước chúng ta đã hiện thực phiên bản đơn giản của phương thức `Watch` dựa trên thư viện RPC dựng sẵn của Go. Ý tưởng đó có thể sử dụng cho hệ thống publish-subscribe, nhưng bởi vì RPC thiếu đi cơ chế streaming nên nó chỉ có thể trả về 1 kết quả trong 1 lần. Trong chế độ publish-subscribe, hành động publish đưa ra bởi *caller* giống với lời gọi hàm thông thường, trong khi subscriber bị động thì giống với *receiver* trong gRPC client stream một chiều. Bây giờ ta có thể thử xây dựng một hệ thống publish - subscribe dựa trên đặc điểm stream của gRPC.
+Trong phần trước chúng ta đã xây dựng phiên bản đơn giản của phương thức `Watch` dựa trên thư viện RPC dựng sẵn của Go. Ý tưởng đó có thể sử dụng cho hệ thống publish-subscribe, nhưng bởi vì RPC thiếu đi cơ chế streaming nên nó chỉ có thể trả về 1 kết quả trong 1 lần. Trong chế độ publish-subscribe, hành động publish đưa ra bởi *caller* giống với lời gọi hàm thông thường, trong khi subscriber bị động thì giống với *receiver* trong gRPC client stream một chiều. Bây giờ ta có thể thử xây dựng một hệ thống publish - subscribe dựa trên đặc điểm stream của gRPC.
 
 <div align="center">
 
@@ -256,7 +256,7 @@ Trong phần trước chúng ta đã hiện thực phiên bản đơn giản c�
 
 </div>
 
-Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều hiện thực của mẫu thiết kế này trong cộng đồng opensource. Đoạn code sau đây hiện thực cơ chế publish - subscription dựa trên package pubsub:
+Publishing - Subscription là một mẫu thiết kế thông dụng và đã có nhiều cài đặt của mẫu thiết kế này trong cộng đồng Open source. Đoạn code sau đây xây dựng cơ chế publish - subscription dựa trên package pubsub:
 
 ```go
 import (
@@ -341,7 +341,7 @@ type PubsubService_SubscribeServer interface {
 
 Bởi vì `Subscribe` là stream 1 chiều phía server nên chỉ có phương thức `Send` được tạo ra trong interface `HelloService_SubscribeServer`.
 
-Sau đó có thể hiện thực các service publish và subscribe như sau:
+Sau đó có thể xây dựng các service publish và subscribe như sau:
 
 ```go
 type PubsubService struct {
@@ -450,4 +450,4 @@ func main() {
 
 Chi tiết: [clientsub](../examples/ch3/ch3.4/4-pubsub/clientsub/main.go).
 
-Cho đến giờ chúng ta đã hiện thực được service publishing và subscription khác mạng dựa trên gRPC. Trong phần kế tiếp chúng ta sẽ xét một số ứng dụng nâng cao hơn của Go trong gRPC.
+Cho đến giờ chúng ta đã xây dựng được service publishing và subscription khác mạng dựa trên gRPC. Trong phần kế tiếp chúng ta sẽ xét một số ứng dụng nâng cao hơn của Go trong gRPC.
