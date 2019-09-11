@@ -1,37 +1,14 @@
-# 3.6. gRPC và Protobuf extensions
+# 3.6. Protobuf extensions
 
-Hiện nay, cộng đồng opensource đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn. Ở phần này sẽ trình bày về một số extensions thông dụng.
+Hiện nay, cộng đồng Open source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn. Ở phần này sẽ trình bày về một số extensions thông dụng.
 
 ## 3.6.1 Validator
 
-Cho đến nay, Protobuf đã có phiên bản thứ ba. Ở phiên bản thứ hai của Protobuf có một thuộc tính `default` ở các trường nhằm định nghĩa giá trị mặc định cho nó là một giá trị thuộc kiểu string hoặc kiểu số.
+Trong Protobuf chúng ta có thể quy định giá trị mặc định của các trường thông qua phần mở rộng, ví dụ:
 
-Chúng ta sẽ tạo ra file proto sử dụng phiên bản Protobuf thứ hai:
-
-***hello.proto (proto2):***
+***hello.proto:***
 
 ```go
-// phiên bản protobuf
-syntax = "proto2";
-// định nghĩa tên package được sinh ra
-package main;
-// định nghĩa đối tượng dữ liệu
-message Message {
-    // nếu không khởi trị, thì giá trị mặc định của name là "gopher"
-    string name = 1 [default = "gopher"];
-    // tương tự, giá trị mặc định của age là 10
-    int32 age = 2 [default = 10];
-}
-```
-
-Cú pháp này sẽ được hiện thực thông qua phần mở rộng tính năng của Protobuf. Giá trị mặc định không còn được hỗ trợ trong Protobuf phiên bản thứ ba, nhưng chúng ta có thể mô phỏng giá trị mặc định của chúng bởi một phần mở rộng của option.
-
-Sau đây là phần viết lại của file proto trên với phần mở rộng thuộc cú pháp proto3:
-
-***hello.proto (proto3):***
-
-```go
-// phiên bản hiện tại là proto3
 syntax = "proto3";
 package main;
 // import phần mở rộng của protobuf
@@ -51,33 +28,7 @@ message Message {
 }
 ```
 
-Trong dấu đóng mở ngoặc vuông sau mỗi trường trong message là một cú pháp mở rộng. Chúng ta sẽ tạo lại mã nguồn Go dựa trên những thông tin liên quan đến phần mở rộng của options. Phần mã nguồn sinh ra có một số nội dung dựa trên phần mở rộng như sau:
-
-***hello.pb.go:***
-
-```go
-var E_DefaultString = &proto.ExtensionDesc{
-    ExtendedType:  (*descriptor.FieldOptions)(nil),
-    ExtensionType: (*string)(nil),
-    Field:         50000,
-    Name:          "main.default_string",
-    Tag:           "bytes,50000,opt,name=default_string,json=defaultString",
-    Filename:      "helloworld.proto",
-}
-
-var E_DefaultInt = &proto.ExtensionDesc{
-    ExtendedType:  (*descriptor.FieldOptions)(nil),
-    ExtensionType: (*int32)(nil),
-    Field:         50001,
-    Name:          "main.default_int",
-    Tag:           "varint,50001,opt,name=default_int,json=defaultInt",
-    Filename:      "helloworld.proto",
-}
-```
-
-Chúng ta có thể parse out phần mở rộng của option được định nghĩa trong mỗi thành viên của Message tại thời điểm thực thi bởi kiểu `reflection`, và sau đó parse out giá trị mặc định mà chúng ta đã định nghĩa sẵn từ những thông tin liên quan khác cho phần mở rộng.
-
-Trong cộng đồng opensource, thư viện [go-proto-validators](github.com/mwitkow/go-proto-validators) là một extension của protobuf có chức năng validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới:
+Trong cộng đồng Open source, thư viện [go-proto-validators](github.com/mwitkow/go-proto-validators) là một extension của Protobuf có chức năng validator rất mạnh mẽ dựa trên phần mở rộng tự nhiên của Protobuf. Để sử dụng validator đầu tiên ta cần phải tải plugin sinh mã nguồn bên dưới:
 
 ```sh
 $ go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
@@ -188,7 +139,7 @@ Thông qua hàm Validate() được sinh ra, chúng có thể được kết h�
 
 Hiện nay RESTful JSON API vẫn là sự lựa chọn hàng đầu cho các ứng dụng web hay mobile. Vì tính tiện lợi và dễ dùng của RESTful API nên chúng ta vẫn sử dụng nó để frondend có thể giao tiếp với hệ thống backend. Nhưng khi chúng ta sử dụng framework gRPC của Google để xây dựng các service. Các service sử dụng gRPC thì dễ dàng trao đổi dữ liệu với nhau dựa trên giao thức HTTP/2 và protobuf, nhưng ở phía frontend lại sử dụng [RESTful API](https://restfulapi.net/) API hoạt động trên giao thức HTTP/1. Vấn đề đặt ra là chúng ta cần phải chuyển đổi các yêu cầu RESTful API thành các yêu cầu gRPC để hệ thống các service gRPC có thể hiểu được.
 
-Cộng đồng opensource đã hiện thực một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
+Cộng đồng Open source đã xây dựng một project với tên gọi là [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway), nó sẽ sinh ra một proxy có vai trò chuyển các yêu cầu REST HTTP thành các yêu cầu gRPC HTTP2.
 
 
 <div align="center">
@@ -303,13 +254,13 @@ Tiếp theo ta sẽ chạy gRPC service:
 ***restservice/main.go:***
 
 ```go
-// khai báo struct hiện thực RestService
+// khai báo struct xây dựng RestService
 type RestServiceImpl struct{}
-// hàm Get RPC được hiện thực như sau
+// hàm Get RPC được xây dựng như sau
 func (r *RestServiceImpl) Get(ctx context.Context, message *StringMessage) (*StringMessage, error) {
     return &StringMessage{Value: "Get hi:" + message.Value + "#"}, nil
 }
-// tương tự với hàm Post RPC được hiện thực với
+// tương tự với hàm Post RPC được xây dựng với
 func (r *RestServiceImpl) Post(ctx context.Context, message *StringMessage) (*StringMessage, error) {
     return &StringMessage{Value: "Post hi:" + message.Value + "@"}, nil
 }
@@ -317,7 +268,7 @@ func (r *RestServiceImpl) Post(ctx context.Context, message *StringMessage) (*St
 func main() {
     // khởi tạo một grpc Server mới
     grpcServer := grpc.NewServer()
-    // register grpc Server với đối tượng hiện thực các hàm RPC
+    // register grpc Server với đối tượng xây dựng các hàm RPC
     RegisterRestServiceServer(grpcServer, new(RestServiceImpl))
     // listen gRPC Service trên port 5000, bỏ qua lỗi trả về nếu có
     lis, _ := net.Listen("tcp", ":5000")
@@ -356,7 +307,7 @@ $ protoc -I. \
 File `hello.swagger.json` sẽ được sinh ra sau đó. Trong trường hợp này, chúng ta có thể dùng `swagger-ui project` để cung cấp tài liệu `REST interface` và testing dưới dạng web pages.
 
 ## 3.6.3 Dùng Docker grpc-gateway
-Với những lập trình viên phát triển gRPC Services trên các ngôn ngữ không phải Golang như Java, C++, ... có nhu cầu sinh ra grpc gateway cho các services của họ nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, protobuf, các lệnh generate,v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker để xây dựng grpc-gateway theo bài hướng dẫn chi tiết sau [buildingdocker-grpc-gateway](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c).
+Với những lập trình viên phát triển gRPC Services trên các ngôn ngữ không phải Golang như Java, C++, ... có nhu cầu sinh ra grpc gateway cho các services của họ nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, Protobuf, các lệnh generate,v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker để xây dựng grpc-gateway theo bài hướng dẫn chi tiết sau [buildingdocker-grpc-gateway](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c).
 
 ## 3.6.4 Nginx
 Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều gRPC service instance giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx về gRPC là một chủ đề lớn, ở đây chúng tôi không trinhf bày hết được, các bạn có thể tham khảo các tài liệu trên trang chủ của Nginx như [ở đây](https://www.nginx.com/blog/nginx-1-13-10-grpc/).
