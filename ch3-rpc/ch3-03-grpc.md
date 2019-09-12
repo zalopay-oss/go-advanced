@@ -1,4 +1,4 @@
-# 3.4 Làm quen với gRPC
+# 3.3 Làm quen với gRPC
 
 <div align="center">
 	<img src="../images/grpc.png" width="800">
@@ -8,7 +8,7 @@
 
 [gRPC](https://grpc.io/) là một framework RPC Open source đa ngôn ngữ được Google phát triển dựa trên [Protobuf](https://developers.google.com/protocol-buffers/) và giao thức HTTP/2. Phần này sẽ giới thiệu một số cách sử dụng gRPC để xây dựng service đơn giản.
 
-## 3.4.1 Kiến trúc gRPC
+## 3.3.1 Kiến trúc gRPC
 
 Kiến trúc gRPC trong Go:
 
@@ -23,7 +23,7 @@ Kiến trúc gRPC trong Go:
 
 Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đấy là phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Go được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
-## 3.4.2 Làm quen với gRPC
+## 3.3.2 Làm quen với gRPC
 
 Từ quan điểm của Protobuf, gRPC không gì khác hơn là một trình tạo code cho interface service.
 
@@ -118,7 +118,7 @@ func main() {
 
 Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: gRPC không hỗ trợ gọi asynchronous. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
 
-## 3.4.3 gRPC streaming
+## 3.3.3 gRPC streaming
 
 RPC là lời gọi hàm từ xa, vì vậy các tham số hàm và giá trị trả về của mỗi cuộc gọi không thể quá lớn, nếu không thời gian phản hồi của mỗi lời gọi sẽ bị ảnh hưởng nghiêm trọng. Do đó, các lời gọi phương thức RPC truyền thống không phù hợp để tải lên và tải xuống trong trường hợp khối lượng dữ liệu lớn. Để khắc phục điểm này, framework gRPC cung cấp các chức năng stream cho phía server và client tương ứng.
 
@@ -243,7 +243,7 @@ for {
 
 Bạn có thể xem code cụ thể tại [đây](../examples/ch3/ch3.4/3-grpc-flow/server/main.go)
 
-## 3.4.4 Mô hình Publishing - Subscription
+## 3.3.4 Mô hình Publishing - Subscription
 
 Trong phần trước chúng ta đã xây dựng phiên bản đơn giản của phương thức `Watch` dựa trên thư viện RPC dựng sẵn của Go. Ý tưởng đó có thể sử dụng cho hệ thống publish-subscribe, nhưng bởi vì RPC thiếu đi cơ chế streaming nên nó chỉ có thể trả về 1 kết quả trong 1 lần. Trong chế độ publish-subscribe, hành động publish đưa ra bởi *caller* giống với lời gọi hàm thông thường, trong khi subscriber bị động thì giống với *receiver* trong gRPC client stream một chiều. Bây giờ ta có thể thử xây dựng một hệ thống publish - subscribe dựa trên đặc điểm stream của gRPC.
 

@@ -1,8 +1,8 @@
-# 3.8 Công cụ grpcurl
+# 3.6. Công cụ grpcurl
 
 Bản thân Protobuf đã có chức năng phản chiếu (reflection) lại file Proto của đối tượng khi thực thi. gRPC cũng cung cấp một package reflection để thực hiện các truy vấn cho  gRPC service. Mặc dù gRPC có một hiện thực bằng C++ của công cụ `grpc_cli`, có thể được sử dụng để truy vấn danh sách gRPC hoặc gọi phương thức gRPC, nhưng bởi vì phiên bản đó cài đặt khá  phức tạp nên ở đây chúng ta sẽ dùng công cụ `grpcurl` được hiện thực thuần bằng Golang. Phần này ta sẽ cùng tìm hiểu cách sử dụng công cụ này.
 
-## 3.8.1 Khởi động một reflection service
+## 3.6.1 Khởi động một reflection service
 
 Chỉ có duy nhất hàm `Register` trong package reflection, hàm này dùng để đăng ký `grpc.Server` với reflection service. Trong document của package có hướng dẫn như sau:
 
@@ -24,7 +24,7 @@ func main() {
 
 Nếu gRPC reflection service được khởi chạy thì các gRPC service   có thể được truy vấn hoặc gọi ra bằng reflection service do package reflection cung cấp.
 
-## 3.8.2 Xem danh sách service
+## 3.6.2 Xem danh sách service
 
 Grpcurl là công cụ được cộng đồng Open source của Golang phát triển, quá trình cài đặt như sau:
 
@@ -79,7 +79,7 @@ grpc.reflection.v1alpha.ServerReflection
 
 Trong đó `HelloService.HelloService` là service được định nghĩa trong file protobuf. `ServerReflection` là reflection service được package reflection đăng ký. Thông qua service này chúng ta có thể truy vấn thông tin của tất cả các gRPC service bao gồm chính nó.
 
-## 3.8.3 Danh sách các phương thức của service
+## 3.6.3 Danh sách các phương thức của service
 
 Nếu tiếp tục sử dụng lệnh `list` ta có thể xem được cả danh sách các phương thức trong `HelloService`:
 
@@ -103,7 +103,7 @@ service HelloService {
 
 Kết quả là danh sách các phương thức có trong service cùng với mô tả các tham số input cũng như giá trị trả về tương ứng của chúng.
 
-## 3.8.4 Lấy thông tin kiểu dữ liệu
+## 3.6.4 Lấy thông tin kiểu dữ liệu
 
 Sau khi có được danh sách các phương thức và kiểu của giá tị trả về, chúng ta có thể tiếp tục xem thông tin chi tiết hơn về kiểu của các biến này. Sau đây là các sử dụng lệnh `describe` để xem thông tin của tham số `HelloService.String`:
 
@@ -117,7 +117,7 @@ message String {
 
 Kết quả trả về đúng với mô tả trong file protobuf của service.
 
-## 3.8.5 Lệnh gọi phương thức
+## 3.6.5 Lệnh gọi phương thức
 
 Ta có thể gọi phương thức gRPC bằng cách truyền thêm tham số `-d` và một chuỗi json như input của hàm và gọi tới phương thức `Hello` trong `HelloService`, chi tiết như sau:
 

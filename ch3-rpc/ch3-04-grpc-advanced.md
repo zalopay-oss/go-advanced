@@ -1,4 +1,4 @@
-# 3.5 Một số vấn đề khác của gRPC
+# 3.4 Một số vấn đề khác của gRPC
 
 Để nâng cao khả năng bảo mật, ta có thể áp dụng chức năng xác thực vào hệ thống. Hai mức xác thực dùng trong RPC:
 
@@ -7,7 +7,7 @@
 
 Phần này sẽ ta sẽ tìm hiểu cách hiện thực các cơ chế xác thực này, sau đó là sử dụng interceptor cho request/response và gRPC kết hợp với web service.
 
-## 3.5.1 Xác thực qua chứng chỉ (certificate)
+## 3.4.1 Xác thực qua chứng chỉ (certificate)
 
 gRPC được xây dựng dựa trên giao thức HTTP/2 và hỗ trợ TLS khá hoàn thiện. gRPC service trong chương trước chúng ta không hỗ trợ xác thực qua chứng chỉ, vì vậy client `grpc.WithInsecure()` có thể  thông qua tùy chọn mà bỏ qua việc xác thực trong server được kết nối.
 
@@ -133,7 +133,7 @@ func main() {
 
 Như vậy chúng ta đã xây dựng được một hệ thống gRPC đáng tin cậy để kết nối giữa Client và Server thông qua xác thực chứng chỉ từ cả 2 chiều.
 
-## 3.5.2 Xác thực bằng token
+## 3.4.2 Xác thực bằng token
 
 Xác thực dựa trên chứng chỉ được mô tả ở trên là dành cho từng kết nối gRPC. Ngoài ra gRPC cũng  hỗ trợ xác thực cho mỗi lệnh gọi   gRPC, để việc quản lý quyền có thể thực hiện trên các kết nối khác nhau dựa trên user token.
 
@@ -244,7 +244,7 @@ func (a *Authentication) Auth(ctx context.Context) error {
 }
 ```
 
-## 3.5.3 Interceptor
+## 3.4.3 Interceptor
 
 `Grpc.UnaryInterceptor` và `grpc.StreamInterceptor` trong gRPC  hỗ trợ interceptor cho các phương thức thông thường và phương thức stream. Ở đây chúng ta hãy tìm hiểu về việc sử dụng  interceptor cho phương thức thông thường.
 
@@ -306,7 +306,6 @@ func filter(
 }
 ```
 
-<<<<<<< HEAD
 Ta áp dụng cho hàm `SayHello` của service `Greeter`:
 
 ```go
@@ -336,9 +335,6 @@ $ ./3-interceptor
 Kết quả cho thấy request của client đi qua hàm filter (là interceptor) gặp hàm `SayHello` throw ra panic, filter lấy panic này trả về cho client.
 
 Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong project opensource [grpc-ecosystem](https://github.com/grpc-ecosystem) có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
-=======
-Tuy nhiên, chỉ một interceptor có thể được gắn cho một service trong gRPC framework, cho nên tất cả chức năng interceptor chỉ có thể thực hiện trong một hàm. Package go-grpc-middleware trong project Open source [grpc-ecosystem](https://github.com/grpc-ecosystem) có hiện thực cơ chế hỗ trợ cho một chuỗi interceptor dựa trên gRPC.
->>>>>>> 76ab621db1f62d8cc10e7bd242125b8be848ab04
 
 Một ví dụ về cách sử dụng một chuỗi interceptor trong package go-grpc-middleware:
 
@@ -356,92 +352,3 @@ myServer := grpc.NewServer(
 ```
 
 Xem chi tiết: [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-middleware)
-<<<<<<< HEAD
-=======
-
-## 3.5.4 gRPC kết hợp với Web service dùng chung port
-
-gRPC được xây dựng bên trên giao thức HTTP/2 nên chúng ta có thể đặt gRPC service vào các port giống  như một web service bình thường.
-
-- Với các service không sử dụng TLS:
-
-    ```go
-    func main() {
-        mux := http.NewServeMux()
-
-        h2Handler := h2c.NewHandler(mux, &http2.Server{})
-        server = &http.Server{Addr: ":3999", Handler: h2Handler}
-        server.ListenAndServe()
-    }
-    ```
-
-- Các service sử dụng TLS:
-
-    ```go
-    func main() {
-        mux := http.NewServeMux()
-        mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-            fmt.Fprintln(w, "hello")
-        })
-
-        http.ListenAndServeTLS(port, "server.crt", "server.key",
-            http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-                mux.ServeHTTP(w, r)
-                return
-            }),
-        )
-    }
-    ```
-
-- Kích hoạt một gRPC service với các chứng chỉ riêng (xem phần 4.5.1):
-
-```go
-func main() {
-    creds, err := credentials.NewServerTLSFromFile("server.crt", "server.key")
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    grpcServer := grpc.NewServer(grpc.Creds(creds))
-
-    ...
-}
-```
-
-Vì gRPC service đã hiện thực phương thức `ServeHTTP` trước đó nên nó có thể được sử dụng  làm đối tượng xử lý định tuyến Web (routing). Nếu  đặt gRPC và Web service lại với nhau, sẽ dẫn đến xung đột link gRPC và link Web. Chúng ta cần phân biệt giữa hai loại service này khi xử lý.
-
-Việc tạo ra các handler xử lý việc routing hỗ trợ cả Web và gRPC có thể thực hiện như sau:
-
-```go
-func main() {
-    ...
-
-    http.ListenAndServeTLS(port, "server.crt", "server.key",
-        http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-            // đảm bảo nếu không phải là HTTP/2 thì sẽ không hỗ trợ gRPC
-            if r.ProtoMajor != 2 {
-                mux.ServeHTTP(w, r)
-                return
-            }
-
-            // nếu header có chỉ định grpc thì thực thi
-            // lời gọi tương ứng
-            if strings.Contains(
-                r.Header.Get("Content-Type"), "application/grpc",
-            ) {
-                grpcServer.ServeHTTP(w, r)
-                return
-            }
-
-            // nếu không thì thực thi server HTTP
-            mux.ServeHTTP(w, r)
-            return
-        }),
-    )
-}
-```
-
-Bạn đọc có thể xem code chi tiết tại [đây](../examples/ch3/ch3.5/4-with-web-services/main.go).
-
-Theo cách này chúng ta có thể cung cấp cả web serive và gRPC chung port cùng một lúc.
->>>>>>> 76ab621db1f62d8cc10e7bd242125b8be848ab04

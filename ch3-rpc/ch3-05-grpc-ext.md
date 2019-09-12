@@ -1,8 +1,8 @@
-# 3.6. Protobuf extensions
+# 3.5. Protobuf extensions
 
 Hiện nay, cộng đồng Open source đã phát triển rất nhiều extensions xung quanh Protobuf và gRPC, tạo thành một hệ sinh thái to lớn. Ở phần này sẽ trình bày về một số extensions thông dụng.
 
-## 3.6.1 Validator
+## 3.5.1 Validator
 
 Trong Protobuf chúng ta có thể quy định giá trị mặc định của các trường thông qua phần mở rộng, ví dụ:
 
@@ -135,7 +135,7 @@ func (this *Message) Validate() error {
 
 Thông qua hàm Validate() được sinh ra, chúng có thể được kết hợp với `gRPC interceptor`, chúng ta có thể dễ dàng validate giá trị của tham số đầu vào và kết quả trả về của mỗi hàm.
 
-## 3.6.2 REST interface
+## 3.5.2 REST interface
 
 Hiện nay RESTful JSON API vẫn là sự lựa chọn hàng đầu cho các ứng dụng web hay mobile. Vì tính tiện lợi và dễ dùng của RESTful API nên chúng ta vẫn sử dụng nó để frondend có thể giao tiếp với hệ thống backend. Nhưng khi chúng ta sử dụng framework gRPC của Google để xây dựng các service. Các service sử dụng gRPC thì dễ dàng trao đổi dữ liệu với nhau dựa trên giao thức HTTP/2 và protobuf, nhưng ở phía frontend lại sử dụng [RESTful API](https://restfulapi.net/) API hoạt động trên giao thức HTTP/1. Vấn đề đặt ra là chúng ta cần phải chuyển đổi các yêu cầu RESTful API thành các yêu cầu gRPC để hệ thống các service gRPC có thể hiểu được.
 
@@ -306,8 +306,8 @@ $ protoc -I. \
 
 File `hello.swagger.json` sẽ được sinh ra sau đó. Trong trường hợp này, chúng ta có thể dùng `swagger-ui project` để cung cấp tài liệu `REST interface` và testing dưới dạng web pages.
 
-## 3.6.3 Dùng Docker grpc-gateway
+## 3.5.3 Dùng Docker grpc-gateway
 Với những lập trình viên phát triển gRPC Services trên các ngôn ngữ không phải Golang như Java, C++, ... có nhu cầu sinh ra grpc gateway cho các services của họ nhưng gặp khá nhiều khó khăn từ việc cài đặt môi trường Golang, Protobuf, các lệnh generate,v,v.. Có một giải pháp đơn giản hơn đó là sử dụng Docker để xây dựng grpc-gateway theo bài hướng dẫn chi tiết sau [buildingdocker-grpc-gateway](https://medium.com/zalopay-engineering/buildingdocker-grpc-gateway-e2efbdcfe5c).
 
-## 3.6.4 Nginx
+## 3.5.4 Nginx
 Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều gRPC service instance giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx về gRPC là một chủ đề lớn, ở đây chúng tôi không trinhf bày hết được, các bạn có thể tham khảo các tài liệu trên trang chủ của Nginx như [ở đây](https://www.nginx.com/blog/nginx-1-13-10-grpc/).
