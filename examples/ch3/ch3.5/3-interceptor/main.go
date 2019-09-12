@@ -22,7 +22,7 @@ func (s *myGrpcServer) SayHello(ctx context.Context, in *HelloRequest) (*HelloRe
 
 func main() {
 	go startServer()
-	time.Sleep(2*time.Second)
+	time.Sleep(2 * time.Second)
 
 	doClientWork()
 }
@@ -32,7 +32,7 @@ func filter(
 	info *grpc.UnaryServerInfo,
 	handler grpc.UnaryHandler,
 ) (resp interface{}, err error) {
-	log.Println("filter:", info)
+	log.Println("[server] filter:", info)
 
 	defer func() {
 		if r := recover(); r != nil {
@@ -41,7 +41,7 @@ func filter(
 	}()
 
 	// validate req
-	log.Println("validate req")
+	log.Println("[server] validate req")
 
 	return handler(ctx, req)
 }
@@ -68,10 +68,10 @@ func doClientWork() {
 	defer conn.Close()
 
 	c := NewGreeterClient(conn)
-	
+
 	r, err := c.SayHello(context.Background(), &HelloRequest{Name: "gopher"})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+		log.Fatalf("[client] could not greet: %v", err)
 	}
 	log.Printf("doClientWork: %s", r.Message)
 }

@@ -1,4 +1,4 @@
-# 3.4 Bắt đầu với gRPC
+# 3.4 Làm quen với gRPC
 
 <div align="center">
 	<img src="../images/grpc.png" width="800">
@@ -21,7 +21,7 @@ Kiến trúc gRPC trong Go:
 </div>
 <br/>
 
-Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đây là phần cài đặt của giao thức HTTP/2. Thư viện gRPC core cho Golang được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
+Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đấy là phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Go được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
 ## 3.4.2 Làm quen với gRPC
 
@@ -116,7 +116,7 @@ func main() {
 }
 ```
 
-Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: gRPC không hỗ trợ các gọi asynchronous. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
+Có một sự khác biệt giữa gRPC và framework RPC của thư viện chuẩn: gRPC không hỗ trợ gọi asynchronous. Tuy nhiên, ta có thể chia sẻ  kết nối HTTP/2 trên nhiều Goroutines, vì vậy có thể mô phỏng các lời gọi bất đồng bộ bằng cách block các lời gọi trong Goroutine khác.
 
 ## 3.4.3 gRPC streaming
 
@@ -271,10 +271,10 @@ func main() {
     // xây dựng một đối tượng để publish
     p := pubsub.NewPublisher(100*time.Millisecond, 10)
 
-    // subscribe các topic "golang"
-    golang := p.SubscribeTopic(func(v interface{}) bool {
+    // subscribe các topic "go"
+    go := p.SubscribeTopic(func(v interface{}) bool {
         if key, ok := v.(string); ok {
-            if strings.HasPrefix(key, "golang:") {
+            if strings.HasPrefix(key, "go:") {
                 return true
             }
         }
@@ -292,12 +292,12 @@ func main() {
     })
 
     go p.Publish("hi")
-    go p.Publish("golang: https://golang.org")
+    go p.Publish("go: https://go.org")
     go p.Publish("docker: https://www.docker.com/")
     time.Sleep(1)
 
     go func() {
-        fmt.Println("golang topic:", <-golang)
+        fmt.Println("go topic:", <-go)
     }()
     go func() {
         fmt.Println("docker topic:", <-docker)
@@ -400,7 +400,7 @@ func main() {
     client := NewPubsubServiceClient(conn)
 
     _, err = client.Publish(
-        context.Background(), &String{Value: "golang: hello Go"},
+        context.Background(), &String{Value: "go: hello Go"},
     )
     if err != nil {
         log.Fatal(err)
@@ -428,7 +428,7 @@ func main() {
 
     client := NewPubsubServiceClient(conn)
     stream, err := client.Subscribe(
-        context.Background(), &String{Value: "golang:"},
+        context.Background(), &String{Value: "go:"},
     )
     if err != nil {
         log.Fatal(err)
