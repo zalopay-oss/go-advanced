@@ -1,6 +1,6 @@
 # 4.6 Service Flow Limit
 
-Một chương trình máy tính có thể mắc phải một số các vấn đề bottleneck (tắt nghẽn):
+Một chương trình máy tính có thể mắc phải một số các vấn đề bottleneck (tắc nghẽn):
 
 - Bottleneck do CPU tính toán.
 - Bottleneck do băng thông mạng.
@@ -95,12 +95,12 @@ Kết quả của thử nghiệm là khoảng 70.000 QPS và thời gian phản 
 
 Chương trình của chúng ta chưa có chứa logic nghiệp vụ nên có thể dễ dàng đánh giá được QPS như thế, trên thực tế khi gặp một mô-đun có số lượng logic nghiệp vụ lớn và số lượng code lớn, thì vấn đề bottleneck có thể phải trả qua nhiều lần stress test mới có thể phát hiện ra.
 
-Một số hệ thống thường bị bottleneck do mạng, chẳng hạn như dịch vụ CDN và dịch vụ Proxy. Một số là do CPU/GPU, như các dịch vụ xác minh đăng nhập và dịch vụ xử lý hình ảnh. Số khác do truy cập vào disk bị tắt nghẽn như hệ thống lưu trữ, cơ sở dữ liệu. Các nút thắt chương trình khác nhau được phản ánh ở những nơi khác nhau và các dịch vụ đơn chức năng được đề cập ở trên tương đối dễ phân tích. Nếu bạn 
+Một số hệ thống thường bị bottleneck do mạng, chẳng hạn như dịch vụ CDN và dịch vụ Proxy. Một số là do CPU/GPU, như các dịch vụ xác minh đăng nhập và dịch vụ xử lý hình ảnh. Số khác do truy cập vào disk bị tắc nghẽn như hệ thống lưu trữ, cơ sở dữ liệu. Các nút thắt chương trình khác nhau được phản ánh ở những nơi khác nhau và các dịch vụ đơn chức năng được đề cập ở trên tương đối dễ phân tích.
 
 <div align="center">
 	<img src="../images/bottleneck.gif" width="400">
 	<br/>
-	<span align="center"><i>3 nơi có khả năng tắt nghẽn: disk, CPU, NIC</i></span>
+	<span align="center"><i>3 nơi có khả năng tắc nghẽn: disk, CPU, NIC</i></span>
 	<br/>
 	<br/>
 </div>
@@ -293,7 +293,7 @@ cur = cur > cap ? cap : cur
 
 Chúng ta sử dụng chênh lệch thời gian giữa t1, t2 kết hợp với các tham số ti, k1 thì có thể biết được số lượng token trong bucket trước khi lấy ra token. Về mặt lý thuyết là không cần thiết sử dụng hoạt động điền token vào channel ở ví dụ trước. Miễn là  mỗi lần ta đều tính số lượng token trong bucket thì có thể nhận được số lượng token chính xác. Sau khi nhận được số lượng token rồi thì chỉ cần thực hiện những thao tác cần thiết như phép trừ số lượng token. Hãy nhớ sử dụng lock để đảm bảo an toàn với tính concurrency. Thư viện [juju/ratelimit](https://github.com/juju/ratelimit) đang thực hiện theo cách này.
 
-## 4.6.3 Vấn đề tắt nghẽn Service và Quality of Service
+## 4.6.3 Vấn đề tắc nghẽn Service và Quality of Service
 
 Trước đây chúng ta đã nói nhiều về việc bottleneck ở CPU, IO và một số loại khác nữa, vấn đề này có thể phát hiện tương đối nhanh chóng từ hầu hết các công ty có monitoring, nếu hệ thống gặp vấn đề về hiệu suất thì quan sát biểu đồ monitor về response là phương án nhanh nhất để phát hiện nguyên nhân.
 
