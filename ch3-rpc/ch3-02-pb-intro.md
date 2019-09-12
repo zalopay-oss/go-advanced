@@ -74,7 +74,7 @@ func (m *String) GetValue() string {
 //...
 ```
 
-Ở phần [3.1](./) chúng ta đã xây dựng một RPC HelloService đơn giản dựa trên thư viện chuẩn [net/rpc](https://godoc.org/net/rpc) có kiểu dữ liệu request, reply do người dùng tự định nghĩa, bây giờ dựa trên kiểu String mới được sinh ra từ Protobuf, chúng ta có thể viết lại RPC HelloService như sau:
+Ở phần [3.1](./ch3-01-rpc-go.md) chúng ta đã xây dựng một RPC HelloService đơn giản dựa trên thư viện chuẩn [net/rpc](https://godoc.org/net/rpc) có kiểu dữ liệu request, reply do người dùng tự định nghĩa, bây giờ dựa trên kiểu String mới được sinh ra từ Protobuf, chúng ta có thể viết lại RPC HelloService như sau:
 
 ***hello.go:***
 

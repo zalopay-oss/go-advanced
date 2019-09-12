@@ -241,7 +241,7 @@ for {
 }
 ```
 
-Bạn có thể xem code cụ thể tại [đây](../examples/ch3/ch3.4/3-grpc-flow/server/main.go)
+Bạn có thể xem code cụ thể tại [đây](../examples/ch3/ch3.3/3-grpc-flow)
 
 ## 3.3.4 Mô hình Publishing - Subscription
 
@@ -414,7 +414,7 @@ func main() {
 }
 ```
 
-Chi tiết: [clientpub](../examples/ch3/ch3.4/4-pubsub/clientpub/main.go).
+Chi tiết: [clientpub](../examples/ch3/ch3.3/4-pubsub/clientpub).
 
 Sau đó có thể subscribe thông tin đó từ một client khác:
 
@@ -448,6 +448,6 @@ func main() {
 }
 ```
 
-Chi tiết: [clientsub](../examples/ch3/ch3.4/4-pubsub/clientsub/main.go).
+Chi tiết: [clientsub](../examples/ch3/ch3.3/4-pubsub/clientsub).
 
 Cho đến giờ chúng ta đã xây dựng được service publishing và subscription khác mạng dựa trên gRPC. Trong phần kế tiếp chúng ta sẽ xét một số ứng dụng nâng cao hơn của Go trong gRPC.
