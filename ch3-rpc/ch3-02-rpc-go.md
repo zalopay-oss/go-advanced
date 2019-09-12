@@ -1,8 +1,117 @@
-# 3.2 Một số ví dụ dùng RPC
+# 3.1. Giới thiệu về RPC
 
-Trong phần này, chúng ta sẽ sử dụng [package RPC](https://golang.org/pkg/net/rpc/) tích hợp sẵn trong Go để xây dựng một số ứng dụng.
+[Remote Procedure Call](https://en.wikipedia.org/wiki/Remote_procedure_call) (RPC) là phương pháp gọi hàm từ một máy tính ở xa để lấy về kết quả. Trong lịch sử phát triển của Internet, RPC đã trở thành một cơ sở hạ tầng không thể thiếu cũng giống như là IPC (Inter Process Communication).
 
-## 3.2.1 Hàm giám sát bằng RPC
+<div align="center">
+	<img src="../images/ch3-1-operating-system-remote-call-procedure-working.png" width="400">
+    <br/>
+    <span align="center">
+		<i>Mô hình giao tiếp client/server trong RPC</i>
+	</span>
+</div>
+
+
+## 3.1.1 Chương trình RPC đầu tiên
+
+Chương trình RPC đầu tiên được xây dựng dựa trên package [net/rpc](https://golang.org/pkg/net/rpc/) sẽ in ra chuỗi "Hello World" được tạo ra và trả về từ process khác:
+
+
+***server/main.go:*** chương trình phía server.
+
+```go
+package main
+
+import (
+    "log"
+    "net"
+    "net/rpc"
+)
+
+// định nghĩa service struct 
+type HelloService struct{}
+
+// định nghĩa hàm service Hello, quy tắc:
+// 1. Hàm service phải public (viết hoa)
+// 2. Có hai tham số trong hàm
+// 3. Tham số thứ hai phải kiểu con trỏ
+// 4. Phải trả về kiểu error
+
+func (p *HelloService) Hello(request string, reply *string) error {
+    *reply = "Hello " + request
+    // trả về error = nil nếu thành công
+    return nil
+}
+
+func main() {
+    rpc.RegisterName("HelloService", new(HelloService))
+    // chạy rpc server trên port 1234
+    listener, err := net.Listen("tcp", ":1234")
+    // nếu có lỗi thì in ra
+    if err != nil {
+        log.Fatal("ListenTCP error:", err)
+    }
+    // vòng lặp để phục vụ nhiều client
+    for {
+        // accept một connection đến
+        conn, err := listener.Accept()
+        // in ra lỗi nếu có
+        if err != nil {
+            log.Fatal("Accept error:", err)
+        }
+        // phục vụ client trên một goroutine khác
+        // để giải phóng main thread tiếp tục vòng lặp
+        go rpc.ServeConn(conn)
+    }
+}
+```
+
+
+***client/main.go:*** chương trình phía client.
+
+```go
+package main
+
+import (
+    "fmt"
+    "log"
+    "net/rpc"
+)
+
+func main() {
+    // kết nối đến rpc server
+    client, err := rpc.Dial("tcp", "localhost:1234")
+    // in ra lỗi nếu có
+    if err != nil {
+        log.Fatal("dialing:", err)
+    }
+    // biến chứa giá trị trả về sau lời gọi rpc
+    var reply string
+    // gọi rpc với tên service đã register
+    err = client.Call("HelloService.Hello", "World", &reply)
+    if err != nil {
+        log.Fatal(err)
+    }
+    // in ra kết quả
+    fmt.Println(reply)
+}
+```
+
+Chạy server :
+
+```sh
+$ go run server/main.go
+```
+
+Chạy client :
+
+```sh
+$ go run client/main.go
+Hello World
+```
+
+Qua ví dụ trên, có thể thấy rằng việc dùng RPC trong Go thật sự đơn giản.
+
+## 3.1.2 Hàm giám sát bằng RPC
 
 Ta mong muốn khi hệ thống gặp phải những điều kiện nhất định thì có thể nhận về kết quả thông báo. Ví dụ sau sẽ xây dựng phương thức `Watch` để làm điều đó.
 
@@ -145,7 +254,7 @@ watch: abc
 
 Server sẽ trả về key đã thay đổi (thông qua phương thức `Watch`) cho client. Bằng cách này chúng ta có thể giám sát việc thay đổi trạng thái của key từ phía người gọi.
 
-## 3.2.2 Reverse RPC
+## 3.1.3 Reverse RPC
 
 RPC thông thường chỉ do client gọi tới, server mới gửi lại phản hồi. Nhưng có một số trường hợp đặc biệt mà ta muốn server đóng vai trò người gọi (caller) để gọi cho client khi cần thiết. Mô hình này tương tự với reverse proxy:  trong mạng nội bộ các service của chúng ta gọi nhau bằng RPC và không cho phép bên ngoài gọi trực tiếp vào đây. Khi đó cần một server đứng trung gian gọi tới các service trong nội bộ và gửi lại phản hồi cho các yêu cầu từ client bên ngoài.
 
@@ -241,7 +350,7 @@ func doClientWork(clientChan <-chan *rpc.Client) {
 }
 ```
 
-## 3.2.4 RPC theo ngữ cảnh
+## 3.1.4 RPC theo ngữ cảnh
 
 Dựa trên ngữ cảnh chúng ta có thể cung cấp những RPC service thích hợp cho những client khác nhau. Trong ví dụ sau ta chỉ cung cấp service Hello cho những user đã Login xong. Quá trình xây dựng như sau.
 
