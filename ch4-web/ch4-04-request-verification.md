@@ -361,8 +361,6 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
         next.ServeHTTP(w, r)
     });
 }
-
-// github: https://github.com/thoainguyen/go-hackercamp/tree/master/go-contacts
 ```
 
 [Tiếp theo](ch4-05-database.md)
