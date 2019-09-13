@@ -90,7 +90,7 @@ func (p *HelloService) Hello(request *String, reply *String) error {
 }
 ```
 
-Đoạn mã nguồn trên tuân theo một khuôn mẫu hàm nhất định, ý tưởng ở đây là trực tiếp sinh ra chúng dựa vào định nghĩa service trong Protobuf như sau:
+Chúng ta vẫn phải tự xây dựng hàm **Hello(request, reply)** bằng cách tự viết. Khi sử dụng Protobuf chúng ta có thể tự định nghĩa luôn service mình có những hàm rpc nào, nhận vào request và trả về reply ra sao. Chúng ta định nghĩa HelloService trong file proto như sau:
 
 ***hello.proto***
 
@@ -103,7 +103,7 @@ service HelloService {
 }
 ```
 
-Chúng ta cần có một plugin để sinh ra mã nguồn service tương ứng với định nghĩa ở trên, phần dưới sẽ trình bày cách xây dựng plugin này dựa trên mã nguồn gRPC plugin, chi tiết về gRPC chúng tôi sẽ đề cập ở các phần sau.
+Chúng ta cần có một plugin để sinh ra mã nguồn service tương ứng với định nghĩa ở trên. Hiện nay Google đã phát triển bộ [gRPC plugin](https://github.com/golang/protobuf/blob/master/protoc-gen-go/grpc/grpc.go) giúp tạo ra mã nguồn tương ứng với file proto. Ở phần dưới sẽ trình bày cách xây dựng một plugin dựa trên mã nguồn gRPC plugin, chi tiết về gRPC chúng tôi sẽ đề cập ở các phần sau.
 
 ## 3.2.2 Viết plugin sinh mã nguồn RPC service
 
