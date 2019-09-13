@@ -14,3 +14,10 @@
 Ngôn ngữ Go được biết đến như là ngôn ngữ C của thời đại Internet. Ngày nay, hệ thống Internet không phải là thời đại khi các hệ thống trước đó đã làm mọi thứ rồi. Các dịch vụ trong kỷ nguyên Internet đã và đang sử dụng một số lượng lớn các hệ thống phân tán. Đồng thời, sự trỗi dậy của các nhà cung cấp dịch vụ đám mây như Alibaba Cloud và Tencent Cloud đã đánh dấu sự xuất hiện của kỷ nguyên đám mây. Lập trình phân tán (distributed programming) trong kỷ nguyên đám mây sẽ trở thành một kỹ năng cơ bản. Các hệ thống Docker và K8s được xây dựng trên ngôn ngữ Go đã thúc đẩy sự xuất hiện sớm của kỷ nguyên đám mây này.
 
 Ở chương này đối với các hệ thống phân tán đã được phát triển tốt, chúng tôi sẽ trình bày ngắn gọn về cách sử dụng chúng để cải thiện hiệu quả công việc. Đối với các hệ thống không có giải pháp sẵn có, chúng tôi sẽ đề xuất một giải pháp dựa trên các nhu cầu kinh doanh.
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="../ch4-web/ch4-08-ext.md">&lt Phần 4.8</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-01-dist-id.md">Phần 5.1 &gt</a> </span>
+</div>

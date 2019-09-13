@@ -313,4 +313,8 @@ Về cơ bản, khi lập trình thì các `producer` và `consumer` là giống
 
 Việc sử dụng hệ thống cấu hình đã được đề cập trong phần [cấu hình phân tán](./ch5-06-config.md) nên các bạn có thể tự mình dùng thử nó.
 
-[Tiếp theo](ch5-08-ext.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch5-06-config.md">&lt Phần 5.6</a> </span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-08-ext.md">Phần 5.8 &gt</a> </span>
+</div>
