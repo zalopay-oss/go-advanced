@@ -19,3 +19,10 @@ Tài liệu này được là một trong những quyển sách nâng cao về G
 - Bạn cũng có thể đọc hướng dẫn ["Ngôn ngữ lập trình Go"](http://www.gopl.io/) được xuất bản bởi team Golang chính thức . ["Ngôn ngữ lập trình Go"](http://www.gopl.io/)  được gọi là *Kinh thánh* Golang trong cộng đồng Golang mà bạn phải đọc thật bài bản.
 
 Trong khi học, hãy cố gắng giải quyết một số vấn đề nhỏ với Golang. Nếu bạn muốn tham khảo API, có thể mở truy vấn tài liệu tích hợp bằng lệnh `godoc`.
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="#">&lt Mở đầu</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch1-01-genesis.md">Phần 1.1 &gt</a> </span>
+</div>

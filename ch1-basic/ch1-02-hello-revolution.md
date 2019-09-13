@@ -360,4 +360,10 @@ func main() {
 
 Lúc này, Go cuối cùng đã hoàn thành việc chuyển đổi từ ngôn ngữ C của kỷ nguyên đơn lõi sang một ngôn ngữ lập trình đa dụng của môi trường đa lõi trong kỷ nguyên Internet thế kỷ 21.
 
-[Tiếp theo](ch1-03-array-string-and-slice.md)
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./ch1-01-genesis.md">&lt Phần 1.1</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch1-03-array-string-and-slice.md">Phần 1.3 &gt</a> </span>
+</div>

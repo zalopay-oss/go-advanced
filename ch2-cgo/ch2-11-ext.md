@@ -5,3 +5,11 @@ Thông qua CGO, bạn có thể kế thừa những phần mềm viết bằng C
 Bây giờ, các phần mềm chính thống thường được viết bởi ngôn ngữ C/C++. Sẽ rất nặng nề để có thể thay thế tòan bộ chúng bằng Go, do đó việc học cách chuyển đổi C/C++ sang Go bằng CGO là rất đáng cho dù bạn có là một nhà lập trình viên Go chuyên nghiệp.
 
 [Tiếp theo](../ch3-rpc/ch3-01-rpc-intro.md)
+
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./ch2-10-link.md">&lt Phần 2.10</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="../ch3-rpc/README.md">Chương 3 &gt</a> </span>
+</div>
