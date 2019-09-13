@@ -1,4 +1,4 @@
-# 4.6 Service Flow Limit
+# 4.6 Giới hạn lưu lượng Service
 
 Một chương trình máy tính có thể mắc phải một số các vấn đề bottleneck (tắc nghẽn):
 
