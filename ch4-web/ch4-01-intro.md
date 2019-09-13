@@ -1,6 +1,6 @@
 # 4.1. Giới thiệu về chương trình Web
 
-Trong lập trình web, đối với các trang web nhỏ và đơn giản (như blog, portfolio, ...) ta sẽ sử dụng [template](https://gowebexamples.com/templates/), đối với các trang web phức tạp và phát triển về lâu dài ta sẽ cần chia thành front end, back end riêng biệt để tiện cho các team làm việc độc lập.
+Trong lập trình web, đối với các trang web nhỏ và đơn giản (như blog, portfolio, ...) ta sẽ sử dụng [template](https://gowebexamples.com/templates/), đối với các trang web phức tạp và phát triển về lâu dài ta sẽ cần chia thành front end, back end riêng biệt để tiện cho các team làm việc độc lập và dễ dàng phát triển mở rộng.
 
 Ngày nay có rất nhiều công nghệ hỗ trợ cho phát triển front end, mà nổi bật là Vue, React. Front end server được build để xử lý việc hiển thị giao diện còn các xử lý logic liên quan tới database nó sẽ phải gọi xuống api ở back end.
 
