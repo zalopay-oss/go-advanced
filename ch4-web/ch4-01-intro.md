@@ -1,10 +1,10 @@
-# 4.1. Giới thiệu về Web
+# 4.1. Giới thiệu về chương trình Web
 
-Trong lập trình web, đối với các trang web nhỏ và đơn giản (như blog, portfolio, ...) ta sẽ sử dụng template, đối với các trang web phức tạp và phát triển về lâu dài ta sẽ cần chia thành front end, back end riêng biệt để tiện cho các team làm việc độc lập.
+Trong lập trình web, đối với các trang web nhỏ và đơn giản (như blog, portfolio, ...) ta sẽ sử dụng [template](https://gowebexamples.com/templates/), đối với các trang web phức tạp và phát triển về lâu dài ta sẽ cần chia thành front end, back end riêng biệt để tiện cho các team làm việc độc lập.
 
-Ngày nay có rất nhiều công nghệ hỗ trợ cho phát triển front end, mà nổi bật là Vue, React. Front end server được build để xử lý việc hiển thị giao diện còn các xử lý logic liên quan tới database nó sẽ phải gọi xuống api ở Back end.
+Ngày nay có rất nhiều công nghệ hỗ trợ cho phát triển front end, mà nổi bật là Vue, React. Front end server được build để xử lý việc hiển thị giao diện còn các xử lý logic liên quan tới database nó sẽ phải gọi xuống api ở back end.
 
-Back end cũng có thể chia thành nhiều service nhỏ (để scale được) và cung cấp các api viết bằng gRPC hoặc RESTful, tất cả có thể viết bằng nhiều ngôn ngữ như Java, C#, JS, PHP, Python, Rust, ... nhưng ở đây chúng ta sẽ tìm hiểu về Go.
+Back end cũng có thể chia thành nhiều service nhỏ (để scale được) và cung cấp các api viết bằng gRPC hoặc RESTful, tất cả có thể viết bằng nhiều ngôn ngữ như Java, C#, JS, PHP, Python, Rust,... nhưng ở đây chúng ta sẽ tìm hiểu về Go.
 
 Phần này sẽ đề cập về cách xây dựng một chương trình web đơn giản bằng thư viện chuẩn của Go, sau đó giới thiệu các framework web trong cộng đồng Open source.
 
@@ -76,14 +76,4 @@ GET     /card/:id/name
 GET     /card/:id/relations
 ```
 
-Có thể thấy rằng, cùng là đường dẫn có chứa `/card/:id`, nhưng có phương thức khác nhau hoặc nhánh con khác nhau sẽ dẫn đến logic xử lý khác nhau, cách xử lý những đường dẫn trùng tên như vậy thường sẽ phức tạp. Khi đó chúng ta có thể nghĩ đến việc sử dụng một số framework routing bên ngoài từ cộng đồng Open source.
-
-Framework web của Go có thể được chia thành hai loại sau:
-
-1. Router framework ([HttpRouter](https://github.com/julienschmidt/httprouter), [Gin](https://github.com/gin-gonic/gin), [Gorilla](https://github.com/gorilla/mux),...)
-
-2. MVC class framework ([Revel](https://github.com/revel/revel), [Beego](https://github.com/astaxie/beego), [Iris](https://github.com/kataras/iris),...)
-
-Chúng ta có thể xem thống kê các framwork web phổ biến được dùng trong cộng đồng Golang [ở đây](https://github.com/mingrammer/go-web-framework-stars/blob/master/README.md).
-
-[Tiếp theo](ch4-02-router.md)
+Có thể thấy rằng, cùng là đường dẫn có chứa `/card/:id`, nhưng có phương thức khác nhau hoặc nhánh con khác nhau sẽ dẫn đến logic xử lý khác nhau, cách xử lý những đường dẫn trùng tên như vậy thường sẽ phức tạp. Khi đó chúng ta có thể nghĩ đến việc sử dụng một số framework routing bên ngoài từ cộng đồng Open source như [HttpRouter](https://github.com/julienschmidt/httprouter), [Gin](https://github.com/gin-gonic/gin), [Gorilla](https://github.com/gorilla/mux), [Revel](https://github.com/revel/revel), [Beego](https://github.com/astaxie/beego), [Iris](https://github.com/kataras/iris),...

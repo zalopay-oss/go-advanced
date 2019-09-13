@@ -1,4 +1,4 @@
-# Chương 4: Remote Procedure Call
+# Chương 3: Remote Procedure Call
 
 <div align="center">
 	<img src="../images/ch4.png">
