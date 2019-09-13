@@ -368,4 +368,8 @@ Nếu độ tin cậy của dữ liệu lock là rất cao, thì chỉ có khóa
 
 `Lưu ý:` sẽ không có cách nào để cải thiện hiệu suất của cụm etcd và Zookeeper bằng cách thêm các node. Để mở rộng quy mô theo chiều ngang, bạn chỉ có thể tăng số lượng cụm để hỗ trợ nhiều yêu cầu hơn. Điều này sẽ tăng thêm các chi phí vận hành, bảo trì và giám sát. Nhiều cụm có thể cần phải thêm proxy. Nếu không có proxy, dịch vụ cần được phân phối theo một ID nhất định. Nếu dịch vụ đã được mở rộng, bạn cũng nên xem xét việc di chuyển dữ liệu động. Đây không phải là điều dễ dàng.
 
-[Tiếp theo](ch5-03-delay-job.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch5-01-dist-id.md">&lt Phần 5.1</a> </span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-03-delay-job.md">Phần 5.3 &gt</a> </span>
+</div>
