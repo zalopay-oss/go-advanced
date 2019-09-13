@@ -199,3 +199,10 @@ func (r *Router) Add(route string, h http.Handler) {
     r.mux[route] = mergedHandler
 }
 ```
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch4-02-router.md">&lt Phần 4.2</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch4-04-request-verification.md">Phần 4.4 &gt</a> </span>
+</div>

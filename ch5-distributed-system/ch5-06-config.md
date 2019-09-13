@@ -192,4 +192,8 @@ Hãy xem xét kỹ vấn đề thống nhất dữ liệu khi thêm cache. Các 
 
 Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng cách đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thiệt hại quá nhiều khi vấn đề xảy ra.
 
-[Tiếp theo](ch5-07-crawler.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch5-05-load-balance.md">&lt Phần 5.5</a> </span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-07-crawler.md">Phần 5.7 &gt</a> </span>
+</div>

@@ -388,3 +388,10 @@ func (p *{{$root.ServiceName}}Client) {{$m.MethodName}}(
 ```
 
 Khi plugin mới của protoc được hoàn thành, mã nguồn có thể được sinh ra mỗi khi RPC service thay đổi trong `hello.proto` file. Chúng ta có thể điều chỉnh hoặc thêm nội dung của mã nguồn được sinh ra bằng việc cập nhật template plugin.
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch3-01-rpc-go.md">&lt Phần 3.1</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch3-03-grpc.md">Phần 3.3 &gt</a> </span>
+</div>
