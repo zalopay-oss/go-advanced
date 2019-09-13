@@ -9,7 +9,7 @@ Một chương trình máy tính có thể mắc phải một số các vấn đ
 Phần quan trọng nhất của một hệ thống Web là mạng. Cho dù đó là tiếp nhận, phân tích request của người dùng, truy cập bộ nhớ hay trả về dữ liệu response đều cần phải truy cập trực tuyến. Trước khi xuất hiện IO multiplexing interface `epoll/kqueue` do hệ thống cung cấp thì  từng có một sự cố [C10k](http://www.kegel.com/c10k.html) trong máy tính đa lõi.
 
 <div align="center">
-	<img src="../images/c10k.png" width="400" >
+	<img src="../images/c10k.png" width="500" >
 	<br/>
 	<span align="center"><i>Vấn đề C10k xảy ra khi số lượng client giữ kết nối vượt 10000</i></span>
 	<br/>

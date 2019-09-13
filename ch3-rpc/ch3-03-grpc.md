@@ -21,7 +21,7 @@ Kiến trúc gRPC trong Go:
 </div>
 <br/>
 
-Lớp dưới cùng là giao thức TCP hoặc Unix Socket. Ngay trên đấy là phần hiện thực của giao thức HTTP/2. Thư viện gRPC core cho Go được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
+Lớp dưới cùng là giao thức TCP hoặc [Unix Socket](https://en.wikipedia.org/wiki/Unix_domain_socket). Ngay trên đấy là phần hiện thực của giao thức [HTTP/2](https://en.wikipedia.org/wiki/HTTP/2). Thư viện gRPC core cho Go được xây dựng ở lớp kế. Stub code được tạo ra bởi chương trình thông qua plug-in gRPC giao tiếp với thư viện gRPC core.
 
 ## 3.3.2 Làm quen với gRPC
 
@@ -63,7 +63,7 @@ type HelloServiceClient interface {
 
 gRPC cung cấp hỗ trợ context cho mỗi lệnh gọi phương thức thông qua tham số `context.Context`. Khi client gọi phương thức, nó có thể cung cấp thông tin context bổ sung thông qua các tham số tùy chọn của kiểu `grpc.CallOption`.
 
-`HelloSercieServer` interface dựa trên server có thể reimplement service `HelloService`:
+Chúng ta sử dụng struct `HelloServiceImpl` để thực hiện service `HelloService` dựa trên interface `HelloSercieServer`:
 
 ```go
 type HelloServiceImpl struct{}
@@ -249,7 +249,7 @@ Trong phần trước chúng ta đã xây dựng phiên bản đơn giản của
 
 <div align="center">
 
-<img src="../images/pubsub.png" width="400">
+<img src="../images/pubsub.png" width="600">
 <br/>
 <span align="center"><i>Nhắc lại mô hình Pub/Sub</i></span>
     <br/>
