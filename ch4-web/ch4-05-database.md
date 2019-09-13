@@ -182,6 +182,13 @@ Nói một cách dễ hiểu, SQL Builder là một cách biểu diễn ngôn ng
 
 ## 4.5.4 Sử dụng connection pool để tăng hiệu suất
 
+<div align="center">
+	<img src="../images/connection-pool.png" width="600">
+	<br/>
+	<span align="center"><i>Minh hoạ Connection Pool </i></span>
+	<br/>	<br/>
+</div>
+
 Một trong những kĩ thuật quan trọng khi làm việc với database là sử dụng **connection pool**. Một connection xem như là một bộ đệm duy trì các kết nối tới database. Một connection pool là tập hợp nhiều connection tới database.
 
 Cơ chế hoạt động của connection pool khá đơn giản, khi một connection được tạo thì conneciton đó sẽ được đưa vào pool và được sử dụng lại cho các yêu cầu kết nối tiếp theo cho đến khi bị đóng hoặc hết thời gian chờ (timeout). Khi người dùng gửi yêu cầu gửi đến hệ thống, hệ thống sẽ kiểm tra xem trong pool có connection nào chưa đươc sử dụng không. Có hai trường hợp xảy ra:
