@@ -520,4 +520,9 @@ Bằng cách này, chúng ta có thể xây dựng một đối tượng `Int` b
 
 Do đó, phương thức C++ cũng có thể được sử dụng cho các kiểu không phải class. C++ cho các hàm thành phần thông thường cũng có thể được liên kết với các kiểu. Chỉ có các phương thức ảo thuần túy được ràng buộc với đối tượng và đó là interface.
 
-[Tiếp theo](ch2-09-static-shared-lib.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./ch2-07-cgo-mem.md">&lt Phần 2.7</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch2-09-static-shared-lib.md">Phần 2.9 &gt</a> </span>
+</div>

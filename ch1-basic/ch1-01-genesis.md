@@ -91,4 +91,10 @@ $ go build
 $ ./hello
 Hello World
 ```
-[Tiếp theo](ch1-02-hello-revolution.md)
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./README.md">&lt Chương 1</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch1-02-hello-revolution.md">Phần 1.2 &gt</a> </span>
+</div>
