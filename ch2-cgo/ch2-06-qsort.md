@@ -356,4 +356,9 @@ func main() {
 
 Để tránh thông tin ngữ cảnh của mảng được sắp xếp là `go_qsort_compare_info` bị sửa đổi trong quá trình sắp xếp, chúng tôi đã thực hiện lock global. Do đó, phiên bản hiện tại của hàm `qsort.Slice` không thể được thực thi đồng thời. Bạn đọc có thể thử cải tiến giới hạn này.
 
-[Tiếp theo](ch2-07-cgo-mem.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./ch2-05-internal-mechanisms.md">&lt Phần 2.5</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch2-07-cgo-mem.md">Phần 2.7 &gt</a> </span>
+</div>

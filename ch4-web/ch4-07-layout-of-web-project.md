@@ -56,3 +56,4 @@ Việc phân chia thành các lớp khác nhau giúp cho chúng ta dễ dàng ph
 </div>
 
 Bên cạnh các yêu cầu business logic, hệ thống web còn phải hiện thực phần non-business logic như xác thực token, gửi số liệu báo cáo, kiểm tra tín hợp lệ yêu cầu, ... để tách riêng hai phần này, các lớp middleware được thêm vào.
+

@@ -273,4 +273,9 @@ func SayHello(s string) {
 
 Có vẻ như tất cả đều được viết bằng Go, nhưng việc triển khai từ hàm `main()` của ngôn ngữ Go đến phiên bản ngôn ngữ C đã tự động tạo ra hàm `SayHello`, rồi cuối cùng trở lại môi trường ngôn ngữ Go.
 
-[Tiếp theo](ch2-01-quick-start.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./README.md">&lt Mở đầu</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch2-02-cgo-foundation.md">Phần 2.2 &gt</a> </span>
+</div>
