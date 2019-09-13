@@ -245,4 +245,8 @@ func main() {
 // ID: 84989976554504193
 ```
 
-[Tiếp theo](ch5-02-lock.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="README.md">&lt Chương 5</a> </span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-02-lock.md">Phần 5.2 &gt</a> </span>
+</div>
