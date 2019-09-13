@@ -229,4 +229,12 @@ Node gốc bây giờ sẽ bắt đầu từ ký tự `/`, chuỗi truy vấn ph
 		<i>Sau khi chèn tất cả các node</i>
 	</span>
 	<br/>
+	<br/>
+</div>
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch4-01-intro.md">&lt Phần 4.1</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch4-03-middleware.md">Phần 4.3 &gt</a> </span>
 </div>

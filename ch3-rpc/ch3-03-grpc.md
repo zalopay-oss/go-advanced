@@ -451,3 +451,10 @@ func main() {
 Chi tiết: [clientsub](../examples/ch3/ch3.3/4-pubsub/clientsub).
 
 Cho đến giờ chúng ta đã xây dựng được service publishing và subscription khác mạng dựa trên gRPC. Trong phần kế tiếp chúng ta sẽ xét một số ứng dụng nâng cao hơn của Go trong gRPC.
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch3-02-pb-intro.md">&lt Phần 3.2</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch3-04-grpc-expand.md">Phần 3.4 &gt</a> </span>
+</div>

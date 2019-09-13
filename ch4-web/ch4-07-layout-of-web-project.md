@@ -54,5 +54,16 @@ Việc phân chia thành các lớp khác nhau giúp cho chúng ta dễ dàng ph
 		<i>Three layer model</i>
 	</span>
 </div>
+<<<<<<< HEAD
+<br/>
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch4-06-service-flow-limitation.md">&lt Phần 4.6</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch4-08-ext.md">Phần 4.8 &gt</a> </span>
+</div>
+=======
 
 Bên cạnh các yêu cầu business logic, hệ thống web còn phải hiện thực phần non-business logic như xác thực token, gửi số liệu báo cáo, kiểm tra tín hợp lệ yêu cầu, ... để tách riêng hai phần này, các lớp middleware được thêm vào.
+>>>>>>> dev

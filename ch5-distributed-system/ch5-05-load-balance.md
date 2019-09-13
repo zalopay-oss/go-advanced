@@ -186,4 +186,8 @@ map[6:143275 5:143054 3:143584 2:143031 1:141898 0:142631 4:142527]
 
 Kết quả trên phù hợp với kết luận đã đưa ra.
 
-[Tiếp theo](ch5-06-config.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch5-04-search-engine.md">&lt Phần 5.4</a> </span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-06-config.md">Phần 5.6 &gt</a> </span>
+</div>
