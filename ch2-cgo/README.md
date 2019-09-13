@@ -25,3 +25,10 @@ Tuy nhiên ta cũng không nên lạm dụng CGO vì vấn đề hiệu suất, 
 	</span>
 </div>
 <br/>
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="../ch1-basic/ch1-07-error-and-panic.md">&lt Phần 1.7</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch2-01-quick-start.md">Phần 2.1 &gt</a> </span>
+</div>

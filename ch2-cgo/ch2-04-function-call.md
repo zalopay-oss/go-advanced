@@ -174,4 +174,9 @@ void foo() {
 
 Khi export interface của ngôn ngữ C, ta cần đảm bảo rằng các tham số hàm và kiểu giá trị trả về là kiểu "thân thiện" với C (xem lại [2.3](./ch2-03-type-conversion.md)) đồng thời giá trị trả về không được trực tiếp hoặc gián tiếp chứa con trỏ vào không gian bộ nhớ ngôn ngữ Go.
 
-[Tiếp theo](ch2-05-internal-mechanisms.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./ch2-03-type-conversion.md">&lt Phần 2.3</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch2-05-internal-mechanisms.md">Phần 2.5 &gt</a> </span>
+</div>

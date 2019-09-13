@@ -359,4 +359,10 @@ Sau khi tắt `cgocheck` và chạy đoạn code trên, exception  sẽ xuất h
 
 Để biết mô tả chi tiết về các hàm CGO rumtime pointer detection hãy tham khảo tài liệu chính thức của Golang: [package runtime - GoDoc](https://godoc.org/runtime#hdr-Environment_Variables).
 
-[Tiếp theo](ch2-08-c-class.md)
+
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="./ch2-06-qsort.md">&lt Phần 2.6</a>
+</span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
+<span> <a href="./ch2-08-c-class.md">Phần 2.8 &gt</a> </span>
+</div>
