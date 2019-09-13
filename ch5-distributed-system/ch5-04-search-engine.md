@@ -406,4 +406,8 @@ Sau khi tăng khoảng thời gian lên 11 phút thì mọi thứ đã ổn hơn
 
 Mô hình này cũng yêu cầu business tuân thủ một điều kiện của bảng dữ liệu, bảng phải có ID khóa chính là `duy nhất` để đảm bảo rằng dữ liệu chúng ta nhập vào Elaticsearch sẽ không bị trùng lặp. Khi điều kiện này không được tuân theo, nó sẽ dẫn đến sự trùng lặp dữ liệu khi đồng bộ hóa.
 
-[Tiếp theo](ch5-05-load-balance.md)
+<div style="display: flex; justify-content: space-around;">
+<span> <a href="ch5-03-delay-job.md">&lt Phần 5.3</a> </span>
+<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
+<span> <a href="ch5-05-load-balance.md">Phần 5.5 &gt</a> </span>
+</div>
