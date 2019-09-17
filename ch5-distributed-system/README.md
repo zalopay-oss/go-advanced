@@ -17,5 +17,5 @@ Ngôn ngữ Go được biết đến như là ngôn ngữ C của thời đại
 
 ## Liên kết
 * Phần tiếp theo: [Distributed ID generator](./ch5-01-dist-id.md)
-* Phần trước: [Chương 4: Go và Web](../ch4-web/README.md)
+* Phần trước: [Chương 4: Lời nói thêm](../ch4-web/ch4-08-ext.md)
 * [Mục lục](../SUMMARY.md)

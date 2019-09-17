@@ -28,5 +28,5 @@ Tuy nhiên ta cũng không nên lạm dụng CGO vì vấn đề hiệu suất, 
 
 ## Liên kết
 * Phần tiếp theo: [Quick Start](./ch2-01-quick-start.md)
-* Phần trước: [Chương 1](../ch1-basic/README.md)
+* Phần trước: [Chương 1: Lời nói thêm](../ch1-basic/README.md)
 * [Mục lục](../SUMMARY.md)

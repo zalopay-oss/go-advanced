@@ -193,6 +193,6 @@ Hãy xem xét kỹ vấn đề thống nhất dữ liệu khi thêm cache. Các 
 Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng cách đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thiệt hại quá nhiều khi vấn đề xảy ra.
 
 ## Liên kết
-* Phần tiếp theo: [](./)
-* Phần trước: [](./)
+* Phần tiếp theo: [Trình thu thập thông tin phân tán](./ch5-06-crawler.md)
+* Phần trước: [Cân bằng tải](./ch5-04-load-balance.md)
 * [Mục lục](../SUMMARY.md)

@@ -92,17 +92,6 @@ $ ./hello
 Hello World
 ```
 
-<div style="display: flex; justify-content: space-around;">
-	<div>
-		<a href="./README.md">&lt Chương 1</a>
-	</div>
-	<div>
-		<a href="../SUMMARY.md"> Mục lục</a>
-	</div> 
-	<div>
-		<a href="./ch1-02-hello-revolution.md">Phần 1.2 &gt</a>
-	</div>
-</div>
 
 ## Liên kết
 * Phần tiếp theo: [Sự tiến hóa của "Hello World"

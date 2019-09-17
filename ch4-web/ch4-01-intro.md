@@ -80,5 +80,5 @@ Có thể thấy rằng, cùng là đường dẫn có chứa `/card/:id`, nhưn
 
 ## Liên kết
 * Phần tiếp theo: [Routing trong Web](./ch4-02-router.md)
-* Phần trước: [Chương 4: Web](./README.md)
+* Phần trước: [Chương 4: Go và Web](./README.md)
 * [Mục lục](../SUMMARY.md)
