@@ -311,9 +311,7 @@ import (
 
 Các bạn có thể xem chi tiết hơn bài [blog](https://medium.com/zalopay-engineering/hi%E1%BB%83u-s%C3%A2u-v%E1%BB%81-prepared-statement-trong-sql-bc79d85f9b98) này.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch4-04-request-verification.md">&lt Phần 4.4</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch4-06-service-flow-limitation.md">Phần 4.6 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Giới hạn lưu lượng Service](./ch4-06-service-flow-limitation.md)
+* Phần trước: [Kiểm tra tính hợp lệ của request](./ch4-04-request-verification.md)
+* [Mục lục](../SUMMARY.md)

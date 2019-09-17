@@ -78,9 +78,7 @@ GET     /card/:id/relations
 
 Có thể thấy rằng, cùng là đường dẫn có chứa `/card/:id`, nhưng có phương thức khác nhau hoặc nhánh con khác nhau sẽ dẫn đến logic xử lý khác nhau, cách xử lý những đường dẫn trùng tên như vậy thường sẽ phức tạp. Khi đó chúng ta có thể nghĩ đến việc sử dụng một số framework routing bên ngoài từ cộng đồng Open source như [HttpRouter](https://github.com/julienschmidt/httprouter), [Gin](https://github.com/gin-gonic/gin), [Gorilla](https://github.com/gorilla/mux), [Revel](https://github.com/revel/revel), [Beego](https://github.com/astaxie/beego), [Iris](https://github.com/kataras/iris),...
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="README.md">&lt Chương 4</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch4-02-router.md">Phần 4.2 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Routing trong Web](./ch4-02-router.md)
+* Phần trước: [Chương 4: Web](./README.md)
+* [Mục lục](../SUMMARY.md)

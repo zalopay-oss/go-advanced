@@ -363,9 +363,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 }
 ```
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch4-03-middleware.md">&lt Phần 4.3</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch4-05-database.md">Phần 4.5 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Làm việc với Database](./ch4-05-database.md)
+* Phần trước: [Middleware](./ch4-03-middleware.md)
+* [Mục lục](../SUMMARY.md)

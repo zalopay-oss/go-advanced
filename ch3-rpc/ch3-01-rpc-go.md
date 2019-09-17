@@ -349,3 +349,8 @@ func doClientWork(clientChan <-chan *rpc.Client) {
     fmt.Println(reply)
 }
 ```
+
+## Liên kết
+* Phần tiếp theo: [Protobuf](./ch3-02-pb-intro.md)
+* Phần trước: [Chương 2](../ch2-cgo/README.md)
+* [Mục lục](../SUMMARY.md)

@@ -312,9 +312,7 @@ Với những lập trình viên phát triển gRPC Services trên các ngôn ng
 ## 3.5.4 Nginx
 Những phiên bản [Nginx](https://www.nginx.com/) về sau cũng đã hỗ trợ `gRPC` với khả năng register nhiều gRPC service instance giúp load balancing (cân bằng tải) dễ dàng hơn. Những extension của Nginx về gRPC là một chủ đề lớn, ở đây chúng tôi không trình bày hết được, các bạn có thể tham khảo các tài liệu trên trang chủ của Nginx như [ở đây](https://www.nginx.com/blog/nginx-1-13-10-grpc/).
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch3-04-grpc-expand.md">&lt Phần 3.4</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch3-06-grpc-curl.md">Phần 3.6 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Công cụ grpcurl](./ch3-06-grpc-curl.md)
+* Phần trước: [Một số vấn đề khác của gRPC](./ch3-04-grpc-expand.md)
+* [Mục lục](../SUMMARY.md)

@@ -13,9 +13,7 @@
 
 Ngành công nghiệp phần mềm hiện đại không thể tách khỏi Web. Cho dù mục tiêu là trở thành một kỹ sư phần mềm, hay một nhà tư vấn về kỹ thuật thì kiến thức về Web nên là một trong những kiến thức nền tảng mà ta cần phải biết đến.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="../ch3-rpc/ch3-07-ext.md">&lt Phần 3.7</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch4-01-intro.md">Phần 4.1 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Giới thiệu về chương trình Web](./ch4-01-intro.md)
+* Phần trước: [Chương 3: Remote Procedure Call](../ch3-rpc/README.md)
+* [Mục lục](../SUMMARY.md)
