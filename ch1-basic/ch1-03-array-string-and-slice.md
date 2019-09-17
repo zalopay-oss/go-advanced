@@ -477,9 +477,9 @@ a[len(a)-1] = nil
 a = a[:len(a)-1]
 ```
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="./ch1-02-hello-revolution.md">&lt Phần 1.2</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="./ch1-04-func-method-interface.md">Phần 1.4 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Functions, Methods và Interfaces
+](./ch1-04-func-method-interface.md)
+* Phần trước: [Sự tiến hóa của "Hello World"
+](./ch1-02-hello-revolution.md)
+* [Mục lục](../SUMMARY.md)

@@ -44,9 +44,7 @@ Sẽ có một số lý do cho việc hỏng chuỗi get, đây là một số l
 * Phụ thuộc vào `custom pkg-config`: yêu cầu một số thiết lập thêm.
 * Phụ thuộc vào `swig`: user chưa cài đặt `swig`, hoặc phiên bản không tương thích.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="./ch2-09-static-shared-lib.md">&lt Phần 2.9</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="./ch2-11-ext.md">Phần 2.11 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Lời nói thêm](./ch2-11-ext.md)
+* Phần trước: [Thư viện tĩnh và động](./ch2-09-static-shared-lib.md)
+* [Mục lục](../SUMMARY.md)

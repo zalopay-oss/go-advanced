@@ -432,9 +432,8 @@ func main {
 
 Nhưng làm như vậy sẽ đi ngược lại với triết lý lập trình đơn giản và dễ hiểu của Go.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="./ch1-06-common-concurrency-mode.md">&lt Phần 1.6</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="../ch2-cgo/README.md">Chương 2 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Chương 2](../ch2-cgo/README.md)
+* Phần trước: [Mô hình thực thi đồng thời
+](./ch1-06-common-concurrency-mode.md)
+* [Mục lục](../SUMMARY.md)

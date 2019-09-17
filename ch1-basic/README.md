@@ -20,9 +20,8 @@ Tài liệu này được là một trong những quyển sách nâng cao về G
 
 Trong khi học, hãy cố gắng giải quyết một số vấn đề nhỏ với Golang. Nếu bạn muốn tham khảo API, có thể mở truy vấn tài liệu tích hợp bằng lệnh `godoc`.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="#">&lt Mở đầu</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="./ch1-01-genesis.md">Phần 1.1 &gt</a> </span>
-</div>
+
+## Liên kết
+* Phần tiếp theo: [Nguồn gốc của ngôn ngữ Go](./ch1-01-genesis.md)
+* Phần trước: [Lời giới thiệu](../README.md)
+* [Mục lục](../SUMMARY.md)
