@@ -1,4 +1,4 @@
-# 5.7 Trình thu thập thông tin phân tán
+# 5.6 Trình thu thập thông tin phân tán
 
 Sự bùng nổ thông tin trong kỷ nguyên Internet là một vấn đề khiến nhiều người cảm thấy đau đầu. Vô số tin tức, thông tin và video đang xâm chiếm dần thời gian của chúng ta. Mặt khác, khi chúng ta thực sự cần dữ liệu, chúng ta cảm thấy rằng dữ liệu không dễ dàng gì có được. Ví dụ: chúng ta muốn biết về những gì mọi người đang thảo luận và quan tâm. Nhưng chúng ta không có thời gian để đọc từng diễn dàn được yêu thích, lúc này chúng ta muốn sử dụng công nghệ để đưa những thông tin cần vào cơ sở dữ liệu. Quá trình này có thể tốn một vài tháng hoặc một năm. Cũng có thể chúng ta muốn lưu những thông tin hữu ích mà vô tình gặp trên Internet như các cuộc thảo luận chất lượng cao của những người tài năng được tập hợp trong một diễn đàn rất nhỏ. Vào một lúc nào đó trong tương lai, chúng ta tìm lại được những thông tin đó và rút ra được những kết luận giá trị mà đến lúc này mới nhận ra.
 
@@ -6,7 +6,7 @@ Ngoài nhu cầu giải trí, có rất nhiều tài liệu mở quý giá trên
 
 Việc có một chương trình phục vụ việc thu thập thông tin hiện nay rất quan trọng.
 
-## 5.7.1 Trình thu thập thông tin độc lập dựa trên [Collly](https://github.com/gocolly/colly)
+## 5.6.1 Trình thu thập thông tin độc lập dựa trên [Collly](https://github.com/gocolly/colly)
 
 Ví dụ sau đưa ra một ví dụ về trình thu thập thông tin đơn giản. Việc dùng Go sẽ cực kì thuận tiện để viết một trình thu thập thông tin cho trang web, chẳng hạn như việc thu thập thông tin trang web (www.abcdefg.com là trang web ảo):
 
@@ -67,7 +67,7 @@ func main() {
 }
 ```
 
-## 5.7.2 Trình thu thập thông tin phân tán
+## 5.6.2 Trình thu thập thông tin phân tán
 
 Hãy tưởng tượng rằng hệ thống phân tích thông tin của bạn đang chạy rất nhanh. Tốc độ thu thập thông tin đã trở thành nút cổ chai. Mặc dù bạn có thể sử dụng tất cả các tính năng xử lý đồng thời tuyệt vời của Go để dùng hết hiệu suất CPU và băng thông mạng, nhưng bạn vẫn muốn tăng tốc độ thu thập thông tin của trình thu thập thông tin. Trong nhiều ngữ cảnh, tốc độ mang nhiều ý nghĩa:
 
@@ -82,7 +82,7 @@ Công việc chính của `upstream` là thu thập thông tin tất cả các "
 
 Trong phần này, chúng ta sẽ hiện thực trình thu thập thông tin đơn giản dựa trên hàng đợi tin nhắn. Cụ thể ở đây là sử dụng các nats để phân phối tác vụ. Trong thực tế, tuỳ vào yêu cầu về độ tin cậy của thông điệp và cơ sở hạ tầng của công ty nên sẽ ảnh hưởng tới việc chọn công nghệ của từng doanh nghiệp.
 
-### 5.7.2.1 Giới thiệu về nats
+### 5.6.2.1 Giới thiệu về nats
 
 [Nats](https://nats.io/) là một hàng đợi tin nhắn phân tán (distributed message queue) hiệu suất cao được lập trình bằng [Go](https://github.com/nats-io) cho các tình huống yêu cầu tính đồng thời cao, thông lượng cao. Những phiên bản nats ban đầu mang thiên hướng về tốc độ và không hỗ trợ tính `persistence`. Kể từ 16 năm trước, Nats đã hỗ trợ tính `persistence` dựa trên log thông qua nats-streaming, cũng như nhắn tin đáng tin cậy. Dưới đây là những ví dụ đơn giản về Nats.
 
@@ -149,7 +149,7 @@ for {
 }
 ```
 
-## 5.7.3 Tạo tin nhắn bằng cách kết hợp Nats và Colly
+## 5.6.3 Tạo tin nhắn bằng cách kết hợp Nats và Colly
 
 Bên dưới là một trình thu thập được tuỳ chỉnh cho trang web là `www.abcdefg.com`, `www.hijklmn.com` (ví dụ bên dưới), và sử dụng một phương thức `factory` đơn giản để ánh xạ trình thu thập tới đúng server. Khi trang web đang duyệt là một trang danh sách, ta cần phân tích tất cả các liên kết trong trang hiện tại và gửi liên kết của trang chi tiết đến hàng đợi tin nhắn.
 
@@ -233,7 +233,7 @@ func main() {
 }
 ```
 
-## 5.7.4 Kết hợp trình tiêu thụ tin nhắn với Collly
+## 5.6.4 Kết hợp trình tiêu thụ tin nhắn với Collly
 
 Phía `consumer` sẽ đơn giản hơn, chúng ta chỉ cần đăng ký chủ đề tương ứng và truy cập trực tiếp vào trang chi tiết.
 
@@ -313,8 +313,7 @@ Về cơ bản, khi lập trình thì các `producer` và `consumer` là giống
 
 Việc sử dụng hệ thống cấu hình đã được đề cập trong phần [cấu hình phân tán](./ch5-06-config.md) nên các bạn có thể tự mình dùng thử nó.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch5-06-config.md">&lt Phần 5.6</a> </span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch5-08-ext.md">Phần 5.8 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [](./)
+* Phần trước: [](./)
+* [Mục lục](../SUMMARY.md)

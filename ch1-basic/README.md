@@ -26,3 +26,9 @@ Trong khi học, hãy cố gắng giải quyết một số vấn đề nhỏ v�
 <span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
 <span> <a href="./ch1-01-genesis.md">Phần 1.1 &gt</a> </span>
 </div>
+
+
+## Liên kết
+* Phần tiếp theo: []()
+* Phần trước: []()
+* [Mục lục](../SUMMARY.md)

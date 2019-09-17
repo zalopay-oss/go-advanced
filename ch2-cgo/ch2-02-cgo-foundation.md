@@ -195,9 +195,9 @@ Ví dụ các build flag sau chỉ ra rằng việc build chỉ được thực 
 Trong đó, dấu phẩy (`,`) nghĩa là **và**. Khoảng trắng (`  `) nghĩa là **hoặc**.
 
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="./ch2-01-quick-start.md">&lt Phần 2.1</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="./ch2-03-type-conversion.md">Phần 2.3 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Chuyển đổi kiểu dữ liệu
+](./ch2-03-type-conversion.md)
+* Phần trước: [Quick Start
+](./ch2-01-quick-start.md)
+* [Mục lục](../SUMMARY.md)

@@ -1,4 +1,4 @@
-# 5.5 Cân bằng tải (Loadbalancer)
+# 5.4 Cân bằng tải (Loadbalancer)
 <div align="center">
 	<img src="../images/ch6-loadbalancer.png" width="400">
 	<br/>
@@ -9,7 +9,7 @@
 
 Phần này sẽ thảo luận về các phương pháp phổ biến trong cân bằng tải hệ thống phân tán.
 
-## 5.5.1 Ý tưởng cân bằng tải
+## 5.4.1 Ý tưởng cân bằng tải
 
 Khi có n node cùng cung cấp service và chúng ta cần chọn một trong số đó để thực hiện quy trình business. Có một số ý tưởng:
 
@@ -21,7 +21,7 @@ Khi có n node cùng cung cấp service và chúng ta cần chọn một trong s
 
 Nếu yêu cầu không thành công, chúng ta vẫn cần cơ chế để thử lại. Đối với thuật toán ngẫu nhiên, có khả năng bạn sẽ chọn node lỗi lần nữa.
 
-## 5.5.2 Cân bằng tải dựa trên thuật toán xáo trộn
+## 5.4.2 Cân bằng tải dựa trên thuật toán xáo trộn
 
 Giả sử chúng ta cần chọn ngẫu nhiên node gửi yêu cầu và thử lại các node khác khi có lỗi trả về. Vì vậy, chúng ta thiết kế một mảng chỉ mục với kích thước bằng số node. Mỗi lần chúng ta có một yêu cầu mới, chúng ta xáo trộn mảng chỉ mục, sau đó lấy phần tử đầu tiên làm node dịch vụ. Nếu yêu cầu thất bại, ta chọn node tiếp theo. Cứ thử lại và tiếp tục, ...
 
@@ -75,7 +75,7 @@ func request(params map[string]interface{}) error {
 
 Chúng ta duyệt qua các chỉ mục và hoán đổi chúng, tương tự như phương pháp xáo trộn mà chúng ta thường sử dụng khi chơi bài.
 
-### 5.5.2.1 Tải không cân bằng gây ra do xáo trộn không chính xác
+### 5.4.2.1 Tải không cân bằng gây ra do xáo trộn không chính xác
 
 Thực sự không có vấn đề? Trong thực tế, vẫn còn vấn đề. Có hai cạm bẫy tiềm ẩn trong chương trình trên là:
 
@@ -87,7 +87,7 @@ Thực sự không có vấn đề? Trong thực tế, vẫn còn vấn đề. C
 
 Rõ ràng, thuật toán xáo trộn được đưa ra ở đây có xác suất 30% không hoán đổi các yếu tố cho bất kỳ vị trí nào. Vì vậy, tất cả các yếu tố có xu hướng ở lại vị trí ban đầu của chúng. Bởi vì mỗi lần chúng ta nhập cùng một chuỗi cho mảng `shuffle`, phần tử đầu tiên có xác suất được chọn cao hơn. Trong trường hợp cân bằng tải, có nghĩa là tải máy đầu tiên trong mảng node sẽ cao hơn nhiều so với các máy khác (ít nhất gấp 3 lần).
 
-### 5.5.2.2 Sửa thuật toán xáo trộn
+### 5.4.2.2 Sửa thuật toán xáo trộn
 
 Thuật toán [fishing-yates](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) đã chứng minh tính đúng đắn về mặt toán học. Ý tưởng chính của nó là chọn một giá trị ngẫu nhiên rồi đặt ở cuối mảng, và cứ thế tiếp tục. Ví dụ:
 
@@ -112,7 +112,7 @@ func shuffle(n int) []int {
 
 Hiện tại, chúng ta có thể sử dụng `rand.Perm` để lấy mảng chỉ mục mà chúng ta muốn.
 
-## 5.5.3 Vấn đề chọn node ngẫu nhiên cho cụm ZooKeeper
+## 5.4.3 Vấn đề chọn node ngẫu nhiên cho cụm ZooKeeper
 
 Giả sử, ta cần chọn một node từ N node để gửi yêu cầu. Sau khi yêu cầu ban đầu kết thúc, các yêu cầu tiếp theo sẽ xáo trộn lại mảng, do đó không có mối quan hệ nào giữa hai yêu cầu. Ví thế, thuật toán ở trên sẽ không cần khởi tạo bất kì random seed nào.
 
@@ -124,7 +124,7 @@ rand.Seed(time.Now().UnixNano())
 
 Lý do cho những kết luận này là phiên bản trước của thư viện Open source ZooKeeper được sử dụng rộng rãi đã mắc phải những lỗi trên và mãi đến đầu năm 2016, vấn đề mới được khắc phục.
 
-## 5.5.4 Kiểm tra lại ảnh hưởng của thuật toán cân bằng tải
+## 5.4.4 Kiểm tra lại ảnh hưởng của thuật toán cân bằng tải
 
 Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán fisher yates:
 
@@ -186,8 +186,7 @@ map[6:143275 5:143054 3:143584 2:143031 1:141898 0:142631 4:142527]
 
 Kết quả trên phù hợp với kết luận đã đưa ra.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch5-04-search-engine.md">&lt Phần 5.4</a> </span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch5-06-config.md">Phần 5.6 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [](./)
+* Phần trước: [](./)
+* [Mục lục](../SUMMARY.md)

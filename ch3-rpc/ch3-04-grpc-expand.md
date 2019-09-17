@@ -353,9 +353,7 @@ myServer := grpc.NewServer(
 
 Xem chi tiết: [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-middleware)
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch3-03-grpc.md">&lt Phần 3.3</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch3-05-grpc-ext.md">Phần 3.5 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [gRPC và Protobuf extensions](./ch3-05-grpc-ext.md)
+* Phần trước: [Làm quen với gRPC](./ch3-03-grpc.md)
+* [Mục lục](../SUMMARY.md)
