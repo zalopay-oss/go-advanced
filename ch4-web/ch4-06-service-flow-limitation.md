@@ -311,9 +311,7 @@ Nhìn chung, ta có thể cải thiện việc sử dụng CPU của các dịch
 
 Nhưng khi throughput được cải thiện, chưa chắc đã có thể cải thiện trải nghiệm người dùng. Người dùng rất nhạy cảm với độ trễ. Dù throughput của hệ thống cao, nhưng nếu không phản hồi được trong một thời gian dài sẽ làm người dùng rất khó chịu. Do đó, trong các chỉ số hiệu suất dịch vụ Web của các công ty lớn, ngoài độ trễ phản hồi trung bình, thời gian phản hồi [95% (p95) và 99% (p99)](https://stackoverflow.com/questions/12808934/what-is-p99-latency) cũng được lấy ra làm tiêu chuẩn hiệu suất. Thời gian phản hồi trung bình thường không ảnh hưởng nhiều đến việc cải thiện hiệu suất sử dụng CPU, quan trọng là thời gian phản hồi 99% so với 95% có thể tăng đáng kể. Từ đó ta có thể xem xét liệu chi phí cải thiện hiệu suất sử dụng CPU này có đáng hay không.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch4-05-database.md">&lt Phần 4.5</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch4-07-layout-of-web-project.md">Phần 4.7 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Mô hình của các dự án web](./ch4-07-layout-of-web-project.md)
+* Phần trước: [Làm việc với Database](./ch4-05-database.md)
+* [Mục lục](../SUMMARY.md)

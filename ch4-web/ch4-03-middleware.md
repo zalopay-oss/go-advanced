@@ -200,9 +200,7 @@ func (r *Router) Add(route string, h http.Handler) {
 }
 ```
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch4-02-router.md">&lt Phần 4.2</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch4-04-request-verification.md">Phần 4.4 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Kiểm tra tính hợp lệ của request](./ch4-04-request-verification.md)
+* Phần trước: [Routing trong Web](./ch4-02-router.md)
+* [Mục lục](../SUMMARY.md)

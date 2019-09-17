@@ -236,9 +236,9 @@ $ gcc -o a.out _test_main.c number.so
 $ ./a.out
 ```
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="./ch2-08-c-class.md">&lt Phần 2.8</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="./ch2-10-link.md">Phần 2.10 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Biên dịch và liên kết các tham số
+](./ch2-10-link.md)
+* Phần trước: [C++ Class Packaging
+](./ch2-08-c-class.md)
+* [Mục lục](../SUMMARY.md)

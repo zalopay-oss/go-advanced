@@ -122,8 +122,7 @@ Tất nhiên, bạn cũng có thể sử dụng một ý tưởng phức tạp h
 
 Như đã đề cập, chúng ta sẽ sử dụng hàng đợi tin nhắn để thông báo cho người dùng. Khi sử dụng hàng đợi tin nhắn, nhiều hàng đợi không hỗ trợ [exactly once](https://streaml.io/blog/exactly-once). Trong trường hợp này, chúng ta cần để người dùng tự xử lý việc nhận tin nhắn 2 lần hoặc thiếu tin nhắn (xử lý tạm thời).
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch5-02-lock.md">&lt Phần 5.2</a> </span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch5-04-search-engine.md">Phần 5.4 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Cân bằng tải](./ch5-04-search-engine.md)
+* Phần trước: [Lock phân tán](./ch5-02-lock.md)
+* [Mục lục](../SUMMARY.md)

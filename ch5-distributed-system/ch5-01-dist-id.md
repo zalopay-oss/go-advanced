@@ -245,8 +245,7 @@ func main() {
 // ID: 84989976554504193
 ```
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="README.md">&lt Chương 5</a> </span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch5-02-lock.md">Phần 5.2 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Lock phân tán (Distributed lock)](./ch5-02-lock.md)
+* Phần trước: [Chương 5: Distributed System](./README.md)
+* [Mục lục](../SUMMARY.md)

@@ -146,9 +146,7 @@ $ grpcurl -plaintext -d @ localhost:1234 HelloService.HelloService/Channel
 }
 ```
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="ch3-05-grpc-ext.md">&lt Phần 3.5</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span>
-<span> <a href="ch3-07-ext.md">Phần 3.7 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Lời nói thêm](./ch3-07-ext.md)
+* Phần trước: [gRPC và Protobuf extensions](./ch3-05-grpc-ext.md)
+* [Mục lục](../SUMMARY.md)

@@ -478,9 +478,9 @@ Sau đây cho thấy luồng cụ thể của thao tác chuyển đổi giữa c
 
 Đối với các tính năng thường được sử dụng trong CGO, tác giả package [github.com/chai2010/cgo](https://github.com/chai2010/cgo), đã cung cấp các chức năng chuyển đổi cơ bản. Để biết thêm chi tiết hãy tham khảo code hiện thực.
 
-<div style="display: flex; justify-content: space-around;">
-<span> <a href="./ch2-02-cgo-foundation.md">&lt Phần 2.2</a>
-</span>
-<span><a href="../SUMMARY.md"> Mục lục</a>  </span> 
-<span> <a href="./ch2-04-function-call.md">Phần 2.4 &gt</a> </span>
-</div>
+## Liên kết
+* Phần tiếp theo: [Lời gọi hàm
+](./ch2-04-function-call.md)
+* Phần trước: [Chuyển đổi kiểu dữ liệu
+](./ch2-03-type-conversion.md)
+* [Mục lục](../SUMMARY.md)
