@@ -314,6 +314,6 @@ Về cơ bản, khi lập trình thì các `producer` và `consumer` là giống
 Việc sử dụng hệ thống cấu hình đã được đề cập trong phần [cấu hình phân tán](./ch5-06-config.md) nên các bạn có thể tự mình dùng thử nó.
 
 ## Liên kết
-* Phần tiếp theo: [](./)
-* Phần trước: [](./)
+* Phần tiếp theo: [Lời nói thêm](./ch5-07-ext.md)
+* Phần trước: [Quản lý cấu hình trong hệ thống phân tán](./ch5-05-config.md)
 * [Mục lục](../SUMMARY.md)

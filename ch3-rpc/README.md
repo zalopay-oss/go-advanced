@@ -15,5 +15,5 @@ Remote Procedure Call là kỹ thuật cho phép chúng ta gọi hàm từ một
 
 ## Liên kết
 * Phần tiếp theo: [Giới thiệu về RPC](./ch3-01-rpc-go.md)
-* Phần trước: [Chương 2](../ch2-cgo/README.md)
+* Phần trước: [Chương 2: Lời nói thêm](../ch2-cgo/ch2-11-ext.md)
 * [Mục lục](../SUMMARY.md)

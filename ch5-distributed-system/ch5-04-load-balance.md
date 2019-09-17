@@ -187,6 +187,6 @@ map[6:143275 5:143054 3:143584 2:143031 1:141898 0:142631 4:142527]
 Kết quả trên phù hợp với kết luận đã đưa ra.
 
 ## Liên kết
-* Phần tiếp theo: [](./)
-* Phần trước: [](./)
+* Phần tiếp theo: [Quản lý cấu hình trong hệ thống phân tán](./ch5-05-config.md)
+* Phần trước: [Hệ thống tác vụ có trì hoãn](./ch5-03-delay-job.md)
 * [Mục lục](../SUMMARY.md)

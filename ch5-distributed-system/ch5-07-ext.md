@@ -5,6 +5,6 @@ Hệ thống phân tán là một lĩnh vực lớn, những phần chúng tôi 
 Dù cho đó là một hệ thống đơn giản hay phức tạp, nó cũng sẽ có giá trị quan trọng trong một ngữ cảnh cụ thể. Chúng tôi hy vọng người đọc sẽ tiếp xúc nhiều hơn với Open source, tích lũy các công cụ cho riêng mình, và *"standing on the shoulders of giants"* (học từ kinh nghiệm của những người đi trước).
 
 ## Liên kết
-* Phần tiếp theo: [](./)
-* Phần trước: [](./)
+* Phần tiếp theo: [Chương 6: Go best practice](../ch6-best-practices/README.md)
+* Phần trước: [Trình thu thập thông tin phân tán](./ch5-06-crawler.md)
 * [Mục lục](../SUMMARY.md)

@@ -15,5 +15,5 @@ Ngành công nghiệp phần mềm hiện đại không thể tách khỏi Web. 
 
 ## Liên kết
 * Phần tiếp theo: [Giới thiệu về chương trình Web](./ch4-01-intro.md)
-* Phần trước: [Chương 3: Remote Procedure Call](../ch3-rpc/README.md)
+* Phần trước: [Chương 3: Lời nói thêm](../ch3-rpc/ch3-07-ext.md)
 * [Mục lục](../SUMMARY.md)
