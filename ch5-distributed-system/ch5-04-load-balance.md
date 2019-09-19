@@ -11,6 +11,8 @@ Phần này sẽ thảo luận về các phương pháp phổ biến trong cân 
 
 ## 5.4.1 Ý tưởng cân bằng tải
 
+Cân bằng tải luôn là một vấn đề đáng chú trọng khi xây dựng một hệ thống phân tán. Có rất nhiều mô hình để đặt cân bằng tải: ở phía client, ở phía gateway, ở sidecar,... Mỗi mô hình đều có ưu nhược điểm riêng, tùy vào nhu cầu và điều kiện hiện tại của bạn để chọn một cách phù hợp nhất. Nhưng, dù nó đặt ở đâu, vấn đề của cân bằng tải vẫn luôn là giải thuật cân bằng tải như thế nào để mang lại tính cân bằng nhất cho các hệ thống con. Một giải thuật tốt sẽ đem lại một hiệu năng tốt cho toàn hệ thống, giảm khả năng `bottleneck` khi lượng truy cập lớn chỉ dồn vào service. Trong chương này, ta sẽ tìm hiểu về cách cân bằng tải và các lưu ý khi sử dụng các thuật toán cân bằng tải.
+
 Khi có n node cùng cung cấp service và chúng ta cần chọn một trong số đó để thực hiện quy trình business. Có một số ý tưởng:
 
 1. Chọn theo thứ tự: lần gần nhất bạn chọn cái đầu tiên, thì lần này bạn chọn cái thứ hai, rồi cứ thế với cái tiếp theo. Nếu bạn đã đạt đến cái cuối cùng, thì cái tiếp theo bắt đầu từ cái đầu tiên. Trong trường hợp này, chúng ta có thể lưu trữ thông tin node dịch vụ trong một mảng. Sau khi mỗi yêu cầu được hoàn thành xuôi dòng, chúng ta di chuyển chỉ mục đi tiếp. Di chuyển trở lại đầu của mảng khi bạn di chuyển đến cuối.
