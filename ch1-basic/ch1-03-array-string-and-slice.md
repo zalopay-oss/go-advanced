@@ -144,7 +144,6 @@ Một array có chiều dài 0 thì không chiếm không gian lưu trữ.
 <div align="center">
 	<img src="../images/ch1-string.png" width="400">
 </div>
-<br/>
 
 `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string là [immutable](https://en.wikipedia.org/wiki/Immutable_object).
 
