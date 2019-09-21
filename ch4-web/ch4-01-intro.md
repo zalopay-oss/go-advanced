@@ -1,4 +1,4 @@
-# 4.1. Giới thiệu về chương trình Web
+# 4.1. Giới thiệu chương trình Web
 
 Trong lập trình web, đối với các trang web nhỏ và đơn giản (như blog, portfolio, ...) ta sẽ sử dụng [template](https://gowebexamples.com/templates/), đối với các trang web phức tạp và phát triển về lâu dài ta sẽ cần chia thành front end, back end riêng biệt để tiện cho các team làm việc độc lập và dễ dàng phát triển mở rộng.
 

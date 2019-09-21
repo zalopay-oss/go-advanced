@@ -1,4 +1,4 @@
-# 5.2 Lock phân tán (Distributed lock)
+# 5.2 Lock phân tán
 
 <div align="center">
 	<img src="../images/ch6-dis-lock.png" width="300">
