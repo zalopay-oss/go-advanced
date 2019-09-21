@@ -1,8 +1,11 @@
 # 5.5 Quản lý cấu hình trong hệ thống phân tán
 
-Trong hệ thống phân tán, thường có những vấn đề gây phiền cho chúng ta. Mặc dù, hiện tại có một số cách để thay đổi cấu hình nhưng vẫn bị hạn chế bởi cách hoạt động nội bộ của hệ thống và lúc này sẽ không có cách nào để thay đổi cấu hình một cách thuận tiện nhất. Ví dụ: để giới hạn dòng chảy xuống `downstream`, chúng ta có thể tích luỹ dữ liệu lại và sau khi lượng tích luỹ đến một ngưỡng thời gian hay tổng số tiền thì ta bắt đầu gửi đi, điều này tránh được việc gửi quá nhiều cho `downstream`. Trong trường hợp này, ta lại rất khó để thay đổi cấu hình.
+Trong hệ thống phân tán, thường có những vấn đề gây phiền cho chúng ta. Mặc dù, hiện tại có một số cách để thay đổi cấu hình nhưng vẫn bị hạn chế bởi cách hoạt động nội bộ của hệ thống và lúc này sẽ không có cách nào để thay đổi cấu hình một cách thuận tiện nhất. Ví dụ: để giới hạn dòng chảy xuống `downstream`, chúng ta có thể tích luỹ dữ liệu lại và sau đó, nếu lượng tích luỹ đến ngưỡng về thời gian hay số lượng thì ta bắt đầu gửi đi, điều này tránh được việc gửi quá nhiều cho `downstream`. Với trường hợp này, ta lại rất khó để thay đổi cấu hình.
 
-Do đó, mục tiêu của chúng ta là tránh áp dụng hoặc bỏ qua phương pháp trực tuyến và thực hiện một số sửa đổi cho chương trình trực tuyến. Một sửa đổi điển hình là mục cấu hình của chương trình.
+Do đó, trong chương này, ta sẽ tìm hiểu cách cấu hình cho hệ thống phân tán bằng Go và các vấn đề cần cân nhắc khi sử dụng cách cấu hình trực tuyến. 
+
+Quản lý cấu hình trong hệ thống phân tán là một vấn đề cực kì khó. Ngay cả một công ty công nghệ hàng đầu thế giới như google cũng đã gặp vấn đề và làm cho họ giảm chất lượng dịch vụ rất nhiều. Chi tiết bài viết của google [ở đây](https://cloud.google.com/blog/topics/inside-google-cloud/an-update-on-sundays-service-disruption).
+
 
 ## 5.5.1 Thảo luận các ví dụ
 
@@ -191,6 +194,8 @@ Cụ thể, khi cung cấp SDK đọc cấu hình cho một dịch vụ, tốt n
 Hãy xem xét kỹ vấn đề thống nhất dữ liệu khi thêm cache. Các máy kinh doanh có thể không thống nhất về cấu hình do lỗi mạng, chúng ta có thể biết được nó đang diễn ra bằng hệ thống giám sát.
 
 Chúng ta sử dụng một cách để giải quyết các vấn đề của việc cập nhật cấu hình, nhưng đồng thời chúng ta lại mang đến những vấn đề mới bằng việc sử dụng cách đó. Trong thực tế, chúng ta phải suy nghĩ rất nhiều về từng quyết định để chúng ta không bị thiệt hại quá nhiều khi vấn đề xảy ra.
+
+## 5.5.6 Khả năng chịu lỗi ở máy khách
 
 ## Liên kết
 * Phần tiếp theo: [Trình thu thập thông tin phân tán](./ch5-06-crawler.md)
