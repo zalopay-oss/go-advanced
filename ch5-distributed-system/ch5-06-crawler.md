@@ -6,9 +6,9 @@ Ngoài nhu cầu giải trí, có rất nhiều tài liệu mở quý giá trên
 
 Việc có một chương trình phục vụ việc thu thập thông tin hiện nay rất quan trọng.
 
-## 5.6.1 Trình thu thập thông tin độc lập dựa trên [Collly](https://github.com/gocolly/colly)
+## 5.6.1 Trình thu thập thông tin độc lập dựa trên Collly
 
-Ví dụ sau đưa ra một ví dụ về trình thu thập thông tin đơn giản. Việc dùng Go sẽ cực kì thuận tiện để viết một trình thu thập thông tin cho trang web, chẳng hạn như việc thu thập thông tin trang web (www.abcdefg.com là trang web ảo):
+Ví dụ sau đưa ra một ví dụ về trình thu thập thông tin đơn giản sử dụng thư viện [Collly](https://github.com/gocolly/colly). Việc dùng Go sẽ cực kì thuận tiện để viết một trình thu thập thông tin cho trang web, chẳng hạn như việc thu thập thông tin trang web (www.abcdefg.com là trang web ảo):
 
 ***main.go***
 ```go
@@ -86,7 +86,7 @@ Trong phần này, chúng ta sẽ hiện thực trình thu thập thông tin đ�
 
 [Nats](https://nats.io/) là một hàng đợi tin nhắn phân tán (distributed message queue) hiệu suất cao được lập trình bằng [Go](https://github.com/nats-io) cho các tình huống yêu cầu tính đồng thời cao, thông lượng cao. Những phiên bản nats ban đầu mang thiên hướng về tốc độ và không hỗ trợ tính `persistence`. Kể từ 16 năm trước, Nats đã hỗ trợ tính `persistence` dựa trên log thông qua nats-streaming, cũng như nhắn tin đáng tin cậy. Dưới đây là những ví dụ đơn giản về Nats.
 
-Máy chủ của nats là `gnatsd` . Phương thức giao tiếp giữa máy khách và gnatsd là giao thức văn bản dựa trên tcp:
+Máy chủ của Nats là `gnatsd` . Phương thức giao tiếp giữa máy khách và gnatsd là giao thức văn bản dựa trên tcp:
 
 Gửi tin nhắn đi có chứa chủ đề cho một tác vụ:
 
@@ -110,7 +110,7 @@ Theo dõi các tác vụ bằng chủ đề trên hàng đợi của các worker
 
 Tham số hàng đợi là tùy chọn. Nếu bạn muốn cân bằng tải các tác vụ ở phía người dùng, thay vì tất cả mọi người nhận cùng một kênh, bạn nên gán một tên hàng đợi cho một người dùng.
 
-#### Sản xuất tin nhắn (message production)
+#### Sản xuất tin nhắn
 
 Sản xuất tin nhắn được chỉ định bằng `topic`:
 
@@ -125,7 +125,7 @@ err = nc.Publish("tasks", []byte("your task content"))
 nc.Flush()
 ```
 
-#### Tiêu thụ tin nhắn (message consumption)
+#### Tiêu thụ tin nhắn
 
 Việc sử dụng trực tiếp API đăng ký của Nats không thể thoả được mục đích phân phối tác vụ, vì pub-sub là `broadcast` nên tất cả `consumer` sẽ nhận được cùng một thông điệp.
 

@@ -1,4 +1,4 @@
-# 5.4 Cân bằng tải (Loadbalancer)
+# 5.4 Cân bằng tải
 <div align="center">
 	<img src="../images/ch6-loadbalancer.png" width="400">
 	<br/>
@@ -11,11 +11,11 @@ Phần này sẽ thảo luận về các phương pháp phổ biến trong cân 
 
 ## 5.4.1 Ý tưởng cân bằng tải
 
-Khi có n node cùng cung cấp service và chúng ta cần chọn một trong số đó để thực hiện quy trình business. Có một số ý tưởng:
+Khi có N node cùng cung cấp service và chúng ta cần chọn một trong số đó để thực hiện quy trình business. Có một số ý tưởng:
 
 1. Chọn theo thứ tự: lần gần nhất bạn chọn cái đầu tiên, thì lần này bạn chọn cái thứ hai, rồi cứ thế với cái tiếp theo. Nếu bạn đã đạt đến cái cuối cùng, thì cái tiếp theo bắt đầu từ cái đầu tiên. Trong trường hợp này, chúng ta có thể lưu trữ thông tin node dịch vụ trong một mảng. Sau khi mỗi yêu cầu được hoàn thành xuôi dòng, chúng ta di chuyển chỉ mục đi tiếp. Di chuyển trở lại đầu của mảng khi bạn di chuyển đến cuối.
 
-2. Chọn ngẫu nhiên: Chọn node một cách ngẫu nhiên. Giả sử rằng máy thứ x được chọn, thì x có thể được chọn từ hàm `rand.Intn()%n`.
+2. Chọn ngẫu nhiên: Chọn node một cách ngẫu nhiên. Giả sử rằng máy thứ X được chọn, thì x có thể được chọn từ hàm `rand.Intn()%n`.
 
 3. Sắp xếp các node theo một trọng lượng nhất định và chọn một node có trọng lượng lớn nhất hoặc nhỏ nhất.
 
@@ -75,7 +75,7 @@ func request(params map[string]interface{}) error {
 
 Chúng ta duyệt qua các chỉ mục và hoán đổi chúng, tương tự như phương pháp xáo trộn mà chúng ta thường sử dụng khi chơi bài.
 
-### 5.4.2.1 Tải không cân bằng gây ra do xáo trộn không chính xác
+### 5.4.2.1 Vấn đề sinh số ngẫu nhiên
 
 Thực sự không có vấn đề? Trong thực tế, vẫn còn vấn đề. Có hai cạm bẫy tiềm ẩn trong chương trình trên là:
 
@@ -112,21 +112,9 @@ func shuffle(n int) []int {
 
 Hiện tại, chúng ta có thể sử dụng `rand.Perm` để lấy mảng chỉ mục mà chúng ta muốn.
 
-## 5.4.3 Vấn đề chọn node ngẫu nhiên cho cụm ZooKeeper
+## 5.4.3 Kiểm tra tính ảnh hưởng của thuật toán cân bằng tải
 
-Giả sử, ta cần chọn một node từ N node để gửi yêu cầu. Sau khi yêu cầu ban đầu kết thúc, các yêu cầu tiếp theo sẽ xáo trộn lại mảng, do đó không có mối quan hệ nào giữa hai yêu cầu. Ví thế, thuật toán ở trên sẽ không cần khởi tạo bất kì random seed nào.
-
-Tuy nhiên, trong một số trường hợp đặc biệt, chẳng hạn như khi sử dụng ZooKeeper, khi máy khách khởi tạo việc lựa chọn node từ nhiều node dịch vụ, một kết nối được thiết lập cho node. Yêu cầu máy khách sau đó được gửi đến node. Node tiếp theo trong danh sách được chọn cho đến khi không còn node nào có sẵn. Lúc này, việc lựa chọn node kết nối ban đầu là "đúng chuẩn" ngẫu nhiên. Tuy nhiên, tất cả các máy khách sẽ kết nối với cùng một ZooKeeper khi chúng khởi động cùng lúc, lúc này sẽ không có tải cân bằng. Nếu doanh nghiệp của bạn cần phát triển tính năng hàng ngày, thì bạn phải xem xét liệu có một tình huống tương tự như trên xảy ra không. Cách đặt random seed cho thư viện rand:
-
-```go
-rand.Seed(time.Now().UnixNano())
-```
-
-Lý do cho những kết luận này là phiên bản trước của thư viện Open source ZooKeeper được sử dụng rộng rãi đã mắc phải những lỗi trên và mãi đến đầu năm 2016, vấn đề mới được khắc phục.
-
-## 5.4.4 Kiểm tra lại ảnh hưởng của thuật toán cân bằng tải
-
-Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán fisher yates:
+Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán Fisher-Yates:
 
 ***main.go***
 ```go
@@ -184,7 +172,7 @@ map[0:224436 1:128780 5:129310 6:129194 2:129643 3:129384 4:129253]
 map[6:143275 5:143054 3:143584 2:143031 1:141898 0:142631 4:142527]
 ```
 
-Kết quả trên phù hợp với kết luận đã đưa ra.
+Dựa vào kết quả trên chúng ta thấy được sau khi sử dụng thuật toán  Fisher-Yates thì sự cân bằng được tốt hơn, rải đều từ các node 0 -> node 6, trung bình khoảng 142000. Còn đối với thuật toán ban đầu thì ở node 0 đã chiếm hơn 220000, các node sau thì trung bình khoảng 128000.
 
 ## Liên kết
 * Phần tiếp theo: [Quản lý cấu hình trong hệ thống phân tán](./ch5-05-config.md)
