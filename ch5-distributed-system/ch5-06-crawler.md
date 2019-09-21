@@ -80,13 +80,13 @@ Công việc chính của `upstream` là thu thập thông tin tất cả các "
 
 Để thu thập thông tin trang, điều quan trọng là không có sự lặp lại xảy ra thường xuyên trong quá trình thực thi, vì nó sẽ tạo các kết quả sai (ví dụ trên sẽ chỉ thu thập nội dung trang chứ không phải phần bình luận).
 
-Trong phần này, chúng ta sẽ hiện thực trình thu thập thông tin đơn giản dựa trên hàng đợi tin nhắn. Cụ thể ở đây là sử dụng các nats để phân phối tác vụ. Trong thực tế, tuỳ vào yêu cầu về độ tin cậy của thông điệp và cơ sở hạ tầng của công ty nên sẽ ảnh hưởng tới việc chọn công nghệ của từng doanh nghiệp.
+Trong phần này, chúng ta sẽ hiện thực trình thu thập thông tin đơn giản dựa trên hàng đợi tin nhắn. Cụ thể ở đây là sử dụng các NATS để phân phối tác vụ. Trong thực tế, tuỳ vào yêu cầu về độ tin cậy của thông điệp và cơ sở hạ tầng của công ty nên sẽ ảnh hưởng tới việc chọn công nghệ của từng doanh nghiệp.
 
 ### 5.6.2.1 Giới thiệu về nats
 
-[Nats](https://nats.io/) là một hàng đợi tin nhắn phân tán (distributed message queue) hiệu năng cao được lập trình bằng [Go](https://github.com/nats-io), ta nên sử dụng nó cho các tình huống yêu cầu tính đồng thời cao, thông lượng cao. Những phiên bản nats ban đầu mang thiên hướng về tốc độ và không hỗ trợ tính `persistence`. Kể từ 16 năm trước, Nats đã hỗ trợ tính `persistence` dựa trên log thông qua nats-streaming, cũng như nhắn tin đáng tin cậy. Dưới đây là những ví dụ đơn giản về Nats.
+[NATS](https://nats.io/) là một hàng đợi tin nhắn phân tán (distributed message queue) hiệu năng cao được lập trình bằng [Go](https://github.com/nats-io), ta nên sử dụng nó cho các tình huống yêu cầu tính đồng thời cao, thông lượng cao. Những phiên bản NATS ban đầu mang thiên hướng về tốc độ và không hỗ trợ tính `persistence`. Kể từ 16 năm trước, NATS đã hỗ trợ tính `persistence` dựa trên log thông qua NATS Streaming, cũng như nhắn tin đáng tin cậy. Dưới đây là những ví dụ đơn giản về NATS.
 
-Máy chủ của nats là `gnatsd`. Phương thức giao tiếp giữa máy khách và `gnatsd` là giao thức văn bản dựa trên tcp:
+Máy chủ của NATS là `gnatsd`. Phương thức giao tiếp giữa máy khách và `gnatsd` là giao thức văn bản dựa trên tcp:
 
 Gửi tin nhắn đi có chứa chủ đề cho một tác vụ:
 
@@ -94,7 +94,7 @@ Gửi tin nhắn đi có chứa chủ đề cho một tác vụ:
   <img src="../images/ch6-09-nats-protocol-pub.png">
   <br/>
   <span align="center">
-    <i>Pub trong giao thức nats</i>
+    <i>Pub trong giao thức NATS</i>
   </span>
 </div>
 
@@ -104,7 +104,7 @@ Theo dõi các tác vụ bằng chủ đề trên hàng đợi của các worker
   <img src="../images/ch6-09-nats-protocol-sub.png">
   <br/>
   <span align="center">
-    <i>Sub trong giao thức nats</i>
+    <i>Sub trong giao thức NATS</i>
   </span>
 </div>
 
@@ -149,7 +149,7 @@ for {
 }
 ```
 
-## 5.6.3 Tạo tin nhắn bằng cách kết hợp Nats và Colly
+## 5.6.3 Tạo tin nhắn bằng cách kết hợp NATS và Colly
 
 Bên dưới là một trình thu thập được tuỳ chỉnh cho trang web là `www.abcdefg.com`, `www.hijklmn.com` (ví dụ bên dưới), và sử dụng một phương thức `factory` đơn giản để ánh xạ trình thu thập tới đúng server. Khi trang web đang duyệt là một trang danh sách, ta cần phân tích tất cả các liên kết trong trang hiện tại và gửi liên kết của trang chi tiết đến hàng đợi tin nhắn.
 

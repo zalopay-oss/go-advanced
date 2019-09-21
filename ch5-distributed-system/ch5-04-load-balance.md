@@ -128,7 +128,7 @@ Lý do cho những kết luận này là phiên bản trước của thư viện
 
 ## 5.4.4 Kiểm tra lại ảnh hưởng của thuật toán cân bằng tải
 
-Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán fisher yates:
+Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán Fisher-Yates:
 
 ***main.go***
 ```go
@@ -186,7 +186,7 @@ map[0:224436 1:128780 5:129310 6:129194 2:129643 3:129384 4:129253]
 map[6:143275 5:143054 3:143584 2:143031 1:141898 0:142631 4:142527]
 ```
 
-Kết quả trên phù hợp với kết luận đã đưa ra.
+Kết quả trên phù hợp với nhận định đã đưa ra. Đây là một điểm lưu ý quan trọng khi bạn tự hiện thực thuật toán ngẫu nhiên cho hệ thống cân bằng tải.
 
 ## Liên kết
 * Phần tiếp theo: [Quản lý cấu hình trong hệ thống phân tán](./ch5-05-config.md)
