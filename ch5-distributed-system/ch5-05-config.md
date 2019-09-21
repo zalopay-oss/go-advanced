@@ -6,9 +6,9 @@ Do đó, mục tiêu của chúng ta là tránh áp dụng hoặc bỏ qua phư�
 
 ## 5.5.1 Thảo luận các ví dụ
 
-### 5.5.1.1 Hệ thống báo cáo (Reporting system)
+### 5.5.1.1 Hệ thống báo cáo
 
-Trong các hệ thống [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processing) hoặc một số nền tảng dữ liệu ngoại tuyến, sau một thời gian dài phát triển, các chức năng của toàn bộ hệ thống đã dần ổn định. Các dữ liệu đã có sẵn và hầu hết các thay đổi để hiển thị chỉ liên quan tới việc thay đổi câu truy vấn SQL. Lúc này, ta nghĩ tới việc có thể cấu hình được các câu truy vấn SQL mà không cần phải sửa đổi code.
+Trong các hệ thống [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processing) (Online analytical processing) hoặc một số nền tảng dữ liệu ngoại tuyến, sau một thời gian dài phát triển, các chức năng của toàn bộ hệ thống đã dần ổn định. Các dữ liệu đã có sẵn và hầu hết các thay đổi để hiển thị chỉ liên quan tới việc thay đổi câu truy vấn SQL. Lúc này, ta nghĩ tới việc có thể cấu hình được các câu truy vấn SQL mà không cần phải sửa đổi code.
 
 Khi doanh nghiệp đưa ra các yêu cầu mới, việc chúng ta cần làm là cấu hình lại câu SQL cho hệ thống. Những thay đổi này có thể được thực hiện trực tiếp mà không cần khởi động lại.
 
@@ -22,7 +22,9 @@ Một ví dụ khác, có nhiều loại hoạt động trong hệ điều hành
 
 ## 5.5.2 Sử dụng etcd để thực hiện cập nhật cấu hình
 
-Chúng ta sẽ sử dụng etcd để thực hiện đọc cấu hình và cập nhật tự động để hiểu về một quy trình cập nhật cấu hình trực tuyến.
+[etcd](https://etcd.io/) là một kho lưu trữ key-value phân tán, nó có tính nhất quán mạnh mẽ, có khả năng chịu lỗi cao khi có một node trong cluster có sự cố hay lỗi do network. etcd được viết bằng ngôn ngữ Go, sử dụng thuật toán đồng thuận [Raft](https://raft.github.io/) để giao tiếp và bình chọn leader giữa các node trong hệ thống. Hiện nay có khá nhiều sản phẩm công nghệ sử dụng etcd như [Kubernetes](https://kubernetes.io), [Rook](https://rook.io/),... 
+
+Ở ví dụ này chúng ta sẽ sử dụng etcd để thực hiện đọc cấu hình và cập nhật tự động cấu hình cho các máy khách.
 
 ### 5.5.2.1 Định nghĩa cấu hình
 
