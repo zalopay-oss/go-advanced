@@ -84,9 +84,9 @@ Trong phần này, chúng ta sẽ hiện thực trình thu thập thông tin đ�
 
 ### 5.6.2.1 Giới thiệu về nats
 
-[Nats](https://nats.io/) là một hàng đợi tin nhắn phân tán (distributed message queue) hiệu suất cao được lập trình bằng [Go](https://github.com/nats-io) cho các tình huống yêu cầu tính đồng thời cao, thông lượng cao. Những phiên bản nats ban đầu mang thiên hướng về tốc độ và không hỗ trợ tính `persistence`. Kể từ 16 năm trước, Nats đã hỗ trợ tính `persistence` dựa trên log thông qua nats-streaming, cũng như nhắn tin đáng tin cậy. Dưới đây là những ví dụ đơn giản về Nats.
+[Nats](https://nats.io/) là một hàng đợi tin nhắn phân tán (distributed message queue) hiệu năng cao được lập trình bằng [Go](https://github.com/nats-io), ta nên sử dụng nó cho các tình huống yêu cầu tính đồng thời cao, thông lượng cao. Những phiên bản nats ban đầu mang thiên hướng về tốc độ và không hỗ trợ tính `persistence`. Kể từ 16 năm trước, Nats đã hỗ trợ tính `persistence` dựa trên log thông qua nats-streaming, cũng như nhắn tin đáng tin cậy. Dưới đây là những ví dụ đơn giản về Nats.
 
-Máy chủ của nats là `gnatsd` . Phương thức giao tiếp giữa máy khách và gnatsd là giao thức văn bản dựa trên tcp:
+Máy chủ của nats là `gnatsd`. Phương thức giao tiếp giữa máy khách và `gnatsd` là giao thức văn bản dựa trên tcp:
 
 Gửi tin nhắn đi có chứa chủ đề cho một tác vụ:
 
@@ -152,6 +152,10 @@ for {
 ## 5.6.3 Tạo tin nhắn bằng cách kết hợp Nats và Colly
 
 Bên dưới là một trình thu thập được tuỳ chỉnh cho trang web là `www.abcdefg.com`, `www.hijklmn.com` (ví dụ bên dưới), và sử dụng một phương thức `factory` đơn giản để ánh xạ trình thu thập tới đúng server. Khi trang web đang duyệt là một trang danh sách, ta cần phân tích tất cả các liên kết trong trang hiện tại và gửi liên kết của trang chi tiết đến hàng đợi tin nhắn.
+
+Mô hình hoạt động:
+
+![crawler](../images/ch6-crawler-model.png)
 
 ***main.go***
 ```go
