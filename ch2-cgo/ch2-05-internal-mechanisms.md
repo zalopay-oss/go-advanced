@@ -265,4 +265,9 @@ Toàn bộ biểu đồ luồng cuộc gọi như sau:
 
 Trong đó, hàm `runtime.cgocallback` là chìa khóa để thực hiện cuộc gọi vượt ranh giới từ ngôn ngữ C sang Go. Chi tiết  có thể được tìm thấy trong hiện thực [runtime.cgocallback.go](https://github.com/golang/go/blob/master/src/runtime/cgocallback.go)
 
-[Tiếp theo](ch2-06-qsort.md)
+## Liên kết
+* Phần tiếp theo: [Tạo ra package `qsort`
+](./ch2-06-qsort.md)
+* Phần trước: [Lời gọi hàm
+](./ch2-04-function-call.md)
+* [Mục lục](../SUMMARY.md)

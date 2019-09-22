@@ -91,4 +91,11 @@ $ go build
 $ ./hello
 Hello World
 ```
-[Tiếp theo](ch1-02-hello-revolution.md)
+
+
+## Liên kết
+* Phần tiếp theo: [Sự tiến hóa của "Hello World"
+](./ch1-02-hello-revolution.md)
+* Phần trước: [Chương 1](./README.md)
+* [Mục lục](../SUMMARY.md)
+

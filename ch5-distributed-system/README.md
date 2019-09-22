@@ -11,6 +11,17 @@
 
 >*“We used it to write our own simple distributed computing software after realizing hadoop was too complicated (and thus bug prone) for our embarrassingly parallel needs. It took us less time to get the system written, stable and up and running then it had to get hadoop setup” – micro_cam in Hacker News*
 
-Ngôn ngữ Go được biết đến như là ngôn ngữ C của thời đại Internet. Ngày nay, hệ thống Internet không phải là thời đại khi các hệ thống trước đó đã làm mọi thứ rồi. Các dịch vụ trong kỷ nguyên Internet đã và đang sử dụng một số lượng lớn các hệ thống phân tán. Đồng thời, sự trỗi dậy của các nhà cung cấp dịch vụ đám mây như Alibaba Cloud và Tencent Cloud đã đánh dấu sự xuất hiện của kỷ nguyên đám mây. Lập trình phân tán (distributed programming) trong kỷ nguyên đám mây sẽ trở thành một kỹ năng cơ bản. Các hệ thống Docker và K8s được xây dựng trên ngôn ngữ Go đã thúc đẩy sự xuất hiện sớm của kỷ nguyên đám mây này.
+Ngôn ngữ Go ngày càng trở nên phổ biển và đang dần thay thế các ngôn ngữ truyền thống vì các ưu điểm vượt trội của nó. Bên cạnh đó, sự phát triển mạnh mẽ của điện toán đám mây như AWS, Azure,... đã mang lại nhiều lợi ích cho các doanh nghiệp. Và không thể không kể đến các hệ thống như Docker, Kubernetes được xây dựng bằng Go, nhờ chúng mà kỷ nguyên đám mây đã phát triển mạnh mẽ và nhanh chóng. Cùng với đó, nó lại kéo theo là các mô hình thiết kế hiện đại ra đời như serverless, microservices, ..., nơi mà phần cứng đã đạt giới hạn của nó, ta không thể tiếp tục mở rộng theo kiểu `vertical` mà thay vào đó phải tập trung theo `horizontal` hay chia nhỏ vấn đề lớn thành nhiều vấn đề nhỏ để giải quyết. Lúc này, ta sẽ gặp lại các câu hỏi quen thuộc trong hệ thống phân tán như:
 
-Ở chương này đối với các hệ thống phân tán đã được phát triển tốt, chúng tôi sẽ trình bày ngắn gọn về cách sử dụng chúng để cải thiện hiệu quả công việc. Đối với các hệ thống không có giải pháp sẵn có, chúng tôi sẽ đề xuất một giải pháp dựa trên các nhu cầu kinh doanh.
+- Làm sao tạo một ID duy nhất trong hệ thống phân tán?
+- Làm sao tạo ra một `lock` phân tán trên nhiều hệ thống?
+- Làm sao cân bằng tải trong hệ thống?
+- Tính thống nhất khi nhiều hệ thống sử dụng chung cấu hình?
+- Thu thập dữ liệu lớn?
+
+Các vấn đề trên tuy không mới nhưng ở đây, chúng ta sẽ giải quyết chúng theo cách của Go.
+
+## Liên kết
+* Phần tiếp theo: [Distributed ID generator](./ch5-01-dist-id.md)
+* Phần trước: [Chương 4: Lời nói thêm](../ch4-web/ch4-08-ext.md)
+* [Mục lục](../SUMMARY.md)

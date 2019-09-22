@@ -42,23 +42,9 @@ func main() {
 
 Hàm `div` ở trên thực hiện một phép toán chia số nguyên và trả về kết quả của phép chia.
 
-Tuy nhiên, không có cách xử lý đặc biệt nào cho trường hợp số chia là 0. Vì ngôn ngữ C không hỗ trợ trả về nhiều kết quả, thư viện chuẩn <errno.h> cung cấp macro `errno` để trả về trạng thái lỗi. Nếu bạn muốn trả về lỗi khi số chia là 0 còn những lần khác trả về kết quả bình thường. Chúng ta có thể xem  `errno` là một biến toàn cục thread-safe có thể được sử dụng để ghi lại mã trạng thái của lỗi đây đây nhất.
+Tuy nhiên, không có cách xử lý đặc biệt nào cho trường hợp số chia là 0. Vì ngôn ngữ C không hỗ trợ trả về nhiều kết quả nên nếu bạn muốn trả về lỗi khi số chia là 0 thì có thể xem  `errno` là một biến toàn cục thread-safe có thể được sử dụng để ghi lại mã trạng thái của lỗi đây đây nhất.
 
-Hàm `div` cải tiến được hiện thực như sau:
-
-```c
-#include <errno.h>
-
-int div(int a, int b) {
-    if(b == 0) {
-        errno = EINVAL;
-        return 0;
-    }
-    return a/b;
-}
-```
-
-CGO cũng có hỗ trợ đặc biệt cho các macro `errno`  thuộc thư viện tiêu chuẩn <errno.h>: nếu có hai giá trị trả về khi CGO gọi hàm C thì giá trị trả về thứ hai sẽ tương ứng với trạng thái lỗi `errno`.
+CGO hỗ trợ các macro `errno`  thuộc thư viện tiêu chuẩn <errno.h>: nếu có hai giá trị trả về khi CGO gọi hàm C thì giá trị trả về thứ hai sẽ tương ứng với trạng thái lỗi `errno`.
 
 ```go
 /*
@@ -188,4 +174,9 @@ void foo() {
 
 Khi export interface của ngôn ngữ C, ta cần đảm bảo rằng các tham số hàm và kiểu giá trị trả về là kiểu "thân thiện" với C (xem lại [2.3](./ch2-03-type-conversion.md)) đồng thời giá trị trả về không được trực tiếp hoặc gián tiếp chứa con trỏ vào không gian bộ nhớ ngôn ngữ Go.
 
-[Tiếp theo](ch2-05-internal-mechanisms.md)
+## Liên kết
+* Phần tiếp theo: [Cơ chế bên trong CGO
+](./ch2-05-internal-mechanisms.md)
+* Phần trước: [Chuyển đổi kiểu dữ liệu
+](./ch2-03-type-conversion.md)
+* [Mục lục](../SUMMARY.md)
