@@ -2,5 +2,5 @@
 .vscode
 .txt
 _book
-./DS_Store
+**/DS_Store
 gen.sh
