@@ -1,8 +1,11 @@
 # 5.5 Quản lý cấu hình trong hệ thống phân tán
 
-Trong hệ thống phân tán, thường có những vấn đề gây phiền cho chúng ta. Mặc dù, hiện tại có một số cách để thay đổi cấu hình nhưng vẫn bị hạn chế bởi cách hoạt động nội bộ của hệ thống và lúc này sẽ không có cách nào để thay đổi cấu hình một cách thuận tiện nhất. Ví dụ: để giới hạn dòng chảy xuống `downstream`, chúng ta có thể tích luỹ dữ liệu lại và sau khi lượng tích luỹ đến một ngưỡng thời gian hay tổng số tiền thì ta bắt đầu gửi đi, điều này tránh được việc gửi quá nhiều cho `downstream`. Trong trường hợp này, ta lại rất khó để thay đổi cấu hình.
+Trong hệ thống phân tán, thường có những vấn đề gây phiền cho chúng ta. Mặc dù, hiện tại có một số cách để thay đổi cấu hình nhưng vẫn bị hạn chế bởi cách hoạt động nội bộ của hệ thống và lúc này sẽ không có cách nào để thay đổi cấu hình một cách thuận tiện nhất. Ví dụ: để giới hạn dòng chảy xuống `downstream`, chúng ta có thể tích luỹ dữ liệu lại và sau đó, nếu lượng tích luỹ đến ngưỡng về thời gian hay số lượng thì ta bắt đầu gửi đi, điều này tránh được việc gửi quá nhiều cho `downstream`. Với trường hợp này, ta lại rất khó để thay đổi cấu hình.
 
-Do đó, mục tiêu của chúng ta là tránh áp dụng hoặc bỏ qua phương pháp trực tuyến và thực hiện một số sửa đổi cho chương trình trực tuyến. Một sửa đổi điển hình là mục cấu hình của chương trình.
+Do đó, trong chương này, ta sẽ tìm hiểu cách cấu hình cho hệ thống phân tán bằng Go và các vấn đề cần cân nhắc khi sử dụng cách cấu hình trực tuyến. 
+
+Quản lý cấu hình trong hệ thống phân tán là một vấn đề cực kì khó. Ngay cả một công ty công nghệ hàng đầu thế giới như Google cũng đã gặp vấn đề và làm cho họ giảm chất lượng dịch vụ rất nhiều. Chi tiết bài viết của Google [ở đây](https://cloud.google.com/blog/topics/inside-google-cloud/an-update-on-sundays-service-disruption).
+
 
 ## 5.5.1 Thảo luận các ví dụ
 
