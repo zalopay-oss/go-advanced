@@ -236,4 +236,9 @@ $ gcc -o a.out _test_main.c number.so
 $ ./a.out
 ```
 
-[Tiếp theo](ch2-10-link.md)
+## Liên kết
+* Phần tiếp theo: [Biên dịch và liên kết các tham số
+](./ch2-10-link.md)
+* Phần trước: [C++ Class Packaging
+](./ch2-08-c-class.md)
+* [Mục lục](../SUMMARY.md)

@@ -11,7 +11,7 @@ Trong phần này, chúng ta sẽ tìm hiểu cách sử dụng CGO cơ bản  t
 ***Windows***
 
 - CGO không tương thích với Cygwin
-- Để dùng được CGO ban5 phải cài đặt MingGW và sử dụng cmd của Windows
+- Để dùng được CGO bạn phải cài đặt MingGW và sử dụng cmd của Windows
 
 ## 2.1.1. Chương trình CGO đơn giản
 
@@ -273,4 +273,8 @@ func SayHello(s string) {
 
 Có vẻ như tất cả đều được viết bằng Go, nhưng việc triển khai từ hàm `main()` của ngôn ngữ Go đến phiên bản ngôn ngữ C đã tự động tạo ra hàm `SayHello`, rồi cuối cùng trở lại môi trường ngôn ngữ Go.
 
-[Tiếp theo](ch2-01-quick-start.md)
+
+## Liên kết
+* Phần tiếp theo: [CGO Foundation](./ch2-02-cgo-foundation.md) 
+* Phần trước: [Chương 1](../ch1-basic/README.md)
+* [Mục lục](../SUMMARY.md)

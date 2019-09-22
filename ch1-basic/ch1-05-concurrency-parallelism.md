@@ -162,4 +162,9 @@ func main() {
 
 Ở phần tiếp theo chúng ta sẽ đi tới những ví dụ phức tạp hơn như cách xử lý race-condition trong Golang, sử dụng channel để chặn các goroutine,...
 
-[Tiếp theo](ch1-06-common-concurrency-mode.md)
+## Liên kết
+* Phần tiếp theo: [Mô hình thực thi đồng thời
+](./ch1-06-common-concurrency-mode.md)
+* Phần trước: [Functions, Methods và Interfaces
+](./ch1-04-func-method-interface.md)
+* [Mục lục](../SUMMARY.md)

@@ -1,4 +1,4 @@
-# 5.3 Hệ thống tác vụ có trì hoãn (Delayed Task System)
+# 5.3 Hệ thống tác vụ có trì hoãn
 
 Khi chúng ta xây dựng hệ thống, chúng ta thường xử lý các công việc trên thời gian thực. Người dùng gửi yêu cầu và sau đó được phản hồi ngay lập tức. Nhưng đôi khi bạn sẽ gặp các công việc không theo thời gian thực, chẳng hạn như đưa ra các thông báo quan trọng tại một thời điểm cụ thể. Hoặc bạn cần làm một cái gì đó cụ thể sau khi người dùng đã thực hiện một vài thứ trong X phút / Y giờ, chẳng hạn như thông báo, phát hành trái phiếu, ...
 
@@ -94,7 +94,7 @@ Nếu bạn áp dụng cách thứ hai, nó sẽ tăng gánh nặng của hệ t
 
 Khi tác vụ của chúng ta thực hiện lỗi do một máy nào đó trong cụm có vấn đề, tác vụ cần được thực hiện lại. Theo chiến lược modulo phía trên, việc phân phối lại các tác vụ chưa được xử lý bởi server này sẽ rắc rối hơn. Nếu đó là một hệ thống đang thực sự chạy, bạn phải chú ý nhiều hơn đến việc cân bằng các nhiệm vụ trong trường hợp có lỗi xảy ra.
 
-Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của [Elaticsearch](https://www.elastic.co/), mỗi dữ liệu của tác vụ có nhiều bản sao. Giả sử có hai bản sao như hình sau:
+Chúng ta có thể tham khảo thiết kế phân phối dữ liệu của [ElasticSearch](https://www.elastic.co/), mỗi dữ liệu của tác vụ có nhiều bản sao. Giả sử có hai bản sao như hình sau:
 
 <div align="center">
 	<img src="../images/ch6-task-data-dis.png" width="300">
@@ -122,4 +122,7 @@ Tất nhiên, bạn cũng có thể sử dụng một ý tưởng phức tạp h
 
 Như đã đề cập, chúng ta sẽ sử dụng hàng đợi tin nhắn để thông báo cho người dùng. Khi sử dụng hàng đợi tin nhắn, nhiều hàng đợi không hỗ trợ [exactly once](https://streaml.io/blog/exactly-once). Trong trường hợp này, chúng ta cần để người dùng tự xử lý việc nhận tin nhắn 2 lần hoặc thiếu tin nhắn (xử lý tạm thời).
 
-[Tiếp theo](ch5-04-search-engine.md)
+## Liên kết
+* Phần tiếp theo: [Cân bằng tải](./ch5-04-search-engine.md)
+* Phần trước: [Lock phân tán](./ch5-02-lock.md)
+* [Mục lục](../SUMMARY.md)

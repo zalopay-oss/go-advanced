@@ -859,4 +859,7 @@ Khi hàm `main` kết thúc hoạt động, nó được thông báo bằng lệ
 
 Concurrency là một chủ đề rất lớn, và ở đây chúng tôi chỉ đưa ra một vài ví dụ về lập trình concurrency rất cơ bản. Tài liệu chính thức cũng có rất nhiều cuộc thảo luận về lập trình concurrency, có khá nhiều  cuốn sách  thảo luận cụ thể về lập trình concurrency trong Golang. Độc giả có thể tham khảo các tài liệu liên quan theo nhu cầu của mình.
 
-[Tiếp theo](ch1-07-error-and-panic.md)
+## Liên kết
+* Phần tiếp theo: [Error và Exceptions](./ch1-07-error-and-panic.md)
+* Phần trước: [Mô hình lập trình đồng thời và lập trình song song](./ch1-05-concurrency-parallelism.md)
+* [Mục lục](../SUMMARY.md)

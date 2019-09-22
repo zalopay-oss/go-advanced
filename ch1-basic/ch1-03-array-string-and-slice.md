@@ -144,7 +144,6 @@ Một array có chiều dài 0 thì không chiếm không gian lưu trữ.
 <div align="center">
 	<img src="../images/ch1-string.png" width="400">
 </div>
-<br/>
 
 `string` cũng là một array của các `byte` dữ liệu, nhưng khác với array những phần tử của string là [immutable](https://en.wikipedia.org/wiki/Immutable_object).
 
@@ -202,7 +201,7 @@ fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
 ## 1.3.3. Slice
 
 <div align="center">
-	<img src="../images/1-3-golang-slices-length-capacity.jpg"width="500">
+	<img src="../images/1-3-golang-slices-length-capacity.png"width="550">
 	<br/>
 	<span align="center">
 		<i>Cấu trúc Slice</i>
@@ -220,7 +219,11 @@ type  SliceHeader  struct {
 	Cap   int 
 }
 ```
-Ngoài `Data` và `Len`, slice có thêm thuộc tính `Cap` chỉ ra kích thước tối đa mà vùng nhớ trỏ tới slice được cấp phát. 
+
+Slice được xem là fat pointer, các bạn có thể đọc thêm ở bài viết sau để hiểu hơn về fat pointer trong [Go](https://nullprogram.com/blog/2019/06/30/). Cấu trúc slice bao gồm:
+- `Data`: là con trỏ chứa địa chỉ của một array.
+- `Len`: độ dài của slice.
+- `Cap`: kích thước tối đa mà vùng nhớ trỏ tới slice được cấp phát. 
 
 Hình bên dưới sẽ miêu tả slice `x := []int{2,3,5,7,11}` và slice `y := x[1:3]`:
 
@@ -257,7 +260,26 @@ var (
 )
 ```
 
-Duyệt qua slice thì tương tự như duyệt qua một arrays
+Khi chúng ta sử dụng cú pháp tạo slice từ một slice cho trước như sau: **d = c[:2]** thì chúng ta nên lưu ý ở điểm sau. Slice sẽ không sao chép dữ liệu của slice gốc c qua d mà nó tạo ra một giá trị slice mới trỏ đến mảng ban đầu. Do đó, sửa đổi các phần tử của slice vừa được tạo sẽ sửa đổi các phần tử của slice gốc.Ví dụ minh hoạ:
+
+```go
+old := []byte{'r', 'o', 'a', 'd'}
+
+new := old[2:] 
+// new = []byte{'a', 'd'}
+
+new[1] = 'm'
+// new = []byte{'a', 'm'}
+// old = []byte{'r', 'o', 'a', 'm'}
+```
+
+Các tác vụ cơ bản trong slice bao gồm:
+  * Duyệt qua các phần tử của slice
+  * Thêm phần tử vào slice
+  * Xóa phần tử trong slcie
+
+#### Duyệt qua slice 
+Duyệt qua slice thì tương tự như duyệt qua một arrays.
 
 ```go
 for i := range a {
@@ -270,11 +292,6 @@ for i := 0; i < len(c); i++ {
 	fmt.Printf("c[%d]: %d\n", i, c[i])
 }
 ```
-
-Các tác vụ cơ bản trong slice bao gồm:
-  * Thêm phần tử vào slice
-  * Xóa phần tử trong slcie
-  * Duyệt qua các phần tử của slice
 
 #### Thêm phần tử vào slice
 
@@ -290,8 +307,55 @@ a = append(a, 1, 2, 3)
 a = append(a, []int{1,2,3}...)
 ```
 
-Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào phần tử, hàm `append` sẽ hiện thực cấp phát lại vùng nhớ, chi phí của việc cấp phát và sao chép là tương đối đáng kể.
+Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào phần tử, hàm append sẽ hiện thực cấp phát lại vùng nhớ có kích thước gấp đôi vùng nhớ cũ và sao chép dữ liệu sang. Các bạn có thêt xem đoạn mã nguồn về việc cấp pháp lại vùng nhớ cho slice [ở đây](https://golang.org/src/runtime/slice.go?fbclid=IwAR0xgVnf7SFJu_Kai8zo_5PZXolsuEL3JgfKejj7Ww0CpO1G82rbXbcWosQ#L66).
 
+<div align="center">
+	<img src="../images/recapacity-slice.png"width="550">
+	<br/>
+	<span align="center">
+		<i>Cấu trúc Slice</i>
+	</span>
+</div>
+
+Ví dụ bên dưới cho thấy giá trị **cap tăng gấp 2** khi thực thi hàm append vượt quá kích thước ban đầu.
+
+```go
+func myAppend(sl []int, val int) []int{
+	sl = append(sl, val)
+	printSlice(sl)
+	return sl
+}
+
+func printSlice(sl []int) {
+	fmt.Printf("Slice %v\n", sl)
+	fmt.Printf("Len %v, Cap %v\n\n", len(sl), cap(sl))
+}
+
+func main() {
+	sl := make([]int, 1)
+	printSlice(sl)
+	for i := 1; i < 5; i ++ {
+		sl = myAppend(sl, i)
+	}
+}
+
+/**
+* Slice [0]
+* Len 1, Cap 1
+*
+* Slice [0 1]
+* Len 2, Cap 2
+*
+* Slice [0 1 2]
+* Len 3, Cap 4
+*
+* Slice [0 1 2 3]
+* Len 4, Cap 4
+*
+* Slice [0 1 2 3 4]
+* Len 5, Cap 8
+*/
+```
 Bên cạnh thêm phần tử vào cuối slice, chúng ta cũng có thể thêm phần tử vào đầu slice như sau
 
 ```go
@@ -477,4 +541,9 @@ a[len(a)-1] = nil
 a = a[:len(a)-1]
 ```
 
-[Tiếp theo](ch1-04-func-method-interface.md)
+## Liên kết
+* Phần tiếp theo: [Functions, Methods và Interfaces
+](./ch1-04-func-method-interface.md)
+* Phần trước: [Sự tiến hóa của "Hello World"
+](./ch1-02-hello-revolution.md)
+* [Mục lục](../SUMMARY.md)

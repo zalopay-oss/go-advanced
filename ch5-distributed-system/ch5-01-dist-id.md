@@ -245,4 +245,7 @@ func main() {
 // ID: 84989976554504193
 ```
 
-[Tiếp theo](ch5-02-lock.md)
+## Liên kết
+* Phần tiếp theo: [Lock phân tán (Distributed lock)](./ch5-02-lock.md)
+* Phần trước: [Chương 5: Distributed System](./README.md)
+* [Mục lục](../SUMMARY.md)
