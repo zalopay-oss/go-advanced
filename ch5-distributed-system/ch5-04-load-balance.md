@@ -11,6 +11,8 @@ Phần này sẽ thảo luận về các phương pháp phổ biến trong cân 
 
 ## 5.4.1 Ý tưởng cân bằng tải
 
+Cân bằng tải luôn là một vấn đề đáng chú trọng khi xây dựng một hệ thống phân tán. Có rất nhiều mô hình để đặt cân bằng tải: ở phía client, ở phía gateway, ở sidecar,... Mỗi mô hình đều có ưu nhược điểm riêng, tùy vào nhu cầu và điều kiện hiện tại của bạn để chọn một cách phù hợp nhất. Nhưng, dù nó đặt ở đâu, vấn đề của cân bằng tải vẫn luôn là giải thuật cân bằng tải như thế nào để mang lại tính cân bằng nhất cho các hệ thống con. Một giải thuật tốt sẽ đem lại một hiệu năng tốt cho toàn hệ thống, giảm khả năng `bottleneck` khi lượng truy cập lớn chỉ dồn vào service. Trong chương này, ta sẽ tìm hiểu về cách cân bằng tải và các lưu ý khi sử dụng các thuật toán cân bằng tải.
+
 Khi có N node cùng cung cấp service và chúng ta cần chọn một trong số đó để thực hiện quy trình business. Có một số ý tưởng:
 
 1. Chọn theo thứ tự: lần gần nhất bạn chọn cái đầu tiên, thì lần này bạn chọn cái thứ hai, rồi cứ thế với cái tiếp theo. Nếu bạn đã đạt đến cái cuối cùng, thì cái tiếp theo bắt đầu từ cái đầu tiên. Trong trường hợp này, chúng ta có thể lưu trữ thông tin node dịch vụ trong một mảng. Sau khi mỗi yêu cầu được hoàn thành xuôi dòng, chúng ta di chuyển chỉ mục đi tiếp. Di chuyển trở lại đầu của mảng khi bạn di chuyển đến cuối.
@@ -113,6 +115,18 @@ func shuffle(n int) []int {
 Hiện tại, chúng ta có thể sử dụng `rand.Perm` để lấy mảng chỉ mục mà chúng ta muốn.
 
 ## 5.4.3 Kiểm tra tính ảnh hưởng của thuật toán cân bằng tải
+
+Giả sử, ta cần chọn một node từ N node để gửi yêu cầu. Sau khi yêu cầu ban đầu kết thúc, các yêu cầu tiếp theo sẽ xáo trộn lại mảng, do đó không có mối quan hệ nào giữa hai yêu cầu. Ví thế, thuật toán ở trên sẽ không cần khởi tạo bất kì random seed nào.
+
+Tuy nhiên, trong một số trường hợp đặc biệt, chẳng hạn như khi sử dụng ZooKeeper, khi máy khách khởi tạo việc lựa chọn node từ nhiều node dịch vụ, một kết nối được thiết lập cho node. Yêu cầu máy khách sau đó được gửi đến node. Node tiếp theo trong danh sách được chọn cho đến khi không còn node nào có sẵn. Lúc này, việc lựa chọn node kết nối ban đầu là "đúng chuẩn" ngẫu nhiên. Tuy nhiên, tất cả các máy khách sẽ kết nối với cùng một ZooKeeper khi chúng khởi động cùng lúc, lúc này sẽ không có tải cân bằng. Nếu doanh nghiệp của bạn cần phát triển tính năng hàng ngày, thì bạn phải xem xét liệu có một tình huống tương tự như trên xảy ra không. Cách đặt random seed cho thư viện rand:
+
+```go
+rand.Seed(time.Now().UnixNano())
+```
+
+Lý do cho những kết luận này là phiên bản trước của thư viện Open source ZooKeeper được sử dụng rộng rãi đã mắc phải những lỗi trên và mãi đến đầu năm 2016, vấn đề mới được khắc phục.
+
+## 5.4.4 Kiểm tra lại ảnh hưởng của thuật toán cân bằng tải
 
 Chúng ta không xét trường hợp cân bằng tải có trọng số ở đây. Bây giờ, điều quan trọng nhất là sự cân bằng. Chúng ta chỉ đơn giản so sánh thuật toán xáo trộn trong phần mở đầu với kết quả của thuật toán Fisher-Yates:
 
