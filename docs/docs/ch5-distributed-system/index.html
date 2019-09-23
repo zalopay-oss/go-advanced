@@ -1,0 +1,845 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Chương 5: Hệ thống phân tán · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch5-01-dist-id.html" />
+    
+    
+    <link rel="prev" href="../ch4-web/ch4-08-ext.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ch1-basic/">
+            
+                <a href="../ch1-basic/">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ch1-basic/ch1-01-genesis.html">
+            
+                <a href="../ch1-basic/ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                <a href="../ch1-basic/ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                <a href="../ch1-basic/ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                <a href="../ch1-basic/ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../ch1-basic/ch1-05-concurrency-parallelism.html">
+            
+                <a href="../ch1-basic/ch1-05-concurrency-parallelism.html">
+            
+                    
+                    1.5 Khái niệm xử lý đồng thời và song song
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                <a href="../ch1-basic/ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Mô hình thực thi đồng thời
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                <a href="../ch1-basic/ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10 Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-rpc/">
+            
+                <a href="../ch3-rpc/">
+            
+                    
+                    Chương 3: Remote Procedure Call
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../ch3-rpc/ch3-01-rpc-go.html">
+            
+                <a href="../ch3-rpc/ch3-01-rpc-go.html">
+            
+                    
+                    3.1 Giới thiệu về RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../ch3-rpc/ch3-02-pb-intro.html">
+            
+                <a href="../ch3-rpc/ch3-02-pb-intro.html">
+            
+                    
+                    3.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../ch3-rpc/ch3-03-grpc.html">
+            
+                <a href="../ch3-rpc/ch3-03-grpc.html">
+            
+                    
+                    3.3 Làm quen với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../ch3-rpc/ch3-04-grpc-expand.html">
+            
+                <a href="../ch3-rpc/ch3-04-grpc-expand.html">
+            
+                    
+                    3.4 Một số vấn đề khác của gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../ch3-rpc/ch3-05-grpc-ext.html">
+            
+                <a href="../ch3-rpc/ch3-05-grpc-ext.html">
+            
+                    
+                    3.5 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../ch3-rpc/ch3-06-grpc-curl.mdd">
+            
+                <span>
+            
+                    
+                    3.6 Công cụ grpcurl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../ch3-rpc/ch3-07-supplementary-notes.md">
+            
+                <span>
+            
+                    
+                    3.7 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-web/">
+            
+                <a href="../ch4-web/">
+            
+                    
+                    Chương 4: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-web/ch4-01-intro.html">
+            
+                <a href="../ch4-web/ch4-01-intro.html">
+            
+                    
+                    4.1 Giới thiệu chương trình Web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-web/ch4-02-router.html">
+            
+                <a href="../ch4-web/ch4-02-router.html">
+            
+                    
+                    4.2 Routing trong Web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-web/ch4-03-middleware.html">
+            
+                <a href="../ch4-web/ch4-03-middleware.html">
+            
+                    
+                    4.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-web/ch4-04-request-verification.html">
+            
+                <a href="../ch4-web/ch4-04-request-verification.html">
+            
+                    
+                    4.4 Kiểm tra tính hợp lệ của request
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-web/ch4-05-database.html">
+            
+                <a href="../ch4-web/ch4-05-database.html">
+            
+                    
+                    4.5 Làm việc với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                <a href="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                    
+                    4.6 Giới hạn lưu lượng Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                <a href="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                    
+                    4.7 Mô hình của các dự án web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-web/ch4-08-ext.html">
+            
+                <a href="../ch4-web/ch4-08-ext.html">
+            
+                    
+                    4.8 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 5: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="ch5-01-dist-id.html">
+            
+                <a href="ch5-01-dist-id.html">
+            
+                    
+                    5.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="ch5-02-lock.html">
+            
+                <a href="ch5-02-lock.html">
+            
+                    
+                    5.2 Lock phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="ch5-03-delay-job.html">
+            
+                <a href="ch5-03-delay-job.html">
+            
+                    
+                    5.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="ch5-04-load-balance.html">
+            
+                <a href="ch5-04-load-balance.html">
+            
+                    
+                    5.4 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="ch5-05-config.html">
+            
+                <a href="ch5-05-config.html">
+            
+                    
+                    5.5 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="ch5-06-crawler.html">
+            
+                <a href="ch5-06-crawler.html">
+            
+                    
+                    5.6 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="ch5-07-ext.html">
+            
+                <a href="ch5-07-ext.html">
+            
+                    
+                    5.7 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-best-practice/README.md">
+            
+                <span>
+            
+                    
+                    Chương 6: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Chương 5: Hệ thống phân tán</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="chapter-5-h&#x1EC7;-th&#x1ED1;ng-ph&#xE2;n-t&#xE1;n">Chapter 5 H&#x1EC7; th&#x1ED1;ng ph&#xE2;n t&#xE1;n</h1>
+<p><div align="center">
+    <img src="../images/ch6.png">
+    <br>
+    <span align="center">
+        <i></i>
+    </span>
+</div>
+<br></p>
+<blockquote>
+<p><em>&#x201C;We used it to write our own simple distributed computing software after realizing hadoop was too complicated (and thus bug prone) for our embarrassingly parallel needs. It took us less time to get the system written, stable and up and running then it had to get hadoop setup&#x201D; &#x2013; micro_cam in Hacker News</em></p>
+</blockquote>
+<p>Ng&#xF4;n ng&#x1EEF; Go ng&#xE0;y c&#xE0;ng tr&#x1EDF; n&#xEA;n ph&#x1ED5; bi&#x1EC3;n v&#xE0; &#x111;ang d&#x1EA7;n thay th&#x1EBF; c&#xE1;c ng&#xF4;n ng&#x1EEF; truy&#x1EC1;n th&#x1ED1;ng v&#xEC; c&#xE1;c &#x1B0;u &#x111;i&#x1EC3;m v&#x1B0;&#x1EE3;t tr&#x1ED9;i c&#x1EE7;a n&#xF3;. B&#xEA;n c&#x1EA1;nh &#x111;&#xF3;, s&#x1EF1; ph&#xE1;t tri&#x1EC3;n m&#x1EA1;nh m&#x1EBD; c&#x1EE7;a &#x111;i&#x1EC7;n to&#xE1;n &#x111;&#xE1;m m&#xE2;y nh&#x1B0; AWS, Azure,... &#x111;&#xE3; mang l&#x1EA1;i nhi&#x1EC1;u l&#x1EE3;i &#xED;ch cho c&#xE1;c doanh nghi&#x1EC7;p. V&#xE0; kh&#xF4;ng th&#x1EC3; kh&#xF4;ng k&#x1EC3; &#x111;&#x1EBF;n c&#xE1;c h&#x1EC7; th&#x1ED1;ng nh&#x1B0; Docker, Kubernetes &#x111;&#x1B0;&#x1EE3;c x&#xE2;y d&#x1EF1;ng b&#x1EB1;ng Go, nh&#x1EDD; ch&#xFA;ng m&#xE0; k&#x1EF7; nguy&#xEA;n &#x111;&#xE1;m m&#xE2;y &#x111;&#xE3; ph&#xE1;t tri&#x1EC3;n m&#x1EA1;nh m&#x1EBD; v&#xE0; nhanh ch&#xF3;ng. C&#xF9;ng v&#x1EDB;i &#x111;&#xF3;, n&#xF3; l&#x1EA1;i k&#xE9;o theo l&#xE0; c&#xE1;c m&#xF4; h&#xEC;nh thi&#x1EBF;t k&#x1EBF; hi&#x1EC7;n &#x111;&#x1EA1;i ra &#x111;&#x1EDD;i nh&#x1B0; serverless, microservices, ..., n&#x1A1;i m&#xE0; ph&#x1EA7;n c&#x1EE9;ng &#x111;&#xE3; &#x111;&#x1EA1;t gi&#x1EDB;i h&#x1EA1;n c&#x1EE7;a n&#xF3;, ta kh&#xF4;ng th&#x1EC3; ti&#x1EBF;p t&#x1EE5;c m&#x1EDF; r&#x1ED9;ng theo ki&#x1EC3;u <code>vertical</code> m&#xE0; thay v&#xE0;o &#x111;&#xF3; ph&#x1EA3;i t&#x1EAD;p trung theo <code>horizontal</code> hay chia nh&#x1ECF; v&#x1EA5;n &#x111;&#x1EC1; l&#x1EDB;n th&#xE0;nh nhi&#x1EC1;u v&#x1EA5;n &#x111;&#x1EC1; nh&#x1ECF; &#x111;&#x1EC3; gi&#x1EA3;i quy&#x1EBF;t. L&#xFA;c n&#xE0;y, ta s&#x1EBD; g&#x1EB7;p l&#x1EA1;i c&#xE1;c c&#xE2;u h&#x1ECF;i quen thu&#x1ED9;c trong h&#x1EC7; th&#x1ED1;ng ph&#xE2;n t&#xE1;n nh&#x1B0;:</p>
+<ul>
+<li>L&#xE0;m sao t&#x1EA1;o m&#x1ED9;t ID duy nh&#x1EA5;t trong h&#x1EC7; th&#x1ED1;ng ph&#xE2;n t&#xE1;n?</li>
+<li>L&#xE0;m sao t&#x1EA1;o ra m&#x1ED9;t <code>lock</code> ph&#xE2;n t&#xE1;n tr&#xEA;n nhi&#x1EC1;u h&#x1EC7; th&#x1ED1;ng?</li>
+<li>L&#xE0;m sao c&#xE2;n b&#x1EB1;ng t&#x1EA3;i trong h&#x1EC7; th&#x1ED1;ng?</li>
+<li>T&#xED;nh th&#x1ED1;ng nh&#x1EA5;t khi nhi&#x1EC1;u h&#x1EC7; th&#x1ED1;ng s&#x1EED; d&#x1EE5;ng chung c&#x1EA5;u h&#xEC;nh?</li>
+<li>Thu th&#x1EAD;p d&#x1EEF; li&#x1EC7;u l&#x1EDB;n?</li>
+</ul>
+<p>C&#xE1;c v&#x1EA5;n &#x111;&#x1EC1; tr&#xEA;n tuy kh&#xF4;ng m&#x1EDB;i nh&#x1B0;ng &#x1EDF; &#x111;&#xE2;y, ch&#xFA;ng ta s&#x1EBD; gi&#x1EA3;i quy&#x1EBF;t ch&#xFA;ng theo c&#xE1;ch c&#x1EE7;a Go.</p>
+<h2 id="li&#xEA;n-k&#x1EBF;t">Li&#xEA;n k&#x1EBF;t</h2>
+<ul>
+<li>Ph&#x1EA7;n ti&#x1EBF;p theo: <a href="ch5-01-dist-id.html">Distributed ID generator</a></li>
+<li>Ph&#x1EA7;n tr&#x1B0;&#x1EDB;c: <a href="../ch4-web/ch4-08-ext.html">Ch&#x1B0;&#x1A1;ng 4: L&#x1EDD;i n&#xF3;i th&#xEA;m</a></li>
+<li><a href="../SUMMARY.md">M&#x1EE5;c l&#x1EE5;c</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../ch4-web/ch4-08-ext.html" class="navigation navigation-prev " aria-label="Previous page: 4.8 Lời nói thêm">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch5-01-dist-id.html" class="navigation navigation-next " aria-label="Next page: 5.1 Distributed id generator">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Chương 5: Hệ thống phân tán","level":"1.6","depth":1,"next":{"title":"5.1 Distributed id generator","level":"1.6.1","depth":2,"path":"ch5-distributed-system/ch5-01-dist-id.md","ref":"ch5-distributed-system/ch5-01-dist-id.md","articles":[]},"previous":{"title":"4.8 Lời nói thêm","level":"1.5.8","depth":2,"path":"ch4-web/ch4-08-ext.md","ref":"ch4-web/ch4-08-ext.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch5-distributed-system/README.md","mtime":"2019-09-22T16:25:50.461Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-22T16:26:45.242Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
