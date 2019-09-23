@@ -307,7 +307,7 @@ a = append(a, 1, 2, 3)
 a = append(a, []int{1,2,3}...)
 ```
 
-Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào phần tử, hàm append sẽ hiện thực cấp phát lại vùng nhớ có kích thước gấp đôi vùng nhớ cũ và sao chép dữ liệu sang. Các bạn có thêt xem đoạn mã nguồn về việc cấp pháp lại vùng nhớ cho slice [ở đây](https://golang.org/src/runtime/slice.go?fbclid=IwAR0xgVnf7SFJu_Kai8zo_5PZXolsuEL3JgfKejj7Ww0CpO1G82rbXbcWosQ#L66).
+Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào phần tử, hàm append sẽ hiện thực cấp phát lại vùng nhớ có kích thước gấp đôi vùng nhớ cũ và sao chép dữ liệu sang. Các bạn có thể xem đoạn mã nguồn về việc cấp pháp lại vùng nhớ cho slice [ở đây](https://golang.org/src/runtime/slice.go?fbclid=IwAR0xgVnf7SFJu_Kai8zo_5PZXolsuEL3JgfKejj7Ww0CpO1G82rbXbcWosQ#L66).
 
 <div align="center">
 	<img src="../images/recapacity-slice.png"width="550">
