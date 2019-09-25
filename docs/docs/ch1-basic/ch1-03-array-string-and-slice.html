@@ -1,0 +1,1254 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>1.3 Array, strings và slices · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ch1-04-func-method-interface.html" />
+    
+    
+    <link rel="prev" href="ch1-02-hello-revolution.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Giới thiệu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Chương 1: Nền tảng ngôn ngữ Go
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="ch1-01-genesis.html">
+            
+                <a href="ch1-01-genesis.html">
+            
+                    
+                    1.1 Nguồn gốc của ngôn ngữ Go
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="ch1-02-hello-revolution.html">
+            
+                <a href="ch1-02-hello-revolution.html">
+            
+                    
+                    1.2 Sự tiến hóa của chương trình "Hello World"
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.3" data-path="ch1-03-array-string-and-slice.html">
+            
+                <a href="ch1-03-array-string-and-slice.html">
+            
+                    
+                    1.3 Array, strings và slices
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="ch1-04-func-method-interface.html">
+            
+                <a href="ch1-04-func-method-interface.html">
+            
+                    
+                    1.4 Functions, Methods và Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="ch1-05-concurrency-parallelism.html">
+            
+                <a href="ch1-05-concurrency-parallelism.html">
+            
+                    
+                    1.5 Khái niệm xử lý đồng thời và song song
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="ch1-06-common-concurrency-mode.html">
+            
+                <a href="ch1-06-common-concurrency-mode.html">
+            
+                    
+                    1.6 Mô hình thực thi đồng thời
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="ch1-07-error-and-panic.html">
+            
+                <a href="ch1-07-error-and-panic.html">
+            
+                    
+                    1.7 Error và Exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../ch2-cgo/">
+            
+                <a href="../ch2-cgo/">
+            
+                    
+                    Chương 2: Lập trình CGO
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../ch2-cgo/ch2-01-quick-start.html">
+            
+                <a href="../ch2-cgo/ch2-01-quick-start.html">
+            
+                    
+                    2.1 Quick Start
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                <a href="../ch2-cgo/ch2-02-CGO-foundation.html">
+            
+                    
+                    2.2 CGO Foundation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                <a href="../ch2-cgo/ch2-03-type-conversion.html">
+            
+                    
+                    2.3 Chuyển đổi kiểu
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../ch2-cgo/ch2-04-function-call.html">
+            
+                <a href="../ch2-cgo/ch2-04-function-call.html">
+            
+                    
+                    2.4 Lời gọi hàm
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                <a href="../ch2-cgo/ch2-05-internal-mechanisms.html">
+            
+                    
+                    2.5 Cơ chế bên trong CGO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                <a href="../ch2-cgo/ch2-09-static-shared-lib.html">
+            
+                    
+                    2.9 Thư viện tĩnh và động
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../ch2-cgo/ch2-10-link.html">
+            
+                <a href="../ch2-cgo/ch2-10-link.html">
+            
+                    
+                    2.10 Biên dịch và liên kết các tham số
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../ch2-cgo/ch2-11-ext.html">
+            
+                <a href="../ch2-cgo/ch2-11-ext.html">
+            
+                    
+                    2.11 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../ch3-rpc/">
+            
+                <a href="../ch3-rpc/">
+            
+                    
+                    Chương 3: Remote Procedure Call
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../ch3-rpc/ch3-01-rpc-go.html">
+            
+                <a href="../ch3-rpc/ch3-01-rpc-go.html">
+            
+                    
+                    3.1 Giới thiệu về RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../ch3-rpc/ch3-02-pb-intro.html">
+            
+                <a href="../ch3-rpc/ch3-02-pb-intro.html">
+            
+                    
+                    3.2 Protobuf
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../ch3-rpc/ch3-03-grpc.html">
+            
+                <a href="../ch3-rpc/ch3-03-grpc.html">
+            
+                    
+                    3.3 Làm quen với gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../ch3-rpc/ch3-04-grpc-expand.html">
+            
+                <a href="../ch3-rpc/ch3-04-grpc-expand.html">
+            
+                    
+                    3.4 Một số vấn đề khác của gRPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../ch3-rpc/ch3-05-grpc-ext.html">
+            
+                <a href="../ch3-rpc/ch3-05-grpc-ext.html">
+            
+                    
+                    3.5 gRPC và Protobuf extensions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../ch3-rpc/ch3-06-grpc-curl.html">
+            
+                <a href="../ch3-rpc/ch3-06-grpc-curl.html">
+            
+                    
+                    3.6 Công cụ grpcurl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../ch3-rpc/ch3-07-supplementary-notes.md">
+            
+                <span>
+            
+                    
+                    3.7 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../ch4-web/">
+            
+                <a href="../ch4-web/">
+            
+                    
+                    Chương 4: Go và Web
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../ch4-web/ch4-01-intro.html">
+            
+                <a href="../ch4-web/ch4-01-intro.html">
+            
+                    
+                    4.1 Giới thiệu chương trình Web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../ch4-web/ch4-02-router.html">
+            
+                <a href="../ch4-web/ch4-02-router.html">
+            
+                    
+                    4.2 Routing trong Web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../ch4-web/ch4-03-middleware.html">
+            
+                <a href="../ch4-web/ch4-03-middleware.html">
+            
+                    
+                    4.3 Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../ch4-web/ch4-04-request-verification.html">
+            
+                <a href="../ch4-web/ch4-04-request-verification.html">
+            
+                    
+                    4.4 Kiểm tra tính hợp lệ của request
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../ch4-web/ch4-05-database.html">
+            
+                <a href="../ch4-web/ch4-05-database.html">
+            
+                    
+                    4.5 Làm việc với Database
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                <a href="../ch4-web/ch4-06-service-flow-limitation.html">
+            
+                    
+                    4.6 Giới hạn lưu lượng Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                <a href="../ch4-web/ch4-07-layout-of-web-project.html">
+            
+                    
+                    4.7 Mô hình của các dự án web
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../ch4-web/ch4-08-ext.html">
+            
+                <a href="../ch4-web/ch4-08-ext.html">
+            
+                    
+                    4.8 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../ch5-distributed-system/">
+            
+                <a href="../ch5-distributed-system/">
+            
+                    
+                    Chương 5: Hệ thống phân tán
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../ch5-distributed-system/ch5-01-dist-id.html">
+            
+                <a href="../ch5-distributed-system/ch5-01-dist-id.html">
+            
+                    
+                    5.1 Distributed id generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../ch5-distributed-system/ch5-02-lock.html">
+            
+                <a href="../ch5-distributed-system/ch5-02-lock.html">
+            
+                    
+                    5.2 Lock phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../ch5-distributed-system/ch5-03-delay-job.html">
+            
+                <a href="../ch5-distributed-system/ch5-03-delay-job.html">
+            
+                    
+                    5.3 Hệ thống tác vụ có trì hoãn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../ch5-distributed-system/ch5-04-load-balance.html">
+            
+                <a href="../ch5-distributed-system/ch5-04-load-balance.html">
+            
+                    
+                    5.4 Cân bằng tải
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../ch5-distributed-system/ch5-05-config.html">
+            
+                <a href="../ch5-distributed-system/ch5-05-config.html">
+            
+                    
+                    5.5 Quản lý cấu hình trong hệ thống phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../ch5-distributed-system/ch5-06-crawler.html">
+            
+                <a href="../ch5-distributed-system/ch5-06-crawler.html">
+            
+                    
+                    5.6 Trình thu thập thông tin phân tán
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../ch5-distributed-system/ch5-07-ext.html">
+            
+                <a href="../ch5-distributed-system/ch5-07-ext.html">
+            
+                    
+                    5.7 Lời nói thêm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../ch6-best-practice/README.md">
+            
+                <span>
+            
+                    
+                    Chương 6: Go Best Practices
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >1.3 Array, strings và slices</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="13-array-strings-v&#xE0;-slices">1.3. Array, strings v&#xE0; slices</h1>
+<p><code>Arrays</code> v&#xE0; m&#x1ED9;t s&#x1ED1; c&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u li&#xEA;n quan kh&#xE1;c &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng th&#x1B0;&#x1EDD;ng xuy&#xEA;n trong c&#xE1;c ng&#xF4;n ng&#x1EEF; l&#x1EAD;p tr&#xEC;nh. Ch&#x1EC9; khi ch&#xFA;ng kh&#xF4;ng &#x111;&#xE1;p &#x1EE9;ng &#x111;&#x1B0;&#x1EE3;c y&#xEA;u c&#x1EA7;u ch&#xFA;ng ta m&#x1EDB;i c&#xE2;n nh&#x1EAF;c s&#x1EED; d&#x1EE5;ng <code>linked lists</code> (danh s&#xE1;ch li&#xEA;n k&#x1EBF;t) v&#xE0; <code>hash tables</code> (b&#x1EA3;ng b&#x103;m) ho&#x1EB7;c nhi&#x1EC1;u c&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u t&#x1EF1; &#x111;&#x1ECB;nh ngh&#x129;a ph&#x1EE9;c t&#x1EA1;p kh&#xE1;c.</p>
+<p><code>Arrays</code>, <code>strings</code> v&#xE0; <code>slices</code> trong ng&#xF4;n ng&#x1EEF; Go l&#xE0; c&#xE1;c c&#x1EA5;u tr&#xFA;c d&#x1EEF; li&#x1EC7;u li&#xEA;n quan m&#x1EAD;t thi&#x1EBF;t v&#x1EDB;i nhau. Ba ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u &#x111;&#xF3; c&#xF3; c&#xF9;ng c&#x1EA5;u tr&#xFA;c v&#xF9;ng nh&#x1EDB; l&#x1B0;u tr&#x1EEF; b&#xEA;n d&#x1B0;&#x1EDB;i, v&#xE0; ch&#x1EC9; c&#xF3; nh&#x1EEF;ng h&#xE0;nh vi th&#x1EC3; hi&#x1EC7;n ra b&#xEA;n ngo&#xE0;i kh&#xE1;c nhau t&#xF9;y thu&#x1ED9;c v&#xE0;o r&#xE0;ng bu&#x1ED9;c ng&#x1EEF; ngh&#x129;a.</p>
+<h2 id="131-array">1.3.1. Array</h2>
+<div align="center">
+    <img src="../images/ch1-1-array-and-array-index-representation.png" width="600">
+    <br>
+    <span align="center">
+        <i>Array</i>
+    </span>
+</div>
+
+<p>Trong ng&#xF4;n ng&#x1EEF; Go, <code>array</code> l&#xE0; m&#x1ED9;t ki&#x1EC3;u gi&#xE1; tr&#x1ECB;. M&#x1EB7;c d&#xF9; nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; c&#x1EE7;a array c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c ch&#x1EC9;nh s&#x1EED;a, ph&#xE9;p g&#xE1;n c&#x1EE7;a array ho&#x1EB7;c khi truy&#x1EC1;n array nh&#x1B0; l&#xE0; m&#x1ED9;t tham s&#x1ED1; c&#x1EE7;a h&#xE0;m th&#xEC; ch&#xFA;ng s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c x&#x1EED; l&#xFD; to&#xE0;n b&#x1ED9;, c&#xF3; th&#x1EC3; hi&#x1EC3;u l&#xE0; khi &#x111;&#xF3; ch&#xFA;ng &#x111;&#x1B0;&#x1EE3;c sao ch&#xE9;p l&#x1EA1;i to&#xE0;n b&#x1ED9; th&#xE0;nh m&#x1ED9;t b&#x1EA3;n sao r&#x1ED3;i m&#x1EDB;i x&#x1EED; l&#xFD; tr&#xEA;n b&#x1EA3;n sao &#x111;&#xF3; (kh&#xE1;c v&#x1EDB;i ki&#x1EC3;u truy&#x1EC1;n tham kh&#x1EA3;o).</p>
+<p>M&#x1ED9;t array l&#xE0; m&#x1ED9;t chu&#x1ED7;i &#x111;&#x1ED9; d&#xE0;i c&#x1ED1; &#x111;&#x1ECB;nh c&#x1EE7;a c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#xF3; ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u n&#xE0;o &#x111;&#xF3;, m&#x1ED9;t array c&#xF3; th&#x1EC3; bao g&#x1ED3;m kh&#xF4;ng ho&#x1EB7;c nhi&#x1EC1;u ph&#x1EA7;n t&#x1EED;. &#x110;&#x1ED9; d&#xE0;i c&#x1EE7;a array l&#xE0; m&#x1ED9;t ph&#x1EA7;n th&#xF4;ng tin &#x111;&#x1B0;&#x1EE3;c ch&#x1EE9;a trong n&#xF3;, c&#xE1;c array c&#xF3; &#x111;&#x1ED9; d&#xE0;i kh&#xE1;c nhau ho&#x1EB7;c ki&#x1EC3;u ph&#x1EA7;n t&#x1EED; b&#xEA;n trong kh&#xE1;c nhau &#x111;&#x1B0;&#x1EE3;c xem l&#xE0; c&#xE1;c ki&#x1EC3;u d&#x1EEF; li&#x1EC7;u kh&#xE1;c nhau, v&#xE0; kh&#xF4;ng &#x111;&#x1B0;&#x1EE3;c ph&#xE9;p g&#xE1;n cho nhau, v&#xEC; th&#x1EBF; array hi&#x1EBF;m khi &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng trong Go.</p>
+<p>C&#xE1;ch &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t array:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// &#x110;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t m&#x1EA3;ng ki&#x1EC3;u int &#x111;&#x1ED9; d&#xE0;i 3, c&#xE1;c ph&#x1EA7;n t&#x1EED; &#x111;&#x1EC1;u b&#x1EB1;ng 0</span>
+<span class="hljs-keyword">var</span> a [<span class="hljs-number">3</span>]<span class="hljs-keyword">int</span>
+<span class="hljs-comment">// &#x110;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t m&#x1EA3;ng c&#xF3; ba ph&#x1EA7;n t&#x1EED; 1, 2, 3, do &#x111;&#xF3; &#x111;&#x1ED9; d&#xE0;i l&#xE0; 3</span>
+<span class="hljs-keyword">var</span> b = [...]<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>} 
+<span class="hljs-comment">// M&#x1EA3;ng n&#xE0;y c&#xF3; 3 ph&#x1EA7;n t&#x1EED; theo th&#x1EE9; t&#x1EF1; l&#xE0; 0, 2, 3</span>
+<span class="hljs-keyword">var</span> c = [...]<span class="hljs-keyword">int</span>{<span class="hljs-number">2</span>: <span class="hljs-number">3</span>, <span class="hljs-number">1</span>: <span class="hljs-number">2</span>} 
+<span class="hljs-comment">// M&#x1EA3;ng n&#xE0;y ch&#x1EE9;a d&#xE3;y c&#xE1;c ph&#x1EA7;n t&#x1EED; l&#xE0; 1, 2, 0 , 0, 5, 6</span>
+<span class="hljs-keyword">var</span> d = [...]<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>: <span class="hljs-number">5</span>, <span class="hljs-number">6</span>}
+</code></pre>
+<p>C&#x1EA5;u tr&#xFA;c v&#xF9;ng nh&#x1EDB; c&#x1EE7;a array th&#xEC; r&#x1EA5;t &#x111;&#x1A1;n gi&#x1EA3;n. V&#xED; d&#x1EE5; cho m&#x1ED9;t array <code>[4]int{2,3,5,7}</code> th&#xEC; c&#x1EA5;u tr&#xFA;c b&#xEA;n d&#x1B0;&#x1EDB;i s&#x1EBD; nh&#x1B0; sau:</p>
+<div align="center">
+    <img src="../images/ch1-7-array-4int.ditaa.png">
+    <br>
+    <span align="center">
+        <i>Array layout</i>
+    </span>
+</div>
+
+<p>Khi bi&#x1EBF;n array &#x111;&#x1B0;&#x1EE3;c g&#xE1;n ho&#x1EB7;c truy&#x1EC1;n, th&#xEC; to&#xE0;n b&#x1ED9; array s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c sao ch&#xE9;p. N&#x1EBF;u k&#xED;ch th&#x1B0;&#x1EDB;c c&#x1EE7;a array l&#x1EDB;n, th&#xEC; ph&#xE9;p g&#xE1;n array s&#x1EBD; ch&#x1ECB;u t&#x1ED5;n ph&#xED; l&#x1EDB;n. &#x110;&#x1EC3; tr&#xE1;nh vi&#x1EC7;c <code>overhead</code> (t&#x1ED5;n ph&#xED;) trong vi&#x1EC7;c sao ch&#xE9;p array, b&#x1EA1;n c&#xF3; th&#x1EC3; truy&#x1EC1;n con tr&#x1ECF; c&#x1EE7;a array.</p>
+<p><strong>L&#x1B0;u &#xFD;:</strong> con tr&#x1ECF; array th&#xEC; kh&#xF4;ng ph&#x1EA3;i l&#xE0; m&#x1ED9;t array.</p>
+<pre><code class="lang-go"><span class="hljs-comment">// a l&#xE0; m&#x1ED9;t array</span>
+<span class="hljs-keyword">var</span> a = [...]<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+<span class="hljs-comment">// b l&#xE0; m&#x1ED9;t con tr&#x1ECF; t&#x1EDB;i array a</span>
+<span class="hljs-keyword">var</span> b = &amp;a
+<span class="hljs-comment">// in ra hai ph&#x1EA7;n t&#x1EED; &#x111;&#x1EA7;u ti&#xEA;n c&#x1EE7;a array a</span>
+fmt.Println(a[<span class="hljs-number">0</span>], a[<span class="hljs-number">1</span>])
+<span class="hljs-comment">// truy xu&#x1EA5;t c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a con tr&#x1ECF; array c&#x169;ng gi&#x1ED1;ng nh&#x1B0; truy xu&#x1EA5;t c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a array</span>
+fmt.Println(b[<span class="hljs-number">0</span>], b[<span class="hljs-number">1</span>])
+<span class="hljs-comment">// duy&#x1EC7;t qua c&#xE1;c ph&#x1EA7;n t&#x1EED; trong con tr&#x1ECF; array, gi&#x1ED1;ng nh&#x1B0; duy&#x1EC7;t qua array</span>
+<span class="hljs-keyword">for</span> index, value := <span class="hljs-keyword">range</span> b {
+<span class="hljs-comment">// thay &#x111;&#x1ED5;i t&#x1EEB;ng ph&#x1EA7;n t&#x1EED; trong b</span>
+    b[index] += <span class="hljs-number">1</span>
+    fmt.Println(index, value)
+}
+<span class="hljs-comment">// gi&#xE1; tr&#x1ECB; c&#x1EE7;a c&#xE1;c ph&#x1EA7;n t&#x1EED; trong a b&#x1ECB; thay &#x111;&#x1ED5;i v&#xEC; b</span>
+<span class="hljs-keyword">for</span> index, value := <span class="hljs-keyword">range</span> a {
+    fmt.Println(index, value)
+}
+</code></pre>
+<p>K&#x1EBF;t qu&#x1EA3; l&#xE0; :</p>
+<pre><code class="lang-sh">$ go run main.go
+1 2
+1 2
+0 1
+1 2
+2 3
+0 2
+1 3
+2 4
+</code></pre>
+<p>H&#xE0;m <code>len</code> c&#xF3; th&#x1EC3; d&#xF9;ng &#x111;&#x1EC3; l&#x1EA5;y th&#xF4;ng tin v&#x1EC1; &#x111;&#x1ED9; d&#xE0;i c&#x1EE7;a array, v&#xE0; h&#xE0;m <code>cap</code> s&#x1EBD; t&#xED;nh to&#xE1;n &#x111;&#x1ED9; d&#xE0;i t&#x1ED1;i &#x111;a c&#x1EE7;a array. Nh&#x1B0;ng trong ki&#x1EC3;u array c&#x1EA3; hai h&#xE0;m n&#xE0;y s&#x1EBD; c&#xF9;ng tr&#x1EA3; v&#x1EC1; m&#x1ED9;t gi&#xE1; tr&#x1ECB; gi&#x1ED1;ng nhau (&#x111;i&#x1EC1;u n&#xE0;y kh&#xE1;c v&#x1EDB;i slice).</p>
+<p>Ch&#xFA;ng ta c&#xF3; th&#x1EC3;  d&#xF9;ng v&#xF2;ng l&#x1EB7;p <code>for</code> d&#x1EC3; duy&#x1EC7;t qua c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a array. Sau &#x111;&#xE2;y l&#xE0; nh&#x1EEF;ng c&#xE1;ch th&#x1B0;&#x1EDD;ng d&#xF9;ng &#x111;&#x1EC3; duy&#x1EC7;t qua m&#x1ED9;t array</p>
+<pre><code class="lang-go"><span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> a {
+    fmt.Printf(<span class="hljs-string">&quot;a[%d]: %d\n&quot;</span>, i, a[i])
+}
+<span class="hljs-keyword">for</span> i, v := <span class="hljs-keyword">range</span> b {
+    fmt.Printf(<span class="hljs-string">&quot;b[%d]: %d\n&quot;</span>, i, v)
+}
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(c); i++ {
+    fmt.Printf(<span class="hljs-string">&quot;c[%d]: %d\n&quot;</span>, i, c[i])
+}
+</code></pre>
+<p><code>for range</code> l&#xE0; c&#xE1;ch t&#x1ED1;t nh&#x1EA5;t &#x111;&#x1EC3; duy&#x1EC7;t qua c&#xE1;c ph&#x1EA7;n t&#x1EED; trong array, b&#x1EDF;i v&#xEC; c&#xE1;ch n&#xE0;y s&#x1EBD; &#x111;&#x1EA3;m c&#xE1;c vi&#x1EC7;c truy xu&#x1EA5;t s&#x1EBD; kh&#xF4;ng v&#x1B0;&#x1EE3;t qu&#xE1; gi&#x1EDB;i h&#x1EA1;n c&#x1EE7;a array.</p>
+<p>C&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a array kh&#xF4;ng nh&#x1EA5;t thi&#x1EBF;t l&#xE0; ki&#x1EC3;u s&#x1ED1; h&#x1ECD;c, n&#xEA;n c&#x169;ng c&#xF3; th&#x1EC3; l&#xE0; string, struct, function, interface, v&#xE0; channel, v,v..</p>
+<pre><code class="lang-go"><span class="hljs-comment">// M&#x1EA3;ng string</span>
+<span class="hljs-keyword">var</span> s1 = [<span class="hljs-number">2</span>]<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>}
+<span class="hljs-keyword">var</span> s2 = [...]<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;Hello!&quot;</span>, <span class="hljs-string">&quot;World&quot;</span>}
+<span class="hljs-keyword">var</span> s3 = [...]<span class="hljs-keyword">string</span>{<span class="hljs-number">1</span>: <span class="hljs-string">&quot;Hello&quot;</span>, <span class="hljs-number">0</span>: <span class="hljs-string">&quot;World&quot;</span>, }
+
+<span class="hljs-comment">// M&#x1EA3;ng struct</span>
+<span class="hljs-keyword">var</span> line1 [<span class="hljs-number">2</span>]image.Point
+<span class="hljs-keyword">var</span> line2 = [...]image.Point{image.Point{X: <span class="hljs-number">0</span>, Y: <span class="hljs-number">0</span>}, image.Point{X: <span class="hljs-number">1</span>, Y: <span class="hljs-number">1</span>}}
+<span class="hljs-keyword">var</span> line3 = [...]image.Point{{<span class="hljs-number">0</span>, <span class="hljs-number">0</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>}}
+
+<span class="hljs-comment">// M&#x1EA3;ng decoder c&#x1EE7;a h&#xEC;nh &#x1EA3;nh</span>
+<span class="hljs-keyword">var</span> decoder1 [<span class="hljs-number">2</span>]<span class="hljs-keyword">func</span>(io.Reader) (image.Image, error)
+<span class="hljs-keyword">var</span> decoder2 = [...]<span class="hljs-keyword">func</span>(io.Reader) (image.Image, error){
+    png.Decode,
+    jpeg.Decode,
+}
+
+<span class="hljs-comment">// M&#x1EA3;ng interface{}</span>
+<span class="hljs-keyword">var</span> unknown1 [<span class="hljs-number">2</span>]<span class="hljs-keyword">interface</span>{}
+<span class="hljs-keyword">var</span> unknown2 = [...]<span class="hljs-keyword">interface</span>{}{<span class="hljs-number">123</span>, <span class="hljs-string">&quot;Hello!&quot;</span>}
+
+<span class="hljs-comment">// M&#x1EA3;ng channel</span>
+<span class="hljs-keyword">var</span> chanList = [<span class="hljs-number">2</span>]<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>{}
+</code></pre>
+<p>Ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; &#x111;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t array r&#x1ED7;ng.</p>
+<pre><code class="lang-go"><span class="hljs-comment">// &#x110;&#x1ECB;nh ngh&#x129;a m&#x1ED9;t array chi&#x1EC1;u d&#xE0;i 0</span>
+<span class="hljs-keyword">var</span> d [<span class="hljs-number">0</span>]<span class="hljs-keyword">int</span>
+<span class="hljs-comment">// T&#x1B0;&#x1A1;ng t&#x1EF1; tr&#xEA;n</span>
+<span class="hljs-keyword">var</span> e = [<span class="hljs-number">0</span>]<span class="hljs-keyword">int</span>{}
+<span class="hljs-comment">// T&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; tr&#xEA;n</span>
+<span class="hljs-keyword">var</span> f = [...]<span class="hljs-keyword">int</span>{}
+</code></pre>
+<p>M&#x1ED9;t array c&#xF3; chi&#x1EC1;u d&#xE0;i 0 th&#xEC; kh&#xF4;ng chi&#x1EBF;m kh&#xF4;ng gian l&#x1B0;u tr&#x1EEF;.</p>
+<h2 id="132-string">1.3.2. String</h2>
+<div align="center">
+    <img src="../images/ch1-string.png" width="400">
+</div>
+
+<p><code>string</code> c&#x169;ng l&#xE0; m&#x1ED9;t array c&#x1EE7;a c&#xE1;c <code>byte</code> d&#x1EEF; li&#x1EC7;u, nh&#x1B0;ng kh&#xE1;c v&#x1EDB;i array nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; c&#x1EE7;a string l&#xE0; <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank">immutable</a>.</p>
+<p>C&#x1EA5;u tr&#xFA;c <a href="https://golang.org/src/reflect/value.go?s=56526:56578#L1873" target="_blank">reflect.StringHeader</a> &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; bi&#x1EC3;u di&#x1EC5;n string :</p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> StringHeader <span class="hljs-keyword">struct</span> {
+    <span class="hljs-comment">// con tr&#x1ECF; &#x111;&#x1ECB;a ch&#x1EC9; v&#xF9;ng nh&#x1EDB; string</span>
+    Data <span class="hljs-keyword">uintptr</span>
+    <span class="hljs-comment">// chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string</span>
+    Len  <span class="hljs-keyword">int</span>
+}
+</code></pre>
+<p>M&#x1ED9;t string l&#xE0; m&#x1ED9;t c&#x1EA5;u tr&#xFA;c, do &#x111;&#xF3; ph&#xE9;p g&#xE1;n string th&#x1EF1;c ch&#x1EA5;t l&#xE0; vi&#x1EC7;c sao ch&#xE9;p c&#x1EA5;u tr&#xFA;c <code>reflect.StringHeader</code>, v&#xE0; kh&#xF4;ng g&#xE2;y ra vi&#x1EC7;c sao ch&#xE9;p b&#xEA;n d&#x1B0;&#x1EDB;i ph&#x1EA7;n d&#x1EEF; li&#x1EC7;u.</p>
+<p>C&#x1EA5;u tr&#xFA;c v&#xF9;ng nh&#x1EDB; t&#x1B0;&#x1A1;ng &#x1EE9;ng v&#x1EDB;i string &quot;Hello World&quot; l&#xE0;:</p>
+<div align="center">
+    <img src="../images/ch1-8-string-1.ditaa.png" width="600">
+    <br>
+    <span align="center">
+        <i>String layout</i>
+    </span>
+</div>
+
+<p>C&#xF3; th&#x1EC3; th&#x1EA5;y r&#x1EB1;ng b&#xEA;n d&#x1B0;&#x1EDB;i string &quot;Hello World&quot; l&#xE0; m&#x1ED9;t array nh&#x1B0; sau:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span>  data = [...] <span class="hljs-keyword">byte</span> {
+    <span class="hljs-string">&apos;H&apos;</span>, <span class="hljs-string">&apos;e&apos;</span>, <span class="hljs-string">&apos;l&apos;</span>, <span class="hljs-string">&apos;l&apos;</span>, <span class="hljs-string">&apos;o&apos;</span>, <span class="hljs-string">&apos; &apos;</span>, <span class="hljs-string">&apos;w&apos;</span>, <span class="hljs-string">&apos;o&apos;</span>, <span class="hljs-string">&apos;r&apos;</span>, <span class="hljs-string">&apos;l&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>,
+}
+</code></pre>
+<p>M&#x1EB7;c d&#xF9; string kh&#xF4;ng ph&#x1EA3;i l&#xE0; slice nh&#x1B0;ng n&#xF3; c&#x169;ng h&#x1ED7; tr&#x1EE3; thao t&#xE1;c (slicing) c&#x1EAF;t. M&#x1ED9;t v&#xE0;i ph&#x1EA7;n c&#x1EE7;a v&#xF9;ng nh&#x1EDB; c&#x169;ng &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p b&#xEA;n d&#x1B0;&#x1EDB;i slice t&#x1EA1;i m&#x1ED9;t s&#x1ED1; n&#x1A1;i kh&#xE1;c nhau:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// s l&#xE0; bi&#x1EBF;n string</span>
+<span class="hljs-keyword">var</span> s = <span class="hljs-string">&quot;hello world&quot;</span>
+<span class="hljs-comment">// l&#x1EA5;y ph&#x1EA7;n t&#x1EED; t&#x1EEB; index 0 t&#x1EDB;i 4</span>
+hello := s[:<span class="hljs-number">5</span>]
+<span class="hljs-comment">// l&#x1EA5;y ph&#x1EA7;n t&#x1EED; t&#x1EEB; index 6 t&#x1EDB;i h&#x1EBF;t</span>
+world := s[<span class="hljs-number">6</span>:]
+<span class="hljs-comment">// c&#xF3; th&#x1EC3; thao t&#xE1;c tr&#x1EF1;c ti&#x1EBF;p</span>
+s1 := <span class="hljs-string">&quot;hello world&quot;</span>[:<span class="hljs-number">5</span>]
+s2 := <span class="hljs-string">&quot;hello world&quot;</span>[<span class="hljs-number">6</span>:]
+</code></pre>
+<p>T&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; array, String c&#x169;ng c&#xF3; m&#x1ED9;t h&#xE0;m built-in l&#xE0; <code>len</code> d&#xF9;ng &#x111;&#x1EC3; tr&#x1EA3; v&#x1EC1; chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string, ngo&#xE0;i ra b&#x1EA1;n c&#xF3; th&#x1EC3;  d&#xF9;ng <code>reflect.StringHeader</code> &#x111;&#x1EC3; truy xu&#x1EA5;t chi&#x1EC1;u d&#xE0;i c&#x1EE7;a string theo c&#xE1;ch nh&#x1B0; sau</p>
+<pre><code class="lang-go">fmt.Println(<span class="hljs-string">&quot;len(s): &quot;</span>, (*reflect.StringHeader)(unsafe.Pointer(&amp;s)).Len)
+</code></pre>
+<h2 id="133-slice">1.3.3. Slice</h2>
+<div align="center">
+    <img src="../images/1-3-golang-slices-length-capacity.png" width="550">
+    <br>
+    <span align="center">
+        <i>C&#x1EA5;u tr&#xFA;c Slice</i>
+    </span>
+</div>
+
+<p><code>Slices</code> th&#xEC; ph&#x1EE9;c t&#x1EA1;p h&#x1A1;n, c&#x1EA5;u tr&#xFA;c c&#x1EE7;a ch&#xFA;ng c&#x169;ng nh&#x1B0; <code>string</code>, tuy nhi&#xEA;n vi&#x1EC7;c gi&#x1EDB;i h&#x1EA1;n ch&#x1EC9;-&#x111;&#x1ECD;c nh&#x1B0; string &#x111;&#x1B0;&#x1EE3;c l&#x1B0;&#x1EE3;c b&#x1ECF;.</p>
+<p>C&#x1EA5;u tr&#xFA;c c&#x1EE7;a slice l&#xE0; <code>reflect.SliceHeader</code></p>
+<pre><code class="lang-go"><span class="hljs-keyword">type</span>  SliceHeader  <span class="hljs-keyword">struct</span> {
+    Data  <span class="hljs-keyword">uintptr</span> 
+    Len   <span class="hljs-keyword">int</span> 
+    Cap   <span class="hljs-keyword">int</span> 
+}
+</code></pre>
+<p>Slice &#x111;&#x1B0;&#x1EE3;c xem l&#xE0; fat pointer, c&#xE1;c b&#x1EA1;n c&#xF3; th&#x1EC3; &#x111;&#x1ECD;c th&#xEA;m &#x1EDF; b&#xE0;i vi&#x1EBF;t sau &#x111;&#x1EC3; hi&#x1EC3;u h&#x1A1;n v&#x1EC1; fat pointer trong <a href="https://nullprogram.com/blog/2019/06/30/" target="_blank">Go</a>. C&#x1EA5;u tr&#xFA;c slice bao g&#x1ED3;m:</p>
+<ul>
+<li><code>Data</code>: l&#xE0; con tr&#x1ECF; ch&#x1EE9;a &#x111;&#x1ECB;a ch&#x1EC9; c&#x1EE7;a m&#x1ED9;t array.</li>
+<li><code>Len</code>: &#x111;&#x1ED9; d&#xE0;i c&#x1EE7;a slice.</li>
+<li><code>Cap</code>: k&#xED;ch th&#x1B0;&#x1EDB;c t&#x1ED1;i &#x111;a m&#xE0; v&#xF9;ng nh&#x1EDB; tr&#x1ECF; t&#x1EDB;i slice &#x111;&#x1B0;&#x1EE3;c c&#x1EA5;p ph&#xE1;t. </li>
+</ul>
+<p>H&#xEC;nh b&#xEA;n d&#x1B0;&#x1EDB;i s&#x1EBD; mi&#xEA;u t&#x1EA3; slice <code>x := []int{2,3,5,7,11}</code> v&#xE0; slice <code>y := x[1:3]</code>:</p>
+<div align="center">
+    <img src="../images/ch1-10-slice-1.ditaa.png">
+    <br>
+    <span align="center">
+        <i>Slice layout</i>
+    </span>
+</div>
+
+<p>C&#xE1;c c&#xE1;ch &#x111;&#x1ECB;nh ngh&#x129;a slice:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> (
+    <span class="hljs-comment">// nil slice</span>
+    a = []<span class="hljs-keyword">int</span>
+    <span class="hljs-comment">// empty slice, kh&#xE1;c v&#x1EDB;i nil</span>
+    b = []<span class="hljs-keyword">int</span>{}
+    <span class="hljs-comment">// c&#xF3; 3 ph&#x1EA7;n t&#x1EED; trong slice, c&#x1EA3; len v&#xE0; cap &#x111;&#x1EC1;u b&#x1EB1;ng 3</span>
+    c = []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}
+    <span class="hljs-comment">// c&#xF3; 2 ph&#x1EA7;n t&#x1EED; trong slice, len b&#x1EB1;ng 2 v&#xE0; cap b&#x1EB1;ng 3</span>
+    d = c[:<span class="hljs-number">2</span>]
+    <span class="hljs-comment">// c&#xF3; 2 ph&#x1EA7;n t&#x1EED; trong slice, len b&#x1EB1;ng 2 v&#xE0; cap b&#x1EB1;ng 3</span>
+    e = c[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>:<span class="hljs-built_in">cap</span>(c)]
+    <span class="hljs-comment">// c&#xF3; 0 ph&#x1EA7;n t&#x1EED; trong slice, len b&#x1EB1;ng 0 v&#xE0; cap b&#x1EB1;ng 3</span>
+    f = c[:<span class="hljs-number">0</span>]
+    <span class="hljs-comment">// c&#xF3; 3 ph&#x1EA7;n t&#x1EED; trong slice, len v&#xE0; cap b&#x1EB1;ng 3</span>
+    g = <span class="hljs-built_in">make</span> ([]<span class="hljs-keyword">int</span>,<span class="hljs-number">3</span>)
+    <span class="hljs-comment">// c&#xF3; 2 ph&#x1EA7;n t&#x1EED; trong slice, len b&#x1EB1;ng 2, cap b&#x1EB1;ng 3</span>
+    h = <span class="hljs-built_in">make</span> ([]<span class="hljs-keyword">int</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+    <span class="hljs-comment">// c&#xF3; 0 ph&#x1EA7;n t&#x1EED; trong slice, len b&#x1EB1;ng 0, cap b&#x1EB1;ng 3</span>
+    i = <span class="hljs-built_in">make</span> ([]<span class="hljs-keyword">int</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3</span>)
+)
+</code></pre>
+<p>Khi ch&#xFA;ng ta s&#x1EED; d&#x1EE5;ng c&#xFA; ph&#xE1;p t&#x1EA1;o slice t&#x1EEB; m&#x1ED9;t slice cho tr&#x1B0;&#x1EDB;c nh&#x1B0; sau: <strong>d = c[:2]</strong> th&#xEC; ch&#xFA;ng ta n&#xEA;n l&#x1B0;u &#xFD; &#x1EDF; &#x111;i&#x1EC3;m sau. Slice s&#x1EBD; kh&#xF4;ng sao ch&#xE9;p d&#x1EEF; li&#x1EC7;u c&#x1EE7;a slice g&#x1ED1;c c qua d m&#xE0; n&#xF3; t&#x1EA1;o ra m&#x1ED9;t gi&#xE1; tr&#x1ECB; slice m&#x1EDB;i tr&#x1ECF; &#x111;&#x1EBF;n m&#x1EA3;ng ban &#x111;&#x1EA7;u. Do &#x111;&#xF3;, s&#x1EED;a &#x111;&#x1ED5;i c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a slice v&#x1EEB;a &#x111;&#x1B0;&#x1EE3;c t&#x1EA1;o s&#x1EBD; s&#x1EED;a &#x111;&#x1ED5;i c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a slice g&#x1ED1;c.V&#xED; d&#x1EE5; minh ho&#x1EA1;:</p>
+<pre><code class="lang-go">old := []<span class="hljs-keyword">byte</span>{<span class="hljs-string">&apos;r&apos;</span>, <span class="hljs-string">&apos;o&apos;</span>, <span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>}
+
+<span class="hljs-built_in">new</span> := old[<span class="hljs-number">2</span>:] 
+<span class="hljs-comment">// new = []byte{&apos;a&apos;, &apos;d&apos;}</span>
+
+<span class="hljs-built_in">new</span>[<span class="hljs-number">1</span>] = <span class="hljs-string">&apos;m&apos;</span>
+<span class="hljs-comment">// new = []byte{&apos;a&apos;, &apos;m&apos;}</span>
+<span class="hljs-comment">// old = []byte{&apos;r&apos;, &apos;o&apos;, &apos;a&apos;, &apos;m&apos;}</span>
+</code></pre>
+<p>C&#xE1;c t&#xE1;c v&#x1EE5; c&#x1A1; b&#x1EA3;n trong slice bao g&#x1ED3;m:</p>
+<ul>
+<li>Duy&#x1EC7;t qua c&#xE1;c ph&#x1EA7;n t&#x1EED; c&#x1EE7;a slice</li>
+<li>Th&#xEA;m ph&#x1EA7;n t&#x1EED; v&#xE0;o slice</li>
+<li>X&#xF3;a ph&#x1EA7;n t&#x1EED; trong slcie</li>
+</ul>
+<h4 id="duy&#x1EC7;t-qua-slice">Duy&#x1EC7;t qua slice</h4>
+<p>Duy&#x1EC7;t qua slice th&#xEC; t&#x1B0;&#x1A1;ng t&#x1EF1; nh&#x1B0; duy&#x1EC7;t qua m&#x1ED9;t arrays.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> a {
+    fmt.Printf(<span class="hljs-string">&quot;a[%d]: %d\n&quot;</span>, i, a[i])
+}
+<span class="hljs-keyword">for</span> i, v := <span class="hljs-keyword">range</span> b {
+    fmt.Printf(<span class="hljs-string">&quot;b[%d]: %d\n&quot;</span>, i, v)
+}
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">len</span>(c); i++ {
+    fmt.Printf(<span class="hljs-string">&quot;c[%d]: %d\n&quot;</span>, i, c[i])
+}
+</code></pre>
+<h4 id="th&#xEA;m-ph&#x1EA7;n-t&#x1EED;-v&#xE0;o-slice">Th&#xEA;m ph&#x1EA7;n t&#x1EED; v&#xE0;o slice</h4>
+<p>H&#xE0;m  <code>append</code> c&#xF3; th&#x1EC3; th&#xEA;m ph&#x1EA7;n t&#x1EED; th&#x1EE9; <code>N</code> v&#xE0;o cu&#x1ED1;i c&#xF9;ng c&#x1EE7;a slice:</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> a []<span class="hljs-keyword">int</span>
+<span class="hljs-comment">// n&#x1ED1;i th&#xEA;m ph&#x1EA7;n t&#x1EED; 1</span>
+a = <span class="hljs-built_in">append</span>(a, <span class="hljs-number">1</span>)
+<span class="hljs-comment">// n&#x1ED1;i th&#xEA;m ph&#x1EA7;n t&#x1EED; 1, 2, 3</span>
+a = <span class="hljs-built_in">append</span>(a, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-comment">// n&#x1ED1;i th&#xEA;m c&#xE1;c ph&#x1EA7;n t&#x1EED; 1, 2, 3 b&#x1EB1;ng c&#xE1;ch truy&#x1EC1;n v&#xE0;o m&#x1ED9;t m&#x1EA3;ng</span>
+a = <span class="hljs-built_in">append</span>(a, []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}...)
+</code></pre>
+<p>Trong tr&#x1B0;&#x1EDD;ng h&#x1EE3;p slice ban &#x111;&#x1EA7;u kh&#xF4;ng &#x111;&#x1EE7; s&#x1EE9;c ch&#x1EE9;a khi th&#xEA;m v&#xE0;o ph&#x1EA7;n t&#x1EED;, h&#xE0;m append s&#x1EBD; hi&#x1EC7;n th&#x1EF1;c c&#x1EA5;p ph&#xE1;t l&#x1EA1;i v&#xF9;ng nh&#x1EDB; c&#xF3; k&#xED;ch th&#x1B0;&#x1EDB;c g&#x1EA5;p &#x111;&#xF4;i v&#xF9;ng nh&#x1EDB; c&#x169; v&#xE0; sao ch&#xE9;p d&#x1EEF; li&#x1EC7;u sang. C&#xE1;c b&#x1EA1;n c&#xF3; th&#x1EC3; xem &#x111;o&#x1EA1;n m&#xE3; ngu&#x1ED3;n v&#x1EC1; vi&#x1EC7;c c&#x1EA5;p ph&#xE1;p l&#x1EA1;i v&#xF9;ng nh&#x1EDB; cho slice <a href="https://golang.org/src/runtime/slice.go?fbclid=IwAR0xgVnf7SFJu_Kai8zo_5PZXolsuEL3JgfKejj7Ww0CpO1G82rbXbcWosQ#L66" target="_blank">&#x1EDF; &#x111;&#xE2;y</a>.</p>
+<div align="center">
+    <img src="../images/recapacity-slice.png" width="550">
+    <br>
+    <span align="center">
+        <i>C&#x1EA5;u tr&#xFA;c Slice</i>
+    </span>
+</div>
+
+<p>V&#xED; d&#x1EE5; b&#xEA;n d&#x1B0;&#x1EDB;i cho th&#x1EA5;y gi&#xE1; tr&#x1ECB; <strong>cap t&#x103;ng g&#x1EA5;p 2</strong> khi th&#x1EF1;c thi h&#xE0;m append v&#x1B0;&#x1EE3;t qu&#xE1; k&#xED;ch th&#x1B0;&#x1EDB;c ban &#x111;&#x1EA7;u.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> myAppend(sl []<span class="hljs-keyword">int</span>, val <span class="hljs-keyword">int</span>) []<span class="hljs-keyword">int</span>{
+    sl = <span class="hljs-built_in">append</span>(sl, val)
+    printSlice(sl)
+    <span class="hljs-keyword">return</span> sl
+}
+
+<span class="hljs-keyword">func</span> printSlice(sl []<span class="hljs-keyword">int</span>) {
+    fmt.Printf(<span class="hljs-string">&quot;Slice %v\n&quot;</span>, sl)
+    fmt.Printf(<span class="hljs-string">&quot;Len %v, Cap %v\n\n&quot;</span>, <span class="hljs-built_in">len</span>(sl), <span class="hljs-built_in">cap</span>(sl))
+}
+
+<span class="hljs-keyword">func</span> main() {
+    sl := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">int</span>, <span class="hljs-number">1</span>)
+    printSlice(sl)
+    <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">5</span>; i ++ {
+        sl = myAppend(sl, i)
+    }
+}
+
+<span class="hljs-comment">/**
+* Slice [0]
+* Len 1, Cap 1
+*
+* Slice [0 1]
+* Len 2, Cap 2
+*
+* Slice [0 1 2]
+* Len 3, Cap 4
+*
+* Slice [0 1 2 3]
+* Len 4, Cap 4
+*
+* Slice [0 1 2 3 4]
+* Len 5, Cap 8
+*/</span>
+</code></pre>
+<p>B&#xEA;n c&#x1EA1;nh th&#xEA;m ph&#x1EA7;n t&#x1EED; v&#xE0;o cu&#x1ED1;i slice, ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; th&#xEA;m ph&#x1EA7;n t&#x1EED; v&#xE0;o &#x111;&#x1EA7;u slice nh&#x1B0; sau</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> a = []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>}
+<span class="hljs-comment">// th&#xEA;m ph&#x1EA7;n t&#x1EED; 0 v&#xE0;o &#x111;&#x1EA7;u slice a</span>
+a = <span class="hljs-built_in">append</span>([]<span class="hljs-keyword">int</span>{<span class="hljs-number">0</span>}, a...)
+<span class="hljs-comment">// th&#xEA;m c&#xE1;c ph&#x1EA7;n t&#x1EED; -3, -2, -1 v&#xE0;o &#x111;&#x1EA7;u slice a</span>
+a = <span class="hljs-built_in">append</span>([]<span class="hljs-keyword">int</span>{<span class="hljs-number">-3</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">-1</span>}, a...)
+</code></pre>
+<p>Th&#xEA;m ph&#x1EA7;n t&#x1EED; v&#xE0;o &#x111;&#x1EA7;u slice s&#x1EBD; g&#xE2;y ra vi&#x1EC7;c c&#x1EA5;p ph&#xE1;t l&#x1EA1;i v&#xF9;ng nh&#x1EDB; v&#xE0; l&#xE0;m nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; &#x111;ang t&#x1ED3;n t&#x1EA1;i trong slice s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c sao ch&#xE9;p m&#x1ED9;t l&#x1EA7;n n&#x1EEF;a. Do &#x111;&#xF3;, hi&#x1EC7;u su&#x1EA5;t c&#x1EE7;a vi&#x1EC7;c th&#xEA;m ph&#x1EA7;n t&#x1EED;  v&#xE0;o &#x111;&#x1EA7;u slice s&#x1EBD; th&#x1EA5;p h&#x1A1;n th&#xEA;m ph&#x1EA7;n t&#x1EED; v&#xE0;o cu&#x1ED1;i slice.</p>
+<p>Do h&#xE0;m <code>append</code> s&#x1EBD; tr&#x1EA3; v&#x1EC1; m&#x1ED9;t slice m&#x1EDB;i, ch&#xFA;ng ta c&#xF3; th&#x1EC3; k&#x1EBF;t h&#x1EE3;p nhi&#x1EC1;u h&#xE0;m <code>append</code> &#x111;&#x1EC3; ch&#xE8;n m&#x1ED9;t v&#xE0;i ph&#x1EA7;n t&#x1EED; v&#xE0;o gi&#x1EEF;a slice.</p>
+<pre><code class="lang-go"><span class="hljs-comment">// khai b&#xE1;o slice a</span>
+<span class="hljs-keyword">var</span> a []<span class="hljs-keyword">int</span>
+<span class="hljs-comment">// ch&#xE8;n x &#x1EDF; v&#x1ECB; tr&#xED; th&#x1EE9; i</span>
+a = <span class="hljs-built_in">append</span>(
+    a[:i],
+    <span class="hljs-comment">// t&#x1EA1;o ra m&#x1ED9;t slice t&#x1EA1;m th&#x1EDD;i &#x111;&#x1EC3; n&#x1ED1;i v&#x1EDB;i a[:i]</span>
+    <span class="hljs-built_in">append</span>(
+        []<span class="hljs-keyword">int</span>{x},a[i:]...
+    )...
+)
+<span class="hljs-comment">// ch&#xE8;n m&#x1ED9;t slice con v&#xE0;o slice &#x1EDF; v&#x1ECB; tr&#xED; th&#x1EE9; i</span>
+a = <span class="hljs-built_in">append</span>(
+    a[:i],
+    <span class="hljs-built_in">append</span>(
+        []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>},
+        a[i:]...
+    )...
+)
+</code></pre>
+<p>B&#x1EA1;n c&#x169;ng c&#xF3; th&#x1EC3; s&#x1EED; d&#x1EE5;ng h&#xE0;m <code>copy</code> v&#xE0; <code>append</code> k&#x1EBF;t h&#x1EE3;p v&#x1EDB;i nhau &#x111;&#x1EC3; tr&#xE1;nh vi&#x1EC7;c kh&#x1EDF;i t&#x1EA1;o nh&#x1EEF;ng slice t&#x1EA1;m th&#x1EDD;i nh&#x1B0; v&#x1EAD;y:</p>
+<pre><code class="lang-go"><span class="hljs-comment">// th&#xEA;m ph&#x1EA7;n t&#x1EED; 0 v&#xE0;o cu&#x1ED1;i slice a</span>
+a = <span class="hljs-built_in">append</span>(a, <span class="hljs-number">0</span>)
+<span class="hljs-comment">// l&#xF9;i nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; t&#x1EEB; i tr&#x1EDF; v&#x1EC1; sau</span>
+<span class="hljs-built_in">copy</span>(a[i+<span class="hljs-number">1</span>:], a[i:])
+<span class="hljs-comment">// g&#xE1;n v&#x1ECB; tr&#xED; th&#x1EE9; i b&#x1EB1;ng x</span>
+a[i] = x
+</code></pre>
+<p>Ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; ch&#xE8;n nhi&#x1EC1;u ph&#x1EA7;n t&#x1EED; v&#xE0;o v&#x1ECB; tr&#xED; ch&#xED;nh gi&#x1EEF;a b&#x1EB1;ng vi&#x1EC7;c k&#x1EBF;t h&#x1EE3;p h&#xE0;m <code>copy</code> v&#xE0; <code>append</code> nh&#x1B0; sau</p>
+<pre><code class="lang-go"><span class="hljs-comment">// m&#x1EDF; r&#x1ED9;ng kh&#xF4;ng gian c&#x1EE7;a slice a v&#x1EDB;i array x</span>
+a = <span class="hljs-built_in">append</span>(a, x...)
+<span class="hljs-comment">// sao ch&#xE9;p len(x) ph&#x1EA7;n t&#x1EED; l&#xF9;i v&#x1EC1; sau</span>
+<span class="hljs-built_in">copy</span>(a[i+<span class="hljs-built_in">len</span>(x):], a[i:])
+<span class="hljs-comment">// sao ch&#xE9;p array x v&#xE0;o gi&#x1EEF;a</span>
+<span class="hljs-built_in">copy</span>(a[i:], x)
+</code></pre>
+<h4 id="x&#xF3;a-nh&#x1EEF;ng-ph&#x1EA7;n-t&#x1EED;-trong-slice">X&#xF3;a nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; trong slice</h4>
+<p>C&#xF3; ba tr&#x1B0;&#x1EDD;ng h&#x1EE3;p x&#xF3;a c&#xE1;c ph&#x1EA7;n t&#x1EED;:</p>
+<ul>
+<li>&#x1EDE; &#x111;&#x1EA7;u</li>
+<li>&#x1EDE; gi&#x1EEF;a</li>
+<li>&#x1EDE; cu&#x1ED1;i</li>
+</ul>
+<p>Trong &#x111;&#xF3; x&#xF3;a ph&#x1EA7;n t&#x1EED; &#x1EDF; cu&#x1ED1;i l&#xE0; nhanh nh&#x1EA5;t</p>
+<pre><code class="lang-go">a = []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+<span class="hljs-comment">// x&#xF3;a m&#x1ED9;t ph&#x1EA7;n t&#x1EED; &#x1EDF; cu&#x1ED1;i</span>
+a = a[:<span class="hljs-built_in">len</span>(a)<span class="hljs-number">-1</span>]
+<span class="hljs-comment">// x&#xF3;a N ph&#x1EA7;n t&#x1EED; &#x1EDF; cu&#x1ED1;i</span>
+a = a[:<span class="hljs-built_in">len</span>(a)-N]
+</code></pre>
+<p>X&#xF3;a ph&#x1EA7;n t&#x1EED; &#x1EDF; &#x111;&#x1EA7;u th&#xEC; th&#x1EF1;c ch&#x1EA5;t l&#xE0; di chuy&#x1EC3;n con tr&#x1ECF; d&#x1EEF; li&#x1EC7;u v&#x1EC1; sau</p>
+<pre><code class="lang-go">a = []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}
+<span class="hljs-comment">// x&#xF3;a ph&#x1EA7;n t&#x1EED; &#x111;&#x1EA7;u ti&#xEA;n</span>
+a = a[<span class="hljs-number">1</span>:]
+<span class="hljs-comment">// x&#xF3;a N ph&#x1EA7;n t&#x1EED; &#x111;&#x1EA7;u ti&#xEA;n</span>
+a = a[N:]
+</code></pre>
+<p>Khi x&#xF3;a ph&#x1EA7;n t&#x1EED; &#x1EDF; gi&#x1EEF;a, b&#x1EA1;n c&#x1EA7;n d&#x1ECB;ch chuy&#x1EC3;n nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; &#x1EDF; ph&#xED;a sau l&#xEA;n tr&#x1B0;&#x1EDB;c, &#x111;i&#x1EC1;u &#x111;&#xF3; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c th&#x1EF1;c hi&#x1EC7;n nh&#x1B0; sau</p>
+<pre><code class="lang-go">a = []<span class="hljs-keyword">int</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, ...}
+<span class="hljs-comment">// x&#xF3;a ph&#x1EA7;n t&#x1EED; &#x1EDF; v&#x1ECB; tr&#xED; i</span>
+a = <span class="hljs-built_in">append</span>(a[:i], a[i+<span class="hljs-number">1</span>:]...)
+<span class="hljs-comment">// x&#xF3;a N ph&#x1EA7;n t&#x1EED; t&#x1EEB; v&#x1ECB; tr&#xED; i</span>
+a = <span class="hljs-built_in">append</span>(a[:i], a[i+N:]...)
+<span class="hljs-comment">// x&#xF3;a ph&#x1EA7;n t&#x1EED; &#x1EDF; v&#x1ECB; tr&#xED; i</span>
+a = a[:i+<span class="hljs-built_in">copy</span>(a[i:], a[i+<span class="hljs-number">1</span>:])]
+<span class="hljs-comment">// xo&#xE1; N ph&#x1EA7;n t&#x1EEB; t&#x1EEB; v&#x1ECB; tr&#xED; i</span>
+a = a[:i+<span class="hljs-built_in">copy</span>(a[i:], a[i+N:])]
+</code></pre>
+<h4 id="k&#x1EF9;-thu&#x1EAD;t-qu&#x1EA3;n-l&#xFD;-v&#xF9;ng-nh&#x1EDB;-trong-slice">K&#x1EF9; thu&#x1EAD;t qu&#x1EA3;n l&#xFD; v&#xF9;ng nh&#x1EDB; trong slice</h4>
+<p>H&#xE0;m <code>TrimSpace</code> sau s&#x1EBD; x&#xF3;a &#x111;i c&#xE1;c kho&#x1EA3;ng tr&#x1EAF;ng. Hi&#x1EC7;n th&#x1EF1;c h&#xE0;m n&#xE0;y v&#x1EDB;i &#x111;&#x1ED9; ph&#x1EE9;c t&#x1EA1;p O(n) &#x111;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c s&#x1EF1; hi&#x1EC7;u qu&#x1EA3; v&#xE0; &#x111;&#x1A1;n gi&#x1EA3;n.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> TrimSpace(s []<span class="hljs-keyword">byte</span>) []<span class="hljs-keyword">byte</span> {
+    b := s[:<span class="hljs-number">0</span>]
+    <span class="hljs-comment">// duy&#x1EC7;t qua slice s &#x111;&#x1EC3; t&#xEC;m ph&#x1EA7;n t&#x1EED; th&#x1ECF;a &#x111;i&#x1EC1;u ki&#x1EC7;n</span>
+    <span class="hljs-keyword">for</span> _, x := <span class="hljs-keyword">range</span> s {
+        <span class="hljs-comment">// ki&#x1EC3;m tra &#x111;i&#x1EC1;u ki&#x1EC7;n</span>
+        <span class="hljs-keyword">if</span> x != <span class="hljs-string">&apos; &apos;</span> {
+        <span class="hljs-comment">// t&#x1EA1;o ra slice m&#x1EDB;i t&#x1EEB; slice ban &#x111;&#x1EA7;u th&#xEA;m v&#xE0;o ph&#x1EA7;n t&#x1EED; x</span>
+            b = <span class="hljs-built_in">append</span>(b, x)
+        }
+    }
+    <span class="hljs-keyword">return</span> b
+}
+</code></pre>
+<p>Th&#x1EF1;c t&#x1EBF;, nh&#x1EEF;ng gi&#x1EA3;i thu&#x1EAD;t t&#x1B0;&#x1A1;ng t&#x1EF1; &#x111;&#x1EC3; x&#xF3;a nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; trong slice th&#x1ECF;a m&#x1ED9;t &#x111;i&#x1EC1;u ki&#x1EC7;n n&#xE0;o &#x111;&#xF3;, c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c x&#x1EED; l&#xFD; theo c&#xE1;ch tr&#xEA;n.</p>
+<p><strong>L&#x1B0;u &#xFD;:</strong>  h&#xE0;m <code>append()</code> kh&#xF4;ng c&#x1EA5;p ph&#xE1;t l&#x1EA1;i v&#xF9;ng nh&#x1EDB; khi ch&#x1B0;a &#x111;&#x1EA1;t t&#x1EDB;i s&#x1EE9;c ch&#x1EE9;a t&#x1ED1;i &#x111;a <code>cap</code>.</p>
+<p>H&#xE0;m <code>Filter</code> s&#x1EBD; l&#x1ECD;c c&#xE1;c ph&#x1EA7;n t&#x1EED; th&#x1ECF;a &#x111;i&#x1EC1;u ki&#x1EC7;n trong slice.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> Filter(s []<span class="hljs-keyword">byte</span>, fn <span class="hljs-keyword">func</span>(x <span class="hljs-keyword">byte</span>) <span class="hljs-keyword">bool</span>) []<span class="hljs-keyword">byte</span> {
+    b := s[:<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">for</span> _, x := <span class="hljs-keyword">range</span> s {
+        <span class="hljs-keyword">if</span> !fn(x) {
+            b = <span class="hljs-built_in">append</span>(b, x)
+        }
+    }
+    <span class="hljs-keyword">return</span> b
+}
+</code></pre>
+<p>&#x110;i&#x1EC3;m ch&#xED;nh c&#x1EE7;a nh&#x1EEF;ng t&#xE1;c v&#x1EE5; l&#xE0;m vi&#x1EC7;c hi&#x1EC7;u qu&#x1EA3; tr&#xEA;n slice l&#xE0; h&#x1EA1;n ch&#x1EBF; vi&#x1EC7;c ph&#x1EA3;i c&#x1EA5;p l&#x1EA1;i v&#xF9;ng nh&#x1EDB;, c&#x1ED1; g&#x1EAF;ng &#x111;&#x1EC3; h&#xE0;m <code>append</code> s&#x1EBD; kh&#xF4;ng &#x111;&#x1EA1;t t&#x1EDB;i <code>cap</code> s&#x1EE9;c ch&#x1EE9;a c&#x1EE7;a slice, l&#xE0; gi&#x1EA3;m s&#x1ED1; l&#x1EA7;n c&#x1EA5;p ph&#xE1;t v&#xF9;ng nh&#x1EDB; v&#xE0; gi&#x1EA3;m k&#xED;ch th&#x1B0;&#x1EDB;c v&#xF9;ng nh&#x1EDB; c&#x1EA5;p ph&#xE1;t t&#x1EA1;i m&#x1ECD;i th&#x1EDD;i &#x111;i&#x1EC3;m.</p>
+<h4 id="tr&#xE1;nh-g&#xE2;y-ra-memory-leak-tr&#xEA;n-slice">Tr&#xE1;nh g&#xE2;y ra memory leak tr&#xEA;n slice</h4>
+<p>Nh&#x1EEF;ng t&#xE1;c v&#x1EE5; tr&#xEA;n slice s&#x1EBD; kh&#xF4;ng thay &#x111;&#x1ED5;i v&#xF9;ng nh&#x1EDB; b&#xEA;n d&#x1B0;&#x1EDB;i slice, m&#xE0; th&#x1EF1;c ch&#x1EA5;t l&#xE0; thay &#x111;&#x1ED5;i c&#xE1;c tham s&#x1ED1; nh&#x1B0; <code>Data</code>, <code>Len</code>. V&#xF9;ng nh&#x1EDB; b&#xEA;n d&#x1B0;&#x1EDB;i v&#x1EAB;n c&#xF2;n cho &#x111;&#x1EBF;n khi n&#xE0;o kh&#xF4;ng c&#xF2;n &#x111;&#x1B0;&#x1EE3;c tham chi&#x1EBF;u n&#x1EEF;a.</p>
+<p>Th&#x1EC9;nh tho&#x1EA3;ng to&#xE0;n b&#x1ED9; d&#x1EEF; li&#x1EC7;u b&#xEA;n d&#x1B0;&#x1EDB;i slice s&#x1EBD; c&#xF3; th&#x1EC3; mang m&#x1ED9;t tr&#x1EA1;ng th&#xE1;i &#x111;ang &#x111;&#x1B0;&#x1EE3;c s&#x1EED; d&#x1EE5;ng v&#xEC; ch&#x1EC9; c&#xF3; m&#x1ED9;t ph&#x1EA7;n nh&#x1ECF; v&#xF9;ng nh&#x1EDB; &#x111;&#x1B0;&#x1EE3;c tham chi&#x1EBF;u t&#x1EDB;i, n&#xF3; s&#x1EBD; tr&#xEC; ho&#xE3;n qu&#xE1; tr&#xEC;nh t&#x1EF1; &#x111;&#x1ED9;ng thu gom v&#xF9;ng nh&#x1EDB; &#x111;&#x1EC3; &#x111;&#xF2;i l&#x1EA1;i v&#xF9;ng nh&#x1EDB; &#x111;&#xE3; c&#x1EA5;p ph&#xE1;t.</p>
+<p>V&#xED; d&#x1EE5; l&#xE0; h&#xE0;m <code>FindPhoneNumber</code> s&#x1EBD; t&#x1EA3;i to&#xE0;n b&#x1ED9; file v&#xE0;o b&#x1ED9; nh&#x1EDB;, v&#xE0; sau &#x111;&#xF3; t&#xEC;m ki&#x1EBF;m s&#x1ED1; &#x111;i&#x1EC7;n tho&#x1EA1;i &#x111;&#x1EA7;u ti&#xEA;n xu&#x1EA5;t hi&#x1EC7;n trong file, v&#xE0; k&#x1EBF;t qu&#x1EA3; cu&#x1ED1;i c&#xF9;ng s&#x1EBD; tr&#x1EA3; v&#x1EC1; m&#x1ED9;t array.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> FindPhoneNumber(filename <span class="hljs-keyword">string</span>) []<span class="hljs-keyword">byte</span> {
+    b, _ := ioutil.ReadFile(filename)
+    <span class="hljs-keyword">return</span> regexp.MustCompile(<span class="hljs-string">&quot;[0-9]+&quot;</span>).Find(b)
+}
+</code></pre>
+<p>M&#xE3; ngu&#x1ED3;n n&#xE0;y s&#x1EBD; tr&#x1EA3; v&#x1EC1;  m&#x1ED9;t m&#x1EA3;ng c&#xE1;c <code>byte</code> tr&#x1ECF; t&#x1EDB;i to&#xE0;n b&#x1ED9; file. B&#x1EDF;i v&#xEC; slice tham kh&#x1EA3;o t&#x1EDB;i to&#xE0;n b&#x1ED9; array g&#x1ED1;c, c&#x1A1; ch&#x1EBF; t&#x1EF1; &#x111;&#x1ED9;ng thu gom r&#xE1;c kh&#xF4;ng th&#x1EC3; gi&#x1EA3;i ph&#xF3;ng kh&#xF4;ng gian b&#xEA;n d&#x1B0;&#x1EDB;i array trong th&#x1EDD;i gian &#x111;&#xF3;. M&#x1ED9;t y&#xEA;u c&#x1EA7;u k&#x1EBF;t qu&#x1EA3; nh&#x1ECF;, nh&#x1EEF;ng ph&#x1EA3;i l&#x1B0;u tr&#x1EEF; to&#xE0;n b&#x1ED9; d&#x1EEF; li&#x1EC7;u trong m&#x1ED9;t th&#x1EDD;i gian d&#xE0;i. M&#x1EB7;c d&#xF9; n&#xF3; kh&#xF4;ng ph&#x1EA3;i l&#xE0; <code>memory leak</code> trong ng&#x1EEF; c&#x1EA3;nh truy&#x1EC1;n th&#x1ED1;ng, n&#xF3; c&#xF3; th&#x1EC3; l&#xE0;m ch&#x1EAD;m hi&#x1EC7;u su&#x1EA5;t c&#x1EE7;a to&#xE0;n h&#x1EC7; th&#x1ED1;ng.</p>
+<p>&#x110;&#x1EC3; kh&#x1EAF;c ph&#x1EE5;c v&#x1EA5;n &#x111;&#x1EC1; n&#xE0;y, b&#x1EA1;n c&#xF3; th&#x1EC3; sao ch&#xE9;p d&#x1EEF; li&#x1EC7;u c&#x1EA7;n thi&#x1EBF;t th&#xE0;nh m&#x1ED9;t slice m&#x1EDB;i.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">func</span> FindPhoneNumber(filename <span class="hljs-keyword">string</span>) []<span class="hljs-keyword">byte</span> {
+    b, _ := ioutil.ReadFile(filename)
+    b = regexp.MustCompile(<span class="hljs-string">&quot;[0-9]+&quot;</span>).Find(b)
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">append</span>([]<span class="hljs-keyword">byte</span>{}, b...)
+}
+</code></pre>
+<p>V&#x1EA5;n &#x111;&#x1EC1; t&#x1B0;&#x1A1;ng t&#x1EF1; c&#xF3; th&#x1EC3; g&#x1EB7;p ph&#x1EA3;i khi x&#xF3;a nh&#x1EEF;ng ph&#x1EA7;n t&#x1EED; trong slice. Gi&#x1EA3; s&#x1EED; r&#x1EB1;ng con tr&#x1ECF; &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng &#x111;&#x1B0;&#x1EE3;c l&#x1B0;u tr&#x1EEF; trong c&#x1EA5;u tr&#xFA;c c&#x1EE7;a slice, sau khi x&#xF3;a &#x111;i ph&#x1EA7;n t&#x1EED; cu&#x1ED1;i, th&#xEC; ph&#x1EA7;n t&#x1EED; &#x111;&#x1B0;&#x1EE3;c x&#xF3;a c&#xF3; th&#x1EC3; c&#xF2;n &#x111;&#x1B0;&#x1EE3;c tham kh&#x1EA3;o b&#xEA;n d&#x1B0;&#x1EDB;i m&#x1EA3;ng slice, v&#xF9;ng nh&#x1EDB; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c gi&#x1EA3;i ph&#xF3;ng t&#x1EF1; &#x111;&#x1ED9;ng trong th&#x1EDD;i gian &#x111;&#xF3; (n&#xF3; ph&#x1EE5; thu&#x1ED9;c v&#xE0;o c&#xE1;ch hi&#x1EC7;n th&#x1EF1;c c&#x1A1; ch&#x1EBF; thu h&#x1ED3;i v&#xF9;ng nh&#x1EDB;)</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> a []*<span class="hljs-keyword">int</span>{ ... }
+<span class="hljs-comment">// ph&#x1EA7;n t&#x1EED; cu&#x1ED1;i c&#xF9;ng d&#xF9; &#x111;&#x1B0;&#x1EE3;c x&#xF3;a nh&#x1B0;ng v&#x1EAB;n &#x111;&#x1B0;&#x1EE3;c tham chi&#x1EBF;u,</span>
+<span class="hljs-comment">// do &#x111;&#xF3; c&#x1A1; ch&#x1EBF; thu gom r&#xE1;c t&#x1EF1; &#x111;&#x1ED9;ng kh&#xF4;ng thu h&#x1ED3;i n&#xF3;</span>
+a = a[:<span class="hljs-built_in">len</span>(a)<span class="hljs-number">-1</span>]
+</code></pre>
+<p>C&#xE1;ch gi&#x1EA3;i quy&#x1EBF;t l&#xE0; &#x111;&#x1EA7;u ti&#xEA;n thi&#x1EBF;t l&#x1EAD;p ph&#x1EA7;n t&#x1EED; c&#x1EA7;n thu h&#x1ED3;i v&#x1EC1; <code>nil</code> &#x111;&#x1EC3; &#x111;&#x1EA3;m b&#x1EA3;o gi&#xE1; tr&#x1ECB; thu gom t&#x1EF1; &#x111;&#x1ED9;ng c&#xF3; th&#x1EC3; t&#xEC;m th&#x1EA5;y ch&#xFA;ng, sau &#x111;&#xF3; x&#xF3;a slices &#x111;&#xF3;.</p>
+<pre><code class="lang-go"><span class="hljs-keyword">var</span> a []*<span class="hljs-keyword">int</span>{ ... }
+<span class="hljs-comment">// ph&#x1EA7;n t&#x1EED; cu&#x1ED1;i c&#xF9;ng s&#x1EBD; &#x111;&#x1B0;&#x1EE3;c g&#xE1;n gi&#xE1; tr&#x1ECB; nil</span>
+a[<span class="hljs-built_in">len</span>(a)<span class="hljs-number">-1</span>] = <span class="hljs-literal">nil</span>
+<span class="hljs-comment">// x&#xF3;a ph&#x1EA7;n t&#x1EED; cu&#x1ED1;i c&#xF9;ng ra kh&#x1ECF;i slice</span>
+a = a[:<span class="hljs-built_in">len</span>(a)<span class="hljs-number">-1</span>]
+</code></pre>
+<h2 id="li&#xEA;n-k&#x1EBF;t">Li&#xEA;n k&#x1EBF;t</h2>
+<ul>
+<li>Ph&#x1EA7;n ti&#x1EBF;p theo: <a href="ch1-04-func-method-interface.html">Functions, Methods v&#xE0; Interfaces
+</a></li>
+<li>Ph&#x1EA7;n tr&#x1B0;&#x1EDB;c: <a href="ch1-02-hello-revolution.html">S&#x1EF1; ti&#x1EBF;n h&#xF3;a c&#x1EE7;a &quot;Hello World&quot;
+</a></li>
+<li><a href="../SUMMARY.md">M&#x1EE5;c l&#x1EE5;c</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="ch1-02-hello-revolution.html" class="navigation navigation-prev " aria-label="Previous page: 1.2 Sự tiến hóa của chương trình "Hello World"">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ch1-04-func-method-interface.html" class="navigation navigation-next " aria-label="Next page: 1.4 Functions, Methods và Interfaces">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"1.3 Array, strings và slices","level":"1.2.3","depth":2,"next":{"title":"1.4 Functions, Methods và Interfaces","level":"1.2.4","depth":2,"path":"ch1-basic/ch1-04-func-method-interface.md","ref":"ch1-basic/ch1-04-func-method-interface.md","articles":[]},"previous":{"title":"1.2 Sự tiến hóa của chương trình \"Hello World\"","level":"1.2.2","depth":2,"path":"ch1-basic/ch1-02-hello-revolution.md","ref":"ch1-basic/ch1-02-hello-revolution.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-03-array-string-and-slice.md","mtime":"2019-09-23T01:51:59.979Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-25T10:59:08.649Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
