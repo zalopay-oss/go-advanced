@@ -25,11 +25,7 @@
     * [3.4 Một số vấn đề khác của gRPC](ch3-rpc/ch3-04-grpc-expand.md)
     * [3.5 gRPC và Protobuf extensions](ch3-rpc/ch3-05-grpc-ext.md)
     * [3.6 Công cụ grpcurl](ch3-rpc/ch3-06-grpc-curl.md)
-<<<<<<< HEAD
     * [3.7 Lời nói thêm](ch3-rpc/ch3-07-ext.md)
-=======
-    * [3.7 Lời nói thêm](ch3-rpc/ch3-07-supplementary-notes.md)
->>>>>>> ca9712fe350e7225584620eb55989c0b0f3bd8b1
 * [Chương 4: Go và Web](ch4-web/README.md)
     * [4.1 Giới thiệu chương trình Web](ch4-web/ch4-01-intro.md)
     * [4.2 Routing trong Web](ch4-web/ch4-02-router.md)

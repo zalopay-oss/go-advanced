@@ -61,8 +61,6 @@ Xem mục lục chính của bộ tài liệu [ở đây](./SUMMARY.md).
 
 - Đọc online: [GitBook](https://zalopay-oss.github.io/go-advanced/)
 - Tải file pdf: [pdf](./resource/advanced-go-book.pdf)
-- Tải file epub: [epub](./resource/advanced-go-book.epub)
-- Tải file mobi: [mobi](./resource/advanced-go-book.mobi)
 
 ## Tham gia phát triển
 

@@ -427,15 +427,9 @@
             
         </li>
     
-<<<<<<< HEAD
         <li class="chapter " data-level="1.4.7" data-path="../ch3-rpc/ch3-07-ext.html">
             
                 <a href="../ch3-rpc/ch3-07-ext.html">
-=======
-        <li class="chapter " data-level="1.4.7" data-path="../ch3-rpc/ch3-07-supplementary-notes.md">
-            
-                <span>
->>>>>>> ca9712fe350e7225584620eb55989c0b0f3bd8b1
             
                     
                     3.7 Lời nói thêm
@@ -876,136 +870,9 @@
     }
 
     <span class="hljs-comment">// &#x111;&#x1EE3;i N goroutine ho&#xE0;n th&#xE0;nh</span>
-<<<<<<< HEAD
     wg.Wait()
 }
 </code></pre>
-<h2 id="162-t&#xE1;c-v&#x1EE5;-atomic">1.6.2. T&#xE1;c v&#x1EE5; Atomic</h2>
-<p><a href="https://preshing.com/20130618/atomic-vs-non-atomic-operations/" target="_blank">T&#xE1;c v&#x1EE5; atomic</a> tr&#xEA;n m&#x1ED9;t v&#xF9;ng nh&#x1EDB; chia s&#x1EBB; th&#xEC; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng v&#xF9;ng nh&#x1EDB; &#x111;&#xF3; ch&#x1EC9; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p b&#x1EDF;i m&#x1ED9;t Goroutine t&#x1EA1;i m&#x1ED9;t th&#x1EDD;i &#x111;i&#x1EC3;m. &#x110;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c &#x111;i&#x1EC1;u n&#xE0;y ta c&#xF3; th&#x1EC3; d&#xF9;ng <a href="https://golang.org/pkg/sync/#Mutex" target="_blank">sync.Mutex</a>.</p>
-<h3 id="s&#x1EED;-d&#x1EE5;ng-syncmutex">S&#x1EED; d&#x1EE5;ng sync.Mutex</h3>
-<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
-<span class="hljs-comment">// package c&#x1EA7;n d&#xF9;ng</span>
-    <span class="hljs-string">&quot;sync&quot;</span>
-)
-
-<span class="hljs-comment">// total l&#xE0; m&#x1ED9;t atomic struct</span>
-<span class="hljs-keyword">var</span> total <span class="hljs-keyword">struct</span> {
-    sync.Mutex
-    value <span class="hljs-keyword">int</span>
-}
-
-<span class="hljs-keyword">func</span> worker(wg *sync.WaitGroup) {
-    <span class="hljs-comment">// th&#xF4;ng b&#xE1;o ho&#xE0;n th&#xE0;nh khi ra kh&#x1ECF;i h&#xE0;m</span>
-    <span class="hljs-keyword">defer</span> wg.Done()
-
-    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++ {
-        <span class="hljs-comment">// ch&#x1EB7;n c&#xE1;c Goroutines kh&#xE1;c v&#xE0;o</span>
-        total.Lock()
-        <span class="hljs-comment">// b&#xE2;y gi&#x1EDD;, l&#x1EC7;nh total.value += i &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o l&#xE0; atomic (&#x111;&#x1A1;n nguy&#xEA;n)</span>
-        total.value += i
-        <span class="hljs-comment">// b&#x1ECF; ch&#x1EB7;n</span>
-        total.Unlock()
-    }
-}
-
-<span class="hljs-keyword">func</span> main() {
-    <span class="hljs-comment">// khai b&#xE1;o wg &#x111;&#x1EC3; main Goroutine d&#x1EEB;ng ch&#x1EDD; c&#xE1;c Goroutines kh&#xE1;c tr&#x1B0;&#x1EDB;c khi k&#x1EBF;t th&#xFA;c ch&#x1B0;&#x1A1;ng tr&#xEC;nh</span>
-    <span class="hljs-keyword">var</span> wg sync.WaitGroup
-    <span class="hljs-comment">// wg c&#x1EA7;n ch&#x1EDD; 2 Goroutines kh&#xE1;c</span>
-    wg.Add(<span class="hljs-number">2</span>)
-    <span class="hljs-comment">// th&#x1EF1;c thi Goroutines th&#x1EE9; nh&#x1EA5;t</span>
-    <span class="hljs-keyword">go</span> worker(&amp;wg)
-    <span class="hljs-comment">// th&#x1EF1;c thi Goroutines th&#x1EE9; hai</span>
-    <span class="hljs-keyword">go</span> worker(&amp;wg)
-    <span class="hljs-comment">// wg b&#x1EAF;t &#x111;&#x1EA7;u &#x111;&#x1EE3;i &#x111;&#x1EC3; 2 Goroutines kia xong</span>
-    wg.Wait()
-    <span class="hljs-comment">// in ra k&#x1EBF;t qu&#x1EA3; th&#x1EF1;c thi</span>
-    fmt.Println(total.value)
-}
-</code></pre>
-<p>Trong m&#x1ED9;t ch&#x1B0;&#x1A1;ng tr&#xEC;nh &#x111;&#x1ED3;ng th&#x1EDD;i, ta c&#x1EA7;n c&#xF3; c&#x1A1; ch&#x1EBF; &#x111;&#x1EC3; <code>lock</code> v&#xE0; <code>unlock</code> tr&#x1B0;&#x1EDB;c v&#xE0; sau khi truy c&#x1EAD;p v&#xE0;o v&#xF9;ng <a href="https://en.wikipedia.org/wiki/Critical_section" target="_blank">critical section</a>. N&#x1EBF;u kh&#xF4;ng c&#xF3; s&#x1EF1; b&#x1EA3;o v&#x1EC7; bi&#x1EBF;n <code>total</code> , k&#x1EBF;t qu&#x1EA3; cu&#x1ED1;i c&#xF9;ng c&#xF3; th&#x1EC3; b&#x1ECB; sai kh&#xE1;c do s&#x1EF1; truy c&#x1EAD;p &#x111;&#x1ED3;ng th&#x1EDD;i c&#x1EE7;a nhi&#x1EC1;u thread.</p>
-<h3 id="s&#x1EED;-d&#x1EE5;ng-syncatomic">S&#x1EED; d&#x1EE5;ng sync/atomic</h3>
-<p>Thay v&#xEC; d&#xF9;ng mutex, ch&#xFA;ng ta c&#x169;ng c&#xF3; th&#x1EC3; d&#xF9;ng package <a href="https://golang.org/pkg/sync/atomic/" target="_blank">sync/atomic</a>, &#x111;&#xE2;y l&#xE0; gi&#x1EA3;i ph&#xE1;p hi&#x1EC7;u qu&#x1EA3; h&#x1A1;n &#x111;&#x1ED1;i v&#x1EDB;i m&#x1ED9;t bi&#x1EBF;n s&#x1ED1; h&#x1ECD;c.</p>
-<pre><code class="lang-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;sync&quot;</span>
-    <span class="hljs-comment">// khai b&#xE1;o bi&#x1EBF;n g&#xF3;i sync/atomic</span>
-    <span class="hljs-string">&quot;sync/atomic&quot;</span>
-)
-
-<span class="hljs-comment">// bi&#x1EBF;n total &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p &#x111;&#x1ED3;ng th&#x1EDD;i</span>
-<span class="hljs-keyword">var</span> total <span class="hljs-keyword">uint64</span>
-
-<span class="hljs-keyword">func</span> worker(wg *sync.WaitGroup) {
-    <span class="hljs-comment">// wg th&#xF4;ng b&#xE1;o ho&#xE0;n th&#xE0;nh khi ra kh&#x1ECF;i h&#xE0;m</span>
-    <span class="hljs-keyword">defer</span> wg.Done()
-
-    <span class="hljs-keyword">var</span> i <span class="hljs-keyword">uint64</span>
-    <span class="hljs-keyword">for</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++ {
-        <span class="hljs-comment">// l&#x1EC7;nh c&#x1ED9;ng atomic.AddUint64 total &#x111;&#x1B0;&#x1EE3;c &#x111;&#x1EA3;m b&#x1EA3;o l&#xE0; atomic (&#x111;&#x1A1;n nguy&#xEA;n)</span>
-        atomic.AddUint64(&amp;total, i)
-    }
-}
-
-<span class="hljs-keyword">func</span> main() {
-    <span class="hljs-comment">// wg &#x111;&#x1B0;&#x1EE3;c d&#xF9;ng &#x111;&#x1EC3; d&#x1EEB;ng h&#xE0;m main &#x111;&#x1EE3;i c&#xE1;c Goroutines kh&#xE1;c</span>
-    <span class="hljs-keyword">var</span> wg sync.WaitGroup
-    <span class="hljs-comment">// wg c&#x1EA7;n &#x111;&#x1EE3;i hai Goroutines g&#x1ECD;i l&#x1EC7;nh Done() m&#x1EDB;i th&#x1EF1;c thi ti&#x1EBF;p</span>
-    wg.Add(<span class="hljs-number">2</span>)
-    <span class="hljs-comment">// t&#x1EA1;o Goroutines th&#x1EE9; nh&#x1EA5;t</span>
-    <span class="hljs-keyword">go</span> worker(&amp;wg)
-    <span class="hljs-comment">// t&#x1EA1;o Goroutines th&#x1EE9; hai</span>
-    <span class="hljs-keyword">go</span> worker(&amp;wg)
-    <span class="hljs-comment">// b&#x1EAF;t &#x111;&#x1EA7;u vi&#x1EC7;c &#x111;&#x1EE3;i</span>
-=======
->>>>>>> ca9712fe350e7225584620eb55989c0b0f3bd8b1
-    wg.Wait()
-    <span class="hljs-comment">// in ra k&#x1EBF;t qu&#x1EA3;</span>
-    fmt.Println(total)
-}
-</code></pre>
-<p>&#x110;&#x1EC3; ghi v&#xE0; &#x111;&#x1ECD;c atomic tr&#xEA;n nh&#x1EEF;ng &#x111;&#x1ED1;i t&#x1B0;&#x1EE3;ng ph&#x1EE9;c t&#x1EA1;p h&#x1A1;n th&#xEC; ta d&#xF9;ng ki&#x1EC3;u <a href="https://golang.org/pkg/sync/atomic/#Value" target="_blank">atomic.Value</a>, v&#xED; d&#x1EE5;:</p>
-<pre><code class="lang-go"><span class="hljs-keyword">package</span> main
-
-<span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;sync/atomic&quot;</span>
-    <span class="hljs-string">&quot;time&quot;</span>
-)
-
-<span class="hljs-keyword">func</span> loadConfig() <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span> {
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>)
-}
-
-<span class="hljs-keyword">func</span> requests() <span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span> {
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">int</span>)
-}
-
-<span class="hljs-keyword">func</span> main() {
-    <span class="hljs-comment">// n&#x1EAF;m gi&#x1EEF; th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh c&#x1EE7;a server</span>
-    <span class="hljs-keyword">var</span> config atomic.Value
-    <span class="hljs-comment">// kh&#x1EDF;i t&#x1EA1;o gi&#xE1; tr&#x1ECB; ban &#x111;&#x1EA7;u</span>
-    config.Store(loadConfig())
-    <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
-    <span class="hljs-comment">// c&#x1EAD;p nh&#x1EAD;t th&#xF4;ng tin sau m&#x1ED7;i 10 gi&#xE2;y</span>
-        <span class="hljs-keyword">for</span> {
-            time.Sleep(<span class="hljs-number">10</span> * time.Second)
-            config.Store(loadConfig())
-        }
-    }()
-    <span class="hljs-comment">// t&#x1EA1;o nhi&#x1EC1;u worker s&#x1EED; l&#xFD; request</span>
-    <span class="hljs-comment">// d&#xF9;ng th&#xF4;ng tin c&#x1EA5;u h&#xEC;nh g&#x1EA7;n nh&#x1EA5;t</span>
-    <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++ {
-        <span class="hljs-keyword">go</span> <span class="hljs-keyword">func</span>() {
-            <span class="hljs-keyword">for</span> r := <span class="hljs-keyword">range</span> requests() {
-                c := config.Load()
-                <span class="hljs-comment">// x&#x1EED; l&#xFD; request v&#x1EDB;i c&#x1EA5;u h&#xEC;nh c</span>
-                _, _ = r, c
-            }
-        }()
-    }
-}
-</code></pre>
-<<<<<<< HEAD
-=======
 <h2 id="162-t&#xE1;c-v&#x1EE5;-atomic">1.6.2. T&#xE1;c v&#x1EE5; Atomic</h2>
 <p><a href="https://preshing.com/20130618/atomic-vs-non-atomic-operations/" target="_blank">T&#xE1;c v&#x1EE5; atomic</a> tr&#xEA;n m&#x1ED9;t v&#xF9;ng nh&#x1EDB; chia s&#x1EBB; th&#xEC; &#x111;&#x1EA3;m b&#x1EA3;o r&#x1EB1;ng v&#xF9;ng nh&#x1EDB; &#x111;&#xF3; ch&#x1EC9; c&#xF3; th&#x1EC3; &#x111;&#x1B0;&#x1EE3;c truy c&#x1EAD;p b&#x1EDF;i m&#x1ED9;t Goroutine t&#x1EA1;i m&#x1ED9;t th&#x1EDD;i &#x111;i&#x1EC3;m. &#x110;&#x1EC3; &#x111;&#x1EA1;t &#x111;&#x1B0;&#x1EE3;c &#x111;i&#x1EC1;u n&#xE0;y ta c&#xF3; th&#x1EC3; d&#xF9;ng <a href="https://golang.org/pkg/sync/#Mutex" target="_blank">sync.Mutex</a>.</p>
 <h3 id="s&#x1EED;-d&#x1EE5;ng-syncmutex">S&#x1EED; d&#x1EE5;ng sync.Mutex</h3>
@@ -1128,7 +995,6 @@
     }
 }
 </code></pre>
->>>>>>> ca9712fe350e7225584620eb55989c0b0f3bd8b1
 <h2 id="163-m&#xF4;-h&#xEC;nh-producer-consumer">1.6.3. M&#xF4; h&#xEC;nh Producer Consumer</h2>
 <div align="center">
 
@@ -1673,11 +1539,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-<<<<<<< HEAD
-            gitbook.page.hasChanged({"page":{"title":"1.6 Mô hình thực thi đồng thời","level":"1.2.6","depth":2,"next":{"title":"1.7 Error và Exceptions","level":"1.2.7","depth":2,"path":"ch1-basic/ch1-07-error-and-panic.md","ref":"ch1-basic/ch1-07-error-and-panic.md","articles":[]},"previous":{"title":"1.5 Khái niệm xử lý đồng thời và song song","level":"1.2.5","depth":2,"path":"ch1-basic/ch1-05-concurrency-parallelism.md","ref":"ch1-basic/ch1-05-concurrency-parallelism.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-06-common-concurrency-mode.md","mtime":"2019-09-25T11:15:25.413Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-25T12:20:22.871Z"},"basePath":"..","book":{"language":""}});
-=======
-            gitbook.page.hasChanged({"page":{"title":"1.6 Mô hình thực thi đồng thời","level":"1.2.6","depth":2,"next":{"title":"1.7 Error và Exceptions","level":"1.2.7","depth":2,"path":"ch1-basic/ch1-07-error-and-panic.md","ref":"ch1-basic/ch1-07-error-and-panic.md","articles":[]},"previous":{"title":"1.5 Khái niệm xử lý đồng thời và song song","level":"1.2.5","depth":2,"path":"ch1-basic/ch1-05-concurrency-parallelism.md","ref":"ch1-basic/ch1-05-concurrency-parallelism.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-06-common-concurrency-mode.md","mtime":"2019-09-22T16:25:50.433Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-25T10:59:08.649Z"},"basePath":"..","book":{"language":""}});
->>>>>>> ca9712fe350e7225584620eb55989c0b0f3bd8b1
+            gitbook.page.hasChanged({"page":{"title":"1.6 Mô hình thực thi đồng thời","level":"1.2.6","depth":2,"next":{"title":"1.7 Error và Exceptions","level":"1.2.7","depth":2,"path":"ch1-basic/ch1-07-error-and-panic.md","ref":"ch1-basic/ch1-07-error-and-panic.md","articles":[]},"previous":{"title":"1.5 Khái niệm xử lý đồng thời và song song","level":"1.2.5","depth":2,"path":"ch1-basic/ch1-05-concurrency-parallelism.md","ref":"ch1-basic/ch1-05-concurrency-parallelism.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch1-basic/ch1-06-common-concurrency-mode.md","mtime":"2019-09-26T01:55:58.891Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-26T02:46:42.744Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
