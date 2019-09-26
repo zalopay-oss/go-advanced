@@ -19,17 +19,17 @@ jobs:
         with:
           node-version: '10.16'
 
-      - name: deploy-to-dev
+      - name: Deploy gh-pages
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          PUBLISH_BRANCH: dev
+          PUBLISH_BRANCH: gh-pages
           PUBLISH_DOCS: docs
           PUBLISH_RESOURCE: resource
         run: |
           REPOSITORY_PATH="https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           cd .. && rm -rf $GITHUB_WORKSPACE/
           git clone $REPOSITORY_PATH && cd $GITHUB_WORKSPACE
-          git checkout -b dev;
+          git checkout -b $PUBLISH_BRANCH;
           git config user.name "${GITHUB_ACTOR}";
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com";
           COMMIT_MESSAGE="Automated generate and deployment gitbook: $(date -u) ${GITHUB_SHA}"
@@ -37,7 +37,7 @@ jobs:
           gitbook build . $PUBLISH_DOCS;
           git add -f $PUBLISH_DOCS;
           git commit -m "${COMMIT_MESSAGE}"
-          git push origin dev;
+          git push origin $PUBLISH_BRANCH;
           # git checkout master;
           # git merge origin/dev;
           # git push --progress --porcelain origin refs/heads/master:master;
