@@ -276,7 +276,7 @@ new[1] = 'm'
 Các tác vụ cơ bản trong slice bao gồm:
   * Duyệt qua các phần tử của slice
   * Thêm phần tử vào slice
-  * Xóa phần tử trong slcie
+  * Xóa phần tử trong slice
 
 #### Duyệt qua slice 
 Duyệt qua slice thì tương tự như duyệt qua một arrays.
