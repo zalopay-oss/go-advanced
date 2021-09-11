@@ -151,7 +151,7 @@ Cấu trúc [reflect.StringHeader](https://golang.org/src/reflect/value.go?s=565
 
 ```go
 type StringHeader struct {
-    // chứa giá trị con trỏ tới array của string
+    // chứa đỉa chỉ trong bộ nhớ của con trỏ trỏ tới underlying array của string
     Data uintptr
     // chiều dài của string
     Len  int
@@ -221,7 +221,7 @@ type  SliceHeader  struct {
 ```
 
 Slice được xem là fat pointer, các bạn có thể đọc thêm ở bài viết sau để hiểu hơn về fat pointer trong [Go](https://nullprogram.com/blog/2019/06/30/). Cấu trúc slice bao gồm:
-- `Data`: chứa giá của con trỏ tới một array.
+- `Data`: chứa đỉa chỉ trong bộ nhớ của con trỏ trỏ tới underlying array của slice.
 - `Len`: độ dài của slice.
 - `Cap`: kích thước tối đa mà vùng nhớ trỏ tới slice được cấp phát. 
 
