@@ -15,7 +15,7 @@ Chương này bắt đầu bằng vài lời giới thiệu về lịch sử c�
 
 Tài liệu này được là một trong những quyển sách nâng cao về Golang, vì vậy người đọc cần có một nền tảng Golang nhất định. Nếu bạn không biết nhiều về Golang, các bạn nên học Golang với một số gợi ý sau:
 
-- Sau khi cài đặt Golang và tải hướng dẫn bằng `go get golang.org/x/tour`, có thể xem hướng dẫn [A Tour of Go](https://tour.golang.org/welcome/1) ngay ở local bằng lệnh `tour`.
+- Sau khi cài đặt Golang và tải hướng dẫn bằng `go get golang.org/x/website/tour`, có thể xem hướng dẫn [A Tour of Go](https://tour.golang.org/welcome/1) ngay ở local bằng lệnh `tour`.
 - Bạn cũng có thể đọc hướng dẫn ["Ngôn ngữ lập trình Go"](http://www.gopl.io/) được xuất bản bởi team Golang chính thức . ["Ngôn ngữ lập trình Go"](http://www.gopl.io/)  được gọi là *Kinh thánh* Golang trong cộng đồng Golang mà bạn phải đọc thật bài bản.
 
 Trong khi học, hãy cố gắng giải quyết một số vấn đề nhỏ với Golang. Nếu bạn muốn tham khảo API, có thể mở truy vấn tài liệu tích hợp bằng lệnh `godoc`.
