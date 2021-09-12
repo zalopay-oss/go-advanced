@@ -151,7 +151,7 @@ Cấu trúc [reflect.StringHeader](https://golang.org/src/reflect/value.go?s=565
 
 ```go
 type StringHeader struct {
-    // con trỏ địa chỉ vùng nhớ string
+    // chứa đỉa chỉ trong bộ nhớ của con trỏ trỏ tới underlying array của string
     Data uintptr
     // chiều dài của string
     Len  int
@@ -192,7 +192,7 @@ s1 := "hello world"[:5]
 s2 := "hello world"[6:]
 ```
 
-Tương tự như array, String cũng có một hàm built-in là `len` dùng để trả về chiều dài của string, ngoài ra bạn có thể  dùng `reflect.StringHeader` để truy xuất chiều dài của string theo cách như sau
+Tương tự như array, chúng ta có thể dùng hàm built-in `len` để trả về chiều dài của string, ngoài ra bạn có thể  dùng `reflect.StringHeader` để truy xuất chiều dài của string theo cách như sau
 
 ```go
 fmt.Println("len(s): ", (*reflect.StringHeader)(unsafe.Pointer(&s)).Len)
@@ -221,7 +221,7 @@ type  SliceHeader  struct {
 ```
 
 Slice được xem là fat pointer, các bạn có thể đọc thêm ở bài viết sau để hiểu hơn về fat pointer trong [Go](https://nullprogram.com/blog/2019/06/30/). Cấu trúc slice bao gồm:
-- `Data`: là con trỏ chứa địa chỉ của một array.
+- `Data`: chứa đỉa chỉ trong bộ nhớ của con trỏ trỏ tới underlying array của slice.
 - `Len`: độ dài của slice.
 - `Cap`: kích thước tối đa mà vùng nhớ trỏ tới slice được cấp phát. 
 
@@ -260,7 +260,7 @@ var (
 )
 ```
 
-Khi chúng ta sử dụng cú pháp tạo slice từ một slice cho trước như sau: **d = c[:2]** thì chúng ta nên lưu ý ở điểm sau. Slice sẽ không sao chép dữ liệu của slice gốc c qua d mà nó tạo ra một giá trị slice mới trỏ đến mảng ban đầu. Do đó, sửa đổi các phần tử của slice vừa được tạo sẽ sửa đổi các phần tử của slice gốc.Ví dụ minh hoạ:
+Khi chúng ta sử dụng cú pháp tạo slice từ một slice cho trước như sau: **d = c[:2]** thì chúng ta nên lưu ý ở điểm sau. Slice sẽ không sao chép dữ liệu của slice gốc c qua d mà nó tạo ra một giá trị slice mới trỏ đến mảng ban đầu. Do đó, sửa đổi các phần tử của slice vừa được tạo sẽ sửa đổi các phần tử của slice gốc. Ví dụ minh hoạ:
 
 ```go
 old := []byte{'r', 'o', 'a', 'd'}
@@ -279,7 +279,7 @@ Các tác vụ cơ bản trong slice bao gồm:
   * Xóa phần tử trong slice
 
 #### Duyệt qua slice 
-Duyệt qua slice thì tương tự như duyệt qua một arrays.
+Chúng ta có thể sử dụng `for ... range` để duyệt qua slice.
 
 ```go
 for i := range a {
@@ -307,7 +307,11 @@ a = append(a, 1, 2, 3)
 a = append(a, []int{1,2,3}...)
 ```
 
-Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào phần tử, hàm append sẽ hiện thực cấp phát lại vùng nhớ có kích thước gấp đôi vùng nhớ cũ và sao chép dữ liệu sang. Các bạn có thể xem đoạn mã nguồn về việc cấp pháp lại vùng nhớ cho slice [ở đây](https://golang.org/src/runtime/slice.go?fbclid=IwAR0xgVnf7SFJu_Kai8zo_5PZXolsuEL3JgfKejj7Ww0CpO1G82rbXbcWosQ#L66).
+Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào phần tử, hàm append sẽ hiện thực cấp phát lại vùng nhớ có kích thước:
+- Nếu kích thước cũ (cap) < 1024: cấp phát gấp đôi (x2) vùng nhớ cũ.
+- Nếu kích thước cũ >= 1024: cấp phát 1.25x vùng nhớ cũ.
+
+Sau đó, dữ liệu cũ sẽ được sao chép sang. Các bạn có thể xem đoạn mã nguồn về việc cấp pháp lại vùng nhớ cho slice [ở đây](https://golang.org/src/runtime/slice.go?fbclid=IwAR0xgVnf7SFJu_Kai8zo_5PZXolsuEL3JgfKejj7Ww0CpO1G82rbXbcWosQ#L66).
 
 <div align="center">
 	<img src="../images/recapacity-slice.png"width="550">
@@ -317,7 +321,7 @@ Trong trường hợp slice ban đầu không đủ sức chứa khi thêm vào 
 	</span>
 </div>
 
-Ví dụ bên dưới cho thấy giá trị **cap tăng gấp 2** khi thực thi hàm append vượt quá kích thước ban đầu.
+Ví dụ bên dưới cho thấy giá trị **cap tăng gấp 2** khi thực thi hàm append vượt quá kích thước ban đầu (< 1024).
 
 ```go
 func myAppend(sl []int, val int) []int{
@@ -540,6 +544,8 @@ a[len(a)-1] = nil
 // xóa phần tử cuối cùng ra khỏi slice
 a = a[:len(a)-1]
 ```
+
+Các bạn có thể tham khảo thêm bài blog của Golang về phần này [ở đây](https://go.dev/blog/slices).
 
 ## Liên kết
 * Phần tiếp theo: [Functions, Methods và Interfaces
