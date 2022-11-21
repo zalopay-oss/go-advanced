@@ -134,17 +134,17 @@ import "sync"
 var wg = sync.WaitGroup{}
 
 func main() {
-    // biến wg sẽ tăng lên 1
-    wg.Add(1)
+    	// biến wg sẽ tăng lên 1
+    	wg.Add(1)
 	// sử dụng từ khoá go để tạo goroutine
-    go func() {
-        fmt.Println("Hello from another goroutine")
-        // biến wg sẽ giảm đi 1
-        wg.Done()
-    }()
+    	go func() {
+        	fmt.Println("Hello from another goroutine")
+        	// biến wg sẽ giảm đi 1
+        	wg.Done()
+    	}()
 
-    // goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
-    wg.Wait()
+    	// goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
+    	wg.Wait()
 	fmt.Println("Hello from main goroutine")
 }
 ```
@@ -160,18 +160,18 @@ import "sync"
 var wg = sync.WaitGroup{}
 
 func main() {
-    // biến wg sẽ tăng lên 1
-    wg.Add(1)
+    	// biến wg sẽ tăng lên 1
+    	wg.Add(1)
 	// sử dụng từ khoá go để tạo goroutine
-    go func() {
-        fmt.Println("Hello from another goroutine")
-        // biến wg sẽ giảm đi 1
-        wg.Done()
-    }()
+    	go func() {
+        	fmt.Println("Hello from another goroutine")
+        	// biến wg sẽ giảm đi 1
+        	wg.Done()
+    	}()
 
 	fmt.Println("Hello from main goroutine")
-    // goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
-    wg.Wait()
+    	// goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
+    	wg.Wait()
 }
 ```
 
@@ -188,8 +188,8 @@ import "sync"
 var wg = sync.WaitGroup{}
 
 func MyPrintln(id int) {
-    // biến wg sẽ tăng lên 1
-    wg.Add(1)
+    	// biến wg sẽ tăng lên 1
+    	wg.Add(1)
 	go func() {
 		fmt.Println("Xin chào, tôi là goroutine: ", id)
         // biến wg sẽ giảm đi 1
@@ -202,8 +202,8 @@ func main() {
 		MyPrintln(i)
 	}
 
-    // goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
-    wg.Wait()
+    	// goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
+    	wg.Wait()
 	fmt.Println("Chương trình kết thúc")
 }
 ```
