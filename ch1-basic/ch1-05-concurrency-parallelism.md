@@ -122,40 +122,88 @@ func main() {
 }
 ```
 
-Chương trình trên có lúc in ra cả hai câu không đúng như thứ tự trên, có lúc sẽ chỉ in được mỗi câu "Xin chào main goroutin". Chúng ta đã biết khi hàm main chạy xong thì chương trình sẽ dừng. Hàm main cũng là một goroutine và chạy đồng thời với hàm `fmt.Println`. Nên có trường hợp hàm main chạy xong và dừng trước khi hàm `fmt.Println1` được chạy.
+Chương trình trên có lúc in ra cả hai câu không đúng như thứ tự trên, có lúc sẽ chỉ in được mỗi câu "Xin chào main goroutine". Chúng ta đã biết khi hàm main chạy xong thì chương trình sẽ dừng. Hàm main cũng là một goroutine và chạy đồng thời với hàm `fmt.Println`. Nên có trường hợp hàm main chạy xong và dừng trước khi hàm `fmt.Println1` được chạy.
 
-Chúng ta có thể làm như sau để có thể in ra cả hai câu:
+Chúng ta có thể làm như sau để có thể in ra cả hai câu (sử dụng WaitGroup của thư viện sync):
 
 ```go
-func main() {
-	// sử dụng từ khoá go để tạo goroutine
-	go fmt.Println("Hello from another goroutine")
-	fmt.Println("Hello from main goroutine")
+// import thư viện sync
+import "sync"
 
-    // chờ 1 giây để có thể chạy được goroutine 
-    //của hàm fmt.Println trước khi hàm main kết thúc
-	time.Sleep(time.Second)
+// tạo biến wg kiểu WaitGroup để thêm goroutine vào hàng đợi
+var wg = sync.WaitGroup{}
+
+func main() {
+    	// biến wg sẽ tăng lên 1
+    	wg.Add(1)
+	// sử dụng từ khoá go để tạo goroutine
+    	go func() {
+        	fmt.Println("Hello from another goroutine")
+        	// biến wg sẽ giảm đi 1
+        	wg.Done()
+    	}()
+
+    	// goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
+    	wg.Wait()
+	fmt.Println("Hello from main goroutine")
 }
 ```
+Sau khi chạy xong chương trình sẽ luôn luôn in ra 2 câu theo thứ tự "Hello from another goroutine" rồi đến "Hello from main goroutine".
+
+Tuy nhiên có một cách khác vẫn đảm bảo được chương trình sẽ in ra 2 câu nhưng sẽ không đảm bảo được thứ tự in:
+
+```go
+// import thư viện sync
+import "sync"
+
+// tạo biến wg kiểu WaitGroup để thêm goroutine vào hàng đợi
+var wg = sync.WaitGroup{}
+
+func main() {
+    	// biến wg sẽ tăng lên 1
+    	wg.Add(1)
+	// sử dụng từ khoá go để tạo goroutine
+    	go func() {
+        	fmt.Println("Hello from another goroutine")
+        	// biến wg sẽ giảm đi 1
+        	wg.Done()
+    	}()
+
+	fmt.Println("Hello from main goroutine")
+    	// goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
+    	wg.Wait()
+}
+```
+
 Sau khi chương trình chạy xong các goroutine sẽ bị huỷ.
 
 ### Ví dụ 2:
 
 Chúng ta có thể sử dụng goroutine bằng cách sau.
 ```go
-func MyPrintln(id int, delay time.Duration) {
+// import thư viện sync
+import "sync"
+
+// tạo biến wg kiểu WaitGroup để thêm goroutine vào hàng đợi
+var wg = sync.WaitGroup{}
+
+func MyPrintln(id int) {
+    	// biến wg sẽ tăng lên 1
+    	wg.Add(1)
 	go func() {
-		time.Sleep(delay)
 		fmt.Println("Xin chào, tôi là goroutine: ", id)
+        // biến wg sẽ giảm đi 1
+        wg.Done()
 	}()
 }
 
 func main() {
 	for i := 0; i < 100; i++ {
-		MyPrintln(i, 1*time.Second)
+		MyPrintln(i)
 	}
 
-	time.Sleep(10 * time.Second)
+    	// goroutine hiện tại (main goroutine) sẽ dừng lại để đợi đến khi biến wg có giá trị bằng 0 thì mới tiếp tục
+    	wg.Wait()
 	fmt.Println("Chương trình kết thúc")
 }
 ```
