@@ -66,7 +66,7 @@ func Find(m map[int]int, key int) (value int, ok bool) {
 
 ### Defer trong Function
 
-Lệnh `defer` trì hoãn việc thực thi hàm cho tới khi hàm bao ngoài nó return. Các đối số trong lời gọi defer được đánh giá ngay lặp tức nhưng lời gọi không được thực thi cho tới khi hàm bao ngoài nó return.
+Lệnh `defer` trì hoãn việc thực thi hàm cho tới khi hàm bao ngoài nó return. Các đối số trong lời gọi defer được tính toán ngay lập tức (evaluated immediately) tức nhưng lời gọi không được thực thi cho tới khi hàm bao ngoài nó return.
 
 ```go
 func main() {
