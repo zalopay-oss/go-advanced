@@ -14,7 +14,7 @@
 	</span>
 </div>
 
-Trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được xử lý toàn bộ, có thể hiểu là khi đó chúng được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó (khác với kiểu truyền tham khảo).
+Trong ngôn ngữ Go, `array` là một kiểu giá trị. Mặc dù những phần tử của array có thể được chỉnh sửa, phép gán của array hoặc khi truyền array như là một tham số của hàm thì chúng sẽ được sao chép lại toàn bộ thành một bản sao rồi mới xử lý trên bản sao đó (khác với kiểu truyền tham chiếu).
 
 Một array là một chuỗi độ dài cố định của các phần tử có kiểu dữ liệu nào đó, một array có thể bao gồm không hoặc nhiều phần tử. Độ dài của array là một phần thông tin được chứa trong nó, các array có độ dài khác nhau hoặc kiểu phần tử bên trong khác nhau được xem là các kiểu dữ liệu khác nhau, và không được phép gán cho nhau, vì thế array hiếm khi được sử dụng trong Go.
 
@@ -514,7 +514,7 @@ func FindPhoneNumber(filename string) []byte {
 }
 ```
 
-Mã nguồn này sẽ trả về  một mảng các `byte` trỏ tới toàn bộ file. Bởi vì slice tham khảo tới toàn bộ array gốc, cơ chế tự động thu gom rác không thể giải phóng không gian bên dưới array trong thời gian đó. Một yêu cầu kết quả nhỏ, những phải lưu trữ toàn bộ dữ liệu trong một thời gian dài. Mặc dù nó không phải là `memory leak` trong ngữ cảnh truyền thống, nó có thể làm chậm hiệu suất của toàn hệ thống.
+Mã nguồn này sẽ trả về  một mảng các `byte` trỏ tới toàn bộ file. Bởi vì slice tham chiếu tới toàn bộ array gốc, cơ chế tự động thu gom rác không thể giải phóng không gian bên dưới array trong thời gian đó. Một yêu cầu kết quả nhỏ, những phải lưu trữ toàn bộ dữ liệu trong một thời gian dài. Mặc dù nó không phải là `memory leak` trong ngữ cảnh truyền thống, nó có thể làm chậm hiệu suất của toàn hệ thống.
 
 Để khắc phục vấn đề này, bạn có thể sao chép dữ liệu cần thiết thành một slice mới.
 
@@ -526,7 +526,7 @@ func FindPhoneNumber(filename string) []byte {
 }
 ```
 
-Vấn đề tương tự có thể gặp phải khi xóa những phần tử trong slice. Giả sử rằng con trỏ đối tượng được lưu trữ trong cấu trúc của slice, sau khi xóa đi phần tử cuối, thì phần tử được xóa có thể còn được tham khảo bên dưới mảng slice, vùng nhớ có thể được giải phóng tự động trong thời gian đó (nó phụ thuộc vào cách hiện thực cơ chế thu hồi vùng nhớ)
+Vấn đề tương tự có thể gặp phải khi xóa những phần tử trong slice. Giả sử rằng con trỏ đối tượng được lưu trữ trong cấu trúc của slice, sau khi xóa đi phần tử cuối, thì phần tử được xóa có thể còn được tham chiếu bên dưới mảng slice, vùng nhớ có thể được giải phóng tự động trong thời gian đó (nó phụ thuộc vào cách hiện thực cơ chế thu hồi vùng nhớ)
 
 ```go
 var a []*int{ ... }

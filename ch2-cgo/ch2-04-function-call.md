@@ -162,7 +162,7 @@ func add(a, b C.int) C.int {
 
 Tên hàm `add` bắt đầu bằng một chữ cái viết thường và là một hàm private trong package của Go. Nhưng theo cái nhìn của ngôn ngữ C thì hàm `add` là hàm ngôn ngữ C có thể được truy cập toàn cục. Nếu có một hàm `add` cùng tên được export dưới dạng hàm ngôn ngữ C trong hai package ngôn ngữ Go khác nhau, vấn đề về trùng tên sẽ xảy ra trong link phase.
 
-Chúng ta có thể include file header `_cgo_export.h` để thêm tham chiếu đến các hàm export. Nếu bạn muốn sử dụng ngay lập tức hàm `add` của C được export trong file CGO hiện tại, bạn không thể tham khảo đến file `_cgo_export.h`,  bởi vì việc tạo file `_cgo_export.h`  cần phụ thuộc vào file hiện tại mà trong file hiện tại lại tham khảo tới `_cgo_export.h` (file chưa được tạo) thì sẽ gây ra lỗi.
+Chúng ta có thể include file header `_cgo_export.h` để thêm tham chiếu đến các hàm export. Nếu bạn muốn sử dụng ngay lập tức hàm `add` của C được export trong file CGO hiện tại, bạn không thể tham chiếu đến file `_cgo_export.h`,  bởi vì việc tạo file `_cgo_export.h`  cần phụ thuộc vào file hiện tại mà trong file hiện tại lại tham khảo tới `_cgo_export.h` (file chưa được tạo) thì sẽ gây ra lỗi.
 
 ```c
 #include "_cgo_export.h"

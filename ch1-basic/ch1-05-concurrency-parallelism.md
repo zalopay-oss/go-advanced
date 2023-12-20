@@ -68,7 +68,7 @@ Tiến trình có thể hiểu đơn giản là một chương trình đang ch�
 
 
 ### Thread
-Thread hay được gọi là tiểu trình nó là một luồng trong tiến trình đang chạy. Các luồng được chạy song song trong mỗi tiến trình và có thể truy cập đến vùng nhớ được cung cấp bởi tiến trình, các tài nguyên của hệ điều hành,...
+Thread hay được gọi là tiểu trình, nó là một luồng trong tiến trình đang chạy. Các luồng được chạy song song trong mỗi tiến trình và có thể truy cập đến vùng nhớ được cung cấp bởi tiến trình, các tài nguyên của hệ điều hành,...
 
 <div align="center">
     <img src="../images/ch1.6-process.png" width ="400">
