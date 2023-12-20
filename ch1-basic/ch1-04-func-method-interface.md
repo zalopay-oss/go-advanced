@@ -498,10 +498,12 @@ type proto.Message interface {
 }
 ```
 
-Interface `proto.Message` rất dễ  bị "giả mạo", để tránh điều đó ta nên định nghĩa một phương thức riêng cho nó. Chỉ các đối tượng thỏa mãn phương thức riêng  này mới có thể thỏa mãn interface đó và tên của phương thức riêng chứa tên đường dẫn tuyệt đối của package, vì vậy phương thức này chỉ có thể được hiện thực bên trong package để đáp ứng  interface. `testing.TB` là interface trong package `test` sử dụng kỹ thuật này:
+Interface `proto.Message` rất dễ  bị "giả mạo", để tránh điều đó ta nên định nghĩa một phương thức riêng tư (private) cho nó. Chỉ các đối tượng thỏa mãn phương thức riêng này mới có thể thỏa mãn interface đó. `TB` là interface trong package `testing` sử dụng kỹ thuật này:
 
 ```go
-type testing.TB interface {
+package testing
+
+type TB interface {
     Error(args ...interface{})
     Errorf(format string, args ...interface{})
     ...
