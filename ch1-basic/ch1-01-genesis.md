@@ -30,7 +30,7 @@ Một vài những tính năng khác của ngôn ngữ Go đến từ một số
 
 ## 1.1.1. Khởi nguồn từ Bell Labs
 
-Tính chất concurrency của Go đến từ học thuyết [Commutative sequential processes (CSP)](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf) được công bố bởi Tony Hoare tại Bell Labs vào năm 1978. Bài báo khoa học về CSP nói rằng chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `channel` cho việc giao tiếp và điều khiển đồng bộ.
+Tính chất concurrency của Go đến từ học thuyết [Communicating Sequential Processes (CSP)](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf) được công bố bởi Tony Hoare tại Bell Labs vào năm 1978. Bài báo khoa học về CSP nói rằng chương trình chỉ là một tập hợp các tiến trình được chạy song song, mà không có sự chia sẻ về trạng thái, sử dụng `channel` cho việc giao tiếp và điều khiển đồng bộ.
 
 Học thuyết CSP của Tony Hoare chỉ là một mô hình lập trình với những khái niệm cơ bản về concurrency (tính đồng thời), nó cũng không hẳn là một ngôn ngữ lập trình. Qua việc thiết kế Go, Rob Pike đã tổng hợp nhiều thập kỷ trong việc ứng dụng học thuyết CSP trong việc xây dựng ngôn ngữ lập trình.
 
